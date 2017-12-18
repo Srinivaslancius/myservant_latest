@@ -7,6 +7,7 @@ if (!isset($_POST['submit'])) {
     } else {
     //If success            
     $services_category_id = $_POST['services_category_id'];
+    $sub_service_min_charge = $_POST['sub_service_min_charge'];
     $sub_category_name = $_POST['sub_category_name'];
     $sub_category_description = $_POST['sub_category_description'];
     $meta_title = $_POST['meta_title'];
@@ -24,7 +25,7 @@ if (!isset($_POST['submit'])) {
               $getImgUnlink = getImageUnlink('sub_category_image','services_sub_category','id',$id,$target_dir);
                 //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
               if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    $sql = "UPDATE `services_sub_category` SET services_category_id = '$services_category_id', sub_category_name = '$sub_category_name', sub_category_description = '$sub_category_description',sub_category_image = '$fileToUpload',meta_title = '$meta_title',meta_keywords = '$meta_keywords',meta_desc = '$meta_desc', lkp_status_id='$lkp_status_id' WHERE id = '$id' ";
+                    $sql = "UPDATE `services_sub_category` SET sub_service_min_charge= '$sub_service_min_charge',services_category_id = '$services_category_id', sub_category_name = '$sub_category_name', sub_category_description = '$sub_category_description',sub_category_image = '$fileToUpload',meta_title = '$meta_title',meta_keywords = '$meta_keywords',meta_desc = '$meta_desc', lkp_status_id='$lkp_status_id' WHERE id = '$id' ";
                     if($conn->query($sql) === TRUE){
                        echo "<script type='text/javascript'>window.location='services_sub_category.php?msg=success'</script>";
                     } else {
@@ -36,7 +37,7 @@ if (!isset($_POST['submit'])) {
                 }
       } else {
 
-          $sql = "UPDATE `services_sub_category` SET services_category_id = '$services_category_id', sub_category_name = '$sub_category_name', sub_category_description = '$sub_category_description',meta_title = '$meta_title',meta_keywords = '$meta_keywords',meta_desc = '$meta_desc', lkp_status_id='$lkp_status_id' WHERE id = '$id' ";
+          $sql = "UPDATE `services_sub_category` SET sub_service_min_charge= '$sub_service_min_charge' , services_category_id = '$services_category_id', sub_category_name = '$sub_category_name', sub_category_description = '$sub_category_description',meta_title = '$meta_title',meta_keywords = '$meta_keywords',meta_desc = '$meta_desc', lkp_status_id='$lkp_status_id' WHERE id = '$id' ";
           if($conn->query($sql) === TRUE){
              echo "<script type='text/javascript'>window.location='services_sub_category.php?msg=success'</script>";
           } else {
@@ -72,6 +73,11 @@ if (!isset($_POST['submit'])) {
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Sub Category Name</label>
                     <input type="text" name="sub_category_name" class="form-control" id="form-control-2" data-error="Please enter a Sub Category Name" required value="<?php echo $getSubCategoriesData['sub_category_name'];?>">
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Sub Service Minimum Charge</label>
+                    <input type="text" name="sub_service_min_charge" class="form-control valid_price_dec" id="form-control-2" data-error="Please enter a Sub Category Name" required value="<?php echo $getSubCategoriesData['sub_service_min_charge'];?>">
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
