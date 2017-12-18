@@ -177,6 +177,8 @@
 					    } else {                                       
 					        $cartItems = getAllDataWhere('services_cart','session_cart_id',$session_cart_id);
 					    } 
+						$getPriceType = "SELECT * FROM services_cart WHERE (services_price_type_id=2) AND (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') ";
+        					$getCount = $conn->query($getPriceType);
 					?>
 					<div class="col-md-5 col-sm-12 col-xs-12">
 						<div class="your-order">
@@ -192,7 +194,7 @@
 										<strong>Total</strong>
 									</div>
 								</li>
-								<?php $cartTotal = 0;  
+								<?php $cartTotal = 0; $service_tax = 0;
                               		while ($getCartItems = $cartItems->fetch_assoc()) { 
                                		$getSerName= getIndividualDetails('services_group_service_names','id',$getCartItems['service_id']); ?>
 
@@ -242,7 +244,6 @@
 								<input type="hidden" name="sub_total" id="sub_total" value="<?php echo $cartTotal1; ?>">
 								<input type="hidden" name="coupon_code_type" id="coupon_code_type" value="">
 								<input type="hidden" name="discount_money" id="discount_money" value="">
-                                <input type="hidden" name="order_total" id="order_total" value="<?php echo $cartTotal1+$getSiteSettingsData['service_tax']; ?>">
 								<li class="clearfix">
 									<div class="col" style="text-transform:none;">
 										SubTotal
@@ -258,26 +259,31 @@
 									<div class="col second" id="discount_price1">
 									</div>
 								</li>
+								<?php if($getCount->num_rows == 0) { 
+									$service_tax += ($getSiteSettingsData['service_tax']/100)*$cartTotal;
+								?>
 								<li class="clearfix">
 									<div class="col" style="text-transform:none;">
 										Service Tax
 									</div>
 									<div class="col second" >
-										Rs. <?php echo $getSiteSettingsData['service_tax']; ?>
-										<input type="hidden" name="service_tax" id="service_tax" value="<?php echo $getSiteSettingsData['service_tax']; ?>">
+										Rs. <?php echo $service_tax ; ?>(<?php echo $getSiteSettingsData['service_tax'] ; ?>%)
 									</div>
 								</li>
+								<?php } ?>
+								<input type="hidden" name="service_tax" id="service_tax" value="<?php echo $service_tax ; ?>">
 								<li class="clearfix total">
 									<div class="col">
 										<strong>Order Total</strong>
 									</div>
 									<div class="col second" id="cart_total2">
-										<strong>Rs. <?php echo $cartTotal+$getSiteSettingsData['service_tax']; ?></strong>
+										<strong>Rs. <?php echo $cartTotal+$service_tax; ?></strong>
 									</div>
 								</li>
+								<input type="hidden" name="order_total" id="order_total" value="<?php echo $cartTotal1+$service_tax; ?>">
 							</ul>
 							<div class="coupon-code">
-								<?php if($cartTotal != 0) { ?>
+								<?php if($getCount->num_rows == 0) { ?>
 								<div class="form-group">
 									<div class="field-group has-feedback has-clear">
 								      <input type="text" name="coupon_code" style="text-transform:uppercase" id="coupon_code" value="" placeholder="Coupon Code" class="form-control">
@@ -291,10 +297,7 @@
 							</div>
 						</div>
 						<!--End Your Order-->
-						<?php
-							$getPriceType = "SELECT * FROM services_cart WHERE (services_price_type_id=2) AND (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') ";
-        					$getCount = $conn->query($getPriceType);  
-						?>
+						
 						<div class="place-order">
 							<div class="default-title">
 								<h2>Payment Method</h2>

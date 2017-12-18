@@ -121,7 +121,7 @@
 					</thead>
 					<form name="cart_form" method="post">
 					<tbody>
-						<?php $cartTotal = 0;  
+						<?php $cartTotal = 0; $service_tax = 0;
                               while ($getCartItems = $cartItems->fetch_assoc()) {
                         ?>
                          <input type="hidden" name="cart_id[]" value="<?php echo $getCartItems['id']; ?>">
@@ -180,6 +180,12 @@
 						<input type="submit" class="btn_cart_outine" value="Update Cart" name="submit">
 					</div> -->
 				</div>
+				<?php 
+				//below condition for check service type prices fixed or variant for payment gateway display
+				$getPriceType = "SELECT * FROM services_cart WHERE (services_price_type_id=2) AND (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') ";
+        		$getCount = $conn->query($getPriceType);
+        		$count = $cartItems->num_rows;
+        		?>
 				<div class="row">
 					<div class="column pull-right col-md-4 col-sm-6 col-xs-12">
 						<ul class="totals-table">
@@ -187,11 +193,15 @@
 							</li>
 							<input type="hidden" class="get_cart_total">
 
-							<li class="clearfix"><span class="col">Service Tax</span><span class="col" >Rs. <?php echo $getSiteSettingsData['service_tax']; ?></span>
-							</li>							
-							<input type="hidden" name="service_tax" id="service_tax" value="<?php echo $getSiteSettingsData['service_tax']; ?>">
+							<?php if($getCount->num_rows == 0) {
+							$service_tax += ($getSiteSettingsData['service_tax']/100)*$cartTotal; ?>
+							<li class="clearfix"><span class="col">Service Tax</span><span class="col" >Rs. <?php echo $service_tax; ?>(<?php echo $getSiteSettingsData['service_tax'] ; ?>%)</span>
+							</li>	
+							<?php } ?>
 
-							<li class="clearfix total"><span class="col">Order Total</span><span class="col">Rs. <span class="grand_total"><?php echo $cartTotal+$getSiteSettingsData['service_tax']; ?></span>/-</span>
+							<input type="hidden" name="service_tax" id="service_tax" value="<?php echo $service_tax; ?>">
+
+							<li class="clearfix total"><span class="col">Order Total</span><span class="col">Rs. <span class="grand_total"><?php echo $cartTotal+$service_tax; ?></span>/-</span>
 							</li>
 							
 						</ul>

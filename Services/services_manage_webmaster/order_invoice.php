@@ -9,11 +9,17 @@ $getOrders = "SELECT * FROM services_orders WHERE id='$id'";
 $getOrdersData = $conn->query($getOrders);
 $getOrdersData1 = $getOrdersData->fetch_assoc();
 
+$ordersCount = "SELECT * FROM services_orders WHERE order_id='".$getOrdersData1['order_id']."'";
+$ordersCount1 = $conn->query($ordersCount); 
+$ordersCount2 = $ordersCount1->num_rows;
+
 $getServiceNames = getAllDataWhere('services_group_service_names','id',$getOrdersData1['service_id']); 
 $getServiceNamesData = $getServiceNames->fetch_assoc();
 
 $getPaymentMethod = getAllDataWhere('lkp_payment_types','id',$getOrdersData1['payment_method']); 
 $getPaymentMethodData = $getPaymentMethod->fetch_assoc();
+
+$getSiteSettingsData = getIndividualDetails('services_site_settings','id',1);
 
 if($getOrdersData1['lkp_order_status_id'] == 2 && $getOrdersData1['lkp_payment_status_id'] == 1) {
 
@@ -22,8 +28,10 @@ $content ='';
 if($getOrdersData1['coupon_code'] == '') {
 	$discount_money = 0;
 } else {
-	$discount_money = $getOrdersData1['discount_money'];
+	$discount_money = $getOrdersData1['discount_money']/$ordersCount2;
 }
+$service_tax = $getOrdersData1['order_price']*$getSiteSettingsData['service_tax']/100;
+$order_price = $getOrdersData1['order_price']+$service_tax-$discount_money;
 
 $content .='<!DOCTYPE html>
 <html lang="en">
@@ -42,57 +50,62 @@ $content .='<!DOCTYPE html>
         <th colspan="2" style="padding-bottom:40px;padding-left:120px"><img src="img/logo2.png" class="logo-responsive" width="210px" height="100px;"></th>
 		<th></th>
 		<th colspan="2"><h3 style="color:#f26226">Invoice</h3>
-		<p>Oreder Id: '.$getOrdersData1['order_sub_id'].'</p>
-		<p>Created Date:  '.$getOrdersData1['delivery_date'].'</p>
+		<p>Oreder Id: '.$getOrdersData1['order_id'].'</p>
+		<p>Created Date:  '.$getOrdersData1['created_at'].'</p>
 		</th>	
       </tr>
     </thead>
     <tbody>
       <tr>     
         <td colspan="2"></td>
-        <td colspan="2" style="padding-left:150px"><h4 style="color:#f26226">Order Details</h4></td>
+        <td colspan="2" style="padding-left:150px"><h4 style="color:#f26226">ORDER DETAILS</h4></td>
 		<td colspan="3"></td>
       </tr>
       <tr  style="border-top:0px">
-        <td></td>
+	  
+       <td colspan="3"><p style="color:#f26226">Order Information</p>
+		<p>Order Sub Id: '.$getOrdersData1['order_sub_id'].'</p>
+		<p>Order Date: '.$getOrdersData1['created_at'].'</p>
+		<p>Invoice Date: '.$getOrdersData1['delivery_date'].'</p>
+		<p>Payment method: '.$getPaymentMethodData['status'].'</p>
+		<p></p>
+		</td>
+		
         <td colspan="2"><p style="color:#f26226">Billing Address</p>
 		<p>'.$getOrdersData1['first_name'].'</p>
 		<p>'.$getOrdersData1['email'].'</p>
 		<p>'.$getOrdersData1['mobile'].'</p>
 		<p>'.$getOrdersData1['address'].'</p>
 		<p>'.$getOrdersData1['postal_code'].'</p>
-		<p style="color:#f26226">Payment Information</p>
-		<p>'.$getPaymentMethodData['status'].'</p>
 		</td>
-		<td></td>
+		
         <td colspan="2"><p style="color:#f26226">Shipping Address</p>
 		<p>'.$getOrdersData1['first_name'].'</p>
 		<p>'.$getOrdersData1['email'].'</p>
 		<p>'.$getOrdersData1['mobile'].'</p>
 		<p>'.$getOrdersData1['address'].'</p>
 		<p>'.$getOrdersData1['postal_code'].'</p>
-		<p style="color:#f26226">Order Price</p>
-		<p>'.$getOrdersData1['order_price'].'</p>
 		</td>
+      </tr>
+      <tr style="color:#f26226">
+        <td>SERVICE NAME</td>
+        <td></td>
+        <td>PRICE</td>
+        <td>QUANTITY</td>
+		<td>SELECTED DATE</td>
 		<td></td>
+		<td>SELECTED TIME</td>
       </tr>
-      <tr style="color:#f26226;text-align:center">
-        <td colspan="2">Service Name</td>
-        <td>Price</td>
-        <td>Quantity</td>
-		<td>Selected Date</td>
-		<td>Selected Time</td>
-		<td>SUBTOTAL</td>
-      </tr>
-	   <tr style="text-align:center">
-        <td colspan="2">'.$getServiceNamesData['group_service_name'].'</td>
+	   <tr>
+        <td>'.$getServiceNamesData['group_service_name'].'</td>
+        <td></td>
         <td>Rs. '.$getOrdersData1['order_price'].'</td>
         <td>'.$getOrdersData1['service_quantity'].'</td>
 		<td>'.$getOrdersData1['service_selected_date'].'</td>
+		<td></td>
 		<td>'.$getOrdersData1['service_selected_time'].'</td>
-		<td>Rs. '.$getOrdersData1['sub_total'].'</td>
       </tr>
-	   <tr style="background-color:#f2f2f2">
+	  <tr style="background-color:#f2f2f2">
         <td colspan="5"></td>
 		<td>
 		<p>Subtotal:</p>
@@ -100,10 +113,10 @@ $content .='<!DOCTYPE html>
 		<p>Service Tax:</p>
 		<p style="color:#f26226">Grand Total:</p>
 		</td>
-		<td style="color:#f26226"><p>Rs. '.$getOrdersData1['sub_total'].'</p>
+		<td style="color:#f26226"><p>Rs. '.$getOrdersData1['order_price'].'</p>
 		<p>Rs.'.$discount_money.'</p>
-		<p>Rs.'.$getOrdersData1['service_tax'].'</p>
-		<p>Rs. '.$getOrdersData1['order_total'].'</p></td>
+		<p>Rs.'.$service_tax.'('.$getSiteSettingsData['service_tax'].'%)</p>
+		<p>Rs. '.$order_price.'</p></td>
       </tr>
     </tbody>
   </table>
@@ -127,7 +140,7 @@ $html2pdf->Output('../../uploads/generate_invoice/'.$getOrdersData1['order_sub_i
 
 // Email attachment to user
 $to = $getOrdersData1['email'];
-$from = $getSitesettingsDeatils['from_email'];
+$from = $getSiteSettingsData['from_email'];
 $subject = "MY SERVANT ORDER INVOICE";
 
 $message = "<p>Dear ". $getOrdersData1['first_name'] . ", <br /><br />Please see the MY SERVANT Service Details attachment.</p><br /><br />Thank You<br/>MY SERVANT. ";
@@ -170,7 +183,7 @@ if (mail($to, $subject, $body, $headers)) {
 $getAdminData = $orderStatus = getIndividualDetails('admin_users','id',$_SESSION['services_admin_user_id']);
 
 $to = $getAdminData['admin_email'];
-$from = $getSitesettingsDeatils['from_email'];
+$from = $getSiteSettingsData['from_email'];
 $subject = "MY SERVANT ORDER INVOICE";
 
 $message = "<p>Dear Admin, <br /><br />Please see the MY SERVANT Service Details attachment.</p><br /><br />Thank You<br/>MY SERVANT. ";
