@@ -76,10 +76,11 @@
             <div class="container-fluid marg10 search_back">
             	
                 <div class="row">
-                	<?php while($getServiceNewsFeed = $getAllServiceNewsFeedData->fetch_assoc()) {  ?>
-					<marquee scrollamount="10" style="color:white;font-size:15px"><span><a href="<?php echo $getServiceNewsFeed['news_feed_url']; ?>" style="color:white;"><?php echo $getServiceNewsFeed['news_feed_url'];?></span>
+                	
+					<marquee scrollamount="10" style="color:white;font-size:15px">
+					<?php while($getServiceNewsFeed = $getAllServiceNewsFeedData->fetch_assoc()) {  ?><span><a href="<?php echo $getServiceNewsFeed['news_feed_url']; ?>" style="color:white;"><?php echo $getServiceNewsFeed['news_feed_url'];?></span> -  <?php  } ?>
 					</marquee> 
-					 <?php  } ?>
+					 
                 </div>
                
                 </div>
