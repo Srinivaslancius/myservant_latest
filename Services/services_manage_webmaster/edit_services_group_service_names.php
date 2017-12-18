@@ -15,6 +15,7 @@ if (!isset($_POST['submit'])) {
     $service_price_type_id = $_POST['service_price_type_id'];
     $price_after_visit_type_id = $_POST['price_after_visit_type_id'];
     $lkp_status_id = $_POST['lkp_status_id'];
+    $related_tags = $_POST['related_tags'];
     if($_POST['service_price_type_id'] == 1) {
       $price_after_visit_type_id = 0;
       $service_price = $_POST['service_price'];
@@ -33,7 +34,7 @@ if (!isset($_POST['submit'])) {
       $price_after_visit = $_POST['price_after_visit'];
     }
 
-      $sql = "UPDATE `services_group_service_names` SET services_category_id = '$services_category_id', services_sub_category_id = '$services_sub_category_id', services_group_id = '$services_group_id', group_service_name = '$group_service_name',group_service_description = '$group_service_description',service_price_type_id = '$service_price_type_id',service_price = '$service_price',price_after_visit_type_id = '$price_after_visit_type_id',price_after_visiting = '$price_after_visit',service_min_price = '$service_min_price',service_max_price = '$service_max_price', lkp_status_id='$lkp_status_id' WHERE id = '$id' ";
+      $sql = "UPDATE `services_group_service_names` SET services_category_id = '$services_category_id', services_sub_category_id = '$services_sub_category_id', services_group_id = '$services_group_id', group_service_name = '$group_service_name',group_service_description = '$group_service_description',service_price_type_id = '$service_price_type_id',service_price = '$service_price',price_after_visit_type_id = '$price_after_visit_type_id',price_after_visiting = '$price_after_visit',service_min_price = '$service_min_price',service_max_price = '$service_max_price',related_tags = '$related_tags', lkp_status_id='$lkp_status_id' WHERE id = '$id' ";
       if($conn->query($sql) === TRUE){
          echo "<script type='text/javascript'>window.location='services_group_service_names.php?msg=success'</script>";
       } else {
@@ -140,6 +141,11 @@ if (!isset($_POST['submit'])) {
                     <input type="text" name="service_max_price" class="form-control valid_price_dec" id="max_price" value="<?php echo $getGroupNamesData['service_max_price'];?>">
                     <div class="help-block with-errors"></div>
                   </div>
+                  <div class="form-group">
+                      <label for="form-control-2" class="control-label">Service Tags</label>
+                      <textarea name="related_tags" class="form-control" id="form-control-2" placeholder="Group Service Tags" data-error="Please enter Group Service Tags." required><?php echo $getGroupNamesData['related_tags'];?></textarea>
+                      <div class="help-block with-errors"></div>
+                    </div>
                   <?php $getStatus = getAllData('lkp_status');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your status</label>
