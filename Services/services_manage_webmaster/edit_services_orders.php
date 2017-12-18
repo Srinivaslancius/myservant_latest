@@ -1,5 +1,6 @@
-<?php include_once 'admin_includes/main_header.php'; ?>
-<?php  
+<?php include_once 'admin_includes/main_header.php';
+$getSiteSettingsData = getIndividualDetails('services_site_settings','id',1);
+
 $id = $_GET['id'];
 $subcat_id = $_GET['subcat_id'];
 $order_id = $_GET['order_id'];
@@ -12,25 +13,22 @@ if (!isset($_POST['submit'])) {
   $lkp_order_status_id = $_POST['lkp_order_status_id'];
   $lkp_payment_status_id = $_POST['lkp_payment_status_id'];
   $order_total = $_POST['order_total'];
-  $delivery_date = date("Y-m-d h:i:s");;
+  $delivery_date = date("Y-m-d h:i:s");
+  $service_tax = $getSiteSettingsData['service_tax'];
 
   if($_POST['service_price_type_id'] == 1) {
-    $order_total = $_POST['order_total'];
+    $order_total = $_POST['order_total']+($order_price*$service_tax/100);
+    $sql = "UPDATE `services_orders` SET service_tax = '$service_tax',lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id', delivery_date ='$delivery_date' WHERE id = '$id'";
+    $res = $conn->query($sql);
   } else {
-    $order_total = $_POST['order_total']+$order_price;
+    $order_total = $_POST['order_total']+$order_price+($order_price*$service_tax/100);
+    $sql = "UPDATE `services_orders` SET service_tax = '$service_tax',order_price='$order_price',lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id', delivery_date ='$delivery_date' WHERE id = '$id'";
+    $res = $conn->query($sql);
   }
-
   $updateTotal = "UPDATE `services_orders` SET order_total = '$order_total' WHERE order_id = '$order_id'";
   $updateOrdertotal = $conn->query($updateTotal);
-  
-  $sql = "UPDATE `services_orders` SET order_price = '$order_price',order_total = '$order_total',lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id', delivery_date ='$delivery_date' WHERE id = '$id' AND sub_category_id = '$subcat_id'";
-  $res = $conn->query($sql);
+
   header("Location:order_invoice.php?id=".$id."");
-  // if($conn->query($sql) === TRUE){
-  //    echo "<script type='text/javascript'>window.location='services_orders.php?msg=success'</script>";
-  // } else {
-  //    echo "<script type='text/javascript'>window.location='services_orders.php?msg=fail'</script>";
-  // }
 }   
 ?>
  <div class="site-content">
