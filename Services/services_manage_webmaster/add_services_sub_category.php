@@ -6,6 +6,7 @@ if (!isset($_POST['submit']))  {
 }else  {
   //If success
   $services_category_id = $_POST['services_category_id'];
+  $sub_service_min_charge = $_POST['sub_service_min_charge'];
   $sub_category_description = $_POST['sub_category_description'];
   $sub_category_name = $_POST['sub_category_name'];
   $meta_title = $_POST['meta_title'];
@@ -21,7 +22,7 @@ if (!isset($_POST['submit']))  {
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        $sql = "INSERT INTO services_sub_category (`services_category_id`, `sub_category_name`, `sub_category_description`,`sub_category_image`, `meta_title`, `meta_keywords`, `meta_desc`, `lkp_status_id`) VALUES ('$services_category_id', '$sub_category_name', '$sub_category_description','$fileToUpload', '$meta_title', '$meta_keywords', '$meta_desc', '$lkp_status_id')"; 
+        $sql = "INSERT INTO services_sub_category (`services_category_id` ,`sub_service_min_charge`,`sub_category_name`, `sub_category_description`,`sub_category_image`, `meta_title`, `meta_keywords`, `meta_desc`, `lkp_status_id`) VALUES ('$services_category_id', '$sub_service_min_charge','$sub_category_name', '$sub_category_description','$fileToUpload', '$meta_title', '$meta_keywords', '$meta_desc', '$lkp_status_id')"; 
         if($conn->query($sql) === TRUE){
            echo "<script type='text/javascript'>window.location='services_sub_category.php?msg=success'</script>";
         } else {
@@ -61,7 +62,11 @@ if (!isset($_POST['submit']))  {
                     <input type="text" name="sub_category_name" class="form-control" id="form-control-2" placeholder="Sub Category Name" data-error="Please enter Sub Category Name" required>
                     <div class="help-block with-errors"></div>
                   </div>
-
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Sub Service Minimum Charge</label>
+                    <input type="text" name="sub_service_min_charge" class="form-control valid_price_dec" id="form-control-2" placeholder="Sub Service Minimum Charge" data-error="Please enter Sub Category Name" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
                   <div class="form-group">
                     <label for="form-control-4" class="control-label">Sub Category Image</label>
                     <img id="output" height="100" width="100"/>
