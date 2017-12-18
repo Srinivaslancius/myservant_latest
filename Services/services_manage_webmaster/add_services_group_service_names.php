@@ -146,8 +146,8 @@ if (!isset($_POST['submit']))  {
                     </div>
 
                     <div class="form-group">
-                      <label for="form-control-2" class="control-label">Service Tags</label>
-                      <textarea name="related_tags" class="form-control" id="form-control-2" placeholder="Group Service Tags" data-error="Please enter Group Service Tags." required></textarea>
+                      <label for="form-control-2" class="control-label">Tags</label>
+                      <textarea name="related_tags" class="form-control" id="form-control-2" placeholder="Tags" data-error="Please enter Tags." required></textarea>
                       <div class="help-block with-errors"></div>
                     </div>
 
