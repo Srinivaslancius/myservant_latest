@@ -65,19 +65,25 @@
 
 	<main>
 		<!-- Slider -->
-		<?php $getAllContentPageData = getAllDataWhere('services_content_pages','id',13);
-		  $getSliderTextData = $getAllContentPageData->fetch_assoc();
+		<?php $getAllServiceNewsFeedData = getAllDataWithStatus('services_newsfeed','0');
+	
 		?>
 		<div id="full-slider-wrapper">
                     <?php include_once './slider.php';?>
 		</div>
 		<!-- End layerslider -->
+			
             <div class="container-fluid marg10 search_back">
-                    <div class="row">
-					<marquee scrollamount="10" style="color:white;font-size:15px"><span><?php echo strip_tags($getSliderTextData['description']);?></span>
+            	
+                <div class="row">
+                	<?php while($getServiceNewsFeed = $getAllServiceNewsFeedData->fetch_assoc()) {  ?>
+					<marquee scrollamount="10" style="color:white;font-size:15px"><span><a href="<?php echo $getServiceNewsFeed['news_feed_url']; ?>" style="color:white;"><?php echo $getServiceNewsFeed['news_feed_url'];?></span>
 					</marquee> 
+					 <?php  } ?>
                 </div>
+               
                 </div>
+
 		<div class="container margin_60">
 
 			<div class="main_title">
