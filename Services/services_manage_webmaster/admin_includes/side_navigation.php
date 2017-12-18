@@ -54,6 +54,8 @@
                 </li>
                 <li  class="<?php if($page_name == 'services_testimonials.php' || $page_name == 'add_services_testimonials.php' || $page_name == 'edit_services_testimonials.php') { echo "active"; } ?>"><a href="services_testimonials.php">Testimonials</a>
                 </li>
+                <li  class="<?php if($page_name == 'services_newsfeeds.php' || $page_name == 'add_services_newsfeeds.php' || $page_name == 'edit_services_newsfeeds.php') { echo "active"; } ?>"><a href="services_newsfeeds.php">News Feeds</a>
+                </li>
                 <!-- <li  class="<?php if($page_name == 'services_newsletter.php' ) { echo "active"; } ?>"><a href="services_newsletter.php">News Letters</a>
                 </li> -->
               </ul>
