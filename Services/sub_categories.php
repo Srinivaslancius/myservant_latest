@@ -55,18 +55,10 @@
 
   <main>
     <!-- Slider -->
-    <?php if (isset($_POST['search'])) {
-      $sub_cat_id = $_POST['id'];
-      if($_POST['id'] == '0' && $_POST['sub_category_name'] == '') {
-        header("Location: services.php");         
-        exit; 
-      } elseif(!empty($_POST['id'])) {
-        $sub_cat_id = $_POST['id'];
-        $getSubCategoriesData = getAllDataWhereWithActive('services_sub_category','id',$sub_cat_id);
-      } elseif(!empty($_POST['sub_category_name'])) {
-        $sub_category_name = $_POST['sub_category_name'];
-        $getSubCategoriesData = getAllDataWhereWithActive('services_sub_category','sub_category_name',$sub_category_name);
-      }
+    <?php if ($_GET['cat_id']) {
+      $cat_id = decryptPassword($_GET['cat_id']);
+      $getSubCategoriesData = getAllDataWhereWithActive('services_sub_category','services_category_id',$cat_id);
+      $getBanners1 = "SELECT * FROM `services_banners` WHERE lkp_status_id = 0 ANd service_category_id = $cat_id ORDER BY id DESC";
     } else {
       $sub_cat_id = decryptPassword($_GET['key']);
       $getSubCategoriesData = getAllDataWhereWithActive('services_sub_category','services_category_id',$sub_cat_id);

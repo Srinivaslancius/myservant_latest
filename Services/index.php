@@ -58,33 +58,7 @@
 		</div>
 		<!-- container -->
             <section id="hero">
-			        <div id="search_bar_container">
-			            <div class="container">
-			            <form method="post" action="sub_categories.php">
-			                <div class="search_bar">
-			                <span class="nav-facade-active" id="nav-search-in">
-			                    <span id="nav-search-in-content">Services Sub Category</span>
-			                    <span class="nav-down-arrow nav-sprite"></span>
-			                    <select name="id" class="searchSelect" id="searchDropdownBox">
-			                    <?php $getCategoriesData = getAllDataWithStatusLimit('services_sub_category','0','0','6'); ?>
-			                    <option value="0">Service Category</option>
-			                    <?php while($row = $getCategoriesData->fetch_assoc()) {  ?>
-		                          <option value="<?php echo $row['id']; ?>" ><?php echo $row['sub_category_name']; ?></option>
-		                       <?php } ?>                                    
-			                    </select>
-			                    </span>
-			                    <div class="nav-searchfield-outer">
-			                    <input type="text" autocomplete="off" name="sub_category_name" placeholder="Search your related service" id="twotabsearchtextbox">
-			                    </div>
-			                   <div class="nav-submit-button">
-		                            <button type="submit" class="btn btn-default" name="search" style="height:30px;border-radius: 1px;border-color:#f26226;"><span class="icon icon-search pull-right"></span></button>
-		                       </div>
-
-			                </div>
-			            </form>
-			            
-			            </div>
-			        </div>
+			        <?php include_once './search_bar.php';?>
 			    </section>
         </header>
 	<!-- End Header -->
@@ -246,18 +220,6 @@
   });
 }());
 </script>
-<script>
-//Search bar
-$(function () {
-$("#searchDropdownBox").change(function(){
-	var Search_Str = $(this).find('option:selected').text();	
-    //var Search_Str = $(this).val();
-    //replace search str in span value
-    $("#nav-search-in-content").text(Search_Str);
-  });
-});
-</script>
-
 </body>
 
 </html>

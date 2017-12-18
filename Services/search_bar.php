@@ -1,0 +1,54 @@
+<?php if (isset($_POST['search'])) {
+  $cat_id = $_POST['id'];
+  if($_POST['id'] == '0' && $_POST['service_name'] == '') {
+    header("Location: services.php");
+    exit; 
+  } elseif(!empty($_POST['id'])) {
+    $cat_id = $_POST['id'];
+    header("Location: sub_categories.php?cat_id=".encryptPassword($cat_id)."");
+  } elseif(!empty($_POST['service_name'])) {
+    $service_name = $_POST['service_name'];
+	$getGroupServiceNames = getAllDataWhereWithActive('services_group_service_names','related_tags',$service_name);
+	$getGroupServiceNamesData = $getGroupServiceNames->fetch_assoc();
+    header("Location: list.php?sub_cat_id=".encryptPassword($getGroupServiceNamesData['services_sub_category_id'])."");
+  }
+}
+?>
+<div id="search_bar_container">
+    <div class="container">
+    <form method="post" action="">
+        <div class="search_bar">
+        <span class="nav-facade-active" id="nav-search-in">
+            <span id="nav-search-in-content">Services Category</span>
+            <span class="nav-down-arrow nav-sprite"></span>
+            <select name="id" class="searchSelect" id="searchDropdownBox">
+            <?php $getCategoriesData = getAllDataWhere('services_category','lkp_status_id','0'); ?>
+            <option value="0">Service Category</option>
+            <?php while($row = $getCategoriesData->fetch_assoc()) {  ?>
+              <option value="<?php echo $row['id']; ?>" ><?php echo $row['category_name']; ?></option>
+           <?php } ?>                                    
+            </select>
+            </span>
+            <div class="nav-searchfield-outer">
+            <input type="text" autocomplete="off" name="service_name" placeholder="Search your related service" id="twotabsearchtextbox">
+            </div>
+           <div class="nav-submit-button">
+                <button type="submit" class="btn btn-default" name="search" style="height:30px;border-radius: 1px;border-color:#f26226;"><span class="icon icon-search pull-right"></span></button>
+           </div>
+
+        </div>
+    </form>
+    </div>
+</div>
+
+<script>
+//Search bar
+$(function () {
+$("#searchDropdownBox").change(function(){
+	var Search_Str = $(this).find('option:selected').text();	
+    //var Search_Str = $(this).val();
+    //replace search str in span value
+    $("#nav-search-in-content").text(Search_Str);
+  });
+});
+</script>

@@ -14,7 +14,8 @@ if (!isset($_POST['submit']))  {
   $group_service_description = $_POST['group_service_description'];
   $service_price_type_id = $_POST['service_price_type_id'];
   $service_price = $_POST['service_price'];
-  $price_after_visit_type_id = $_POST['price_after_visit_type_id'];  
+  $price_after_visit_type_id = $_POST['price_after_visit_type_id'];
+  $related_tags = $_POST['related_tags'];  
   
   $lkp_status_id = $_POST['lkp_status_id'];
 
@@ -36,7 +37,7 @@ if (!isset($_POST['submit']))  {
     $price_after_visit = $_POST['price_after_visit'];
   }
 
- $sql = "INSERT INTO services_group_service_names (`services_category_id`, `services_sub_category_id`, `services_group_id`, `group_service_name`,`group_service_description`, `service_price_type_id`,  `service_price`,`price_after_visit_type_id`,`price_after_visiting`, `service_min_price`, `service_max_price`, `lkp_status_id`) VALUES ('$services_category_id', '$services_sub_category_id', '$services_group_id', '$group_service_name','$group_service_description', '$service_price_type_id','$service_price', '$price_after_visit_type_id', '$price_after_visit', '$service_min_price', '$service_max_price', '$lkp_status_id')";
+ $sql = "INSERT INTO services_group_service_names (`services_category_id`, `services_sub_category_id`, `services_group_id`, `group_service_name`,`group_service_description`, `service_price_type_id`,  `service_price`,`price_after_visit_type_id`,`price_after_visiting`, `service_min_price`, `service_max_price`, `related_tags`, `lkp_status_id`) VALUES ('$services_category_id', '$services_sub_category_id', '$services_group_id', '$group_service_name','$group_service_description', '$service_price_type_id','$service_price', '$price_after_visit_type_id', '$price_after_visit', '$service_min_price', '$service_max_price','$related_tags', '$lkp_status_id')";
   
     
     if($conn->query($sql) === TRUE){
@@ -141,6 +142,12 @@ if (!isset($_POST['submit']))  {
                     <div class="form-group" id="service_max_price" >
                       <label for="form-control-2" class="control-label">Service Max Price</label>
                       <input type="text" name="service_max_price" class="form-control valid_price_dec" id="max_price" placeholder="Service Max Price">
+                      <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="form-control-2" class="control-label">Service Tags</label>
+                      <textarea name="related_tags" class="form-control" id="form-control-2" placeholder="Group Service Tags" data-error="Please enter Group Service Tags." required></textarea>
                       <div class="help-block with-errors"></div>
                     </div>
 
