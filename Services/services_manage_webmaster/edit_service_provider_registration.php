@@ -27,6 +27,11 @@ if (!isset($_POST['submit']))  {
   $associate_or_not = $_POST['associate_or_not'];
   $experience = $_POST['experience'];
   $created_at = date("Y-m-d h:i:s");
+  $lkp_state_id = $_POST['lkp_state_id'];
+  $lkp_district_id = $_POST['lkp_district_id'];
+  $lkp_city_id = $_POST['lkp_city_id'];
+  $lkp_pincode_id = $_POST['lkp_pincode_id'];
+  $lkp_location_id = $_POST['lkp_location_id'];
   $fileToUpload = $_FILES["fileToUpload"]["name"];
   $fileToUpload1 = $_FILES["fileToUpload1"]["name"];
   if($sub_category_id == 0) {
@@ -40,7 +45,7 @@ if (!isset($_POST['submit']))  {
     $specialization_name1 = 0;
   }
   
-   $service_provider = "UPDATE service_provider_registration SET name = '$name',email ='$email',mobile_number ='$mobile_number',address = '$address' WHERE id = '$id'";
+   $service_provider = "UPDATE service_provider_registration SET name = '$name',email ='$email',mobile_number ='$mobile_number',lkp_state_id ='$lkp_state_id',lkp_district_id ='$lkp_district_id',lkp_city_id ='$lkp_city_id',lkp_pincode_id ='$lkp_pincode_id',lkp_location_id ='$lkp_location_id',address = '$address' WHERE id = '$id'";
     $result1 = $conn->query($service_provider);
 
   if($service_provider_type_id == 'Business') {
@@ -114,6 +119,66 @@ if (!isset($_POST['submit']))  {
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Mobile Number</label>
                     <input type="text" name="mobile_number" class="form-control valid_mobile_num" id="form-control-2" placeholder="Mobile Number" data-error="Please enter mobile number." required maxlength="10" pattern="[0-9]{10}" value="<?php echo $getServiceProviderRegistrationsData['mobile_number'];?>">
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose your State</label>
+                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);">
+                      <option value="">Select State</option>
+                      <?php while($row = $getStates->fetch_assoc()) {  ?>
+                          <option <?php if($row['id'] == $getServiceProviderRegistrationsData['lkp_state_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['state_name']; ?></option>
+                      <?php } ?>
+                   </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <?php $getDistrcits = getAllDataWithStatus('lkp_districts','0');?>
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose your District</label>
+                    <select id="lkp_district_id" name="lkp_district_id" class="custom-select" data-error="This field is required." required onChange="getCities(this.value);">
+                      <option value="">Select District</option>
+                      <?php while($row = $getDistrcits->fetch_assoc()) {  ?>
+                          <option <?php if($row['id'] == $getServiceProviderRegistrationsData['lkp_district_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['district_name']; ?></option>
+                      <?php } ?>
+                    </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose your City</label>
+                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required  onChange="getPincodes(this.value);">
+                      <option value="">Select City</option>
+                      <?php while($row = $getCities->fetch_assoc()) {  ?>
+                          <option <?php if($row['id'] == $getServiceProviderRegistrationsData['lkp_city_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>
+                      <?php } ?>
+                    </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <?php $getPincodes = getAllDataWithStatus('lkp_pincodes','0');?>
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose your Pincode</label>
+                    <select id="lkp_pincode_id" name="lkp_pincode_id" class="custom-select" data-error="This field is required." required   onChange="getLocations(this.value);">
+                      <option value="">Select Pincode</option>
+                      <?php while($row = $getPincodes->fetch_assoc()) {  ?>
+                          <option <?php if($row['id'] == $getServiceProviderRegistrationsData['lkp_pincode_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['pincode']; ?></option>
+                      <?php } ?>
+                    </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <?php $getLocations = getAllDataWithStatus('lkp_locations','0');?>
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose your Location</label>
+                    <select id="lkp_location_id" name="lkp_location_id" class="custom-select" data-error="This field is required." required>
+                      <option value="">Select Location</option>
+                      <?php while($row = $getLocations->fetch_assoc()) {  ?>
+                          <option <?php if($row['id'] == $getServiceProviderRegistrationsData['lkp_location_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['location_name']; ?></option>
+                      <?php } ?>
+                    </select>
                     <div class="help-block with-errors"></div>
                   </div>
 

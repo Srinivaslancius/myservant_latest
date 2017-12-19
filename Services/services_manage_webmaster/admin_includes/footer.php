@@ -4,6 +4,7 @@
     <script src="js/cosmos.min.js"></script>
     <script src="js/application.min.js"></script>
     <script src="js/index.min.js"></script>
+    <script src="js/chosen.jquery.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script>
       $( function() {
@@ -114,6 +115,16 @@
         data:'lkp_city_id='+val,
         success: function(data){
             $("#lkp_pincode_id").html(data);
+        }
+        });
+    }
+    function getLocations(val) { 
+        $.ajax({
+        type: "POST",
+        url: "get_locations.php",
+        data:'lkp_pincode_id='+val,
+        success: function(data){
+            $("#lkp_location_id").html(data);
         }
         });
     }

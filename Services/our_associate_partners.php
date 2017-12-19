@@ -2,7 +2,7 @@
 	<div class="container margin20">
 		<div class="banner colored">
 			<h4>Are You  <span>Professional</span> Looking to grow your service Business</h4>
-			<a href="#" class="btn_1 white">Join Now</a>
+			<a href="service_provider.php" class="btn_1 white">Join Now</a>
 		</div>				
 		<!-- End row -->
 	</div>
