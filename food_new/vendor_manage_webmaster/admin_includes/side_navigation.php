@@ -24,14 +24,14 @@
                 <span class="menu-text">Products</span>
               </a>
             </li>        
-           <li class="<?php if($page_name == 'food_orders.php' ) { echo "active"; } ?>">
+           <!-- <li class="<?php if($page_name == 'food_orders.php' ) { echo "active"; } ?>">
               <a href="food_orders.php" aria-haspopup="true">
                 <span class="menu-icon">
                    <i class="zmdi zmdi-shopping-cart-plus zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Orders</span>
               </a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
