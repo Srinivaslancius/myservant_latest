@@ -78,7 +78,7 @@
                 <div class="row">
                 	
 					<marquee scrollamount="10" style="color:white;font-size:15px">
-					<?php while($getServiceNewsFeed = $getAllServiceNewsFeedData->fetch_assoc()) {  ?><span><a href="<?php echo $getServiceNewsFeed['news_feed_url']; ?>" target= "_blank" style="color:white;"><?php echo $getServiceNewsFeed['news_feed_url'];?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php  } ?>
+					<?php while($getServiceNewsFeed = $getAllServiceNewsFeedData->fetch_assoc()) {  ?><span><a href="<?php echo $getServiceNewsFeed['news_feed_url']; ?>" target= "_blank" style="color:white;"><?php echo $getServiceNewsFeed['news_feed_url'];?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php  } ?>
 					</marquee> 
 					 
                 </div>
@@ -115,7 +115,7 @@
 				<a href="services.php" class="btn_1 medium"><i class="icon-eye-7"></i>View all our Services</a>
 			</p>
 
-			<hr>
+			
 
 			
 
@@ -131,7 +131,7 @@
           <div class="feature">
           <div class="row">
           <div class="col-sm-2">
-            <center><img src="<?php echo $base_url . 'uploads/service_provider_business_logo/'.$getAllgetServiceProvider['logo'] ?>" class="img-responsive" alt="<?php echo $getAllgetServiceProvider['company_name']; ?>" style="width:65px; height:65px;"></center>
+            <center><img src="<?php echo $base_url . 'uploads/service_provider_business_logo/'.$getAllgetServiceProvider['logo'] ?>" class="img-responsive" alt="<?php echo $getAllgetServiceProvider['company_name']; ?>" style="width:65px; height:65px;margin-top:40px;margin-bottom:40px"></center>
             </div>
             <div class="col-sm-10">
             <h3><?php echo $getAllgetServiceProvider['company_name']; ?></h3>
@@ -156,7 +156,7 @@
 		<?php include_once 'our_associate_partners.php';?>
 
 		<!-- Brnds Start here -->
-		<div class="container margin_0">
+		<div class="container margin_0b">
 			<div class="main_title">
 				<h2>Our <span>Brands</span></h2>				
 			</div>
