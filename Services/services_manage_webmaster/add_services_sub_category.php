@@ -127,6 +127,7 @@ if (!isset($_POST['submit']))  {
 <script type="text/javascript">
       $(".chosen").chosen();
 </script>
+
 <script type="text/javascript">
 $(function()
 {
