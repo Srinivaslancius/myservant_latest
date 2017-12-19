@@ -8,6 +8,20 @@
           </div>
           <div class="panel-body">
             <div class="table-responsive">
+                  <?php $getAllSpecilizationData = getAllDataWithActiveRecent('services_employee_registration');;
+                
+              ?>
+              <div class="col s4 m9 l2">                  
+
+                  <div class="form-group col-md-4">                    
+                    <select id="select-specilization" class="custom-select">
+                       <option value="">Select Specalization</option>
+                        <?php while ($getSpecilizationData = $getAllSpecilizationData->fetch_assoc()) { ?>
+                          <option value="<?php echo $getSpecilizationData['specalization']; ?>"><?php echo $getSpecilizationData['specalization']; ?></option>
+                        <?php } ?>
+                    </select>                    
+                  </div>
+                </div>
               <div class="clear_fix"></div>
 
                 <div class="form-group col-md-4">
@@ -33,6 +47,7 @@
                     <th>Email</th>
                     <th>Mobile</th>
                     <th>Status</th>
+                    <th>Specilization</th>
                     <th>Photo</th>
                     <th>Created Date</th>
                     <th>Actions</th>
@@ -46,6 +61,7 @@
                     <td><?php echo $row['email'];?></td>
                     <td><?php echo $row['mobile_number'];?></td>
                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='services_employee_registration'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='services_employee_registration'>In Active</span>" ;} ?></td>
+                    <td><?php echo $row['specalization'];?></td>
                     <td><img src="<?php echo $base_url . 'uploads/service_employee_photo/'.$row['photo'] ?>" height="100" width="100"/></td>
                     <td><?php echo $row['created_at'];?></td>
                    
