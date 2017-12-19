@@ -1,14 +1,4 @@
-
-/*
-	* Style settings of LayerSlider
-	*
-	* (c) 2011-2014 George Krupa, John Gera & Kreatura Media
-	*
-	* Plugin web:			http://kreaturamedia.com/
-	* Licenses: 			http://codecanyon.net/licenses/
-*/
-
-/** Layes slider typography ab buttons **/   
+  
 h3.slide_typo {lwhite-space:nowrap;color:#fff !important;font-weight:normal;text-transform:uppercase;font-size:40px;line-height:1.2;font-weight:900;font-family: Roboto,Helvetica,Arial,sans-serif;}
 .slide_typo_2{color:#fff; font-size:16px; white-space:nowrap; text-transform:uppercase}
 a.button_intro_2, .button_intro_2  {
@@ -16,7 +6,7 @@ a.button_intro_2, .button_intro_2  {
 	font-weight:normal;
 	font-style:normal;
 	color:#fff !important;
-	background: #e04f67;
+	background: #fe6003;
 	cursor: pointer;
 	padding: 10px 20px;
 	display: inline-block;
@@ -35,7 +25,7 @@ a.button_intro_2, .button_intro_2  {
 }
 a.button_intro_2:hover, .button_intro_2:hover {
 	background: #fff;
-	color:#e04f67 !important;
+	color:#fe6003 !important;
 }
 a.button_intro_2.outilne, .button_intro_2.outline  {
 	border: 2px solid #fff;

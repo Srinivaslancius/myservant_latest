@@ -10,8 +10,8 @@
             </div>
            <?php } ?> 
         </div>
-        <a class="left carousel-control" href="#carousel123" data-slide="prev"><i class="icon-angle-circled-left" style="color:#f26226"></i></a>
-        <a class="right carousel-control" href="#carousel123" data-slide="next"><i class="icon-angle-circled-right"style="color:#f26226"></i></a>
+        <a class="left carousel-control" href="#carousel123" data-slide="prev"><i class="icon-angle-circled-left" style="color:#fe6003"></i></a>
+        <a class="right carousel-control" href="#carousel123" data-slide="next"><i class="icon-angle-circled-right"style="color:#fe6003"></i></a>
       </div>
     </div>
   </div> 

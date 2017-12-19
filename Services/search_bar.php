@@ -33,7 +33,7 @@
             <input type="text" autocomplete="off" name="service_name" placeholder="Search your related service" id="twotabsearchtextbox">
             </div>
            <div class="nav-submit-button">
-                <button type="submit" class="btn btn-default" name="search" style="height:30px;border-radius: 1px;border-color:#f26226;"><span class="icon icon-search pull-right"></span></button>
+                <button type="submit" class="btn btn-default" name="search" style="height:30px;border-radius: 1px;border-color:#fe6003;"><span class="icon icon-search pull-right"></span></button>
            </div>
 
         </div>

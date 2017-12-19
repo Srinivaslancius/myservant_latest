@@ -1,4 +1,5 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
+<link rel="stylesheet" href="css/chosen.min.css">
 <?php  
 if (!isset($_POST['submit']))  {
   //If fail
@@ -44,11 +45,11 @@ if (!isset($_POST['submit']))  {
           <div class="panel-body">
             <div class="row">
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                <form data-toggle="validator" method="POST" enctype="multipart/form-data">
+                <form data-toggle="validator" method="POST" id="myform" enctype="multipart/form-data">
                   <?php $getServicesCategories = getAllDataWithStatus('services_category','0');?>
                   <div class="form-group" id="service_category_id">
                     <label for="form-control-3" class="control-label">Choose your Service Category</label>
-                    <select name="services_category_id" class="custom-select" data-error="This field is required." required>
+                    <select name="services_category_id" class="custom-select chosen" placeholder="Select Your Favorite" data-search="true" data-error="This field is required." required>
                       <option value="">Select Service Category</option>
                       <?php while($row = $getServicesCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['category_name']; ?></option>
@@ -59,7 +60,7 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Sub Category Name</label>
-                    <input type="text" name="sub_category_name" class="form-control" id="form-control-2" placeholder="Sub Category Name" data-error="Please enter Sub Category Name" required>
+                    <input type="text" name="sub_category_name" class="form-control" id="form-control-2" placeholder="Select Your Favorite" data-search="true" placeholder="Sub Category Name" data-error="Please enter Sub Category Name" required>
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
@@ -122,3 +123,23 @@ if (!isset($_POST['submit']))  {
       </div>
   
 <?php include_once 'admin_includes/footer.php'; ?>
+
+<script type="text/javascript">
+      $(".chosen").chosen();
+</script>
+<script type="text/javascript">
+$(function()
+{
+    $("#myform").validate(
+      {
+        rules: 
+        {
+          services_category_id: 
+          {
+            required: true
+          }
+        }
+      }); 
+});
+</script>
+
