@@ -13,16 +13,18 @@ if (!isset($_POST['submit']))  {
   $lkp_city_id = $_POST['lkp_city_id'];
   $lkp_pincode_id = $_POST['lkp_pincode_id'];
   $lkp_status_id = $_POST['lkp_status_id'];
-  
+  //echo "<pre>"; print_r($_POST); die;
 
-  $i = 0;
-  while($i<count($_POST['location_name'])) {
+  //$i = 0;
+  $count = count($_POST['location_name']);
+  for($i=0;$i<$count;$i++) {
     $location_name = $_POST['location_name'][$i];
-    $id = $_POST['id'][$i];
+    $id = $_POST['location_id'][$i];
     $sql = "UPDATE lkp_locations SET lkp_state_id = '$lkp_state_id',lkp_district_id ='$lkp_district_id',lkp_city_id ='$lkp_city_id',lkp_pincode_id ='$lkp_pincode_id',location_name = '$location_name',lkp_status_id ='$lkp_status_id' WHERE id = '$id' ";
-    $i++;
+    $res = $conn->query($sql);
+    //$i++;
   }
-  $res = $conn->query($sql);
+  
 
     if($res === TRUE){
        echo "<script type='text/javascript'>window.location='lkp_locations.php?msg=success'</script>";
@@ -70,7 +72,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your City</label>
-                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required  onChange="getPincodes(this.value);>
+                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required  onChange="getPincodes(this.value);">
                       <option value="">Select City</option>
                       <?php while($row = $getCities->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getLocationsData['lkp_city_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>
@@ -97,8 +99,8 @@ if (!isset($_POST['submit']))  {
                     <div class="col-sm-4">
                       <div class="form-group">
                         <label for="form-control-2" class="control-label">Location Name</label>
-                        <input type="hidden" name="id" value="<?php  echo $row['id'] ;?>">
-                        <input type="text" name="location_name[]" class="form-control" id="user_input" placeholder="Location Name" data-error="Please enter Location Name" onkeyup="checkUserAvailTest()" required value="<?php echo $row['location_name'];?>">
+                        <input type="hidden" name="location_id[]" value="<?php  echo $row['id'] ;?>">
+                        <input type="text" name="location_name[]" class="form-control" id="user_input" placeholder="Location Name" data-error="Please enter Location Name" required value="<?php echo $row['location_name'];?>">
                         <span id="input_status" style="color: red;"></span>
                         <input type="hidden" id="table_name" value="lkp_locations">
                         <input type="hidden" id="column_name" value="location_name">
