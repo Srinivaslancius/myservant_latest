@@ -5,67 +5,50 @@ include "../../admin_includes/common_functions.php";
 //Set Array for list
 $response = array();
 
-if (isset($_REQUEST['product_id']) && !empty($_REQUEST['product_id']) && isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id']) && isset($_REQUEST['product_price']) && !empty($_REQUEST['product_price']) && isset($_REQUEST['product_weight']) && !empty($_REQUEST['product_weight']) && isset($_REQUEST['product_quantity']) && !empty($_REQUEST['product_quantity']) ) {
+if (isset($_REQUEST['userId']) && !empty($_REQUEST['serviceCategoryId']) && isset($_REQUEST['serviceSubCatId']) && !empty($_REQUEST['groupId']) && isset($_REQUEST['serviceId']) && !empty($_REQUEST['servicePriceTypeId']) && isset($_REQUEST['servicePrice']) && !empty($_REQUEST['serviceQuantity']) ) {
 	
-	$user_id = $_REQUEST['user_id'];	
-	$date = date("Y-m-d h:i:s");
-    
-    $prods = array();
-    $prods = explode(',', $_REQUEST['product_id']);
-    
-    $qnty = array();
-    $qnty = explode(',', $_REQUEST['product_quantity']);
+	$user_id = $_POST['userId'];
+	$session_cart_id = $_POST['CART_TEMP_RANDOM'];
+	$category_id = $_POST['serviceCategoryId'];
+	$sub_cat_id = $_POST['serviceSubCatId'];
+	$group_id = $_POST['groupId'];
+	$service_price = $_POST['servicePrice'];
+	$services_service_id = $_POST['serviceId'];
+	$service_price_type_id = $_POST['servicePriceTypeId'];
+	$service_quantity = $_POST['serviceQuantity'];
+	$created_at = date('Y-m-d H:i:s', time() + 24 * 60 * 60);
+	$service_selected_time = date('H:i:s', strtotime($created_at));
+	$service_selected_date = date("Y-m-d h:i:s");	    
+   
+    $sql1= "SELECT * from services_cart where service_id='$services_service_id' AND user_id='$user_id' ";
+	$res = $conn->query($sql1);
+	$getcartIt = $res->fetch_assoc();
 
-    $price = array();
-    $price = explode(',', $_REQUEST['product_price']);
-
-    $weight = array();
-    $weight = explode(',', $_REQUEST['product_weight']);
-    
-    if(count($prods) > 0)   {
-
-        $response["lists"] = array();
-        for($i=0; $i<count($prods); $i++)   {
-
-            $pid = $prods[$i];            
-            $sql1 = "SELECT * FROM products where id = '$pid'";
-            $ = $conn->query($sql1);
-            $rresultow = $result->fetch_assoc();
-            if($result->num_rows > 0) {
-
-	           	$id = $row["id"];
-	            $lists = array();
-	            $lists["id"] = $id;
-	            $lists["product_name"] = $row['product_name'];  
-	            $lists["quantity"] = $qnty[$i]; 	
-	            $lists["price"] = $price[$i];             	           
-	            $lists["weight"] = $weight[$i]; 
-	            $lists["items"] = count($prods);
-	            $getImgDetails = getAllDataWhere('product_images','product_id',$pid);
-	            $getImgDet = array();
-	    	    while($getImgDet = $getImgDetails->fetch_assoc()) {
-	    		  $lists["image"]  .= $base_url."uploads/product_images/".$getImgDet["product_image"].",";		    			    		
-	    		}
-	    		//Save data into cart
-	    		$product_id = $prods[$i];
-	    		$product_name = $row['product_name'];
-				$product_price = $price[$i];
-				$product_quantity = $qnty[$i];
-				$product_total_price = $price[$i]*$qnty[$i];
-				$weight_type = $weight[$i];
-
-	            $sql = "INSERT INTO cart (`product_id`,`product_name`, `product_price`,  `product_quantity`,  `product_total_price`, `user_id`,`weight_type`, `created_at`) VALUES ('$product_id','$product_name', '$product_price', '$product_quantity', '$product_total_price', '$user_id','$weight_type', '$date')";
-	          	$conn->query($sql);
-	            array_push($response["lists"], $lists);
-            }
-
-        }
-        $response["success"] = 0;
-        $response["message"] = "Cart Save Successfully";
-    }   else {
-        $response["success"] = 1;
-        $response["message"] = "No Items Found";        
-    }        
+	if ($getcartIt->num_rows > 0) {
+		$cart_id = $getcartIt['cart_id'];
+		$updateq = "UPDATE services_cart SET service_quantity = '$service_quantity' WHERE user_id='$user_id' AND id='$cart_id' ";
+		$result = $conn->query($updateq);
+	} else {
+		$saveItems = "INSERT INTO `services_cart`(`user_id`, `session_cart_id`, `service_category_id`, `service_sub_category_id`, `group_id`, `service_id`, `services_price_type_id`, `service_price`,`service_selected_date`, `service_selected_time`, `created_at`) VALUES ('$user_id','$session_cart_id','$category_id','$sub_cat_id','$group_id','$services_service_id','$service_price_type_id','$service_price','$service_selected_date','$service_selected_time','$created_at')";
+		$saveCart = $conn->query($saveItems);
+	}   
+	$getCartServicesData = getAllDataWhere('services_cart','user_id',$user_id); 
+	$response["lists"] = array();
+	while($row = $getCartServicesData->fetch_assoc()) {
+		$lists = array();
+		$lists["cartId"] = $row["id"];
+		$lists["servicePrice"] = $row["service_price"];
+		$lists["serviceQuantity"] = $row["service_quantity"];	
+		$lists["serviceSelectedDate"] = date('m/d/Y', strtotime($row['service_selected_date']));
+		$lists["serviceSelectedTime"] = date('H:i:s A', strtotime($row['service_selected_time']));
+		$getSerName= getIndividualDetails('services_group_service_names','id',$row['service_id']);
+		$lists["groupServiceName"] = $getSerName['group_service_name'];
+		array_push($response["lists"], $lists);
+	}
+        
+    $response["success"] = 0;
+    $response["message"] = "Success";
+          
 } else {
     $response["success"] = 2;
     $response["message"] = "Required field(s) is missing";

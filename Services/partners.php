@@ -81,7 +81,7 @@
 					<div class="feature">
 					<div class="row">
 					<div class="col-sm-2">
-						<center><img src="<?php echo $base_url . 'uploads/service_provider_business_logo/'.$getAllgetServiceProvider['logo'] ?>" class="img-responsive" alt="<?php echo $getAllgetServiceProvider['company_name']; ?>" style="width:65px; height:65px;"></center>
+						<center><img src="<?php echo $base_url . 'uploads/service_provider_business_logo/'.$getAllgetServiceProvider['logo'] ?>" class="img-responsive" alt="<?php echo $getAllgetServiceProvider['company_name']; ?>" style="width:65px; height:65px;margin-top:40px;margin-bottom:40px"></center>
 						</div>
 						<div class="col-sm-10">
 						<h3><?php echo $getAllgetServiceProvider['company_name']; ?></h3>
@@ -97,7 +97,7 @@
 			</div>
 			<!-- End row -->
 			
-			<hr>
+			
 		</div>
 		<?php include_once 'our_associate_partners.php';?>
 		<!-- End section -->

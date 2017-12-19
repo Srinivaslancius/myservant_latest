@@ -1,4 +1,5 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
+<link rel="stylesheet" href="css/chosen.min.css">
 <?php  
 if (!isset($_POST['submit']))  {
   //If fail
@@ -48,7 +49,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getServicesCategories = getAllDataWithStatus('services_category','0');?>
                   <div class="form-group" id="service_category_id">
                     <label for="form-control-3" class="control-label">Choose your Service Category</label>
-                    <select name="services_category_id" class="custom-select" data-error="This field is required." required>
+                    <select name="services_category_id" class="custom-select chosen" data-error="This field is required." required>
                       <option value="">Select Service Category</option>
                       <?php while($row = $getServicesCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['category_name']; ?></option>
@@ -122,3 +123,6 @@ if (!isset($_POST['submit']))  {
       </div>
   
 <?php include_once 'admin_includes/footer.php'; ?>
+<script type="text/javascript">
+      $(".chosen").chosen();
+</script>

@@ -1,4 +1,5 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
+<link rel="stylesheet" href="css/chosen.min.css">
 <?php  
 error_reporting(1);
 if (!isset($_POST['submit']))  {
@@ -237,7 +238,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Specialization</label>
-                    <select name="sub_category_id" class="custom-select service_provider_business" id="sub_category_id" data-error="This field is required.">
+                    <select name="sub_category_id" class="custom-select service_provider_business chosen" id="sub_category_id" data-error="This field is required.">
                       <option value="">Select Specialization</option>
                       <?php while($row = $getSubCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['sub_category_name']; ?></option>
@@ -274,7 +275,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Specialization</label>
-                    <select name="sub_category_id1" class="custom-select service_provider_personal" id="sub_category_id1" data-error="This field is required.">
+                    <select name="sub_category_id1" class="custom-select service_provider_personal chosen" id="sub_category_id1" data-error="This field is required.">
                       <option value="">Select Specialization</option>
                       <?php while($row = $getSubCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['sub_category_name']; ?></option>
@@ -378,4 +379,8 @@ if (!isset($_POST['submit']))  {
     $box.prop("checked", false);
   }
 });
+</script>
+
+<script type="text/javascript">
+      $(".chosen").chosen();
 </script>

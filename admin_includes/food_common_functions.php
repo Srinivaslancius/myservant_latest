@@ -44,4 +44,11 @@
         return $noRows;
     }
 
+    function getItemsByVendorId($table,$clause1,$value1) {
+        global $conn;        
+        $sql="select * from `$table` WHERE `$clause1` = '$value1'";
+        $result = $conn->query($sql);        
+        return $result;
+    }
+
 ?>
