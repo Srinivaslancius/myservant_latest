@@ -1,7 +1,7 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
 <?php  
 error_reporting(0);
-$lkp_pincode_id = $_GET['lkp_pincode_id'];
+$pincode_id = $_GET['pincode_id'];
 if (!isset($_POST['submit']))  {
   //If fail
   echo "fail";
@@ -11,34 +11,27 @@ if (!isset($_POST['submit']))  {
   $lkp_state_id = $_POST['lkp_state_id'];
   $lkp_district_id = $_POST['lkp_district_id'];
   $lkp_city_id = $_POST['lkp_city_id'];
-  $lkp_pincode_id = $_POST['lkp_pincode_id'];
+  $pincode = $_POST['pincode'];
   $lkp_status_id = $_POST['lkp_status_id'];
-  
-
-  $i = 0;
-  while($i<count($_POST['location_name'])) {
-    $location_name = $_POST['location_name'][$i];
-    $id = $_POST['id'][$i];
-    $sql = "UPDATE lkp_locations SET lkp_state_id = '$lkp_state_id',lkp_district_id ='$lkp_district_id',lkp_city_id ='$lkp_city_id',lkp_pincode_id ='$lkp_pincode_id',location_name = '$location_name',lkp_status_id ='$lkp_status_id' WHERE id = '$id' ";
-    $i++;
-  }
-  $res = $conn->query($sql);
+    
+    $sql = "UPDATE lkp_pincodes SET lkp_state_id = '$lkp_state_id',lkp_district_id ='$lkp_district_id',lkp_city_id ='$lkp_city_id',pincode = '$pincode',lkp_status_id ='$lkp_status_id' WHERE id = $pincode_id";
+      $res = $conn->query($sql);
 
     if($res === TRUE){
-       echo "<script type='text/javascript'>window.location='lkp_locations.php?msg=success'</script>";
+       echo "<script type='text/javascript'>window.location='lkp_pincodes.php?msg=success'</script>";
     } else {
-       echo "<script type='text/javascript'>window.location='lkp_locations.php?msg=fail'</script>";
+       echo "<script type='text/javascript'>window.location='lkp_pincodes.php?msg=fail'</script>";
     }
 }
 ?>
       <div class="site-content">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="m-y-0">Locations</h3>
+            <h3 class="m-y-0">Pincodes</h3>
           </div>
           <div class="panel-body">
             <div class="row">
-              <?php $sql = "SELECT * FROM lkp_locations WHERE id = $lkp_pincode_id";
+              <?php $sql = "SELECT * FROM lkp_pincodes WHERE id = $pincode_id";
                $getLocations = $conn->query($sql);
               $getLocationsData = $getLocations->fetch_assoc(); ?>
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
@@ -70,7 +63,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your City</label>
-                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required  onChange="getPincodes(this.value);>
+                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required>
                       <option value="">Select City</option>
                       <?php while($row = $getCities->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getLocationsData['lkp_city_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>
@@ -79,33 +72,14 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
 
-                  <?php $getPincodes = getAllDataWithStatus('lkp_pincodes','0');?>
-                  <div class="form-group">
-                    <label for="form-control-3" class="control-label">Choose your Pincode</label>
-                    <select id="lkp_pincode_id" name="lkp_pincode_id" class="custom-select" data-error="This field is required." required>
-                      <option value="">Select Pincode</option>
-                      <?php while($row = $getPincodes->fetch_assoc()) {  ?>
-                          <option <?php if($row['id'] == $getLocationsData['lkp_pincode_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['pincode']; ?></option>
-                      <?php } ?>
-                    </select>
-                    <div class="help-block with-errors"></div>
-                  </div>
-
-                  <?php $getAllLocations = getAllDataWhere('lkp_locations','lkp_pincode_id',$lkp_pincode_id); ?>
                   <div class="row">
-                    <?php while($row = $getAllLocations->fetch_assoc()) {  ?>
-                    <div class="col-sm-4">
+                    <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="form-control-2" class="control-label">Location Name</label>
-                        <input type="hidden" name="id" value="<?php  echo $row['id'] ;?>">
-                        <input type="text" name="location_name[]" class="form-control" id="user_input" placeholder="Location Name" data-error="Please enter Location Name" onkeyup="checkUserAvailTest()" required value="<?php echo $row['location_name'];?>">
-                        <span id="input_status" style="color: red;"></span>
-                        <input type="hidden" id="table_name" value="lkp_locations">
-                        <input type="hidden" id="column_name" value="location_name">
+                        <label for="form-control-2" class="control-label">Pincode</label>
+                        <input type="text" name="pincode" class="form-control valid_mobile_num" id="user_input" placeholder="Pincode" data-error="Please enter Pincode" required maxlength="6" minlength="6" value="<?php echo $getLocationsData['pincode'];?>">
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
-                    <?php } ?>
                   </div>
 
                   <?php $getStatus = getAllData('lkp_status');?>

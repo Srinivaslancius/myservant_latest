@@ -107,6 +107,16 @@
         }
         });
     }
+    function getPincodes(val) { 
+        $.ajax({
+        type: "POST",
+        url: "get_pincodes.php",
+        data:'lkp_city_id='+val,
+        success: function(data){
+            $("#lkp_pincode_id").html(data);
+        }
+        });
+    }
     function getSubCategory(val) {
         $.ajax({
         type: "POST",

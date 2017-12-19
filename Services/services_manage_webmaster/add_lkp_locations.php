@@ -10,14 +10,14 @@ if (!isset($_POST['submit']))  {
   $lkp_state_id = $_POST['lkp_state_id'];
   $lkp_district_id = $_POST['lkp_district_id'];
   $lkp_city_id = $_POST['lkp_city_id'];
+  $lkp_pincode_id = $_POST['lkp_pincode_id'];
   $lkp_status_id = $_POST['lkp_status_id'];
 
     $location_name = $_REQUEST['location_name'];
     foreach($location_name as $key=>$value){
 
-        $location_name = $_REQUEST['location_name'][$key];
-        $location_pincode = $_REQUEST['location_pincode'][$key];      
-        $sql = "INSERT INTO lkp_locations (`lkp_state_id`, `lkp_district_id`, `lkp_city_id`, `location_name`, `location_pincode`, `lkp_status_id`) VALUES ('$lkp_state_id', '$lkp_district_id', '$lkp_city_id', '$location_name', '$location_pincode', '$lkp_status_id')";
+        $location_name = $_REQUEST['location_name'][$key];    
+        $sql = "INSERT INTO lkp_locations (`lkp_state_id`, `lkp_district_id`, `lkp_city_id`, `lkp_pincode_id`, `location_name`, `lkp_status_id`) VALUES ('$lkp_state_id', '$lkp_district_id', '$lkp_city_id', '$lkp_pincode_id', '$location_name', '$lkp_status_id')";
         $result = $conn->query($sql);
     }
 
@@ -60,8 +60,16 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your City</label>
-                    <select name="lkp_city_id" id="lkp_city_id" class="custom-select" data-error="This field is required." required>
+                    <select name="lkp_city_id" id="lkp_city_id" class="custom-select" data-error="This field is required." required onChange="getPincodes(this.value);">
                       <option value="">Select City</option>
+                   </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose your Pincode</label>
+                    <select name="lkp_pincode_id" id="lkp_pincode_id" class="custom-select" data-error="This field is required." required>
+                      <option value="">Select Pincode</option>
                    </select>
                     <div class="help-block with-errors"></div>
                   </div>
@@ -69,7 +77,7 @@ if (!isset($_POST['submit']))  {
                   <div class="clear_fix"></div>
                   <div class="input_fields_container">
                     <div class="row">
-                      <div class="col-sm-4">
+                      <div class="col-sm-6">
                         <div class="form-group">
                           <label for="form-control-2" class="control-label">Location Name</label>
                           <input type="text" name="location_name[]" class="form-control" id="user_input" placeholder="Location Name" data-error="Please enter Location Name" onkeyup="checkUserAvailTest()" required>
@@ -79,20 +87,11 @@ if (!isset($_POST['submit']))  {
                           <div class="help-block with-errors"></div>
                         </div>
                       </div>
-
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="form-control-2" class="control-label">Location Pincode</label>
-                          <input type="text" name="location_pincode[]" class="form-control valid_mobile_num" id="form-control-2" placeholder="Location Pincode" data-error="Please enter Location Pincode" maxlength="6" required>
-                          <div class="help-block with-errors"></div>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
+                      <div class="col-sm-6">
                         <div class="form-group">
                           <label for="form-control-2" class="control-label"></label>
-                          <!-- <button type="button" class="btn btn-primary add_more_button" style="top:24px;">Add More Fields</button> -->
+                          <button type="button" class="btn btn-primary add_more_button" style="top:24px;">Add More Fields</button>
                         </div>
-                        
                       </div>
                     </div>
                   </div>
@@ -122,13 +121,13 @@ if (!isset($_POST['submit']))  {
 <?php include_once 'admin_includes/footer.php'; ?>
     <script>
         $(document).ready(function() {
-        var max_fields_limit      = 2; //set limit for maximum input fields
+        var max_fields_limit      = 10; //set limit for maximum input fields
         var x = 1; //initialize counter for text box
         $('.add_more_button').click(function(e){ //click event on add more fields button having class add_more_button
             e.preventDefault();
             if(x < max_fields_limit){ //check conditions
                 x++; //counter increment
-                $('.input_fields_container').append('<div><div class="row"><div class="col-sm-4"><div class="form-group"><label for="form-control-2" class="control-label">Location Name</label><input type="text" name="location_name[]" class="form-control" id="form-control-2" placeholder="Location Name"></div></div><div class="col-sm-4"><div class="form-group"><label for="form-control-2" class="control-label">Location Pincode</label><input type="text" name="location_pincode[]" class="form-control valid_mobile_num" id="form-control-2" placeholder="Location Pincode" maxlength="6"></div></div><a href="#" class="remove_field btn btn-primary" style="margin-left:20px; top:20px;">Remove</a></div></div>'); //add input field
+                $('.input_fields_container').append('<div><div class="row"><div class="col-sm-6"><div class="form-group"><label for="form-control-2" class="control-label">Location Name</label><input type="text" name="location_name[]" class="form-control" id="form-control-2" placeholder="Location Name"></div></div><a href="#" class="remove_field btn btn-primary" style="margin-left:20px; top:20px;">Remove</a></div></div>'); //add input field
             }
         });  
         $('.input_fields_container').on("click",".remove_field", function(e){ //user click on remove text links
