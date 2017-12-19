@@ -57,31 +57,31 @@
 	<main>
 		<!-- Slider -->
 		 <div class="container-fluid page-title">
-		 	<?php 
-				if(!empty($getAboutUsData['image'])) { ?> 	
-				<div class="row">
-					<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getAboutUsData['image'] ?>" alt="<?php echo $getAboutUsData['title'];?>" class="img-responsive">
-				</div>
-			<?php } else { ?>
-				<div class="row">
-					<img src="img/slides/slide_1.jpg" class="img-responsive">
-				</div>
-			<?php }?>	
+			<?php  
+				  if(!empty($getPartnersBanner['image'])) { ?> 	
+					<div class="row">
+						<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getPartnersBanner['image'] ?>" alt="<?php echo $getPartnersBanner['title'];?>" class="img-responsive">
+					</div>
+				<?php } else { ?>
+					<div class="row">
+						<img src="img/slides/slide_1.jpg" class="img-responsive">
+					</div>
+				<?php }?>
     	</div>
-
-		<div class="white_bg">
-			<div class="container margin_60">							
-            <div class="main_title">
-				<h2><span><?php echo $getAboutUsData['title'];?></span></h2>				
+		<div class="container margin_35">
+		<div class="main_title">
+				<h2><?php echo $getAboutUsData['title'];?></h2>				
 			</div>
-			<?php echo $getAboutUsData['description'];?>
-				
-				<!-- End row -->
+			<div class="row">			
+					<div class="feature">
+					<?php echo $getAboutUsData['description'];?>
+					</div>      
 			</div>
-			<!-- End container -->
+			<!-- End row -->						
 		</div>
-		<!-- End white_bg -->
-		<?php include_once 'our_associate_partners.php';?>	
+		<?php include_once 'our_associate_partners.php';?>
+		<!-- End section -->
+
 	</main>
 	<!-- End main -->
 
