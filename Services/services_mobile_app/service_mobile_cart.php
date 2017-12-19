@@ -47,7 +47,7 @@ if (isset($_REQUEST['userId']) && !empty($_REQUEST['serviceCategoryId']) && isse
 	}
         
     $response["success"] = 0;
-    $response["message"] = "Cart Save Successfully";
+    $response["message"] = "Success";
           
 } else {
     $response["success"] = 2;
