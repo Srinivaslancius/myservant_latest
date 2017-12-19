@@ -1,27 +1,15 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
-<?php $getProductsData = getAllDataWithActiveRecent('food_products'); $i=1; ?>
+<?php $getProductsData = getItemsByVendorId('food_products','created_by',$_SESSION['food_vendor_user_id']); $i=1; ?>
      
       <div class="site-content">
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
-           <!-- <a href="add_food_products.php" style="float:right">Add Products</a> -->
+            <a href="add_food_products.php" style="float:right">Add Products</a>
             <h3 class="m-t-0 m-b-5">Products</h3>
           </div>
            <div class="panel-body">
             <div class="table-responsive">
-          <?php $sql = "SELECT food_products.category_id, food_category.category_name FROM food_products LEFT JOIN food_category ON food_products.category_id=food_category.id GROUP BY food_products.category_id";
-            $result = $conn->query($sql);
-          ?>
-          <div class="form-group col-md-4">            
-            <select id="select-category" class="custom-select">
-              <option value="">Select Category</option>
-              <?php while($getAllCategories = $result->fetch_assoc()) {  ?>
-                <option value="<?php echo $getAllCategories['category_name']; ?>"><?php echo $getAllCategories['category_name']; ?></option>
-              <?php } ?>
-            </select>           
-          </div>
           <div class="clear_fix"></div>
-         
               <table class="table table-striped table-bordered dataTable" id="table-1">
                 <thead>
                   <tr>
@@ -37,13 +25,13 @@
                   <?php while ($row = $getProductsData->fetch_assoc()) { ?>
                   <tr>
                     <td><?php echo $i;?></td>
-                    <td><?php $getRst =  getAllDataWhere('food_vendors','id',$row['restaurant_id']);
+                    <td><?php $getRst =  getItemsByVendorId('food_vendors','id',$row['restaurant_id']);
                     $getRestName = $getRst->fetch_assoc(); echo $getRestName['restaurant_name']; ?></td>
                     <td><?php echo $row['product_name'];?></td>
                     <td><?php $getCategories =  getAllDataWhere('food_category','id',$row['category_id']);
                     $getCategory = $getCategories->fetch_assoc(); echo $getCategory['category_name']; ?></td>
                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='food_products'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='food_products'>In Active</span>" ;} ?></td>
-                    <td> <!-- <a href="edit_food_products.php?pid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> -->&nbsp; <a href="#"><i class="zmdi zmdi-eye zmdi-hc-fw" data-toggle="modal" data-target="#<?php echo $row['id']; ?>" class=""></i></a></td>
+                    <td> <a href="edit_food_products.php?pid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp; <a href="#"><i class="zmdi zmdi-eye zmdi-hc-fw" data-toggle="modal" data-target="#<?php echo $row['id']; ?>" class=""></i></a></td>
                      <!-- Open Modal Box  here -->
                     <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog">
                       <div class="modal-dialog">

@@ -15,7 +15,7 @@ if($_SESSION['user_login_session_id'] == "") {
 
 $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
 
-$getAddData = "SELECT * FROM food_cart WHERE session_cart_id = '$session_cart_id'";
+$getAddData = "SELECT * FROM food_cart WHERE session_cart_id = '$session_cart_id' AND item_quantity!='0' ";
 $getSelData = $conn->query($getAddData);
 
 if($getSelData->num_rows > 0) {

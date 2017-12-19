@@ -6,21 +6,21 @@ include_once('../../admin_includes/common_functions.php');
 
 if($_SERVER["REQUEST_METHOD"]=="POST") {
 
-	$admin_email = $_POST["admin_email"];
+	$vendor_email = $_POST["vendor_email"];
 	//Set Password encrypt and decrypt	
-	$pwd=$_POST["admin_password"];	
-	$admin_password = encryptPassword($pwd);
-	$sql = "SELECT * FROM admin_users WHERE admin_email = '$admin_email' AND admin_password = '$admin_password' AND lkp_status_id = 0 AND lkp_admin_user_type_id = 1 AND lkp_admin_service_type_id = 2";
+	$pwd=$_POST["vendor_password"];	
+	$vendor_password = encryptPassword($pwd);
+	$sql = "SELECT * FROM food_vendors WHERE vendor_email = '$vendor_email' AND password = '$vendor_password' AND lkp_status_id = 0";
 	$result = $conn->query($sql);
 	$row = $result->fetch_assoc();
 
 	if($row) {
-	    $_SESSION['food_admin_user_id'] = $row['id'];
-	    $_SESSION['food_admin_user_name'] = $row['admin_name'];
+	    $_SESSION['food_vendor_user_id'] = $row['id'];
+	    $_SESSION['food_vendor_user_name'] = $row['vendor_name'];
 	    //Assign the current timestamp as the user's
 		//latest activity
 		$_SESSION['last_action'] = time();
-	    if(isset($_SESSION["food_admin_user_name"])) {
+	    if(isset($_SESSION["food_vendor_user_name"])) {
 		    echo "<script type='text/javascript'>window.location='dashboard.php'</script>";
 		}
 	} else {
