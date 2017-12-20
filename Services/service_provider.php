@@ -54,10 +54,10 @@
         </header>
 	<!-- End Header -->
 <?php  
-error_reporting(1);
+error_reporting(0);
 if (!isset($_POST['submit']))  {
   //If fail
-  echo "fail";
+  //echo "fail";
 }else  {
 
   //If success
@@ -329,7 +329,7 @@ if (!isset($_POST['submit']))  {
                   </div>
                   </div>
                 
-                  <button type="submit" name="submit" class="btn btn-default btn-block">Submit</button>
+                  <button type="submit" name="submit" value="submit" class="btn btn-default btn-block">Submit</button>
                 </form>
               </div>
             </div>
