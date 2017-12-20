@@ -1,4 +1,7 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
+<link rel="stylesheet" href="css/chosen.min.css">
+
+
 <?php  
 error_reporting(0);
 if (!isset($_POST['submit']))  {
@@ -41,7 +44,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your State</label>
-                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);">
+                    <select name="lkp_state_id" class="custom-select chosen" data-error="This field is required." required onChange="getDistricts(this.value);">
                       <option value="">Select State</option>
                       <?php while($row = $getStates->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['state_name']; ?></option>
@@ -127,7 +130,7 @@ if (!isset($_POST['submit']))  {
             e.preventDefault();
             if(x < max_fields_limit){ //check conditions
                 x++; //counter increment
-                $('.input_fields_container').append('<div><div class="row"><div class="col-sm-6"><div class="form-group"><label for="form-control-2" class="control-label">Location Name</label><input type="text" name="location_name[]" class="form-control" id="form-control-2" placeholder="Location Name"></div></div><a href="#" class="remove_field btn btn-primary" style="margin-left:20px; top:20px;">Remove</a></div></div>'); //add input field
+                $('.input_fields_container').append('<div><div class="row"><div class="col-sm-6"><div class="form-group"><label for="form-control-2" class="control-label">Location Name</label><input type="text" name="location_name[]" class="form-control" id="form-control-2" placeholder="Location Name" onkeyup="checkUserAvailTest()"></div></div><a href="#" class="remove_field btn btn-primary" style="margin-left:20px; top:20px;">Remove</a></div></div>'); //add input field
             }
         });  
         $('.input_fields_container').on("click",".remove_field", function(e){ //user click on remove text links
@@ -135,3 +138,6 @@ if (!isset($_POST['submit']))  {
         })
     });
     </script>
+    <script type="text/javascript">
+      $(".chosen").chosen();
+</script>
