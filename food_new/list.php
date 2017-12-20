@@ -53,11 +53,11 @@
         $searchParms = $_POST['searchKey'];
         //$getSearchResults = getSearchResults('food_vendors',$searchParms);
         $getRes = "SELECT * FROM food_vendors WHERE `lkp_status_id`= '0' AND  (restaurant_address LIKE '%$searchParms%' OR  pincode LIKE '%$searchParms%') AND id IN (SELECT restaurant_id FROM food_products WHERE lkp_status_id = 0) ORDER BY id DESC";
-        $getSearchResults = $conn->query($getRes);
-        $getResultsCount = $getSearchResults->num_rows;
+        $getSearchResults = $conn->query($getRes);        
     } else {
         $getSearchResults = getAllRestaruntsWithProducts('0','','');
     }
+    $getResultsCount = $getSearchResults->num_rows;
 ?>
 
 <!-- SubHeader =============================================== -->
@@ -75,24 +75,8 @@
       <div class="item active">
         <img src="img/slide/slide_1.jpg" alt="image" style="width:100%;">
         <div class="carousel-caption">
-        <h2 style="color:white">24 results in your zone</h2>
-        <p>LA is always so much fun!</p>
-      </div>
-      </div>
-
-      <div class="item">
-        <img src="img/slide/slide_2.jpg" alt="image" style="width:100%;">
-        <div class="carousel-caption">
-       <h2 style="color:white">24 results in your zone</h2>
-        <p>LA is always so much fun!</p>
-      </div>
-      </div>
-    
-      <div class="item">
-        <img src="img/slide/slide_3.jpg" alt="image" style="width:100%;">
-        <div class="carousel-caption">
-       <h2 style="color:white">24 results in your zone</h2>
-        <p>LA is always so much fun!</p>
+        <h2 style="color:white"><?php echo $getResultsCount; ?> results in your zone</h2>
+        <?php if(isset($_POST['searchKey'])) { ?><p><i class="icon_pin"></i> <?php echo $_POST['searchKey']; ?></p><?php } ?>
       </div>
       </div>
     </div>
@@ -112,9 +96,8 @@
     <div id="position">
         <div class="container">
             <ul>
-                <li><a href="#0">Home</a></li>
-                <li><a href="#0">Category</a></li>
-                <li>Page active</li>
+                <li><a href="index.php">Home</a></li>                
+                <li><?php if(isset($_POST['searchKey'])) { ?><?php echo $_POST['searchKey']; ?><?php } else { ?>Restaurants<?php } ?></li>
             </ul>
              
         </div>
@@ -231,4 +214,5 @@
     });
 </script>
 </body>
+<?php include "search_js_script.php"; ?>
 </html>
