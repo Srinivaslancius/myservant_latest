@@ -23,8 +23,9 @@ if (!isset($_POST['submit']))  {
   $working_hours1 = $_POST['working_hours1'];
   $contact_numbers = $_POST['contact_numbers'];
   $email_id = $_POST['email_id'];
-  $sub_category_id = $_POST['sub_category_id'];
-  $sub_category_id1 = $_POST['sub_category_id1'];
+  $sub_category_id = implode(',',$_POST["sub_category_id"]);
+  $sub_category_id1 = implode(',',$_POST["sub_category_id1"]);
+  
   $associate_or_not = $_POST['associate_or_not'];
   $experience = $_POST['experience'];
   $created_at = date("Y-m-d h:i:s");
@@ -257,14 +258,16 @@ if (!isset($_POST['submit']))  {
                       <div class="help-block with-errors"></div>
                     </div>
 
-                    <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
+                    <?php 
+                    $getSubCategoryTypeId = explode(',',$getServiceProviderBusinessRegistrationsData['sub_category_id']);
+                    $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                     <div class="form-group">
                       <label for="form-control-3" class="control-label">Choose your Specialization</label>
-                      <select name="sub_category_id" class="custom-select chosen" id="sub_category_id" data-error="This field is required." required>
+                      <select name="sub_category_id[]" class="custom-select chosen" multiple="multiple" id="sub_category_id" data-error="This field is required." required>
                         <option value="">Select Specialization</option>
                         <?php while($row = $getSubCategories->fetch_assoc()) {  ?>
-                        <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == $getServiceProviderBusinessRegistrationsData['sub_category_id']) { echo "selected=selected"; }?> ><?php echo $row['sub_category_name']; ?></option>
-                        <?php } ?>
+                          <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == in_array($row['id'], $getSubCategoryTypeId)) { echo "selected=selected"; }?> ><?php echo $row['sub_category_name']; ?></option>
+                      <?php } ?>
                         <option value="0" <?php if($getServiceProviderBusinessRegistrationsData['sub_category_id'] == 0) { echo "selected=selected"; }?> >Others</option>
                      </select>
                       <div class="help-block with-errors"></div>
@@ -300,14 +303,16 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                     </div>
 
-                    <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
+                    <?php 
+                    $getSubCategoryTypeId1 = explode(',',$getServiceProviderPersonalRegistrationsData['sub_category_id']);
+                    $getSubCategories1 = getAllDataWithStatus('services_sub_category','0');?>
                     <div class="form-group">
                       <label for="form-control-3" class="control-label">Choose your Specialization</label>
-                      <select name="sub_category_id1" class="custom-select" id="sub_category_id1" data-error="This field is required." required>
+                      <select name="sub_category_id1[]" class="custom-select chosen" id="sub_category_id1" multiple="multiple" data-error="This field is required." required>
                         <option value="">Select Specialization</option>
-                        <?php while($row = $getSubCategories->fetch_assoc()) {  ?>
-                        <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == $getServiceProviderPersonalRegistrationsData['sub_category_id']) { echo "selected=selected"; }?> ><?php echo $row['sub_category_name']; ?></option>
-                        <?php } ?>
+                        <?php while($row1 = $getSubCategories1->fetch_assoc()) {  ?>
+                          <option value="<?php echo $row1['id']; ?>" <?php if($row1['id'] == in_array($row1['id'], $getSubCategoryTypeId1)) { echo "selected=selected"; } ?> ><?php echo $row1['sub_category_name']; ?></option>
+                      <?php } ?>
                         <option value="0" <?php if($getServiceProviderPersonalRegistrationsData['sub_category_id'] == 0) { echo "selected=selected"; }?> >Others</option>
                      </select>
                       <div class="help-block with-errors"></div>
