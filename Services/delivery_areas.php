@@ -9,7 +9,6 @@
 	<?php $getContentPageData = getAllDataWhere('services_content_pages','id',10);
 		  $getDeliveryAreasData = $getContentPageData->fetch_assoc();
 	?>
-
 	<!-- Favicons-->
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
@@ -57,7 +56,7 @@
 	<main>
 		<!-- Slider -->
 		 <div class="container-fluid page-title">
-		 	<?php 
+			<?php 
 				if(!empty($getDeliveryAreasData['image'])) { ?> 	
 				<div class="row">
 					<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getDeliveryAreasData['image'] ?>" alt="<?php echo $getDeliveryAreasData['title'];?>" class="img-responsive" style="width:100%; height:400px;">
@@ -66,22 +65,25 @@
 				<div class="row">
 					<img src="img/slides/slide_1.jpg" class="img-responsive" style="width:100%; height:400px;">
 				</div>
-			<?php }?>	
+			<?php }?>
     	</div>
-
-		<div class="white_bg">
-			<div class="container margin_60">							
-            <div class="main_title">
-				<h2><span><?php echo $getDeliveryAreasData['title'];?></span></h2>				
+		<div class="container margin_60">
+		<div class="main_title">
+				<h2>my servant cash on delivery available in vijayawada</h2>				
 			</div>
-			<?php echo $getDeliveryAreasData['description'];?>
-				
-				<!-- End row -->
+			<?php $getOurBranchesData = getAllDataWithActiveRecent('services_our_branches'); ?>
+			<div class="row">			
+					<div class="feature">
+						<?php while ($row = $getOurBranchesData->fetch_assoc()) { ?>
+						<span style="font-size:15px;">My Servant Cash on Delivery Available in</span> <span style="font-size:18px;"><?php echo $row['address'];?></span>
+						<?php  } ;?>
+					</div>      
 			</div>
-			<!-- End container -->
+			<!-- End row -->						
 		</div>
-		<!-- End white_bg -->
-		<?php include_once 'our_associate_partners.php';?>	
+		<?php include_once 'our_associate_partners.php';?>
+		<!-- End section -->
+
 	</main>
 	<!-- End main -->
 
