@@ -242,7 +242,7 @@
         <div class="container">
             <h3>Choose from over 2,000 Restaurants</h3>
             <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
-            <a href="list_page.html">View all Restaurants</a>
+            <a href="list.php">View all Restaurants</a>
         </div><!-- End container -->
       </div><!-- End hight_light -->
             

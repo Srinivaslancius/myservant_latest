@@ -17,8 +17,12 @@
 
     function getAllRestaruntsWithProducts($status,$minlimit,$maxlimit) {
         global $conn;
-        $sql=" SELECT * FROM food_vendors WHERE `lkp_status_id`= '$status' AND id IN (SELECT restaurant_id FROM food_products WHERE lkp_status_id = 0) ORDER BY id DESC LIMIT $minlimit,$maxlimit ";
-        $result = $conn->query($sql); 
+        if($minlimit!='' && $maxlimit!='') {
+            $sql="SELECT * FROM food_vendors WHERE `lkp_status_id`= '$status' AND id IN (SELECT restaurant_id FROM food_products WHERE lkp_status_id = 0) ORDER BY id DESC LIMIT $minlimit,$maxlimit ";            
+        } else {
+            $sql="SELECT * FROM food_vendors WHERE `lkp_status_id`= '$status' AND id IN (SELECT restaurant_id FROM food_products WHERE lkp_status_id = 0) ORDER BY id DESC ";            
+        }
+        $result = $conn->query($sql);
         return $result;
     }
 
