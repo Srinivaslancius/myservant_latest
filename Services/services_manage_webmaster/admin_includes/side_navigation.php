@@ -134,7 +134,7 @@
                 <span class="menu-icon">
                    <i class="zmdi zmdi-pin zmdi-hc-fw"></i>
                 </span>
-                <span class="menu-text">Our Branches</span>
+                <span class="menu-text">Delivery Areas</span>
               </a>
             </li>
             <li class="with-sub">

@@ -3,8 +3,8 @@
      <div class="site-content">
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
-            <a href="add_services_our_branches.php" style="float:right">Add Our Branches</a>
-            <h3 class="m-t-0 m-b-5">Our Branches</h3>
+            <a href="add_services_our_branches.php" style="float:right">Add Delivery Areas</a>
+            <h3 class="m-t-0 m-b-5">Delivery Areas</h3>
           </div>
           <div class="panel-body">
             <div class="table-responsive">
