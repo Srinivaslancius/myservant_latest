@@ -56,9 +56,9 @@
         <div class="ls-slide" data-ls="slidedelay: 5000; transition2d:5;">
             <img src="<?php echo $base_url . 'uploads/food_banner_images/'.$getFoodhomeBanners['banner'] ?>" class="ls-bg" alt="Slide background" alt="<?php echo $getFoodhomeBanners['title'];?>">
             <h3 class="ls-l slide_typo" style="top: 50%; left: 50%;font-size:30px" data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;" ><strong>Enjoy</strong> a quick friends dinner</h3>           
-            <?php if($getFoodhomeBanners['lkp_banner_type_id']==1) { ?>
+           <!-- <?php if($getFoodhomeBanners['lkp_banner_type_id']==1) { ?>
             <p class="ls-l" style="top:64%; left:50%;" data-ls="durationin:2000;delayin:1300;easingin:easeOutElastic;" ><a href="list_page.php" class="button_intro">Read more</a> </p>
-            <?php } ?>
+            <?php } ?> -->
         </div>
        <?php } ?>
     
@@ -240,7 +240,7 @@
     
        <div class="high_light">
         <div class="container">
-            <h3>Choose from over 2,000 Restaurants</h3>
+            <h3>Choose from over <?php echo getRowsCount('food_vendors'); ?> Restaurants</h3>
             <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
             <a href="list.php">View all Restaurants</a>
         </div><!-- End container -->
