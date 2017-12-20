@@ -211,7 +211,11 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 
 						</span>
 						<hr>
-						<a class="btn_full" href="cart.php">Order now</a>
+						<?php if(!isset($_SESSION['user_login_session_id'])) { ?>
+						<a href="login.php?cart_id=<?php echo encryptPassword(1);?>" class="btn_full">Order now <i class="icon-left"></i></a>
+						<?php } else { ?>
+                        <a href="checkout.php" class="btn_full">Order now <i class="icon-left"></i></a>
+                        <?php } ?>						
 					</div><!-- End cart_box -->
                 </div><!-- End theiaStickySidebar -->
 			</div><!-- End col-md-3 -->

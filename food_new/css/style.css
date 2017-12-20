@@ -542,9 +542,9 @@ footer .styled-select {
     width: 100%;
     padding: 15px 30px;
     border: 0;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
-    border-radius: 30px;
+    /*! -webkit-border-radius: 30px; */
+    /*! -moz-border-radius: 30px; */
+    /*! border-radius: 30px; */
     -webkit-box-shadow: 0 0 50px 0 rgba(0,0,0,.75);
     -moz-box-shadow: 0 0 50px 0 rgba(0,0,0,.75);
     box-shadow: 0 0 50px 0 rgba(0,0,0,.75);
