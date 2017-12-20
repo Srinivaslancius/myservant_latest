@@ -45,6 +45,18 @@
 <!-- End Header =============================================== -->
 <?php $getRestKey = decryptpassword($_GET['key']); ?>
 <?php //$getRestKey = 3; ?>
+<?php 
+if($_SESSION['CART_TEMP_RANDOM'] == "") {
+    $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
+}
+$session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
+
+if($_SESSION['session_restaurant_id']!= $getRestKey) {
+	$sessionRestId = $_SESSION['session_restaurant_id'];
+    $delCart = "DELETE FROM food_cart WHERE session_cart_id='$session_cart_id' AND restaurant_id = '$sessionRestId' ";
+    $conn->query($delCart);
+}
+?>
 <?php $getCategory = getFoodCategoryByRestId('food_products','restaurant_id',$getRestKey); ?>
 <?php $getFoodVendorsBann = getIndividualDetails('food_vendors','id',$getRestKey); ?>
 <!-- SubHeader =============================================== -->
@@ -64,9 +76,8 @@
     <div id="position">
         <div class="container">
             <ul>
-                <li><a href="#0">Home</a></li>
-                <li><a href="#0">Category</a></li>
-                <li>Page active</li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="#0"><?php echo $getFoodVendorsBann['restaurant_name']; ?></a></li>                
             </ul>
             
         </div>
@@ -75,11 +86,8 @@
 <!-- Content ================================================== -->
 <?php if($getCategory->num_rows > 0) { ?>
 
- <?php
-    if($_SESSION['CART_TEMP_RANDOM'] == "") {
-        $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
-    }
-    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
+ <?php    
+
     if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
         $user_session_id = $_SESSION['user_login_session_id'];
         $cartItems1 = "SELECT * FROM food_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' ";
@@ -142,7 +150,8 @@
 						$i=1; while($getItemsByCategory = $getItemsByCat->fetch_assoc() ) {
 						$productId = $getItemsByCategory['id'];
 		            ?>
-		            <input type="hidden" id="product_id" value="<?php echo $productId; ?>" class="product_id">    			
+		            <input type="hidden" id="product_id" value="<?php echo $productId; ?>" class="product_id">  
+		            <input type="hidden" id="rest_id" value="<?php echo $getRestKey; ?>" class="rest_id">   			
 						<td>
                         	<figure class="thumb_menu_list"><img src="<?php echo $base_url . 'uploads/food_product_images/'.$getItemsByCategory['product_image']; ?>" alt="<?php echo $getItemsByCategory['product_name']; ?>" ></figure>
 							<h5><?php echo $i; ?>. <?php echo $getItemsByCategory['product_name']; ?></h5>
@@ -262,6 +271,7 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 	//var ProductPrice = $(this).attr("data-key-price");
 	var ProductPrice = $('#item_price_'+ProductId).val();	
 	var ProductWeighType = $('#item_weight_type_'+ProductId).val();
+	var restaurantId = $('#rest_id').val();
 
 	var removeItemCheck = $(this).attr("data-key-check");
 	if(removeItemCheck == "remove") {
@@ -277,6 +287,7 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 	     item_price:ProductPrice,
 	     item_weight:ProductWeighType,	     
 	     item_remove:removeItemCheckPro,
+	     rest_id:restaurantId,
 	  },
 	  success:function(response) {  	
 	    document.getElementById("mycart").innerHTML=response;
@@ -350,11 +361,13 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 });
 
 function show_cart() {
+	var restaurantId = $('#rest_id').val();
     $.ajax({
       type:'post',
       url:'show_cart_items.php',
       data:{
-        showcart:"cart"
+        showcart:"cart",
+        rest_id:restaurantId,
       },
       success:function(response) {
       	//alert(response);  
@@ -367,4 +380,6 @@ function show_cart() {
 </script>
 
 </body>
+
+<?php include "search_js_script.php"; ?>
 </html>

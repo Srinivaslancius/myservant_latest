@@ -204,7 +204,7 @@ if (!isset($_POST['submit']))  {
                       <div id="dynamicInput1" class="input-field col s12"></div>
                   
                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Description</label>
+                    <label for="form-control-2" class="control-label">Short Description</label>
                     <textarea name="specifications" class="form-control" id="description" placeholder="Product Info" data-error="This field is required." required><?php echo $getProducts['specifications']; ?></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
