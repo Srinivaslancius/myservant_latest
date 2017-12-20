@@ -6,7 +6,7 @@ if (!isset($_POST['submit']))  {
   echo "fail";
 }else  {
   //If success
-  echo "<pre>"; print_r($_POST); exit;
+  //echo "<pre>"; print_r($_POST); exit;
   $services_category_id = $_POST['services_category_id'];
   $services_sub_category_id = $_POST['services_sub_category_id'];
   $group_name = $_POST['group_name'];
@@ -16,7 +16,7 @@ if (!isset($_POST['submit']))  {
   $meta_desc = $_POST['meta_desc'];
   $lkp_status_id = $_POST['lkp_status_id'];
   
-  echo  $sql = "INSERT INTO services_groups (`services_category_id`, `services_sub_category_id`, `group_name`,`group_description`, `meta_title`, `meta_keywords`, `meta_desc`, `lkp_status_id`) VALUES ('$services_category_id', '$services_sub_category_id', '$group_name','$group_description', '$meta_title', '$meta_keywords', '$meta_desc', '$lkp_status_id')"; die;
+    $sql = "INSERT INTO services_groups (`services_category_id`, `services_sub_category_id`, `group_name`,`group_description`, `meta_title`, `meta_keywords`, `meta_desc`, `lkp_status_id`) VALUES ('$services_category_id', '$services_sub_category_id', '$group_name','$group_description', '$meta_title', '$meta_keywords', '$meta_desc', '$lkp_status_id')";
     if($conn->query($sql) === TRUE){
        echo "<script type='text/javascript'>window.location='services_groups.php?msg=success'</script>";
     } else {

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
 <html>
@@ -50,13 +49,15 @@
     <!-- End Header =============================================== -->
 
 <?php
-//if(isset($_POST['searchKey'])) {
-    //$searchParms = $_POST['searchKey'];
-    //$getSearchResults = getSearchResults('food_vendors',$searchParms);
-    $getRes = "SELECT * FROM food_vendors WHERE lkp_status_id = 0 ORDER BY id DESC LIMIT 2";
-    $getSearchResults = $conn->query($getRes);
+    if(isset($_POST['searchKey'])) {
+        $searchParms = $_POST['searchKey'];
+        //$getSearchResults = getSearchResults('food_vendors',$searchParms);
+        $getRes = "SELECT * FROM food_vendors WHERE `lkp_status_id`= '0' AND  (restaurant_address LIKE '%$searchParms%' OR  pincode LIKE '%$searchParms%') AND id IN (SELECT restaurant_id FROM food_products WHERE lkp_status_id = 0) ORDER BY id DESC";
+        $getSearchResults = $conn->query($getRes);        
+    } else {
+        $getSearchResults = getAllRestaruntsWithProducts('0','','');
+    }
     $getResultsCount = $getSearchResults->num_rows;
-//}
 ?>
 
 <!-- SubHeader =============================================== -->
@@ -74,24 +75,8 @@
       <div class="item active">
         <img src="img/slide/slide_1.jpg" alt="image" style="width:100%;">
         <div class="carousel-caption">
-        <h2 style="color:white">24 results in your zone</h2>
-        <p>LA is always so much fun!</p>
-      </div>
-      </div>
-
-      <div class="item">
-        <img src="img/slide/slide_2.jpg" alt="image" style="width:100%;">
-        <div class="carousel-caption">
-       <h2 style="color:white">24 results in your zone</h2>
-        <p>LA is always so much fun!</p>
-      </div>
-      </div>
-    
-      <div class="item">
-        <img src="img/slide/slide_3.jpg" alt="image" style="width:100%;">
-        <div class="carousel-caption">
-       <h2 style="color:white">24 results in your zone</h2>
-        <p>LA is always so much fun!</p>
+        <h2 style="color:white"><?php echo $getResultsCount; ?> results in your zone</h2>
+        <?php if(isset($_POST['searchKey'])) { ?><p><i class="icon_pin"></i> <?php echo $_POST['searchKey']; ?></p><?php } ?>
       </div>
       </div>
     </div>
@@ -111,9 +96,8 @@
     <div id="position">
         <div class="container">
             <ul>
-                <li><a href="#0">Home</a></li>
-                <li><a href="#0">Category</a></li>
-                <li>Page active</li>
+                <li><a href="index.php">Home</a></li>                
+                <li><?php if(isset($_POST['searchKey'])) { ?><?php echo $_POST['searchKey']; ?><?php } else { ?>Restaurants<?php } ?></li>
             </ul>
              
         </div>
@@ -159,7 +143,7 @@
                                             <div class="col-md-8 col-sm-9">
                                                     <div class="desc">
                                                             <div class="thumb_strip">
-                                                                <a href="#"><img src="<?php echo $base_url . 'uploads/food_restaurants_images/'.$getResults['logo'] ?>" alt=""></a>
+                                                                <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>"><img src="<?php echo $base_url . 'uploads/food_vendor_logo/'.$getResults['logo'] ?>" alt=""></a>
                                                             </div>
                                                             
                                                             <h4><?php echo $getResults['restaurant_name']; ?></h4>
@@ -176,7 +160,7 @@
                                             <div class="col-md-4 col-sm-3">
                                                     <div class="go_to">
                                                             <div>
-                                                                <a href="view_rest_menu.php?key=<?php echo decryptPassword($getResults['id']);?>" class="btn_1">View Menu</a>
+                                                                <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>" class="btn_1">View Menu</a>
                                                             </div>
                                                     </div>
                                             </div>
@@ -184,10 +168,7 @@
                             </div><!-- End strip_list-->
                         </div>
                         <?php } ?>
-                        <div class="col-md-12" id="show_more_main<?php echo $show_more; ?>">
-                            <span id="<?php echo $show_more; ?>" class="load_more_bt wow fadeIn show_more" data-wow-delay="0.2s">Load more...</span>
-                            
-                        </div>
+                        
         </div><!-- End col-md-9-->
         
     </div><!-- End row -->
@@ -201,60 +182,6 @@
 <!-- End Footer =============================================== -->
 
 <div class="layer"></div><!-- Mobile menu overlay mask -->
-    
-<!-- Login modal -->   
-<div class="modal fade" id="login_2" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content modal-popup">
-                <a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-                <form action="#" class="popup-form" id="myLogin">
-                    <div class="login_icon"><i class="icon_lock_alt"></i></div>
-                    <input type="text" class="form-control form-white" placeholder="Username">
-                    <input type="text" class="form-control form-white" placeholder="Password">
-                    <div class="text-left">
-                        <a href="#">Forgot Password?</a>
-                    </div>
-                    <button type="submit" class="btn btn-submit">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div><!-- End modal -->   
-    
-<!-- Register modal -->   
-<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content modal-popup">
-                <a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-                <form action="#" class="popup-form" id="myRegister">
-                    <div class="login_icon"><i class="icon_lock_alt"></i></div>
-                    <input type="text" class="form-control form-white" placeholder="Name">
-                    <input type="text" class="form-control form-white" placeholder="Last Name">
-                    <input type="email" class="form-control form-white" placeholder="Email">
-                    <input type="text" class="form-control form-white" placeholder="Password"  id="password1">
-                    <input type="text" class="form-control form-white" placeholder="Confirm password"  id="password2">
-                    <div id="pass-info" class="clearfix"></div>
-                    <div class="checkbox-holder text-left">
-                        <div class="checkbox">
-                            <input type="checkbox" value="accept_2" id="check_2" name="check_2" />
-                            <label for="check_2"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-submit">Register</button>
-                </form>
-            </div>
-        </div>
-    </div><!-- End Register modal -->
-    
-     <!-- Search Menu -->
-    <div class="search-overlay-menu">
-        <span class="search-overlay-close"><i class="icon_close"></i></span>
-        <form role="search" id="searchform" method="get">
-            <input value="" name="q" type="search" placeholder="Search..." />
-            <button type="submit"><i class="icon-search-6"></i>
-            </button>
-        </form>
-    </div>
-    <!-- End Search Menu -->
     
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-2.2.4.min.js"></script>
@@ -287,24 +214,5 @@
     });
 </script>
 </body>
+<?php include "search_js_script.php"; ?>
 </html>
-
-<script>
-$(document).ready(function(){
-    
-    $(document).on('click','.show_more',function(){
-        
-        var ID = $(this).attr('id');
-        $('.show_more').hide();
-        $.ajax({
-            type:'POST',
-            url:'show_more_list.php',
-            data:'id='+ID,
-            success:function(html){
-                $('#show_more_main'+ID).remove();
-                $('.fadeIn').append(html);
-            }
-        }); 
-    });
-});
-</script>

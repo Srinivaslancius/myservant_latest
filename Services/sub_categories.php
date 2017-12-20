@@ -64,12 +64,20 @@
       $getSubCategoriesData = getAllDataWhereWithActive('services_sub_category','services_category_id',$sub_cat_id);
       $getBanners1 = "SELECT * FROM `services_banners` WHERE lkp_status_id = 0 ANd service_category_id = $sub_cat_id ORDER BY id DESC";
       $getBanners = $conn->query($getBanners1);
+      $getAllBanners = $getBanners->fetch_assoc();
     } ?>
 
     <div class="container-fluid page-title">
+      <?php  
+    if(!empty($getAllBanners['banner'])) { ?>
       <div class="row">
-        <img src="img/slides/slide_1.jpg" class="img-responsive">
+        <img src="<?php echo $base_url . 'uploads/services_banner_images/'.$getAllBanners['banner'] ?>" class="img-responsive" style="width:100%; height:400px;">
       </div>
+      <?php } else { ?>
+        <div class="row">
+          <img src="img/slides/slide_1.jpg" class="img-responsive" style="width:100%; height:400px;">
+        </div>
+      <?php }?>
     </div>
 
     <div class="container margin_60">

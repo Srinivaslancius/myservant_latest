@@ -13,9 +13,10 @@
                   <tr>
                     <th>S.No</th>
                     <th>State</th>
-                    <th>City</th>
                     <th>District</th>
-                    <th>Pincodes</th>
+                    <th>City</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -24,6 +25,8 @@
                     <td><?php echo $i;?></td>
                     <?php $getStateNames = getIndividualDetails('lkp_states','id',$row['lkp_state_id']); ?>
                     <td><?php echo $getStateNames['state_name'];?></td>
+                    <?php $getStateNames = getIndividualDetails('lkp_districts','id',$row['lkp_district_id']); ?>
+                    <td><?php echo $getStateNames['district_name'];?></td>
                     <?php $getCityNames = getIndividualDetails('lkp_cities','id',$row['lkp_city_id']); ?>
                     <td><?php echo $getCityNames['city_name'];?></td>
                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='availability_of_locations'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='availability_of_locations'>In Active</span>" ;} ?></td>

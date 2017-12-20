@@ -61,11 +61,11 @@
 		//$checkImg =$getServicesBanner['image']; 
 		if(!empty($getServicesBanner['image'])) { ?> 	
 				<div class="row">
-					<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getServicesBanner['image'] ?>" alt="<?php echo $getServicesBanner['title'];?>" class="img-responsive">
+					<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getServicesBanner['image'] ?>" alt="<?php echo $getServicesBanner['title'];?>" class="img-responsive" style="width:100%; height:400px;">
 				</div>
 			<?php } else { ?>
 				<div class="row">
-					<img src="img/slides/slide_1.jpg" class="img-responsive">
+					<img src="img/slides/slide_1.jpg" class="img-responsive" style="width:100%; height:400px;">
 				</div>
 			<?php }?>
     	</div>

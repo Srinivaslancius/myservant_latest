@@ -63,7 +63,7 @@ if (!isset($_POST['submit']))  {
               <?php $getIngredients = getAllDataWithStatus('food_ingredients','0');?>
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <form data-toggle="validator" method="post" enctype="multipart/form-data">
-                  <?php $getFoodVendors = getItemsByVendorId('food_vendors','id','18'); ?>
+                  <?php $getFoodVendors = getItemsByVendorId('food_vendors','id',$_SESSION['food_vendor_user_id']); ?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Resturant</label>
                     <select name="restaurant_id" class="custom-select" data-error="This field is required." required>
@@ -145,7 +145,7 @@ if (!isset($_POST['submit']))  {
                   
                   <div id="dynamicInput1" class="input-field col s12"></div>
                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Description</label>
+                    <label for="form-control-2" class="control-label">Short Description</label>
                     <textarea name="specifications" class="form-control" id="description" placeholder="Description" data-error="This field is required." required></textarea>
                     <div class="help-block with-errors"></div>
                   </div>

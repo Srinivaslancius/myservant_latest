@@ -81,7 +81,7 @@
 		<!-- Slider -->
 		 <div class="container-fluid page-title">
 		<div class="row">
-			<img src="img/slides/slide_3.jpg" class="img-responsive">
+			<img src="img/slides/slide_3.jpg" class="img-responsive" style="width:100%; height:400px;">
 		</div>
     </div>
 		<div class="container" style="margin-top:-70px">		
