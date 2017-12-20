@@ -22,8 +22,9 @@ if (!isset($_POST['submit']))  {
   $working_hours1 = $_POST['working_hours1'];
   $contact_numbers = $_POST['contact_numbers'];
   $email_id = $_POST['email_id'];
-  $sub_category_id = $_POST['sub_category_id'];
-  $sub_category_id1 = $_POST['sub_category_id1'];
+  $sub_category_id = implode(',',$_POST["sub_category_id"]);
+
+  $sub_category_id1 = implode(',',$_POST["sub_category_id1"]);
   $associate_or_not = $_POST['associate_or_not'];
   $experience = $_POST['experience'];
   $created_at = date("Y-m-d h:i:s");
@@ -189,7 +190,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Specialization</label>
-                    <select name="sub_category_id" class="custom-select service_provider_business chosen" id="sub_category_id" data-error="This field is required.">
+                    <select name="sub_category_id[]" class="custom-select service_provider_business chosen" multiple="multiple" id="sub_category_id" data-error="This field is required.">
                       <option value="">Select Specialization</option>
                       <?php while($row = $getSubCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['sub_category_name']; ?></option>
@@ -226,7 +227,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Specialization</label>
-                    <select name="sub_category_id1" class="custom-select service_provider_personal chosen" id="sub_category_id1" data-error="This field is required.">
+                    <select name="sub_category_id1[]" class="custom-select service_provider_personal chosen" multiple="multiple" id="sub_category_id1" data-error="This field is required.">
                       <option value="">Select Specialization</option>
                       <?php while($row = $getSubCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['sub_category_name']; ?></option>
