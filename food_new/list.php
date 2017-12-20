@@ -214,4 +214,5 @@
     });
 </script>
 </body>
+<?php include "search_js_script.php"; ?>
 </html>
