@@ -11,14 +11,14 @@
               <?php $getAllSpecilizationData = getAllDataWithActiveRecent('service_provider_registration');?>
               <div class="col s4 m9 l2">                  
 
-                  <div class="form-group col-md-4">                    
+                  <!-- <div class="form-group col-md-4">                    
                     <select id="select-specilization" class="custom-select">
                        <option value="">Select Specalization</option>
                         <?php while ($getSpecilizationData = $getAllSpecilizationData->fetch_assoc()) { ?>
                           <option value="<?php echo $getSpecilizationData['specalization']; ?>"><?php echo $getSpecilizationData['specalization']; ?></option>
                         <?php } ?>
                     </select>                    
-                  </div>
+                  </div> -->
                 </div>
               <div class="clear_fix"></div>
               <table class="table table-striped table-bordered dataTable" id="table-1">
