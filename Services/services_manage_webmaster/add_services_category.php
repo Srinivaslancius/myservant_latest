@@ -66,8 +66,11 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Category Position</label>
-                    <input type="text" name="category_position" class="form-control valid_mobile_num" id="form-control-2" placeholder="Category Position" data-error="Please enter Category Position" required>
+                    <input type="text" name="category_position" class="form-control valid_mobile_num" id="user_input" placeholder="Category Position" data-error="Please enter Category Position" required onblur="checkUserAvailTest()">
+                    <span id="input_status" style="color: red;"></span>
                     <div class="help-block with-errors"></div>
+                    <input type="hidden" id="table_name" value="services_category">
+                    <input type="hidden" id="column_name" value="category_position">
                   </div>
 
                   <div class="form-group">

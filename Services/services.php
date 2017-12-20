@@ -75,7 +75,8 @@
 				<h2>Our <span>Services</span> Categories</h2>
 				
 			</div>
-			<?php $getCategoriesData = getAllDataWithStatusLimit('services_category',0,'',''); ?>
+			<?php $getCategories = "SELECT * FROM services_category WHERE lkp_status_id = 0 ORDER BY category_position";
+			$getCategoriesData = $conn->query($getCategories);; ?>
 
 			<div class="row">
                  <?php  while($getAllCategoriesData = $getCategoriesData->fetch_assoc()) { ?>           

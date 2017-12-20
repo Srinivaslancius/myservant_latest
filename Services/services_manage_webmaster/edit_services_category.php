@@ -78,8 +78,11 @@ if (!isset($_POST['submit'])) {
                   </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Category Position</label>
-                    <input type="text" name="category_position" class="form-control valid_mobile_num" id="form-control-2" data-error="Please enter a Category Position" required value="<?php echo $getCategoriesData['category_position'];?>">
+                    <input type="text" name="category_position" class="form-control valid_mobile_num" id="user_input" data-error="Please enter a Category Position" required value="<?php echo $getCategoriesData['category_position'];?>" onblur="checkUserAvailTest()">
+                    <span id="input_status" style="color: red;"></span>
                     <div class="help-block with-errors"></div>
+                    <input type="hidden" id="table_name" value="services_category">
+                    <input type="hidden" id="column_name" value="category_position">
                   </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Meta Title</label>
