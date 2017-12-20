@@ -40,7 +40,7 @@ if (!isset($_POST['submit']))  {
           </div>
           <div class="panel-body">
             <div class="row">
-              <?php $sql = "SELECT * FROM lkp_locations WHERE id = $lkp_pincode_id";
+              <?php $sql = "SELECT * FROM lkp_locations WHERE lkp_pincode_id = $lkp_pincode_id";
                $getLocations = $conn->query($sql);
               $getLocationsData = $getLocations->fetch_assoc(); ?>
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
