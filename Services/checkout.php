@@ -94,7 +94,7 @@
 				$getUser = $getUserData->fetch_assoc();?>
 				<form method="post" action="save_order.php" name="form">
 				<div class="row">
-					<div class="col-md-7 col-sm-12 col-xs-12">
+					<div class="col-md-7 col-sm-12 col-xs-12"  style="padding-right:20px">
 
 						<div class="billing-details">
 							<div class="shop-form">

@@ -68,9 +68,16 @@
     } ?>
 
     <div class="container-fluid page-title">
+      <?php  
+    if(!empty($getAllBanners['banner'])) { ?>
       <div class="row">
-        <img src="<?php echo $base_url . 'uploads/services_banner_images/'.$getAllBanners['banner'] ?>" class="img-responsive">
+        <img src="<?php echo $base_url . 'uploads/services_banner_images/'.$getAllBanners['banner'] ?>" class="img-responsive" style="width:100%; height:400px;">
       </div>
+      <?php } else { ?>
+        <div class="row">
+          <img src="img/slides/slide_1.jpg" class="img-responsive" style="width:100%; height:400px;">
+        </div>
+      <?php }?>
     </div>
 
     <div class="container margin_60">

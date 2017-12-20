@@ -10,7 +10,6 @@
 		  $getContentsData = getAllDataWhere('services_content_pages','id',$id);
 		  $getAboutUsData  = $getContentsData->fetch_assoc();
 	?> 
-
 	<!-- Favicons-->
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
@@ -58,28 +57,26 @@
 	<main>
 		<!-- Slider -->
 		 <div class="container-fluid page-title">
-		<div class="row">
-		<?php if($getAboutUsData['image']!='') { ?>
+			<?php if($getAboutUsData['image']!='') { ?>
 			<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getAboutUsData['image'] ?>" alt="<?php echo $getAboutUsData['title'];?>" class="img-responsive">
 		<?php } else { ?>
 			<img src="img/slides/slide_3.jpg" class="img-responsive">
 		<?php } ?>
-		</div>
-    </div>
-	
-		<div class="white_bg">
-			<div class="container margin20 txt">								
-            <div class="main_title">
-				<h2><span><?php echo $getAboutUsData['title'];?></span></h2>				
+    	</div>
+		<div class="container margin_60">
+		<div class="main_title">
+				<h2><?php echo $getAboutUsData['title'];?></h2>				
 			</div>
-			<?php echo $getAboutUsData['description'];?>
-				
-				<!-- End row -->
+			<div class="row">			
+					<div class="feature">
+						<?php echo $getAboutUsData['description'];?>
+					</div>      
 			</div>
-			<!-- End container -->
+			<!-- End row -->						
 		</div>
-		<!-- End white_bg -->
-		
+		<?php include_once 'our_associate_partners.php';?>
+		<!-- End section -->
+
 	</main>
 	<!-- End main -->
 

@@ -91,7 +91,9 @@
 				<h2>Our <span>Services</span> Categories</h2>
 				
 			</div>
-			<?php $getCategoriesData = getAllDataWithStatusLimit('services_category',0,'0','12'); ?>
+			<?php 
+			$getCategories = "SELECT * FROM services_category WHERE lkp_status_id = 0 ORDER BY category_position LIMIT 0,12";
+			$getCategoriesData = $conn->query($getCategories); ?>
 			<div class="row">
                  <?php  while($getAllCategoriesData = $getCategoriesData->fetch_assoc()) { ?> 
 				<div class="col-md-2 col-sm-6 wow zoomIn" data-wow-delay="0.1s">

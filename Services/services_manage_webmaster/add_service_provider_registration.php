@@ -239,7 +239,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Specialization</label>
-                    <select name="sub_category_id[]" class="custom-select service_provider_business chosen" multiple="multiple" id="sub_category_id" data-error="This field is required.">
+                    <select name="sub_category_id[]" class="custom-select service_provider_business" multiple="multiple" id="sub_category_id" data-error="This field is required.">
                       <option value="">Select Specialization</option>
                       <?php while($row = $getSubCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['sub_category_name']; ?></option>

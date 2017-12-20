@@ -112,7 +112,7 @@ if(mail($to, $subject, $message, $headers)) {
 			</div>
 			<div class="row">
 			
-				<div class="col-md-8 col-sm-8">
+				<div class="col-md-8 col-sm-8" style="padding-right:15px">
 						<div id="message-contact"></div>
 						<form method="post" action="" id="contactform" name="form"> 
 							<div class="row">
@@ -167,7 +167,7 @@ if(mail($to, $subject, $message, $headers)) {
 					/*echo $getSiteSettingsData; die;*/
 					
 				 ?> 
-				 <div class="col-md-4 col-sm-4">
+				 <div class="col-md-4 col-sm-4" style="padding-top:20px">
                     <div class="box_style_1">
                         <h3><span>Information</span></h3>
                          <p><span class=" icon-location" style="color:#f26226 ;"></span><?php echo $getSiteSettingsData['address']; ?></p>
