@@ -43,8 +43,8 @@
         <?php include_once 'header.php';?>
     </header>
 <!-- End Header =============================================== -->
-<?php //echo "srinu". $getRestKey = decryptpassword($_GET['key']); ?>
-<?php $getRestKey = 3; ?>
+<?php $getRestKey = decryptpassword($_GET['key']); ?>
+<?php //$getRestKey = 3; ?>
 <?php $getCategory = getFoodCategoryByRestId('food_products','restaurant_id',$getRestKey); ?>
 <?php $getFoodVendorsBann = getIndividualDetails('food_vendors','id',$getRestKey); ?>
 <!-- SubHeader =============================================== -->
@@ -164,11 +164,12 @@
 		                      <?php } ?>
 		                   </select>
 						</td>
-						<td>
+						<td id="view_add_cart_btn_">
 							<!-- <a class="btn_full" data-key="<?php echo $productId; ?>"  style="width:74px;">Add</a> -->
 
 							<?php 
-							$getcnt = "SELECT * FROM food_cart WHERE food_item_id = '$productId' AND item_weight_type_id = '4' AND session_cart_id = '$session_cart_id'";
+							$weIgId = $getFirstPrice['weight_type_id'];
+							$getcnt = "SELECT * FROM food_cart WHERE food_item_id = '$productId' AND item_weight_type_id = '$weIgId' AND session_cart_id = '$session_cart_id'";
 							$getCountItems = $conn->query($getcnt);
 							$getIndProducartCount = $getCountItems->fetch_assoc();
 							if($getIndProducartCount['item_quantity']!= '') {
@@ -299,7 +300,7 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 	  		var totalProItemsCnt = data[0];
 	  	} else {
 	  		var totalProItemsCnt = 0;		  		
-	  	}
+	  	}	  	
 		$('#cart_count_inc_'+ProductUniqId).html(totalProItemsCnt);	    
 	    //$("#mycart").slideToggle();
 	  }

@@ -24,6 +24,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			    		while($row1 = $getServicenames->fetch_assoc()) {
 			    			$note_array["groupServiceId"] = encryptPassword($row1["id"]);
 			    			$note_array["groupServiceName"] = $row1["group_service_name"];
+			    			$note_array["groupServicePriceType"] = $row1["service_price_type_id"];
 			    			if($row1['service_price_type_id'] == 1) {
 								$servicePrice = $row1['service_price'];
                     		} elseif($row1['price_after_visit_type_id'] == 1) {

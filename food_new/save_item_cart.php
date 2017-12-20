@@ -47,7 +47,7 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
         //echo $getTotalCount;
     }
 
-    $getAddData = "SELECT * FROM food_cart WHERE session_cart_id = '$session_cart_id'";
+    $getAddData = "SELECT * FROM food_cart WHERE session_cart_id = '$session_cart_id' AND item_quantity!='0'";
     $getSelData = $conn->query($getAddData);
 
     $cartSubtotal = 0;

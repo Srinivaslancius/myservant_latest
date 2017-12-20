@@ -4,7 +4,7 @@
       <div class="site-content">
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
-            <a href="add_food_products.php" style="float:right">Add Products</a>
+           <!-- <a href="add_food_products.php" style="float:right">Add Products</a> -->
             <h3 class="m-t-0 m-b-5">Products</h3>
           </div>
            <div class="panel-body">
@@ -21,21 +21,6 @@
             </select>           
           </div>
           <div class="clear_fix"></div>
-          <!-- <div class="form-group col-md-4">
-              <div class="custom-controls-stacked checkbox_new_div">
-                <label class="custom-control custom-control-primary custom-checkbox">
-                  <input class="custom-control-input" type="checkbox" id="test5" name="type" onchange="filterme()" value="Active">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-label" for="test5">Active Products</span>
-                </label>
-                <label class="custom-control custom-control-primary custom-checkbox">
-                  <input class="custom-control-input" type="checkbox" id="test6" name="type" onchange="filterme()" value="In Active">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-label" for="test6">In Active Products</span>
-                </label>
-              </div>
-            </div> -->
-
          
               <table class="table table-striped table-bordered dataTable" id="table-1">
                 <thead>
@@ -58,7 +43,7 @@
                     <td><?php $getCategories =  getAllDataWhere('food_category','id',$row['category_id']);
                     $getCategory = $getCategories->fetch_assoc(); echo $getCategory['category_name']; ?></td>
                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='food_products'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='food_products'>In Active</span>" ;} ?></td>
-                    <td> <a href="edit_food_products.php?pid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp; <a href="#"><i class="zmdi zmdi-eye zmdi-hc-fw" data-toggle="modal" data-target="#<?php echo $row['id']; ?>" class=""></i></a></td>
+                    <td> <!-- <a href="edit_food_products.php?pid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> -->&nbsp; <a href="#"><i class="zmdi zmdi-eye zmdi-hc-fw" data-toggle="modal" data-target="#<?php echo $row['id']; ?>" class=""></i></a></td>
                      <!-- Open Modal Box  here -->
                     <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog">
                       <div class="modal-dialog">

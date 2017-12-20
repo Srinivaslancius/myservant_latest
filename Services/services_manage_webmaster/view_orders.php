@@ -31,7 +31,7 @@
                     <td><?php echo $row['mobile'];?></td>
                     <td><?php echo $row['email'];?></td>
                     <td><?php echo $row['created_at'];?></td>
-                    <td><a href="view_category_orders.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-eye zmdi-hc-fw"  class=""></i></a></td>
+                    <td><a href="view_category_orders.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-eye zmdi-hc-fw"  class=""></i></a>&nbsp;<a target="_blank" href="total_order_details.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-local-printshop"  class=""></i></a></td>
                   </tr>
                   <?php  $i++; } ?>
                 </tbody>
