@@ -1,4 +1,5 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
+<link rel="stylesheet" href="css/chosen.min.css">
 <?php  
 error_reporting(0);
 $lkp_pincode_id = $_GET['lkp_pincode_id'];
@@ -55,7 +56,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your State</label>
-                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);">
+                    <select name="lkp_state_id" class="custom-select chosen" data-error="This field is required." required onChange="getDistricts(this.value);">
                       <option value="">Select State</option>
                       <?php while($row = $getStates->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getLocationsData['lkp_state_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['state_name']; ?></option>
@@ -139,3 +140,6 @@ if (!isset($_POST['submit']))  {
       </div>
   
 <?php include_once 'admin_includes/footer.php'; ?>
+<script type="text/javascript">
+      $(".chosen").chosen();
+</script>
