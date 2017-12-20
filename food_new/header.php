@@ -1,3 +1,17 @@
+<?php
+if($_SESSION['CART_TEMP_RANDOM'] == "") {
+    $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
+}
+$session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
+if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
+    $user_session_id = $_SESSION['user_login_session_id'];
+    $cartItems1 = "SELECT * FROM food_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' ";
+    $cartItems = $conn->query($cartItems1);
+} else {                                       
+    $cartItems = getAllDataWhere('food_cart','session_cart_id',$session_cart_id);
+} 
+?>
+
 <div class="container-fluid">
     <div class="row myservant_topheader">
             <div class="col-md-12">              
@@ -8,7 +22,7 @@
                     <p>Customer Care: <a href="Tel:<?php echo $getFoodSiteSettingsData['mobile']; ?>"><?php echo $getFoodSiteSettingsData['mobile']; ?></a> Toll Free (24*7)</p>
                 </div>
                 <div class="col-md-1 col-xs-12">
-                    <p><a href="#">Login</a></p>
+                    <p><a href="login.php">Login</a></p>
                 </div>
             </div> 
         </div>
@@ -41,8 +55,9 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-3 col-xs-3">
-                <img src="img/cart.png" width="40" height="40" class="img-responsive pull-right" alt=""></div>
+                <div class="col-md-3 col-xs-3">
+                    <img src="img/cart.png" width="40" height="40" class="img-responsive pull-right" alt="">(<?php echo $cartItems->num_rows; ?>)
+                </div>
             </div>
         </div><!-- End row -->
     </div><!-- End container -->
