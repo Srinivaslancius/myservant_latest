@@ -14,7 +14,15 @@ $getPaymentMethodData = $getPaymentMethod->fetch_assoc();
 
 $getSiteSettingsData = getIndividualDetails('services_site_settings','id',1);
 
+//below condition for check service type prices fixed or variant for payment gateway display
+$getPriceType = "SELECT * FROM services_orders WHERE service_price_type_id=2 AND order_id='$id' ";
+$getCount = $conn->query($getPriceType);
+
+if($getCount->num_rows == 0) {
 $service_tax = $getOrdersData1['sub_total']*$getSiteSettingsData['service_tax']/100;
+} else {
+	$service_tax = 0;
+}
 
 $content .='<!DOCTYPE html>
 <html lang="en">
@@ -48,13 +56,13 @@ $content .='<!DOCTYPE html>
 		 <p>'.$getOrdersData1['postal_code'].'</p>
 		 </td>
 		 <td colspan="2"></td>	
-	  <td><p>Order ID</p>
-	  <p>Order Sub Id</p>
-	 <p>Created at</p>
-	  <p>Payment Method</p>
+	  <td><p>Order ID:</p>
+	  <p>Order Sub Id:</p>
+	 <p>Created at:</p>
+	  <p>Payment Method:</p>
 	  </td>
 	  <td><p>'.$getOrdersData1['order_id'].'</p>
-	  <p>'.$getOrdersData1['order_sub_id'].'</p>
+	  <p>'.wordwrap($getOrdersData1['order_sub_id'],20,"<br>\n",TRUE).'</p>
 	  <p>'.$getOrdersData1['created_at'].'</p>
 	  <p>'.$getPaymentMethodData['status'].'</p>
 	  </td>
@@ -75,8 +83,8 @@ $content .='<!DOCTYPE html>
 		$getServiceNamesData = $getServiceNames->fetch_assoc();
 $content .='<tr>
         <td>'.$getServiceNamesData['group_service_name'].'</td>
-        <td>'.$getOrdersData2['service_price'].'</td>
-        <td>'.$getOrdersData2['service_quantity'].'</td>
+        <td>'.wordwrap($getOrdersData2['service_price'],15,"<br>\n",TRUE).'</td>
+        <td>'.wordwrap($getOrdersData2['service_quantity'],15,"<br>\n",TRUE).'</td>
 		<td>'.$getOrdersData2['service_selected_date'].'</td>
 		<td>'.$getOrdersData2['service_selected_time'].'</td>
 		<td></td>

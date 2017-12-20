@@ -51,6 +51,8 @@
 						</li>
 						<li><a href="return_policy.php">Return Policy</a>
 						</li>
+						<li><a href="user_feedback_form.php">Customer Feed Back</a>
+						</li>
 					</ul>
 				</div>
 				<div class="col-md-3 col-sm-3">

@@ -8,8 +8,8 @@
     header("Location: sub_categories.php?cat_id=".encryptPassword($cat_id)."");
   } elseif(!empty($_POST['service_name'])) {
     $service_name = $_POST['service_name'];
-	$getGroupServiceNames = getAllDataWhereWithActive('services_group_service_names','related_tags',$service_name);
-	$getGroupServiceNamesData = $getGroupServiceNames->fetch_assoc();
+  $getGroupServiceNames = getAllDataWhereWithActive('services_group_service_names','related_tags',$service_name);
+  $getGroupServiceNamesData = $getGroupServiceNames->fetch_assoc();
     header("Location: list.php?sub_cat_id=".encryptPassword($getGroupServiceNamesData['services_sub_category_id'])."");
   }
 }
@@ -30,7 +30,7 @@
             </select>
             </span>
             <div class="nav-searchfield-outer">
-            <input type="text" autocomplete="off" name="service_name" placeholder="Search your related service" id="twotabsearchtextbox">
+            <input type="text" autocomplete="off" name="service_name" class="service_name" placeholder="Search your related service" id="twotabsearchtextbox" style="width:700px;border:1px solid white">
             </div>
            <div class="nav-submit-button">
                 <button type="submit" class="btn btn-default" name="search" style="height:30px;border-radius: 1px;border-color:#fe6003;"><span class="icon icon-search pull-right"></span></button>
@@ -45,10 +45,33 @@
 //Search bar
 $(function () {
 $("#searchDropdownBox").change(function(){
-	var Search_Str = $(this).find('option:selected').text();	
+  var Search_Str = $(this).find('option:selected').text();  
     //var Search_Str = $(this).val();
     //replace search str in span value
     $("#nav-search-in-content").text(Search_Str);
   });
 });
+</script>
+
+<!-- Search with Auto Complete -->
+<script src="//netsh.pp.ua/upwork-demo/1/js/typeahead.js"></script>
+<style>
+  .tt-dropdown-menu {
+      width: 700px;
+      margin-top: 5px;
+      padding: 8px 12px;
+      background-color: #fff;
+      font-size: 12px;
+      color: #888;
+      background-color: #FFFF;
+    line-height:10px !important;
+  }
+</style>
+<script>
+    $(document).ready(function() {
+        $('input.service_name').typeahead({
+            name: 'service_name',
+            remote: 'service_names.php?query=%QUERY'
+        });
+    })
 </script>

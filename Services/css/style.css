@@ -1125,33 +1125,35 @@ video {
 }
 
 .nav-searchfield-outer {
-    background: #fff;
-    color: #ccc;
-    display: block;
-    font-size: 15px;
-    left: 0;
-    padding: 5px;
-    position: realtive;
-    width: 100%;
-    font-family: 'Open Sans', sans-serif;
-    border: none;
-    height: 30px;
-    font-weight: 600;
-    margin-top: 1px;
+       background: #fff;
+   color: #888;
+   display: block;
+   font-size: 13px;
+   left: 0;  
+   position: realtive;
+   width: 100%;
+   font-family: 'Open Sans', sans-serif;
+   border: 1px solid white;
+   height: 30px;
+   /*font-weight: 600; */
+   margin-top: 1px;
+    padding-left:90px;
+    padding-top:3px;
+    outline: 0;
 }
 
-#twotabsearchtextbox {
-    background: #FFF;
-    width: 100%;
-    border: none;
-    box-shadow: none;
-    color: #333;
-    font-size: 12px;
-    /* height: 30px; */
-    padding: 1px 0 0 155px;
-    outline: 0;
-    font-weight: 700;
-}
+/*#twotabsearchtextbox {
+   background: #FFF;
+   width: 100%;
+   border: none;
+   box-shadow: none;
+   color: #333;
+   font-size: 12px;
+    height: 30px;
+   padding: 1px 0 0 155px;
+   outline: 0;
+   font-weight: 700;
+}*/
 
 .feature,.strip_all_tour_list {
     -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,.1)
@@ -2036,7 +2038,7 @@ input.qty2 {
     padding: 30px 30px 20px 20px;
     position: relative;
     background: #fff;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     color: #888;
     box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
 }
@@ -2096,6 +2098,7 @@ input.qty2 {
 }
 
 .review_strip {
+    min-height: 180px;
     background: #fff;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -2916,7 +2919,7 @@ ul.list_order li span {
     -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
     -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
     box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
-    margin: 0 0 30px
+    margin: 0 0 15px
 }
 
 .img_container {
@@ -4966,6 +4969,57 @@ ul.slides-container li img{
 /*footer h3,li{
     text-align:center !important;
     }*/
+    .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+        position: relative;
+        min-height: 1px;
+        padding-right: 15px !important;
+        padding-left: 15px;
+    }
+    #twotabsearchtextbox{
+   font-size:12px !important;
+   padding: 0px 0 0 0px !important;
+    width:100% !important;
+    border: 1px solid white !important;
+    background-color:none !important;
+}
+.tt-hint{
+    width:100% !important;
+    background-color:none !important;
+}
+.tt-dropdown-menu {
+     width: 100% !important;
+     background-color: #fff;
+     /*border: 1px solid #ccc;
+     border: 1px solid rgba(0, 0, 0, 0.2);
+     border-radius: 8px 8px 8px 8px;*/
+     font-size: 12px !important;
+     color: #888;
+     background-color: #FFFF;
+ }
+ .tt-suggestion p{
+      text-transform:capitalize !important;
+      line-height:15px !important;
+      text-align:left !important;
+ }
+ .tt-suggestion{
+      line-height:1px !important;
+ }
+ #boxes{
+      width:100px !important;
+      height:100px !important;
+ }
+ #dialog{
+      width:90% !important;
+      left: 15px !important;
+ }
+ .selectdiv {
+   position: relative !important;
+   margin: 10px 19% !important;
+}
+    .page-title .img-responsive {
+        width:100% !important;
+        height:160px !important;
+    }
     .layerslider{
         width:100% !important;
         height:100% !important;
@@ -4982,10 +5036,6 @@ ul.slides-container li img{
 }
 .nav-facade-active #searchDropdownBox {
     left: -6px !important;
-}
-#twotabsearchtextbox{
-    font-size:12px !important;
-    padding: 3px 0 0 120px !important;
 }
 .search_bar{
     width:100% !important;
@@ -5004,9 +5054,9 @@ ul#top_tools a{
     font-size:12px !important;
 }
 .cmn-toggle-switch{
-    right: 10px;
-    width: 25px;
-    height: 25px;
+    right: 10px !important;
+    width: 25px !important;
+    height: 25px !important;
 }
 #logo_home h1 a, header.sticky #logo_home h1 a, header#plain #logo_home h1 a, header#colored #logo_home h1 a {
     background-size: auto 25px !important;
