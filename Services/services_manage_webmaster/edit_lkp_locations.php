@@ -40,10 +40,16 @@ if (!isset($_POST['submit']))  {
           </div>
           <div class="panel-body">
             <div class="row">
+
               <?php 
               $getDistricts = getAllDataWhere('lkp_locations','id',$lkp_pincode_id);
           
               $getLocationsData = $getDistricts->fetch_assoc(); ?>
+
+              <?php $sql = "SELECT * FROM lkp_locations WHERE lkp_pincode_id = $lkp_pincode_id";
+               $getLocations = $conn->query($sql);
+              $getLocationsData = $getLocations->fetch_assoc(); ?>
+
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <form data-toggle="validator" method="POST" enctype="multipart/form-data">
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>

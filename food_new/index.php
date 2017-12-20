@@ -56,15 +56,15 @@
         <div class="ls-slide" data-ls="slidedelay: 5000; transition2d:5;">
             <img src="<?php echo $base_url . 'uploads/food_banner_images/'.$getFoodhomeBanners['banner'] ?>" class="ls-bg" alt="Slide background" alt="<?php echo $getFoodhomeBanners['title'];?>">
             <h3 class="ls-l slide_typo" style="top: 50%; left: 50%;font-size:30px" data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;" ><strong>Enjoy</strong> a quick friends dinner</h3>           
-            <?php if($getFoodhomeBanners['lkp_banner_type_id']==1) { ?>
+           <!-- <?php if($getFoodhomeBanners['lkp_banner_type_id']==1) { ?>
             <p class="ls-l" style="top:64%; left:50%;" data-ls="durationin:2000;delayin:1300;easingin:easeOutElastic;" ><a href="list_page.php" class="button_intro">Read more</a> </p>
-            <?php } ?>
+            <?php } ?> -->
         </div>
        <?php } ?>
     
         <div id="count" class="hidden-xs">
             <ul>
-                <li><span class="number"><?php echo getRowsCount('food_vendors'); ?></span> Restaurant</li>
+                <li><span class="number"><?php echo getRowsCount('food_vendors'); ?></span> Restaurants</li>
                 <li><span class="number">5350</span> People Served</li>
                 <li><span class="number"><?php echo getUsersRowsCount('users','lkp_admin_service_type_id','2'); ?></span> Registered Users</li>
             </ul>
@@ -86,13 +86,20 @@
           $getDeliveryData = $getAllDeliveryData->fetch_assoc();
 ?>
 
+<?php $gethowitWorksData = getAllDataWhere('food_content_pages','id',7);
+          $gethowitWorksData1 = $gethowitWorksData->fetch_assoc();
+?>
+
+<?php $getchooseFrom = getAllDataWhere('food_content_pages','id',7);
+          $getchooseFrom1 = $getchooseFrom->fetch_assoc();
+?>
     <!-- Content ================================================== -->
          <div class="container margin_10">
         
          <div class="main_title">
-            <h2 class="nomargin_top" style="padding-top:0">How it works</h2>
+            <h2 class="nomargin_top" style="padding-top:0"><?php echo $gethowitWorksData1['title']; ?></h2>
             <p>
-                Cum doctus civibus efficiantur in imperdiet deterruisset.
+               <?php echo $gethowitWorksData1['description']; ?>
             </p>
         </div>
         <div class="row">
@@ -142,13 +149,13 @@
     <div class="container margin_60">
         
         <div class="main_title">
-            <h2 class="nomargin_top">Choose from Most Popular</h2>
-            <p>
-                Cum doctus civibus efficiantur in imperdiet deterruisset.
-            </p>
+            <h2 class="nomargin_top"><?php echo $getchooseFrom1['title']; ?></h2>
+            
+               <?php echo $getchooseFrom1['description']; ?>
+          
         </div>
 
-        <?php $getMostPopualrRest = getAllDataWithStatusLimit('food_vendors','0','0','6'); ?>
+        <?php $getMostPopualrRest = getAllRestaruntsWithProducts('0','0','6'); ?>
         
         <div class="row">
             <?php while($getMostPopualrRestaurants = $getMostPopualrRest->fetch_assoc()) { ?>
@@ -175,8 +182,21 @@
                            <?php echo $getMostPopualrRestaurants['restaurant_address']; ?> .<span class="opening">Opens at <?php echo $getMostPopualrRestaurants['working_timings']; ?></span>
                         </div>
                         <ul>
-                            <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                            <li>Delivery<i class="icon_check_alt2 ok"></i></li>
+                            <?php 
+                                $getDeliveryTypes = $getMostPopualrRestaurants['delivery_type_id']; 
+                                $getDtype = explode(",",$getDeliveryTypes);
+                            ?>
+                            <?php 
+                                if (in_array("1", $getDtype)) { 
+                                   echo "<li>Take away<i class='icon_check_alt2 ok'></i></li>";
+                                } 
+
+                                if(in_array("2", $getDtype)) {
+                                    echo "<li>Delivery<i class='icon_check_alt2 ok'></i></li>";
+                                }
+
+                            ?>
+                           
                         </ul>
                     </div><!-- End desc-->
                 </a><!-- End strip_list-->
@@ -220,17 +240,16 @@
     
        <div class="high_light">
         <div class="container">
-            <h3>Choose from over 2,000 Restaurants</h3>
+            <h3>Choose from over <?php echo getRowsCount('food_vendors'); ?> Restaurants</h3>
             <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
-            <a href="list_page.html">View all Restaurants</a>
+            <a href="list.php">View all Restaurants</a>
         </div><!-- End container -->
       </div><!-- End hight_light -->
             
     
     <!-- End Content =============================================== -->
     
-    
-    
+       
     <!-- Footer ================================================== -->
     <footer>
         <?php include_once 'footer.php';?>
@@ -238,49 +257,6 @@
     <!-- End Footer =============================================== -->
 
 <div class="layer"></div><!-- Mobile menu overlay mask -->
-
-<!-- Login modal -->   
-<div class="modal fade" id="login_2" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content modal-popup">
-                <a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-                <form action="#" class="popup-form" id="myLogin">
-                    <div class="login_icon"><i class="icon_lock_alt"></i></div>
-                    <input type="text" class="form-control form-white" placeholder="Username">
-                    <input type="text" class="form-control form-white" placeholder="Password">
-                    <div class="text-left">
-                        <a href="#">Forgot Password?</a>
-                    </div>
-                    <button type="submit" class="btn btn-submit">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div><!-- End modal -->   
-    
-<!-- Register modal -->   
-<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content modal-popup">
-                <a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-                <form action="#" class="popup-form" id="myRegister">
-                    <div class="login_icon"><i class="icon_lock_alt"></i></div>
-                    <input type="text" class="form-control form-white" placeholder="Name">
-                    <input type="text" class="form-control form-white" placeholder="Last Name">
-                    <input type="email" class="form-control form-white" placeholder="Email">
-                    <input type="text" class="form-control form-white" placeholder="Password"  id="password1">
-                    <input type="text" class="form-control form-white" placeholder="Confirm password"  id="password2">
-                    <div id="pass-info" class="clearfix"></div>
-                    <div class="checkbox-holder text-left">
-                        <div class="checkbox">
-                            <input type="checkbox" value="accept_2" id="check_2" name="check_2" />
-                            <label for="check_2"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-submit">Register</button>
-                </form>
-            </div>
-        </div>
-    </div><!-- End Register modal -->
     
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-2.2.4.min.js"></script>

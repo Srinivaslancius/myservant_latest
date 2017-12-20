@@ -93,7 +93,7 @@
 		<div class="row">
         
 			<div class="col-md-3">
-                <p><a href="list.php" class="btn_side">Back to search</a></p>
+                <p><a onclick="history.go(-1);" class="btn_side">Back to search</a></p>
 				<div class="box_style_1">
 					<ul id="cat_nav">						
 						<?php while($getCatList = $getCategory->fetch_assoc() ) { ?>

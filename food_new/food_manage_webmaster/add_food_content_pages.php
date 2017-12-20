@@ -11,13 +11,13 @@
       $meta_desc = $_POST['meta_desc'];
       $created_at = date("Y-m-d h:i:s");
       $fileToUpload = uniqid().$_FILES["fileToUpload"]["name"];
-      if($fileToUpload!='') {
+      //if($fileToUpload!='') {
 
         $target_dir = "../../uploads/food_content_pages_images/";
         $target_file = $target_dir . basename($fileToUpload);
         $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        //if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
             $sql = "INSERT INTO food_content_pages (`title`, `description`, `image`, `meta_title`, `meta_keywords`, `meta_desc`) VALUES ('$title', '$description','$fileToUpload', '$meta_title','$meta_keywords','$meta_desc')";
             if($conn->query($sql) === TRUE){
                echo "<script type='text/javascript'>window.location='food_content_pages.php?msg=success'</script>";
@@ -25,11 +25,11 @@
                echo "<script type='text/javascript'>window.location='food_content_pages.php?msg=fail'</script>";
             }
             //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-        } else {
-            echo "Sorry, there was an error uploading your file.";
-        }
+        //} else {
+           // echo "Sorry, there was an error uploading your file.";
+        //}
 
-      }
+      //}
   }
 ?>
       <div class="site-content">

@@ -92,7 +92,7 @@ $content .='<tr>
 		</td>
 		<td style="color:#f26226"><p>'.$getOrdersData1['sub_total'].'</p>
 		<p>Rs.'.$service_tax.'('.$getSiteSettingsData['service_tax'].'%)</p>
-		<p>'.$getOrdersData1['order_id'].'</p></td>
+		<p>'.$getOrdersData1['order_total'].'</p></td>
       </tr>
     </tbody>
   </table>

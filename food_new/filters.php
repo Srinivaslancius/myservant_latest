@@ -34,22 +34,7 @@
 							<i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
 							</span></label></li>
 						</ul>
-					</div>
-					<div class="filter_type">
-						<h6>Budget</h6>
-						<ul class="nomargin">
-                                                    <li><label><input type="checkbox" class="icheck"><i class="icon-rupee"></i></label></li>
-                                                    <li><label><input type="checkbox" class="icheck"><i class="icon-rupee"></i><i class="icon-rupee"></i></label></li>
-                                                    <li><label><input type="checkbox" class="icheck"><i class="icon-rupee"></i><i class="icon-rupee"></i><i class="icon-rupee"></i></label></li>
-                                                    <li><label><input type="checkbox" class="icheck"><i class="icon-rupee"></i><i class="icon-rupee"></i><i class="icon-rupee"></i><i class="icon-rupee"></i></label></li>
-						</ul>
-					</div>
-                                        <div class="filter_type">
-						<h6>Offers</h6>
-						<ul class="nomargin">
-                                                    <li><label><input type="checkbox" class="icheck">Show</label></li>
-                                                    
-						</ul>
-					</div>
+					</div>				
+                         
 				</div><!--End collapse -->
 			</div><!--End filters col-->
