@@ -56,8 +56,7 @@
 <?php  
 error_reporting(1);
 if (!isset($_POST['submit']))  {
-  //If fail
-  echo "fail";
+
 }else  {
 
   //If success
@@ -253,7 +252,7 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Email id</label>
-                    <input type="email" name="email_id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control service_provider_business" id="email" placeholder="email" data-error="Please enter Valid Email Address">
+                    <input type="email" name="email_id" id="user_input" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control service_provider_business" id="email" placeholder="email" data-error="Please enter Valid Email Address">
                     <span id="email_status" style="color: red;"></span>
                     <div class="help-block with-errors"></div>
                   </div>
@@ -441,6 +440,30 @@ if (!isset($_POST['submit']))  {
   }
 });
 </script>
+<script type="text/javascript">
+      function checkUserAvailTest() {
+        var userInput = document.getElementById("user_input").value;
+        var table = document.getElementById("table_name").value;
+        var columnName = document.getElementById("column_name").value;
+        if (userInput){
+          $.ajax({
+          type: "POST",
+          url: "common_user_avail_check.php",
+          data: {
+            userInput:userInput,table:table,columnName:columnName,
+          },
+          success: function (response) {
+            if (response > 0){
+              $('#input_status').html("<span>Already Exist</span>");
+              $("#user_input").val("");
+            } else {
+              $('#input_status').html("");        
+            }
+          }
+          });          
+        }
+      }
+    </script>
 </body>
 
 </html>
