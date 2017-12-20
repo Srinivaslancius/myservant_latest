@@ -1,7 +1,6 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
 <?php
-$getLocations = "SELECT * FROM lkp_locations GROUP BY lkp_pincode_id ORDER BY lkp_status_id,id DESC";
-$getLocationsData = $conn->query($getLocations); $i=1; ?>
+$getLocationsData = getAllDataWithActiveRecent('lkp_locations'); $i=1; ?>
      <div class="site-content">
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
@@ -18,6 +17,7 @@ $getLocationsData = $conn->query($getLocations); $i=1; ?>
                     <th>District Name</th>
                     <th>City Name</th>
                     <th>Pincode</th>
+                    <th>Status</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -29,6 +29,8 @@ $getLocationsData = $conn->query($getLocations); $i=1; ?>
                    <td><?php $getDistricts = getAllData('lkp_districts'); while($getDistrictsData = $getDistricts->fetch_assoc()) { if($row['lkp_district_id'] == $getDistrictsData['id']) { echo $getDistrictsData['district_name']; } } ?></td>
                    <td><?php $getCities = getAllData('lkp_cities'); while($getCitiesData = $getCities->fetch_assoc()) { if($row['lkp_city_id'] == $getCitiesData['id']) { echo $getCitiesData['city_name']; } } ?></td>
                    <td><?php $getPincodes = getAllData('lkp_pincodes'); while($getPincodesData = $getPincodes->fetch_assoc()) { if($row['lkp_pincode_id'] == $getPincodesData['id']) { echo $getPincodesData['pincode']; } } ?></td>
+                   <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='lkp_locations'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='lkp_locations'>In Active</span>" ;} ?></td>
+                   
                    <td> <a href="edit_lkp_locations.php?lkp_pincode_id=<?php echo $row['lkp_pincode_id']; ?>"><i class="zmdi zmdi-edit"></i></a>  &nbsp; <!-- <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "lkp_locations" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></td>
                   </tr>
                   <?php  $i++; } ?>

@@ -20,7 +20,7 @@ if (!isset($_POST['submit']))  {
   for($i=0;$i<$count;$i++) {
     $location_name = $_POST['location_name'][$i];
     $id = $_POST['location_id'][$i];
-    $sql = "UPDATE lkp_locations SET lkp_state_id = '$lkp_state_id',lkp_district_id ='$lkp_district_id',lkp_city_id ='$lkp_city_id',lkp_pincode_id ='$lkp_pincode_id',location_name = '$location_name',lkp_status_id ='$lkp_status_id' WHERE id = '$id' ";
+    $sql = "UPDATE lkp_locations SET lkp_state_id = '$lkp_state_id',lkp_district_id ='$lkp_district_id',lkp_city_id ='$lkp_city_id',lkp_pincode_id ='$lkp_pincode_id',location_name = '$location_name',lkp_status_id ='$lkp_status_id' WHERE id = '$lkp_pincode_id' ";
     $res = $conn->query($sql);
     //$i++;
   }
@@ -40,9 +40,16 @@ if (!isset($_POST['submit']))  {
           </div>
           <div class="panel-body">
             <div class="row">
+
+              <?php 
+              $getDistricts = getAllDataWhere('lkp_locations','id',$lkp_pincode_id);
+          
+              $getLocationsData = $getDistricts->fetch_assoc(); ?>
+
               <?php $sql = "SELECT * FROM lkp_locations WHERE lkp_pincode_id = $lkp_pincode_id";
                $getLocations = $conn->query($sql);
               $getLocationsData = $getLocations->fetch_assoc(); ?>
+
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <form data-toggle="validator" method="POST" enctype="multipart/form-data">
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
