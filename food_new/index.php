@@ -189,10 +189,9 @@
                             <?php 
                                 if (in_array("1", $getDtype)) { 
                                    echo "<li>Take away<i class='icon_check_alt2 ok'></i></li>";
-                                } elseif(in_array("2", $getDtype)) {
-                                    echo "<li>Delivery<i class='icon_check_alt2 ok'></i></li>";
-                                } else {
-                                    echo "<li>Take away<i class='icon_check_alt2 ok'></i></li>";
+                                } 
+
+                                if(in_array("2", $getDtype)) {
                                     echo "<li>Delivery<i class='icon_check_alt2 ok'></i></li>";
                                 }
 
