@@ -42,16 +42,7 @@ if($getSelData->num_rows > 0) {
 
   echo '<hr>
             <input type="hidden" id="cart_count_items" value="'.$getSelData->num_rows.'">
-            <div class="row" id="options_2">
-              <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                <label><input type="radio" value="" checked name="option_2" class="icheck">Delivery</label>
-              </div>
-              <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                <label><input type="radio" value="" name="option_2" class="icheck">Take Away</label>
-              </div>
-            </div><!-- Edn options 2 -->
-                      
-            <hr>
+            
             <table class="table table_summary">
             <tbody>
             <tr>
