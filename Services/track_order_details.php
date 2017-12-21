@@ -228,8 +228,8 @@ html * {
 					</div>
 					<div class="col-sm-4">
 					<h4 style="color:#f26226;">MANAGE ORDER</h4><br>
-					<p style="color:#2874f0;"><span class="icon-doc-text-inv"></span> REQUEST INVOICE <span class="icon-help-circled"></span></p>
-					<p style="color:#2874f0;"><span class="icon-help-circled"></span> NEED HELP ?</p>
+					<!-- <p style="color:#2874f0;"><span class="icon-doc-text-inv"></span> REQUEST INVOICE <span class="icon-help-circled"></span></p> -->
+					<a href="contactus.php" style="color:#2874f0;"><span class="icon-help-circled"></span> NEED HELP ?</a>
 					</div>
 					</div>
 					

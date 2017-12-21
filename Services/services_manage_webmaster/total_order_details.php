@@ -24,6 +24,12 @@ $service_tax = $getOrdersData1['sub_total']*$getSiteSettingsData['service_tax']/
 	$service_tax = 0;
 }
 
+if($getOrdersData1['discount_money'] != 0) {
+$discount_money = $getOrdersData1['discount_money'].'(<span style="color:green">Coupon Applied Successfully.</span>)';
+} else {
+	$discount_money = 0;
+}
+
 $content .='<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,37 +49,39 @@ $content .='<!DOCTYPE html>
       </tr>
     </thead>
     <tbody>
-    <tr>
-      <td><p>Name:</p>
-	<p>Mobile:</p>
-	<p>Email:</p>
-	<p>Address:</p>
-	<p>Postal Code:</p></td>
-	  <td><p>'.$getOrdersData1['first_name'].'</p>
-	  <p>'.$getOrdersData1['mobile'].'</p>
-	   <p>'.$getOrdersData1['email'].'</p>
-	    <p>'.$getOrdersData1['address'].'</p>
-		 <p>'.$getOrdersData1['postal_code'].'</p>
+    <tr style="font-size:12px;">
+      <td>Name:<br>
+	Mobile:<br>
+	Email:<br>
+	Address:<br>
+	Postal Code:</td>
+	  <td>'.$getOrdersData1['first_name'].'<br>
+	 '.$getOrdersData1['mobile'].'<br>
+	  '.$getOrdersData1['email'].'<br>
+	    '.$getOrdersData1['address'].'<br>
+		'.$getOrdersData1['postal_code'].'
 		 </td>
-		 <td colspan="2"></td>	
-	  <td><p>Order ID:</p>
-	  <p>Order Sub Id:</p>
-	 <p>Created at:</p>
-	  <p>Payment Method:</p>
+		 <td></td>	
+	  <td>Order ID:<br>
+	  Order Sub Id:<br><br>
+	 Created at:<br>
+	  Payment Method:
+	 
 	  </td>
-	  <td><p>'.$getOrdersData1['order_id'].'</p>
-	  <p>'.wordwrap($getOrdersData1['order_sub_id'],20,"<br>\n",TRUE).'</p>
-	  <p>'.$getOrdersData1['created_at'].'</p>
-	  <p>'.$getPaymentMethodData['status'].'</p>
+	  <td colspan="2">'.$getOrdersData1['order_id'].'<br>
+	 '.wordwrap($getOrdersData1['order_sub_id'],20,"<br>\n",TRUE).'<br>
+	 '.$getOrdersData1['created_at'].'<br>
+	 '.$getPaymentMethodData['status'].'
+	  
 	  </td>
-      </tr>
-      <tr style="color:#f26226">
+      </tr><br><br>
+      <tr style="color:#f26226;font-size:12px">
         <td>Service Name</td>
-        <td>Price</td>
+        <td>Service Price</td>
         <td>Quantity</td>
 		<td>Selected Date</td>
 		<td>Selected Time</td>
-		<td></td>
+		<td>Order Price</td>
       </tr>';
       $getOrders1 = "SELECT * FROM services_orders WHERE order_id='$id'";
 	$getOrdersData3 = $conn->query($getOrders1);
@@ -81,26 +89,28 @@ $content .='<!DOCTYPE html>
       while($getOrdersData2 = $getOrdersData3->fetch_assoc()) {
       	$getServiceNames = getAllDataWhere('services_group_service_names','id',$getOrdersData2['service_id']); 
 		$getServiceNamesData = $getServiceNames->fetch_assoc();
-$content .='<tr>
-        <td>'.$getServiceNamesData['group_service_name'].'</td>
-        <td>'.wordwrap($getOrdersData2['service_price'],15,"<br>\n",TRUE).'</td>
-        <td>'.wordwrap($getOrdersData2['service_quantity'],15,"<br>\n",TRUE).'</td>
+$content .='<tr style="font-size:12px">
+        <td>'.wordwrap($getServiceNamesData['group_service_name'],20,"<br>\n",TRUE).'</td>
+        <td>'.wordwrap($getOrdersData2['service_price'],22,"<br>\n",TRUE).'</td>
+        <td>'.$getOrdersData2['service_quantity'].'</td>
 		<td>'.$getOrdersData2['service_selected_date'].'</td>
 		<td>'.$getOrdersData2['service_selected_time'].'</td>
-		<td></td>
-      </tr>';
+		<td>'.$getOrdersData2['order_price'].'</td>
+      </tr><br>';
   }
   $content .= '
-	   <tr style="background-color:#f2f2f2">
+	   <tr style="background-color:#f2f2f2;font-size:12px">
         <td colspan="4"></td>
 		<td>
-		<p>Subtotal:</p>
-		<p>Tax:</p>
-		<p style="color:#f26226">Grand Total:</p>
+		Subtotal:<br>
+		Discount Money:<br>
+		Tax:<br>
+		<span style="color:#f26226">Grand Total:</span>
 		</td>
-		<td style="color:#f26226"><p>'.$getOrdersData1['sub_total'].'</p>
-		<p>Rs.'.$service_tax.'('.$getSiteSettingsData['service_tax'].'%)</p>
-		<p>'.$getOrdersData1['order_total'].'</p></td>
+		<td style="color:#f26226;font-size:12px">'.$getOrdersData1['sub_total'].'<br>
+		Rs.'.$discount_money.'<br>
+		Rs.'.$service_tax.'('.$getSiteSettingsData['service_tax'].'%)<br>
+		'.$getOrdersData1['order_total'].'</td>
       </tr>
     </tbody>
   </table>

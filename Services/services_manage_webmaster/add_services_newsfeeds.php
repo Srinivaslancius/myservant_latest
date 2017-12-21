@@ -35,11 +35,9 @@ if (!isset($_POST['submit']))  {
                   </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">News Feed Url</label>
-                    <input type="url" name="news_feed_url" class="form-control" id="form-control-2" placeholder="News Feed url" data-error="Please enter News Feed Url." ?>"
+                    <input type="url" name="news_feed_url" class="form-control" id="form-control-2" placeholder="News Feed url" data-error="Please enter News Feed Url." required>
                     <div class="help-block with-errors"></div>
                   </div>
-                 
-                  
                   <?php $getStatus = getAllData('lkp_status');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your status</label>

@@ -9,7 +9,7 @@ if (!isset($_POST['submit'])) {
     echo "fail";
 } else {
     //If success
-  $order_price = $_POST['order_price'];
+  $order_price = $_POST['order_price']*$_POST['service_quantity'];
   $lkp_order_status_id = $_POST['lkp_order_status_id'];
   $lkp_payment_status_id = $_POST['lkp_payment_status_id'];
   $order_total = $_POST['order_total'];
@@ -113,6 +113,7 @@ if($lkp_payment_status_id == 1 AND $lkp_order_status_id == 2) {
                 <form data-toggle="validator" method="POST" autocomplete="off" enctype="multipart/form-data">
                   <input type="hidden" name="order_total" value="<?php echo $getServiceOrdersData['order_total'];?>">
                   <input type="hidden" name="service_price_type_id" value="<?php echo $getServiceOrdersData['service_price_type_id'];?>">
+                  <input type="hidden" name="service_quantity" value="<?php echo $getServiceOrdersData['service_quantity'];?>">
                   <div class="form-group">
                   </div>
                   <div class="form-group">
@@ -137,7 +138,9 @@ if($lkp_payment_status_id == 1 AND $lkp_order_status_id == 2) {
                   </div>
                   <?php } ?>
 
-                  <?php $getPaymentStatus = getAllData('lkp_payment_status');?>
+                  <?php 
+                  $getPaymentStatusData = "SELECT * FROM lkp_payment_status WHERE id != 3";
+                  $getPaymentStatus = $conn->query($getPaymentStatusData);?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Payment status</label>
                     <select id="form-control-3" name="lkp_payment_status_id" class="custom-select" data-error="This field is required." required>
@@ -149,7 +152,9 @@ if($lkp_payment_status_id == 1 AND $lkp_order_status_id == 2) {
                     <div class="help-block with-errors"></div>
                   </div>
                   
-                  <?php $getStatus = getAllData('lkp_order_status');?>
+                  <?php 
+                  $getStatusData = "SELECT * FROM lkp_order_status WHERE id != 3";
+                  $getStatus = $conn->query($getStatusData);?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Order status</label>
                     <select id="form-control-3" name="lkp_order_status_id" class="custom-select" data-error="This field is required." required>

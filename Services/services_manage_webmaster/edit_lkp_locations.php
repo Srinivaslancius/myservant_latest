@@ -21,7 +21,7 @@ if (!isset($_POST['submit']))  {
   for($i=0;$i<$count;$i++) {
     $location_name = $_POST['location_name'][$i];
     $id = $_POST['location_id'][$i];
-    $sql = "UPDATE lkp_locations SET lkp_state_id = '$lkp_state_id',lkp_district_id ='$lkp_district_id',lkp_city_id ='$lkp_city_id',lkp_pincode_id ='$lkp_pincode_id',location_name = '$location_name',lkp_status_id ='$lkp_status_id' WHERE id = '$lkp_pincode_id' ";
+    $sql = "UPDATE lkp_locations SET lkp_state_id = '$lkp_state_id',lkp_district_id ='$lkp_district_id',lkp_city_id ='$lkp_city_id',lkp_pincode_id ='$lkp_pincode_id',location_name = '$location_name',lkp_status_id ='$lkp_status_id' WHERE id = '$id' ";
     $res = $conn->query($sql);
     //$i++;
   }

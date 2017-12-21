@@ -195,13 +195,13 @@
 
 							<?php if($getCount->num_rows == 0) {
 							$service_tax += ($getSiteSettingsData['service_tax']/100)*$cartTotal; ?>
-							<li class="clearfix"><span class="col">Service Tax</span><span class="col" >Rs. <?php echo $service_tax; ?>(<?php echo $getSiteSettingsData['service_tax'] ; ?>%)</span>
-							</li>	
+							<!-- <li class="clearfix"><span class="col">Service Tax</span><span class="col" >Rs. <?php echo $service_tax; ?>(<?php echo $getSiteSettingsData['service_tax'] ; ?>%)</span>
+							</li> -->	
 							<?php } ?>
 
 							<input type="hidden" name="service_tax" id="service_tax" value="<?php echo $service_tax; ?>">
 
-							<li class="clearfix total"><span class="col">Order Total</span><span class="col">Rs. <span class="grand_total"><?php echo $cartTotal+$service_tax; ?></span>/-</span>
+							<li class="clearfix total"><span class="col">Order Total</span><span class="col">Rs. <span class="grand_total"><?php echo $cartTotal; ?></span>/-</span>
 							</li>
 							
 						</ul>
