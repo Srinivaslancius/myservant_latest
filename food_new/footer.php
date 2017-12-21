@@ -41,6 +41,7 @@
                 <div id="message-newsletter_2">
                 </div>
                 <?php 
+                if(!empty($_POST['email']) )  {
                 $email = $_POST['email'];
                 $created_at = date("Y-m-d h:i:s");
 
@@ -50,6 +51,7 @@
                     } else {
                        echo "<script type='text/javascript'>window.location='food_banners.php?msg=fail'</script>";
                     }
+                }
                 ?>
                 
                 <form method="post" action="" name="newsletter_2">
