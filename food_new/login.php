@@ -49,7 +49,16 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
-
+    <style type="text/css">
+    .btn-info{
+    padding-left:60px;
+    padding-right:60px;
+	}
+	.btn-primary{
+    padding-left:50px;
+    padding-right:50px;
+	}
+    </style>
 </head>
 <body>
 <!--[if lte IE 8]>
@@ -118,18 +127,27 @@
 	</div>
 	<div class="col-md-5 wow fadeIn" data-wow-delay="0.1s">
 			<div class="feature">
-				<form class="popup-form" method="POST">
+				<form action="#" class="popup-form" id="myLogin">
 				<center> <h2 class="nomargin_top" style="color:#f26226">Login</h2></center>
 					<hr class="more_margin">
-                <!--	<center><div class="login_icon"><i class="icon_lock_alt"></i></div></center>-->
+					<div class="row">
+					<div class="col-sm-6 col-xs-6">
+					  <button type="button" class="btn btn-primary"><span class=" icon-facebook-1"></span>Facebook</button>
+					</div>
+					<div class="col-sm-6 col-xs-6">
+					<button type="button" class="btn btn-info"><span class="icon-twitter-2"></span>Twitter</button>
+					</div>
+					</div><br>
+					<p style="text-align:center">(OR)</p>
 					<form action="#" class="popup-form" id="myLogin">
 					<input type="text" class=" form-control " name="login_email" placeholder="Email or Mobile" required>
 					<input type="password" class=" form-control" name="login_password" placeholder="Password" required>
 					<div class="text-left">
 						<a href="forgot_password.php">Forgot Password?</a>
 					</div>
-					<button type="submit" name="login" class="btn btn-submit">Sign in</button>
-				</form>				
+					<button type="submit" name="login" class="btn btn-submit">SIGN IN</button>
+				</form>
+				</form>
 			</div>
 		</div>
 		<div class="col-md-5 wow fadeIn" data-wow-delay="0.1s">
