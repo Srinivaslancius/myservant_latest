@@ -79,8 +79,15 @@ if (!isset($_POST['submit']))  {
   $working_hours1 = $_POST['working_hours1'];
   $contact_numbers = $_POST['contact_numbers'];
   $email_id = $_POST['email_id'];
-  $sub_category_id = $_POST['sub_category_id'];
-  $sub_category_id1 = $_POST['sub_category_id1'];
+
+  $lkp_state_id = $_POST['lkp_state_id'];
+  $lkp_district_id = $_POST['lkp_district_id'];
+  $lkp_city_id = $_POST['lkp_city_id'];
+  $lkp_pincode_id = $_POST['lkp_pincode_id'];
+  $lkp_location_id = $_POST['lkp_location_id'];
+
+  $sub_category_id = implode(',',$_POST["sub_category_id"]);
+  $sub_category_id1 = implode(',',$_POST["sub_category_id1"]);
   $associate_or_not = $_POST['associate_or_not'];
   $experience = $_POST['experience'];
   $created_at = date("Y-m-d h:i:s");
@@ -97,7 +104,7 @@ if (!isset($_POST['submit']))  {
     $specialization_name1 = 0;
   }
   
-  $service_provider = "INSERT INTO service_provider_registration (`name`, `email`, `mobile_number`, `address`,`service_provider_type_id`,`created_at`) VALUES ('$name', '$email', '$mobile_number', '$address','$service_provider_type_id', '$created_at')";
+  $service_provider = "INSERT INTO service_provider_registration (`name`, `email`, `mobile_number`, `lkp_state_id`, `lkp_district_id`, `lkp_city_id`, `lkp_pincode_id`, `lkp_location_id`, `address`,`service_provider_type_id`,`created_at`) VALUES ('$name', '$email', '$mobile_number','$lkp_state_id','$lkp_district_id','$lkp_city_id','$lkp_pincode_id','$lkp_location_id', '$address','$service_provider_type_id', '$created_at')";
   $result1 = $conn->query($service_provider);
   $last_id = $conn->insert_id;
 
@@ -185,6 +192,49 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
 
+                  <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Choose your State</label>
+                    <select name="lkp_state_id" class="form-control" data-error="This field is required." required onChange="getDistricts(this.value);">
+                      <option value="">Select State</option>
+                      <?php while($row = $getStates->fetch_assoc()) {  ?>
+                          <option value="<?php echo $row['id']; ?>" ><?php echo $row['state_name']; ?></option>
+                      <?php } ?>
+                   </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Choose your District</label>
+                    <select name="lkp_district_id" id="lkp_district_id" class="form-control" data-error="This field is required." required onChange="getCities(this.value);">
+                      <option value="">Select District</option>
+                   </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Choose your City</label>
+                    <select name="lkp_city_id" id="lkp_city_id" class="form-control" data-error="This field is required." required onChange="getPincodes(this.value);">
+                      <option value="">Select City</option>
+                   </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Choose your Pincode</label>
+                    <select name="lkp_pincode_id" id="lkp_pincode_id" class="form-control" data-error="This field is required." required onChange="getLocations(this.value);">
+                      <option value="">Select Pincode</option>
+                   </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Choose your Locations</label>
+                    <select name="lkp_location_id" id="lkp_location_id" class="form-control" data-error="This field is required." required>
+                      <option value="">Select Locations</option>
+                   </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Address</label>
                     <textarea name="address" class="form-control" id="category_description" placeholder="Address" data-error="Please enter Address." required></textarea>
@@ -263,8 +313,8 @@ if (!isset($_POST['submit']))  {
 
                   <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                   <div class="form-group">
-                    <label for="form-control-3" class="control-label">Choose your Specialization</label><br>
-                    <select name="sub_category_id" class="custom-select service_provider_business" id="sub_category_id" data-error="This field is required."style="width:100%;height:38px">
+                    <label for="form-control-3" class="control-label">Choose your Specialization</label>
+                    <select name="sub_category_id[]" class="form-control service_provider_business" multiple="multiple" id="sub_category_id" data-error="This field is required.">
                       <option value="">Select Specialization</option>
                       <?php while($row = $getSubCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['sub_category_name']; ?></option>
@@ -300,8 +350,8 @@ if (!isset($_POST['submit']))  {
 
                   <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                   <div class="form-group">
-                    <label for="form-control-3" class="control-label">Choose your Specialization</label><br>
-                    <select name="sub_category_id1" class="custom-select service_provider_personal" id="sub_category_id1" data-error="This field is required." style="width:100%;height:38px">
+                    <label for="form-control-3" class="control-label">Choose your Specialization</label>
+                    <select name="sub_category_id1[]" class="form-control service_provider_personal chosen" multiple="multiple" id="sub_category_id1" data-error="This field is required.">
                       <option value="">Select Specialization</option>
                       <?php while($row = $getSubCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['sub_category_name']; ?></option>
@@ -467,6 +517,48 @@ if (!isset($_POST['submit']))  {
           });          
         }
       }
+    </script>
+    <script type="text/javascript">
+    function getDistricts(val) { 
+        $.ajax({
+        type: "POST",
+        url: "services_manage_webmaster/get_districts.php",
+        data:'lkp_state_id='+val,
+        success: function(data){
+            $("#lkp_district_id").html(data);
+        }
+        });
+    }
+    function getCities(val) { 
+        $.ajax({
+        type: "POST",
+        url: "services_manage_webmaster/get_cities.php",
+        data:'lkp_district_id='+val,
+        success: function(data){
+            $("#lkp_city_id").html(data);
+        }
+        });
+    }
+    function getPincodes(val) { 
+        $.ajax({
+        type: "POST",
+        url: "services_manage_webmaster/get_pincodes.php",
+        data:'lkp_city_id='+val,
+        success: function(data){
+            $("#lkp_pincode_id").html(data);
+        }
+        });
+    }
+    function getLocations(val) { 
+        $.ajax({
+        type: "POST",
+        url: "services_manage_webmaster/get_locations.php",
+        data:'lkp_pincode_id='+val,
+        success: function(data){
+            $("#lkp_location_id").html(data);
+        }
+        });
+    }
     </script>
 </body>
 
