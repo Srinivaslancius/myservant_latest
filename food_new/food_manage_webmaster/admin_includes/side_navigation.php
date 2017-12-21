@@ -92,7 +92,7 @@
             </li>
               </ul>
             </li>
-            <li class="with-sub">
+            <!-- <li class="with-sub">
               <a href="#" aria-haspopup="true">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-pin zmdi-hc-fw"></i>
@@ -110,11 +110,9 @@
                 <li  class="<?php if($page_name == 'lkp_cities.php' || $page_name == 'add_lkp_cities.php' || $page_name == 'edit_lkp_cities.php' ) { echo "active"; } ?>">
                 <a href="lkp_cities.php">Cities</a>
                 </li>
-                <!-- <li  class="<?php if($page_name == 'lkp_locations.php' || $page_name == 'add_lkp_locations.php' || $page_name == 'edit_lkp_locations.php' ) { echo "active"; } ?>">
-                <a href="lkp_locations.php" >Locations</a>
-                </li>  -->
+                
               </ul>
-            </li>
+            </li> -->
             <li  class="<?php if($page_name == 'food_brand_logos.php' || $page_name == 'add_food_brand_logos.php' || $page_name == 'edit_food_brand_logos.php' ) { echo "active"; } ?>">
               <a href="food_brand_logos.php" aria-haspopup="true">
                 <span class="menu-icon">
@@ -161,14 +159,14 @@
                 <span class="menu-text">Testimonials</span>
               </a>
             </li> -->
-           <li  class="<?php if($page_name == 'customer_enquireis.php' ) { echo "active"; } ?>">
+           <!-- <li  class="<?php if($page_name == 'customer_enquireis.php' ) { echo "active"; } ?>">
               <a href="customer_enquireis.php" aria-haspopup="true">
                 <span class="menu-icon">
                    <i class="zmdi zmdi-collection-image zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Customer Enquireis</span>
               </a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>

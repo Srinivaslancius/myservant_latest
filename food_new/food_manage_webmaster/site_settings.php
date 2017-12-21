@@ -9,7 +9,8 @@
     $id=1;
     $admin_title = $_POST['admin_title'];  
     $email = $_POST['email'];
-    
+    $google_analytics_code  = $_POST['google_analytics_code'];
+    $service_tax = $_POST['service_tax'];
     $mobile = $_POST['mobile'];    
     $footer_text = $_POST['footer_text'];
     $open_timings = $_POST['open_timings'];
@@ -31,7 +32,7 @@
         $getImgUnlink = getImageUnlink('logo','food_site_settings','id',$id,$target_dir);
         //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
         if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
-            $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title', email='$email', mobile='$mobile', logo = '$logo',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
+            $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax',email='$email', mobile='$mobile', logo = '$logo',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
             } else {
@@ -42,7 +43,7 @@
             echo "Sorry, there was an error uploading your file.";
         }
     }  else {
-        $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title', email='$email', mobile='$mobile',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
+        $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax', email='$email', mobile='$mobile',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
         if($conn->query($sql) === TRUE){
            echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
         } else {
@@ -80,7 +81,10 @@
                     <input type="text" name="mobile" class="form-control" id="form-control-2"  placeholder="Mobile" data-error="Please enter valid Mobile." value="<?php echo $getSiteSettingsData['mobile'];?>" onkeypress="return isNumberKey(event)" maxlength="10" pattern="[0-9]{10}" required>
                     <div class="help-block with-errors"></div>
                   </div>
-                  
+                  <div class="form-group">
+                    <label for="form-control-4" class="control-label">Google Analytics Code</label>
+                    <textarea type="text" name="google_analytics_code" class="form-control" id="form-control-2" placeholder="Google Analytics Code" data-error="This field is required." required><?php echo $getSiteSettingsData['google_analytics_code'];?></textarea>
+                  </div>
                   <div class="form-group">
                     <img src="<?php echo $base_url . 'uploads/logo/'.$getSiteSettingsData['logo'] ?>" accept="image/*" height="100" width="100" id="output"/>
                   </div>
@@ -92,7 +96,11 @@
                         <input name="logo" id="form-control-22" class="file-upload-input" type="file" multiple="multiple" onchange="loadFile(event)" accept="image/*">
                       </label>
                   </div>
-
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Service Tax</label>
+                    <input type="text" name="service_tax" class="form-control" id="form-control-2" placeholder="Service Tax" data-error="Please enter valid Service Tax." value="<?php echo $getSiteSettingsData['service_tax'];?>" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Footer Text</label>
                     <input type="text" name="footer_text" class="form-control" id="form-control-2" placeholder="Footer Text" data-error="Please enter valid Footer text." value="<?php echo $getSiteSettingsData['footer_text'];?>" required>
