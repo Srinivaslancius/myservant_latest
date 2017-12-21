@@ -122,6 +122,25 @@
               </a>
             </li>
             
+            <li class="with-sub">
+              <a href="#" aria-haspopup="true">
+                <span class="menu-icon">
+                  <i class="zmdi zmdi-shopping-cart-plus zmdi-hc-fw"></i>
+                </span>
+                <span class="menu-text">Orders</span>
+              </a>
+              <ul class="sidebar-submenu collapse">
+                <li class="menu-subtitle">Orders</li>
+                <li  class="<?php if($page_name == 'food_orders.php' || $page_name == 'add_food_orders.php' || $page_name == 'edit_food_orders.php' ) { echo "active"; } ?>"><a href="food_orders.php">Orders</a>
+                </li>
+                <li  class="<?php if($page_name == 'food_failed_orders.php' || $page_name == 'edit_food_failed_orders.php' ) { echo "active"; } ?>"><a href="food_failed_orders.php">Failed Orders</a>
+                </li>
+                <li  class="<?php if($page_name == 'food_cancelled_orders.php' ) { echo "active"; } ?>"><a href="food_cancelled_orders.php">Cancelled Orders</a>
+                </li>
+                <li  class="<?php if($page_name == 'food_today_orders.php' ) { echo "active"; } ?>"><a href="food_today_orders.php">Today Orders</a>
+                </li> 
+              </ul>
+            </li>
             
             <!-- <li  class="<?php if($page_name == 'food_sub_category.php' || $page_name == 'add_food_sub_category.php' || $page_name == 'edit_food_sub_category.php' ) { echo "active"; } ?>">
               <a href="food_sub_category.php" aria-haspopup="true">

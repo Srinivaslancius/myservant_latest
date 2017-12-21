@@ -44,26 +44,27 @@
                               <div class="col-sm-4">Title:</div>
                               <div class="col-sm-6"><?php echo $row['title'];?></div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                               <div class="col-sm-2"></div>
                               <div class="col-sm-4">Banner Type:</div>
                               <div class="col-sm-6"><?php if($row['lkp_banner_type_id'] == 1 ){ echo "Category";} else{ echo "Normal";}?></div>
-                            </div>
-                            <div class="row">
+                            </div> -->
+                            <!-- <div class="row">
                               <?php $getFoodCategories = getAllDataWithStatus('food_category','0'); ?>
                               <div class="col-sm-2"></div>
                               <div class="col-sm-4">Service Category:</div>
-                              <div class="col-sm-6"><?php while($getFoodCategories1 = $getFoodCategories->fetch_assoc()) { if($row['service_category_id'] == $getFoodCategories1['id']) { echo $getFoodCategories1['category_name']; } } ?></div>
+                              <div class="col-sm-6"><?php while($getFoodCategories1 = $getFoodCategories->fetch_assoc()) { if($row['food_category_id'] == $getFoodCategories1['id']) { echo $getFoodCategories1['category_name']; } } ?></div>
+                            </div> -->
+                            
+                            <div class="row">
+                              <div class="col-sm-2"></div>
+                              <div class="col-sm-4">Status:</div>
+                              <div class="col-sm-6"><?php if($row['lkp_status_id'] == 0 ){ echo "Active";} else{ echo "InActive";}?></div>
                             </div>
                             <div class="row">
                               <div class="col-sm-2"></div>
                               <div class="col-sm-4">Banner:</div>
                               <div class="col-sm-6"><img src="<?php echo $base_url . 'uploads/food_banner_images/'.$row['banner'] ?>" height="100" width="100"/></div>
-                            </div>
-                            <div class="row">
-                              <div class="col-sm-2"></div>
-                              <div class="col-sm-4">Status:</div>
-                              <div class="col-sm-6"><?php if($row['lkp_status_id'] == 0 ){ echo "Active";} else{ echo "InActive";}?></div>
                             </div>
                           </div>
                           <div class="modal-footer">

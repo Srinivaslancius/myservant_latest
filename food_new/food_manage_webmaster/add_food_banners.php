@@ -5,8 +5,6 @@ if (!isset($_POST['submit']))  {
   echo "fail";
 }else  {
   //If success
-  $lkp_banner_type_id = $_POST['lkp_banner_type_id'];
-  $food_category_id = $_POST['food_category_id'];
   $title = $_POST['title'];
   $lkp_status_id = $_POST['lkp_status_id'];
   $fileToUpload = $_FILES["fileToUpload"]["name"];
@@ -18,7 +16,7 @@ if (!isset($_POST['submit']))  {
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        $sql = "INSERT INTO food_banners (`lkp_banner_type_id`, `food_category_id`,`title`,`banner`,`lkp_status_id`) VALUES ('$lkp_banner_type_id', '$food_category_id', '$title','$fileToUpload', '$lkp_status_id')"; 
+        $sql = "INSERT INTO food_banners ( `title`,`banner`,`lkp_status_id`) VALUES ('$title','$fileToUpload', '$lkp_status_id')"; 
         if($conn->query($sql) === TRUE){
            echo "<script type='text/javascript'>window.location='food_banners.php?msg=success'</script>";
         } else {
@@ -56,30 +54,6 @@ if (!isset($_POST['submit']))  {
                       </label>
                   </div>
 
-                  <?php $getBannerTypes = getAllDataWithStatus('lkp_banner_types','0');?>
-                  <div class="form-group">
-                    <label for="form-control-4" class="control-label">Banner Type</label>
-                    <div class="radio">
-                      <?php while($row = $getBannerTypes->fetch_assoc()) {  ?>
-                      <label>
-                        <input name="lkp_banner_type_id" id="lkp_banner_type_id" value="<?php echo $row['id']; ?>" type="radio" required ><?php echo $row['banner_type']; ?>
-                      </label>
-                      <?php } ?>
-                    </div>
-                  </div>
-
-                  <?php $getFoodCategories = getAllDataWithStatus('food_category','0');?>
-                  <div class="form-group" id="food_category_id">
-                    <label for="form-control-3" class="control-label">Choose your Food Category</label>
-                    <select name="food_category_id" class="custom-select" >
-                      <option value="">Select Food Category</option>
-                      <?php while($row = $getFoodCategories->fetch_assoc()) {  ?>
-                          <option value="<?php echo $row['id']; ?>"><?php echo $row['category_name']; ?></option>
-                      <?php } ?>
-                   </select>
-                    <div class="help-block with-errors"></div>
-                  </div>
-                  
                   <?php $getStatus = getAllData('lkp_status');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your status</label>

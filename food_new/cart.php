@@ -20,7 +20,87 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+	<style>
+	.btn-group button {
+    background-color:  #fe6003;
+    border: 1px solid  #fe6003;
+    color: white;
+    padding: 10px 24px; 
+    cursor: pointer;
+    float: left;
+}
 
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.btn-group button:not(:last-child) {
+    border-right: none; 
+}
+.radio {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.radio input {
+    position: absolute;
+    opacity: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #eee; 
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radio:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.radio input:checked ~ .checkmark {
+    background-color: #fe6003;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.radio input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.radio .checkmark:after {
+    left: 5px;
+    top: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+	background: white;
+}
+th{
+	font-size:15px;
+}
+</style>
 </head>
 
 <body>
@@ -41,35 +121,14 @@
 
     <!-- Header ================================================== -->
     <header>
-        <?php include_once './header.php';?>
+        <?php include_once 'header.php';?>
     </header>
     <!-- End Header =============================================== -->
 
 <!-- SubHeader =============================================== -->
-<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
+<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
-    	<div id="sub_content">
-    	 <h1>Place your order</h1>
-            <div class="bs-wizard">
-                <div class="col-xs-4 bs-wizard-step active">
-                  <div class="text-center bs-wizard-stepnum"><strong>1.</strong> Your details</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="#0" class="bs-wizard-dot"></a>
-                </div>
-                               
-                <div class="col-xs-4 bs-wizard-step disabled">
-                  <div class="text-center bs-wizard-stepnum"><strong>2.</strong> Payment</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="checkout.php" class="bs-wizard-dot"></a>
-                </div>
-            
-              <div class="col-xs-4 bs-wizard-step disabled">
-                  <div class="text-center bs-wizard-stepnum"><strong>3.</strong> Finish!</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="finsl.php" class="bs-wizard-dot"></a>
-                </div>  
-		</div><!-- End bs-wizard --> 
-        </div><!-- End sub_content -->
+		
 	</div><!-- End subheader -->
 </section><!-- End section -->
 <!-- End SubHeader ============================================ -->
@@ -77,235 +136,152 @@
     <div id="position">
         <div class="container">
             <ul>
-                <li><a href="#0">Home</a></li>
-                <li><a href="#0">Category</a></li>
-                <li>Page active</li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="#0">Cart</a></li>                
             </ul>
             
         </div>
     </div><!-- Position -->
-
+<?php
+    if($_SESSION['CART_TEMP_RANDOM'] == "") {
+        $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
+    }
+    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
+    if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
+        $user_session_id = $_SESSION['user_login_session_id'];
+        $cartItems1 = "SELECT * FROM food_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' ";
+        $cartItems = $conn->query($cartItems1);
+    } else {
+        $cartItems = getAllDataWhere('food_cart','session_cart_id',$session_cart_id);
+    } 
+?>
 <!-- Content ================================================== -->
-<div class="container margin_60_35">
-		<div class="row">
-			<div class="col-md-3">
-            
-				<div class="box_style_2 hidden-xs info">
-					<h4 class="nomargin_top">Delivery time <i class="icon_clock_alt pull-right"></i></h4>
-					<p>
-						Lorem ipsum dolor sit amet, in pri partem essent. Qui debitis meliore ex, tollit debitis conclusionemque te eos.
-					</p>
-					<hr>
-					<h4>Secure payment <i class="icon_creditcard pull-right"></i></h4>
-					<p>
-						Lorem ipsum dolor sit amet, in pri partem essent. Qui debitis meliore ex, tollit debitis conclusionemque te eos.
-					</p>
-				</div><!-- End box_style_1 -->
-                
-				<div class="box_style_2 hidden-xs" id="help">
-					<i class="icon_lifesaver"></i>
-					<h4>Need <span>Help?</span></h4>
-					<a href="tel://004542344599" class="phone">+45 423 445 99</a>
-					<small>Monday to Friday 9.00am - 7.30pm</small>
-				</div>
-                
-			</div><!-- End col-md-3 -->
-            
-			<div class="col-md-6">
-				<div class="box_style_2" id="order_process">
-					<h2 class="inner">Your order details</h2>
-					<div class="form-group">
-						<label>First name</label>
-						<input type="text" class="form-control" id="firstname_order" name="firstname_order" placeholder="First name">
-					</div>
-					<div class="form-group">
-						<label>Last name</label>
-						<input type="text" class="form-control" id="lastname_order" name="lastname_order" placeholder="Last name">
-					</div>
-					<div class="form-group">
-						<label>Telephone/mobile</label>
-						<input type="text" id="tel_order" name="tel_order" class="form-control" placeholder="Telephone/mobile">
-					</div>
-					<div class="form-group">
-						<label>Email</label>
-						<input type="email" id="email_booking_2" name="email_order" class="form-control" placeholder="Your email">
-					</div>
-					<div class="form-group">
-						<label>Your full address</label>
-						<input type="text" id="address_order" name="address_order" class="form-control" placeholder=" Your full address">
-					</div>
-					<div class="row">
-						<div class="col-md-6 col-sm-6">
-							<div class="form-group">
-								<label>City</label>
-								<input type="text" id="city_order" name="city_order" class="form-control" placeholder="Your city">
-							</div>
-						</div>
-						<div class="col-md-6 col-sm-6">
-							<div class="form-group">
-								<label>Postal code</label>
-								<input type="text" id="pcode_oder" name="pcode_oder" class="form-control" placeholder=" Your postal code">
-							</div>
-						</div>
-					</div>
+	<div class="container margin_60_35">
+		<div class="row">     
+		<?php if($cartItems->num_rows > 0) { ?>  			
+			<div class="col-md-12">
+				<div class="box_style_2" id="main_menu">                  
+					<table class="table table-striped cart-list">
+					<thead>
+						<tr>
+							<th>ITEM</th>							
+							<th>PRICE</th>
+							<th>SOMTHING</th>
+							<th>TOTAL</th>
+							<th>REMOVE</th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php $cartTotal = 0; $service_tax = 0;
+                          while ($getCartItems = $cartItems->fetch_assoc()) {
+                    ?>
+					<tr>
+						<td>
+							<?php $getProductDetails= getIndividualDetails('food_products','id',$getCartItems['food_item_id']); ?>
+                        	<figure class="thumb_menu_list"><img src="<?php echo $base_url . 'uploads/food_product_images/'.$getProductDetails['product_image']; ?>" alt="<?php echo $getProductDetails['product_name']; ?>"></figure>                        	
+							<h5><?php echo $getProductDetails['product_name']; ?></h5>							
+						</td>
+						<td>Rs. <?php echo $getCartItems['item_price']; ?></td>
+						<td>
+                           <a href="#" data-toggle="modal" data-target="#<?php echo $getCartItems['id']; ?>"><i class="icon_plus_alt2" style="font-size:25px"></i></a>
+							<div class="modal fade" id="<?php echo $getCartItems['id']; ?>" role="dialog">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											  <div class="row">
+												  <div class="col-sm-6">
+												  <h4 class="modal-title" style="font-size:15px"><small>Add On's:</small><br><?php echo $getProductDetails['product_name']; ?></h4>
+												  </div>
+												   <div class="col-sm-6">
+													<div class="btn-group">
+													  <button style="background-color:#f5f5f5;border-color:#f5f5f5;color:black">Total:₹ <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?></button>
+													  <button>Update Cart</button>					  
+													</div>
+												   </div>
+											  </div>
+										</div>
+
+										<?php $getIngredenats = getAllDataWhere('food_product_ingredient_prices','product_id',$getCartItems['food_item_id']); ?>
+										<div class="modal-body">
+											<div class="row">
+												<div class="col-sm-1">
+												</div>
+												<div class="col-sm-5">
+													<label class="radio">
+														<h4 style="font-size:15px">Extra Pepper <span style="padding-left:50px;">Rs:150/-</span></h4>
+														<input type="checkbox">
+														<span class="checkmark"></span>
+													</label>
+												</div>												
+												<div class="col-sm-1">
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+										  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>                        
+						</td>
+						<td>Rs. <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?> /-</td>
+						<?php $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?>
+						<td><i class=" icon-trash" style="font-size:25px;color:#fe6003"></li></td>
+					</tr>
+                     <?php } ?>
+					</tbody>
+					</table>
 					
-					<hr>
-					<div class="row">
-						<div class="col-md-12">
-				
-								<label>Notes for the restaurant</label>
-								<textarea class="form-control" style="height:150px" placeholder="Ex. Allergies, cash change..." name="notes" id="notes"></textarea>
-				
-						</div>
+				</div>
+			</div>
+            <div class="col-md-9"></div>
+			<div class="col-md-3">
+				<div class="theiaStickySidebar">
+					<div id="cart_box" >
+						<table class="table table_summary">
+						<tbody>
+						<tr>
+							<td>Subtotal <span class="pull-right">Rs. <?php echo $cartTotal; ?></span></td>
+						</tr>						
+						<?php $service_tax += ($getFoodSiteSettingsData['service_tax']/100)*$cartTotal; ?>
+						<tr>
+							<td>Service Tax <span class="pull-right">Rs. <?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span></td>
+						</tr>
+						
+						<tr>
+							<td>Delivery fee <span class="pull-right">Rs. <?php echo $getFoodSiteSettingsData['delivery_charges'] ; ?></span> </td>
+
+						</tr>
+						<tr>
+							<td style="color:#fe6003">TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?></span></td>
+						</tr>
+						</tbody>
+						</table>
+						<hr>
+						<a class="btn_full" href="cart.php">Order now</a>
+						<a class="btn_full_outline" href="menu.php">Continue <i class="icon-left"></i></a>
 					</div>
-				</div><!-- End box_style_1 -->
-			</div><!-- End col-md-6 -->
-            
-			<div class="col-md-3" id="sidebar">
-            	<div class="theiaStickySidebar">
-				<div id="cart_box">
-					<h3>Your order <i class="icon_cart_alt pull-right"></i></h3>
-					<table class="table table_summary">
-					<tbody>
-					<tr>
-						<td>
-							<a href="#0" class="remove_item"><i class="icon_plus_alt"></i></a> <strong>1x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> Enchiladas
-						</td>
-						<td>
-							<strong class="pull-right">Rs. 11</strong>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="#0" class="remove_item"><i class="icon_plus_alt"></i></a> <strong>1x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> Burrito
-						</td>
-						<td>
-							<strong class="pull-right">Rs. 14</strong>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="#0" class="remove_item"><i class="icon_plus_alt"></i></a> <strong>1x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> Chicken
-						</td>
-						<td>
-							<strong class="pull-right">Rs.20</strong>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="#0" class="remove_item"><i class="icon_plus_alt"></i></a> <strong>1x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> Corona Beer
-						</td>
-						<td>
-							<strong class="pull-right">Rs.9</strong>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="#0" class="remove_item"><i class="icon_plus_alt"></i></a> <strong>1x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> Cheese Cake
-						</td>
-						<td>
-							<strong class="pull-right">Rs.12</strong>
-						</td>
-					</tr>
-					</tbody>
-					</table>
-					<hr>
-					<div class="row" id="options_2">
-						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="" checked name="option_2" class="icheck">Delivery</label>
-						</div>
-						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="" name="option_2" class="icheck">Take Away</label>
-						</div>
-					</div><!-- Edn options 2 -->
-					<hr>
-					<table class="table table_summary">
-					<tbody>
-					<tr>
-						<td>
-							 Subtotal <span class="pull-right">Rs.56</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 Delivery fee <span class="pull-right">Rs.10</span>
-						</td>
-					</tr>
-                                        <tr>
-						<td>
-							 Service Tax <span class="pull-right">Rs.10</span>
-						</td>
-					</tr>
-					<tr>
-						<td class="total">
-							 TOTAL <span class="pull-right">Rs. 76</span>
-						</td>
-					</tr>
-					</tbody>
-					</table>
-					<hr>
-					<a class="btn_full" href="checkout.php">Go to checkout</a>
-                                        <a class="btn_full_outline" href="menu.php"><i class="icon-right"></i> Add other items</a>
-				</div><!-- End cart_box -->
-                </div><!-- End theiaStickySidebar -->
-			</div><!-- End col-md-3 -->
+				</div>
+			</div>
+			<?php }  else { ?>
+    			<p style="text-align:center; color:#f26226">No Items In Your Cart</p>
+    			<center><a href="index.php" style="color:#f26226">Click here for Items</a></center>
+    		<?php } ?>
             
 		</div><!-- End row -->
 </div><!-- End container -->
 <!-- End Content =============================================== -->
 
 <!-- Footer ================================================== -->
-	<footer>
+    <footer>
         <?php include_once 'footer.php';?>
     </footer>
 <!-- End Footer =============================================== -->
 
 <div class="layer"></div><!-- Mobile menu overlay mask -->
-
-<!-- Login modal -->   
-<div class="modal fade" id="login_2" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<form action="#" class="popup-form" id="myLogin">
-                	<div class="login_icon"><i class="icon_lock_alt"></i></div>
-					<input type="text" class="form-control form-white" placeholder="Username">
-					<input type="text" class="form-control form-white" placeholder="Password">
-					<div class="text-left">
-						<a href="#">Forgot Password?</a>
-					</div>
-					<button type="submit" class="btn btn-submit">Submit</button>
-				</form>
-			</div>
-		</div>
-	</div><!-- End modal -->   
     
-<!-- Register modal -->   
-<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<form action="#" class="popup-form" id="myRegister">
-                	<div class="login_icon"><i class="icon_lock_alt"></i></div>
-					<input type="text" class="form-control form-white" placeholder="Name">
-					<input type="text" class="form-control form-white" placeholder="Last Name">
-                    <input type="email" class="form-control form-white" placeholder="Email">
-                    <input type="text" class="form-control form-white" placeholder="Password"  id="password1">
-                    <input type="text" class="form-control form-white" placeholder="Confirm password"  id="password2">
-                    <div id="pass-info" class="clearfix"></div>
-					<div class="checkbox-holder text-left">
-						<div class="checkbox">
-							<input type="checkbox" value="accept_2" id="check_2" name="check_2" />
-							<label for="check_2"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
-						</div>
-					</div>
-					<button type="submit" class="btn btn-submit">Register</button>
-				</form>
-			</div>
-		</div>
-	</div><!-- End Register modal -->
-    
-     <!-- Search Menu -->
+    <!-- Search Menu -->
 	<div class="search-overlay-menu">
 		<span class="search-overlay-close"><i class="icon_close"></i></span>
 		<form role="search" id="searchform" method="get">
@@ -323,11 +299,25 @@
 <script src="assets/validate.js"></script>
 
 <!-- SPECIFIC SCRIPTS -->
+<script  src="js/cat_nav_mobile.js"></script>
+<script>$('#cat_nav').mobileMenu();</script>
 <script src="js/theia-sticky-sidebar.js"></script>
 <script>
     jQuery('#sidebar').theiaStickySidebar({
       additionalMarginTop: 80
     });
+</script>
+<script>
+$('#cat_nav a[href^="#"]').on('click', function (e) {
+			e.preventDefault();
+			var target = this.hash;
+			var $target = $(target);
+			$('html, body').stop().animate({
+				'scrollTop': $target.offset().top - 70
+			}, 900, 'swing', function () {
+				window.location.hash = target;
+			});
+		});
 </script>
 
 </body>

@@ -68,29 +68,9 @@ if (!isset($_POST['submit'])) {
                         <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload" id="fileToUpload"  onchange="loadFile(event)"  multiple="multiple" >
                       </label>
                   </div>
-                  <?php $getBannerTypes = getAllDataWithStatus('lkp_banner_types','0');?>
-                  <div class="form-group">
-                    <label for="form-control-3" class="control-label">Choose your Banner Types</label>
-                      <div class="radio">
-                        <?php while($getBannerTypes1 = $getBannerTypes->fetch_assoc()) {  ?>
-                        <label>
-                          <input name="lkp_banner_type_id" id="lkp_banner_type_id" value="<?php echo $getBannerTypes1['id']; ?>" type="radio" <?php if($getBannersData['lkp_banner_type_id']  == $getBannerTypes1['id']){ echo "checked=checked"; }?> required><?php echo $getBannerTypes1['banner_type']; ?>
-                        </label>
-                        <?php } ?>
-                      </div>
-                    <div class="help-block with-errors"></div>
-                  </div>
-                  <?php $getServicesCategories = getAllDataWithStatus('food_category','0');?>
-                  <div class="form-group" id="food_category_id">
-                    <label for="form-control-3" class="control-label">Choose your Services Categories</label>
-                    <select id="form-control-3" name="food_category_id" class="custom-select" data-error="This field is required.">
-                      <option value="">Select Services Categories</option>
-                      <?php while($row = $getServicesCategories->fetch_assoc()) {  ?>
-                          <option <?php if($row['id'] == $getBannersData['food_category_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['category_name']; ?></option>
-                      <?php } ?>
-                    </select>
-                    <div class="help-block with-errors"></div>
-                  </div>
+                  
+                  
+                 
                   <?php $getStatus = getAllData('lkp_status');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your status</label>

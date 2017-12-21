@@ -10,6 +10,7 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
     $ProductWeighType = $_POST['item_weight'];
     $restId = $_POST['rest_id'];
     $removeItemCheckPro = $_POST['item_remove'];
+    $ProductCategoryId = $_POST['item_cat_id'];
 
     if($_SESSION['CART_TEMP_RANDOM'] == "") {
 
@@ -42,7 +43,8 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
         $upCart = $conn->query($updateItems);
     } else {
         $itemPrevQuantity = 1;
-        $saveItems = "INSERT INTO `food_cart`(`session_cart_id`, `food_item_id`, `item_price`, `item_quantity`, `item_weight_type_id`, `restaurant_id`) VALUES ('$session_cart_id','$ProductId','$ProductPrice','$itemPrevQuantity', '$ProductWeighType', '$restId')";
+        $created_at = date('Y-m-d H:i:s', time() + 24 * 60 * 60);
+        $saveItems = "INSERT INTO `food_cart`(`session_cart_id`, `food_item_id`, `item_price`, `item_quantity`, `item_weight_type_id`, `restaurant_id`, `food_category_id`, `created_at`) VALUES ('$session_cart_id','$ProductId','$ProductPrice','$itemPrevQuantity', '$ProductWeighType', '$restId', '$ProductCategoryId', '$created_at')";
         $saveCart = $conn->query($saveItems);
         //echo $getTotalCount;
     }
@@ -71,16 +73,9 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
     }
 
     echo '<hr>
-          <div class="row" id="options_2">
-            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-              <label><input type="radio" value="2" checked name="option_2" class="icheck">Delivery</label>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-              <label><input type="radio" value="1" name="option_2" class="icheck">Take Away</label>
-            </div>
-          </div><!-- Edn options 2 -->
-                    
-          <hr>
+    <input type="hidden" id="cart_count_items" value="'.$getSelData->num_rows.'">
+          
+               
           <table class="table table_summary">
           <tbody>
           <tr>

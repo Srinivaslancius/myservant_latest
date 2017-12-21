@@ -19,7 +19,34 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+    <style>
+.selectdiv {
+position: relative; 
+}
 
+select::-ms-expand {
+display: none;
+}
+
+.selectdiv select {
+-moz-appearance: none;
+appearance: none;
+/* Add some styling */
+display: block;
+height: 32px;
+float: right;
+margin: 5px 0px;
+padding: 0px 2px;
+font-size: 13px;
+line-height: 1.75;
+color: #333;
+background-color: #ffffff ;
+background-image: none;
+border: 1px solid #fe6003 ;
+-ms-word-break: normal;
+word-break: normal;
+}
+</style>
 </head>
 
 <body onload="show_cart()">
@@ -163,8 +190,13 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 							<?php $getFirstPrice =  getIndividualDetails('food_product_weight_prices','product_id',$productId); ?>
 							<strong id="get_price_<?php echo $productId; ?>">Rs. <?php echo $getFirstPrice['product_price']; ?></strong>							
 						</td>
+
+
 						<td>
+							<div class="selectdiv">
+							<label>
 							<input type="hidden" id="item_price_<?php echo $productId; ?>" name="item_price" value="<?php echo $getFirstPrice['product_price']; ?>">
+							<input type="hidden" id="item_category_id_<?php echo $productId; ?>" name="item_category_id" value="<?php echo $getItemsByCategory['category_id']; ?>">
 							<?php $getWeightTypes = getAllDataWhere('food_product_weight_prices','product_id',$productId); ?>
 							<select name="item_weight_type" id="item_weight_type_<?php echo $productId; ?>" class="get_product_id" data-key-product-id="<?php echo $productId?>" >
 		                      <?php while($getWeightType = $getWeightTypes->fetch_assoc()) {  ?>
@@ -172,6 +204,8 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 		                          <option value="<?php echo $getWeightType['weight_type_id']; ?>"><?php echo $getWeight['weight_type']; ?></option>
 		                      <?php } ?>
 		                   </select>
+							</label>
+							</div>
 						</td>
 						<td id="view_add_cart_btn_">
 							<!-- <a class="btn_full" data-key="<?php echo $productId; ?>"  style="width:74px;">Add</a> -->
@@ -208,14 +242,10 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 					<div id="cart_box">		
 						<h3>Your order <i class="icon_cart_alt pull-right"></i></h3>			
 						<span id="mycart">
-
 						</span>
-						<hr>
-						<?php if(!isset($_SESSION['user_login_session_id'])) { ?>
-						<a href="login.php?cart_id=<?php echo encryptPassword(1);?>" class="btn_full">Order now <i class="icon-left"></i></a>
-						<?php } else { ?>
-                        <a href="checkout.php" class="btn_full">Order now <i class="icon-left"></i></a>
-                        <?php } ?>						
+						<hr>						
+                        <a href="cart.php" class="btn_full order_now">Order now <i class="icon-left"></i></a>
+                        						
 					</div><!-- End cart_box -->
                 </div><!-- End theiaStickySidebar -->
 			</div><!-- End col-md-3 -->
@@ -276,6 +306,7 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 	var ProductPrice = $('#item_price_'+ProductId).val();	
 	var ProductWeighType = $('#item_weight_type_'+ProductId).val();
 	var restaurantId = $('#rest_id').val();
+	var ProductCategoryId = $('#item_category_id_'+ProductId).val();	
 
 	var removeItemCheck = $(this).attr("data-key-check");
 	if(removeItemCheck == "remove") {
@@ -292,9 +323,11 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 	     item_weight:ProductWeighType,	     
 	     item_remove:removeItemCheckPro,
 	     rest_id:restaurantId,
+	     item_cat_id:ProductCategoryId,
 	  },
-	  success:function(response) {  	
-	    document.getElementById("mycart").innerHTML=response;
+	  success:function(response) {  
+      	$('.order_now').removeAttr("style");
+      	document.getElementById("mycart").innerHTML=response;
 	    //$("#mycart").slideToggle();
 	  }
 	 });
@@ -366,6 +399,7 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 
 function show_cart() {
 	var restaurantId = $('#rest_id').val();
+
     $.ajax({
       type:'post',
       url:'show_cart_items.php',
@@ -374,8 +408,14 @@ function show_cart() {
         rest_id:restaurantId,
       },
       success:function(response) {
-      	//alert(response);  
-        document.getElementById("mycart").innerHTML=response;
+      	//alert(response);        	
+        document.getElementById("mycart").innerHTML=response;   
+        //alert($('#cart_count_items').val());
+      	var myVar = $('#cart_count_items').val();
+      	if(typeof myVar=="undefined") {
+      		$('.order_now').css({"pointer-events": "none", "cursor": "not-allowed", "background-color": "#d4d4d4"});
+      	} else {		
+      	}     
         //$("#mycart").slideToggle();
       }
      });   
