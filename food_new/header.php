@@ -22,7 +22,7 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                     <p>Customer Care: <a href="Tel:<?php echo $getFoodSiteSettingsData['mobile']; ?>"><?php echo $getFoodSiteSettingsData['mobile']; ?></a> Toll Free (24*7)</p>
                 </div>
                 <div class="col-md-1 col-xs-12">
-                <?php if($_SESSION['user_login_session_id'] =='') { ?>
+                   <?php if($_SESSION['user_login_session_id'] =='') { ?>
                     <p><a href="login.php">Login</a></p>
                 <?php } else { ?>
                     <p><a href="my_dashboard.php"><?php echo $_SESSION['user_login_session_name']; ?></a> | 
@@ -42,16 +42,20 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
         </div>
         <div class="row myseranr_header">
             <div class="col--md-3 col-sm-3 col-xs-12">
+                <?php  
+                if(!empty($getFoodSiteSettingsData['logo'])) { ?>
                 <a href="index.php" id="logo">
                 <img src="<?php echo $base_url . 'uploads/logo/'.$getFoodSiteSettingsData['logo'] ?>" alt="<?php echo $getFoodSiteSettingsData['admin_title']; ?>" data-retina="true" class="hidden-xs myservanrlogo">
-                
+                <?php } else { ?>
+                <center><img src="img/logo-mobile.png"  alt="" data-retina="true" class="hidden-lg hidden-md hidden-sm"></center>
+                <?php }?>
                 </a>
             </div>
             <div class="col-md-6 col-xs-9">
                 <form method="post" action="list.php" autocomplete="off">
                     <div id="custom-search-input">
                         <div class="input-group">
-                            <input type="text" class=" search-query" placeholder="Your Address or postal code" required name="searchKey" id="search-box" style="background-color:#f5f5f5">
+                            <input type="text" class=" search-query" placeholder="Your Address or postal code" required name="searchKey" id="search-box">
                             <div id="suggesstion-box"></div>
                             <span class="input-group-btn">
                             <input type="submit" class="btn_search" value="submit" name="searchFood">
@@ -60,9 +64,11 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                     </div>
                 </form>
             </div>
-                <div class="col-md-3 col-xs-3">
-                    <img src="img/cart.png" width="40" height="40" class="img-responsive pull-right" alt="">(<?php echo $cartItems->num_rows; ?>)
-                </div>
+
+             <div class="col-md-2 col-xs-2">
+             </div>
+            <div class="col-md-1 col-xs-1">
+                <button type="button" class="btn btn-danger" style="background-color:transparent;border-color:white"><span class=" icon-cart" style="font-size:18px"></span> <span class="badge" style="font-size:10px">(<?php echo $cartItems->num_rows; ?>)</span></button> 
             </div>
         </div><!-- End row -->
     </div><!-- End container -->
