@@ -1,6 +1,8 @@
 <?php $getContentPageData = getAllDataWhere('food_content_pages','id',1);
           $getAboutUsData = $getContentPageData->fetch_assoc();
 ?>
+
+
         <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-3">
@@ -38,12 +40,24 @@
                 </p>
                 <div id="message-newsletter_2">
                 </div>
-                <form method="post" action="" name="newsletter_2" id="newsletter_2">
-                    <div class="form-group">
-                        <input name="email" id="email" type="email" value="" placeholder="Your mail" class="form-control">
-                    </div>
-                    <input type="submit" value="Subscribe" class="btn_1" id="submit-newsletter_2">
-                </form>
+                <?php 
+                $email = $_POST['email'];
+                $created_at = date("Y-m-d h:i:s");
+
+                $sql = "INSERT INTO food_newsletter (`email`, `created_at`) VALUES ('$email','$created_at')";
+                    if($conn->query($sql) === TRUE){
+                       echo "<script type='text/javascript'>alert('Data Updated Successfully');</script>";
+                    } else {
+                       echo "<script type='text/javascript'>window.location='food_banners.php?msg=fail'</script>";
+                    }
+                ?>
+                
+                <form method="post" action="" name="newsletter_2">
+                   <div class="form-group">
+                       <input  type="email" name="email" value="" placeholder="Your mail" class="form-control" required>
+                   </div>
+                   <input type="submit" value="Subscribe" class="btn_1" >
+               </form>
             </div>
          <!--   <div class="col-md-2 col-sm-3">
                 <h3>Settings</h3>
