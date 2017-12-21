@@ -10,8 +10,9 @@ if (!isset($_POST['submit'])) {
 } else {
     //If success            
   $assign_service_provider_id = $_POST['assign_service_provider_id'];
+  $service_provider_note = $_POST['service_provider_note'];
   
-  $sql = "UPDATE `services_orders` SET assign_service_provider_id = '$assign_service_provider_id' WHERE id = '$assign_id' AND sub_category_id = '$subcat_id'";
+  $sql = "UPDATE `services_orders` SET assign_service_provider_id = '$assign_service_provider_id',service_provider_note = '$service_provider_note' WHERE id = '$assign_id' AND sub_category_id = '$subcat_id'";
   if($conn->query($sql) === TRUE){
      echo "<script type='text/javascript'>window.location='view_category_orders.php?order_id=$order_id&msg=success'</script>";
   } else {
@@ -107,6 +108,11 @@ if (!isset($_POST['submit'])) {
                       <option <?php if($getServiceProviderData['id'] == $getServiceOrdersData['assign_service_provider_id']) { echo "Selected"; } ?> value="<?php echo $getServiceProviderData['id']; ?>"><?php echo $getServiceProviderData['name']; ?></option>
                       <?php } ?>
                     </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Service Provider Note</label>
+                    <input type="text" name="service_provider_note" class="form-control" id="form-control-2" value="<?php echo $getServiceOrdersData['service_provider_note'] ?>" placeholder="Service Provider Note" data-error="Please enter Service Provider Note." required>
                     <div class="help-block with-errors"></div>
                   </div>
                   <button type="submit" name="submit" class="btn btn-primary btn-block">Submit</button>

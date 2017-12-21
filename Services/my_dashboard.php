@@ -91,13 +91,59 @@
             <?php $uid=$_SESSION['user_login_session_id']; ?>
             <div class="col-xs-8 bhoechie-tab">
                 <!-- My orders section -->
-                <div class="bhoechie-tab-content active">
+                <div class="bhoechie-tab-content active total_order_details">
+                    
                     <div class="row">
-                        <div class="col-sm-12" id="faq-result">                            
-                            <?php include('getresult.php'); ?>                           
+
+                         <div class="col-sm-12 total_orders_new">
+                         </div>
+
+                        <div class="col-sm-12 total_orders">  
+                        <?php 
+                        $getOrders = "SELECT * from services_orders WHERE user_id = '$uid' ORDER BY id DESC LIMIT 3";
+                        $getOrders1 = $conn->query($getOrders);
+                        if($getOrders1->num_rows > 0) { 
+                    ?>                          
+                            <?php 
+                            while($orderData = $getOrders1->fetch_assoc()) { ?> 
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" style="border-bottom:0px">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p style="color:#f26226"><b>ORDER PLACED</b></p>
+                                                <p><?php echo $orderData['created_at']; ?></p>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <p style="color:#f26226"><b>Order Price</b></p>
+                                                <p>Rs.<?php echo $orderData['order_price']; ?></p>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <p style="color:#f26226"><b>SHIP TO</b></p>
+                                                <p><?php echo $orderData['first_name']; ?><br><?php echo $orderData['address']; ?></p>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <p style="color:#f26226"><b>ORDER ID:</b></p>
+                                                <p><?php echo $orderData['order_sub_id']; ?></p><br>
+                                                <div class="row">
+                                                
+                                                <div class="col-sm-5">
+                                                <a href="view_orders.php?token=<?php echo $orderData['order_sub_id']; ?>" class="btn_1 outline" style="border-color:#f26226;padding:2px 10px;text-transform:capitalize">Details</a>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                <a href="track_order_details.php?token=<?php echo $orderData['order_sub_id']; ?>" class="btn_1 outline" style="border-color:#f26226;padding:2px 10px;text-transform:capitalize">Track</a>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                            
+                                </div> 
+                            <?php } ?>
                         </div>
-                        <div id="loader-icon"><img src="LoaderIcon.gif" /></div>
                     </div>
+                    <a class="btn_full load_more" user-id ="<?php echo $_SESSION['user_login_session_id']; ?>">Load More</a>
+                    <?php } else { echo "<h3 style='text-align:center;'>Sorry! Items Not found</h3>"; } ?>
                 </div>
                 <!-- Account settings section -->
                 <div class="bhoechie-tab-content">
@@ -193,34 +239,24 @@
             });
         </script>
         <script>
-$(document).ready(function(){
-    function getresult(url) {
-        $.ajax({
-            url: url,
-            type: "GET",
-            data:  {rowcount:$("#rowcount").val()},
-            beforeSend: function(){
-            $('#loader-icon').show();
-            },
-            complete: function(){
-            $('#loader-icon').hide();
-            },
-            success: function(data){
-            $("#faq-result").append(data);
-            },
-            error: function(){}             
-       });
-    }
-    $(window).scroll(function(){
-        if ($(window).scrollTop() == $(document).height() - $(window).height()){
-            if($(".pagenum:last").val() <= $(".total-page").val()) {
-                var pagenum = parseInt($(".pagenum:last").val()) + 1;
-                getresult('getresult.php?page='+pagenum);
-            }
-        }
-    }); 
-});
-</script>
+            $(document).ready(function() {
+                $(".total_orders_new").css("display", "none");
+                $('.load_more').on('click', function () {
+                    $('.load_more').hide();
+                    var user_id = $(this).attr("user-id");
+                    $.ajax({
+                    type:"post",
+                    url:"total_order_details.php",          
+                    data:'user_id='+user_id,
+                    success:function(html){                          
+                        $(".total_orders").css("display", "none");
+                         $(".total_orders_new").css("display", "block");
+                        $(".total_orders_new").append(html);
+                    }
+                  }); 
+                });
+            });
+        </script>
 </body>
 
 </html>

@@ -412,6 +412,7 @@
                			$("#coupon_code").val('');
                			$(".form-control-clear").html('');
                		} else{
+               			$('#coupon_code').attr('readonly','true');
                			var data = value.split(",");
 		          		$('#cart_total2').html(data[0]);
 			            $('#order_total').val(data[0]);

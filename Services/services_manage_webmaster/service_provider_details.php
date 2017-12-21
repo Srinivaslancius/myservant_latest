@@ -101,9 +101,14 @@ $content .='<!DOCTYPE html>
   	if($getServicePersonalProviderDetails['sub_category_id'] == 0) { 
       	$specialization_name = $getServicePersonalProviderDetails['specialization_name']; 
       } else {
-      	$getSpecialization = getIndividualDetails('services_sub_category','id',$getServicePersonalProviderDetails['sub_category_id']);
-      	$specialization_name = $getSpecialization['sub_category_name'];
+        $getSubCategoryTypeId = explode(',',$getServicePersonalProviderDetails['sub_category_id']);
+        $getSubCategories = getAllDataWithStatus('services_sub_category','0');
+        while($row = $getSubCategories->fetch_assoc()) {
+          if($row['id'] == in_array($row['id'], $getSubCategoryTypeId)) {
+      	   $specialization_name = $row['sub_category_name'];
+         }
       }
+    }
   	$content .= '<tr>
       <td style="border-bottom:1px solid gray"></td>
     <td colspan="2" style="border-bottom:1px solid gray"><h5 style="color:#f26226;text-align:center"><b>SERVICE PROVIDER PERSONAL DETAILS</b></h5></td>
@@ -121,7 +126,7 @@ $content .='<!DOCTYPE html>
      <td style="color:#f26226"></td>
      <td></td>
       </tr>';
-  }
+    }
   $content .= '</tbody>
   </table>
 </div>

@@ -1,5 +1,4 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
-<link rel="stylesheet" href="css/chosen.min.css">
 <?php  
 error_reporting(1);
 $id = $_GET['registrationid'];
@@ -263,8 +262,8 @@ if (!isset($_POST['submit']))  {
                     $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                     <div class="form-group">
                       <label for="form-control-3" class="control-label">Choose your Specialization</label>
-                      <select name="sub_category_id[]" class="custom-select" multiple="multiple" id="sub_category_id" data-error="This field is required." required>
-                        <option value="">Select Specialization</option>
+                      <select name="sub_category_id[]" class="custom-select multi_select" multiple="multiple" id="sub_category_id" data-error="This field is required." required="true" >
+                        <!-- <option value="">Select Specialization</option> -->
                         <?php while($row = $getSubCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == in_array($row['id'], $getSubCategoryTypeId)) { echo "selected=selected"; }?> ><?php echo $row['sub_category_name']; ?></option>
                       <?php } ?>
@@ -308,8 +307,8 @@ if (!isset($_POST['submit']))  {
                     $getSubCategories1 = getAllDataWithStatus('services_sub_category','0');?>
                     <div class="form-group">
                       <label for="form-control-3" class="control-label">Choose your Specialization</label>
-                      <select name="sub_category_id1[]" class="custom-select chosen" id="sub_category_id1" multiple="multiple" data-error="This field is required." required>
-                        <option value="">Select Specialization</option>
+                      <select name="sub_category_id1[]" class="custom-select multi_select" id="sub_category_id1" multiple="multiple" data-error="This field is required." required>
+                        <!-- <option value="">Select Specialization</option> -->
                         <?php while($row1 = $getSubCategories1->fetch_assoc()) {  ?>
                           <option value="<?php echo $row1['id']; ?>" <?php if($row1['id'] == in_array($row1['id'], $getSubCategoryTypeId1)) { echo "selected=selected"; } ?> ><?php echo $row1['sub_category_name']; ?></option>
                       <?php } ?>
@@ -354,7 +353,7 @@ if (!isset($_POST['submit']))  {
 <!-- Script for Service Probiders -->
 <script type="text/javascript">
   $(document).ready(function () { 
-
+      $(".multi_select").attr("required", "true");
     if ($("#service_provider_type_id").val() == 'Business') {
       $('#service_provider_business_type').show();
       $('#service_provider_personal_type').hide();
@@ -420,7 +419,4 @@ if (!isset($_POST['submit']))  {
     $box.prop("checked", false);
   }
 });
-</script>
-<script type="text/javascript">
-      $(".chosen").chosen();
 </script>

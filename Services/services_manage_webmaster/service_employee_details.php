@@ -33,7 +33,7 @@ $content .='<!DOCTYPE html>
     <thead>
       <tr>
         <th style="border-bottom:1px solid gray"><img src="'.$img.'" style="height:50px"></th>
-        <th colspan="2" style="border-bottom:1px solid gray"><h4 style="color:#f26226;text-align:center"><b>SERVICE PROVIDER DETAILS</b></h4></th>
+        <th colspan="2" style="border-bottom:1px solid gray"><h4 style="color:#f26226;text-align:center"><b>SERVICE EMPLOYEE DETAILS</b></h4></th>
     <th style="border-bottom:1px solid gray"></th>
       </tr>
     </thead>

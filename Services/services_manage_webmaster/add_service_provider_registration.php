@@ -239,8 +239,8 @@ if (!isset($_POST['submit']))  {
                   <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Specialization</label>
-                    <select name="sub_category_id[]" class="custom-select service_provider_business" multiple="multiple" id="sub_category_id" data-error="This field is required.">
-                      <option value="">Select Specialization</option>
+                    <select name="sub_category_id[]" class="custom-select service_provider_business multi_select" multiple="multiple" id="sub_category_id" data-error="This field is required.">
+                      <!-- <option value="">Select Specialization</option> -->
                       <?php while($row = $getSubCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['sub_category_name']; ?></option>
                       <?php } ?>
@@ -276,8 +276,8 @@ if (!isset($_POST['submit']))  {
                   <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Specialization</label>
-                    <select name="sub_category_id1[]" class="custom-select service_provider_personal chosen" multiple="multiple" id="sub_category_id1" data-error="This field is required.">
-                      <option value="">Select Specialization</option>
+                    <select name="sub_category_id1[]" class="custom-select service_provider_personal multi_select" multiple="multiple" id="sub_category_id1" data-error="This field is required.">
+                      <!-- <option value="">Select Specialization</option> -->
                       <?php while($row = $getSubCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['sub_category_name']; ?></option>
                       <?php } ?>
@@ -321,6 +321,7 @@ if (!isset($_POST['submit']))  {
 <!-- Script for Service Probiders -->
 <script type="text/javascript">
   $(document).ready(function () { 
+    $(".multi_select").attr("required", "true");
     $('#service_provider_business_type, #service_provider_personal_type,#specialization_name,#specialization_name1').hide();
     $('.service_provider_type_id').change(function() {
 

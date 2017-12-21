@@ -183,10 +183,15 @@ th{
 						</td>
 						<td>Rs. <?php echo $getCartItems['item_price']; ?></td>
 						<td>
+
+						<?php $getIngredenats = getAllDataWhere('food_product_ingredient_prices','product_id',$getCartItems['food_item_id']); ?>
+
                            <a href="#" data-toggle="modal" data-target="#<?php echo $getCartItems['id']; ?>"><i class="icon_plus_alt2" style="font-size:25px"></i></a>
 							<div class="modal fade" id="<?php echo $getCartItems['id']; ?>" role="dialog">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
+
+										<?php if($getIngredenats->num_rows > 0) { ?>
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											  <div class="row">
@@ -201,23 +206,29 @@ th{
 												   </div>
 											  </div>
 										</div>
-
-										<?php $getIngredenats = getAllDataWhere('food_product_ingredient_prices','product_id',$getCartItems['food_item_id']); ?>
+										
 										<div class="modal-body">
-											<div class="row">
-												<div class="col-sm-1">
-												</div>
-												<div class="col-sm-5">
-													<label class="radio">
-														<h4 style="font-size:15px">Extra Pepper <span style="padding-left:50px;">Rs:150/-</span></h4>
-														<input type="checkbox">
-														<span class="checkmark"></span>
-													</label>
-												</div>												
-												<div class="col-sm-1">
-												</div>
-											</div>
-										</div>
+                                           <div class="row">
+                                               <div class="col-sm-1">
+                                               </div>
+                                               <div class="col-sm-10  col-xs-12">
+                                               	<?php while ($getIngProdItems = $getIngredenats->fetch_assoc()) { ?>
+                                               	<?php $getInDet= getIndividualDetails('food_ingredients','id',$getIngProdItems['ingredient_name_id']); ?>
+                                                   <label class="radio" style="margin-bottom:20px">
+                                                       <h4 style="font-size:15px"><?php echo $getInDet['ingredient_name']; ?><span style="padding-left:50px">Rs:<?php echo $getIngProdItems['ingredient_price']; ?></span></h4>
+                                                       <input type="checkbox">
+                                                       <span class="checkmark"></span>
+                                                   </label>
+                                                <?php } ?>
+                                               </div>
+                                               <div class="col-sm-1">
+                                               </div>
+                                           </div>
+                                        </div>
+										
+										<?php } ?>
+										
+
 										<div class="modal-footer">
 										  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 										</div>
