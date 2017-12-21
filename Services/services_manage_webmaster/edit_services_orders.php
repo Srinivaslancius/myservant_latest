@@ -14,7 +14,12 @@ if (!isset($_POST['submit'])) {
   $lkp_payment_status_id = $_POST['lkp_payment_status_id'];
   $order_total = $_POST['order_total'];
   $delivery_date = date("Y-m-d h:i:s");
-  $service_tax = $getSiteSettingsData['service_tax'];
+
+  if($_POST['service_tax'] == 0) {
+    $service_tax = $getSiteSettingsData['service_tax'];
+  } else {
+    $service_tax = 0;
+  }
 
 //Update total and price when payment status success and order status completed
 if($lkp_payment_status_id == 1 AND $lkp_order_status_id == 2) {
@@ -114,6 +119,7 @@ if($lkp_payment_status_id == 1 AND $lkp_order_status_id == 2) {
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <form data-toggle="validator" method="POST" autocomplete="off" enctype="multipart/form-data">
                   <input type="hidden" name="order_total" value="<?php echo $getServiceOrdersData['order_total'];?>">
+                  <input type="hidden" name="service_tax" value="<?php echo $getServiceOrdersData['service_tax'];?>">
                   <input type="hidden" name="service_price_type_id" value="<?php echo $getServiceOrdersData['service_price_type_id'];?>">
                   <input type="hidden" name="service_quantity" value="<?php echo $getServiceOrdersData['service_quantity'];?>">
                   <div class="form-group">
