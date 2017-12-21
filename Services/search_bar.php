@@ -1,16 +1,21 @@
-<?php if (isset($_POST['search'])) {
+<?php ob_start(); ?>
+<?php if(isset($_POST['search'])) {
+
   $cat_id = $_POST['id'];
   if($_POST['id'] == '0' && $_POST['service_name'] == '') {
-    header("Location: services.php");
-    exit; 
+    //header("Location:services.php");
+    echo '<script>window.location.replace("services.php")</script>';
+   
   } elseif(!empty($_POST['id'])) {
     $cat_id = $_POST['id'];
-    header("Location: sub_categories.php?cat_id=".encryptPassword($cat_id)."");
+    //header("Location:sub_categories.php?cat_id=".encryptPassword($cat_id).""); 
+    echo '<script>window.location.replace("sub_categories.php?cat_id='.encryptPassword($cat_id).'")</script>';
   } elseif(!empty($_POST['service_name'])) {
     $service_name = $_POST['service_name'];
   $getGroupServiceNames = getAllDataWhereWithActive('services_group_service_names','related_tags',$service_name);
   $getGroupServiceNamesData = $getGroupServiceNames->fetch_assoc();
-    header("Location: list.php?sub_cat_id=".encryptPassword($getGroupServiceNamesData['services_sub_category_id'])."");
+    //header("Location:list.php?sub_cat_id=".encryptPassword($getGroupServiceNamesData['services_sub_category_id'])."");
+    echo '<script>window.location.replace("list.php?sub_cat_id='.encryptPassword($getGroupServiceNamesData['services_sub_category_id']).'")</script>';
   }
 }
 ?>

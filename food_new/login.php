@@ -5,6 +5,35 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <?php include_once './meta_fav.php';?>
+    <?php 
+		error_reporting(0);
+
+		$cart_id = decryptPassword($_GET['cart_id']);
+		if(isset($_POST['login']))  { 
+		    //Login here
+		    $user_email = $_POST['login_email'];
+		    $user_password = encryptPassword($_POST['login_password']);
+		    $getLoginData = userLogin($user_email,$user_password);
+		    //Set variable for session
+		    if($getLoggedInDetails = $getLoginData->fetch_assoc()) {
+		    	$last_login_visit = date("Y-m-d h:i:s");
+		    	$login_count = $getLoggedInDetails['login_count']+1;
+		    	$sql = "UPDATE `users` SET login_count='$login_count', last_login_visit='$last_login_visit' WHERE user_email = '$user_email' OR user_mobile = '$user_email' ";
+		    	$row = $conn->query($sql);
+		        $_SESSION['user_login_session_id'] =  $getLoggedInDetails['id'];
+		        $_SESSION['user_login_session_name'] = $getLoggedInDetails['user_full_name'];
+		        $_SESSION['user_login_session_email'] = $getLoggedInDetails['user_email'];
+		        $_SESSION['timestamp'] = time();
+		        $updateCart = "UPDATE `services_cart` SET user_id='".$_SESSION['user_login_session_id']."' WHERE session_cart_id = '".$_SESSION['CART_TEMP_RANDOM']."'";
+				$updateCart1 = $conn->query($updateCart);
+		        if($cart_id == 1) {
+		        	header('Location: checkout.php');
+		        } elseif($_GET['err']!='') { header('Location: index.php'); exit; } else { header('Location: index.php'); exit; }
+		    } else {
+		    	header('Location: login.php?err=log-fail');
+		    }
+		}
+	?>
     <!-- GOOGLE WEB FONT -->
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic,300,300italic' rel='stylesheet' type='text/css'>
 
@@ -59,49 +88,66 @@
         <div class="container">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li>Register</li>
-               
+                <li>Register</li>               
             </ul>
-            <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
+           
         </div>
     </div><!-- Position -->
+    <br />
+ 		<?php if(isset($_GET['err']) && $_GET['err'] == 'log-success' ) {  ?>
+			<div class="col-sm-4"></div>
+       	  	<div class="col-sm-4 alert alert-success" style="display:block">
+		      <strong>Success!</strong> Your Registration Successfully Completed.
+		    </div>
+		<?php }?>
 
+	    <?php if(isset($_GET['err']) && $_GET['err'] == 'log-fail' ) {  ?>
+	    <div class="col-sm-4"></div>
+	    <div class="col-sm-4 alert alert-danger" style="display:block">
+	      <strong>Failed!</strong> Your Login Failed.
+	    </div>
+	    <?php }?>
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
         </div>
+
 	<div class="row">
+		
+
 	<div class="col-md-1">
 	</div>
 	<div class="col-md-5 wow fadeIn" data-wow-delay="0.1s">
 			<div class="feature">
-				<form action="#" class="popup-form" id="myRegister">
+				<form class="popup-form" method="POST">
 				<center> <h2 class="nomargin_top" style="color:#f26226">Login</h2></center>
 					<hr class="more_margin">
                 <!--	<center><div class="login_icon"><i class="icon_lock_alt"></i></div></center>-->
 					<form action="#" class="popup-form" id="myLogin">
-					<input type="text" class="form-control" placeholder="Username">
-					<input type="text" class="form-control" placeholder="Password">
+					<input type="text" class=" form-control " name="login_email" placeholder="Email or Mobile" required>
+					<input type="password" class=" form-control" name="login_password" placeholder="Password" required>
 					<div class="text-left">
-						<a href="#">Forgot Password?</a>
+						<a href="forgot_password.php">Forgot Password?</a>
 					</div>
-					<button type="submit" class="btn btn-submit">Submit</button>
-				</form>
-				</form>
+					<button type="submit" name="login" class="btn btn-submit">Sign in</button>
+				</form>				
 			</div>
 		</div>
 		<div class="col-md-5 wow fadeIn" data-wow-delay="0.1s">
 			<div class="feature">
-				<form action="#" class="popup-form" id="myRegister">
+				<form class="popup-form" autocomplete="off" method="post" action="mobile_otp.php">
 				<center> <h2 class="nomargin_top" style="color:#f26226">Register</h2></center>
 					<hr class="more_margin">
                 <!--	<center><div class="login_icon"><i class="icon_lock_alt"></i></div></center>-->
-					<input type="text" class="form-control" placeholder="Name">
-					<input type="text" class="form-control" placeholder="Last Name">
-                    <input type="email" class="form-control" placeholder="Email">
-                    <input type="text" class="form-control" placeholder="Password"  id="password1">
-                    <input type="text" class="form-control" placeholder="Confirm password"  id="password2">
+					<input type="text" name="user_name" class=" form-control"  placeholder="Name" required>
+					<input type="tel" name="user_mobile" id="user_mobile" class=" form-control valid_mobile_num"  placeholder="Mobile Number" maxlength="10" pattern="[0-9]{10}" onkeyup="checkMobile();" required>
+                    <span id="input_status1" style="color: red;"></span>
+                    <input type="email" name="user_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="user_email" class=" form-control" placeholder="Email" onkeyup="checkEmail();" required>
+                    <span id="input_status" style="color: red;"></span>
+                    <input type="password" name="user_password" class=" form-control" minlength="8" id="user_password" placeholder="Password" required>
+                    <input type="password" name="confirm_password" class=" form-control" minlength="8" id="confirm_password" placeholder="Confirm password" onChange="checkPasswordMatch();" required>
+                    <div id="divCheckPasswordMatch" style="color:red"></div>
                     <div id="pass-info" class="clearfix"></div>					
-					<button type="submit" class="btn btn-submit" style="margin-top:0px">Register</button>
+					<button type="submit" name="register" class="btn btn-submit" style="margin-top:0px">Register</button>
 				</form>
 			</div>
 		</div>
@@ -122,66 +168,83 @@
 <!-- End Footer =============================================== -->
 
 <div class="layer"></div><!-- Mobile menu overlay mask -->
-
-<!-- Login modal -->   
-<div class="modal fade" id="login_2" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<form action="#" class="popup-form" id="myLogin">
-                	<div class="login_icon"><i class="icon_lock_alt"></i></div>
-					<input type="text" class="form-control form-white" placeholder="Username">
-					<input type="text" class="form-control form-white" placeholder="Password">
-					<div class="text-left">
-						<a href="#">Forgot Password?</a>
-					</div>
-					<button type="submit" class="btn btn-submit">Submit</button>
-				</form>
-			</div>
-		</div>
-	</div><!-- End modal -->   
-    
-<!-- Register modal -->   
-<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<form action="#" class="popup-form" id="myRegister">
-                	<div class="login_icon"><i class="icon_lock_alt"></i></div>
-					<input type="text" class="form-control form-white" placeholder="Name">
-					<input type="text" class="form-control form-white" placeholder="Last Name">
-                    <input type="email" class="form-control form-white" placeholder="Email">
-                    <input type="text" class="form-control form-white" placeholder="Password"  id="password1">
-                    <input type="text" class="form-control form-white" placeholder="Confirm password"  id="password2">
-                    <div id="pass-info" class="clearfix"></div>
-					<div class="checkbox-holder text-left">
-						<div class="checkbox">
-							<input type="checkbox" value="accept_2" id="check_2" name="check_2" />
-							<label for="check_2"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
-						</div>
-					</div>
-					<button type="submit" class="btn btn-submit">Register</button>
-				</form>
-			</div>
-		</div>
-	</div><!-- End Register modal -->
-    
-     <!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_close"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon-search-6"></i>
-			</button>
-		</form>
-	</div>
-	<!-- End Search Menu -->
     
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-2.2.4.min.js"></script>
+
+
+<!-- This Script For validations -->
+<script type="text/javascript" src="js/check_number_validations.js"></script>
+
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
 <script src="assets/validate.js"></script>
+
+
+<script type="text/javascript">
+		$(document).ready(function () {
+			'use strict';
+			$('#layerslider').layerSlider({
+				autoStart: true,
+				responsive: true,
+				responsiveUnder: 1280,
+				layersContainer: 1170,
+				skinsPath: 'layerslider/skins/'
+					// Please make sure that you didn't forget to add a comma to the line endings
+					// except the last line!
+			});
+		});		
+    	function checkPasswordMatch() {
+		    var password = $("#user_password").val();
+		    var confirmPassword = $("#confirm_password").val();
+		    if (confirmPassword != password) {
+		        $("#divCheckPasswordMatch").html("Passwords do not match!");
+		        $("#confirm_password").val("");
+		    } else {
+		        $("#divCheckPasswordMatch").html("");
+		    }
+		}
+	    function checkMobile() {
+	        var user_mobile = document.getElementById("user_mobile").value;
+	        if (user_mobile){
+	          $.ajax({
+	          type: "POST",
+	          url: "user_avail_check.php",
+	          data: {
+	            user_mobile:user_mobile,
+	          },
+	          success: function (result) {
+	            if (result > 0){
+	            	$("#input_status1").html("<span style='color:red;'>Mobile Already Exist</span>");
+	        		$('#user_mobile').val('');
+	            } else {
+	              $('#input_status1').html("");
+	            }       
+	            }
+	           });          
+	        }
+	    }
+	    function checkEmail() {
+	        var user_email = document.getElementById("user_email").value;
+	        if (user_email){
+	          $.ajax({
+	          type: "POST",
+	          url: "user_avail_check.php",
+	          data: {
+	            user_email:user_email,
+	          },
+	          success: function (result) {
+	            if (result > 0){
+	            	$("#input_status").html("<span style='color:red;'>Email Already Exist</span>");
+	        		$('#user_email').val('');
+	            } else {
+	              $('#input_status').html("");
+	            }     
+	            }
+	           });          
+	        }
+	    }
+    </script>
 
 </body>
 </html>

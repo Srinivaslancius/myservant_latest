@@ -27,10 +27,13 @@
     </script>
     
 <style>
-#country-list{float:left;list-style:none;margin-top:-3px;padding:0;width:620px;position: absolute}
-#country-list li{padding: 10px; background: #ffffff;}
+#country-list{float:left;list-style:none;margin-top:0px;padding:0;width:628px;position: absolute}
+#country-list li{padding: 10px; background: #ffffff;border-bottom:1px solid #DEDEDE}
 #country-list li:hover{background:#ece3d2;cursor: pointer;}
-#search-box{padding: 10px;border: #a8d4b1 1px solid;border-radius:4px;}
+#search-box{padding: 10px;border: #a8d4b1 1px solid;border-radius:0px;}
+#suggesstion-box{
+    border-radius:30px !important;
+}
 </style>
 
     <!-- End home page search -->
