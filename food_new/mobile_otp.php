@@ -130,25 +130,16 @@
     
 <!-- Register modal -->   
 
-    
-     <!-- Search Menu -->
-    <div class="search-overlay-menu">
-        <span class="search-overlay-close"><i class="icon_close"></i></span>
-        <form role="search" id="searchform" method="get">
-            <input value="" name="q" type="search" placeholder="Search..." />
-            <button type="submit"><i class="icon-search-6"></i>
-            </button>
-        </form>
-    </div>
-    <!-- End Search Menu -->
-    
-<!-- COMMON SCRIPTS -->
-<script type="text/javascript" src="js/check_number_validations.js"></script>
+
 
 <script src="js/jquery-2.2.4.min.js"></script>
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
 <script src="assets/validate.js"></script>
+
+<!-- COMMON SCRIPTS -->
+<script type="text/javascript" src="js/check_number_validations.js"></script>
+
 <script type="text/javascript">
 
 $('#verify_otp').on('click', function () {
