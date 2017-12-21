@@ -166,7 +166,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 						<td>
 							<input type="hidden" id="item_price_<?php echo $productId; ?>" name="item_price" value="<?php echo $getFirstPrice['product_price']; ?>">
 							<?php $getWeightTypes = getAllDataWhere('food_product_weight_prices','product_id',$productId); ?>
-							<select name="item_weight_type" id="item_weight_type_<?php echo $productId; ?>" class="get_product_id" data-key-product-id="<?php echo $productId?>">
+							<select name="item_weight_type" id="item_weight_type_<?php echo $productId; ?>" class="get_product_id" data-key-product-id="<?php echo $productId?>" >
 		                      <?php while($getWeightType = $getWeightTypes->fetch_assoc()) {  ?>
 		                      <?php $getWeight =  getIndividualDetails('food_product_weights','id',$getWeightType['weight_type_id']); ?>
 		                          <option value="<?php echo $getWeightType['weight_type_id']; ?>"><?php echo $getWeight['weight_type']; ?></option>

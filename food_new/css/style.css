@@ -541,7 +541,7 @@ footer .styled-select {
 #custom-search-input .search-query {
     width: 100%;
     padding: 15px 30px;
-    border: 0;
+    border: 1px solid #dcdcdc;
     /*! -webkit-border-radius: 30px; */
     /*! -moz-border-radius: 30px; */
     /*! border-radius: 30px; */
