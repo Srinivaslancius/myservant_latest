@@ -18,10 +18,10 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                 <div class="col-md-2 col-xs-12">
                     <p>Email: <a href="mailto::<?php echo $getFoodSiteSettingsData['email']; ?>"><?php echo $getFoodSiteSettingsData['email']; ?></a></p>
                 </div>
-                <div class="col-md-9 col-xs-12">
+                <div class="col-md-8 col-xs-12">
                     <p>Customer Care: <a href="Tel:<?php echo $getFoodSiteSettingsData['mobile']; ?>"><?php echo $getFoodSiteSettingsData['mobile']; ?></a> Toll Free (24*7)</p>
                 </div>
-                <div class="col-md-1 col-xs-12">
+                <div class="col-md-2 col-xs-12">
                    <?php if($_SESSION['user_login_session_id'] =='') { ?>
                     <p><a href="login.php">Login</a></p>
                 <?php } else { ?>
