@@ -39,8 +39,8 @@ if (!isset($_POST['submit'])) {
                 <form data-toggle="validator" method="POST" autocomplete="off">
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose Service Name</label>
-                    <select name="service_id[]" class="custom-select" multiple="multiple" data-error="This field is required." required>
-                      <option value="">Select Service Name</option>
+                    <select name="service_id[]" class="custom-select multi_select" multiple="multiple" data-error="This field is required." required>
+                      <!-- <option value="">Select Service Name</option> -->
                       <?php while($row1 = $getServiceNames->fetch_assoc()) {  ?>
                           <option value="<?php echo $row1['id']; ?>" <?php if($row1['id'] == in_array($row1['id'], $getServiceId)) { echo "selected=selected"; } ?> ><?php echo $row1['group_service_name']; ?></option>
                       <?php } ?>
@@ -81,7 +81,7 @@ if (!isset($_POST['submit'])) {
                     </select>
                     <div class="help-block with-errors"></div>
                   </div>
-                  <?php $getPincodes = getAllDataWithStatus('lkp_pincodes','0');
+                  <?php $getPincodes = getAllDataWhereWithActive('lkp_pincodes','lkp_city_id',$getAvailableLocationsData['lkp_city_id']);
                   $getPincodeId = explode(',',$getAvailableLocationsData['pincodes']);
                   $checked = "checked"; ?>
                   <div class="form-group">
@@ -113,5 +113,6 @@ if (!isset($_POST['submit'])) {
       </div>
 <?php include_once 'admin_includes/footer.php'; ?>
 <script type="text/javascript">
+  $(".multi_select").attr("required", "true");
       $(".chosen").chosen();
 </script>
