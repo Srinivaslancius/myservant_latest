@@ -101,7 +101,7 @@ if (!isset($_POST['submit'])) {
                     <label for="form-control-3" class="control-label">Choose Service Provider</label>
                     <select name="assign_service_provider_id" class="custom-select" data-error="This field is required." required>
                       <option value="">Select Service Provider</option>
-                      <?php $getServiceProvider = "SELECT spr.id,spr.name,spr.lkp_status_id FROM service_provider_registration spr LEFT JOIN service_provider_business_registration spb ON spr.id = spb.service_provider_registration_id LEFT JOIN service_provider_personal_registration spp ON spr.id = spp.service_provider_registration_id WHERE spr.lkp_status_id=0 AND ( spb.sub_category_id = '$subcat_id' OR spp.sub_category_id = '$subcat_id'  )";
+                      <?php $getServiceProvider = "SELECT spr.id,spr.name,spr.lkp_status_id FROM service_provider_registration spr LEFT JOIN service_provider_business_registration spb ON spr.id = spb.service_provider_registration_id LEFT JOIN service_provider_personal_registration spp ON spr.id = spp.service_provider_registration_id WHERE spr.lkp_status_id=0 AND ( FIND_IN_SET('$subcat_id', spb.sub_category_id)  OR FIND_IN_SET('$subcat_id', spp.sub_category_id)  )";
                       $getServiceProviderNames = $conn->query($getServiceProvider); 
                       while($getServiceProviderData = $getServiceProviderNames->fetch_assoc()) { ?>
                       <option <?php if($getServiceProviderData['id'] == $getServiceOrdersData['assign_service_provider_id']) { echo "Selected"; } ?> value="<?php echo $getServiceProviderData['id']; ?>"><?php echo $getServiceProviderData['name']; ?></option>
