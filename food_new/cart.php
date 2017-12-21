@@ -183,56 +183,37 @@ th{
 						</td>
 						<td>Rs. <?php echo $getCartItems['item_price']; ?></td>
 						<td>
-                           <a href="#" data-toggle="modal" data-target="#myModal"><i class="icon_plus_alt2" style="font-size:25px"></i></a>
-							<div class="modal fade" id="myModal" role="dialog">
+                           <a href="#" data-toggle="modal" data-target="#<?php echo $getCartItems['id']; ?>"><i class="icon_plus_alt2" style="font-size:25px"></i></a>
+							<div class="modal fade" id="<?php echo $getCartItems['id']; ?>" role="dialog">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											  <div class="row">
 												  <div class="col-sm-6">
-												  <h4 class="modal-title" style="font-size:15px"><small>Customize:</small><br>Tender Coconut Ice Cream</h4>
+												  <h4 class="modal-title" style="font-size:15px"><small>Add On's:</small><br><?php echo $getProductDetails['product_name']; ?></h4>
 												  </div>
 												   <div class="col-sm-6">
 													<div class="btn-group">
-													  <button style="background-color:#f5f5f5;border-color:#f5f5f5;color:black">Total:₹60.00</button>
+													  <button style="background-color:#f5f5f5;border-color:#f5f5f5;color:black">Total:₹ <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?></button>
 													  <button>Update Cart</button>					  
 													</div>
 												   </div>
 											  </div>
 										</div>
+
+										<?php $getIngredenats = getAllDataWhere('food_product_ingredient_prices','product_id',$getCartItems['food_item_id']); ?>
 										<div class="modal-body">
 											<div class="row">
 												<div class="col-sm-1">
 												</div>
 												<div class="col-sm-5">
 													<label class="radio">
-														<h4 style="font-size:15px">Extra Pepper</h4>
-														<input type="checkbox" checked="checked">
-														<span class="checkmark"></span>
-													</label>
-													<label class="radio">
-														<h4 style="font-size:15px">Extra Tomato</h4>
+														<h4 style="font-size:15px">Extra Pepper <span style="padding-left:50px;">Rs:150/-</span></h4>
 														<input type="checkbox">
 														<span class="checkmark"></span>
 													</label>
-													<label class="radio">
-														<h4 style="font-size:15px">Extra Somthing</h4>
-														<input type="checkbox">
-														<span class="checkmark"></span>
-													</label>
-													<label class="radio">
-													    <h4 style="font-size:15px">Extra Pepper</h4>
-														<input type="checkbox">
-														<span class="checkmark"></span>
-													</label>
-												</div>
-												<div class="col-sm-5">
-													<h4 style="font-size:15px">Rs:150/-</h4>
-													<h4 style="font-size:15px">Rs:150/-</h4>
-													<h4 style="font-size:15px">Rs:150/-</h4>
-													<h4 style="font-size:15px">Rs:150/-</h4>
-												</div>
+												</div>												
 												<div class="col-sm-1">
 												</div>
 											</div>
