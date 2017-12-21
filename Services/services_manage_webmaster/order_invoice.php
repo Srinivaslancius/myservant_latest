@@ -30,8 +30,8 @@ if($getOrdersData1['coupon_code'] == '') {
 } else {
 	$discount_money = $getOrdersData1['discount_money']/$ordersCount2;
 }
-$service_tax = $getOrdersData1['order_price']*$getSiteSettingsData['service_tax']/100;
-$order_price = $getOrdersData1['order_price']+$service_tax-$discount_money;
+$service_tax = $getOrdersData1['order_price']*$getOrdersData1['service_quantity']*$getSiteSettingsData['service_tax']/100;
+$order_price = ($getOrdersData1['order_price']*$getOrdersData1['service_quantity'])+($service_tax-$discount_money);
 
 $content .='<!DOCTYPE html>
 <html lang="en">
@@ -68,7 +68,7 @@ $content .='<!DOCTYPE html>
 		<p>Order Date: '.$getOrdersData1['created_at'].'</p>
 		<p>Invoice Date: '.$getOrdersData1['delivery_date'].'</p>
 		<p>Payment method: '.$getPaymentMethodData['status'].'</p>
-		<p></p>
+		<p>Note:'.$getOrdersData1['service_provider_note'].'</p>
 		</td>
 		
         <td colspan="2"><p style="color:#f26226">Billing Address</p>

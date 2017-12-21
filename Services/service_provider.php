@@ -274,7 +274,7 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-4" class="control-label">Logo</label>
-                    <img id="output" height="100" width="100"/>
+                    <!-- <img id="output" height="100" width="100"/> -->
                     <label for="exampleFormControlFile1">                    
                         <input id="form-control-22" class="file-upload-input service_provider_business" type="file" accept="image/*" name="fileToUpload" id="fileToUpload"  onchange="loadFile(event)"  multiple="multiple" >
                       </label>
@@ -375,7 +375,7 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-4" class="control-label">image</label>
-                    <img id="output1" height="100" width="100"/>
+                    <!-- <img id="output1" height="100" width="100"/> -->
                    <label for="exampleFormControlFile1">
                         <input id="form-control-22" class="file-upload-input service_provider_personal" type="file" accept="image/*" name="fileToUpload1" id="fileToUpload1"  onchange="loadFile1(event)"  multiple="multiple" >
                       </label>

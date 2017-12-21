@@ -129,13 +129,13 @@ if (!isset($_POST['submit']))  {
                 <form autocomplete="off" data-toggle="validator" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Title</label>
-                    <input type="text" name="title" class="form-control" id="form-control-2" placeholder="title" data-error="Please enter title" required>
+                    <input type="text" name="title" class="form-control" id="form-control-2" placeholder="Title" data-error="Please enter title" required>
                     <div class="help-block with-errors"></div>
                   </div>
 
                   <div class="form-group">
-                    <label for="form-control-4" class="control-label">Logo</label>
-                    <img id="output" height="100" width="100"/>
+                    <label for="form-control-4" class="control-label">Profile</label>
+                    <!-- <img id="output" height="100" width="100"/> -->
                     <label for="exampleFormControlFile1">                    
                         <input id="form-control-22" class="file-upload-input service_provider_business" type="file" accept="image/*" name="fileToUpload" id="fileToUpload" multiple="multiple" required>
                       </label>
