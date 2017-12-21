@@ -105,7 +105,7 @@ $content .='<!DOCTYPE html>
         $getSubCategories = getAllDataWithStatus('services_sub_category','0');
         while($row = $getSubCategories->fetch_assoc()) {
           if($row['id'] == in_array($row['id'], $getSubCategoryTypeId)) {
-      	   $specialization_name = implode(',',$row['sub_category_name']);
+      	   $specialization_name = $row['sub_category_name'];
          }
       }
     }

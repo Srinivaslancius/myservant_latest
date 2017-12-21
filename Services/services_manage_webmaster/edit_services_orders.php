@@ -30,7 +30,9 @@ if($lkp_payment_status_id == 1 AND $lkp_order_status_id == 2) {
   }
   $updateTotal = "UPDATE `services_orders` SET order_total = '$order_total' WHERE order_id = '$order_id'";
   $updateOrdertotal = $conn->query($updateTotal);
-
+} else {
+  $sql = "UPDATE `services_orders` SET lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id'WHERE id = '$id'";
+    $res = $conn->query($sql);
 }
 
   header("Location:order_invoice.php?id=".$id."");
