@@ -53,7 +53,7 @@
                               <?php $getFoodCategories = getAllDataWithStatus('food_category','0'); ?>
                               <div class="col-sm-2"></div>
                               <div class="col-sm-4">Service Category:</div>
-                              <div class="col-sm-6"><?php while($getFoodCategories1 = $getFoodCategories->fetch_assoc()) { if($row['service_category_id'] == $getFoodCategories1['id']) { echo $getFoodCategories1['category_name']; } } ?></div>
+                              <div class="col-sm-6"><?php while($getFoodCategories1 = $getFoodCategories->fetch_assoc()) { if($row['food_category_id'] == $getFoodCategories1['id']) { echo $getFoodCategories1['category_name']; } } ?></div>
                             </div>
                             <div class="row">
                               <div class="col-sm-2"></div>
