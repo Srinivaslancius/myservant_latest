@@ -121,7 +121,14 @@
                 <span class="menu-text">Brand Logos</span>
               </a>
             </li>
-            
+            <li  class="<?php if($page_name == 'food_orders.php' || $page_name == 'add_food_orders.php' || $page_name == 'edit_food_orders.php' ) { echo "active"; } ?>">
+              <a href="food_orders.php" aria-haspopup="true">
+                <span class="menu-icon">
+                  <i class="zmdi zmdi-shopping-cart-plus zmdi-hc-fw"></i>
+                </span>
+                <span class="menu-text">Orders</span>
+              </a>
+            </li>
             
             <!-- <li  class="<?php if($page_name == 'food_sub_category.php' || $page_name == 'add_food_sub_category.php' || $page_name == 'edit_food_sub_category.php' ) { echo "active"; } ?>">
               <a href="food_sub_category.php" aria-haspopup="true">
