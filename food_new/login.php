@@ -127,7 +127,7 @@
 	</div>
 	<div class="col-md-5 wow fadeIn" data-wow-delay="0.1s">
 			<div class="feature">
-				<form action="#" class="popup-form" id="myLogin">
+				<form method="POST" class="popup-form">
 				<center> <h2 class="nomargin_top" style="color:#f26226">Login</h2></center>
 					<hr class="more_margin">
 					<div class="row">
@@ -138,15 +138,13 @@
 					<button type="button" class="btn btn-info"><span class="icon-twitter-2"></span>Twitter</button>
 					</div>
 					</div><br>
-					<p style="text-align:center">(OR)</p>
-					<form action="#" class="popup-form" id="myLogin">
+					<p style="text-align:center">(OR)</p>					
 					<input type="text" class=" form-control " name="login_email" placeholder="Email or Mobile" required>
 					<input type="password" class=" form-control" name="login_password" placeholder="Password" required>
 					<div class="text-left">
 						<a href="forgot_password.php">Forgot Password?</a>
 					</div>
-					<button type="submit" name="login" class="btn btn-submit">SIGN IN</button>
-				</form>
+					<button type="submit" name="login" class="btn btn-submit">SIGN IN</button>				
 				</form>
 			</div>
 		</div>
