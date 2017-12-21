@@ -34,8 +34,8 @@
                   <?php $getServiceNames = getAllDataWithStatus('services_group_service_names','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose Service Name</label>
-                    <select name="service_id[]" class="custom-select" multiple="multiple" data-error="This field is required." required>
-                      <option value="">Select Service Name</option>
+                    <select name="service_id[]" class="custom-select multi_select" multiple="multiple" data-error="This field is required." required>
+                      <!-- <option value="">Select Service Name</option> -->
                       <?php while($row = $getServiceNames->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>"><?php echo $row['group_service_name']; ?></option>
                       <?php } ?>
@@ -98,6 +98,7 @@
       </div>
 <?php include_once 'admin_includes/footer.php'; ?>
 <script>
+  $(".multi_select").attr("required", "true");
   function getPincodes1(val) { 
         $.ajax({
         type: "POST",
