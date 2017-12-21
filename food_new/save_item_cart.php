@@ -73,10 +73,10 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
     echo '<hr>
           <div class="row" id="options_2">
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-              <label><input type="radio" value="" checked name="option_2" class="icheck">Delivery</label>
+              <label><input type="radio" value="2" checked name="option_2" class="icheck">Delivery</label>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-              <label><input type="radio" value="" name="option_2" class="icheck">Take Away</label>
+              <label><input type="radio" value="1" name="option_2" class="icheck">Take Away</label>
             </div>
           </div><!-- Edn options 2 -->
                     

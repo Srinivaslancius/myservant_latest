@@ -22,7 +22,12 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                     <p>Customer Care: <a href="Tel:<?php echo $getFoodSiteSettingsData['mobile']; ?>"><?php echo $getFoodSiteSettingsData['mobile']; ?></a> Toll Free (24*7)</p>
                 </div>
                 <div class="col-md-1 col-xs-12">
+                <?php if($_SESSION['user_login_session_id'] =='') { ?>
                     <p><a href="login.php">Login</a></p>
+                <?php } else { ?>
+                    <p><a href="my_dashboard.php"><?php echo $_SESSION['user_login_session_name']; ?></a> | 
+                    <a href="logout.php"> Logout</a></p>
+                <?php } ?>
                 </div>
             </div> 
         </div>
@@ -46,7 +51,7 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                 <form method="post" action="list.php" autocomplete="off">
                     <div id="custom-search-input">
                         <div class="input-group">
-                            <input type="text" class=" search-query" placeholder="Your Address or postal code" required name="searchKey" id="search-box">
+                            <input type="text" class=" search-query" placeholder="Your Address or postal code" required name="searchKey" id="search-box" style="background-color:#f5f5f5">
                             <div id="suggesstion-box"></div>
                             <span class="input-group-btn">
                             <input type="submit" class="btn_search" value="submit" name="searchFood">
