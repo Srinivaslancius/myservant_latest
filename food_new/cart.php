@@ -196,7 +196,7 @@ th{
 												   <div class="col-sm-6">
 													<div class="btn-group">
 													  <button style="background-color:#f5f5f5;border-color:#f5f5f5;color:black">Total:₹60.00</button>
-													  <button>Add to cart</button>					  
+													  <button>Update Cart</button>					  
 													</div>
 												   </div>
 											  </div>
