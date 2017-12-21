@@ -213,9 +213,9 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 						</span>
 						<hr>
 						<?php if(!isset($_SESSION['user_login_session_id'])) { ?>
-						<a href="login.php?cart_id=<?php echo encryptPassword(1);?>" class="btn_full">Order now <i class="icon-left"></i></a>
+						<a href="login.php?cart_id=<?php echo encryptPassword(1);?>" class="btn_full order_now">Order now <i class="icon-left"></i></a>
 						<?php } else { ?>
-                        <a href="checkout.php" class="btn_full">Order now <i class="icon-left"></i></a>
+                        <a href="checkout.php" class="btn_full order_now">Order now <i class="icon-left"></i></a>
                         <?php } ?>						
 					</div><!-- End cart_box -->
                 </div><!-- End theiaStickySidebar -->
@@ -296,8 +296,9 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 	     rest_id:restaurantId,
 	     item_cat_id:ProductCategoryId,
 	  },
-	  success:function(response) {  	
-	    document.getElementById("mycart").innerHTML=response;
+	  success:function(response) {  
+      	$('.order_now').removeAttr("style");
+      	document.getElementById("mycart").innerHTML=response;
 	    //$("#mycart").slideToggle();
 	  }
 	 });
@@ -369,6 +370,7 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 
 function show_cart() {
 	var restaurantId = $('#rest_id').val();
+
     $.ajax({
       type:'post',
       url:'show_cart_items.php',
@@ -378,7 +380,12 @@ function show_cart() {
       },
       success:function(response) {
       	//alert(response);  
-        document.getElementById("mycart").innerHTML=response;
+      	//alert($('#cart_count_items').val());
+      	var myVar = $('#cart_count_items').val();
+      	if(typeof myVar=="undefined") {      		
+      		$('.order_now').css({"pointer-events": "none", "cursor": "not-allowed", "background-color": "#d4d4d4"});
+      	} 
+        document.getElementById("mycart").innerHTML=response;        
         //$("#mycart").slideToggle();
       }
      });   
