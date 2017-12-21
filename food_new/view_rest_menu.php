@@ -19,7 +19,34 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+    <style>
+.selectdiv {
+position: relative; 
+}
 
+select::-ms-expand {
+display: none;
+}
+
+.selectdiv select {
+-moz-appearance: none;
+appearance: none;
+/* Add some styling */
+display: block;
+height: 32px;
+float: right;
+margin: 5px 0px;
+padding: 0px 2px;
+font-size: 13px;
+line-height: 1.75;
+color: #333;
+background-color: #ffffff ;
+background-image: none;
+border: 1px solid #fe6003 ;
+-ms-word-break: normal;
+word-break: normal;
+}
+</style>
 </head>
 
 <body onload="show_cart()">
@@ -163,7 +190,11 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 							<?php $getFirstPrice =  getIndividualDetails('food_product_weight_prices','product_id',$productId); ?>
 							<strong id="get_price_<?php echo $productId; ?>">Rs. <?php echo $getFirstPrice['product_price']; ?></strong>							
 						</td>
+
+
 						<td>
+							<div class="selectdiv">
+							<label>
 							<input type="hidden" id="item_price_<?php echo $productId; ?>" name="item_price" value="<?php echo $getFirstPrice['product_price']; ?>">
 							<input type="hidden" id="item_category_id_<?php echo $productId; ?>" name="item_category_id" value="<?php echo $getItemsByCategory['category_id']; ?>">
 							<?php $getWeightTypes = getAllDataWhere('food_product_weight_prices','product_id',$productId); ?>
@@ -173,6 +204,8 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 		                          <option value="<?php echo $getWeightType['weight_type_id']; ?>"><?php echo $getWeight['weight_type']; ?></option>
 		                      <?php } ?>
 		                   </select>
+							</label>
+							</div>
 						</td>
 						<td id="view_add_cart_btn_">
 							<!-- <a class="btn_full" data-key="<?php echo $productId; ?>"  style="width:74px;">Add</a> -->
