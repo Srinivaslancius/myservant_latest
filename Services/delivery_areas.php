@@ -6,9 +6,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<?php include_once 'meta.php';?>
-	<?php $getContentPageData = getAllDataWhere('services_content_pages','id',10);
-		  $getDeliveryAreasData = $getContentPageData->fetch_assoc();
+	<?php $getContentPageData = getAllDataWhere('services_content_pages','id',9);
+		  $getPartnersBanner = $getContentPageData->fetch_assoc();
 	?>
+
 	<!-- Favicons-->
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
@@ -56,28 +57,32 @@
 	<main>
 		<!-- Slider -->
 		 <div class="container-fluid page-title">
-			<?php 
-				if(!empty($getDeliveryAreasData['image'])) { ?> 	
-				<div class="row">
-					<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getDeliveryAreasData['image'] ?>" alt="<?php echo $getDeliveryAreasData['title'];?>" class="img-responsive" style="width:100%; height:400px;">
-				</div>
-			<?php } else { ?>
-				<div class="row">
-					<img src="img/slides/slide_1.jpg" class="img-responsive" style="width:100%; height:400px;">
-				</div>
-			<?php }?>
+			<?php  
+				  if(!empty($getPartnersBanner['image'])) { ?> 	
+					<div class="row">
+						<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getPartnersBanner['image'] ?>" alt="<?php echo $getPartnersBanner['title'];?>" class="img-responsive" style="width:100%;height:400px">
+					</div>
+				<?php } else { ?>
+					<div class="row">
+						<img src="img/slides/slide_1.jpg" class="img-responsive" style="width:100%;height:400px">
+					</div>
+				<?php }?>
     	</div>
 		<div class="container margin_60">
 		<div class="main_title">
-				<h2>my servant cash on delivery available in vijayawada</h2>				
+				<h2>Delivery Areas</h2>					
 			</div>
 			<?php $getOurBranchesData = getAllDataWithActiveRecent('services_our_branches'); ?>
 			<div class="row">			
 					<div class="feature">
-						<?php while ($row = $getOurBranchesData->fetch_assoc()) { ?>
-						<span style="font-size:15px;">My Servant Cash on Delivery Available in</span> <span style="font-size:18px;"><?php echo $row['address'];?></span>
-						<?php  } ;?>
-					</div>      
+					<h4>MY SERVANT CASH ON DELIVERY AVAILABLE IN VIJAYAWADA</h4>
+					<ol type="1" style="line-height:35px;font-size:13px">
+                    <?php while ($row = $getOurBranchesData->fetch_assoc()) { ?>
+                    <li>MY SERVANT CASH ON DELIVERY AVAILABLE IN <?php echo $row['address']; ?></li>
+                    <?php } ?>
+                    </ol>					
+					</div>
+
 			</div>
 			<!-- End row -->						
 		</div>
