@@ -15,7 +15,7 @@
     $footer_text = $_POST['footer_text'];
     $open_timings = $_POST['open_timings'];
     $address = $_POST['address'];
-        
+    $delivery_charges = $_POST['delivery_charges'];
 
     if($_FILES["logo"]["name"]!='') {
                                           
@@ -32,7 +32,7 @@
         $getImgUnlink = getImageUnlink('logo','food_site_settings','id',$id,$target_dir);
         //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
         if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
-            $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax',email='$email', mobile='$mobile', logo = '$logo',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
+            $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title',delivery_charges = '$delivery_charges', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax',email='$email', mobile='$mobile', logo = '$logo',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
             } else {
@@ -43,7 +43,7 @@
             echo "Sorry, there was an error uploading your file.";
         }
     }  else {
-        $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax', email='$email', mobile='$mobile',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
+        $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title', delivery_charges = '$delivery_charges', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax', email='$email', mobile='$mobile',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
         if($conn->query($sql) === TRUE){
            echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
         } else {
@@ -97,8 +97,13 @@
                       </label>
                   </div>
                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Service Tax</label>
+                    <label for="form-control-2" class="control-label">Service Tax (%)</label>
                     <input type="text" name="service_tax" class="form-control" id="form-control-2" placeholder="Service Tax" data-error="Please enter valid Service Tax." value="<?php echo $getSiteSettingsData['service_tax'];?>" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Delivery Charges</label>
+                    <input type="text" name="delivery_charges" class="form-control" id="form-control-2" placeholder="Delivery Charges" data-error="Please enter Delivery Charges." value="<?php echo $getSiteSettingsData['delivery_charges'];?>" required>
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
