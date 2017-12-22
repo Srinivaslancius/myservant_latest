@@ -23,7 +23,15 @@
                 </span>
                 <span class="menu-text">Products</span>
               </a>
-            </li>        
+            </li>
+            <li  class="<?php if($page_name == 'food_vendor_orders.php') { echo "active"; } ?>">
+              <a href="food_vendor_orders.php" aria-haspopup="true">
+                <span class="menu-icon">
+                  <i class="zmdi zmdi-collection-image  zmdi-hc-fw"></i>
+                </span>
+                <span class="menu-text">Orders</span>
+              </a>
+            </li>      
            <!-- <li class="<?php if($page_name == 'food_orders.php' ) { echo "active"; } ?>">
               <a href="food_orders.php" aria-haspopup="true">
                 <span class="menu-icon">
