@@ -82,6 +82,9 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 	$sessionRestId = $_SESSION['session_restaurant_id'];
     $delCart = "DELETE FROM food_cart WHERE session_cart_id='$session_cart_id' AND restaurant_id = '$sessionRestId' ";
     $conn->query($delCart);
+
+    $delCartIng = "DELETE FROM food_update_cart_ingredients WHERE session_cart_id='$session_cart_id'";
+    $conn->query($delCartIng);
 }
 ?>
 <?php $getCategory = getFoodCategoryByRestId('food_products','restaurant_id',$getRestKey); ?>
