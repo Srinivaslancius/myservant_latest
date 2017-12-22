@@ -41,35 +41,18 @@
 
     <!-- Header ================================================== -->
     <header>
-        <?php include_once 'header.php';?>
+        <?php include_once './header.php';?>
     </header>
     <!-- End Header =============================================== -->
-
+<?php
+if($_SESSION['user_login_session_id'] == '') {
+    header ("Location: logout.php");
+} 
+?>
 <!-- SubHeader =============================================== -->
-<section class="parallax-window"  id="short"  data-parallax="scroll" data-image-src="img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
+<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
-    	<div id="sub_content">
-    	 <h1>Place your order</h1>
-            <div class="bs-wizard">
-                <div class="col-xs-4 bs-wizard-step complete">
-                  <div class="text-center bs-wizard-stepnum"><strong>1.</strong> Your details</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="cart.php" class="bs-wizard-dot"></a>
-                </div>
-                               
-                <div class="col-xs-4 bs-wizard-step active">
-                  <div class="text-center bs-wizard-stepnum"><strong>2.</strong> Payment</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="#0" class="bs-wizard-dot"></a>
-                </div>
-            
-              <div class="col-xs-4 bs-wizard-step disabled">
-                  <div class="text-center bs-wizard-stepnum"><strong>3.</strong> Finish!</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="finish.php" class="bs-wizard-dot"></a>
-                </div>  
-		</div><!-- End bs-wizard --> 
-        </div><!-- End sub_content -->
+    	
 	</div><!-- End subheader -->
 </section><!-- End section -->
 <!-- End SubHeader ============================================ -->
@@ -84,11 +67,12 @@
             
         </div>
     </div><!-- Position -->
-    
+
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
 		<div class="row">
 			<div class="col-md-3">
+            
 				<div class="box_style_2 hidden-xs info">
 					<h4 class="nomargin_top">Delivery time <i class="icon_clock_alt pull-right"></i></h4>
 					<p>
@@ -99,7 +83,7 @@
 					<p>
 						Lorem ipsum dolor sit amet, in pri partem essent. Qui debitis meliore ex, tollit debitis conclusionemque te eos.
 					</p>
-				</div><!-- End box_style_2 -->
+				</div><!-- End box_style_1 -->
                 
 				<div class="box_style_2 hidden-xs" id="help">
 					<i class="icon_lifesaver"></i>
@@ -107,64 +91,77 @@
 					<a href="tel://004542344599" class="phone">+45 423 445 99</a>
 					<small>Monday to Friday 9.00am - 7.30pm</small>
 				</div>
+                
 			</div><!-- End col-md-3 -->
-            
+            <form method="post" action="hdfc_form.php">
 			<div class="col-md-6">
-				<div class="box_style_2">
-					<h2 class="inner">Payment methods</h2>
-					<div class="payment_select">
-						<label><input type="radio" value="" checked name="payment_method" class="icheck">Credit card</label>
-						<i class="icon_creditcard"></i>
+				<div class="box_style_2" id="order_process">
+					<h2 class="inner">Your order details</h2>
+					<div class="form-group">
+						<label>First name *</label>
+						<input type="text" class="form-control" id="firstname_order" name="firstname_order" placeholder="First name">
 					</div>
 					<div class="form-group">
-						<label>Name on card</label>
-						<input type="text" class="form-control" id="name_card_order" name="name_card_order" placeholder="First and last name">
+						<label>Last name *</label>
+						<input type="text" class="form-control" id="lastname_order" name="lastname_order" placeholder="Last name">
 					</div>
 					<div class="form-group">
-						<label>Card number</label>
-						<input type="text" id="card_number" name="card_number" class="form-control" placeholder="Card number">
+						<label>Telephone/mobile *</label>
+						<input type="text" id="tel_order" name="tel_order" class="form-control" placeholder="Telephone/mobile">
+					</div>
+					<div class="form-group">
+						<label>Email *</label>
+						<input type="email" id="email_booking_2" name="email_order" class="form-control" placeholder="Your email">
+					</div>
+					<div class="form-group">
+						<label>Your full address *</label>
+						<input type="text" id="address_order" name="address_order" class="form-control" placeholder=" Your full address">
 					</div>
 					<div class="row">
-						<div class="col-md-6">
-							<label>Expiration date</label>
-							<div class="row">
-								<div class="col-md-6 col-sm-6">
-									<div class="form-group">
-										<input type="text" id="expire_month" name="expire_month" class="form-control" placeholder="mm">
-									</div>
-								</div>
-								<div class="col-md-6 col-sm-6">
-									<div class="form-group">
-										<input type="text" id="expire_year" name="expire_year" class="form-control" placeholder="yyyy">
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 col-sm-12">
+						<div class="col-md-6 col-sm-6">
 							<div class="form-group">
-								<label>Security code</label>
-								<div class="row">
-									<div class="col-md-4 col-sm-6">
-										<div class="form-group">
-											<input type="text" id="ccv" name="ccv" class="form-control" placeholder="CCV">
-										</div>
-									</div>
-									<div class="col-md-8 col-sm-6">
-										<img src="img/icon_ccv.gif" width="50" height="29" alt="ccv"><small>Last 3 digits</small>
-									</div>
-								</div>
+								<label>City *</label>
+								<input type="text" id="city_order" name="city_order" class="form-control" placeholder="Your city" required>
 							</div>
 						</div>
-					</div><!--End row -->
-					<div class="payment_select" id="paypal">
-						<label><input type="radio" value="" name="payment_method" class="icheck">Pay with paypal</label>
+						<div class="col-md-6 col-sm-6">
+							<div class="form-group">
+								<label>Postal code *</label>
+								<input type="text" id="pcode_oder" name="pcode_oder" class="form-control" placeholder=" Your postal code" required>
+							</div>
+						</div>
 					</div>
-					<div class="payment_select nomargin">
-						<label><input type="radio" value="" name="payment_method" class="icheck">Pay with cash</label>
-						<i class="icon_wallet"></i>
+					
+					<hr>
+					<div class="row">
+						<div class="col-md-12">
+				
+								<label>Notes for the restaurant</label>
+								<textarea class="form-control" style="height:150px" placeholder="Ex. Allergies, cash change..." name="order_note" id="order_note"></textarea>
+				
+						</div>
 					</div>
 				</div><!-- End box_style_1 -->
 			</div><!-- End col-md-6 -->
+
+			<?php 
+			if($_SESSION['CART_TEMP_RANDOM'] == "") {
+		        $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
+		    }
+		    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
+		    $user_session_id = $_SESSION['user_login_session_id'];
+			$cartItems1 = "SELECT * FROM food_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' ";
+    		$cartItems = $conn->query($cartItems1);
+			?>
+            
+
+            <input type="hidden" name='key' type='text' value='71tFEF'>
+			<input type="hidden" name='txnid' type='text' value='<?php echo uniqid( "srinivas_" );?>'>		
+			<input type="hidden" name='amount' type='text' value='1'>
+			<input type="hidden" name='firstname' type='text' value='srinivas'>
+			<input type="hidden" name='email' type='text' value='srinivas@lanciussolutions.in'>
+			<input type="hidden" name='phone' type='text' value='1234567890'>
+			<input type="hidden" name='productinfo' type='text' value='Just another test site'>
             
 			<div class="col-md-3" id="sidebar">
             	<div class="theiaStickySidebar">
@@ -172,55 +169,35 @@
 					<h3>Your order <i class="icon_cart_alt pull-right"></i></h3>
 					<table class="table table_summary">
 					<tbody>
+					<?php $cartTotal = 0; $service_tax = 0;
+                    	while ($getCartItems = $cartItems->fetch_assoc()) { ?>
+                    <?php $getProductDetails= getIndividualDetails('food_products','id',$getCartItems['food_item_id']); ?>
 					<tr>
 						<td>
-							<a href="#0" class="remove_item"><i class="icon_plus_alt"></i></a> <strong>1x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> Enchiladas
+							 <strong> <?php echo $getCartItems['item_quantity']; ?> x </strong> <?php echo $getProductDetails['product_name']; ?>
 						</td>
 						<td>
-							<strong class="pull-right">Rs. 11</strong>
+							<strong class="pull-right">Rs. <?php echo $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?></strong>
 						</td>
 					</tr>
-					<tr>
-						<td>
-							<a href="#0" class="remove_item"><i class="icon_plus_alt"></i></a> <strong>1x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> Burrito
-						</td>
-						<td>
-							<strong class="pull-right">Rs. 14</strong>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="#0" class="remove_item"><i class="icon_plus_alt"></i></a> <strong>1x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> Chicken
-						</td>
-						<td>
-							<strong class="pull-right">Rs.20</strong>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="#0" class="remove_item"><i class="icon_plus_alt"></i></a> <strong>1x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> Corona Beer
-						</td>
-						<td>
-							<strong class="pull-right">Rs.9</strong>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="#0" class="remove_item"><i class="icon_plus_alt"></i></a> <strong>1x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> Cheese Cake
-						</td>
-						<td>
-							<strong class="pull-right">Rs.12</strong>
-						</td>
-					</tr>
+
+					<input type="hidden" name="food_category_id[]" value="<?php echo $getCartItems['food_category_id']; ?>">
+					<input type="hidden" name="food_item_id[]" value="<?php echo $getCartItems['food_item_id']; ?>">
+					<input type="hidden" name="item_weight_type_id[]" value="<?php echo $getCartItems['item_weight_type_id']; ?>">
+					<input type="hidden" name="item_price[]" value="<?php echo $getCartItems['item_price']; ?>">
+					<input type="hidden" name="item_quantity[]" value="<?php echo $getCartItems['item_quantity']; ?>">
+					<input type="hidden" name="restaurant_id" value="<?php echo $getCartItems['restaurant_id']; ?>">
+
+					<?php } ?>					
 					</tbody>
 					</table>
 					<hr>
 					<div class="row" id="options_2">
 						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="" checked name="option_2" class="icheck">Delivery</label>
+							<label><input type="radio" value="2" checked name="dev_type" class="icheck">Delivery</label>
 						</div>
 						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="" name="option_2" class="icheck">Take Away</label>
+							<label><input type="radio" value="1" name="dev_type" class="icheck">Take Away</label>
 						</div>
 					</div><!-- Edn options 2 -->
 					<hr>
@@ -228,40 +205,59 @@
 					<tbody>
 					<tr>
 						<td>
-							 Subtotal <span class="pull-right">Rs.56</span>
+							 Subtotal <span class="pull-right">Rs.<?php echo $cartTotal; ?></span>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							 Delivery fee <span class="pull-right">Rs.10</span>
+							 Delivery fee <span class="pull-right">Rs.<?php echo $getFoodSiteSettingsData['delivery_charges'] ; ?></span>
 						</td>
 					</tr>
-                                        <tr>
+					<?php $service_tax += ($getFoodSiteSettingsData['service_tax']/100)*$cartTotal; ?>
+                    <tr>
 						<td>
-							 Service Tax <span class="pull-right">Rs.10</span>
+							 Service Tax <span class="pull-right">Rs.<?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span>
 						</td>
 					</tr>
 					<tr>
 						<td class="total">
-							 TOTAL <span class="pull-right">Rs. 76</span>
+							 TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?></span>
+							 <?php $order_total = $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?> 
 						</td>
 					</tr>
 					</tbody>
 					</table>
+
+
+					<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>">
+					<input type="hidden" name="order_total" value="<?php echo $order_total; ?>">
+					<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>">
+					<input type="hidden" name="user_id" value="<?php echo $user_session_id; ?>">
+
 					<hr>
-					<a class="btn_full" href="finish.php">Confirm Your Order</a>
-                                        
+					<div class="row" id="options_2">
+						<div class="col-lg-8 col-md-12 col-sm-12 col-xs-6">
+							<label><input type="radio" value="2" checked name="pay_mn" class="icheck">Online Payment</label>
+						</div>
+						<div class="col-lg-4 col-md-12 col-sm-12 col-xs-6">
+							<label><input type="radio" value="1" name="pay_mn" class="icheck">COD</label>
+						</div>
+					</div><!-- Edn options 2 -->
+					<hr>
+
+					<input type="submit" name="submit" value="Go to checkout" class="btn_full">					
+                    <a class="btn_full_outline" href="index.php"><i class="icon-right"></i> Add other items</a>
 				</div><!-- End cart_box -->
                 </div><!-- End theiaStickySidebar -->
 			</div><!-- End col-md-3 -->
-            
+            </form>
 		</div><!-- End row -->
 </div><!-- End container -->
 <!-- End Content =============================================== -->
 
 <!-- Footer ================================================== -->
 	<footer>
-            <?php include_once 'footer.php';?>
+        <?php include_once 'footer.php';?>
     </footer>
 <!-- End Footer =============================================== -->
 
