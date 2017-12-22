@@ -1,11 +1,11 @@
 <?php
     
     //common function for web / android /ios user registration
-     function saveUser($user_full_name, $user_email, $user_mobile, $user_password,$lkp_status_id,$login_count,$last_login_visit,$lkp_register_device_type_id,$user_login_type,$mobile_token,$created_at) {
+     function saveUser($user_full_name, $user_email, $user_mobile, $user_password,$lkp_status_id,$login_count,$last_login_visit,$lkp_register_device_type_id,$user_login_type,$mobile_token,$user_register_service_id,$created_at) {
         //Save data into users table
         global $conn;
         $created_at = date("Y-m-d h:i:s");
-        $sqlIns = "INSERT INTO users (user_full_name,user_email,user_mobile,user_password,lkp_status_id,login_count,last_login_visit,lkp_register_device_type_id,lkp_user_login_type_id,mobile_token,created_at) VALUES ('$user_full_name','$user_email','$user_mobile','$user_password','$lkp_status_id','$login_count','$last_login_visit','$lkp_register_device_type_id','$user_login_type','$mobile_token','$created_at')"; 
+        $sqlIns = "INSERT INTO users (user_full_name,user_email,user_mobile,user_password,lkp_status_id,login_count,last_login_visit,lkp_register_device_type_id,lkp_user_login_type_id,mobile_token,lkp_admin_service_type_id,created_at) VALUES ('$user_full_name','$user_email','$user_mobile','$user_password','$lkp_status_id','$login_count','$last_login_visit','$lkp_register_device_type_id','$user_login_type','$mobile_token','$user_register_service_id','$created_at')"; 
         if ($conn->query($sqlIns) === TRUE) {
             return 1;
         } else {

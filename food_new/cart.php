@@ -152,9 +152,12 @@ th{
         $cartItems1 = "SELECT * FROM food_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' ";
         $cartItems = $conn->query($cartItems1);
     } else {
-        $cartItems = getAllDataWhere('food_cart','session_cart_id',$session_cart_id);
+        //$cartItems = getAllDataWhere('food_cart','session_cart_id',$session_cart_id);
+      $cartItems1 = "SELECT * FROM food_cart WHERE  item_quantity!='0' AND session_cart_id='$session_cart_id' ";
+      $cartItems = $conn->query($cartItems1);
     } 
 ?>
+<input type="hidden" id="session_cart_id" value="<?php echo $_SESSION['CART_TEMP_RANDOM']; ?>">
 <!-- Content ================================================== -->
 	<div class="container margin_60_35">
 		<div class="row">     
@@ -167,6 +170,7 @@ th{
 							<th>ITEM</th>							
 							<th>PRICE</th>
 							<th>SOMTHING</th>
+              <th>QUANTITY</th>
 							<th>TOTAL</th>
 							<th>REMOVE</th>
 						</tr>
@@ -179,14 +183,23 @@ th{
 						<td>
 							<?php $getProductDetails= getIndividualDetails('food_products','id',$getCartItems['food_item_id']); ?>
                         	<figure class="thumb_menu_list"><img src="<?php echo $base_url . 'uploads/food_product_images/'.$getProductDetails['product_image']; ?>" alt="<?php echo $getProductDetails['product_name']; ?>"></figure>                        	
-							<h5><?php echo $getProductDetails['product_name']; ?></h5>							
+							<h5 style="margin-bottom:5px;"><?php echo $getProductDetails['product_name']; ?></h5>
+
+              <?php 
+                $getAddons = "SELECT * FROM food_update_cart_ingredients WHERE food_item_id = '".$getCartItems['food_item_id']."' AND cart_id='".$getCartItems['id']."' AND session_cart_id = '$session_cart_id'";
+                $getAddonData = $conn->query($getAddons);
+                while($getadcartItems = $getAddonData->fetch_assoc() ) {
+               ?> 
+                  <p id="dis_add_on_<?php echo $getCartItems['id']; ?>" style="margin-bottom:5px;"><?php echo $getadcartItems['item_ingredient_name'] . ":". $getadcartItems['item_ingredient_price']; ?> </p>			
+                <?php } ?>		
+
 						</td>
 						<td>Rs. <?php echo $getCartItems['item_price']; ?></td>
 						<td>
 
 						<?php $getIngredenats = getAllDataWhere('food_product_ingredient_prices','product_id',$getCartItems['food_item_id']); ?>
 
-                           <a href="#" data-toggle="modal" data-target="#<?php echo $getCartItems['id']; ?>"><i class="icon_plus_alt2" style="font-size:25px"></i></a>
+               <a href="#" data-toggle="modal" data-target="#<?php echo $getCartItems['id']; ?>"><i class="icon_plus_alt2" style="font-size:25px"></i></a>
 							<div class="modal fade" id="<?php echo $getCartItems['id']; ?>" role="dialog">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
@@ -201,7 +214,7 @@ th{
 												   <div class="col-sm-6">
 													<div class="btn-group">
 													  <button style="background-color:#f5f5f5;border-color:#f5f5f5;color:black">Total:₹ <span id="tot_item_price_<?php echo $getCartItems['id']; ?>"><?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?></span></button>
-													  <button>Update Cart</button>					  
+													  <button class="update_cart_item" data-cart-id="<?php echo $getCartItems['id']; ?>" data-item-id="<?php echo $getCartItems['food_item_id']; ?>" >Update Cart</button>					  
 													</div>
 												   </div>
 											  </div>
@@ -220,7 +233,7 @@ th{
                                                	 <input type="hidden" class="ing_price" id="ing_price" value="<?php echo $getIngProdItems['ingredient_price']; ?>">
                                                    <label class="radio" style="margin-bottom:20px">
                                                        <h4 style="font-size:15px"><?php echo $getInDet['ingredient_name']; ?><span style="padding-left:50px">Rs:<?php echo $getIngProdItems['ingredient_price']; ?></span></h4>
-                                                       <input type="checkbox" class="check_valid_add_on" value="<?php echo $getIngProdItems['ingredient_price']; ?>" id="check_valid_add_on_<?php echo $getCartItems['id']; ?>" data-key="<?php echo $getCartItems['id']; ?>">
+                                                       <input type="checkbox" class="check_valid_add_on" value="<?php echo $getIngProdItems['ingredient_price']; ?>" id="check_valid_add_on_<?php echo $getCartItems['id']; ?>" data-key="<?php echo $getCartItems['id']; ?>" data-ing-name="<?php echo $getInDet['ingredient_name']; ?>" data-ing-id="<?php echo $getInDet['id']; ?>" data-ing-price="<?php echo $getIngProdItems['ingredient_price']; ?>">
                                                        <span class="checkmark"></span>
                                                    </label>
                                                 <?php } ?>
@@ -230,16 +243,19 @@ th{
                                            </div>
                                         </div>
 										
-										<?php } ?>
+										<?php } else { ?>
+                      No Add on's
+                    <?php } ?>
 										
 
 										<div class="modal-footer">
-										  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										  <button type="button" class="btn btn-default close" data-dismiss="modal" data-key="<?php echo $getCartItems['id']; ?>">Close</button>
 										</div>
 									</div>
 								</div>
 							</div>                        
 						</td>
+            <td><?php echo $getCartItems['item_quantity']; ?></td>
 						<td>Rs. <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?> /-</td>
 						<?php $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?>
 						<td><i class=" icon-trash" style="font-size:25px;color:#fe6003"></li></td>
@@ -263,19 +279,35 @@ th{
 						<tr>
 							<td>Service Tax <span class="pull-right">Rs. <?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span></td>
 						</tr>
+
+            <!-- <?php
+              $getAddOnsPrice = "SELECT * FROM food_update_cart_ingredients WHERE session_cart_id = '$session_cart_id'";
+              $getAddontotal = $conn->query($getAddOnsPrice);
+              $getAdstotal = 0;
+              while($getAdTotal = $getAddontotal->fetch_assoc()) {
+                  $getAdstotal += $getAdTotal['item_ingredient_price'];
+              }
+              ?>
+              <tr>
+                  <td>Extra Add On's Price <span class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
+              </tr> -->
 						
-						<tr>
+						<!-- <tr>
 							<td>Delivery fee <span class="pull-right">Rs. <?php echo $getFoodSiteSettingsData['delivery_charges'] ; ?></span> </td>
 
-						</tr>
+						</tr> -->
 						<tr>
-							<td style="color:#fe6003">TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?></span></td>
+							<td style="color:#fe6003">TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax; ?></span></td>
 						</tr>
 						</tbody>
 						</table>
 						<hr>
-						<a class="btn_full" href="cart.php">Order now</a>
-						<a class="btn_full_outline" href="menu.php">Continue <i class="icon-left"></i></a>
+            <?php if(!isset($_SESSION['user_login_session_id'])) { ?>
+						  <a class="btn_full" href="login.php?cart_id=<?php echo encryptPassword(1);?>">Order now</a>
+            <?php } else { ?>
+              <a class="btn_full" href="checkout.php">Order now</a>
+            <?php } ?>
+						<a class="btn_full_outline" href="index.php">Continue <i class="icon-left"></i></a>
 					</div>
 				</div>
 			</div>
@@ -295,17 +327,7 @@ th{
 <!-- End Footer =============================================== -->
 
 <div class="layer"></div><!-- Mobile menu overlay mask -->
-    
-    <!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_close"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon-search-6"></i>
-			</button>
-		</form>
-	</div>
-	<!-- End Search Menu -->
+  
     
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-2.2.4.min.js"></script>
@@ -344,9 +366,76 @@ $('.check_valid_add_on').on('change', function (e) {
 	$('input:checkbox:checked').each(function(){ // iterate through each checked element.		
     	updateTotalPrice += isNaN(parseInt($(this).val())) ? 0 : parseInt($(this).val());    
     });     
-  	//alert(updateTotalPrice+totalIndPrice);
+  	//alert(updateTotalPrice);
   	var getTotalVal = updateTotalPrice+totalIndPrice;
 	$('#tot_item_price_'+cartId).html(getTotalVal);
+});
+//Close 
+$('.close').on('click', function (e) {
+    var cartId = $(this).attr("data-key");  
+    $(".check_valid_add_on").prop('checked', false); 
+    var totalIndPrice = parseInt($('#product_tot_price_ind_'+cartId).val());
+    $('#tot_item_price_'+cartId).html(totalIndPrice);
+});
+
+//
+$('.update_cart_item').on('click', function (e) {
+
+    if($('[type="checkbox"]').is(":checked")){      
+    
+        var cartId = $(this).attr('data-cart-id'); 
+        var productId = $(this).attr('data-item-id');    
+        var cartSessionId = $('#session_cart_id').val();
+
+        var cb = [],
+        post_cb = []
+        $.each($('input[type=checkbox]:checked'), function(){
+            var ingId = $(this).attr('data-ing-id'),
+                ingName = $(this).attr('data-ing-name'),
+                ingPrice = $(this).attr('data-ing-price')
+
+            cb.push(ingId + ' -> ' + ingName + ' -> ' + ingPrice);
+            post_cb.push({
+                'ingId': ingId,
+                'ingName': ingName,
+                'ingPrice': ingPrice,
+            });
+        });
+      
+        $.ajax({
+          type:'post',
+          url:'update_cart_ingredient.php',
+          data:{
+             cartId : cartId,
+             productId : productId, 
+             cartSessionId : cartSessionId,  
+             cb: post_cb      
+          },
+          success:function(response) {
+             //alert();
+             $(".modal .close").click();
+            }
+        });
+
+        //Display Add On's
+        $.ajax({
+          type:'post',
+          url:'display_add_ons.php',
+          data:{
+             cartId : cartId,
+             productId : productId, 
+             cartSessionId : cartSessionId,                     
+          },
+          success:function(response) {            
+             $('#dis_add_on_'+cartId).html(response);           
+            }
+        });
+        //End add on code display
+
+    } else {
+        alert("Please select any extra Add On's");
+        return false;
+    }
 });
 
 </script>
