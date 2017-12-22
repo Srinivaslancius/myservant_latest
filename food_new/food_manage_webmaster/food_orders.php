@@ -1,6 +1,6 @@
 <?php include_once 'admin_includes/main_header.php';
 
-$_SESSION['food_vendor_user_id']
+
     $serviceOrders = "SELECT * FROM food_orders GROUP BY order_id ORDER BY id DESC"; 
     $getServiceOrderData = $conn->query($serviceOrders);
     $i=1;
