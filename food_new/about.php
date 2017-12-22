@@ -21,7 +21,6 @@
     <![endif]-->
 
 </head>
-
 <body>
 <!--[if lte IE 8]>
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>.</p>
@@ -47,7 +46,7 @@
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
     	<div id="sub_content">
-    	 <h1>About us</h1>
+    	 <h1>About Us</h1>
          <p>One Stop Shop for all your food needs.</p>
          <p></p>
         </div><!-- End sub_content -->
@@ -60,119 +59,45 @@
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li>About Us</li>
-               
             </ul>
             <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
         </div>
     </div><!-- Position -->
-<?php $getAllAboutusData = getAllDataWhere('food_content_pages','id',6);
-          $getAboutusData = $getAllAboutusData->fetch_assoc();
-?>
+
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
-	<div class="row">
-		<div class="col-md-12">
-		<center> <h2 class="nomargin_top">About US</h2></center>
-			<?php echo $getAboutusData
-			['description']; ?>
-				
+    <div class="main_title margin_mobile">
+            <h2 class="nomargin_top">About Us</h2>
+        </div>	
+			<div class="feature_2">
+				<h3>What is Myservant.com</h3>
+				<p> Myservant.com (A Unit of CMR Enterprises Pvt Ltd) is one of the largest online food and grocery store in Vijayawada. With over 3500 products and we deal with over 250 brands in our catalogue. The Main Vision of Myservant.com is to convert complex to simpler form. Myservant offers best online food and grocery shopping experience in and around Vijayawada. My Servant offers the best price, the best quality with on time delivery.</p>
+				<h3>Why Myservant is here?</h3>
+				<p>Myservant is an online grocery store coupled with house maintenance services which serves all your home needs in just a click. Whether it might be a metro city or an urban it doesn’t matter, we are here to save your precious time and reduce the stress on shopping household items and give life changing experience in handling household products. Myservant is an online grocery store designed just for everyone from infant to old age. We provide services at your door step with respect to your comfortable time. Select a time slot for delivery/ service and your order will be delivered right to your doorstep, anywhere in Vijayawada. You can also pay online using your debit/credit cards, wallet payments and cash on delivery.</p>
+				<h3>MyServant.com Services</h3>
+				<p>We give you wide range of grocery products from branded to non-branded including Groceries, Staples, Food items, Fruits and Vegetables, cosmetics, Beauty products, baby products, personal care and many more.</p>
+				<h3>Book a Service</h3>
+				<p>We offer different services which offers great convenience. We offer services such as Home Appliances Repairs & services, Car & bike repair Services, Online 24 X 7 emergency electrical services, Laundry Services, Plumbing Services, Air Conditioning services. You get served by the best and authorized technicians.</p>
+				<h3>Why should you shop at Myservant?</h3>
+				<p>Myservant always give prior importance to “Time”. Every individual is so willing to spare their valuable time with family and friends in their free time but unfortunately a mandate grocery shopping will kill your time. Myservant is a part of CMR services Pvt Ltd which focuses on customers and consumers valuable and precious time who shop for online grocery store in order to save their. No need to list out grocery items, no scope of traffic jam’s, you can say no to carrying, can avoid standing in line. You can just get everything you need by just one click and we will be at your door steps with your order.</p>
+				<p>This is Vijayawada’s best online grocery store. As we know you and we understand your needs. You can also order services from your house and let them do the work. We offer great security, as our services are provided by the best service man in Vijayawada. Our prices are reasonable and we offer reliable service.</p>
+				<h3>Get your service with just few clicks</h3>
+				<ul>
+				<li>Browse or search from our wide range of products.</li>
+				<li>Select all your groceries/service and add them to the cart.</li>
+				<li>Select the payment mode and give information in the fields.</li>
+				<li>Select your convenient time slots as per mentioned.</li>
+				<li>Finally, Your products will be delivered.</li>
 				</ul>
-		</div>
-	<!--	<div class="col-md-7 col-md-offset-1 text-right hidden-sm hidden-xs">
-			<img src="img/devices.jpg" alt="" class="img-responsive">
-		</div>-->
-	</div><!-- End row -->
-	<hr class="more_margin">
-    <div class="main_title">
-            <h2 class="nomargin_top">Quick food quality feautures</h2>
-        <!--    <p>
-                Cum doctus civibus efficiantur in imperdiet deterruisset.
-            </p>-->
-        </div>
-	<div class="row">
-		<div class="col-md-6 wow fadeIn" data-wow-delay="0.1s">
-			<div class="feature">
-				<i class="icon_building"></i>
-				<h3 style="margin-left:100px"><span>+ 1000</span> Restaurants</h3>
-				<p style="margin-left:100px;text-align:justify">
-					Delhiites, ever had a meal at that exorbitant restaurant you love without emptying your wallet? Now’s the
-					time to eat your heart at over 1000+ restaurants across 8 cities, is here to save your pockets!
-				</p>
+				<p><b>Note:</b> We currently operate in Vijayawada only</p>
+				<p>Should you have any concerns or would you want to give us feedback, please do not hesitate to contact our customer service team by sending an email at customercare@myservant.com. CMR Services PVT LTD Office is located at Plot no. 40-15/2-19B, 3rd floor, Brindavan Colony Vijayawada, Andhra Pradesh, India-520010.</p>
 			</div>
-		</div>
-		<div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
-			<div class="feature mrgin">
-				<i class="icon_documents_alt"></i>
-				<h3 style="margin-left:100px"><span>+1000</span> Food Menu</h3>
-				<p style="margin-left:100px;text-align:justify">
-					Delhiites, ever had a meal at that exorbitant restaurant you love without emptying your wallet? Now’s the time to eat your heart at<br>over 1000+ restaurants across 8 cities, is here to save your pockets!
-				</p>
-			</div>
-		</div>
-	</div><!-- End row -->
-	<div class="row">
-		<div class="col-md-6 wow fadeIn" data-wow-delay="0.3s">
-			<div class="feature mrgin">
-				<i class="icon_bag_alt"></i>
-				<h3 style="margin-left:100px"><span>Delivery</span> or Takeaway</h3>
-				<p style="margin-left:100px;text-align:justify">
-					Delhiites, ever had a meal at that exorbitant restaurant you love without emptying your wallet? Now’s the time to eat your heart at<br>over 1000+ restaurants across 8 cities, is here to save your pockets!
-				</p>
-			</div>
-		</div>
-		<div class="col-md-6 wow fadeIn" data-wow-delay="0.4s">
-			<div class="feature mrgin">
-				<i class="icon_mobile"></i>
-				<h3 style="margin-left:100px"><span>Mobile</span> support</h3>
-				<p style="margin-left:100px;text-align:justify">
-					Delhiites, ever had a meal at that exorbitant restaurant you love without emptying your wallet? Now’s the time to eat your heart at<br>over 1000+ restaurants across 8 cities, is here to save your pockets!
-				</p>
-			</div>
-		</div>
-	</div><!-- End row -->
-	<div class="row">
-		<div class="col-md-6 wow fadeIn" data-wow-delay="0.5s">
-			<div class="feature mrgin">
-				<i class="icon_wallet"></i>
-				<h3 style="margin-left:100px"><span>Cash</span> payment</h3>
-				<p style="margin-left:100px;text-align:justify">
-					Delhiites, ever had a meal at that exorbitant restaurant you love without emptying your wallet? Now’s the time to eat your heart at<br>over 1000+ restaurants across 8 cities, is here to save your pockets!
-				</p>
-			</div>
-		</div>
-		<div class="col-md-6 wow fadeIn" data-wow-delay="0.6s">
-			<div class="feature mrgin">
-				<i class="icon_creditcard"></i>
-				<h3 style="margin-left:100px"><span>Secure card</span> payment</h3>
-				<p style="margin-left:100px;text-align:justify">
-					Delhiites, ever had a meal at that exorbitant restaurant you love without emptying your wallet? Now’s the time to eat your heart at<br>over 1000+ restaurants across 8 cities, is here to save your pockets!
-				</p>
-			</div>
-		</div>
-	</div><!-- End row -->
-</div><!-- End container -->
-
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-6 nopadding features-intro-img">
-			<div class="features-bg" class="img-responsive">
-				<div class="features-img">
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6 nopadding">
-			<div class="features-content">
-				<h3>"Founders"</h3><br>
-				<p style="text-align:justify">
-					"Myservant is a food ordering and delivery company based out of Bangalore, India. Myservant was inspired by the thought of providing a complete food ordering and delivery solution from the best neighbourhood restaurants to the urban foodie. A single window for ordering from a wide range of restaurants, we have our own exclusive fleet of delivery personnel to pickup orders from restaurants and deliver it to customers .<br>Having our own fleet gives us the flexibility to offer customers a no minimum order policy on any restaurant and accept online payments for all partner restaurants that we work with.
-				</p>
-			</div>
-		</div>
-	</div>
-</div><!-- End container-fluid  -->
-<!-- End Content =============================================== -->
-
-<!-- Footer ================================================== -->
+</div>
+	<div class="high_light">
+       <?php include_once 'view_restaurants.php'; ?>
+      </div>
+	  
+	  <!-- Footer ================================================== -->
 	<footer>
          <?php include_once 'footer.php'; ?>
 		 </footer>
@@ -182,7 +107,7 @@
 
 <!-- Login modal -->   
 
-
+    
      <!-- Search Menu -->
 	<div class="search-overlay-menu">
 		<span class="search-overlay-close"><i class="icon_close"></i></span>
