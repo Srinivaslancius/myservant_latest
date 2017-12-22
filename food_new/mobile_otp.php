@@ -95,10 +95,16 @@
                 <form method="post" id="opt_valid_mobile" name="opt_valid_mobile" class="popup-form" >
                 <center> <h2 class="nomargin_top" style="color:#f26226">VERIFY OTP</h2></center>
                     <hr class="more_margin">
+
+
+                    <input type="hidden" name="user_name" value="<?php echo $_POST['user_name']; ?>">
+                    <input type="hidden" name="user_mobile_cust" value="<?php echo $_POST['user_mobile']; ?>" id="user_mobile_cust">
+                    <input type="hidden" name="user_email" value="<?php echo $_POST['user_email']; ?>">
+                    <input type="hidden" name="user_password" value="<?php echo encryptPassword($_POST['user_password']); ?>">
                     
-                     <label for="number">Mobile No:</label>
-                     <input type="text" id="user_mobile" name="user_mobile" class="form-control valid_mobile_num" placeholder="Enter Phone number" value="<?php echo $_POST['user_mobile']; ?>" maxlength="10" pattern="[0-9]{10}" readonly required>
-                      <label for="number">OTP:</label>
+                    <label for="number">Mobile No:</label>
+                    <input type="text" id="user_mobile" name="user_mobile" class="form-control valid_mobile_num" placeholder="Enter Phone number" value="<?php echo $_POST['user_mobile']; ?>" maxlength="10" pattern="[0-9]{10}" readonly required>
+                    <label for="number">OTP:</label>
                     <input type="tel" id="mobile_otp" name="mobile_otp" class="form-control valid_mobile_num" placeholder="Enter OTP" maxlength="4" pattern="[0-9]{10}"  required >
                     <span id="return_msg" style="display:none"></span><br />
                                 <div class="clear_fix"></div>

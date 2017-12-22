@@ -200,13 +200,16 @@ th{
 												  </div>
 												   <div class="col-sm-6">
 													<div class="btn-group">
-													  <button style="background-color:#f5f5f5;border-color:#f5f5f5;color:black">Total:₹ <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?></button>
+													  <button style="background-color:#f5f5f5;border-color:#f5f5f5;color:black">Total:₹ <span id="tot_item_price_<?php echo $getCartItems['id']; ?>"><?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?></span></button>
 													  <button>Update Cart</button>					  
 													</div>
 												   </div>
 											  </div>
 										</div>
 										
+
+										<input type="hidden" name="product_tot_price_ind" value="<?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?>" id="product_tot_price_ind_<?php echo $getCartItems['id']; ?>" class="pro_tot_price">
+
 										<div class="modal-body">
                                            <div class="row">
                                                <div class="col-sm-1">
@@ -214,9 +217,10 @@ th{
                                                <div class="col-sm-10  col-xs-12">
                                                	<?php while ($getIngProdItems = $getIngredenats->fetch_assoc()) { ?>
                                                	<?php $getInDet= getIndividualDetails('food_ingredients','id',$getIngProdItems['ingredient_name_id']); ?>
+                                               	 <input type="hidden" class="ing_price" id="ing_price" value="<?php echo $getIngProdItems['ingredient_price']; ?>">
                                                    <label class="radio" style="margin-bottom:20px">
                                                        <h4 style="font-size:15px"><?php echo $getInDet['ingredient_name']; ?><span style="padding-left:50px">Rs:<?php echo $getIngProdItems['ingredient_price']; ?></span></h4>
-                                                       <input type="checkbox">
+                                                       <input type="checkbox" class="check_valid_add_on" value="<?php echo $getIngProdItems['ingredient_price']; ?>" id="check_valid_add_on_<?php echo $getCartItems['id']; ?>" data-key="<?php echo $getCartItems['id']; ?>">
                                                        <span class="checkmark"></span>
                                                    </label>
                                                 <?php } ?>
@@ -329,6 +333,22 @@ $('#cat_nav a[href^="#"]').on('click', function (e) {
 				window.location.hash = target;
 			});
 		});
+</script>
+
+<script type="text/javascript">
+$('.check_valid_add_on').on('change', function (e) {
+
+	var updateTotalPrice =0;
+    var cartId = $(this).attr("data-key");    	
+	var totalIndPrice = parseInt($('#product_tot_price_ind_'+cartId).val());	
+	$('input:checkbox:checked').each(function(){ // iterate through each checked element.		
+    	updateTotalPrice += isNaN(parseInt($(this).val())) ? 0 : parseInt($(this).val());    
+    });     
+  	//alert(updateTotalPrice+totalIndPrice);
+  	var getTotalVal = updateTotalPrice+totalIndPrice;
+	$('#tot_item_price_'+cartId).html(getTotalVal);
+});
+
 </script>
 
 </body>
