@@ -127,7 +127,7 @@
 	</div>
 	<div class="col-md-5 wow fadeIn" data-wow-delay="0.1s">
 			<div class="feature">
-				<form method="POST" class="popup-form">
+				<form method="POST" class="popup-form" autocomplete="off">
 				<center> <h2 class="nomargin_top" style="color:#f26226">Login</h2></center>
 					<hr class="more_margin">
 					<div class="row">
@@ -159,7 +159,7 @@
                     <span id="input_status1" style="color: red;"></span>
                     <input type="email" name="user_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="user_email" class=" form-control" placeholder="Email" onkeyup="checkEmail();" required>
                     <span id="input_status" style="color: red;"></span>
-                    <input type="password" name="user_password" class=" form-control" minlength="8" id="user_password" placeholder="Password" required>
+                    <input type="password" name="user_password" autocomplete="off" class=" form-control" minlength="8" id="user_password" placeholder="Password" required>
                     <input type="password" name="confirm_password" class=" form-control" minlength="8" id="confirm_password" placeholder="Confirm password" onChange="checkPasswordMatch();" required>
                     <div id="divCheckPasswordMatch" style="color:red"></div>
                     <div id="pass-info" class="clearfix"></div>					

@@ -17,7 +17,7 @@
                      <li><a href="#">Help & Support </a></li>
                     <li><a href="#">Privacy Policy </a></li>                 
                     <li><a href="#">Offer Terms </a></li>                 
-                    <li><a href="#">Terms and conditions </a></li>                                   
+                    <li><a href="terms_conditions.php">Terms and conditions </a></li>                                   
                 </ul>
         
             </div>
@@ -45,7 +45,7 @@
                 </div>
                 <form method="post" action="" name="newsletter_2">
                     <div class="form-group">
-                        <input name="email" type="email" value="" placeholder="Your mail" class="form-control">
+                        <input name="email" type="email" value="" placeholder="Your mail" class="form-control" required>
                     </div>
                     <input type="submit" value="Subscribe" class="btn_1" >
                 </form>
