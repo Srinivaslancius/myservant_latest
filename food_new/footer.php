@@ -49,7 +49,7 @@
                     if($conn->query($sql) === TRUE){
                        echo "<script type='text/javascript'>alert('Data Updated Successfully');</script>";
                     } else {
-                       echo "<script type='text/javascript'>window.location='food_banners.php?msg=fail'</script>";
+                       echo "<script type='text/javascript'>window.location='index.php?msg=fail'</script>";
                     }
                 }
                 ?>
