@@ -9,6 +9,9 @@
     $id=1;
     $admin_title = $_POST['admin_title'];  
     $email = $_POST['email'];
+    $from_email = $_POST['from_email'];
+    $orders_email = $_POST['orders_email'];
+    $contact_email = $_POST['contact_email'];
     $google_analytics_code  = $_POST['google_analytics_code'];
     $service_tax = $_POST['service_tax'];
     $mobile = $_POST['mobile'];    
@@ -32,7 +35,7 @@
         $getImgUnlink = getImageUnlink('logo','food_site_settings','id',$id,$target_dir);
         //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
         if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
-            $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title',delivery_charges = '$delivery_charges', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax',email='$email', mobile='$mobile', logo = '$logo',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
+            $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title',from_email = '$from_email',orders_email ='$orders_email', contact_email = '$contact_email', delivery_charges = '$delivery_charges', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax',email='$email', mobile='$mobile', logo = '$logo',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
             } else {
@@ -43,7 +46,7 @@
             echo "Sorry, there was an error uploading your file.";
         }
     }  else {
-        $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title', delivery_charges = '$delivery_charges', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax', email='$email', mobile='$mobile',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
+        $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title', from_email = '$from_email', orders_email ='$orders_email', contact_email = '$contact_email', delivery_charges = '$delivery_charges', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax', email='$email', mobile='$mobile',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
         if($conn->query($sql) === TRUE){
            echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
         } else {
@@ -74,6 +77,21 @@
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Email</label>
                     <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" id="form-control-2" placeholder="Email" data-error="Please enter a valid email address." value="<?php echo $getSiteSettingsData['email'];?>" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">From Email</label>
+                    <input type="email" name="from_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" id="form-control-2" placeholder="From Email" data-error="Please enter from email address." value="<?php echo $getSiteSettingsData['from_email'];?>" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Orders Email</label>
+                    <input type="email" name="orders_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" id="form-control-2" placeholder="Orders Email" data-error="Please enter orders email address." value="<?php echo $getSiteSettingsData['orders_email'];?>" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Contact Email</label>
+                    <input type="email" name="contact_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" id="form-control-2" placeholder="Contact Email" data-error="Please enter contact email address." value="<?php echo $getSiteSettingsData['contact_email'];?>" required>
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">

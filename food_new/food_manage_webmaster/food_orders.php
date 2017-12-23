@@ -1,12 +1,14 @@
 <?php include_once 'admin_includes/main_header.php';
-$category_id = $_GET['category_id'];
-$order_id = $_GET['order_id'];
-$getFoodOrders1 = "SELECT * FROM food_orders WHERE order_id = '$order_id' AND category_id = '$category_id' AND lkp_payment_status_id != 3 AND lkp_order_status_id != 3 ORDER BY id DESC";
-$getFoodOrders = $conn->query($getFoodOrders1); $i=1; ?>
+
+
+    $serviceOrders = "SELECT * FROM food_orders GROUP BY order_id ORDER BY id DESC"; 
+    $getServiceOrderData = $conn->query($serviceOrders);
+    $i=1;
+?>
      <div class="site-content">
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
-            <h3 class="m-t-0 m-b-5">Food Orders</h3>
+            <h3 class="m-t-0 m-b-5">Orders</h3>
           </div>
           <div class="panel-body">
             <div class="table-responsive">
@@ -14,40 +16,24 @@ $getFoodOrders = $conn->query($getFoodOrders1); $i=1; ?>
                 <thead>
                   <tr>
                     <th>S.No</th>
+                    <th>Order ID</th>
                     <th>User Name</th>
-                    <th>Order Id</th>
-                    <th>Order Price</th>                    
-                    <th>Order Status</th>
-                    <th>Payment Status</th>
+                    <th>Mobile Number</th>
+                    <th>Email Id</th>
                     <th>Order Date</th>
-                    <th>Assign To</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php while ($row = $getFoodOrders->fetch_assoc()) { ?>
+                  <?php while ($row = $getServiceOrderData->fetch_assoc()) { ?>              
                   <tr>
                     <td><?php echo $i;?></td>
-                    
-                    <td><?php echo $row['first_name'] . $row['last_name'];?></td>
-                    
-                    <td><?php echo $row['order_sub_id'];?></td>
-                    <td><?php echo $row['order_price'];?></td> 
-                    <td><?php $orderStatus = getIndividualDetails('lkp_order_status','id',$row['lkp_order_status_id']); echo $orderStatus['order_status']; ?></td>                   
-                   <td><?php $orderPaymentStatus = getIndividualDetails('lkp_payment_status','id',$row['lkp_payment_status_id']); echo $orderPaymentStatus['payment_status']; ?></td>
-                   <td><?php echo $row['created_at'];?></td> 
-                   <?php if($row['assign_service_provider_id'] == '0') { ?>
-                   <td><a href="assign_to.php?assign_id=<?php echo $row['id']; ?>&subcat_id=<?php echo $row['sub_category_id'] ?>&order_id=<?php echo $row['order_id']; ?>&category_id=<?php echo $category_id ?>">Assign To</a></td>
-                   <?php } else { 
-                    $getServiceProviderNames = getAllDataWhere('service_provider_registration','id',$row['assign_service_provider_id']); $getServiceProviderData = $getServiceProviderNames->fetch_assoc();
-                    ?>
-                   <td><a href="assign_to.php?assign_id=<?php echo $row['id']; ?>&subcat_id=<?php echo $row['sub_category_id'] ?>&order_id=<?php echo $row['order_id']; ?>&category_id=<?php echo $category_id ?>"><?php if($getServiceProviderData['id'] == $row['assign_service_provider_id']) { echo $getServiceProviderData['name']; } ?>(Assigned)</a></td>
-                   <?php } ?>
-                   <?php if($row['lkp_order_status_id'] == 2 && $row['lkp_payment_status_id'] == 1) { ?>
-                   <td><a href="../../uploads/generate_invoice/<?php echo $row['order_sub_id']; ?>.pdf" target="_blank"><i class="zmdi zmdi-local-printshop"></i></a></td>
-                   <?php } else { ?>
-                    <td><a href="edit_services_orders.php?id=<?php echo $row['id']; ?>&subcat_id=<?php echo $row['sub_category_id'] ?>&order_id=<?php echo $row['order_id']; ?>&category_id=<?php echo $category_id ?>"><i class="zmdi zmdi-edit"></i></a></td>
-                    <?php } ?>
+                    <td><?php echo $row['order_id'];?></td>
+                    <td><?php echo $row['first_name'];?></td>
+                    <td><?php echo $row['mobile'];?></td>
+                    <td><?php echo $row['email'];?></td>
+                    <td><?php echo $row['created_at'];?></td>
+                    <td><a href="view_category_orders.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-eye zmdi-hc-fw"  class=""></i></a>&nbsp;<a target="_blank" href="invoice.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-local-printshop"  class=""></i></a></td>
                   </tr>
                   <?php  $i++; } ?>
                 </tbody>

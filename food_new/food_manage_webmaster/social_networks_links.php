@@ -11,9 +11,11 @@
     $inst_link = $_POST['inst_link'];
     $fb_link = $_POST['fb_link'];
     $twitter_link = $_POST['twitter_link'];
-    $gplus_link = $_POST['gplus_link'];    
+    $gplus_link = $_POST['gplus_link'];
+    $android_app_link = $_POST['android_app_link'];
+    $apple_app_link = $_POST['apple_app_link'];   
 
-        $sql = "UPDATE `food_site_settings` SET fb_link='$fb_link', twitter_link='$twitter_link', gplus_link='$gplus_link',inst_link='$inst_link' WHERE id = '$id' ";
+        $sql = "UPDATE `food_site_settings` SET android_app_link='$android_app_link',apple_app_link='$apple_app_link',fb_link='$fb_link', twitter_link='$twitter_link', gplus_link='$gplus_link',inst_link='$inst_link' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script type='text/javascript'>window.location='social_networks_links.php?msg=success'</script>";
             } else {
@@ -59,6 +61,16 @@
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">G+ Link</label>
                     <input type="url" name="gplus_link" class="form-control" id="form-control-2" placeholder="G+ Link" data-error="Please enter a valid G+ Link." value="<?php echo $getSiteSettingsData['gplus_link'];?>" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Android App Link</label>
+                    <input type="url" name="android_app_link" class="form-control" id="form-control-2" placeholder="Android App Link" data-error="Please enter a valid Android App Link." value="<?php echo $getSiteSettingsData['android_app_link'];?>" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Apple App Link</label>
+                    <input type="url" name="apple_app_link" class="form-control" id="form-control-2" placeholder="Apple App Link" data-error="Please enter a valid Apple App Link." value="<?php echo $getSiteSettingsData['apple_app_link'];?>" required>
                     <div class="help-block with-errors"></div>
                   </div>
                   <button type="submit" name="submit" value="Submit" class="btn btn-primary btn-block">Submit</button>

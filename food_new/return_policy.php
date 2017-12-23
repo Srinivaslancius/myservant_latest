@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html style="overflow-x:hidden">
 <head>
     <meta charset="utf-8">
@@ -41,15 +41,15 @@
 	  <?php include_once './header.php';?>
         </header>
     <!-- End Header =============================================== -->
-<?php $getAllAboutData = getAllDataWhere('food_content_pages','id',6);
-          $getAboutData = $getAllAboutData->fetch_assoc();
+<?php $getAllReturnPolicyData = getAllDataWhere('food_content_pages','id',11);
+          $getReturnPolicyData = $getAllReturnPolicyData->fetch_assoc();
 ?>
 <!-- SubHeader =============================================== -->
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
     	<div id="sub_content">
-    	 <h1><?php echo $getAboutData['title']; ?></h1>
-         <p><?php echo $getAboutData['meta_title']; ?></p>
+    	 <h1><?php echo $getReturnPolicyData['title']; ?></h1>
+         <p><?php echo $getReturnPolicyData['meta_title']; ?></p>
          <p></p>
         </div><!-- End sub_content -->
 	</div><!-- End subheader -->
@@ -60,7 +60,7 @@
         <div class="container">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><?php echo $getAboutData['title']; ?></li>
+                <li><?php echo $getReturnPolicyData['title']; ?></li>
             </ul>
             <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
         </div>
@@ -69,12 +69,12 @@
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
     <div class="main_title margin_mobile">
-            <h2 class="nomargin_top"><?php echo $getAboutData['title']; ?></h2>
+            <h2 class="nomargin_top"><?php echo $getReturnPolicyData['title']; ?></h2>
         </div>	
 			<div class="feature_2">
-				<?php echo $getAboutData['description']; ?>
+				<?php echo $getReturnPolicyData['description']; ?>
 			</div>
-</div>
+		</div>
 	<div class="high_light">
        <?php include_once 'view_restaurants.php'; ?>
       </div>
