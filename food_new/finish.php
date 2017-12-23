@@ -1,4 +1,4 @@
-
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
 <html>
@@ -54,13 +54,13 @@
                 <div class="col-xs-4 bs-wizard-step complete">
                   <div class="text-center bs-wizard-stepnum"><strong>1.</strong> Your details</div>
                   <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="cart.php" class="bs-wizard-dot"></a>
+                  <a href="#" class="bs-wizard-dot"></a>
                 </div>
                                
                 <div class="col-xs-4 bs-wizard-step complete">
                   <div class="text-center bs-wizard-stepnum"><strong>2.</strong> Payment</div>
                   <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="checkout.php" class="bs-wizard-dot"></a>
+                  <a href="#" class="bs-wizard-dot"></a>
                 </div>
             
               <div class="col-xs-4 bs-wizard-step complete">
@@ -78,13 +78,29 @@
         <div class="container">
             <ul>
                 <li><a href="#0">Home</a></li>
-                <li><a href="#0">Category</a></li>
-                <li>Page active</li>
+                <li><a href="#0">Place Order</a></li>
+                <li>Thank You</li>
             </ul>
             
         </div>
     </div><!-- Position -->
+<?php
+header( "refresh:10;url=index.php" );
+if($_SESSION['user_login_session_id'] == '') {
+    header ("Location: logout.php");
+} 
+?>
+<?php 
+$user_session_id = $_SESSION['user_login_session_id'];
+$order_session_id = $_SESSION['order_last_session_id'];
+$cartItems1 = "SELECT * FROM food_orders WHERE user_id = '$user_session_id' AND order_id='$order_session_id' ";
+$cartItems = $conn->query($cartItems1);
+?> 
 
+<?php
+$orderData =getAllDataWhere('food_orders','order_id',$order_session_id);
+$getAddOrder = $orderData->fetch_array();
+?>
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
 	<div class="row">
@@ -94,71 +110,61 @@
 				<div id="confirm">
 					<i class="icon_check_alt2"></i>
 					<h3>Thank you!</h3>
+					<p style="text-align:center">Your Order No is: <strong><?php echo $order_session_id; ?></strong></p>
+					<p style="text-align:center">You will be redirected to the Home in 10 seconds.</p>  
 					<p>
-                                            <b>Delivery Address: </b> Flat no: 403, Patrika Nagar, Street No:3, VR Sunshine Building, Madhpur - 500081
+                        <b>Delivery Address: </b> <?php echo $getAddOrder['address']; ?>
 					</p>
 				</div>
 				<h4>Summary</h4>
 				<table class="table table-striped nomargin">
 				<tbody>
+				<?php $cartTotal = 0; $service_tax = 0;
+					while ($getCartItems = $cartItems->fetch_assoc()) { ?>
+				<?php $getProductDetails= getIndividualDetails('food_products','id',$getCartItems['product_id']); ?>
 				<tr>
 					<td>
-						<strong>1x</strong> Enchiladas
+						<strong> <?php echo $getCartItems['item_quantity']; ?> x </strong> <?php echo $getProductDetails['product_name']; ?>
 					</td>
 					<td>
-						<strong class="pull-right">Rs. 11</strong>
+						<strong class="pull-right">Rs. <?php echo $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?></strong>
 					</td>
 				</tr>
-				<tr>
-					<td>
-						<strong>2x</strong> Burrito
-					</td>
-					<td>
-						<strong class="pull-right">Rs. 14</strong>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<strong>1x</strong> Chicken
-					</td>
-					<td>
-						<strong class="pull-right">Rs. 20</strong>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<strong>2x</strong> Corona Beer
-					</td>
-					<td>
-						<strong class="pull-right">Rs. 9</strong>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<strong>2x</strong> Cheese Cake
-					</td>
-					<td>
-						<strong class="pull-right">Rs. 12</strong>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						 Delivery schedule <a href="#" class="tooltip-1" data-placement="top" title="" data-original-title="Please consider 30 minutes of margin for the delivery!"><i class="icon_question_alt"></i></a>
-					</td>
-					<td>
-						<strong class="pull-right">Today 07.30 pm</strong>
-					</td>
-				</tr>
-				<tr>
-					<td class="total_confirm">
-						 TOTAL
-					</td>
-					<td class="total_confirm">
-						<span class="pull-right">Rs. 76</span>
-					</td>
-				</tr>
+				<?php } ?>
+				
+				
 				</tbody>
 				</table>
+				<hr>
+					<table class="table table_summary">
+					<tbody>
+					<tr>
+						<td>
+							 Subtotal <span class="pull-right">Rs.<?php echo $cartTotal; ?></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							 Delivery fee <span class="pull-right">Rs.<?php echo $getFoodSiteSettingsData['delivery_charges'] ; ?></span>
+						</td>
+					</tr>
+					<?php $service_tax += ($getFoodSiteSettingsData['service_tax']/100)*$cartTotal; ?>
+                    <tr>
+						<td>
+							 Service Tax <span class="pull-right">Rs.<?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span>
+						</td>
+					</tr>
+					<tr>
+					
+					<tr>
+						<td class="total total_confirm">
+							 TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?></span>
+							 <?php $order_total = $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?> 
+							 <?php unset($_SESSION['order_last_session_id']); ?>
+						</td>
+					</tr>
+					</tbody>
+					</table>
 			</div>
 		</div>
 	</div><!-- End row -->
@@ -173,60 +179,6 @@
 
 <div class="layer"></div><!-- Mobile menu overlay mask -->
 
-<!-- Login modal -->   
-<div class="modal fade" id="login_2" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<form action="#" class="popup-form" id="myLogin">
-                	<div class="login_icon"><i class="icon_lock_alt"></i></div>
-					<input type="text" class="form-control form-white" placeholder="Username">
-					<input type="text" class="form-control form-white" placeholder="Password">
-					<div class="text-left">
-						<a href="#">Forgot Password?</a>
-					</div>
-					<button type="submit" class="btn btn-submit">Submit</button>
-				</form>
-			</div>
-		</div>
-	</div><!-- End modal -->   
-    
-<!-- Register modal -->   
-<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<form action="#" class="popup-form" id="myRegister">
-                	<div class="login_icon"><i class="icon_lock_alt"></i></div>
-					<input type="text" class="form-control form-white" placeholder="Name">
-					<input type="text" class="form-control form-white" placeholder="Last Name">
-                    <input type="email" class="form-control form-white" placeholder="Email">
-                    <input type="text" class="form-control form-white" placeholder="Password"  id="password1">
-                    <input type="text" class="form-control form-white" placeholder="Confirm password"  id="password2">
-                    <div id="pass-info" class="clearfix"></div>
-					<div class="checkbox-holder text-left">
-						<div class="checkbox">
-							<input type="checkbox" value="accept_2" id="check_2" name="check_2" />
-							<label for="check_2"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
-						</div>
-					</div>
-					<button type="submit" class="btn btn-submit">Register</button>
-				</form>
-			</div>
-		</div>
-	</div><!-- End Register modal -->
-    
-     <!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_close"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon-search-6"></i>
-			</button>
-		</form>
-	</div>
-	<!-- End Search Menu -->
-    
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-2.2.4.min.js"></script>
 <script src="js/common_scripts_min.js"></script>
