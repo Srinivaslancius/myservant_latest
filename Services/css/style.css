@@ -383,7 +383,7 @@ a.btn_full_outline:hover {
 
 header {
     width: 100%;
-    z-index: 99999;
+    z-index: 999;
     padding-top: 4px;
     padding-bottom: 0px;
     background: rgba(0,0,0,0.5);
