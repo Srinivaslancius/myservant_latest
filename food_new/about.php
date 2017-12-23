@@ -41,13 +41,15 @@
 	  <?php include_once './header.php';?>
         </header>
     <!-- End Header =============================================== -->
-
+<?php $getAllAboutData = getAllDataWhere('food_content_pages','id',6);
+          $getAboutData = $getAllAboutData->fetch_assoc();
+?>
 <!-- SubHeader =============================================== -->
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
     	<div id="sub_content">
-    	 <h1>About Us</h1>
-         <p>One Stop Shop for all your food needs.</p>
+    	 <h1><?php echo $getAboutData['title']; ?></h1>
+         <p><?php echo $getAboutData['meta_title']; ?></p>
          <p></p>
         </div><!-- End sub_content -->
 	</div><!-- End subheader -->
@@ -58,7 +60,7 @@
         <div class="container">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li>About Us</li>
+                <li><?php echo $getAboutData['title']; ?></li>
             </ul>
             <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
         </div>
@@ -67,30 +69,10 @@
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
     <div class="main_title margin_mobile">
-            <h2 class="nomargin_top">About Us</h2>
+            <h2 class="nomargin_top"><?php echo $getAboutData['title']; ?></h2>
         </div>	
 			<div class="feature_2">
-				<h3>What is Myservant.com</h3>
-				<p> Myservant.com (A Unit of CMR Enterprises Pvt Ltd) is one of the largest online food and grocery store in Vijayawada. With over 3500 products and we deal with over 250 brands in our catalogue. The Main Vision of Myservant.com is to convert complex to simpler form. Myservant offers best online food and grocery shopping experience in and around Vijayawada. My Servant offers the best price, the best quality with on time delivery.</p>
-				<h3>Why Myservant is here?</h3>
-				<p>Myservant is an online grocery store coupled with house maintenance services which serves all your home needs in just a click. Whether it might be a metro city or an urban it doesn’t matter, we are here to save your precious time and reduce the stress on shopping household items and give life changing experience in handling household products. Myservant is an online grocery store designed just for everyone from infant to old age. We provide services at your door step with respect to your comfortable time. Select a time slot for delivery/ service and your order will be delivered right to your doorstep, anywhere in Vijayawada. You can also pay online using your debit/credit cards, wallet payments and cash on delivery.</p>
-				<h3>MyServant.com Services</h3>
-				<p>We give you wide range of grocery products from branded to non-branded including Groceries, Staples, Food items, Fruits and Vegetables, cosmetics, Beauty products, baby products, personal care and many more.</p>
-				<h3>Book a Service</h3>
-				<p>We offer different services which offers great convenience. We offer services such as Home Appliances Repairs & services, Car & bike repair Services, Online 24 X 7 emergency electrical services, Laundry Services, Plumbing Services, Air Conditioning services. You get served by the best and authorized technicians.</p>
-				<h3>Why should you shop at Myservant?</h3>
-				<p>Myservant always give prior importance to “Time”. Every individual is so willing to spare their valuable time with family and friends in their free time but unfortunately a mandate grocery shopping will kill your time. Myservant is a part of CMR services Pvt Ltd which focuses on customers and consumers valuable and precious time who shop for online grocery store in order to save their. No need to list out grocery items, no scope of traffic jam’s, you can say no to carrying, can avoid standing in line. You can just get everything you need by just one click and we will be at your door steps with your order.</p>
-				<p>This is Vijayawada’s best online grocery store. As we know you and we understand your needs. You can also order services from your house and let them do the work. We offer great security, as our services are provided by the best service man in Vijayawada. Our prices are reasonable and we offer reliable service.</p>
-				<h3>Get your service with just few clicks</h3>
-				<ul>
-				<li>Browse or search from our wide range of products.</li>
-				<li>Select all your groceries/service and add them to the cart.</li>
-				<li>Select the payment mode and give information in the fields.</li>
-				<li>Select your convenient time slots as per mentioned.</li>
-				<li>Finally, Your products will be delivered.</li>
-				</ul>
-				<p><b>Note:</b> We currently operate in Vijayawada only</p>
-				<p>Should you have any concerns or would you want to give us feedback, please do not hesitate to contact our customer service team by sending an email at customercare@myservant.com. CMR Services PVT LTD Office is located at Plot no. 40-15/2-19B, 3rd floor, Brindavan Colony Vijayawada, Andhra Pradesh, India-520010.</p>
+				<?php echo $getAboutData['description']; ?>
 			</div>
 </div>
 	<div class="high_light">

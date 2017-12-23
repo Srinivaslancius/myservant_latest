@@ -15,7 +15,7 @@
                     <li><a href="#">Team</a></li>
                     <li><a href="careers.php">Careers</a></li>
                      <li><a href="#">Help & Support </a></li>
-                    <li><a href="#">Privacy Policy </a></li>                 
+                    <li><a href="return_policy.php">Return Policy </a></li>                 
                     <li><a href="#">Offer Terms </a></li>                 
                     <li><a href="terms_conditions.php">Terms and conditions </a></li>                                   
                 </ul>
