@@ -61,7 +61,7 @@ function payment_success() {
 function payment_failure() {
 	/* Payment failure logic goes here. */
 	//echo "We are sorry. The Payment has failed";
-	header("Location: online_order_failure.php?odi");
+	header("Location: online_order_failure.php");
 }
 
 
@@ -71,7 +71,7 @@ function payment_failure() {
 
 pay_page( array ('key' => '71tFEF', 'txnid' => $_POST['txnid'], 'amount' => $_POST['amount'],
 			'firstname' => $_POST['firstname'], 'email' => $_POST['email'], 'phone' => $_POST['phone'],
-			'productinfo' => $_POST['productinfo'], 'surl' => 'payment_success', 'furl' => 'payment_failure'), 
+			'productinfo' => $_POST['productinfo'], 'surl' => $_POST['surl'], 'furl' => $_POST['furl']), 
 			'B0Gnqt1g' );
 
 /* Merchant Page. ( All the html code ) */

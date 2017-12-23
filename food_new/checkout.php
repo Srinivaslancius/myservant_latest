@@ -162,6 +162,11 @@ if($_SESSION['user_login_session_id'] == '') {
 			<input type="hidden" name='email' type='text' value='srinivas@lanciussolutions.in'>
 			<input type="hidden" name='phone' type='text' value='1234567890'>
 			<input type="hidden" name='productinfo' type='text' value='Just another test site'>
+
+
+			<input type="hidden" name='furl' type='text' value='online_order_success.php'>
+
+			<input type="hidden" name='surl' type='text' value='online_order_failure.php'>
             
 			<div class="col-md-3" id="sidebar">
             	<div class="theiaStickySidebar">

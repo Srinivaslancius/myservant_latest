@@ -28,7 +28,7 @@ if (!isset($_POST['submit'])) {
     $location = $_POST['location'];
     $created_at = date("Y-m-d h:i:s");   
 
-      if($_FILES["fileToUpload"]["name"]!='' || $_FILES["fileToUpload1"]["name"]!='') {
+      //if($_FILES["fileToUpload"]["name"]!='' || $_FILES["fileToUpload1"]["name"]!='') {
 
               $fileToUpload = uniqid().$_FILES['fileToUpload']['name'];
               $target_dir = "../../uploads/food_vendor_logo/";
@@ -44,11 +44,11 @@ if (!isset($_POST['submit'])) {
                 //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
               if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                     $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', logo = '$fileToUpload',restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' ";
-                    $conn->query($sql);
+                    //$conn->query($sql);
               }
               elseif (move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1)) {
                   $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', vendor_banner = '$fileToUpload1',restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' ";
-                  $conn->query($sql);
+                  //$conn->query($sql);
               }
 
               else {
@@ -60,7 +60,7 @@ if (!isset($_POST['submit'])) {
           } else {
              echo "<script type='text/javascript'>window.location='vendors.php?msg=fail'</script>";
           }
-}
+//}
         }   
 ?>
       <div class="site-content">
@@ -145,12 +145,7 @@ if (!isset($_POST['submit'])) {
                     <input type="password" name="password" id="password" minlength="8" data-error="Please Enter Minimum 8 characters."  class="form-control" id="form-control-2" placeholder="Password" data-error="Please enter Password." required value="<?php echo decryptPassword($getVendorsData['password']);?>">
                     <div class="help-block with-errors"></div>
                   </div>
-                  <div class="form-group">
-                    <label for="form-control-2" class="control-label">Confirm Password</label>
-                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" id="form-control-2" placeholder="Confirm Password" onChange="checkPasswordMatch();" required >
-                    <div class="help-block with-errors"></div>
-                  </div>
-                  <div id="divCheckPasswordMatch" style="color:red"></div>
+                  
                   
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Working Timings</label>
@@ -209,10 +204,10 @@ if (!isset($_POST['submit'])) {
                   </div>
                     <div class="form-group">
                     <label for="form-control-4" class="control-label">logo</label>
-                    <img src="<?php echo $base_url . 'uploads/food_vendor_logo/'.$getVendorsData['logo'] ?>"  id="output" height="100" width="100"/ required>
+                    <img src="<?php echo $base_url . 'uploads/food_vendor_logo/'.$getVendorsData['logo'] ?>"  id="output" height="100" width="100"/ >
                     <label class="btn btn-default file-upload-btn">
                         Choose file...
-                        <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload" id="fileToUpload"  onchange="loadFile(event)"  multiple="multiple" required>
+                        <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload" id="fileToUpload"  onchange="loadFile(event)"  multiple="multiple" >
                       </label>
                   </div>
                   <div class="form-group">
