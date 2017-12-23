@@ -114,6 +114,13 @@ if($_SESSION['user_login_session_id'] == '') {
 			$payment_status = 2; //In progress
 			$country = 99;		
 			$_SESSION['order_last_session_id'] = $order_id;
+			$dev_type = $_POST["dev_type"];
+			if($dev_type == 1) {
+				$delivery_charges = '0';
+			} else {
+				$delivery_charges = $_POST["delivery_charge"];
+			}
+
 
 			for($i=0;$i<$itemCount;$i++) {
 				//Generate sub randon id
@@ -124,7 +131,7 @@ if($_SESSION['user_login_session_id'] == '') {
 				$date = date("ymdhis");
 				$contstr = "MYSER-FOOD";
 				$sub_order_id = $contstr.$random1.$random2.$date;
-				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`,  `payment_method`,`lkp_payment_status_id`,`service_tax`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city_order"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."','$payment_group','$payment_status','".$_POST["service_tax"]."', '$order_id','$sub_order_id','$order_date')";
+				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`,  `payment_method`,`lkp_payment_status_id`,`service_tax`,`delivery_charges`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city_order"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."','$payment_group','$payment_status','".$_POST["service_tax"]."','$delivery_charges', '$order_id','$sub_order_id','$order_date')";
 				$servicesOrders = $conn->query($orders);
 			}
 
@@ -356,7 +363,7 @@ $('.check_dev_type').click(function(){
 	var getSubTotal = parseInt($(this).attr('data-pri-key'));
 	var getServiceTax = parseInt($('#service_tax').val());
 	if(getcheckRadio == 1) {
-		$('#hide_del_fee').hide();
+		$('#hide_del_fee').hide();		
 		$('#order_total').val(getSubTotal+getServiceTax);
 		$('#apply_price_aft_del').html(getSubTotal+getServiceTax);
 	} else {
