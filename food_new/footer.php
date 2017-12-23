@@ -12,6 +12,7 @@
                 
                <ul style="list-style-type:disc">
                     <li><a href="about.php">About us</a></li>
+                    <li><a href="contact.php">Contact us</a></li>
                     <li><a href="#">Team</a></li>
                     <li><a href="careers.php">Careers</a></li>
                      <li><a href="#">Help & Support </a></li>

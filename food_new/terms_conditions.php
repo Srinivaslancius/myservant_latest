@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html style="overflow-x:hidden">
 <head>
     <meta charset="utf-8">
@@ -44,6 +44,7 @@
 <?php $getTerms_ConditionsData = getAllDataWhere('food_content_pages','id',10);
           $getAllTerms_ConditionsData = $getTerms_ConditionsData->fetch_assoc();
 ?>
+
 <!-- SubHeader =============================================== -->
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
@@ -69,12 +70,14 @@
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
     <div class="main_title margin_mobile">
-            <h2 class="nomargin_top"><?php echo $getAllTerms_ConditionsData['title']; ?></h2>
+        <h2 class="nomargin_top"><?php echo $getAllTerms_ConditionsData['title']; ?></h2>
         </div>  
             <div class="feature_2">
                 <?php echo $getAllTerms_ConditionsData['description']; ?>
+        </ol>
+       
             </div>
-</div>
+        </div>
     <div class="high_light">
        <?php include_once 'view_restaurants.php'; ?>
       </div>
