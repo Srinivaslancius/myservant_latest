@@ -108,7 +108,7 @@ if (!isset($_POST['submit']))  {
                       <div class="form-group">
                         <label for="form-control-2" class="control-label">Location Name</label>
                         <input type="hidden" name="location_id[]" value="<?php  echo $row['id'] ;?>">
-                        <input type="text" name="location_name[]" class="form-control" id="user_input" placeholder="Location Name" data-error="Please enter Location Name" required value="<?php echo $row['location_name'];?>">
+                        <input type="text" name="location_name[]" class="form-control" id="user_input" placeholder="Location Name" data-error="Please enter Location Name" required value="<?php echo $row['location_name'];?>"><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active1 open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='lkp_locations'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active1 open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='lkp_locations'>In Active</span>" ;} ?>
                         <span id="input_status" style="color: red;"></span>
                         <input type="hidden" id="table_name" value="lkp_locations">
                         <input type="hidden" id="column_name" value="location_name">
@@ -141,5 +141,28 @@ if (!isset($_POST['submit']))  {
   
 <?php include_once 'admin_includes/footer.php'; ?>
 <script type="text/javascript">
-      $(".chosen").chosen();
+  $(".chosen").chosen();
+  //check status active or not
+    $(".check_active1").click(function(){
+      var check_active_id = $(this).attr("data-incId");
+      var table_name = $(this).attr("data-tbname");
+      var current_status = $(this).attr("data-status");
+      if(current_status == 0) {
+        send_status = 1;
+      } else {
+        send_status = 0;
+      }
+      $.ajax({
+        type:"post",
+        url:"changestatus.php",
+        data:"check_active_id="+check_active_id+"&table_name="+table_name+"&send_status="+send_status,
+        success:function(result){  
+          if(result ==1) {
+            //alert("Your Status Updated!");
+            //location.reload();
+            window.location = "edit_lkp_locations.php?lkp_pincode_id=<?php echo $lkp_pincode_id; ?>&msg=success";
+          }
+        }
+      });
+    }); 
 </script>

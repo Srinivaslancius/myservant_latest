@@ -1,3 +1,13 @@
+<?php
+include_once('../admin_includes/common_functions.php');
+$getAvailableLocations = getIndividualDetails('lkp_cities','id',$_SESSION['lkp_city_id']);
+if($_SESSION['lkp_city_id'] != '') {
+	$city_name = $getAvailableLocations['city_name'];
+} else {
+	$city_name = "Vijayawada";
+}
+?>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <div id="top_line">
@@ -6,7 +16,7 @@
 					<div class="col-md-3 col-sm-3 col-xs-3">
 					<ul id="top_links">
 
-					 <li><span class="icon-location" data-toggle="popover" data-placement="bottom" data-content="TOP SEARCHED: <br> Vijayawada, Hyderabad, Karimnagar, Chennai, Warangal, Pune, Bangalore" style="cursor:pointer">Vijayawada</span></li>
+					 <li><span class="icon-location" id="city" style="cursor:pointer"><?php echo $city_name; ?></span></li>
 
 					 <li><form>
 					 <select class="language" style="cursor:pointer">
@@ -40,18 +50,11 @@
 			<!-- End container-->
 		</div>
 		
-		<script type="text/javascript">
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover({
-        html: true,
-        template: '<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-body"><div class="form-group"><input type="text" class="form-control" id="email" placeholder="ENTER YOUR CITY" style="height:30px" required></div></div><div class="popover-content"></div><div class="popover-footer"><a href="index.php" class="btn btn-info btn-sm">Submit</a></div></div>'
-    });
-    
-    // Custom jQuery to hide popover on click of the close button
-    $(document).on("click", ".popover-footer .btn" , function(){
-        $(this).parents(".popover").popover('hide');
-    });
-});
+		
+<script type="text/javascript">
+	$('#city').on('click', function(){
+	 	window.location = "index.php?key=<?php echo $_SESSION['lkp_city_id'] ?>";
+	}); 
 </script>
 <script type="text/javascript">
 $(".language").change(function(){

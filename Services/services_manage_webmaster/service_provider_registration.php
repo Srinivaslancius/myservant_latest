@@ -61,8 +61,10 @@
                             </button>
                             <center><h4 class="modal-title">Service Employee Information</h4></center>
                           </div>
-                          <?php if($getServiceEmployeeDetails = getIndividualDetails('services_employee_registration','service_provider_registration_id',$row['id'])) { ?>
+                          <?php $getServiceEmployeeDetails1 = getAllDataWhereWithActive('services_employee_registration','service_provider_registration_id',$row['id']); if($getServiceEmployeeDetails1->num_rows > 0) {
+                          while($getServiceEmployeeDetails =$getServiceEmployeeDetails1->fetch_assoc()) { ?>
                           <div class="modal-body" id="modal_body">
+                            <center><strong class="modal-title"><?php echo $getServiceEmployeeDetails['name'];?> Details</strong></center><br>
                             <div class="row">
                               <div class="col-sm-2"></div>
                               <div class="col-sm-4">Name:</div>
@@ -84,7 +86,7 @@
                               <div class="col-sm-6"><?php echo $getServiceEmployeeDetails['specalization'];?></div>
                             </div>
                           </div>
-                          <?php } else { echo "<center><strong>There is no service emstrongloyee for this service provider.</p></center>"; } ?>
+                          <?php } } else { echo "<center><strong>There is no service employee for this service provider.</p></center>"; } ?>
                           <div class="modal-footer">
                             <button type="button" data-dismiss="modal" class="btn btn-success">Close</button>
                             <style>

@@ -105,18 +105,22 @@ if (!isset($_POST['submit']))  {
 				
 			</div>
       <?php if(isset($_GET['succ']) && $_GET['succ'] == 'log-success' ) {  ?>
+      		<div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6 alert alert-success" style="top:10px; display:block">
                   <strong>Success!</strong> Thank You for Your Feedback.
                 </div>
                 <div class="col-sm-3"></div>
+            </div>
             <?php }?>
         <?php if(isset($_GET['err']) && $_GET['err'] == 'log-fail' ) {  ?>
+        	<div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6 alert alert-danger" style="top:10px; display:block">
                   <strong>Failed!</strong> Data Updation Failed.
                 </div>
                 <div class="col-sm-3"></div>
+            </div>
         <?php }?>
 
 			<div class="row"> 

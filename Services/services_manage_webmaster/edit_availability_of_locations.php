@@ -32,7 +32,7 @@ if (!isset($_POST['submit'])) {
           <div class="panel-body">
             <?php $getAvailableLocations = getAllDataWhere('availability_of_locations','id',$id);
               $getAvailableLocationsData = $getAvailableLocations->fetch_assoc(); ?>
-            <?php $getServiceNames = getAllDataWithStatus('services_group_service_names','0');
+            <?php $getServiceNames = getAllDataWithStatus('services_category','0');
             $getServiceId = explode(',',$getAvailableLocationsData['service_id']);?>
             <div class="row">
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
@@ -42,7 +42,7 @@ if (!isset($_POST['submit'])) {
                     <select name="service_id[]" class="custom-select multi_select" multiple="multiple" data-error="This field is required." required>
                       <!-- <option value="">Select Service Name</option> -->
                       <?php while($row1 = $getServiceNames->fetch_assoc()) {  ?>
-                          <option value="<?php echo $row1['id']; ?>" <?php if($row1['id'] == in_array($row1['id'], $getServiceId)) { echo "selected=selected"; } ?> ><?php echo $row1['group_service_name']; ?></option>
+                          <option value="<?php echo $row1['id']; ?>" <?php if($row1['id'] == in_array($row1['id'], $getServiceId)) { echo "selected=selected"; } ?> ><?php echo $row1['category_name']; ?></option>
                       <?php } ?>
                    </select>
                     <div class="help-block with-errors"></div>
@@ -73,7 +73,7 @@ if (!isset($_POST['submit'])) {
                    <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your City</label>
-                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required>
+                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required  onChange="getPincodes1(this.value);">
                       <option value="">Select City</option>
                       <?php while($row = $getCities->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getAvailableLocationsData['lkp_city_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>
@@ -81,10 +81,14 @@ if (!isset($_POST['submit'])) {
                     </select>
                     <div class="help-block with-errors"></div>
                   </div>
+                  <div class="form-group">
+                    <span id="lkp_pincode_id1"/></span>
+                    <div class="help-block with-errors"></div>
+                  </div>
                   <?php $getPincodes = getAllDataWhereWithActive('lkp_pincodes','lkp_city_id',$getAvailableLocationsData['lkp_city_id']);
                   $getPincodeId = explode(',',$getAvailableLocationsData['pincodes']);
                   $checked = "checked"; ?>
-                  <div class="form-group">
+                  <div class="form-group pincodes">
                     <h4>Pincodes</h4>
                     <?php while($row1 = $getPincodes->fetch_assoc()) {  ?>
                     <input type="checkbox" value="<?php echo $row1['id']?>" <?php if($row1['id'] == in_array($row1['id'], $getPincodeId)) echo $checked; ?> name="lkp_pincode_id[]" >&nbsp;<?php echo $row1['pincode']; ?>
@@ -116,3 +120,16 @@ if (!isset($_POST['submit'])) {
   $(".multi_select").attr("required", "true");
       $(".chosen").chosen();
 </script>
+<script>
+  function getPincodes1(val) { 
+        $.ajax({
+        type: "POST",
+        url: "get_pincodes1.php",
+        data:'lkp_city_id='+val,
+        success: function(data){
+          $(".pincodes").css("display", "none");
+          $("#lkp_pincode_id1").html(data);
+        }
+        });
+    }
+  </script>
