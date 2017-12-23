@@ -63,13 +63,11 @@ $content .='<!DOCTYPE html>
 		 </td>
 		 <td></td>	
 	  <td>Order ID:<br>
-	  Order Sub Id:<br><br>
 	 Created at:<br>
 	  Payment Method:
 	 
 	  </td>
 	  <td colspan="2">'.$getOrdersData1['order_id'].'<br>
-	 '.wordwrap($getOrdersData1['order_sub_id'],20,"<br>\n",TRUE).'<br>
 	 '.$getOrdersData1['created_at'].'<br>
 	 '.$getPaymentMethodData['status'].'
 	  

@@ -4,7 +4,7 @@ include "../admin_includes/config.php";
 //Order id generating using sessions
 
 if(isset($_SESSION['order_last_session_id']) && $_SESSION['order_last_session_id']!="") {
-	$payment_status = 1; //success
+	$payment_status = $_GET['pay_stau']; //success
 	$order_id = $_SESSION['order_last_session_id'];
 	$user_id = $_SESSION['user_login_session_id'];
 	$updateOrderStatus = "UPDATE food_orders SET lkp_payment_status_id = '$payment_status' WHERE user_id = '$user_id' AND order_id='$order_id' ";
@@ -15,9 +15,8 @@ if(isset($_SESSION['order_last_session_id']) && $_SESSION['order_last_session_id
         $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
     }
     $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
-	$delCart ="DELETE FROM food_cart WHERE user_id = '$user_id' OR session_cart_id='$session_cart_id' ";
-	$conn->query($delCart);
-	
+	//$delCart ="DELETE FROM food_cart WHERE user_id = '$user_id' OR session_cart_id='$session_cart_id' ";
+	//$conn->query($delCart);
 	header("Location: finish.php?odi=".$order_id."");
 }
 ?>

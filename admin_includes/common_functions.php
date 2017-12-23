@@ -106,7 +106,7 @@
 
     function getAllDataWhereWithActive($table,$clause,$value)  {
         global $conn;
-        $sql="select * from `$table` WHERE `$clause` = '$value' AND lkp_status_id = '0' ";
+        $sql="select * from `$table` WHERE `$clause` = '$value' AND lkp_status_id = '0' order by id DESC";
         $result = $conn->query($sql);        
         return $result;
     }

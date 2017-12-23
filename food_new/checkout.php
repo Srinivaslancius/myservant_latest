@@ -50,12 +50,35 @@ if($_SESSION['user_login_session_id'] == '') {
 } 
 ?>
 <!-- SubHeader =============================================== -->
-<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
+<section class="parallax-window"  id="short"  data-parallax="scroll" data-image-src="img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
-    	
+    	<div id="sub_content">
+    	 <h1>Place your order</h1>
+            <div class="bs-wizard">
+                <div class="col-xs-4 bs-wizard-step active">
+                  <div class="text-center bs-wizard-stepnum"><strong>1.</strong> Your details</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#0" class="bs-wizard-dot"></a>
+                </div>
+                               
+                <div class="col-xs-4 bs-wizard-step disabled">
+                  <div class="text-center bs-wizard-stepnum"><strong>2.</strong> Payment</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#0" class="bs-wizard-dot"></a>
+                </div>
+            
+              <div class="col-xs-4 bs-wizard-step disabled">
+                  <div class="text-center bs-wizard-stepnum"><strong>3.</strong> Finish!</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#0" class="bs-wizard-dot"></a>
+                </div>  
+		</div><!-- End bs-wizard --> 
+        </div><!-- End sub_content -->
 	</div><!-- End subheader -->
 </section><!-- End section -->
 <!-- End SubHeader ============================================ -->
+
+
 
     <div id="position">
         <div class="container">
@@ -67,6 +90,53 @@ if($_SESSION['user_login_session_id'] == '') {
             
         </div>
     </div><!-- Position -->
+
+    <?php 
+		if(isset($_POST["submit"]) && $_POST["submit"]!="") {
+			
+			//Save Order function here
+			//$coupon_code = $_POST["coupon_code"];
+			//$coupon_code_type = $_POST["coupon_code_type"];
+			//$discount_money = $_POST["discount_money"];
+			//echo "<pre>"; print_r($_POST); die;
+			$payment_group = $_POST["pay_mn"];
+			$order_date = date("Y-m-d h:i:s");
+			$string1 = str_shuffle('abcdefghijklmnopqrstuvwxyz');
+			$random1 = substr($string1,0,3);
+			$string2 = str_shuffle('1234567890');
+			$random2 = substr($string2,0,3);
+			$contstr = "MYSER-FOOD";
+			$order_id = $contstr.$random1.$random2;
+			$service_tax = $_POST["service_tax"];
+			$itemCount = count($_POST["food_item_id"]);
+			//Saving user id and coupon id
+			$user_id = $_SESSION['user_login_session_id'];
+			$payment_status = 2; //In progress
+			$country = 99;		
+			$_SESSION['order_last_session_id'] = $order_id;
+
+			for($i=0;$i<$itemCount;$i++) {
+				//Generate sub randon id
+				$string1 = str_shuffle('abcdefghijklmnopqrstuvwxyz');
+				$random1 = substr($string1,0,3);
+				$string2 = str_shuffle('1234567890');
+				$random2 = substr($string2,0,3);
+				$date = date("ymdhis");
+				$contstr = "MYSER-FOOD";
+				$sub_order_id = $contstr.$random1.$random2.$date;
+				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`,  `payment_method`,`lkp_payment_status_id`,`service_tax`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city_order"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."','$payment_group','$payment_status','".$_POST["service_tax"]."', '$order_id','$sub_order_id','$order_date')";
+				$servicesOrders = $conn->query($orders);
+			}
+
+			if($payment_group == 1) {
+				header("Location: online_order_success.php?odi=".$order_id."&pay_stau=2");				
+			} elseif ($payment_group == 2) {
+				header("Location: hdfc_form.php");
+			} else {
+				header("Location: online_order_success.php?odi=".$order_id."&pay_stau=2");
+			}			
+		}
+    ?>
 
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
@@ -93,7 +163,7 @@ if($_SESSION['user_login_session_id'] == '') {
 				</div>
                 
 			</div><!-- End col-md-3 -->
-            <form method="post" action="hdfc_form.php">
+            <form method="post">
 			<div class="col-md-6">
 				<div class="box_style_2" id="order_process">
 					<h2 class="inner">Your order details</h2>
@@ -152,8 +222,7 @@ if($_SESSION['user_login_session_id'] == '') {
 		    $user_session_id = $_SESSION['user_login_session_id'];
 			$cartItems1 = "SELECT * FROM food_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' ";
     		$cartItems = $conn->query($cartItems1);
-			?>
-            
+			?>            
 
             <input type="hidden" name='key' type='text' value='71tFEF'>
 			<input type="hidden" name='txnid' type='text' value='<?php echo uniqid( "srinivas_" );?>'>		
@@ -162,10 +231,7 @@ if($_SESSION['user_login_session_id'] == '') {
 			<input type="hidden" name='email' type='text' value='srinivas@lanciussolutions.in'>
 			<input type="hidden" name='phone' type='text' value='1234567890'>
 			<input type="hidden" name='productinfo' type='text' value='Just another test site'>
-
-
 			<input type="hidden" name='furl' type='text' value='online_order_success.php'>
-
 			<input type="hidden" name='surl' type='text' value='online_order_failure.php'>
             
 			<div class="col-md-3" id="sidebar">
@@ -242,10 +308,10 @@ if($_SESSION['user_login_session_id'] == '') {
 					<hr>
 					<div class="row" id="options_2">
 						<div class="col-lg-8 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="2" checked name="pay_mn" class="icheck">Online Payment</label>
+							<label><input type="radio" value="2" checked name="pay_mn" class="icheck" id="online_check">Online Payment</label>
 						</div>
 						<div class="col-lg-4 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="1" name="pay_mn" class="icheck">COD</label>
+							<label><input type="radio" value="1" name="pay_mn" class="icheck" id="cod_check">COD</label>
 						</div>
 					</div><!-- Edn options 2 -->
 					<hr>

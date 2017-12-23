@@ -75,7 +75,7 @@
 			<?php $getOurBranchesData = getAllDataWithActiveRecent('services_our_branches'); ?>
 			<div class="row">			
 					<div class="feature">
-					<h4>MY SERVANT CASH ON DELIVERY AVAILABLE IN VIJAYAWADA</h4>
+					<h4>MY SERVANT CASH ON DELIVERY AVAILABLE IN VIJAYAWADA</h4><br>
 					<ol type="1" style="line-height:35px;font-size:13px">
                     <?php while ($row = $getOurBranchesData->fetch_assoc()) { ?>
                     <li>MY SERVANT CASH ON DELIVERY AVAILABLE IN <?php echo $row['address']; ?></li>

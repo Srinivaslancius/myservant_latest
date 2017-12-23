@@ -23,6 +23,8 @@
 
 	<!-- REVOLUTION SLIDER CSS -->
 	<link href="layerslider/css/layerslider.css" rel="stylesheet">
+	<!-- Popup CSS -->
+	<link rel="stylesheet" href="css/main.css">
 	<!-- For brands slider -->
 	<script src="../cdn-cgi/scripts/78d64697/cloudflare-static/email-decode.min.js"></script><script src="js/jquery-2.2.4.min.js"></script>
 <style>
@@ -34,6 +36,73 @@
     white-space:nowrap;
     margin-right: 1000px; 
     } 
+	.close1 {   
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    line-height: 2.35 !important;
+    color: #fff !important;
+    text-align: center !important;
+    background-color: #fe6003 !important;
+   padding: 7.2px 20px 7.5px 20px !important;
+    margin-top: 20px !important;
+    font-size:15px !important;
+}
+.submit {   
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    color: #fff !important;
+    text-align: center !important;
+    background-color: #fe6003 !important;
+    padding: 10px 15px 10px 15px !important;
+    border: none !important;
+     font-size:15px !important;
+}
+.selectdiv {
+  position: relative;
+  margin: 10px 33%;
+  padding-right: 100px !important;
+}
+
+.selectdiv:after {
+    /*content: '\f078';
+    font: normal normal normal 17px/1 FontAwesome;*/
+    color: #fe6003;
+    right: 11px;
+    top: 6px;
+    height: 34px;
+    padding: 10px 0px 0px 8px;
+    border-left: 1px solid #fe6003;
+    position: absolute;
+    pointer-events: none;
+}
+
+/* IE11 hide native button (thanks Matt!) */
+select::-ms-expand {
+display: none;
+}
+
+.selectdiv select {
+ 
+  -moz-appearance: none;
+ 
+  /* Add some styling */ 
+  display: block;
+  max-width: 320px;
+  height: 32px;
+  /*float: right;
+  margin: 5px 0px;*/
+  padding: 0px 3px 0px 10px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: #333;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #fe6003;
+  -ms-word-break: normal;
+  word-break: normal;
+}
+
 </style>
 </head>
 
@@ -42,6 +111,64 @@
 	<!--[if lte IE 8]>
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>.</p>
 <![endif]-->
+<?php 
+if($_GET['key']) {
+	unset($_SESSION['lkp_city_id']);
+	unset($_SESSION['lkp_pincode_id']);
+} elseif($_GET['key1']) {
+	$_SESSION['lkp_city_id'] = 1;
+	$_SESSION['lkp_pincode_id'] = 2;
+}
+if(isset($_POST['submit'])) {
+	$_SESSION['lkp_city_id'] = $_POST['lkp_city_id'];
+	$_SESSION['lkp_pincode_id'] = $_POST['lkp_pincode_id'];
+}
+?>
+
+<?php if($_SESSION['lkp_city_id'] == '' && $_SESSION['lkp_pincode_id'] == '') { ?>
+<form method="post">	
+<div id="boxes">
+  <div style="top: 199.5px; left: 551.5px; display: none;" id="dialog" class="window"><h3><b>My Servant Services</b></h3>
+    <div id="lorem" style="padding-top:20px">
+	<div class="selectdiv">
+		<?php $getStates1 = "SELECT * from lkp_cities WHERE id IN (SELECT lkp_city_id FROM availability_of_locations WHERE lkp_status_id = 0) AND lkp_status_id = '0'";
+		$getStates = $conn->query($getStates1);?>
+  <label>
+      <select name="lkp_city_id" id="lkp_city_id" onChange="getPincodes(this.value);" required>
+          <option selected value=""> Select City</option>
+          <?php while($row = $getStates->fetch_assoc()) {  ?>
+              <option value="<?php echo $row['id']; ?>" ><?php echo $row['city_name']; ?></option>
+          <?php } ?>
+      	</select>
+  	</label>
+  	</div>
+  	<div class="selectdiv">
+   		<label>
+      		<select name="lkp_pincode_id" id="lkp_pincode_id" required>
+          		<option selected value=""> Select Pincode</option>
+      		</select>
+  		</label>
+	</div>
+    </div>
+    <div id="popupfoot" style="padding-bottom:20px">
+	<div class="row">
+	<div class="col-sm-3 col-xs-1">
+	</div>
+	<div class="col-sm-3 col-xs-5">
+	<button type="submit" name="submit" value="submit" class="submit">Submit</button>
+	</div>
+	<div class="col-sm-3 col-xs-3">
+	<a href="index.php?key1=<?php echo 1; ?>" value="skip" class="close1 agree">Skip</a>
+	</div>
+	<div class="col-sm-3 col-xs-3">
+	</div>
+	</div>
+	</div>
+  </div>
+  <div style="width: 1478px; font-size: 32pt; color:white; height: 602px; display: none; opacity: 1.0;" id="mask"></div>
+</div>
+</form>
+<?php } ?>
 
 	
 
@@ -92,8 +219,17 @@
 				
 			</div>
 			<?php 
-			$getCategories = "SELECT * FROM services_category WHERE lkp_status_id = 0 ORDER BY category_position LIMIT 0,12";
-			$getCategoriesData = $conn->query($getCategories); ?>
+			if($_SESSION['lkp_city_id'] != '') {
+				$getAvailableLocations = getAllDataWhereWithTWoConditions('availability_of_locations','lkp_city_id',$_SESSION['lkp_city_id'],'pincodes',$_SESSION['lkp_pincode_id']); $getAvailableLocations1 =$getAvailableLocations->fetch_assoc();
+				$service_id = $getAvailableLocations1['service_id'];
+			} else {
+				$getAvailableLocations = getIndividualDetails('availability_of_locations','lkp_city_id',1);
+				$service_id = $getAvailableLocations['service_id'];
+			}
+
+			$getCategories = "SELECT * from services_category WHERE id IN ($service_id) AND id IN (SELECT services_category_id FROM services_sub_category WHERE lkp_status_id = 0) AND lkp_status_id = '0' ORDER BY category_position DESC LIMIT 0,12";
+				$getCategoriesData = $conn->query($getCategories);
+			?>
 			<div class="row">
                  <?php  while($getAllCategoriesData = $getCategoriesData->fetch_assoc()) { ?> 
 				<div class="col-md-2 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
@@ -228,6 +364,34 @@
     }
   });
 }());
+</script>
+
+<!-- Script for popup -->
+<script src="js/main.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  // script to get pincodes
+  function getPincodes(val) { 
+        $.ajax({
+        type: "POST",
+        url: "services_manage_webmaster/get_pincodes.php",
+        data:'lkp_city_id='+val,
+        success: function(data){
+            $("#lkp_pincode_id").html(data);
+        }
+        });
+    }
 </script>
 </body>
 

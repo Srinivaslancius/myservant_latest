@@ -430,6 +430,7 @@
 			}).trigger('propertychange');
 
 			$('.form-control-clear').click(function() {
+				$('#coupon_code').removeAttr("readonly");
 			  $(this).siblings('input[type="text"]').val('')
 			    .trigger('propertychange').focus();
 			    $('#cart_total2').html(order_total);

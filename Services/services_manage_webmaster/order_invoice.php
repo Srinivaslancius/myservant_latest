@@ -32,6 +32,7 @@ if($getOrdersData1['coupon_code'] == '') {
 }
 $service_tax = $getOrdersData1['order_price']*$getOrdersData1['service_quantity']*$getSiteSettingsData['service_tax']/100;
 $order_price = ($getOrdersData1['order_price']*$getOrdersData1['service_quantity'])+($service_tax-$discount_money);
+$sub_total = $getOrdersData1['order_price']*$getOrdersData1['service_quantity'];
 
 $content .='<!DOCTYPE html>
 <html lang="en">
@@ -113,7 +114,7 @@ $content .='<!DOCTYPE html>
 		<p>Service Tax:</p>
 		<p style="color:#f26226">Grand Total:</p>
 		</td>
-		<td style="color:#f26226"><p>Rs. '.$getOrdersData1['order_price'].'</p>
+		<td style="color:#f26226"><p>Rs. '.$sub_total.'</p>
 		<p>Rs.'.$discount_money.'</p>
 		<p>Rs.'.$service_tax.'('.$getSiteSettingsData['service_tax'].'%)</p>
 		<p>Rs. '.$order_price.'</p></td>
@@ -143,10 +144,10 @@ $to = $getOrdersData1['email'];
 $from = $getSiteSettingsData['from_email'];
 $subject = "MY SERVANT ORDER INVOICE";
 
-$message = "<p>Dear ". $getOrdersData1['first_name'] . ", <br /><br />Please see the MY SERVANT Service Details attachment.</p><br /><br />Thank You<br/>MY SERVANT. ";
+$message = "<p>Dear ". $getOrdersData1['first_name'] . ", <br /><br />Please see MY SERVANT Service Details attachment.</p><br /><br />Thank You<br/>MY SERVANT. ";
 $separator = md5(time());
 $eol = PHP_EOL;
-$filename = "../../uploads/generate_invoice/".$getOrdersData1['order_sub_id'].".pdf";
+$filename = "".$getOrdersData1['order_sub_id'].".pdf";
 $pdfdoc = $html2pdf->Output('', 'S');
 $attachment = chunk_split(base64_encode($pdfdoc));
 
@@ -186,10 +187,10 @@ $to = $getAdminData['admin_email'];
 $from = $getSiteSettingsData['from_email'];
 $subject = "MY SERVANT ORDER INVOICE";
 
-$message = "<p>Dear Admin, <br /><br />Please see the MY SERVANT Service Details attachment.</p><br /><br />Thank You<br/>MY SERVANT. ";
+$message = "<p>Dear Admin, <br /><br />Please see MY SERVANT Service Details attachment.</p><br /><br />Thank You<br/>MY SERVANT. ";
 $separator = md5(time());
 $eol = PHP_EOL;
-$filename = "../../uploads/generate_invoice/".$getOrdersData1['order_sub_id'].".pdf";
+$filename = "".$getOrdersData1['order_sub_id'].".pdf";
 $pdfdoc = $html2pdf->Output('', 'S');
 $attachment = chunk_split(base64_encode($pdfdoc));
 
