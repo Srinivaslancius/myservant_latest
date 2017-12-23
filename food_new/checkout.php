@@ -84,8 +84,8 @@ if($_SESSION['user_login_session_id'] == '') {
         <div class="container">
             <ul>
                 <li><a href="#0">Home</a></li>
-                <li><a href="#0">Category</a></li>
-                <li>Page active</li>
+                <li><a href="#0">Checkout</a></li>
+                <li>Place Your Order</li>
             </ul>
             
         </div>
@@ -265,10 +265,10 @@ if($_SESSION['user_login_session_id'] == '') {
 					<hr>
 					<div class="row" id="options_2">
 						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="2" checked name="dev_type" class="icheck">Delivery</label>
+							<label><input type="radio" value="2" checked name="dev_type" class="check_dev_type" id="del_check" data-pri-key="<?php echo $cartTotal;?>">Delivery</label>
 						</div>
 						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="1" name="dev_type" class="icheck">Take Away</label>
+							<label><input type="radio" value="1" name="dev_type" class="check_dev_type" id="take_away_check" data-pri-key="<?php echo $cartTotal; ?>">Take Away</label>
 						</div>
 					</div><!-- Edn options 2 -->
 					<hr>
@@ -279,7 +279,7 @@ if($_SESSION['user_login_session_id'] == '') {
 							 Subtotal <span class="pull-right">Rs.<?php echo $cartTotal; ?></span>
 						</td>
 					</tr>
-					<tr>
+					<tr id="hide_del_fee">
 						<td>
 							 Delivery fee <span class="pull-right">Rs.<?php echo $getFoodSiteSettingsData['delivery_charges'] ; ?></span>
 						</td>
@@ -292,19 +292,18 @@ if($_SESSION['user_login_session_id'] == '') {
 					</tr>
 					<tr>
 						<td class="total">
-							 TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?></span>
+							 TOTAL <span class="pull-right" id="apply_price_aft_del">Rs. <?php echo $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?></span>
 							 <?php $order_total = $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?> 
 						</td>
 					</tr>
 					</tbody>
 					</table>
 
-
-					<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>">
-					<input type="hidden" name="order_total" value="<?php echo $order_total; ?>">
-					<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>">
+					<input type="hidden" name="delivery_charge" value="<?php echo $getFoodSiteSettingsData['delivery_charges'];?>" id="delivery_charge">
+					<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>" id="sub_total">
+					<input type="hidden" name="order_total" value="<?php echo $order_total; ?>" id="order_total">
+					<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>" id="service_tax">
 					<input type="hidden" name="user_id" value="<?php echo $user_session_id; ?>">
-
 					<hr>
 					<div class="row" id="options_2">
 						<div class="col-lg-8 col-md-12 col-sm-12 col-xs-6">
@@ -334,59 +333,6 @@ if($_SESSION['user_login_session_id'] == '') {
 
 <div class="layer"></div><!-- Mobile menu overlay mask -->
 
-<!-- Login modal -->   
-<div class="modal fade" id="login_2" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<form action="#" class="popup-form" id="myLogin">
-                	<div class="login_icon"><i class="icon_lock_alt"></i></div>
-					<input type="text" class="form-control form-white" placeholder="Username">
-					<input type="text" class="form-control form-white" placeholder="Password">
-					<div class="text-left">
-						<a href="#">Forgot Password?</a>
-					</div>
-					<button type="submit" class="btn btn-submit">Submit</button>
-				</form>
-			</div>
-		</div>
-	</div><!-- End modal -->   
-    
-<!-- Register modal -->   
-<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<form action="#" class="popup-form" id="myRegister">
-                	<div class="login_icon"><i class="icon_lock_alt"></i></div>
-					<input type="text" class="form-control form-white" placeholder="Name">
-					<input type="text" class="form-control form-white" placeholder="Last Name">
-                    <input type="email" class="form-control form-white" placeholder="Email">
-                    <input type="text" class="form-control form-white" placeholder="Password"  id="password1">
-                    <input type="text" class="form-control form-white" placeholder="Confirm password"  id="password2">
-                    <div id="pass-info" class="clearfix"></div>
-					<div class="checkbox-holder text-left">
-						<div class="checkbox">
-							<input type="checkbox" value="accept_2" id="check_2" name="check_2" />
-							<label for="check_2"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
-						</div>
-					</div>
-					<button type="submit" class="btn btn-submit">Register</button>
-				</form>
-			</div>
-		</div>
-	</div><!-- End Register modal -->
-    
-     <!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_close"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon-search-6"></i>
-			</button>
-		</form>
-	</div>
-	<!-- End Search Menu -->
     
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-2.2.4.min.js"></script>
@@ -402,5 +348,24 @@ if($_SESSION['user_login_session_id'] == '') {
     });
 </script>
 
+<script type="text/javascript">
+$('.check_dev_type').click(function(){
+
+	var getcheckRadio = $(this).val();	
+	var getOrderDelCharge = parseInt($('#delivery_charge').val());	
+	var getSubTotal = parseInt($(this).attr('data-pri-key'));
+	var getServiceTax = parseInt($('#service_tax').val());
+	if(getcheckRadio == 1) {
+		$('#hide_del_fee').hide();
+		$('#order_total').val(getSubTotal+getServiceTax);
+		$('#apply_price_aft_del').html(getSubTotal+getServiceTax);
+	} else {
+		$('#hide_del_fee').show();
+		$('#order_total').val(getSubTotal + getOrderDelCharge+getServiceTax);
+		$('#apply_price_aft_del').html(getSubTotal + getOrderDelCharge+getServiceTax);
+	}
+
+});
+</script>
 </body>
 </html>
