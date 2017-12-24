@@ -5,7 +5,7 @@ $i=1;
 
 $vendor_id = $_SESSION['food_vendor_user_id'];
 
-$getAllVendorOrdersData = "SELECT * FROM food_orders  WHERE restaurant_id = '$vendor_id' ORDER BY id DESC";
+$getAllVendorOrdersData = "SELECT * FROM food_orders  WHERE restaurant_id = '$vendor_id' GROUP BY order_id ORDER BY id DESC";
 $getVendorOrdersData = $conn->query($getAllVendorOrdersData);
 
 ?>
