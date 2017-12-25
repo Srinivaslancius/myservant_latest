@@ -103,9 +103,6 @@
                 <h3 class="panel-title">Users</h3>
                 <div class="panel-subtitle">Users count based on register device type</div>
               </div>
-              <div class="panel-body">
-                <div id="donut" style="height: 215px"></div>
-              </div>
               <?php $getAndroidUsers = "SELECT * FROM users WHERE lkp_register_device_type_id = 2 AND lkp_admin_service_type_id = 1";
               $getAndroidUsers1 = $conn->query($getAndroidUsers);
               $getAndroidUsersCount = $getAndroidUsers1->num_rows; ?>
@@ -152,6 +149,9 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="panel-body">
+                <div id="donut" style="height: 215px"></div>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
