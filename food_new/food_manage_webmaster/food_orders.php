@@ -21,6 +21,7 @@
                     <th>Mobile Number</th>
                     <th>Email Id</th>
                     <th>Order Date</th>
+                    <th>Assign To</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -33,7 +34,14 @@
                     <td><?php echo $row['mobile'];?></td>
                     <td><?php echo $row['email'];?></td>
                     <td><?php echo $row['created_at'];?></td>
-                    <td><a href="view_category_orders.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-eye zmdi-hc-fw"  class=""></i></a>&nbsp;<a target="_blank" href="invoice.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-local-printshop"  class=""></i></a></td>
+                    <?php if($row['assign_delivery_id'] == '0') { ?>
+                     <td><a href="assign_to.php?order_id=<?php echo $row['order_id']; ?>">Assign To</a></td>
+                     <?php } else { 
+                      $getDeliveryBoysNames = getAllDataWhere('food_delivery_boys','id',$row['assign_delivery_id']); $getDeliveryBoysNamesData = $getDeliveryBoysNames->fetch_assoc();
+                      ?>
+                     <td><a href="assign_to.php?order_id=<?php echo $row['order_id']; ?>"><?php if($getDeliveryBoysNamesData['id'] == $row['assign_delivery_id']) { echo $getDeliveryBoysNamesData['name']; } ?>(Assigned)</a></td>
+                    <?php } ?>
+                    <td><a href="view_category_orders.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-eye zmdi-hc-fw"  class=""></i></a><!-- &nbsp;<a target="_blank" href="invoice.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-local-printshop"  class=""></i></a> --></td>
                   </tr>
                   <?php  $i++; } ?>
                 </tbody>
