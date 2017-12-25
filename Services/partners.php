@@ -78,7 +78,7 @@
                 <?php $getServiceProvider =  getServicesProviderDataLimit('',''); ?>
                 <?php  while($getAllgetServiceProvider = $getServiceProvider->fetch_assoc()) { ?> 
 				<div class="col-md-6 wow fadeIn" data-wow-delay="0.3s">
-					<div class="feature">
+					<div class="feature mrgn_tp">
 					<div class="row">
 					<div class="col-sm-2">
 						<center><img src="<?php echo $base_url . 'uploads/service_provider_business_logo/'.$getAllgetServiceProvider['logo'] ?>" class="img-responsive" alt="<?php echo $getAllgetServiceProvider['company_name']; ?>" style="width:65px; height:65px;margin-top:40px;margin-bottom:40px"></center>
