@@ -13,7 +13,6 @@ if (!isset($_POST['submit']))  {
   $lkp_district_id = $_POST['lkp_district_id'];
   $lkp_city_id = $_POST['lkp_city_id'];
   $lkp_pincode_id = $_POST['lkp_pincode_id'];
-  $lkp_status_id = $_POST['lkp_status_id'];
   //echo "<pre>"; print_r($_POST); die;
 
   //$i = 0;
@@ -21,7 +20,7 @@ if (!isset($_POST['submit']))  {
   for($i=0;$i<$count;$i++) {
     $location_name = $_POST['location_name'][$i];
     $id = $_POST['location_id'][$i];
-    $sql = "UPDATE lkp_locations SET lkp_state_id = '$lkp_state_id',lkp_district_id ='$lkp_district_id',lkp_city_id ='$lkp_city_id',lkp_pincode_id ='$lkp_pincode_id',location_name = '$location_name',lkp_status_id ='$lkp_status_id' WHERE id = '$id' ";
+    $sql = "UPDATE lkp_locations SET lkp_state_id = '$lkp_state_id',lkp_district_id ='$lkp_district_id',lkp_city_id ='$lkp_city_id',lkp_pincode_id ='$lkp_pincode_id',location_name = '$location_name' WHERE id = '$id' ";
     $res = $conn->query($sql);
     //$i++;
   }
@@ -116,18 +115,6 @@ if (!isset($_POST['submit']))  {
                       </div>
                     </div>
                     <?php } ?>
-                  </div>
-
-                  <?php $getStatus = getAllData('lkp_status');?>
-                  <div class="form-group">
-                    <label for="form-control-3" class="control-label">Choose your status</label>
-                    <select id="form-control-3" name="lkp_status_id" class="custom-select" data-error="This field is required." required>
-                      <option value="">Select Status</option>
-                      <?php while($row = $getStatus->fetch_assoc()) {  ?>
-                          <option <?php if($row['id'] == $getLocationsData['lkp_status_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['status']; ?></option>
-                      <?php } ?>
-                    </select>
-                    <div class="help-block with-errors"></div>
                   </div>
                 
                   <button type="submit" name="submit" class="btn btn-primary btn-block">Submit</button>

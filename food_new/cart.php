@@ -169,7 +169,7 @@ th{
 						<tr>
 							<th>ITEM</th>							
 							<th>PRICE</th>
-							<th>SOMTHING</th>
+							<th>ADDON</th>
               <th>QUANTITY</th>
 							<th>TOTAL</th>
 							<th>REMOVE</th>
@@ -258,7 +258,7 @@ th{
             <td><?php echo $getCartItems['item_quantity']; ?></td>
 						<td>Rs. <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?> /-</td>
 						<?php $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?>
-						<td><i class=" icon-trash" style="font-size:25px;color:#fe6003"></li></td>
+						<td><i class=" icon-trash del_cart_item" data-cart-id="<?php echo $getCartItems['id']; ?>" style="font-size:25px;color:#fe6003"></li></td>
 					</tr>
                      <?php } ?>
 					</tbody>
@@ -438,6 +438,27 @@ $('.update_cart_item').on('click', function (e) {
     }
 });
 
+
+$('.del_cart_item').on('click', function (e) {
+  var cartId = $(this).attr('data-cart-id');
+  //Display Add On's
+        $.ajax({
+          type:'post',
+          url:'delete_cart_tem.php',
+          data:{
+             cartId : cartId,                                
+          },
+          success:function(response) {            
+             if(response == 1) {
+                alert("Item Deleted!");
+                location.reload();
+             } else {
+               alert("Item Delete Failed!");
+               return false;
+             }
+            }
+        });
+});
 </script>
 
 </body>

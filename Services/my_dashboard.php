@@ -72,7 +72,7 @@
     <div class="container margin_60">
         <div class="row">
             <!-- <div class="col-xs-12 bhoechie-tab-container"> -->
-            <div class="col-xs-4">
+            <div class="col-sm-4 col-xs-12">
                 <div class="bhoechie-tab-menu">
                     <div class="list-group">
                         <a href="#" class="list-group-item active">
@@ -89,7 +89,7 @@
                 </div>
             </div>            
             <?php $uid=$_SESSION['user_login_session_id']; ?>
-            <div class="col-xs-8 bhoechie-tab">
+            <div class="col-sm-8 col-xs-12 bhoechie-tab">
                 <!-- My orders section -->
                 <div class="bhoechie-tab-content active total_order_details">
                     
@@ -126,13 +126,13 @@
                                                 <p><?php echo $orderData['order_sub_id']; ?></p><br>
                                                 <div class="row">
                                                 
-                                                <div class="col-sm-5">
+                                                <div class="col-sm-5 col-xs-5">
                                                 <a href="view_orders.php?token=<?php echo $orderData['order_sub_id']; ?>" class="btn_1 outline" style="border-color:#f26226;padding:2px 10px;text-transform:capitalize">Details</a>
                                                 </div>
-                                                <div class="col-sm-5">
+                                                <div class="col-sm-5 col-xs-5">
                                                 <a href="track_order_details.php?token=<?php echo $orderData['order_sub_id']; ?>" class="btn_1 outline" style="border-color:#f26226;padding:2px 10px;text-transform:capitalize">Track</a>
                                                 </div>
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-2 col-xs-2">
                                                 </div>
                                                 </div>
                                             </div>
@@ -158,28 +158,28 @@
                                   $getUserInfo = $conn->query($getUser);
                                   $getUserData = $getUserInfo->fetch_assoc();
                             ?>
-                            <div class="col-sm-12" style="margin-bottom: 10px;">
+                            <div class="col-sm-12 col-xs-12" style="margin-bottom: 10px;">
                                 <h4><b>Personal Information</b></h4>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="first-name">First name</label>
                                     <input type="text" class="form-control" readonly id="first-name" placeholder="Name" value="<?php echo $_SESSION['user_login_session_name'];?>">
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="sur-name">Last name</label>
                                     <input type="text" class="form-control" id="full-name" placeholder="Fullname" value="<?php echo $getUserData['user_full_name'];?>" readonly>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="email" class="form-control" id="email" placeholder="abc@gmail.com" value="<?php echo $getUserData['user_email'];?>" readonly>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="mobile">Mobile</label>
                                     <input type="text" class="form-control" id="mobile" placeholder="9876543210" value="<?php echo $getUserData['user_mobile'];?>" readonly>

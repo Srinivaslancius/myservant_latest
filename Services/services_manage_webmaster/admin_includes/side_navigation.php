@@ -8,8 +8,8 @@
         <div class="custom-scrollbar">
           <ul class="sidebar-menu">
             <li class="menu-title">Menu</li>
-             <li  class="<?php if($page_name == 'dashboard.php') { echo "active"; } ?>">
-              <a href="dashboard.php" aria-haspopup="true">
+             <li  class="<?php if($page_name == 'dashboard_new.php') { echo "active"; } ?>">
+              <a href="dashboard_new.php" aria-haspopup="true">
                 <span class="menu-icon">
                    <i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i>
                 </span>
@@ -179,6 +179,14 @@
                 <li  class="<?php if($page_name == 'services_today_orders.php' ) { echo "active"; } ?>"><a href="services_today_orders.php">Today Orders</a>
                 </li> 
               </ul>
+            </li>
+            <li  class="<?php if($page_name == 'payment_gateway_options.php' ) { echo "active"; } ?>">
+              <a href="payment_gateway_options.php" aria-haspopup="true">
+                <span class="menu-icon">
+                   <i class="zmdi zmdi-collection-image zmdi-hc-fw"></i>
+                </span>
+                <span class="menu-text">Payment Gateway Options</span>
+              </a>
             </li>
             <li  class="<?php if($page_name == 'services_faqs.php' || $page_name == 'add_services_faqs.php' || $page_name == 'edit_services_faqs.php' ) { echo "active"; } ?>">
               <a href="services_faqs.php" aria-haspopup="true">

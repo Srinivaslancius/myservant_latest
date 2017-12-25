@@ -18,7 +18,7 @@ div.bhoechie-tab-container {
              padding-right: 0;
              padding-left: 0;
              padding-bottom: 0;
-             min-height: 400px;
+             /*min-height: 400px;*/
              background-color: white;
              border-radius: 4px;
              -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
@@ -31,16 +31,16 @@ div.bhoechie-tab-container {
          @media only screen and (max-width: 480px) {
              .bhoechie-tab-menu .list-group-item.sub p {
              text-align:center !important;
-             font-size:11px !important;
+             font-size:14px !important;
               margin-left: 0px !important;
             }
             h5{
-             font-size:11px !important;
+             font-size:15px !important;
             }
         }
-         div.bhoechie-tab-menu .list-group-item .fa {
+         /*div.bhoechie-tab-menu .list-group-item .fa {
              margin-right: 20px;
-         }
+         }*/
          div.bhoechie-tab-menu div.list-group {
              margin-bottom: 0;
          }
