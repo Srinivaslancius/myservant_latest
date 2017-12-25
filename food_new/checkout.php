@@ -241,29 +241,29 @@ if($_SESSION['user_login_session_id'] == '') {
 				</div>
                 
 			</div><!-- End col-md-3 -->
-            <form method="post">
+            <form method="post" name="form">
 			<div class="col-md-6">
 				<div class="box_style_2" id="order_process">
 					<h2 class="inner">Your order details</h2>
 					<div class="form-group">
 						<label>First name *</label>
-						<input type="text" class="form-control" id="firstname_order" name="firstname_order" placeholder="First name">
+						<input type="text" class="form-control" id="firstname_order" name="firstname_order" placeholder="First name" required>
 					</div>
 					<div class="form-group">
 						<label>Last name *</label>
-						<input type="text" class="form-control" id="lastname_order" name="lastname_order" placeholder="Last name">
+						<input type="text" class="form-control" id="lastname_order" name="lastname_order" placeholder="Last name" required>
 					</div>
 					<div class="form-group">
 						<label>Telephone/mobile *</label>
-						<input type="text" id="tel_order" name="tel_order" class="form-control" placeholder="Telephone/mobile">
+						<input type="text" id="tel_order" name="tel_order" class="form-control" placeholder="Telephone/mobile" required>
 					</div>
 					<div class="form-group">
 						<label>Email *</label>
-						<input type="email" id="email_booking_2" name="email_order" class="form-control" placeholder="Your email">
+						<input type="email" id="email_booking_2" name="email_order" class="form-control" placeholder="Your email" required>
 					</div>
 					<div class="form-group">
 						<label>Your full address *</label>
-						<input type="text" id="address_order" name="address_order" class="form-control" placeholder=" Your full address">
+						<input type="text" id="address_order" name="address_order" class="form-control" placeholder=" Your full address" required>
 					</div>
 					<div class="row">
 						<div class="col-md-6 col-sm-6">
@@ -420,6 +420,7 @@ if($_SESSION['user_login_session_id'] == '') {
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
 <script src="assets/validate.js"></script>
+
 
 <!-- SPECIFIC SCRIPTS -->
 <script src="js/theia-sticky-sidebar.js"></script>
