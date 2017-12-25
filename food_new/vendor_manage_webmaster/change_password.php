@@ -4,16 +4,17 @@ error_reporting(0);
 if (!isset($_POST['submit']))  {
     echo "fail";
 } else  { 
-    //echo "<pre>"; print_r($_POST); die;  
-    $id = $_SESSION["food_admin_user_id"];
-    $sql = "SELECT * FROM admin_users WHERE id = '$id'";
+    
+    $id = $_SESSION['food_vendor_user_id'];
+    
+    $sql = "SELECT * FROM  food_vendors WHERE restaurant_id = '$id' ";
     $result = $conn->query($sql);
-    $getAdminUserPwd = $result->fetch_assoc();
+    $getVendorUserPwd = $result->fetch_assoc();
 
-    if($_POST['current_password'] == decryptPassword($getAdminUserPwd['admin_password'])){
+    if($_POST['current_password'] == decryptPassword($getVendorUserPwd['password'])){
         
-        $sql1 = "UPDATE admin_users SET admin_password = '" . encryptPassword($_POST["confirm_password"]) . "' WHERE  id = '$id'";
-        if($conn->query($sql1) === TRUE){                
+        $sql1 = "UPDATE food_vendors SET password = '" . encryptPassword($_POST["confirm_password"]) . "' WHERE  restaurant_id = '$id' ";
+        if($conn->query($sql1) === TRUE){
             echo "<script>alert('Password Changed Successfully');window.location.href='dashboard.php';</script>";
         }          
     } else {  
@@ -37,7 +38,7 @@ if (!isset($_POST['submit']))  {
                   </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">New Password</label>
-                    <input type="password" name="new_password" class="form-control" id="new_password" placeholder="*********" data-error="Please enter New Password." required>
+                    <input type="password" name="new_password" class="form-control" id="new_password" min-length ="8"  placeholder="*********" data-error="Please enter Atleast 8 Characters." required>
                     <span id="email_status" style="color: red;"></span>
                     <div class="help-block with-errors"></div>
                   </div>

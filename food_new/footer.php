@@ -8,9 +8,8 @@ if(!empty($_POST['email']))  {
     $created_at = date("Y-m-d h:i:s");
     $sql = "INSERT INTO food_newsletter (`email`, `created_at`) VALUES ('$email','$created_at')";
     $conn->query($sql);
-   
-$dataem = $getFoodSiteSettingsData["contact_email"];
- 
+
+$dataem = $getFoodSiteSettingsData["email"];
 //$to = "srinivas@lanciussolutions.com";
 $to = $dataem;
 $subject = "Myservent - Subscribe Us ";
@@ -21,32 +20,28 @@ $message .= '<body>
      <center><img src='.$base_url . "uploads/logo/".$getFoodSiteSettingsData["logo"].' class="logo-responsive"></center>
     </header>
     <article style=" border-left: 1px solid gray;overflow: hidden;text-align:justify; word-spacing:0.1px;line-height:25px;padding:15px">
-        <h1 style="color:#fe6003">User Subscribe Details.</h1>
+        <h1 style="color:#fe6003">Subscribe Us.</h1>
         <h4>Email: </h4><p>'.$email.'</p>
-        <h4>Created Date: </h4><p>'.$created_at.'</p>
-        
-        
-        
+        <h4>Careted Date: </h4><p>'.$created_at.'</p>
     </article>
     <footer style="padding: 1em;color: white;background-color: #fe6003;clear: left;text-align: center;">'.$getFoodSiteSettingsData['footer_text'].'</footer>
     </div>
 
     </body>';
+echo $message; die;
 
 //$sendMail = sendEmail($to,$subject,$message,$email_contact);
 $name = "My Servant";
-$from = $email;
+$from = $email_contact;
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";  
-$headers .= 'From: '.$name.'<'.$from.'>'. "\r\n";
+$headers .= 'From: '.$name.'<'.$email.'>'. "\r\n";
 if(mail($to, $subject, $message, $headers)) {
-    echo "<script type='text/javascript'>alert('Thank You! For Subscribe Us');</script>";
+    echo  "<script>alert('Thank You For Sunscribe Us')</script>";
 }
-else {
-    echo "not updated";
+
 }
-}
-?> 
+?>
     <div class="container">
         <div class="row">       
             <div class="col-md-3 col-sm-3">
