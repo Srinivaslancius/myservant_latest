@@ -126,27 +126,31 @@ if(mail($to, $subject, $message, $headers)) {
                 <li>Contact Us</li>
                
             </ul>
-            <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
+           
         </div>
     </div><!-- Position -->
+<?php $getAllCustomerServicesdata = getAllDataWhere('food_content_pages','id',12);
+          $getCustomerServicesdata = $getAllCustomerServicesdata->fetch_assoc();
+?>
 
+<?php $getAllRestaurantData = getAllDataWhere('food_content_pages','id',13);
+          $getRestaurantData = $getAllRestaurantData->fetch_assoc();
+?>
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
     <div class="row" id="contacts">
         <div class="col-md-6 col-sm-6">
             <div class="box_style_2">
-                <h2 class="inner">Customer service</h2>
-                <p class="add_bottom_30">Adipisci conclusionemque ea duo, quo id fuisset prodesset, vis ea agam quas. <strong>Lorem iisque periculis</strong> id vis, no eum utinam interesset. Quis voluptaria id per, an nibh atqui vix. Mei falli simul nusquam te.</p>
-                <p><a href="tel://+91987654321" class="phone"><i class="icon-phone-circled"></i>9876543210</a></p>
-                <p><a href=""><i class="icon-mail-3"></i>orderfood@gmail.com</a></p>
+                <h2 class="inner"><?php echo $getCustomerServicesdata['title']; ?></h2>
+                <p class="add_bottom_30">
+                    <?php echo substr(strip_tags($getCustomerServicesdata['description']), 0,200);?>
             </div>
         </div>
         <div class="col-md-6 col-sm-6">
             <div class="box_style_2">
-                <h2 class="inner">Restaurant Support</h2>
-                <p class="add_bottom_30">Quo ex rebum petentium, cum alia illud molestiae in, pro ea paulo gubergren. Ne case constituto pro, ex vis delenit complectitur, per ad <strong>everti timeam</strong> conclusionemque. Quis voluptaria id per, an nibh atqui vix.</p>
-                <p><a href="tel://+91987654321" class="phone"><i class="icon-phone-circled"></i>9876543210</a></p>
-                <p><a href=""><i class="icon-mail-3"></i>orderfood@gmail.com</a></p>
+                <h2 class="inner"><?php echo $getRestaurantData['title']; ?></h2>
+                <p class="add_bottom_30"><?php echo substr(strip_tags($getRestaurantData['description']), 0,200);?>
+                
             </div>
         </div>
     </div><!-- End row -->  
