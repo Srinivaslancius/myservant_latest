@@ -1,4 +1,5 @@
 <?php include_once './meta_fav.php';?>
+
 <?php
 
 if(!empty($_POST['email']))  {
@@ -7,8 +8,9 @@ if(!empty($_POST['email']))  {
     $created_at = date("Y-m-d h:i:s");
     $sql = "INSERT INTO food_newsletter (`email`, `created_at`) VALUES ('$email','$created_at')";
     $conn->query($sql);
-    
+   
 $dataem = $getFoodSiteSettingsData["contact_email"];
+ 
 //$to = "srinivas@lanciussolutions.com";
 $to = $dataem;
 $subject = "Myservent - Subscribe Us ";
@@ -40,7 +42,9 @@ $headers .= 'From: '.$name.'<'.$from.'>'. "\r\n";
 if(mail($to, $subject, $message, $headers)) {
     echo "<script type='text/javascript'>alert('Thank You! For Subscribe Us');</script>";
 }
-
+else {
+    echo "not updated";
+}
 }
 ?> 
     <div class="container">
