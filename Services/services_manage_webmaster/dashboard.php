@@ -63,12 +63,14 @@
             </div>
           </div>
           </a>
+          <?php $getOrders = "SELECT * FROM services_orders GROUP BY order_id"; 
+          $getOrders1 = $conn->query($getOrders); $getRowsCount1 = $getOrders1->num_rows; ?>
           <a href="view_orders.php">
           <div class="col-md-4 col-sm-5">
             <div class="widget widget-tile-2 bg-warning m-b-30">
               <div class="wt-content p-a-20 p-b-50">
                 <div class="wt-title">Orders</div>
-                <div class="wt-number"><?php echo getRowsCount('services_orders')?></div>
+                <div class="wt-number"><?php echo $getRowsCount1; ?></div>
               </div>
               <div class="wt-icon">
                 <i class="zmdi zmdi-accounts"></i>
