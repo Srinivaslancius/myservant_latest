@@ -326,7 +326,7 @@ if($_SESSION['user_login_session_id'] == '') {
 							 <strong> <?php echo $getCartItems['item_quantity']; ?> x </strong> <?php echo $getProductDetails['product_name']; ?>
 						</td>
 						<td>
-							<strong class="pull-right">Rs. <?php echo $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?></strong>
+							<strong class="pull-right">Rs. <?php echo  $getCartItems['item_price']*$getCartItems['item_quantity']; ?><?php  $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?></strong>
 						</td>
 					</tr>
 
