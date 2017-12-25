@@ -139,8 +139,10 @@
 					<button type="button" class="btn btn-info"><span class="icon-twitter-2"></span>Twitter</button>
 					</div>
 					</div><br>
-					<p style="text-align:center">(OR)</p>					
+					<p style="text-align:center">(OR)</p>
+					<label for="text">Email/Mobile:</label>				
 					<input type="text" class=" form-control " name="login_email" placeholder="Email or Mobile" required>
+					<label for="pwd">password:</label>
 					<input type="password" class=" form-control" name="login_password" placeholder="Password" required>
 					<div class="text-left">
 						<a href="forgot_password.php">Forgot Password?</a>
