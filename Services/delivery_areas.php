@@ -72,13 +72,13 @@
 		<div class="main_title">
 				<h2>Delivery Areas</h2>					
 			</div>
-			<?php $getOurBranchesData = getAllDataWithActiveRecent('services_our_branches'); ?>
+			<?php $getOurBranchesData = getAllDataWhere('services_our_branches','lkp_status_id','0'); ?>
 			<div class="row">			
 					<div class="feature">
 					<h4>MY SERVANT CASH ON DELIVERY AVAILABLE IN VIJAYAWADA</h4><br>
 					<ol type="1" style="line-height:35px;font-size:13px">
                     <?php while ($row = $getOurBranchesData->fetch_assoc()) { ?>
-                    <li>MY SERVANT CASH ON DELIVERY AVAILABLE IN <?php echo $row['address']; ?></li>
+                    <li>MY SERVANT CASH ON DELIVERY AVAILABLE IN <?php echo strip_tags($row['address']); ?></li>
                     <?php } ?>
                     </ol>					
 					</div>
