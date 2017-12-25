@@ -383,15 +383,17 @@ if($_SESSION['user_login_session_id'] == '') {
 					<input type="hidden" name="order_total" value="<?php echo $order_total; ?>" id="order_total">
 					<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>" id="service_tax">
 					<input type="hidden" name="user_id" value="<?php echo $user_session_id; ?>">
-					<hr>
+					<hr>					
+
 					<div class="row" id="options_2">
 						<div class="col-lg-8 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="2" checked name="pay_mn" class="icheck" id="online_check">Online Payment</label>
+							<label class="radiob"><input type="radio" value="2" checked name="pay_mn" id="online_check">Online Payment<span class="checkmark"></span></label>
 						</div>
 						<div class="col-lg-4 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="1" name="pay_mn" class="icheck" id="cod_check">COD</label>
+							<label class="radiob"><input type="radio" value="1" name="pay_mn"id="cod_check">COD<span class="checkmark"></span></label>
 						</div>
 					</div><!-- Edn options 2 -->
+
 					<hr>
 
 					<input type="submit" name="submit" value="Go to checkout" class="btn_full">					
