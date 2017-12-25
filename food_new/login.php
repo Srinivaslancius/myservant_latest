@@ -157,12 +157,17 @@
 				<center> <h2 class="nomargin_top" style="color:#f26226">Register</h2></center>
 					<hr class="more_margin">
                 <!--	<center><div class="login_icon"><i class="icon_lock_alt"></i></div></center>-->
+                	<label for="user_name">Name:</label>
 					<input type="text" name="user_name" class=" form-control"  placeholder="Name" required>
+					<label for="user_mobile">Mobile:</label>
 					<input type="tel" name="user_mobile" id="user_mobile" class=" form-control valid_mobile_num"  placeholder="Mobile Number" maxlength="10" pattern="[0-9]{10}" onkeyup="checkMobile();" required>
                     <span id="input_status1" style="color: red;"></span>
+                    <label for="user_email">Email:</label>
                     <input type="email" name="user_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="user_email" class=" form-control" placeholder="Email" onkeyup="checkEmail();" required>
                     <span id="input_status" style="color: red;"></span>
+                    <label for="user_password">Password:</label>
                     <input type="password" name="user_password" autocomplete="off" class=" form-control" minlength="8" id="user_password" placeholder="Password" required>
+                    <label for="confirm_password">Confirm Password:</label>
                     <input type="password" name="confirm_password" class=" form-control" minlength="8" id="confirm_password" placeholder="Confirm password" onChange="checkPasswordMatch();" required>
                     <div id="divCheckPasswordMatch" style="color:red"></div>
                     <div id="pass-info" class="clearfix"></div>					
