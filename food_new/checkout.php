@@ -1,4 +1,4 @@
-
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
 <html>
@@ -43,6 +43,77 @@
     <header>
         <?php include_once './header.php';?>
     </header>
+    <style>
+/* The container */
+.radiob {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radiob input {
+    position: absolute;
+    opacity: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radiob:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radiob input:checked ~ .checkmark {
+    background-color: #555;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radiob input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radiob .checkmark:after {
+ left: 9px;
+    top: 6px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+#options_2 label {
+    font-size: 12px;
+    padding-top: 5px;
+}
+</style>
     <!-- End Header =============================================== -->
 <?php
 if($_SESSION['user_login_session_id'] == '') {
@@ -272,12 +343,13 @@ if($_SESSION['user_login_session_id'] == '') {
 					<hr>
 					<div class="row" id="options_2">
 						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="2" checked name="dev_type" class="check_dev_type" id="del_check" data-pri-key="<?php echo $cartTotal;?>">Delivery</label>
+							<label class="radiob"><input type="radio" value="2" checked name="dev_type" class="check_dev_type" id="del_check" data-pri-key="<?php echo $cartTotal;?>">Delivery
+							<span class="checkmark"></span></label>
 						</div>
 						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="1" name="dev_type" class="check_dev_type" id="take_away_check" data-pri-key="<?php echo $cartTotal; ?>">Take Away</label>
+							<label class="radiob"><input type="radio" value="1" name="dev_type" class="check_dev_type" id="take_away_check" data-pri-key="<?php echo $cartTotal; ?>">Take Away<span class="checkmark"></span></label>
 						</div>
-					</div><!-- Edn options 2 -->
+					</div><!-- Edn options 2 -->					
 					<hr>
 					<table class="table table_summary">
 					<tbody>
@@ -311,15 +383,17 @@ if($_SESSION['user_login_session_id'] == '') {
 					<input type="hidden" name="order_total" value="<?php echo $order_total; ?>" id="order_total">
 					<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>" id="service_tax">
 					<input type="hidden" name="user_id" value="<?php echo $user_session_id; ?>">
-					<hr>
+					<hr>					
+
 					<div class="row" id="options_2">
 						<div class="col-lg-8 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="2" checked name="pay_mn" class="icheck" id="online_check">Online Payment</label>
+							<label class="radiob"><input type="radio" value="2" checked name="pay_mn" id="online_check">Online Payment<span class="checkmark"></span></label>
 						</div>
 						<div class="col-lg-4 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="1" name="pay_mn" class="icheck" id="cod_check">COD</label>
+							<label class="radiob"><input type="radio" value="1" name="pay_mn"id="cod_check">COD<span class="checkmark"></span></label>
 						</div>
 					</div><!-- Edn options 2 -->
+
 					<hr>
 
 					<input type="submit" name="submit" value="Go to checkout" class="btn_full">					

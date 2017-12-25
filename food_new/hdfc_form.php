@@ -5,13 +5,13 @@ require_once dirname( __FILE__ ) . '/payu.php';
 function payment_success() {
 	/* Payment success logic goes here. */
 	//echo "Congratulations !! The Payment is successful.";		
-	header("Location: online_order_success.php");
+	header("Location: ordersuccess.php");
 }
 
 function payment_failure() {
 	/* Payment failure logic goes here. */
 	//echo "We are sorry. The Payment has failed";
-	header("Location: online_order_failure.php");
+	header("Location: orderfailure.php");
 }
 
 
