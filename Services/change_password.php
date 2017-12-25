@@ -94,7 +94,7 @@
     <br>
     <div class="container margin_60">
         <div class="row">
-            <div class="col-xs-4">
+            <div class="col-sm-4 col-xs-12">
                 <div class="bhoechie-tab-menu">
                     <div class="list-group">
                         <a href="my_dashboard.php" class="list-group-item">
@@ -110,7 +110,7 @@
                     </div>    
                 </div>
             </div>
-            <div class="col-xs-8 bhoechie-tab">
+            <div class="col-sm-8 col-xs-12 bhoechie-tab">
                 <!-- Change password section -->
                 <div class="bhoechie-tab-content active">
                     <div class="row">

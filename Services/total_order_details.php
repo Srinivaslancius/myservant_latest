@@ -25,13 +25,13 @@ while($orderData = $getOrders->fetch_assoc()) {
                                 <p>'.$orderData['order_sub_id'].'</p><br>
                                 <div class="row">
                                 
-                                <div class="col-sm-5">
+                                <div class="col-sm-5 col-xs-5">
                                 <a href="view_orders.php?token='.$orderData['order_sub_id'].'" class="btn_1 outline" style="border-color:#f26226;padding:2px 10px;text-transform:capitalize">Details</a>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-5 col-xs-5">
                                 <a href="track_order_details.php?token='.$orderData['order_sub_id'].'" class="btn_1 outline" style="border-color:#f26226;padding:2px 10px;text-transform:capitalize">Track</a>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-2 col-xs-2">
                                 </div>
                                 </div>
                             </div>

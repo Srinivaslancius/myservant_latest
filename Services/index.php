@@ -220,7 +220,8 @@ if(isset($_POST['submit'])) {
 			</div>
 			<?php 
 			if($_SESSION['lkp_city_id'] != '') {
-				$getAvailableLocations = getAllDataWhereWithTWoConditions('availability_of_locations','lkp_city_id',$_SESSION['lkp_city_id'],'pincodes',$_SESSION['lkp_pincode_id']); $getAvailableLocations1 =$getAvailableLocations->fetch_assoc();
+				$getAvailableLocationsData = "SELECT * FROM availability_of_locations WHERE lkp_status_id = 0 AND lkp_city_id = '".$_SESSION['lkp_city_id']."' AND FIND_IN_SET('".$_SESSION['lkp_pincode_id']."', pincodes) ORDER BY id DESC";
+				$getAvailableLocations = $conn->query($getAvailableLocationsData); $getAvailableLocations1 =$getAvailableLocations->fetch_assoc();
 				$service_id = $getAvailableLocations1['service_id'];
 			} else {
 				$getAvailableLocations = getIndividualDetails('availability_of_locations','lkp_city_id',1);

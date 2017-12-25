@@ -305,13 +305,17 @@
 							<div class="payment-options">
 								<ul>
 									<?php if($getCount->num_rows == 0) { ?>
+									<?php $getOnlineDeatils = getIndividualDetails('payment_gateway_options','id',2); ?>
+									<?php if($getOnlineDeatils['enable_status'] == 0) { ?>
 									<li>
 										<div class="radio-option">
 											<input type="radio" name="payment_group" id="payment-2" value="2" required>
 											<label for="payment-2">Online Payment</label>
 										</div>
 									</li>
-									<?php } ?>
+									<?php } } ?>
+									<?php $getOnlineDeatils = getIndividualDetails('payment_gateway_options','id',1); ?>
+									<?php if($getOnlineDeatils['enable_status'] == 0) { ?>
 									<li>
 										<div class="radio-option">
 											<input type="radio" name="payment_group" id="payment-3" value="1" required>
@@ -319,6 +323,7 @@
 											</label>
 										</div>
 									</li>
+									<?php } ?>
 								</ul>
 							</div>
 							<div id="divId">
