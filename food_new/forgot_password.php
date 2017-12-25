@@ -5,28 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <?php include_once './meta_fav.php';?>
-    <!-- GOOGLE WEB FONT -->
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic,300,300italic' rel='stylesheet' type='text/css'>
-
-    <!-- BASE CSS -->
-    <link href="css/base.css" rel="stylesheet">
-
-		
-    
-    <!-- SPECIFIC CSS -->
-    <link href="layerslider/css/layerslider.css" rel="stylesheet">
-
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.min.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-<?php 
+    <?php 
 	error_reporting(0);
 	if(isset($_POST['submit']))  { 
+	
 	    //Login here
 	    $user_email = $_POST['login_email'];
+	   
 	    $getUserForgotData = forgotPassword($user_email);
 	    //Set variable for session
 	    if($getUserForgotPassword = $getUserForgotData->fetch_assoc()) {
@@ -45,10 +30,10 @@
 			  <h1 style="color:#fe6003">Your Password</h1>
 			  <p>Dear <span style="color:#fe6003;">'.$getUserForgotPassword["user_full_name"].'</span>.</p>
 			  <p>Want to change your password? Please click on the link given below to reset the password of your Myservant Account </p>
-			  <p><a href="'.$base_url . "Services/reset_password.php?token=".$userId.'" target="_blank"> Click here</a></p>
+			  <p><a href="'.$base_url . "food_new/reset_password.php?token=".$userId.'" target="_blank"> Click here</a></p>
 
 			  <p>If you are not able to click on the above link, please copy and paste the entire URL into your browsers address bar and press Enter.</p>
-			  <strong>'.$base_url . "Services/reset_password.php?token=".$userId.'</strong>
+			  <strong>'.$base_url . "food_new/reset_password.php?token=".$userId.'</strong>
 				<p>We hope you enjoy your stay at myservant.com, if you have any problems, questions, opinions, praise, comments, suggestions, please free to contact us at any time.</p>
 				<p>Warm Regards,<br>The Myservant Team </p>
 			</article>
@@ -56,10 +41,10 @@
 			</div>
 
 			</body>';
-
+			
 			//echo $message; die;
 			$name = "My Servant";
-			$from = $getSiteSettingsData["from_email"];
+			$from = $getFoodSiteSettingsData["from_email"];
 			$headers = "MIME-Version: 1.0" . "\r\n";
 			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";  
 			$headers .= 'From: '.$name.'<'.$from.'>'. "\r\n";
@@ -71,6 +56,24 @@
 	    }
 	}
 ?>
+    <!-- GOOGLE WEB FONT -->
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic,300,300italic' rel='stylesheet' type='text/css'>
+
+    <!-- BASE CSS -->
+    <link href="css/base.css" rel="stylesheet">
+
+		
+    
+    <!-- SPECIFIC CSS -->
+    <link href="layerslider/css/layerslider.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
 <body>
 <!--[if lte IE 8]>
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>.</p>
@@ -111,7 +114,7 @@
                 <li>Forgot Password</li>
                
             </ul>
-            <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
+            
         </div>
     </div><!-- Position -->
 
@@ -123,15 +126,15 @@
 	</div>
 	<div class="col-md-4 wow fadeIn" data-wow-delay="0.1s">
 			<div class="feature">
-				<form action="#" class="popup-form" id="myRegister">
+				
 				<center> <h2 class="nomargin_top" style="color:#f26226">Forgot Password</h2></center>
 					<hr class="more_margin">
-					<form action="#" class="popup-form">
+					<form action="" method="POST" class="popup-form">
 					 <label for="email">Email ID:</label>
-					 <input type="email" class="form-control" placeholder="Enter Email Address.">
-					<button type="submit" class="btn btn-submit">SUBMIT</button>
-				</form>
-				</form>
+					 <input type="email" name="login_email" class="form-control" placeholder="Enter Email Address." required>
+					<button type="submit" name="submit" class="btn btn-submit">SUBMIT</button>
+					</form>
+
 			</div>
 		</div>
 		<div class="col-md-4">

@@ -63,7 +63,7 @@
                 <li><a href="index.php">Home</a></li>
                 <li><?php echo $getAllTerms_ConditionsData['title']; ?></li>
             </ul>
-            <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
+            
         </div>
     </div><!-- Position -->
 
