@@ -1,4 +1,48 @@
+<?php include_once './meta_fav.php';?>
+<?php
 
+if(!empty($_POST['email']))  {
+
+    $email = $_POST['email'];
+    $created_at = date("Y-m-d h:i:s");
+    $sql = "INSERT INTO food_newsletter (`email`, `created_at`) VALUES ('$email','$created_at')";
+    $conn->query($sql);
+    
+$dataem = $getFoodSiteSettingsData["contact_email"];
+//$to = "srinivas@lanciussolutions.com";
+$to = $dataem;
+$subject = "Myservent - Subscribe Us ";
+$message = '';      
+$message .= '<body>
+    <div class="container" style=" width:50%;border: 5px solid #fe6003;margin:0 auto">
+    <header style="padding:0.8em;color: white;background-color: #fe6003;clear: left;text-align: center;">
+     <center><img src='.$base_url . "uploads/logo/".$getFoodSiteSettingsData["logo"].' class="logo-responsive"></center>
+    </header>
+    <article style=" border-left: 1px solid gray;overflow: hidden;text-align:justify; word-spacing:0.1px;line-height:25px;padding:15px">
+        <h1 style="color:#fe6003">User Subscribe Details.</h1>
+        <h4>Email: </h4><p>'.$email.'</p>
+        <h4>Created Date: </h4><p>'.$created_at.'</p>
+        
+        
+        
+    </article>
+    <footer style="padding: 1em;color: white;background-color: #fe6003;clear: left;text-align: center;">'.$getFoodSiteSettingsData['footer_text'].'</footer>
+    </div>
+
+    </body>';
+
+//$sendMail = sendEmail($to,$subject,$message,$email_contact);
+$name = "My Servant";
+$from = $email;
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";  
+$headers .= 'From: '.$name.'<'.$from.'>'. "\r\n";
+if(mail($to, $subject, $message, $headers)) {
+    echo "<script type='text/javascript'>alert('Thank You! For Subscribe Us');</script>";
+}
+
+}
+?> 
     <div class="container">
         <div class="row">       
             <div class="col-md-3 col-sm-3">
@@ -12,11 +56,9 @@
                 
                <ul style="list-style-type:disc">
                     <li><a href="about.php">About us</a></li>
-                    <li><a href="#">Team</a></li>
-                    <li><a href="careers.php">Careers</a></li>
-                     <li><a href="#">Help & Support </a></li>
-                    <li><a href="return_policy.php">Return Policy </a></li>                 
-                    <li><a href="#">Offer Terms </a></li>                 
+                    <li><a href="contact.php">Contact us</a></li>
+                     <li><a href="help_center.php">Help Center </a></li>
+                    <li><a href="return_policy.php">Return Policy </a></li>                               
                     <li><a href="terms_conditions.php">Terms and conditions </a></li>                                   
                 </ul>
         
@@ -26,21 +68,7 @@
                 <p>
                     Join our newsletter to keep be informed about offers and news.
                 </p>
-                <?php 
-
-                if(!empty($_POST['email']) )  {
-                $email = $_POST['email'];
-                $created_at = date("Y-m-d h:i:s");
-
-                $sql = "INSERT INTO food_newsletter (`email`, `created_at`) VALUES ('$email','$created_at')";
-                    if($conn->query($sql) === TRUE){
-                       echo "<script type='text/javascript'>alert('Data Updated Successfully');</script>";
-                    } else {
-                       echo "<script type='text/javascript'>window.location='index.php?msg=fail'</script>";
-                    }
-                }
-                ?>
-                
+             
                 <div id="message-newsletter_2">
                 </div>
                 <form method="post" action="" name="newsletter_2">

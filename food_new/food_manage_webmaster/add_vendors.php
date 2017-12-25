@@ -25,8 +25,8 @@
     $lkp_city_id = $_POST['lkp_city_id'];
     $location = $_POST['location'];
     $created_at = date("Y-m-d h:i:s");
-    $fileToUpload = uniqid().$_FILES['fileToUpload']['name'];
-    $fileToUpload1 = uniqid().$_FILES['fileToUpload1']['name'];
+    $fileToUpload =$_FILES['fileToUpload']['name'];
+    $fileToUpload1 =$_FILES['fileToUpload1']['name'];
 
     $string1 = str_shuffle('abcdefghijklmnopqrstuvwxyz');
     $random1 = substr($string1,0,3);

@@ -1,5 +1,5 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
-<?php $i=1; $getAdminUsers = "SELECT * FROM admin_users WHERE lkp_admin_service_type_id = 2 ORDER BY id DESC"; 
+<?php $i=1; $getAdminUsers = "SELECT * FROM admin_users WHERE lkp_admin_service_type_id = 2 ORDER BY lkp_status_id, id DESC"; 
       $getAdminUsersData = $conn->query($getAdminUsers);
 ?>
      <div class="site-content">

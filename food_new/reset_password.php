@@ -1,9 +1,27 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
 <html style="overflow-x:hidden">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <?php include_once './meta_fav.php';?>
+    <?php
+	error_reporting(0);
+	if(isset($_GET['token']) && $_GET['token']!='')  {
+	    //Login here
+	    $token = $_GET['token'];
+	}
+	if(isset($_POST["token"]) && $_POST["token"]!="") {	
+		$token = decryptPassword($_POST['token']);
+		$encNewPass = encryptPassword($_POST["user_password"]);
+		$updateq = "UPDATE users SET user_password='$encNewPass' WHERE id = '" . $token . "'";
+		if($conn->query($updateq) === TRUE){             
+            echo "<script type='text/javascript'>alert('Your Password Updated Successfully');window.location='login.php?succ=log-success'</script>";
+        } else {
+        	echo "<script type='text/javascript'>alert('Your Password not Updated');window.location='login.php?succ=log-fail'</script>";
+        }
+	}
+?>
     <!-- GOOGLE WEB FONT -->
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic,300,300italic' rel='stylesheet' type='text/css'>
 
@@ -38,18 +56,16 @@
 
     <!-- Header ================================================== -->
     <header>
-	  <?php include_once './header.php';?>
+	 <?php include_once './header.php';?>
         </header>
     <!-- End Header =============================================== -->
-<?php $getAllAboutData = getAllDataWhere('food_content_pages','id',6);
-          $getAboutData = $getAllAboutData->fetch_assoc();
-?>
+
 <!-- SubHeader =============================================== -->
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
     	<div id="sub_content">
-    	 <h1><?php echo $getAboutData['title']; ?></h1>
-         <p><?php echo $getAboutData['meta_title']; ?></p>
+    	<h1>Reset Password</h1>
+         <!-- <p>One Stop Shop for all your food needs.</p>-->
          <p></p>
         </div><!-- End sub_content -->
 	</div><!-- End subheader -->
@@ -60,26 +76,50 @@
         <div class="container">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><?php echo $getAboutData['title']; ?></li>
+                <li>Reset Password</li>
+               
             </ul>
-    
+            
         </div>
     </div><!-- Position -->
 
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
-    <div class="main_title margin_mobile">
-            <h2 class="nomargin_top"><?php echo $getAboutData['title']; ?></h2>
-        </div>	
-			<div class="feature_2">
-				<?php echo $getAboutData['description']; ?>
+        </div>
+	<div class="row">
+	<div class="col-md-4">
+	</div>
+	<div class="col-md-4 wow fadeIn" data-wow-delay="0.1s">
+			<div class="feature">
+				
+				<center> <h2 class="nomargin_top" style="color:#f26226">Reset Password</h2></center>
+					<hr class="more_margin">
+					<form action="" method="post" class="popup-form">
+					<div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" class="form-control" minlength="8" id="user_password" name="user_password" placeholder="New Password" data-error ="please entre atleast 8 characters" required>
+                    </div>
+                    <input type="hidden" name="token" value="<?php echo $token; ?>">
+					<div class="form-group">
+                        <label>Retype Password</label>
+                        <input type="password" class="form-control"  id="retypr_user_password" name="retypr_user_password" placeholder="Retype Password" onChange="checkPasswordMatch();" required>
+                    </div>
+                    <div id="divCheckPasswordMatch" style="color:red"></div>
+					<button type="submit" name="submit" class="btn btn-submit">SUBMIT</button>
+				</form>
 			</div>
-</div>
-	<div class="high_light">
-       <?php include_once 'view_restaurants.php'; ?>
-      </div>
-	  
-	  <!-- Footer ================================================== -->
+		</div>
+		<div class="col-md-4">
+	</div>
+	</div><!-- End row -->
+	
+	
+</div><!-- End container -->
+
+
+<!-- End Content =============================================== -->
+
+<!-- Footer ================================================== -->
 	<footer>
          <?php include_once 'footer.php'; ?>
 		 </footer>
@@ -88,6 +128,9 @@
 <div class="layer"></div><!-- Mobile menu overlay mask -->
 
 <!-- Login modal -->   
+ 
+    
+<!-- Register modal -->   
 
     
      <!-- Search Menu -->
@@ -107,5 +150,18 @@
 <script src="js/functions.js"></script>
 <script src="assets/validate.js"></script>
 
+
+<script type="text/javascript">
+function checkPasswordMatch() {
+		    var password = $("#user_password").val();
+		    var confirmPassword = $("#retypr_user_password").val();
+		    if (confirmPassword != password) {
+		        $("#divCheckPasswordMatch").html("Passwords do not match!");
+		        $("#retypr_user_password").val("");
+		    } else {
+		        $("#divCheckPasswordMatch").html("");
+		    }
+		}
+</script>
 </body>
 </html>

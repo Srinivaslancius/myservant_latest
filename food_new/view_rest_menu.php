@@ -312,11 +312,20 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 	var ProductCategoryId = $('#item_category_id_'+ProductId).val();	
 
 	var removeItemCheck = $(this).attr("data-key-check");
-	if(removeItemCheck == "remove") {
-	    var removeItemCheckPro = 1;
+	if(removeItemCheck == "remove") {		
+	    var removeItemCheckPro = 1;	    
+	    if($('#cart_count_inc_'+ProductId).html() == 0) {
+	    	$('.remove_cart_item').css({"pointer-events": "none", "cursor": "not-allowed"});
+	    	return false;
+	    } else {
+	    	$('.remove_cart_item').removeAttr("style");
+	    }	    
+	    
 	} else {
-		var removeItemCheckPro = 0;
+		var removeItemCheckPro = 0;	
+		$('.remove_cart_item').removeAttr("style");	
 	}
+
 	  $.ajax({
 	  type:'post',
 	  url:'save_item_cart.php',
@@ -414,7 +423,7 @@ function show_cart() {
       	//alert(response);        	
         document.getElementById("mycart").innerHTML=response;   
         //alert($('#cart_count_items').val());
-      	var myVar = $('#cart_count_items').val();
+      	var myVar = $('#total_cart_val').val();
       	if(typeof myVar=="undefined") {
       		$('.order_now').css({"pointer-events": "none", "cursor": "not-allowed", "background-color": "#d4d4d4"});
       	} else {		

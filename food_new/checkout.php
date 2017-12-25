@@ -1,4 +1,4 @@
-
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
 <html>
@@ -43,6 +43,77 @@
     <header>
         <?php include_once './header.php';?>
     </header>
+    <style>
+/* The container */
+.radiob {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radiob input {
+    position: absolute;
+    opacity: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radiob:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radiob input:checked ~ .checkmark {
+    background-color: #555;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radiob input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radiob .checkmark:after {
+ left: 9px;
+    top: 6px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+#options_2 label {
+    font-size: 12px;
+    padding-top: 5px;
+}
+</style>
     <!-- End Header =============================================== -->
 <?php
 if($_SESSION['user_login_session_id'] == '') {
@@ -50,23 +121,100 @@ if($_SESSION['user_login_session_id'] == '') {
 } 
 ?>
 <!-- SubHeader =============================================== -->
-<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
+<section class="parallax-window"  id="short"  data-parallax="scroll" data-image-src="img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
-    	
+    	<div id="sub_content">
+    	 <h1>Place your order</h1>
+            <div class="bs-wizard">
+                <div class="col-xs-4 bs-wizard-step active">
+                  <div class="text-center bs-wizard-stepnum"><strong>1.</strong> Your details</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#0" class="bs-wizard-dot"></a>
+                </div>
+                               
+                <div class="col-xs-4 bs-wizard-step disabled">
+                  <div class="text-center bs-wizard-stepnum"><strong>2.</strong> Payment</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#0" class="bs-wizard-dot"></a>
+                </div>
+            
+              <div class="col-xs-4 bs-wizard-step disabled">
+                  <div class="text-center bs-wizard-stepnum"><strong>3.</strong> Finish!</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#0" class="bs-wizard-dot"></a>
+                </div>  
+		</div><!-- End bs-wizard --> 
+        </div><!-- End sub_content -->
 	</div><!-- End subheader -->
 </section><!-- End section -->
 <!-- End SubHeader ============================================ -->
+
+
 
     <div id="position">
         <div class="container">
             <ul>
                 <li><a href="#0">Home</a></li>
-                <li><a href="#0">Category</a></li>
-                <li>Page active</li>
+                <li><a href="#0">Checkout</a></li>
+                <li>Place Your Order</li>
             </ul>
             
         </div>
     </div><!-- Position -->
+
+    <?php 
+		if(isset($_POST["submit"]) && $_POST["submit"]!="") {
+			
+			//Save Order function here
+			//$coupon_code = $_POST["coupon_code"];
+			//$coupon_code_type = $_POST["coupon_code_type"];
+			//$discount_money = $_POST["discount_money"];
+			//echo "<pre>"; print_r($_POST); die;
+			$payment_group = $_POST["pay_mn"];
+			$order_date = date("Y-m-d h:i:s");
+			$string1 = str_shuffle('abcdefghijklmnopqrstuvwxyz');
+			$random1 = substr($string1,0,3);
+			$string2 = str_shuffle('1234567890');
+			$random2 = substr($string2,0,3);
+			$contstr = "MYSER-FOOD";
+			$order_id = $contstr.$random1.$random2;
+			$service_tax = $_POST["service_tax"];
+			$itemCount = count($_POST["food_item_id"]);
+			//Saving user id and coupon id
+			$user_id = $_SESSION['user_login_session_id'];
+			$payment_status = 2; //In progress
+			$country = 99;		
+			$_SESSION['order_last_session_id'] = $order_id;
+			$dev_type = $_POST["dev_type"];
+			if($dev_type == 1) {
+				$delivery_charges = '0';
+			} else {
+				$delivery_charges = $_POST["delivery_charge"];
+			}
+
+
+			for($i=0;$i<$itemCount;$i++) {
+				//Generate sub randon id
+				$string1 = str_shuffle('abcdefghijklmnopqrstuvwxyz');
+				$random1 = substr($string1,0,3);
+				$string2 = str_shuffle('1234567890');
+				$random2 = substr($string2,0,3);
+				$date = date("ymdhis");
+				$contstr = "MYSER-FOOD";
+				$sub_order_id = $contstr.$random1.$random2.$date;
+				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`,  `payment_method`,`lkp_payment_status_id`,`service_tax`,`delivery_charges`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city_order"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."','$payment_group','$payment_status','".$_POST["service_tax"]."','$delivery_charges', '$order_id','$sub_order_id','$order_date')";
+				$servicesOrders = $conn->query($orders);
+			}
+
+			if($payment_group == 1) {
+				header("Location: online_order_success.php?odi=".$order_id."&pay_stau=2");				
+			} elseif ($payment_group == 2) {
+				header("Location: hdfc_form.php");
+			} else {
+				header("Location: online_order_success.php?odi=".$order_id."&pay_stau=2");
+			}			
+		}
+    ?>
 
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
@@ -93,7 +241,7 @@ if($_SESSION['user_login_session_id'] == '') {
 				</div>
                 
 			</div><!-- End col-md-3 -->
-            <form method="post" action="hdfc_form.php">
+            <form method="post">
 			<div class="col-md-6">
 				<div class="box_style_2" id="order_process">
 					<h2 class="inner">Your order details</h2>
@@ -152,8 +300,7 @@ if($_SESSION['user_login_session_id'] == '') {
 		    $user_session_id = $_SESSION['user_login_session_id'];
 			$cartItems1 = "SELECT * FROM food_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' ";
     		$cartItems = $conn->query($cartItems1);
-			?>
-            
+			?>            
 
             <input type="hidden" name='key' type='text' value='71tFEF'>
 			<input type="hidden" name='txnid' type='text' value='<?php echo uniqid( "srinivas_" );?>'>		
@@ -162,10 +309,7 @@ if($_SESSION['user_login_session_id'] == '') {
 			<input type="hidden" name='email' type='text' value='srinivas@lanciussolutions.in'>
 			<input type="hidden" name='phone' type='text' value='1234567890'>
 			<input type="hidden" name='productinfo' type='text' value='Just another test site'>
-
-
 			<input type="hidden" name='furl' type='text' value='online_order_success.php'>
-
 			<input type="hidden" name='surl' type='text' value='online_order_failure.php'>
             
 			<div class="col-md-3" id="sidebar">
@@ -199,12 +343,13 @@ if($_SESSION['user_login_session_id'] == '') {
 					<hr>
 					<div class="row" id="options_2">
 						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="2" checked name="dev_type" class="icheck">Delivery</label>
+							<label class="radiob"><input type="radio" value="2" checked name="dev_type" class="check_dev_type" id="del_check" data-pri-key="<?php echo $cartTotal;?>">Delivery
+							<span class="checkmark"></span></label>
 						</div>
 						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="1" name="dev_type" class="icheck">Take Away</label>
+							<label class="radiob"><input type="radio" value="1" name="dev_type" class="check_dev_type" id="take_away_check" data-pri-key="<?php echo $cartTotal; ?>">Take Away<span class="checkmark"></span></label>
 						</div>
-					</div><!-- Edn options 2 -->
+					</div><!-- Edn options 2 -->					
 					<hr>
 					<table class="table table_summary">
 					<tbody>
@@ -213,7 +358,7 @@ if($_SESSION['user_login_session_id'] == '') {
 							 Subtotal <span class="pull-right">Rs.<?php echo $cartTotal; ?></span>
 						</td>
 					</tr>
-					<tr>
+					<tr id="hide_del_fee">
 						<td>
 							 Delivery fee <span class="pull-right">Rs.<?php echo $getFoodSiteSettingsData['delivery_charges'] ; ?></span>
 						</td>
@@ -226,28 +371,29 @@ if($_SESSION['user_login_session_id'] == '') {
 					</tr>
 					<tr>
 						<td class="total">
-							 TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?></span>
+							 TOTAL <span class="pull-right" id="apply_price_aft_del">Rs. <?php echo $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?></span>
 							 <?php $order_total = $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?> 
 						</td>
 					</tr>
 					</tbody>
 					</table>
 
-
-					<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>">
-					<input type="hidden" name="order_total" value="<?php echo $order_total; ?>">
-					<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>">
+					<input type="hidden" name="delivery_charge" value="<?php echo $getFoodSiteSettingsData['delivery_charges'];?>" id="delivery_charge">
+					<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>" id="sub_total">
+					<input type="hidden" name="order_total" value="<?php echo $order_total; ?>" id="order_total">
+					<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>" id="service_tax">
 					<input type="hidden" name="user_id" value="<?php echo $user_session_id; ?>">
+					<hr>					
 
-					<hr>
 					<div class="row" id="options_2">
 						<div class="col-lg-8 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="2" checked name="pay_mn" class="icheck">Online Payment</label>
+							<label class="radiob"><input type="radio" value="2" checked name="pay_mn" id="online_check">Online Payment<span class="checkmark"></span></label>
 						</div>
 						<div class="col-lg-4 col-md-12 col-sm-12 col-xs-6">
-							<label><input type="radio" value="1" name="pay_mn" class="icheck">COD</label>
+							<label class="radiob"><input type="radio" value="1" name="pay_mn"id="cod_check">COD<span class="checkmark"></span></label>
 						</div>
 					</div><!-- Edn options 2 -->
+
 					<hr>
 
 					<input type="submit" name="submit" value="Go to checkout" class="btn_full">					
@@ -268,59 +414,6 @@ if($_SESSION['user_login_session_id'] == '') {
 
 <div class="layer"></div><!-- Mobile menu overlay mask -->
 
-<!-- Login modal -->   
-<div class="modal fade" id="login_2" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<form action="#" class="popup-form" id="myLogin">
-                	<div class="login_icon"><i class="icon_lock_alt"></i></div>
-					<input type="text" class="form-control form-white" placeholder="Username">
-					<input type="text" class="form-control form-white" placeholder="Password">
-					<div class="text-left">
-						<a href="#">Forgot Password?</a>
-					</div>
-					<button type="submit" class="btn btn-submit">Submit</button>
-				</form>
-			</div>
-		</div>
-	</div><!-- End modal -->   
-    
-<!-- Register modal -->   
-<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<form action="#" class="popup-form" id="myRegister">
-                	<div class="login_icon"><i class="icon_lock_alt"></i></div>
-					<input type="text" class="form-control form-white" placeholder="Name">
-					<input type="text" class="form-control form-white" placeholder="Last Name">
-                    <input type="email" class="form-control form-white" placeholder="Email">
-                    <input type="text" class="form-control form-white" placeholder="Password"  id="password1">
-                    <input type="text" class="form-control form-white" placeholder="Confirm password"  id="password2">
-                    <div id="pass-info" class="clearfix"></div>
-					<div class="checkbox-holder text-left">
-						<div class="checkbox">
-							<input type="checkbox" value="accept_2" id="check_2" name="check_2" />
-							<label for="check_2"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
-						</div>
-					</div>
-					<button type="submit" class="btn btn-submit">Register</button>
-				</form>
-			</div>
-		</div>
-	</div><!-- End Register modal -->
-    
-     <!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_close"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon-search-6"></i>
-			</button>
-		</form>
-	</div>
-	<!-- End Search Menu -->
     
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-2.2.4.min.js"></script>
@@ -336,5 +429,24 @@ if($_SESSION['user_login_session_id'] == '') {
     });
 </script>
 
+<script type="text/javascript">
+$('.check_dev_type').click(function(){
+
+	var getcheckRadio = $(this).val();	
+	var getOrderDelCharge = parseInt($('#delivery_charge').val());	
+	var getSubTotal = parseInt($(this).attr('data-pri-key'));
+	var getServiceTax = parseInt($('#service_tax').val());
+	if(getcheckRadio == 1) {
+		$('#hide_del_fee').hide();		
+		$('#order_total').val(getSubTotal+getServiceTax);
+		$('#apply_price_aft_del').html(getSubTotal+getServiceTax);
+	} else {
+		$('#hide_del_fee').show();
+		$('#order_total').val(getSubTotal + getOrderDelCharge+getServiceTax);
+		$('#apply_price_aft_del').html(getSubTotal + getOrderDelCharge+getServiceTax);
+	}
+
+});
+</script>
 </body>
 </html>

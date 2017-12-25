@@ -5061,16 +5061,33 @@ ul#top_tools a{
 #logo_home h1 a, header.sticky #logo_home h1 a, header#plain #logo_home h1 a, header#colored #logo_home h1 a {
     background-size: auto 25px !important;
 }
-    }
-    .margin_30{
+
+/* New chnages swapna added for banner responsive */
+#layerslider{
+       width:100% !important;
+       height:150px !important;
+        padding:0px !important;
+        margin-top:65px !important;
         margin-bottom:0px !important;
-    }
-    .mrgin{
-        margin-bottom:0px !important;
-    }
-    /*@media (max-width: 480px){
-    a#phone, a#email_footer {
-        text-align:center !important;
-    }
-    }*/
+}
+.search_back{
+   margin-top: -10px !important;
+}
+.mrgn_tp img{
+    margin-top:0px !important;
+    margin-bottom:0px !important;
+}
+
+}
+.margin_30{
+    margin-bottom:0px !important;
+}
+.mrgin{
+    margin-bottom:0px !important;
+}
+/*@media (max-width: 480px){
+a#phone, a#email_footer {
+    text-align:center !important;
+}
+}*/
     

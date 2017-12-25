@@ -10,7 +10,7 @@
     <!-- BASE CSS -->
     <link href="css/base.css" rel="stylesheet">
 
-		
+        
     
     <!-- SPECIFIC CSS -->
     <link href="layerslider/css/layerslider.css" rel="stylesheet">
@@ -19,7 +19,22 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
-
+<style>
+.icon-location,.icon-mobile,.icon-mail-1{
+    background-color: #FE6003;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    color: #fff;
+    margin-right: 15px;
+    float: left;
+    padding:5px;
+}
+</style>
 </head>
 
 
@@ -28,8 +43,56 @@
 <!--[if lte IE 8]>
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>.</p>
 <![endif]-->
+<?php
 
-	<div id="preloader">
+if(!empty($_POST['name_contact']) && !empty($_POST['how_can_help']) && !empty($_POST['email_contact']) && !empty($_POST['phone_contact']) && !empty($_POST['message_contact']))  {
+
+    $name_contact = $_POST['name_contact'];
+    $how_can_help = $_POST['how_can_help'];
+    $email_contact = $_POST['email_contact'];
+    $phone_contact = $_POST['phone_contact'];
+    $message_contact = $_POST['message_contact'];
+
+$dataem = $getFoodSiteSettingsData["contact_email"];
+//$to = "srinivas@lanciussolutions.com";
+$to = $dataem;
+$subject = "Myservent - Contact Us ";
+$message = '';      
+$message .= '<body>
+    <div class="container" style=" width:50%;border: 5px solid #fe6003;margin:0 auto">
+    <header style="padding:0.8em;color: white;background-color: #fe6003;clear: left;text-align: center;">
+     <center><img src='.$base_url . "uploads/logo/".$getFoodSiteSettingsData["logo"].' class="logo-responsive"></center>
+    </header>
+    <article style=" border-left: 1px solid gray;overflow: hidden;text-align:justify; word-spacing:0.1px;line-height:25px;padding:15px">
+        <h1 style="color:#fe6003">User Feedback Information.</h1>
+        <h4>First Name: </h4><p>'.$name_contact.'</p>
+        
+        <h4>Email: </h4><p>'.$email_contact.'</p>
+        <h4>Mobile: </h4><p>'.$phone_contact.'</p>
+        <h4>How Can I Help You: </h4><p>'.$how_can_help.'</p>
+        <h4>Message: </h4><p>'.$message_contact.'</p>
+    </article>
+    <footer style="padding: 1em;color: white;background-color: #fe6003;clear: left;text-align: center;">'.$getFoodSiteSettingsData['footer_text'].'</footer>
+    </div>
+
+    </body>';
+
+
+//$sendMail = sendEmail($to,$subject,$message,$email_contact);
+$name = "My Servant";
+$from = $email_contact;
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";  
+$headers .= 'From: '.$name.'<'.$from.'>'. "\r\n";
+if(mail($to, $subject, $message, $headers)) {
+    echo  "<script>alert('Thank You For Your feedback');window.location.href('contact.php');</script>";
+}
+
+}
+?>
+<?php $getAllContactdata = getAllDataWithStatus('food_how_can_i_help_you','0'); ?>
+          
+    <div id="preloader">
         <div class="sk-spinner sk-spinner-wave" id="status">
             <div class="sk-rect1"></div>
             <div class="sk-rect2"></div>
@@ -41,7 +104,7 @@
 
     <!-- Header ================================================== -->
      <header>
-	  <?php include_once './header.php';?>
+      <?php include_once './header.php';?>
      </header>
     <!-- End Header =============================================== -->
 
@@ -63,55 +126,91 @@
                 <li>Contact Us</li>
                
             </ul>
-            <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
+           
         </div>
     </div><!-- Position -->
+<?php $getAllCustomerServicesdata = getAllDataWhere('food_content_pages','id',12);
+          $getCustomerServicesdata = $getAllCustomerServicesdata->fetch_assoc();
+?>
 
+<?php $getAllRestaurantData = getAllDataWhere('food_content_pages','id',13);
+          $getRestaurantData = $getAllRestaurantData->fetch_assoc();
+?>
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
-	<div class="row" id="contacts">
-    	<div class="col-md-6 col-sm-6">
-        	<div class="box_style_2">
-            	<h2 class="inner">Customer service</h2>
-                <p class="add_bottom_30">Adipisci conclusionemque ea duo, quo id fuisset prodesset, vis ea agam quas. <strong>Lorem iisque periculis</strong> id vis, no eum utinam interesset. Quis voluptaria id per, an nibh atqui vix. Mei falli simul nusquam te.</p>
-                <p><a href="tel://+91987654321" class="phone"><i class="icon-phone-circled"></i>9876543210</a></p>
-                <p><a href=""><i class="icon-mail-3"></i>orderfood@gmail.com</a></p>
-            </div>
-    	</div>
+    <div class="row" id="contacts">
         <div class="col-md-6 col-sm-6">
-        	<div class="box_style_2">
-            	<h2 class="inner">Restaurant Support</h2>
-                <p class="add_bottom_30">Quo ex rebum petentium, cum alia illud molestiae in, pro ea paulo gubergren. Ne case constituto pro, ex vis delenit complectitur, per ad <strong>everti timeam</strong> conclusionemque. Quis voluptaria id per, an nibh atqui vix.</p>
-                <p><a href="tel://+91987654321" class="phone"><i class="icon-phone-circled"></i>9876543210</a></p>
-                <p><a href=""><i class="icon-mail-3"></i>orderfood@gmail.com</a></p>
+            <div class="box_style_2">
+                <h2 class="inner"><?php echo $getCustomerServicesdata['title']; ?></h2>
+                <p class="add_bottom_30">
+                    <?php echo substr(strip_tags($getCustomerServicesdata['description']), 0,200);?>
             </div>
-    	</div>
-    </div><!-- End row -->
-	
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="box_style_2">
+                <h2 class="inner"><?php echo $getRestaurantData['title']; ?></h2>
+                <p class="add_bottom_30"><?php echo substr(strip_tags($getRestaurantData['description']), 0,200);?>
+                
+            </div>
+        </div>
+    </div><!-- End row -->  
                 <div class="box_style_2">
-				<form>
-					<p><input type="text" class="form-control " placeholder="Name"></p>
-					
-                    <p><input type="email" class="form-control " placeholder="Email"></p>
-                     <p><input type="text" class="form-control " placeholder="Mobile Number"></p>
-      <p><select class="form-control" id="sel1">
-        <option>How can we help you?*</option>
-        <option>I need help with my Myservant online order.</option>
-        <option>I need help with my Myservant online order.</option>
-        <option>I need help with my Myservant online order.</option>
-      </select></p>
-	   <p> <textarea class="form-control" rows="5" id="comment"placeholder="Message*"></textarea></p>
-                    <div id="pass-info" class="clearfix"></div>					
-					<button type="submit" class="btn btn-submit" style="background-color:#f26226;color:white">Send Message</button>
-				</form>
-				</div>
+                <div class="row">
+                <div class="col-md-8 col-sm-8">
+                <form method="post" action="" id="contactform" name="form">
+                <div class="row">
+                <div class="col-sm-6">
+                <label for="text">Name:</label>
+                <p><input type="text" name= "name_contact" class="form-control " placeholder="Name" required></p>
+                </div>
+                <div class="col-sm-6">
+                <label for="email">Email:</label>               
+                <p><input type="email" name="email_contact" class="form-control " placeholder="Email" required></p>
+                </div>
+                <div class="col-sm-6">
+                <label for="text">Mobile No:</label>                
+               <input type="text" class="form-control " name="phone_contact" placeholder="Mobile Number" required>
+                </div>
+                <div class="col-sm-6">
+                <label for="text">Select:</label>
+                  <p>
+                  <select class="form-control" name="how_can_help" id="sel1" required>
+                    <option>How can we help you?*</option>
+                    <?php while($getContactdata = $getAllContactdata->fetch_assoc()) { ?>
+
+                    <option><?php echo $getContactdata['description'] ?></option>
+                    <?php } ?>
+                  </select>
+                  </p>
+                  </div>
+                  <div class="col-sm-12">
+                    <label for="text">Message:</label>                
+                    <p> <textarea class="form-control" name="message_contact" rows="4" id="comment" placeholder="Message*"></textarea></p>
+                </div>
+                <div class="col-sm-3">  
+                    <button type="submit" class="btn btn-submit" style="background-color:#f26226;color:white">Send Message</button>
+                    </div>
+                        <div class="col-sm-9">  
+                        </div>
+                </div>
+                    </div>
+                </form>
+                
+                <div class="col-md-4 col-sm-4">
+                <h4 style="color:#FE6003">Information</h4><br>
+                <p style="margin-bottom:5px"><span class="icon-location"></span> <?php echo $getFoodSiteSettingsData["address"]; ?></p>
+                <p style="margin-bottom:20px"><span class="icon-mobile"></span> <a href="Tel:<?php echo $getFoodSiteSettingsData['mobile']; ?>"><?php echo $getFoodSiteSettingsData['mobile']; ?></a> Toll Free (24*7)</p></p>
+                <p><span class="icon-mail-1"></span> <a href="mailto::<?php echo $getFoodSiteSettingsData['contact_email']; ?>"><?php echo $getFoodSiteSettingsData['email']; ?></a></p>
+                </div>
+                </div>
+                </div></div>
 </div><!-- End container -->
 <div class="high_light">
        <?php include_once 'view_restaurants.php'; ?>
       </div>
 
 <!-- Footer ================================================== -->
-	<footer>
+    <footer>
          <?php include_once 'footer.php'; ?>
     </footer>
 <!-- End Footer =============================================== -->
@@ -119,15 +218,15 @@
 <div class="layer"></div><!-- Mobile menu overlay mask -->
 
      <!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_close"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon-search-6"></i>
-			</button>
-		</form>
-	</div>
-	<!-- End Search Menu -->
+    <div class="search-overlay-menu">
+        <span class="search-overlay-close"><i class="icon_close"></i></span>
+        <form role="search" id="searchform" method="get">
+            <input value="" name="q" type="search" placeholder="Search..." />
+            <button type="submit"><i class="icon-search-6"></i>
+            </button>
+        </form>
+    </div>
+    <!-- End Search Menu -->
     
 <!-- COMMON SCRIPTS -->
 <script src="../cdn-cgi/scripts/84a23a00/cloudflare-static/email-decode.min.js"></script><script src="js/jquery-2.2.4.min.js"></script>
