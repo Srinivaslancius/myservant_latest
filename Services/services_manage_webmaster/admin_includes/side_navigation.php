@@ -8,8 +8,8 @@
         <div class="custom-scrollbar">
           <ul class="sidebar-menu">
             <li class="menu-title">Menu</li>
-             <li  class="<?php if($page_name == 'dashboard_new.php') { echo "active"; } ?>">
-              <a href="dashboard_new.php" aria-haspopup="true">
+             <li  class="<?php if($page_name == 'dashboard.php') { echo "active"; } ?>">
+              <a href="dashboard.php" aria-haspopup="true">
                 <span class="menu-icon">
                    <i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i>
                 </span>
