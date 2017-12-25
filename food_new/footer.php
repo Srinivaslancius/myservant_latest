@@ -35,7 +35,7 @@
 
                 $sql = "INSERT INTO food_newsletter (`email`, `created_at`) VALUES ('$email','$created_at')";
                     if($conn->query($sql) === TRUE){
-                       echo "<script type='text/javascript'>alert('Data Updated Successfully');</script>";
+                       echo "<script type='text/javascript'>alert('Thank You! For Subscribe Us');</script>";
                     } else {
                        echo "<script type='text/javascript'>window.location='index.php?msg=fail'</script>";
                     }
