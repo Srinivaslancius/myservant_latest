@@ -28,8 +28,9 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                             <a href="login.php"><span class="icon-user"></span> Login</a> 
                         <?php } else { ?>
                           <span class="icon-user"></span><a href="my_dashboard.php"><?php echo $_SESSION['user_login_session_name']; ?></a>
-                        | <span><a href="logout.php"><span class="icon-logout"></span>Logout</p>
+                        | <span class="icon-logout"></span><a href="logout.php">Logout</a>
                         <?php } ?>
+                    </p>
                 </div>
 
                 
