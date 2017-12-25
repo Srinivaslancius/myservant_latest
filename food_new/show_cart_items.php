@@ -40,8 +40,7 @@ if($getSelData->num_rows > 0) {
       </table>';
   }
 
-  echo '<hr>
-            <input type="hidden" id="cart_count_items" value="'.$getSelData->num_rows.'">
+  echo '<hr><input type="hidden" value='.$cartTotal.' id="total_cart_val">            
             
             <table class="table table_summary">
             <tbody>
@@ -52,7 +51,7 @@ if($getSelData->num_rows > 0) {
             </tr>
             
             <tr>
-              <td class="total">
+              <td class="total">                
                  TOTAL <span class="pull-right">Rs. '.$cartTotal.'</span>
               </td>
             </tr>

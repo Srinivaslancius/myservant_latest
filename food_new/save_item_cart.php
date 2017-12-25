@@ -72,9 +72,7 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
         </table>';
     }
 
-    echo '<hr>
-    <input type="hidden" id="cart_count_items" value="'.$getSelData->num_rows.'">
-          
+    echo '<hr><input type="hidden" value='.$cartTotal.' id="total_cart_val">    
                
           <table class="table table_summary">
           <tbody>
@@ -85,7 +83,7 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
           </tr>
          
           <tr>
-            <td class="total">
+            <td class="total">            
                TOTAL <span class="pull-right">Rs. '.$cartTotal.'</span>
             </td>
           </tr>

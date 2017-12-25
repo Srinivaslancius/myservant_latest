@@ -414,7 +414,7 @@ function show_cart() {
       	//alert(response);        	
         document.getElementById("mycart").innerHTML=response;   
         //alert($('#cart_count_items').val());
-      	var myVar = $('#cart_count_items').val();
+      	var myVar = $('#total_cart_val').val();
       	if(typeof myVar=="undefined") {
       		$('.order_now').css({"pointer-events": "none", "cursor": "not-allowed", "background-color": "#d4d4d4"});
       	} else {		
