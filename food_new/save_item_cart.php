@@ -56,7 +56,7 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
     $cartTotal = 0;
     while($cartItems = $getSelData->fetch_assoc() ) {
         $cartSubtotal += $cartItems['item_price'] * $cartItems['item_quantity'];
-        $cartTotal = $cartSubtotal + 10;
+        $cartTotal = $cartSubtotal;
     $getProductsName = getIndividualDetails('food_products','id',$cartItems['food_item_id']);    
     
     echo '<table class="table table_summary"><tbody >
@@ -83,11 +83,7 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
                Subtotal <span class="pull-right">Rs. '.$cartSubtotal.'</span>
             </td>
           </tr>
-          <tr>
-            <td>
-               Delivery fee <span class="pull-right">Rs. 10</span>
-            </td>
-          </tr>
+         
           <tr>
             <td class="total">
                TOTAL <span class="pull-right">Rs. '.$cartTotal.'</span>

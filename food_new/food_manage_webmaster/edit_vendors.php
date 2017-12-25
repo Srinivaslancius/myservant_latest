@@ -30,13 +30,13 @@ if (!isset($_POST['submit'])) {
 
       //if($_FILES["fileToUpload"]["name"]!='' || $_FILES["fileToUpload1"]["name"]!='') {
 
-              $fileToUpload = uniqid().$_FILES['fileToUpload']['name'];
+              $fileToUpload = $_FILES['fileToUpload']['name'];
               $target_dir = "../../uploads/food_vendor_logo/";
               $target_file = $target_dir . basename($fileToUpload);
               $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
               $getImgUnlink = getImageUnlink('logo','food_vendors','id',$id,$target_dir);
 
-              $fileToUpload1 = uniqid().$_FILES['fileToUpload1']['name'];
+              $fileToUpload1 = $_FILES['fileToUpload1']['name'];
               $target_dir1 = "../../uploads/food_vendor_Banner/";
               $target_file1 = $target_dir1 . basename($fileToUpload1);
               $imageFileType1 = pathinfo($target_file1,PATHINFO_EXTENSION);
