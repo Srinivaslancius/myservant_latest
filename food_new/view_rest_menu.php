@@ -243,11 +243,11 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 			<div class="col-md-3" id="sidebar">	
             	<div class="theiaStickySidebar">
 					<div id="cart_box">		
-						<h3>Your order <i class="icon_cart_alt pull-right"></i></h3>			
+						<h3>Your order<!--  <i class="icon_cart_alt pull-right"></i> --></h3>			
 						<span id="mycart">
 						</span>
 						<hr>						
-                        <a href="cart.php" class="btn_full order_now">Order now <i class="icon-left"></i></a>
+                        <a href="cart.php" class="btn_full order_now">Book now <i class="icon-left"></i></a>
                         						
 					</div><!-- End cart_box -->
                 </div><!-- End theiaStickySidebar -->
