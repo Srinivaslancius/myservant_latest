@@ -137,7 +137,7 @@
             </div><!--End tools -->                        
                         <?php while($getResults = $getSearchResults->fetch_assoc()) { 
                              $show_more = $getResults['id'];?>
-                        <div class="col-md-6">
+                        <div class="col-md-6 filter_data">
                             <div class="strip_list wow fadeIn" data-wow-delay="0.1s">
                                     <div class="row">
                                             <div class="col-md-8 col-sm-9">
