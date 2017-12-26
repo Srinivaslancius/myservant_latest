@@ -90,7 +90,7 @@
           $gethowitWorksData1 = $gethowitWorksData->fetch_assoc();
 ?>
 
-<?php $getchooseFrom = getAllDataWhere('food_content_pages','id',7);
+<?php $getchooseFrom = getAllDataWhere('food_content_pages','id',8);
           $getchooseFrom1 = $getchooseFrom->fetch_assoc();
 ?>
     <!-- Content ================================================== -->
