@@ -41,7 +41,7 @@
                       ?>
                      <td><a href="assign_to.php?order_id=<?php echo $row['order_id']; ?>"><?php if($getDeliveryBoysNamesData['id'] == $row['assign_delivery_id']) { echo $getDeliveryBoysNamesData['name']; } ?>(Assigned)</a></td>
                     <?php } ?>
-                    <td><a href="invoice.php?order_id=<?php echo $row['order_id']; ?>" target="_blank"><i class="zmdi zmdi-eye zmdi-hc-fw"  class=""></i></a><!-- &nbsp;<a target="_blank" href="invoice.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-local-printshop"  class=""></i></a> --></td>
+                    <td><a href="invoice.php?order_id=<?php echo $row['order_id']; ?>" target="_blank"><i class="zmdi zmdi-eye zmdi-hc-fw"  class=""></i></a>&nbsp;<?php if($row['lkp_order_status_id'] == 2 && $row['lkp_payment_status_id'] == 1) { ?><a href="../../uploads/food_order_invoice/<?php echo $row['order_id']; ?>.pdf" target="_blank"><i class="zmdi zmdi-local-printshop"></i></a><?php } else { ?> <a href="edit_food_orders.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-edit"></i></a><?php } ?><!-- <a target="_blank" href="invoice.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-local-printshop"  class=""></i></a> --></td>
                   </tr>
                   <?php  $i++; } ?>
                 </tbody>

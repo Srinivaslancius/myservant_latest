@@ -28,7 +28,7 @@ $message .= '<body>
     </div>
 
     </body>';
-echo $message; die;
+
 
 //$sendMail = sendEmail($to,$subject,$message,$email_contact);
 $name = "My Servant";
