@@ -41,7 +41,7 @@
                       ?>
                      <td><a href="assign_to.php?order_id=<?php echo $row['order_id']; ?>"><?php if($getDeliveryBoysNamesData['id'] == $row['assign_delivery_id']) { echo $getDeliveryBoysNamesData['name']; } ?>(Assigned)</a></td>
                     <?php } ?>
-                    <td><a href="view_category_orders.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-eye zmdi-hc-fw"  class=""></i></a><!-- &nbsp;<a target="_blank" href="invoice.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-local-printshop"  class=""></i></a> --></td>
+                    <td><a href="invoice.php?order_id=<?php echo $row['order_id']; ?>" target="_blank"><i class="zmdi zmdi-eye zmdi-hc-fw"  class=""></i></a><!-- &nbsp;<a target="_blank" href="invoice.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-local-printshop"  class=""></i></a> --></td>
                   </tr>
                   <?php  $i++; } ?>
                 </tbody>
