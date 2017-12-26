@@ -265,11 +265,17 @@ if($_SESSION['user_login_session_id'] == '') {
 						<label>Your full address *</label>
 						<input type="text" id="address_order" name="address_order" class="form-control" placeholder=" Your full address" required>
 					</div>
+					<?php $getCitiesData = getAllDataWhere('lkp_cities','lkp_status_id',0); ?>
 					<div class="row">
 						<div class="col-md-6 col-sm-6">
 							<div class="form-group">
 								<label>City *</label>
-								<input type="text" id="city_order" name="city_order" class="form-control" placeholder="Your city" required>
+								<select name="city" id="lkp_city_id" class="form-control" required>
+											<option value="">Select City</option>
+											<?php while($getCities = $getCitiesData->fetch_assoc()) { ?>
+											<option value="<?php echo $getCities['id'];?>"><?php echo $getCities['city_name'];?></option>
+											<?php } ?>
+										</select>
 							</div>
 						</div>
 						<div class="col-md-6 col-sm-6">
