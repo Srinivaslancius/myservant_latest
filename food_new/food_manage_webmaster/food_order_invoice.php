@@ -130,7 +130,7 @@ $content .='<html lang="en">
 
 //echo $content; die;
 
-require_once($base_url.'html2pdf/html2pdf.class.php');
+require_once('../../html2pdf/html2pdf.class.php');
 
 
 $html2pdf = new HTML2PDF('P', 'A3', 'fr');
