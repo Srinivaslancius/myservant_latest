@@ -14,22 +14,28 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
 
 <div class="container-fluid">
     <div class="row myservant_topheader">
-            <div class="col-md-12">              
-                <div class="col-md-2 col-xs-12">
-                    <p>Email: <a href="mailto::<?php echo $getFoodSiteSettingsData['email']; ?>"><?php echo $getFoodSiteSettingsData['email']; ?></a></p>
-                </div>
+            <div class="col-md-12">
+              <div class="col-md-1">
+			</div>			  
                 <div class="col-md-8 col-xs-12">
-                    <p>Customer Care: <a href="Tel:<?php echo $getFoodSiteSettingsData['mobile']; ?>"><?php echo $getFoodSiteSettingsData['mobile']; ?></a> Toll Free (24*7)</p>
+                    <p><span style="margin-right:10px"><i class="icon-location"></i>Vijayawada </span>
+					<span> <select style="background-color:transparent;color:white">
+					<option style="color:black">English</option>
+					<option style="color:black">Hindi</option>
+					<option style="color:black">Telugu</option>
+					</select> </span></p>
                 </div>
-
-                <div class="col-md-2 col-xs-12">
+                <div class="col-md-3 col-xs-12">
                     <p>
+					<span class="icon-phone"> 9876543210</span>
                         <?php if($_SESSION['user_login_session_id'] =='') { ?>
-                            <a href="login.php"><span class="icon-user"></span> Login</a> 
+                            <a href="login.php"><span class="icon-lock"></span> Login</a> 
                         <?php } else { ?>
                           <span class="icon-user"></span><a href="my_dashboard.php"><?php echo $_SESSION['user_login_session_name']; ?></a>
                         | <span class="icon-logout"></span><a href="logout.php">Logout</a>
+						
                         <?php } ?>
+						<span class="icon-user"> Register</span>
                     </p>
                 </div>
 
