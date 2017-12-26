@@ -21,14 +21,19 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                 <div class="col-md-8 col-xs-12">
                     <p>Customer Care: <a href="Tel:<?php echo $getFoodSiteSettingsData['mobile']; ?>"><?php echo $getFoodSiteSettingsData['mobile']; ?></a> Toll Free (24*7)</p>
                 </div>
+
                 <div class="col-md-2 col-xs-12">
-                   <?php if($_SESSION['user_login_session_id'] =='') { ?>
-                    <p><a href="login.php">Login</a></p>
-                <?php } else { ?>
-                    <p><a href="my_dashboard.php"><?php echo $_SESSION['user_login_session_name']; ?></a> | 
-                    <a href="logout.php"> Logout</a></p>
-                <?php } ?>
+                    <p>
+                        <?php if($_SESSION['user_login_session_id'] =='') { ?>
+                            <a href="login.php"><span class="icon-user"></span> Login</a> 
+                        <?php } else { ?>
+                          <span class="icon-user"></span><a href="my_dashboard.php"><?php echo $_SESSION['user_login_session_name']; ?></a>
+                        | <span class="icon-logout"></span><a href="logout.php">Logout</a>
+                        <?php } ?>
+                    </p>
                 </div>
+
+                
             </div> 
         </div>
         <div class="row">
