@@ -58,11 +58,6 @@
                             </div>
                             <div class="row">
                               <div class="col-sm-2"></div>
-                              <div class="col-sm-4">Category Position:</div>
-                              <div class="col-sm-6"><?php echo $row['category_position'];?></div>
-                            </div>
-                            <div class="row">
-                              <div class="col-sm-2"></div>
                               <div class="col-sm-4">Meta Title:</div>
                               <div class="col-sm-6"><?php echo $row['meta_title'];?></div>
                             </div>
