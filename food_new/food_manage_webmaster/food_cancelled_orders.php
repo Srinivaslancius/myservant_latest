@@ -13,7 +13,7 @@ $getFoodCancelledOrdersData = $conn->query($getFoodCancelledOrders);
                 <thead>
                   <tr>
                     <th>S.No</th>
-                    <th>Service Name</th>
+                    <th>Item Name</th>
                     <th>Order Id</th>
                     <th>Order Price</th>
                     <th>Order Status</th>
@@ -24,11 +24,11 @@ $getFoodCancelledOrdersData = $conn->query($getFoodCancelledOrders);
                   <?php while ($row = $getFoodCancelledOrdersData->fetch_assoc()) { ?>
                   <tr>
                     <td><?php echo $i;?></td>
-                    <?php $getServicenames = getAllDataWhere('services_group_service_names','id',$row['service_id']); 
-                    $getServicenamesData = $getServicenames->fetch_assoc();?>
-                    <td><?php echo $getServicenamesData['group_service_name'];?></td>
-                    <td><?php echo $row['order_sub_id'];?></td>
-                    <td><?php echo $row['order_price'];?></td>
+                    <?php $getProductNames = getAllDataWhere('food_products','id',$row['product_id']); 
+                    $getProductNamesData = $getProductNames->fetch_assoc();?>
+                    <td><?php echo $getProductNamesData['product_name'];?></td>
+                    <td><?php echo $row['order_id'];?></td>
+                    <td><?php echo $row['item_price'];?></td>
                     <td><?php $orderStatus = getIndividualDetails('lkp_order_status','id',$row['lkp_order_status_id']); echo $orderStatus['order_status']; ?></td>                   
                     <td><?php $orderPaymentStatus = getIndividualDetails('lkp_payment_status','id',$row['lkp_payment_status_id']); echo $orderPaymentStatus['payment_status']; ?></td>
                    </tr>

@@ -212,11 +212,13 @@ if($_SESSION['user_login_session_id'] == '') {
 			$delCart ="DELETE FROM food_cart WHERE user_id = '$user_id' OR session_cart_id='$session_cart_id' ";
 			$conn->query($delCart);
 			if($payment_group == 1) {
+				//cod 
 				header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=2");				
 			} elseif ($payment_group == 2) {
+				//online 
 				header("Location: hdfc_form.php");
 			} else {
-				header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=2");
+				header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=1");
 			}			
 		}
     ?>

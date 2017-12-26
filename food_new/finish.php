@@ -127,7 +127,8 @@ $getAddOrder = $orderData->fetch_array();
 						<strong> <?php echo $getCartItems['item_quantity']; ?> x </strong> <?php echo $getProductDetails['product_name']; ?>
 					</td>
 					<td>
-						<strong class="pull-right">Rs. <?php echo $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?></strong>
+						<strong class="pull-right">Rs. <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?></strong>
+						<?php  $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?>
 					</td>
 				</tr>
 				<?php } ?>
