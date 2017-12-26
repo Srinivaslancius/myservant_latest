@@ -49,7 +49,7 @@
     
     <!-- SubHeader =============================================== -->
     <div id="full-slider-wrapper">
-    <div id="layerslider" style="width:100%;height:300px;">
+    <div id="layerslider" style="width:100%;height:400px;">
         <!-- first slide -->
         <?php $getFoodBanners = getFoodHomeBanners(); ?>
         <?php while($getFoodhomeBanners = $getFoodBanners->fetch_assoc()) { ?>
@@ -239,11 +239,7 @@
     </div>
     
        <div class="high_light">
-        <div class="container">
-            <h3>Choose from over <?php echo getRowsCount('food_vendors'); ?> Restaurants</h3>
-            <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
-            <a href="list.php">View all Restaurants</a>
-        </div><!-- End container -->
+       <?php include_once 'view_restaurants.php';?>
       </div><!-- End hight_light -->
             
     
