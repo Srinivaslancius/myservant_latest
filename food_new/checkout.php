@@ -207,11 +207,11 @@ if($_SESSION['user_login_session_id'] == '') {
 			}
 
 			if($payment_group == 1) {
-				header("Location: online_order_success.php?odi=".$order_id."&pay_stau=2");				
+				header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=2");				
 			} elseif ($payment_group == 2) {
 				header("Location: hdfc_form.php");
 			} else {
-				header("Location: online_order_success.php?odi=".$order_id."&pay_stau=2");
+				header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=2");
 			}			
 		}
     ?>
