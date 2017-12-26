@@ -4,7 +4,7 @@ include "../admin_includes/common_functions.php";
 include "../admin_includes/food_common_functions.php";
 
 if(isset($_POST['cusine_type']) && $_POST['cusine_type']!='' ) {
-     $getFoodVendors="SELECT * FROM food_vendors WHERE cusine_type_id IN (".implode(',', $_POST['cusine_type']).")";
+    $getFoodVendors="SELECT * FROM food_vendors WHERE cusine_type_id IN (".implode(',', $_POST['cusine_type']).") AND `lkp_status_id`= '$status' AND id IN (SELECT restaurant_id FROM food_products WHERE lkp_status_id = 0) ORDER BY id DESC";
     $getSearchResults=$conn->query($getFoodVendors); 
 } else {
     $getSearchResults = getAllRestaruntsWithProducts('0','','');
