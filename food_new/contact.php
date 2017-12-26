@@ -144,13 +144,14 @@ if(mail($to, $subject, $message, $headers)) {
                 <h2 class="inner"><?php echo $getCustomerServicesdata['title']; ?></h2>
                 <p class="add_bottom_30">
                     <?php echo substr(strip_tags($getCustomerServicesdata['description']), 0,200);?>
+                </p>
             </div>
         </div>
         <div class="col-md-6 col-sm-6">
             <div class="box_style_2">
                 <h2 class="inner"><?php echo $getRestaurantData['title']; ?></h2>
                 <p class="add_bottom_30"><?php echo substr(strip_tags($getRestaurantData['description']), 0,200);?>
-                
+                </p>
             </div>
         </div>
     </div><!-- End row -->  
