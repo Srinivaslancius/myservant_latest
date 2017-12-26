@@ -1,4 +1,6 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
+<link rel="stylesheet" href="css/chosen.min.css">
+
 <?php  
 error_reporting(0);
 if (!isset($_POST['submit']))  {
@@ -28,11 +30,11 @@ if (!isset($_POST['submit']))  {
           <div class="panel-body">
             <div class="row">
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                <form data-toggle="validator" method="POST" enctype="multipart/form-data">
+                <form autocomplete="off" data-toggle="validator" method="POST" enctype="multipart/form-data">
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your State</label>
-                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);">
+                    <select name="lkp_state_id" class="custom-select chosen" data-error="This field is required." required onChange="getDistricts(this.value);">
                       <option value="">Select State</option>
                       <?php while($row = $getStates->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['state_name']; ?></option>
@@ -43,7 +45,7 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your District</label>
-                    <select name="lkp_district_id" id="lkp_district_id" class="custom-select" data-error="This field is required." required>
+                    <select name="lkp_district_id" id="lkp_district_id" class="custom-select " data-error="This field is required." required>
                       <option value="">Select District</option>
                    </select>
                     <div class="help-block with-errors"></div>
@@ -51,7 +53,10 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">City Name</label>
-                    <input type="text" name="city_name" class="form-control" id="form-control-2" placeholder="City Name" data-error="Please enter City Name" required>
+                    <input type="text" name="city_name" class="form-control" id="user_input" placeholder="City Name" data-error="Please enter City Name" onkeyup="checkUserAvailTest()" required>
+                    <span id="input_status" style="color: red;"></span>
+                    <input type="hidden" id="table_name" value="lkp_cities">
+                    <input type="hidden" id="column_name" value="city_name">
                     <div class="help-block with-errors"></div>
                   </div>
 
@@ -77,3 +82,6 @@ if (!isset($_POST['submit']))  {
       </div>
   
 <?php include_once 'admin_includes/footer.php'; ?>
+<script type="text/javascript">
+      $(".chosen").chosen();
+</script>

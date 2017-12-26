@@ -1,4 +1,6 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
+<link rel="stylesheet" href="css/chosen.min.css">
+
 <?php  
 error_reporting(0);
 $id = $_GET['districtid'];
@@ -34,7 +36,7 @@ if (!isset($_POST['submit'])) {
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your State</label>
-                    <select id="form-control-3" name="lkp_state_id" class="custom-select" data-error="This field is required." required>
+                    <select id="form-control-3" name="lkp_state_id" class="custom-select chosen" data-error="This field is required." required>
                       <option value="">Select State</option>
                       <?php while($row = $getStates->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getDistrictsData['lkp_state_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['state_name']; ?></option>
@@ -44,7 +46,10 @@ if (!isset($_POST['submit'])) {
                   </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">District Name</label>
-                    <input type="text" name="district_name" class="form-control" id="form-control-2" data-error="Please enter a District Name" required value="<?php echo $getDistrictsData['district_name'];?>">
+                    <input type="text" name="district_name" class="form-control" id="user_input" data-error="Please enter a District Name" required onkeyup="checkUserAvailTest()" value="<?php echo $getDistrictsData['district_name'];?>">
+                     <span id="input_status" style="color: red;"></span>
+                    <input type="hidden" id="table_name" value="lkp_districts">
+                    <input type="hidden" id="column_name" value="district_name">
                     <div class="help-block with-errors"></div>
                   </div>
                   <?php $getStatus = getAllData('lkp_status');?>
@@ -68,3 +73,7 @@ if (!isset($_POST['submit'])) {
       </div>
   
 <?php include_once 'admin_includes/footer.php'; ?>
+
+<script type="text/javascript">
+      $(".chosen").chosen();
+</script>
