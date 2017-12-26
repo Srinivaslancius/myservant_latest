@@ -5,7 +5,7 @@ if($_SESSION['CART_TEMP_RANDOM'] == "") {
 $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
 if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
     $user_session_id = $_SESSION['user_login_session_id'];
-    $cartItems1 = "SELECT * FROM food_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' ";
+    $cartItems1 = "SELECT * FROM food_cart WHERE (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') AND item_quantity!='0' ";
     $cartItems = $conn->query($cartItems1);
 } else {                                       
     $cartItems = getAllDataWhere('food_cart','session_cart_id',$session_cart_id);

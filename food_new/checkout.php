@@ -204,8 +204,13 @@ if($_SESSION['user_login_session_id'] == '') {
 				$sub_order_id = $contstr.$random1.$random2.$date;
 				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`,  `payment_method`,`lkp_payment_status_id`,`service_tax`,`delivery_charges`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city_order"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."','$payment_group','$payment_status','".$_POST["service_tax"]."','$delivery_charges', '$order_id','$sub_order_id','$order_date')";
 				$servicesOrders = $conn->query($orders);
-			}
-
+			} 
+			if($_SESSION['CART_TEMP_RANDOM'] == "") {
+		        $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
+		    }
+		    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
+			$delCart ="DELETE FROM food_cart WHERE user_id = '$user_id' OR session_cart_id='$session_cart_id' ";
+			$conn->query($delCart);
 			if($payment_group == 1) {
 				header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=2");				
 			} elseif ($payment_group == 2) {
@@ -241,13 +246,17 @@ if($_SESSION['user_login_session_id'] == '') {
 				</div>
                 
 			</div><!-- End col-md-3 -->
+			<?php 
+			$id = $_SESSION['user_login_session_id'];
+			$getUserData = getAllDataWhere('users','id',$id);
+			$getUser = $getUserData->fetch_assoc();?>
             <form method="post" name="form">
 			<div class="col-md-6">
 				<div class="box_style_2" id="order_process">
 					<h2 class="inner">Your order details</h2>
 					<div class="form-group">
 						<label>First name *</label>
-						<input type="text" class="form-control" id="firstname_order" name="firstname_order" placeholder="First name" required>
+						<input type="text" class="form-control" id="firstname_order" value="<?php echo $getUser['user_full_name']; ?>" name="firstname_order" placeholder="First name" required>
 					</div>
 					<div class="form-group">
 						<label>Last name *</label>
@@ -255,11 +264,11 @@ if($_SESSION['user_login_session_id'] == '') {
 					</div>
 					<div class="form-group">
 						<label>Telephone/mobile *</label>
-						<input type="text" id="tel_order" name="tel_order" maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" class="form-control" placeholder="Telephone/mobile" required>
+						<input type="text" id="tel_order" name="tel_order" maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" value="<?php echo $getUser['user_mobile']; ?>" class="form-control" placeholder="Telephone/mobile" required>
 					</div>
 					<div class="form-group">
 						<label>Email *</label>
-						<input type="email" id="email_booking_2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="email_order" class="form-control" placeholder="Your email" required>
+						<input type="email" id="email_booking_2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="email_order" class="form-control" value="<?php echo $getUser['user_email']; ?>" placeholder="Your email" required>
 					</div>
 					<div class="form-group">
 						<label>Your full address *</label>
@@ -298,7 +307,7 @@ if($_SESSION['user_login_session_id'] == '') {
 		    }
 		    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
 		    $user_session_id = $_SESSION['user_login_session_id'];
-			$cartItems1 = "SELECT * FROM food_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' ";
+			$cartItems1 = "SELECT * FROM food_cart WHERE (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') AND item_quantity!='0' ";
     		$cartItems = $conn->query($cartItems1);
 			?>            
 
@@ -396,8 +405,8 @@ if($_SESSION['user_login_session_id'] == '') {
 
 					<hr>
 
-					<input type="submit" name="submit" value="Go to checkout" class="btn_full">					
-                    <a class="btn_full_outline" href="index.php"><i class="icon-right"></i> Add other items</a>
+					<input type="submit" name="submit" value="Place Order" class="btn_full">					
+                    <!-- <a class="btn_full_outline" href="index.php"><i class="icon-right"></i> Add other items</a> -->
 				</div><!-- End cart_box -->
                 </div><!-- End theiaStickySidebar -->
 			</div><!-- End col-md-3 -->
