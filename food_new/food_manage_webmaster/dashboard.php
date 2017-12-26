@@ -339,6 +339,7 @@
       });
     });
   </script>
-  <?php include_once 'admin_includes/footer.php'; ?>
+  <?php //include_once 'admin_includes/footer.php'; ?>
      
     
+     
