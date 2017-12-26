@@ -11,7 +11,7 @@
         } else {
             return 0;
         } 
-    }
+    } 
 
     function getBanners() {
         global $conn;
