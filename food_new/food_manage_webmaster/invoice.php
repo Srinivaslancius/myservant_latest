@@ -21,6 +21,8 @@ $orderStatus = getIndividualDetails('lkp_order_status','id',$getOrdersData1['lkp
 
 $paymentStatus = getIndividualDetails('lkp_payment_status','id',$getOrdersData1['lkp_payment_status_id']);
 
+$service_tax = $getOrdersData1['sub_total']*$getSiteSettingsData['service_tax']/100;
+
 if($getOrdersData1['delivery_charges'] == '0') {
 	$order_type = "Take Away";
 	$delivery_charges = 0;
@@ -47,7 +49,7 @@ if($getOrdersData1['delivery_charges'] == '0') {
 		<th></th>
 		<th colspan="2"><h3 style="color:#f26226">Invoice</h3>
 		<p>Oreder Id:<?php echo $getOrdersData1['order_id']; ?></p>
-		<p>Created Date:<?php echo $getOrdersData1['created_at']; ?></p>
+		<p>Order Date:<?php echo $getOrdersData1['created_at']; ?></p>
 		</th>	
       </tr>
     </thead>
