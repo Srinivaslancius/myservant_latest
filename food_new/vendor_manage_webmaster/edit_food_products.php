@@ -17,13 +17,13 @@ if (!isset($_POST['submit']))  {
     //save product images into product_images table    
     if($_FILES["fileToUpload"]["name"]!='') {
         $fileToUpload = uniqid().$_FILES["fileToUpload"]["name"];
-              $target_dir = "../../uploads/food_content_pages_images/";
+              $target_dir = "../../uploads/food_product_images/";
               $target_file = $target_dir . basename($fileToUpload);
               $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-              $getImgUnlink = getImageUnlink('image','food_content_pages','id',$id,$target_dir);
+              $getImgUnlink = getImageUnlink('product_image','food_products','id',$id,$target_dir);
                 //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
               if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                $sql1 = "UPDATE food_products SET restaurant_id = '$restaurant_id',product_name = '$product_name',category_id ='$category_id', specifications = '$specifications', availability_id ='$availability_id', lkp_status_id = '$lkp_status_id' WHERE id = '$id'"; 
+                $sql1 = "UPDATE food_products SET restaurant_id = '$restaurant_id',product_name = '$product_name',product_image='$fileToUpload', category_id ='$category_id', specifications = '$specifications', availability_id ='$availability_id', lkp_status_id = '$lkp_status_id' WHERE id = '$id'"; 
     
         if ($conn->query($sql1) === TRUE) {
         echo "Record updated successfully";
