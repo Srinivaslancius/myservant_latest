@@ -4,7 +4,7 @@ include "../../admin_includes/config.php";
 //Set Array for list
 $lists = array();
 $response = array();
-if($_SERVER['REQUEST_METHOD']=='POST'){
+if($_SERVER['REQUEST_METHOD']=='GET'){
 
 	$getStates1 = "SELECT * from lkp_cities WHERE id IN (SELECT lkp_city_id FROM availability_of_locations WHERE lkp_status_id = 0) AND lkp_status_id = '0'";
 	$getStates = $conn->query($getStates1);

@@ -7,7 +7,7 @@
 			<h6>Cusine</h6>
 			<ul>
 				<?php while($getFoodCusineData1 = $getFoodCusineData->fetch_assoc()) { ?>
-				<li><label class="checkb"><?php echo $getFoodCusineData1['title']; ?><!--  <small>(49)</small>  --><input type="checkbox" <?php if($getFoodCusineData1['id'] == 2) { echo 'checked'; } ?> class="filter" name="cusine_type">
+				<li><label class="checkb check_cousin_type"><?php echo $getFoodCusineData1['title']; ?><!--  <small>(49)</small>  --><input type="checkbox" class="filter" name="cusine_type[]" value="<?php echo $getFoodCusineData1['id']; ?>">
 				<span class="checkmark1"></span></label></li>
 				<?php } ?>
 			</ul>
@@ -37,18 +37,3 @@
 		</div> -->
 	</div><!--End collapse -->
 </div><!--End filters col-->
-<script type="text/javascript">
-	$(document).on('change','.filter',function(){
-		var url = "cusine_filters.php";
-		$.ajax({
-	     type: "POST",
-	     url: url,
-	     data: $("#search_form").serialize(),
-	     success: function(data)
-	     {                  
-	        $('.filter_data').html(data);
-	     }               
-	   });
-	  return false;
-	});
-</script>
