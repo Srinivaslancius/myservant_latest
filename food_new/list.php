@@ -117,7 +117,7 @@
         
         <div class="col-md-9">
         
-                    <div id="tools">
+            <!-- <div id="tools">
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-6 pull-right">
                         <div class="styled-select">
@@ -134,7 +134,9 @@
                                         
                                     
                 </div>
-            </div><!--End tools -->                        
+            </div> --><!--End tools -->        
+
+                <div class="ajax_result">                
                         <?php while($getResults = $getSearchResults->fetch_assoc()) { 
                              $show_more = $getResults['id'];?>
                         <div class="col-md-6 filter_data">
@@ -168,6 +170,7 @@
                             </div><!-- End strip_list-->
                         </div>
                         <?php } ?>
+                </div>
                         
         </div><!-- End col-md-9-->
         
@@ -212,6 +215,22 @@
             grid: true
         });
     });
+</script>
+<script type="text/javascript">
+$(document).on('change','.check_cousin_type',function(){
+   var url = "cusine_filters.php";
+   $.ajax({
+     type: "POST",
+     url: url,
+     data: $("#search_form").serialize(),
+     success: function(data)
+     {                  
+        //alert(data);
+        $('.ajax_result').html(data);
+     }               
+   });
+  return false;
+});
 </script>
 </body>
 <?php include "search_js_script.php"; ?>

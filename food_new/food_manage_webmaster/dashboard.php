@@ -6,7 +6,7 @@
         <div class="row">
           <a href="users.php">
           <div class="col-md-4 col-sm-5">
-            <div class="widget widget-tile-2 bg-primary m-b-30">
+            <div class="widget widget-tile-2 bg-danger m-b-30">
               <div class="wt-content p-a-20 p-b-50">
                 <div class="wt-title">Users
                   <span class="t-caret text-success">
@@ -81,7 +81,7 @@
           $getRowsCount = $getTodayOrders1->num_rows; ?>
           <a href="services_today_orders.php">
           <div class="col-md-4 col-sm-5">
-            <div class="widget widget-tile-2 bg-warning m-b-30">
+            <div class="widget widget-tile-2 bg-danger m-b-30">
               <div class="wt-content p-a-20 p-b-50">
                 <div class="wt-title">Today Orders</div>
                 <div class="wt-number"><?php echo $getRowsCount; ?></div>
