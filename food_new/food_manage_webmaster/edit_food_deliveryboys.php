@@ -24,7 +24,7 @@ if (!isset($_POST['submit'])) {
               $getImgUnlink = getImageUnlink('identity_proof_image','food_delivery_boys','id',$id,$target_dir);
                 //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
               if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    $sql = "UPDATE food_delivery_boys SET name = '$name',identity_proof_image = '$fileToUpload',email = '$email',mobile = '$mobile', lkp_status_id='$lkp_status_id' , address= '$address', experience = '$experience',type= '$experience' WHERE id = '$id' ";
+                    $sql = "UPDATE food_delivery_boys SET name = '$name', identity_proof_image = '$fileToUpload',email = '$email',mobile = '$mobile', lkp_status_id='$lkp_status_id' , address= '$address', experience = '$experience',type= '$type' WHERE id = '$id' ";
                     if($conn->query($sql) === TRUE){
                        echo "<script type='text/javascript'>window.location='food_delivery_boys.php?msg=success'</script>";
                     } else {
