@@ -10,7 +10,7 @@ if (!isset($_POST['submit'])) {
   $lkp_order_status_id = $_POST['lkp_order_status_id'];
   $delivery_date = date("Y-m-d h:i:s");
   
-  if($lkp_payment_status_id == 1 AND $lkp_order_status_id == 2) {
+  if($lkp_order_status_id == 2) {
     $sql = "UPDATE `food_orders` SET delivery_date ='$delivery_date' WHERE order_id = '$order_id' ";
     $res = $conn->query($sql);
   }
