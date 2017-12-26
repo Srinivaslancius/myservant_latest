@@ -8,9 +8,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 	$getStates1 = "SELECT * from lkp_cities WHERE id IN (SELECT lkp_city_id FROM availability_of_locations WHERE lkp_status_id = 0) AND lkp_status_id = '0'";
 	$getStates = $conn->query($getStates1);
-	if ($$getStates = $conn->query($getStates1);->num_rows > 0) {
+	if ($getStates->num_rows > 0) {
 			$response["lists"] = array();
-			while($row = $result->fetch_assoc()) {
+			while($row = $getStates->fetch_assoc()) {
 				//Chedck the condioton for emptty or not		
 				$lists = array();
 		    	$lists["cityId"] = $row["id"];
