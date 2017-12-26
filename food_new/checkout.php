@@ -255,11 +255,11 @@ if($_SESSION['user_login_session_id'] == '') {
 					</div>
 					<div class="form-group">
 						<label>Telephone/mobile *</label>
-						<input type="text" id="tel_order" name="tel_order" class="form-control" placeholder="Telephone/mobile" required>
+						<input type="text" id="tel_order" name="tel_order" maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" class="form-control" placeholder="Telephone/mobile" required>
 					</div>
 					<div class="form-group">
 						<label>Email *</label>
-						<input type="email" id="email_booking_2" name="email_order" class="form-control" placeholder="Your email" required>
+						<input type="email" id="email_booking_2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="email_order" class="form-control" placeholder="Your email" required>
 					</div>
 					<div class="form-group">
 						<label>Your full address *</label>
@@ -275,7 +275,7 @@ if($_SESSION['user_login_session_id'] == '') {
 						<div class="col-md-6 col-sm-6">
 							<div class="form-group">
 								<label>Postal code *</label>
-								<input type="text" id="pcode_oder" name="pcode_oder" class="form-control" placeholder=" Your postal code" required>
+								<input type="text" id="pcode_oder" required maxlength="6"  onkeypress="return isNumberKey(event)" name="pcode_oder" class="form-control" placeholder=" Your postal code" required>
 							</div>
 						</div>
 					</div>
@@ -449,5 +449,13 @@ $('.check_dev_type').click(function(){
 
 });
 </script>
+<script>
+    	function isNumberKey(evt){
+  	    var charCode = (evt.which) ? evt.which : event.keyCode
+  	    if (charCode > 31 && (charCode < 48 || charCode > 57))
+  	        return false;
+  	    return true;
+    	}
+	  </script>
 </body>
 </html>
