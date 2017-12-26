@@ -8,7 +8,13 @@ if (!isset($_POST['submit'])) {
     //If success 
   $lkp_payment_status_id = $_POST['lkp_payment_status_id'];
   $lkp_order_status_id = $_POST['lkp_order_status_id'];
+  $delivery_date = date("Y-m-d h:i:s");
   
+  if($lkp_payment_status_id == 1 AND $lkp_order_status_id == 2) {
+    $sql = "UPDATE `food_orders` SET delivery_date ='$delivery_date' WHERE order_id = '$order_id' ";
+    $res = $conn->query($sql);
+  }
+
   $sql = "UPDATE `food_orders` SET lkp_payment_status_id = '$lkp_payment_status_id',lkp_order_status_id = '$lkp_order_status_id' WHERE order_id = '$order_id' ";
   $res = $conn->query($sql);
   // if($conn->query($sql) === TRUE){
