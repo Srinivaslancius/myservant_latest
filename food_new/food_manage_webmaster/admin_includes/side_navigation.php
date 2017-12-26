@@ -63,8 +63,11 @@
                 <li  class="<?php if($page_name == 'food_newletter.php' ) { echo "active"; } ?>">
                   <a href="food_newletter.php">News Letters</a>
                 </li>
+                <li  class="<?php if($page_name == 'faqs.php' || $page_name == 'add_food_faqs.php' || $page_name == 'edit_food_faqs.php') { echo "active"; } ?>"><a href="faqs.php">FAQ'S</a>
+                </li>
                 <li  class="<?php if($page_name == 'food_howcanhelp_you.php' || $page_name == 'add_food_howcanhelp_you.php' || $page_name == 'edit_food_howcanhelp_you.php' ) { echo "active"; } ?>"><a href="food_howcanhelp_you.php">How Can I Help You</a>
                 </li>
+                
               </ul>
             </li>
             <li class="with-sub">
@@ -123,14 +126,14 @@
                 <span class="menu-text">Brand Logos</span>
               </a>
             </li>
-            <li  class="<?php if($page_name == 'faqs.php' || $page_name == 'add_faqs.php' || $page_name == 'edit_faqs.php') { echo "active"; } ?>">
+            <!-- <li  class="<?php if($page_name == 'faqs.php' || $page_name == 'add_faqs.php' || $page_name == 'edit_faqs.php') { echo "active"; } ?>">
               <a href="faqs.php" aria-haspopup="true">
                 <span class="menu-icon">
                    <i class="zmdi zmdi-pin-help zmdi-hc-fw"></i>
                 </span> 
                 <span class="menu-text">FAQ'S</span>
               </a>
-            </li>
+            </li> -->
             <li class="with-sub">
               <a href="#" aria-haspopup="true">
                 <span class="menu-icon">
