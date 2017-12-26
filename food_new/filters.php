@@ -3,12 +3,18 @@
 	<div class="collapse" id="collapseFilters">
 		<form id="search_form">
 		<div class="filter_type">
-        	<?php $getFoodCusineData = getAllDataWhere('food_cusine_types','lkp_status_id','0'); ?>
-			<h6>Cusine</h6>
+        	<?php //$getFoodCusineData = getAllDataWhere('food_cusine_types','lkp_status_id','0'); ?>
+        	<?php $getReFilt="SELECT * FROM food_vendors WHERE `lkp_status_id`= '0' AND id IN (SELECT restaurant_id FROM food_products WHERE lkp_status_id = 0 ) GROUP BY cusine_type_id DESC";
+        		$getFoodCusineData = $conn->query($getReFilt);
+        	?>
+			<h6>Cusine Types</h6>
 			<ul>
 				<?php while($getFoodCusineData1 = $getFoodCusineData->fetch_assoc()) { ?>
-				<li><label class="checkb check_cousin_type"><?php echo $getFoodCusineData1['title']; ?><!--  <small>(49)</small>  --><input type="checkbox" class="filter" name="cusine_type[]" value="<?php echo $getFoodCusineData1['id']; ?>">
-				<span class="checkmark1"></span></label></li>
+				<?php $exp= explode(",", $getFoodCusineData1['cusine_type_id']); ?>
+				<?php foreach($exp as $key => $value) { ?>
+					<li><label class="checkb check_cousin_type"><?php $getRestCusItem = getIndividualDetails('food_cusine_types','id',$value); ?><?php echo $getRestCusItem['title']; ?><input type="checkbox" class="filter" name="cusine_type[]" value="<?php echo $value; ?>">
+					<span class="checkmark1"></span></label></li>
+				<?php } ?>
 				<?php } ?>
 			</ul>
 		</div>
