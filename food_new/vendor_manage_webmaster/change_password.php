@@ -1,19 +1,19 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
 <?php 
-error_reporting(0);
+error_reporting(1);
 if (!isset($_POST['submit']))  {
     echo "fail";
 } else  { 
     
     $id = $_SESSION['food_vendor_user_id'];
-    
-    $sql = "SELECT * FROM  food_vendors WHERE restaurant_id = '$id' ";
+
+    $sql = "SELECT * FROM  food_vendors  WHERE id = '$id' ";
     $result = $conn->query($sql);
     $getVendorUserPwd = $result->fetch_assoc();
-
     if($_POST['current_password'] == decryptPassword($getVendorUserPwd['password'])){
         
-        $sql1 = "UPDATE food_vendors SET password = '" . encryptPassword($_POST["confirm_password"]) . "' WHERE  restaurant_id = '$id' ";
+        $sql1 = "UPDATE food_vendors SET password = '" . encryptPassword($_POST["confirm_password"]) . "' WHERE  id = '$id' ";
+
         if($conn->query($sql1) === TRUE){
             echo "<script>alert('Password Changed Successfully');window.location.href='dashboard.php';</script>";
         }          
