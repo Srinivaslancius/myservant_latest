@@ -225,9 +225,9 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 							}
 							?>
 
-							<a href="#0" class="remove_item"> <i class="icon_minus_alt remove_cart_item" data-key="<?php echo $productId; ?>" data-key-check="remove"></i> <a/><span id="cart_count_inc_<?php echo $productId; ?>"> <?php echo $getOnloadProductCount; ?> </span>
-							<a href="#0" class="remove_item"> <i class="icon_plus_alt2 add_cart_item" data-key="<?php echo $productId; ?>"></i> <a/>
-							<!-- <i class="icon_plus_alt2 add_cart_item" data-key="<?php echo $productId; ?>" data-key-price="25"></i> -->
+							<!-- <a href="#0" class="remove_item"> <i class="icon_minus_alt remove_cart_item" data-key="<?php echo $productId; ?>" data-key-check="remove"></i> <a/><span id="cart_count_inc_<?php echo $productId; ?>"> <?php echo $getOnloadProductCount; ?> </span>
+							<a href="#0" class="remove_item"> <i class="icon_plus_alt2 add_cart_item" data-key="<?php echo $productId; ?>"></i> <a/> -->
+							 <a class="btn_full order_now" onClick = "add_cart_item(<?php echo $productId; ?>);" style="padding:8px 4px">Add to cart</a><!--<i class="icon_plus_alt2" onClick = "add_cart_item(<?php echo $productId; ?>);" ></i>-->
 						</td>
 						
 					</tr>
@@ -302,17 +302,34 @@ $('#cat_nav a[href^="#"]').on('click', function (e) {
 </script>
 
 <script type="text/javascript">
-$(".add_cart_item, .remove_cart_item").click(function(){
 
-	var ProductId = $(this).attr("data-key");
+function add_cart_item1(cartId) {
+ $.ajax({
+  type:'post',
+  url:'update_cart_items.php',
+  data:{
+     cart_id:cartId,	     
+  },
+  success:function(response) {  
+  	$('.order_now').removeAttr("style");
+  	document.getElementById("mycart").innerHTML=response;
+    //$("#mycart").slideToggle();
+  }
+ });
+
+}
+function add_cart_item(ProductId) {	
+
+	//var ProductId = $(this).attr("data-key");	
 	//var ProductPrice = $(this).attr("data-key-price");
 	var ProductPrice = $('#item_price_'+ProductId).val();	
 	var ProductWeighType = $('#item_weight_type_'+ProductId).val();
 	var restaurantId = $('#rest_id').val();
-	var ProductCategoryId = $('#item_category_id_'+ProductId).val();	
+	var ProductCategoryId = $('#item_category_id_'+ProductId).val();
+	//var cartId = $('#cart_id').val();
 
 	var removeItemCheck = $(this).attr("data-key-check");
-	if(removeItemCheck == "remove") {		
+	if(removeItemCheck == "remove") {	
 	    var removeItemCheckPro = 1;	    
 	    if($('#cart_count_inc_'+ProductId).html() == 0) {
 	    	$('.remove_cart_item').css({"pointer-events": "none", "cursor": "not-allowed"});
@@ -344,28 +361,9 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 	  }
 	 });
 
-	$.ajax({
-	  type:'post',
-	  url:'get_cart_count.php',
-	  data:{
-	     item_id:ProductId,
-	     //item_price:ProductPrice,
-	     item_weight:ProductWeighType,
-	  },
-	  success:function(response) {
-	  	//alert(response);
-	  	var data = response.split(",");	
-	  	var ProductUniqId = data[1];
-	  	if(data[0]!=0)	 {
-	  		var totalProItemsCnt = data[0];
-	  	} else {
-	  		var totalProItemsCnt = 0;		  		
-	  	}	  	
-		$('#cart_count_inc_'+ProductUniqId).html(totalProItemsCnt);	    
-	    //$("#mycart").slideToggle();
-	  }
-	});
-}); 
+}
+</script>
+<script type="text/javascript">
 
  $(function() {
 	$('.get_product_id').change(function() {
@@ -386,26 +384,6 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 			  $('#item_price_'+ProductUniqId).val(data[0]);
 			}
 		});
-
-		$.ajax({
-		  type:'post',
-		  url:'get_cart_count.php',
-		  data:{
-		  	 item_id : productId,
-		     item_weight:weightTypeIncId,		     
-		  },
-		  success:function(response) {
-		    var data = response.split(",");	
-		  	var ProductUniqId = data[1];
-		  	if(data[0]!=0)	 {
-		  		var totalProItemsCnt = data[0];
-		  	} else {
-		  		var totalProItemsCnt = 0;		  		
-		  	}
-			$('#cart_count_inc_'+ProductUniqId).html(totalProItemsCnt);
-		  }
-		});
-	
 	})
 });
 
