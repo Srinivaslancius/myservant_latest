@@ -339,7 +339,7 @@
       });
     });
   </script>
-    <!--  <?php include_once 'admin_includes/footer.php'; ?>
+  <?php include_once 'admin_includes/footer.php'; ?>
      
-     // <script src="js/charts-flot.min.js"></script> -->
+    
      
