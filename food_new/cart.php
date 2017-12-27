@@ -319,7 +319,7 @@ th{
             <?php } else { ?>
               <a class="btn_full" href="checkout.php">Order now</a>
             <?php } ?>
-						<a class="btn_full_outline" href="index.php">Continue<i class="icon-right"></i></a>
+						<a class="btn_full_outline" href="index.php"><i class="icon-right"></i> Continue</a>
 					</div>
 				</div>
 			</div>

@@ -13,10 +13,7 @@ a,a:focus,a:hover {
     width: 100%;
     left: 0
 }
-#sub_content{
-padding-top:105px !important;
-
-}
+#sub_content{padding-top:105px !important;}
 #sub_content h2{
     color:white !important; 
 }
@@ -181,7 +178,7 @@ hr.styled {
 
 .btn_1,a.btn_1 {
     border: none;
-    background: #f26425;
+    background: #fe6003;
     padding: 10px 20px;
     transition: all .3s;
     -webkit-border-radius: 3px;
@@ -198,7 +195,7 @@ hr.styled {
 .btn_full,a.btn_full {
     border: none;
     width: 100%; 
-    background: #f26425;
+    background: #fe6003;
     padding: 12px 20px;
     transition: all .3s;
     -webkit-border-radius: 3px;
@@ -276,10 +273,10 @@ a.btn_side:hover {
 }
 
 .btn_full_outline,a.btn_full_outline {
-    color: #85c99d;
+    color: #fe6003;
     background: 0 0;
     width: 100%;
-    border: 2px solid #85c99d;
+    border: 2px solid #fe6003;
     transition: all .3s;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -312,7 +309,7 @@ a.btn_side:hover {
 
 .button_intro:hover,a.button_intro:hover {
     background: #fff;
-    color: #85c99d!important
+    color: #fe6003!important
 }
 
 .button_intro.outline,a.button_intro.outilne {
@@ -323,7 +320,7 @@ a.btn_side:hover {
 }
 
 #cart_box .btn_full,#cart_box a.btn_full {
-    background: #f26425;
+    background: #fe6003;
     font-size: 15px;
 }
 
@@ -334,7 +331,7 @@ a.btn_side:hover {
 #cart_box a.btn_full_outline {
     color: #f26426;
     background: 0 0;
-    border: 2px solid #f26425;
+    border: 2px solid #fe6003;
 }
 
 #cart_box a.btn_full_outline:hover {
@@ -378,7 +375,7 @@ header.sticky {
 }
 
 #subheader a {
-    color: #f26425;
+    color: #fe6003;
 }
 
 footer {
@@ -1049,7 +1046,7 @@ a.strip_list:hover h3 {
     font-size: 26px;
     display: block;
     margin-bottom: 0;
-    color: #85c99d
+    color: #fe6003;
 }
 
 #cart_box {
@@ -1178,7 +1175,7 @@ ul#cat_nav li a.active,ul#cat_nav li a:hover {
 
 #sub_content h1 {
     margin: 10px 0 10px;
-    font-size: 50px;
+    /* font-size: 50px; */
     font-weight: 300;
     color: #fff;
 }
@@ -1190,7 +1187,7 @@ ul#cat_nav li a.active,ul#cat_nav li a:hover {
 
 .rating .voted {
     color: #FC0;
-    margin-right: 3px
+    margin-right: 3px;
 }
 
 ul.additional_links {
@@ -1322,7 +1319,7 @@ ul.additional_links li:first-child {
 .bs-wizard>.bs-wizard-step>.progress>.progress-bar {
     width: 0;
     box-shadow: none;
-    background: #f26425;
+    background: #fe6003;
 }
 
 .bs-wizard>.bs-wizard-step.complete>.progress>.progress-bar {
@@ -1364,7 +1361,7 @@ ul.additional_links li:first-child {
 
 #confirm i {
     font-size: 140px;
-    color: #85c99d;
+    color: #fe6003;
     display: inline-block
 }
 

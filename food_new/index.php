@@ -49,7 +49,7 @@
     
     <!-- SubHeader =============================================== -->
     <div id="full-slider-wrapper">
-    <div id="layerslider" style="width:100%;height:400px;">
+     <div id="layerslider" style="width:100%;height:400px;">
         <!-- first slide -->
         <?php $getBanners = getAllDataWhere('food_banners','lkp_status_id','0'); ?>
         <?php while($getFoodhomeBanners = $getBanners->fetch_assoc()) { ?>
@@ -63,11 +63,9 @@
        <?php } ?>
        <?php $getBanners = getAllDataWhere('food_vendors','lkp_status_id','0'); ?>
         <?php while($getVendorBanners = $getBanners->fetch_assoc()) { ?>
-        <div class="ls-slide" data-ls="slidedelay: 2000; transition2d:5;">
-          <a href="view_rest_menu.php?key=<?php echo encryptPassword($getVendorBanners['id']);?>">
+       <a href="about.php"><div class="ls-slide" data-ls="slidedelay: 2000; transition2d:5;">          
             <img src="<?php echo $base_url . 'uploads/food_vendor_Banner/'.$getVendorBanners['vendor_banner'] ?>" class="ls-bg" alt="Slide background" alt="<?php echo $getVendorBanners['vendor_name'];?>">
-          </a>
-        </div>
+        </div></a>
        <?php } ?>
         <?php $getAllFoodOrders = "SELECT * FROM food_orders GROUP BY order_id ORDER BY id DESC";
           $getFoodOrders = $conn->query($getAllFoodOrders);

@@ -174,11 +174,11 @@
                         </div>
                         <?php } ?>
                 </div>
-                        
-        </div><!-- End col-md-9-->
-        <?php if($getResultsCount >= 4) { ?>
+             <?php if($getResultsCount >= 4) { ?>
         <center><a class="btn_1 load_more">Load More</a></center>
-        <?php } ?>
+        <?php } ?>            
+        </div><!-- End col-md-9-->
+       
         
     </div><!-- End row -->
 </div><!-- End container -->
