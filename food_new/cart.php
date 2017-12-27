@@ -388,7 +388,7 @@ $('.check_valid_add_on').on('change', function (e) {
       }
     	  
     });     
-  	alert(updateTotalPrice);
+  	//alert(updateTotalPrice);
   	var getTotalVal = updateTotalPrice+totalIndPrice;
 	$('#tot_item_price_'+cartId).html(getTotalVal);
 });
