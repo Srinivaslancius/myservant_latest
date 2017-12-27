@@ -16,7 +16,7 @@
                 <span class="menu-text">Dashboard</span>
               </a>
             </li>    
-            <li class="<?php if($page_name == 'food_products.php' ) { echo "active"; } ?>">
+            <li class="<?php if($page_name == 'food_products.php' || $page_name == 'add_food_products.php' ||) { echo "active"; } ?>">
               <a href="food_products.php" aria-haspopup="true">
                 <span class="menu-icon">
                    <i class="zmdi zmdi-collection-item  zmdi-hc-fw"></i>
