@@ -26,7 +26,7 @@
     $location = $_POST['location'];
     $created_at = date("Y-m-d h:i:s");
     $fileToUpload =$_FILES['fileToUpload']['name'];
-    $fileToUpload1 =$_FILES['fileToUpload1']['name'];
+    $fileToUpload1 =$_FILES['vendor_banner']['name'];
 
     $string1 = str_shuffle('abcdefghijklmnopqrstuvwxyz');
     $random1 = substr($string1,0,3);
@@ -57,12 +57,12 @@
        $bannerName=md5($encname1).'.'.$bannerType;
        $vendorbannerpath="../../uploads/food_vendor_Banner/".$bannerName; 
 
-        if (move_uploaded_file($_FILES["vendor_banner"]["tmp_name"],$vendorbannerpath))
-        {
+        if ($vendorLogo!='' && $vendorBanner!='')  {   
+
+            move_uploaded_file($_FILES["vendor_banner"]["tmp_name"],$vendorbannerpath);
             move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$vendorLogopath);
-           $sql = "INSERT INTO food_vendors (`vendor_name`, `vendor_id`,`vendor_email`, `vendor_mobile`, `description`,  `password`, `working_timings`,`min_delivery_time`, `lkp_state_id`,`lkp_district_id`, `lkp_city_id`,`location`, `logo`, `restaurant_name`,`restaurant_address`,`delivery_type_id`,`created_at`,`pincode`,`meta_title`,`meta_keywords`,`meta_desc`,`cusine_type_id`,`vendor_banner`) VALUES ('$vendor_name','$vendor_id','$vendor_email','$vendor_mobile', '$description','$password','$working_timings','$min_delivery_time','$lkp_state_id','$lkp_district_id','$lkp_city_id','$location','$fileToUpload','$restaurant_name','$restaurant_address','$delivery_type_id','$created_at','$pincode','$meta_title','$meta_keywords','$meta_desc','$cusine_type_id','$fileToUpload1')";
-
-
+           $sql = "INSERT INTO food_vendors (`vendor_name`, `vendor_id`,`vendor_email`, `vendor_mobile`, `description`,  `password`, `working_timings`,`min_delivery_time`, `lkp_state_id`,`lkp_district_id`, `lkp_city_id`,`location`, `logo`, `restaurant_name`,`restaurant_address`,`delivery_type_id`,`created_at`,`pincode`,`meta_title`,`meta_keywords`,`meta_desc`,`cusine_type_id`,`vendor_banner`) VALUES ('$vendor_name','$vendor_id','$vendor_email','$vendor_mobile', '$description','$password','$working_timings','$min_delivery_time','$lkp_state_id','$lkp_district_id','$lkp_city_id','$location','$logoname','$restaurant_name','$restaurant_address','$delivery_type_id','$created_at','$pincode','$meta_title','$meta_keywords','$meta_desc','$cusine_type_id','$bannerName')";
+           
             if($conn->query($sql) === TRUE){
                echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
             } else {
@@ -178,7 +178,7 @@
                     <img id="output1" height="100" width="100"/>
                     <label class="btn btn-default file-upload-btn">
                       Choose file...
-                        <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload1" id="fileToUpload1"  onchange="loadFile1(event)"  multiple="multiple" required data-error="Please Select Banner.">
+                        <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="vendor_banner" id="fileToUpload1"  onchange="loadFile1(event)"  multiple="multiple" required data-error="Please Select Banner.">
                       </label>
                   </div>
                    <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
