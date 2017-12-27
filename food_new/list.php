@@ -52,10 +52,10 @@
     if(isset($_POST['searchKey'])) {
         $searchParms = $_POST['searchKey'];
         //$getSearchResults = getSearchResults('food_vendors',$searchParms);
-        $getRes = "SELECT * FROM food_vendors WHERE `lkp_status_id`= '0' AND  (restaurant_address LIKE '%$searchParms%' OR  pincode LIKE '%$searchParms%') AND id IN (SELECT restaurant_id FROM food_products WHERE lkp_status_id = 0) ORDER BY id DESC";
+        $getRes = "SELECT * FROM food_vendors WHERE `lkp_status_id`= '0' AND  (restaurant_address LIKE '%$searchParms%' OR  pincode LIKE '%$searchParms%') AND id IN (SELECT restaurant_id FROM food_products WHERE lkp_status_id = 0) ORDER BY id DESC LIMIT 4";
         $getSearchResults = $conn->query($getRes);        
     } else {
-        $getSearchResults = getAllRestaruntsWithProducts('0','','');
+        $getSearchResults = getAllRestaruntsWithProducts('0','0','4');
     }
     $getResultsCount = $getSearchResults->num_rows;
 ?>
@@ -134,9 +134,12 @@
                                         
                                     
                 </div>
-            </div> --><!--End tools -->        
+            </div> --><!--End tools --> 
 
-                <div class="ajax_result">                
+                <!-- Load more -->
+               
+                <div class="ajax_result">     
+
                         <?php while($getResults = $getSearchResults->fetch_assoc()) { 
                              $show_more = $getResults['id'];?>
                         <div class="col-md-6 filter_data">
@@ -173,6 +176,9 @@
                 </div>
                         
         </div><!-- End col-md-9-->
+        <?php if($getResultsCount >= 4) { ?>
+        <center><a class="btn_1 load_more">Load More</a></center>
+        <?php } ?>
         
     </div><!-- End row -->
 </div><!-- End container -->
@@ -231,6 +237,21 @@ $(document).on('change','.check_cousin_type',function(){
    });
   return false;
 });
+</script>
+<script>
+    $(document).ready(function() {
+        $('.load_more').on('click', function () {
+            $('.load_more').hide();
+            $.ajax({
+            type:"post",
+            url:"total_list.php", 
+            success:function(html){ 
+                $(".ajax_result").html('');
+                $(".ajax_result").append(html);
+            }
+          }); 
+        });
+    });
 </script>
 </body>
 <?php include "search_js_script.php"; ?>
