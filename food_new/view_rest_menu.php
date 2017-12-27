@@ -65,12 +65,7 @@ word-break: normal;
         </div>
     </div><!-- End Preload -->
 
-    <!-- Header ================================================== -->
-    <header>
-        <?php include_once 'header.php';?>
-    </header>
-<!-- End Header =============================================== -->
-<?php $getRestKey = decryptpassword($_GET['key']); ?>
+    <?php $getRestKey = decryptpassword($_GET['key']); ?>
 <?php //$getRestKey = 3; ?>
 <?php 
 if($_SESSION['CART_TEMP_RANDOM'] == "") {
@@ -87,6 +82,13 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
     $conn->query($delCartIng);
 }
 ?>
+
+    <!-- Header ================================================== -->
+    <header>
+        <?php include_once 'header.php';?>
+    </header>
+<!-- End Header =============================================== -->
+
 <?php $getCategory = getFoodCategoryByRestId('food_products','restaurant_id',$getRestKey); ?>
 <?php $getFoodVendorsBann = getIndividualDetails('food_vendors','id',$getRestKey); ?>
 <!-- SubHeader =============================================== -->
