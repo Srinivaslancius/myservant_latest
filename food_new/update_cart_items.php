@@ -65,7 +65,7 @@ if (isset($_POST['cart_id']) ){
                Subtotal <span class="pull-right">Rs. '.$cartSubtotal.'</span>
             </td>
           </tr>
-         <input type="text" value='.$cartTotal.' id="cart_total">
+         <input type="hidden" value='.$cartTotal.' id="cart_total">
           <tr>
             <td class="total">            
                TOTAL <span class="pull-right">Rs. '.$cartTotal.'</span>
