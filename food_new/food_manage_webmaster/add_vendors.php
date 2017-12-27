@@ -37,17 +37,29 @@
 
       if($fileToUpload!='' && $fileToUpload1!='' ) {
 
-        $target_dir = "../../uploads/food_vendor_logo/";
-        $target_file = $target_dir . basename($fileToUpload);
-        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+       //Vendor Logo update
+       $vendorLogo=$_FILES['fileToUpload']['name']; 
+       $expLogo=explode('.',$vendorLogo);
+       $logoxptype=$expLogo[1];
+       $date = date('m/d/Yh:i:sa', time());
+       $rand=rand(10000,99999);
+       $encname=$date.$rand;
+       $logoname=md5($encname).'.'.$logoxptype;
+       $vendorLogopath="../../uploads/food_vendor_logo/".$logoname;            
 
-        $target_dir1 = "../../uploads/food_vendor_Banner/";
-        $target_file1 = $target_dir1 . basename($fileToUpload1);
-        $imageFileType1 = pathinfo($target_file1,PATHINFO_EXTENSION);
+       //Vendor banner update
+       $vendorBanner=$_FILES['vendor_banner']['name']; 
+       $expBanner=explode('.',$vendorBanner);
+       $bannerType=$expBanner[1];
+       $date1 = date('m/d/Yh:i:sa', time());
+       $rand1=rand(10000,99999);
+       $encname1=$date1.$rand1;
+       $bannerName=md5($encname1).'.'.$bannerType;
+       $vendorbannerpath="../../uploads/food_vendor_Banner/".$bannerName; 
 
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
+        if (move_uploaded_file($_FILES["vendor_banner"]["tmp_name"],$vendorbannerpath))
         {
-          move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1);
+            move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$vendorLogopath);
            $sql = "INSERT INTO food_vendors (`vendor_name`, `vendor_id`,`vendor_email`, `vendor_mobile`, `description`,  `password`, `working_timings`,`min_delivery_time`, `lkp_state_id`,`lkp_district_id`, `lkp_city_id`,`location`, `logo`, `restaurant_name`,`restaurant_address`,`delivery_type_id`,`created_at`,`pincode`,`meta_title`,`meta_keywords`,`meta_desc`,`cusine_type_id`,`vendor_banner`) VALUES ('$vendor_name','$vendor_id','$vendor_email','$vendor_mobile', '$description','$password','$working_timings','$min_delivery_time','$lkp_state_id','$lkp_district_id','$lkp_city_id','$location','$fileToUpload','$restaurant_name','$restaurant_address','$delivery_type_id','$created_at','$pincode','$meta_title','$meta_keywords','$meta_desc','$cusine_type_id','$fileToUpload1')";
 
 
