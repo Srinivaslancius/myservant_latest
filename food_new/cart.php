@@ -198,6 +198,15 @@ th{
 						<td>
 
 						<?php $getIngredenats = getAllDataWhere('food_product_ingredient_prices','product_id',$getCartItems['food_item_id']); ?>
+            <?php
+              $itemId = $getCartItems['item_quantity'];
+              $getAddOnsPrice = "SELECT * FROM food_update_cart_ingredients WHERE food_item_id = '".$getCartItems['food_item_id']."' AND cart_id='".$getCartItems['id']."' AND session_cart_id = '$session_cart_id'";
+              $getAddontotal = $conn->query($getAddOnsPrice);
+              $getAdstotalPrice = 0;
+              while($getAdTotal = $getAddontotal->fetch_assoc()) {
+                  $getAdstotalPrice += $getAdTotal['item_ingredient_price'];
+              }
+              ?>
 
                <a href="#" data-toggle="modal" data-target="#<?php echo $getCartItems['id']; ?>"><i class="icon_plus_alt2" style="font-size:25px"></i></a>
 							<div class="modal fade" id="<?php echo $getCartItems['id']; ?>" role="dialog">
@@ -213,7 +222,7 @@ th{
 												  </div>
 												   <div class="col-sm-6">
 													<div class="btn-group">
-													  <button style="background-color:#f5f5f5;border-color:#f5f5f5;color:black">Total:₹ <span id="tot_item_price_<?php echo $getCartItems['id']; ?>"><?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?></span></button>
+													  <button style="background-color:#f5f5f5;border-color:#f5f5f5;color:black">Total:₹ <span id="tot_item_price_<?php echo $getCartItems['id']; ?>"><?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?></span></button>
 													  <button class="update_cart_item" data-cart-id="<?php echo $getCartItems['id']; ?>" data-item-id="<?php echo $getCartItems['food_item_id']; ?>" >Update Cart</button>					  
 													</div>
 												   </div>
@@ -230,24 +239,17 @@ th{
                                                <div class="col-sm-10  col-xs-12">
                                                	<?php while ($getIngProdItems = $getIngredenats->fetch_assoc()) { ?>
                                                	<?php $getInDet= getIndividualDetails('food_ingredients','id',$getIngProdItems['ingredient_name_id']); ?>
-
-                                                <?php 
-                                                      $getAddons1 = "SELECT * FROM food_update_cart_ingredients WHERE session_cart_id = '$session_cart_id' AND cart_id = ".$getCartItems['id']." AND item_ingredient_id = ".$getIngProdItems['ingredient_name_id']." ";  
-                                                        $getAddonData1 = $conn->query($getAddons1);
-                                                        $getAddData = $getAddonData1->fetch_assoc();
-                                                        
-                                                      ?> 
-
-                                               	      <input type="hidden" class="ing_price" id="ing_price" value="<?php echo $getIngProdItems['ingredient_price']; ?>">
-                                                      <label class="radio" style="margin-bottom:20px">
-                                                       <h4 style="font-size:15px"><?php echo $getInDet['ingredient_name']; ?><span style="padding-left:50px">Rs:<?php echo $getIngProdItems['ingredient_price']; ?></span></h4>                                                      
-
-                                                      <input type="checkbox" class="check_valid_add_on" value="<?php echo $getIngProdItems['ingredient_price']; ?>" id="check_valid_add_on_<?php echo $getCartItems['id']; ?>" data-key="<?php echo $getCartItems['id']; ?>" data-ing-name="<?php echo $getInDet['ingredient_name']; ?>" data-ing-id="<?php echo $getInDet['id']; ?>" data-ing-price="<?php echo $getIngProdItems['ingredient_price']; ?>">
-                                                      <span class="checkmark"></span>
-
-
+                                                <?php $getIngredenatsIdsData = getAllDataWhere('food_update_cart_ingredients','food_item_id',$getCartItems['food_item_id']);
+                                               ?>
+                                               	 <input type="hidden" class="ing_price" id="ing_price" value="<?php echo $getIngProdItems['ingredient_price']; ?>">
+                                                   <label class="radio" style="margin-bottom:20px">
+                                                       <h4 style="font-size:15px"><?php echo $getInDet['ingredient_name']; ?><span style="padding-left:50px">Rs:<?php echo $getIngProdItems['ingredient_price']; ?></span></h4>
+                                                       <?php while($getIngredenatsIds = $getIngredenatsIdsData->fetch_assoc()) { ?>
+                                                       <input type="checkbox" <?php if($getInDet['id'] == $getIngredenatsIds['item_ingredient_id']) { echo 'checked'; } ?> class="check_valid_add_on" value="<?php echo $getIngProdItems['ingredient_price']; ?>" id="check_valid_add_on_<?php echo $getCartItems['id']; ?>" data-key="<?php echo $getCartItems['id']; ?>" data-ing-name="<?php echo $getInDet['ingredient_name']; ?>" data-ing-id="<?php echo $getInDet['id']; ?>" data-ing-price="<?php echo $getIngProdItems['ingredient_price']; ?>">
+                                                       <?php } ?>
+                                                       <span class="checkmark"></span>
                                                    </label>
-                                                <?php } //} ?>
+                                                <?php } ?>
                                                </div>
                                                <div class="col-sm-1">
                                                </div>
@@ -258,16 +260,15 @@ th{
                       No Add on's
                     <?php } ?>
 										
-
 										<div class="modal-footer">
-										  <button type="button" class="btn btn-default close" data-dismiss="modal" data-key="<?php echo $getCartItems['id']; ?>">Close</button>
+										  <!-- <button type="button" class="btn btn-default close" data-dismiss="modal" data-key="<?php echo $getCartItems['id']; ?>">Close</button> -->
 										</div>
 									</div>
 								</div>
 							</div>                        
 						</td>
             <td><?php echo $getCartItems['item_quantity']; ?></td>
-						<td>Rs. <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?> /-</td>
+						<td>Rs. <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?> /-</td>
 						<?php $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?>
 						<td><i class=" icon-trash del_cart_item" data-cart-id="<?php echo $getCartItems['id']; ?>" style="font-size:25px;color:#fe6003"></li></td>
 					</tr>
