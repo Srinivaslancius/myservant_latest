@@ -65,9 +65,8 @@
                 </li>
                 <li  class="<?php if($page_name == 'faqs.php' || $page_name == 'add_food_faqs.php' || $page_name == 'edit_food_faqs.php') { echo "active"; } ?>"><a href="faqs.php">FAQ'S</a>
                 </li>
-                <!-- <li  class="<?php if($page_name == 'food_howcanhelp_you.php' || $page_name == 'add_food_howcanhelp_you.php' || $page_name == 'edit_food_howcanhelp_you.php' ) { echo "active"; } ?>"><a href="food_howcanhelp_you.php">How Can I Help You</a>
-                </li> -->
-                
+                <li  class="<?php if($page_name == 'food_howcanhelp_you.php' || $page_name == 'add_food_howcanhelp_you.php' || $page_name == 'edit_food_howcanhelp_you.php' ) { echo "active"; } ?>"><a href="food_howcanhelp_you.php">How Can I Help You</a>
+                </li>                
               </ul>
             </li>
             <li class="with-sub">

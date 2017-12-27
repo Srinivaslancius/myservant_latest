@@ -10,6 +10,7 @@
         $( "#deal_start_date,#deal_end_date,#last_login_visit" ).datepicker();
       } );
     </script>
+    
     <script>
       function isNumberKey(evt){
         var charCode = (evt.which) ? evt.which : event.keyCode
@@ -140,6 +141,7 @@
     <script>
         CKEDITOR.replace( 'category_description' );
         CKEDITOR.replace( 'meta_desc' );
+        CKEDITOR.replace( 'answer' );
     </script>
     <style type="text/css">
         .cke_top, .cke_contents, .cke_bottom {
