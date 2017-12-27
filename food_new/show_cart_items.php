@@ -41,7 +41,8 @@ if($getSelData->num_rows > 0) {
       </table>';
   }
 
-  echo '<hr><input type="hidden" value='.$cartTotal.' id="total_cart_val">            
+  echo '<hr><input type="hidden" value='.$cartTotal.' id="total_cart_val">      
+            <input type="hidden" value='.$getSelData->num_rows.' id="total_cart_count">      
             
             <table class="table table_summary">
             <tbody>

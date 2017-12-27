@@ -57,6 +57,7 @@ if (isset($_POST['cart_id']) ){
     }
 
     echo '<hr><input type="hidden" value='.$cartTotal.' id="total_cart_val">    
+    <input type="hidden" value='.$getSelData->num_rows.' id="total_cart_count"> 
                
           <table class="table table_summary">
           <tbody>
