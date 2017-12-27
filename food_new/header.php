@@ -29,13 +29,15 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                     <p>
 					<span class="icon-phone"> 9876543210</span>
                         <?php if($_SESSION['user_login_session_id'] =='') { ?>
-                            <a href="login.php"><span class="icon-lock"></span> Login</a> 
+                            <a href="login.php"><span class="icon-lock"></span> Login</a>
+                            <a href="login.php"><span class="icon-user"> Register</span> </a>
+
                         <?php } else { ?>
                           <span class="icon-user"></span><a href="my_dashboard.php"><?php echo $_SESSION['user_login_session_name']; ?></a>
                         | <span class="icon-logout"></span><a href="logout.php">Logout</a>
 						
                         <?php } ?>
-						<span class="icon-user"> Register</span>
+						
                     </p>
                 </div>
 
