@@ -183,7 +183,7 @@ if(mail($to, $subject, $message, $headers)) {
                 </div>
                 <div class="col-sm-6">
                 <label for="text">Mobile No:</label>                
-               <input type="text" class="form-control " maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" name="phone_contact" placeholder="Mobile Number" required>
+               <input type="text" class="form-control valid_mobile_num" maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" name="phone_contact" placeholder="Mobile Number" required>
                 </div>
                 <div class="col-sm-6">
                 <label for="text">Select:</label>
@@ -199,7 +199,7 @@ if(mail($to, $subject, $message, $headers)) {
                   </div>
                   <div class="col-sm-12">
                     <label for="text">Message:</label>                
-                    <p> <textarea class="form-control" name="message_contact" rows="4" id="comment" placeholder="Message*"></textarea></p>
+                    <p> <textarea class="form-control" name="message_contact" rows="4" id="comment" placeholder="Message*" ></textarea></p>
                 </div>
                 <div class="col-sm-3">  
                     <button type="submit" class="btn btn-submit" style="background-color:#f26226;color:white">Send Message</button>

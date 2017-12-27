@@ -28,40 +28,55 @@ if (!isset($_POST['submit'])) {
     $location = $_POST['location'];
     $created_at = date("Y-m-d h:i:s");   
 
-      //if($_FILES["fileToUpload"]["name"]!='' || $_FILES["fileToUpload1"]["name"]!='') {
+      if($_FILES["fileToUpload"]["name"]!='' || $_FILES["vendor_banner"]["name"]!='') {
 
-              $fileToUpload = $_FILES['fileToUpload']['name'];
-              $target_dir = "../../uploads/food_vendor_logo/";
-              $target_file = $target_dir . basename($fileToUpload);
-              $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-              $getImgUnlink = getImageUnlink('logo','food_vendors','id',$id,$target_dir);
+             //Vendor Logo update
+             $vendorLogo=$_FILES['fileToUpload']['name']; 
+             $expLogo=explode('.',$vendorLogo);
+             $logoxptype=$expLogo[1];
+             $date = date('m/d/Yh:i:sa', time());
+             $rand=rand(10000,99999);
+             $encname=$date.$rand;
+             $logoname=md5($encname).'.'.$logoxptype;
+             $vendorLogopath="../../uploads/food_vendor_logo/".$logoname;     
+             $getImgUnlink = getImageUnlink('logo','food_vendors','id',$id,$vendorLogopath);       
 
-              $fileToUpload1 = $_FILES['fileToUpload1']['name'];
-              $target_dir1 = "../../uploads/food_vendor_Banner/";
-              $target_file1 = $target_dir1 . basename($fileToUpload1);
-              $imageFileType1 = pathinfo($target_file1,PATHINFO_EXTENSION);
-              $getImgUnlink1 = getImageUnlink('vendor_banner','food_vendors','id',$id,$target_dir1);
+             //Vendor banner update
+             $vendorBanner=$_FILES['vendor_banner']['name']; 
+             $expBanner=explode('.',$vendorBanner);
+             $bannerType=$expBanner[1];
+             $date1 = date('m/d/Yh:i:sa', time());
+             $rand1=rand(10000,99999);
+             $encname1=$date1.$rand1;
+             $bannerName=md5($encname1).'.'.$bannerType;
+             $vendorbannerpath="../../uploads/food_vendor_Banner/".$bannerName; 
+             $getImgUnlink1 = getImageUnlink('vendor_banner','food_vendors','id',$id,$vendorbannerpath);
+              
+              
                 //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
-              if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', logo = '$fileToUpload',restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' ";
-                    //$conn->query($sql);
+              if ($vendorLogo!='' && $vendorBanner!='') {
+                    move_uploaded_file($_FILES["vendor_banner"]["tmp_name"],$vendorbannerpath);
+                    move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$vendorLogopath);
+                    $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', logo = '$logoname', vendor_banner = '$bannerName', restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' ";
+                      $conn->query($sql);
+              } elseif($vendorBanner!='') {
+                    move_uploaded_file($_FILES["vendor_banner"]["tmp_name"],$vendorbannerpath);
+                    $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', vendor_banner = '$bannerName',restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' "; 
+                    $conn->query($sql);
+              } elseif($vendorLogo!='') {
+                    move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$vendorLogopath);
+                    $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', logo = '$logoname',restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' "; 
+                    $conn->query($sql);
               }
-              elseif (move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1)) {
-                  $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', vendor_banner = '$fileToUpload1',restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' ";
-                  //$conn->query($sql);
-              }
-
-              else {
-
-                $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' ";
-              }
-          if($conn->query($sql) === TRUE){
-             echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
-          } else {
-             echo "<script type='text/javascript'>window.location='vendors.php?msg=fail'</script>";
-          }
-//}
-        }   
+            //echo $sql; die;
+            //echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
+} else {
+        $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' ";
+          $conn->query($sql);
+      }
+      echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
+      //echo $sql; die;
+}   
 ?>
       <div class="site-content">
         <div class="panel panel-default">
@@ -212,11 +227,11 @@ if (!isset($_POST['submit'])) {
                   </div>
                   <div class="form-group">
                     <label for="form-control-4" class="control-label">Banner</label>
-                    <img src="<?php echo $base_url . 'uploads/food_vendor_Banner/'.$getVendorsData['vendor_banner'] ?>"  id="output1" height="100" width="100"/>
-                    <img id="output1" height="100" width="100"/>
+                    <img src="<?php echo $base_url . 'uploads/food_vendor_Banner/'.$getVendorsData['vendor_banner'] ?>"   id="output1" height="100" width="100"/>
+                    
                     <label class="btn btn-default file-upload-btn">
                       Choose file...
-                        <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload1" id="fileToUpload1"  onchange="loadFile1(event)"  multiple="multiple" >
+                        <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="vendor_banner" id="fileToUpload1"   onchange="loadFile1(event)">
                       </label>
                   </div>
                   <div class="form-group">
