@@ -49,52 +49,5 @@
       </div>
      <?php include_once 'admin_includes/footer.php'; ?>
      <!-- Script for pie chart -->
-     // <script src="js/charts-flot.min.js"></script>
-     // <script type="text/javascript">
-     //        $(document).ready(function() {
-                
-     //            var pie = function () {
-     //                var data = [{
-     //                    label: "Admin Users",
-     //                    data: <?php echo getRowsCount('admin_users')?>,
-     //                    color: "#1d87e4",
-     //                }, {
-     //                    label: "Orders",
-     //                    data: <?php echo getRowsCount('orders')?>,
-     //                    color: "#34a853",
-     //                }, {
-     //                    label: "Products",
-     //                    data: <?php echo getRowsCount('products')?>,
-     //                    color: "#7d57c1",
-     //                }];
-     //                var options = {
-     //                    series: {
-     //                        pie: {
-     //                            show: true
-     //                        }
-     //                    },
-     //                    legend: {
-     //                        labelFormatter: function(label, series){
-     //                            return '<span class="pie-chart-legend">'+label+'</span>';
-     //                        }
-     //                    },
-     //                    grid: {
-     //                        hoverable: true
-     //                    },
-     //                    tooltip: true,
-     //                    tooltipOpts: {
-     //                        content: "%p.0%, %s",
-     //                        shifts: {
-     //                            x: 20,
-     //                            y: 0
-     //                        },
-     //                        defaultTheme: false
-     //                    }
-     //                };
-     //                $.plot($("#pie"), data, options);
-     //            };
-
-     //            pie();
-               
-     //        });
-     //    </script>
+     <script src="js/charts-flot.min.js"></script>
+     
