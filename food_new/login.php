@@ -118,12 +118,10 @@
 	    </div>
 	    <?php }?>
 <!-- Content ================================================== -->
-<div class="container margin_60_35">
+<div class="container margin_30_35">
         </div>
-
 	<div class="row">
 		
-
 	<div class="col-md-1">
 	</div>
 	<div class="col-md-5 wow fadeIn" data-wow-delay="0.1s">

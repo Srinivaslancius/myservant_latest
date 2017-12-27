@@ -48,7 +48,6 @@
     <div id="subheader">
       <div id="sub_content">
        <h1>Frequently Asked Questions</h1>
-         <p>Myservant is all about solving the distance between your food and you. Let's take a step ahead and help you better.</p>
         </div><!-- End sub_content -->
   </div><!-- End subheader -->
 </section><!-- End section -->

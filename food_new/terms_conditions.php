@@ -50,7 +50,6 @@
     <div id="subheader">
         <div id="sub_content">
          <h1><?php echo $getAllTerms_ConditionsData['title']; ?></h1>
-         <p><?php echo $getAllTerms_ConditionsData['meta_title']; ?></p>
          <p></p>
         </div><!-- End sub_content -->
     </div><!-- End subheader -->
@@ -69,9 +68,9 @@
 
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
-    <div class="main_title margin_mobile">
+    <!--<div class="main_title margin_mobile">
         <h2 class="nomargin_top"><?php echo $getAllTerms_ConditionsData['title']; ?></h2>
-        </div>  
+        </div>-->
             <div class="feature_2">
                 <?php echo $getAllTerms_ConditionsData['description']; ?>
         </ol>

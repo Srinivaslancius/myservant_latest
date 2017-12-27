@@ -52,11 +52,11 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
             </div>
         </div>
         <div class="row myseranr_header">
-            <div class="col--md-3 col-sm-3 col-xs-12">
+            <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top:-6px">
                 <?php  
                 if(!empty($getFoodSiteSettingsData['logo'])) { ?>
                 <a href="index.php" id="logo">
-                <img src="<?php echo $base_url . 'uploads/logo/'.$getFoodSiteSettingsData['logo'] ?>" alt="<?php echo $getFoodSiteSettingsData['admin_title']; ?>" data-retina="true" class="hidden-xs myservanrlogo">
+                <img src="<?php echo $base_url . 'uploads/logo/'.$getFoodSiteSettingsData['logo'] ?>" alt="<?php echo $getFoodSiteSettingsData['admin_title']; ?>" data-retina="true" class="myservanrlogo">
                 <?php } else { ?>
                 <center><img src="img/logo-mobile.png"  alt="" data-retina="true" class="hidden-lg hidden-md hidden-sm"></center>
                 <?php }?>
@@ -76,9 +76,9 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                 </form>
             </div>
 
-             <div class="col-md-2 col-xs-2">
+             <div class="col-md-2">
              </div>
-            <div class="col-md-1 col-xs-1">
+            <div class="col-md-1 col-xs-3">
                 <a href="cart.php"><button type="button" class="btn btn-danger" style="background-color:transparent;border-color:white"><span class=" icon-cart" style="font-size:18px"></span> <span class="badge" style="font-size:10px">(<?php echo $cartItems->num_rows; ?>)</span></button></a>
             </div>
         </div><!-- End row -->
