@@ -244,9 +244,7 @@ th{
                                                	 <input type="hidden" class="ing_price" id="ing_price" value="<?php echo $getIngProdItems['ingredient_price']; ?>">
                                                    <label class="radio" style="margin-bottom:20px">
                                                        <h4 style="font-size:15px"><?php echo $getInDet['ingredient_name']; ?><span style="padding-left:50px">Rs:<?php echo $getIngProdItems['ingredient_price']; ?></span></h4>
-                                                       <?php while($getIngredenatsIds = $getIngredenatsIdsData->fetch_assoc()) { ?>
-                                                       <input type="checkbox" <?php if($getInDet['id'] == $getIngredenatsIds['item_ingredient_id']) { echo 'checked'; } ?> class="check_valid_add_on" value="<?php echo $getIngProdItems['ingredient_price']; ?>" id="check_valid_add_on_<?php echo $getCartItems['id']; ?>" data-key="<?php echo $getCartItems['id']; ?>" data-ing-name="<?php echo $getInDet['ingredient_name']; ?>" data-ing-id="<?php echo $getInDet['id']; ?>" data-ing-price="<?php echo $getIngProdItems['ingredient_price']; ?>">
-                                                       <?php } ?>
+                                                       <input type="checkbox" class="check_valid_add_on" value="<?php echo $getIngProdItems['ingredient_price']; ?>" id="check_valid_add_on_<?php echo $getCartItems['id']; ?>" data-key="<?php echo $getCartItems['id']; ?>" data-ing-name="<?php echo $getInDet['ingredient_name']; ?>" data-ing-id="<?php echo $getInDet['id']; ?>" data-ing-price="<?php echo $getIngProdItems['ingredient_price']; ?>">
                                                        <span class="checkmark"></span>
                                                    </label>
                                                 <?php } ?>
