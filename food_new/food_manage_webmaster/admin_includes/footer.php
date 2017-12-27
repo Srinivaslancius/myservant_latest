@@ -1,8 +1,9 @@
     <div class="site-footer"> Design & Developed By Lancius IT Solutions</div> 
     </div>
+    <script src="js/vendor.min.js"></script>
     
     <script src="js/application.min.js"></script>
-   
+    <script src="js/index.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script>
       $( function() {
@@ -10,13 +11,13 @@
       } );
     </script>
     <script>
-    	function isNumberKey(evt){
-  	    var charCode = (evt.which) ? evt.which : event.keyCode
-  	    if (charCode > 31 && (charCode < 48 || charCode > 57))
-  	        return false;
-  	    return true;
-    	}
-	  </script>
+      function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+      }
+    </script>
     <script type="text/javascript">
       //$(document).ready(function(){
           $(".click_view").click(function(){
@@ -25,7 +26,7 @@
           });
       //});
     </script>
-	  <script>
+    <script>
       var loadFile = function(event) {
         var output = document.getElementById('output');
         output.src = URL.createObjectURL(event.target.files[0]);
