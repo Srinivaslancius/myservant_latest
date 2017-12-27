@@ -62,7 +62,7 @@
             move_uploaded_file($_FILES["vendor_banner"]["tmp_name"],$vendorbannerpath);
             move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$vendorLogopath);
            $sql = "INSERT INTO food_vendors (`vendor_name`, `vendor_id`,`vendor_email`, `vendor_mobile`, `description`,  `password`, `working_timings`,`min_delivery_time`, `lkp_state_id`,`lkp_district_id`, `lkp_city_id`,`location`, `logo`, `restaurant_name`,`restaurant_address`,`delivery_type_id`,`created_at`,`pincode`,`meta_title`,`meta_keywords`,`meta_desc`,`cusine_type_id`,`vendor_banner`) VALUES ('$vendor_name','$vendor_id','$vendor_email','$vendor_mobile', '$description','$password','$working_timings','$min_delivery_time','$lkp_state_id','$lkp_district_id','$lkp_city_id','$location','$logoname','$restaurant_name','$restaurant_address','$delivery_type_id','$created_at','$pincode','$meta_title','$meta_keywords','$meta_desc','$cusine_type_id','$bannerName')";
-           
+
             if($conn->query($sql) === TRUE){
                echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
             } else {
@@ -74,6 +74,7 @@
         }
 
       }
+      echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
   }
 ?>
       <div class="site-content">
