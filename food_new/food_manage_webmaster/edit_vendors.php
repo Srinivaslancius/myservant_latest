@@ -135,8 +135,8 @@ if (!isset($_POST['submit'])) {
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Description</label>
-                    <textarea name="description" class="form-control" id="description" data-error="Please enter a valid email address." required><?php echo $getVendorsData['description'];?></textarea>
+                    <label for="form-control-2" class="control-label">Description(Add upto only 150 characters)</label>
+                    <textarea name="description" class="form-control" maxlength="150" data-error="Please enter a valid email address." required><?php echo $getVendorsData['description'];?></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
       

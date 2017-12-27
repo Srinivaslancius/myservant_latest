@@ -51,14 +51,22 @@
     <div id="full-slider-wrapper">
     <div id="layerslider" style="width:100%;height:400px;">
         <!-- first slide -->
-        <?php $getFoodBanners = getFoodHomeBanners(); ?>
-        <?php while($getFoodhomeBanners = $getFoodBanners->fetch_assoc()) { ?>
-        <div class="ls-slide" data-ls="slidedelay: 5000; transition2d:5;">
+        <?php $getBanners = getAllDataWhere('food_banners','lkp_status_id','0'); ?>
+        <?php while($getFoodhomeBanners = $getBanners->fetch_assoc()) { ?>
+        <div class="ls-slide" data-ls="slidedelay: 2000; transition2d:5;">
             <img src="<?php echo $base_url . 'uploads/food_banner_images/'.$getFoodhomeBanners['banner'] ?>" class="ls-bg" alt="Slide background" alt="<?php echo $getFoodhomeBanners['title'];?>">
-            <h3 class="ls-l slide_typo" style="top: 50%; left: 50%;font-size:30px" data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;" ><strong>Enjoy</strong> a quick friends dinner</h3>           
+            <h3 class="ls-l slide_typo" style="top: 50%; left: 50%;font-size:30px" data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;" ><strong><?php echo $getFoodhomeBanners['title'];?></strong></h3>           
            <!-- <?php if($getFoodhomeBanners['lkp_banner_type_id']==1) { ?>
             <p class="ls-l" style="top:64%; left:50%;" data-ls="durationin:2000;delayin:1300;easingin:easeOutElastic;" ><a href="list_page.php" class="button_intro">Read more</a> </p>
             <?php } ?> -->
+        </div>
+       <?php } ?>
+       <?php $getBanners = getAllDataWhere('food_vendors','lkp_status_id','0'); ?>
+        <?php while($getVendorBanners = $getBanners->fetch_assoc()) { ?>
+        <div class="ls-slide" data-ls="slidedelay: 2000; transition2d:5;">
+          <a href="view_rest_menu.php?key=<?php echo encryptPassword($getVendorBanners['id']);?>">
+            <img src="<?php echo $base_url . 'uploads/food_vendor_Banner/'.$getVendorBanners['vendor_banner'] ?>" class="ls-bg" alt="Slide background" alt="<?php echo $getVendorBanners['vendor_name'];?>">
+          </a>
         </div>
        <?php } ?>
         <?php $getAllFoodOrders = "SELECT * FROM food_orders GROUP BY order_id ORDER BY id DESC";
@@ -178,7 +186,7 @@
                         </div>
                         <h3><?php echo $getMostPopualrRestaurants['restaurant_name']; ?></h3>
                         <div class="type">
-                           <?php echo $getMostPopualrRestaurants['description']; ?>
+                           <?php echo substr($getMostPopualrRestaurants['description'], 0,150); ?>
                         </div>
                         <div class="location">
                            <?php echo $getMostPopualrRestaurants['restaurant_address']; ?> .<span class="opening">Opens at <?php echo $getMostPopualrRestaurants['working_timings']; ?></span>

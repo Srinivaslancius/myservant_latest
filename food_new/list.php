@@ -153,7 +153,7 @@
                                                             
                                                             <h4><?php echo $getResults['restaurant_name']; ?></h4>
                                                             <div class="type">
-                                                                <?php echo $getResults['description']; ?>
+                                                                <?php echo substr($getResults['description'], 0,150); ?>
                                                             </div>
                                                             
                                                             

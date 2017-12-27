@@ -128,8 +128,8 @@
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Description</label>
-                    <textarea name="description" id="description" class="form-control" id="meta_desc" placeholder="Description" data-error="This field is required." required></textarea>
+                    <label for="form-control-2" class="control-label">Description(Add upto only 150 characters)</label>
+                    <textarea name="description" maxlength="150" class="form-control" placeholder="Description" data-error="This field is required." required></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">

@@ -160,7 +160,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
                     <hr>
 					<h3 class="nomargin_top" id="<?php echo $getCatList1['category_id']; ?>"><?php $getCatName = getIndividualDetails('food_category','id',$getCatList1['category_id']); echo $getCatName['category_name']; ?></h3>
 					<p>
-					<?php echo $getCatName['category_description']; ?>
+					<?php echo substr($getCatName['category_description'], 0,300); ?>
 					</p>
 					<table class="table table-striped cart-list">
 						<thead>
@@ -174,6 +174,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 							<th>
 								 Order
 							</th>
+							<th></th>
 						</tr>
 						</thead>
 					<tbody>
