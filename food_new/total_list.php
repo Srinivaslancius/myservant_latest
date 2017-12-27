@@ -17,7 +17,7 @@ while($getRestaurantsData = $getRestaurants->fetch_assoc()) {
                                                 
                                                 <h4>'.$getRestaurantsData['restaurant_name'].'</h4>
                                                 <div class="type">
-                                                    '.$getRestaurantsData['description'].'
+                                                    '.substr($getRestaurantsData['description'], 0,150).'
                                                 </div>
                                                 
                                                 
