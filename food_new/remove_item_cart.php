@@ -27,10 +27,10 @@ if (isset($_POST['cart_id']) ){
     $itemPrevQuan = $getCartQuantity['item_quantity'];
     $getTotalCount = $getCartCount->num_rows;
     
-        $itemPrevQuantity = $itemPrevQuan+1;
-        
-        $updateItems = "UPDATE food_cart SET item_quantity = '$itemPrevQuantity' WHERE id = '$cartId' ";
-        $upCart = $conn->query($updateItems);
+    $itemPrevQuantity = $itemPrevQuan-1;
+    
+    $updateItems = "UPDATE food_cart SET item_quantity = '$itemPrevQuantity' WHERE id = '$cartId' ";
+    $upCart = $conn->query($updateItems);
     
 
     $getAddData = "SELECT * FROM food_cart WHERE session_cart_id = '$session_cart_id' AND item_quantity!='0'  ";
@@ -65,7 +65,7 @@ if (isset($_POST['cart_id']) ){
                Subtotal <span class="pull-right">Rs. '.$cartSubtotal.'</span>
             </td>
           </tr>
-         <input type="text" value='.$cartTotal.' id="cart_total">
+         <input type="hidden" value='.$cartTotal.' id="cart_total">
           <tr>
             <td class="total">            
                TOTAL <span class="pull-right">Rs. '.$cartTotal.'</span>

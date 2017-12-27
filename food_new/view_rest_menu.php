@@ -318,6 +318,30 @@ function add_cart_item1(cartId) {
  });
 
 }
+
+function remove_cart_item1(cartId) {
+
+ $.ajax({
+  type:'post',
+  url:'remove_item_cart.php',
+  data:{
+     cart_id:cartId,	     
+  },
+  success:function(response) {
+
+  	document.getElementById("mycart").innerHTML=response;
+  	
+  	if($('#cart_total').val() == 0) {
+  		$('.order_now').css({"pointer-events": "none", "cursor": "not-allowed", "background-color": "#d4d4d4"});
+  	} else {
+  		$('.order_now').removeAttr("style");
+  	}
+    //$("#mycart").slideToggle();
+  }
+ });
+
+}
+
 function add_cart_item(ProductId) {	
 
 	//var ProductId = $(this).attr("data-key");	
@@ -354,7 +378,7 @@ function add_cart_item(ProductId) {
 	     rest_id:restaurantId,
 	     item_cat_id:ProductCategoryId,
 	  },
-	  success:function(response) {  
+	  success:function(response) {
       	$('.order_now').removeAttr("style");
       	document.getElementById("mycart").innerHTML=response;
 	    //$("#mycart").slideToggle();
@@ -404,7 +428,7 @@ function show_cart() {
       	var myVar = $('#total_cart_val').val();
       	if(typeof myVar=="undefined") {
       		$('.order_now').css({"pointer-events": "none", "cursor": "not-allowed", "background-color": "#d4d4d4"});
-      	} else {		
+      	} else {
       	}     
         //$("#mycart").slideToggle();
       }
