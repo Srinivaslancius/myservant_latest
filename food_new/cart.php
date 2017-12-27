@@ -453,6 +453,8 @@ $('.update_cart_item').on('click', function (e) {
 $('.del_cart_item').on('click', function (e) {
   var cartId = $(this).attr('data-cart-id');
   //Display Add On's
+  var x = confirm("Are you sure you want to delete?");
+    if(x) {
         $.ajax({
           type:'post',
           url:'delete_cart_tem.php',
@@ -469,6 +471,7 @@ $('.del_cart_item').on('click', function (e) {
              }
             }
         });
+      }
 });
 </script>
 

@@ -266,7 +266,7 @@ if($_SESSION['user_login_session_id'] == '') {
 					</div>
 					<div class="form-group">
 						<label>Telephone/mobile *</label>
-						<input type="text" id="tel_order" name="tel_order" maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" value="<?php echo $getUser['user_mobile']; ?>" class="form-control" placeholder="Telephone/mobile" required>
+						<input type="text" id="tel_order" name="tel_order" maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" value="<?php echo $getUser['user_mobile']; ?>" class="form-control valid_mobile_num" placeholder="Telephone/mobile" required>
 					</div>
 					<div class="form-group">
 						<label>Email *</label>
@@ -292,7 +292,7 @@ if($_SESSION['user_login_session_id'] == '') {
 						<div class="col-md-6 col-sm-6">
 							<div class="form-group">
 								<label>Postal code *</label>
-								<input type="text" id="pcode_oder" required maxlength="6"  onkeypress="return isNumberKey(event)" name="pcode_oder" class="form-control" placeholder=" Your postal code" required>
+								<input type="text" id="pcode_oder" required maxlength="6"  onkeypress="return isNumberKey(event)" name="pcode_oder" class="form-control valid_mobile_num" placeholder=" Your postal code" required>
 							</div>
 						</div>
 					</div>

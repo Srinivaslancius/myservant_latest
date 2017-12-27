@@ -107,7 +107,7 @@ if (!isset($_POST['submit']))  {
       <?php if(isset($_GET['succ']) && $_GET['succ'] == 'log-success' ) {  ?>
       		<div class="row">
                 <div class="col-sm-3"></div>
-                <div class="col-sm-6 alert alert-success" style="top:10px; display:block">
+                <div class="col-sm-6 alert alert-success" style="top:10px; display:block" id="set_valid_msg">
                   <strong>Success!</strong> Thank You for Your Feedback.
                 </div>
                 <div class="col-sm-3"></div>
@@ -116,7 +116,7 @@ if (!isset($_POST['submit']))  {
         <?php if(isset($_GET['err']) && $_GET['err'] == 'log-fail' ) {  ?>
         	<div class="row">
                 <div class="col-sm-3"></div>
-                <div class="col-sm-6 alert alert-danger" style="top:10px; display:block">
+                <div class="col-sm-6 alert alert-danger" style="top:10px; display:block" id="set_valid_msg">
                   <strong>Failed!</strong> Data Updation Failed.
                 </div>
                 <div class="col-sm-3"></div>
@@ -200,6 +200,13 @@ if (!isset($_POST['submit']))  {
 					// except the last line!
 			});
 		});
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function () {
+	    setTimeout(function () {
+	      $('#set_valid_msg').hide();
+	    }, 2000);
+	  });
 	</script>
 </body>
 
