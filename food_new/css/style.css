@@ -197,8 +197,8 @@ hr.styled {
 
 .btn_full,a.btn_full {
     border: none;
-    width: 100%;
-    background: #85c99d;
+    width: 100%; 
+    background: #f26425;
     padding: 12px 20px;
     transition: all .3s;
     -webkit-border-radius: 3px;
@@ -372,9 +372,9 @@ header.sticky {
 #home #subheader {
     height: 550px
 }
-
+/*---changes--*/
 #short #subheader {
-    height: 350px
+    height: 400px
 }
 
 #subheader a {
@@ -1031,8 +1031,8 @@ a.strip_list:hover h3 {
     background: #fff;
     border-radius: 3px;
     border: 1px solid #ededed;
-    margin-bottom: 25px;
-    padding: 25px
+    margin-bottom: 10px;
+    padding: 25px;
 }
 
 .box_style_2#main_menu,.box_style_2.info {
@@ -1177,7 +1177,7 @@ ul#cat_nav li a.active,ul#cat_nav li a:hover {
 }
 
 #sub_content h1 {
-    margin: 100 0 10px;
+    margin: 10px 0 10px;
     font-size: 50px;
     font-weight: 300;
     color: #fff;
@@ -1608,9 +1608,9 @@ ul.opening_list li span {
 }
 
 .parallax-window {
-    min-height: 470px;
+    min-height: 400px;
     background: 0 0;
-    position: relative
+    position: relative;
 }
 
 .parallax-window#home {
@@ -1618,8 +1618,8 @@ ul.opening_list li span {
 }
 
 .parallax-window#short {
-    height: 350px;
-    min-height: inherit
+    height: 400px !important;
+    min-height: inherit;
 }
 
 .parallax-content {
@@ -1689,7 +1689,7 @@ ul.opening_list li span {
 }
 
 #position ul li:first-child:before {
-    content: "\eaf4";
+    /*content: "\eaf4";*/
     left: 0;
     color: #999
 }
@@ -1946,7 +1946,7 @@ select.form-control.form-white {
 }
 
 .add_top_60,.margin_60,.margin_60_35 {
-    padding-top: 40px;
+    padding-top: 30px;
 }
 
 .margin_60 {
@@ -1954,7 +1954,7 @@ select.form-control.form-white {
 }
 
 .margin_60_35 {
-    padding-bottom: 35px;
+    padding-bottom: 20px;
 }
 
 .margin_30 {
@@ -2896,7 +2896,7 @@ ul.list_ok li:before {
     padding: 30px 30px 20px 45px;
     position: relative;
     background: #fff;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     color: #666;
     -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
     -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
@@ -2913,7 +2913,7 @@ ul.list_ok li:before {
     /* margin: 0; */
     /* margin-bottom: 0; */
     /* width: 65px; */
-    height: 65px;
+    /*! height: 65px; */
     /* line-height: 60px; */
     font-size: 23px;
     /* color: #6dcff6; */
@@ -3071,7 +3071,7 @@ ul.plan-features {
 }
 
 .myseranr_header {
-    padding: 10px;
+    padding: 4px 4px 0px;
 }
 .myservant_topheader 
 {
@@ -3210,10 +3210,26 @@ display: none;
 th{
     font-size:12px;
 }
+
 @media only screen and (max-width: 480px) {
+	.myservanrlogo {
+    margin-top: 1px;
+    margin-left: 50px;
+	}
+	#short #subheader {
+	width:100% !important;
+    height: 240px !important;
+	}
+	#sub_content{
+		padding-top:0px !important
+	}
+	.parallax-window#short {
+    height: 0px !important;
+	width:100% !important;
+	}
     #custom-search-input, #custom-search-input .search-query{
-        width:220px !important;
-        margin-left:-10px !important;
+        width:235px !important;
+        margin-left:-11px !important;
     }
     .pad_left{
         padding-left:30px !important;
@@ -3229,14 +3245,15 @@ th{
         padding-left:20px !important;
     }
     #custom-search-input .search-query{
-        padding: 12px 10px;
+        padding: 9px 10px;
     }
     #custom-search-input input.btn_search {
     right: 16px !important;
     top: 8px !important;
 }
 .btn-danger{
-    padding:5px 5px 8px 5px!important;
+    padding: 5px 2px 5px 2px !important;
+margin-bottom: 5px;
 }
 .carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
   
@@ -3249,7 +3266,12 @@ th{
 .container {
     padding-left: 23px !important;
 }
-
+.margin_10{
+	padding-left:15px !important;
+}
+.carousel-caption{
+	bottom:50px;
+}
 .carousel-caption h2{
     font-size:20px !important;
 }
@@ -3302,7 +3324,12 @@ h3.slide_typo{
     text-align: left;
     font-size: 14px;
 }
+footer ul {
+    margin: 0;
+    padding: 0 12px 20px;
 }
+}
+/*  media query 480 end */
 .checkb {
    display: block;
    position: relative;

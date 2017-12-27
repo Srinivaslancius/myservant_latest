@@ -20,7 +20,21 @@
       <script src="js/respond.min.js"></script>
     <![endif]-->
 <style>
-.icon-location,.icon-mobile,.icon-mail-1{
+.one{
+	 background-color: #FE6003 !important;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    color: #fff;
+    margin-right: 15px;
+    float: left;
+    padding:5px;
+}
+.icon-mobile,.icon-mail-1{
     background-color: #FE6003;
     display: inline-block;
     height: 30px;
@@ -112,8 +126,7 @@ if(mail($to, $subject, $message, $headers)) {
     <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
         <div id="subheader">
             <div id="sub_content">
-             <h1>Contact US</h1>
-             <p>We would love to hear from you!</p>
+             <h1>Contact Us</h1>
             </div><!-- End sub_content -->
         </div><!-- End subheader -->
     </section><!-- End section -->
@@ -199,7 +212,7 @@ if(mail($to, $subject, $message, $headers)) {
                 
                 <div class="col-md-4 col-sm-4">
                 <h4 style="color:#FE6003">Information</h4><br>
-                <p style="margin-bottom:5px"><span class="icon-location"></span> <?php echo $getFoodSiteSettingsData["address"]; ?></p>
+                <p style="margin-bottom:5px"><span class="icon-location one"></span> <?php echo $getFoodSiteSettingsData["address"]; ?></p>
                 <p style="margin-bottom:20px"><span class="icon-mobile"></span> <a href="Tel:<?php echo $getFoodSiteSettingsData['mobile']; ?>"><?php echo $getFoodSiteSettingsData['mobile']; ?></a> Toll Free (24*7)</p></p>
                 <p><span class="icon-mail-1"></span> <a href="mailto::<?php echo $getFoodSiteSettingsData['contact_email']; ?>"><?php echo $getFoodSiteSettingsData['email']; ?></a></p>
                 </div>

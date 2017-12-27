@@ -81,28 +81,9 @@ if(mail($to, $subject, $message, $headers)) {
              </div>
             <div class="col-md-3 col-sm-3" id="newsletter">
                 <h3>Download our app</h3>
-              <p style="margin-bottom:4px"><a href="<?php echo $getFoodSiteSettingsData['android_app_link'] ?>"  target="_blank"><img src="img/googleplay.png"></a></p>
-              <p><a href="<?php echo $getFoodSiteSettingsData['apple_app_link'] ?>"  target="_blank"><img src="img/applestore.png" style="margin-top:10px"></a></p>
+              <p style="margin-bottom:5px"><a href="<?php echo $getFoodSiteSettingsData['android_app_link'] ?>"  target="_blank"><img src="img/googleplay.png"></a></p>
+              <p><a href="<?php echo $getFoodSiteSettingsData['apple_app_link'] ?>"  target="_blank"><img src="img/applestore.png"></a></p>
             </div>
-         <!--   <div class="col-md-2 col-sm-3">
-                <h3>Settings</h3>
-                <div class="styled-select">
-                    <select class="form-control" name="lang" id="lang">
-                        <option value="English" selected>English</option>
-                        <option value="French">French</option>
-                        <option value="Spanish">Spanish</option>
-                        <option value="Russian">Russian</option>
-                    </select>
-                </div>
-                <div class="styled-select">
-                    <select class="form-control" name="currency" id="currency">
-                        <option value="USD" selected>USD</option>
-                        <option value="EUR">EUR</option>
-                        <option value="GBP">GBP</option>
-                        <option value="RUB">RUB</option>
-                    </select>
-                </div>
-            </div>-->
         </div><!-- End row -->
         <div class="row">
             <div class="col-md-12">

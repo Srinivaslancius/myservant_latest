@@ -27,10 +27,11 @@ if($getSelData->num_rows > 0) {
   $cartSubtotal += $cartItems['item_price'] * $cartItems['item_quantity'];
   $cartTotal = $cartSubtotal;
   $getProductsName = getIndividualDetails('food_products','id',$cartItems['food_item_id']);  
+  $productId = $cartItems['food_item_id'];
   echo '<table class="table table_summary cart_total_items"><tbody >
           <tr>
               <td>
-                <a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" data-key='.$cartItems['id'].'></i></a> <strong>'.$cartItems['item_quantity'].'x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> '.$getProductsName['product_name'].'
+                <a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onClick="add_cart_item1('.$cartItems['id'] .')" ></i></a> <strong>'.$cartItems['item_quantity'].'x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onClick="remove_cart_item1('.$cartItems['id'] .')"></i></a> '.$getProductsName['product_name'].'
               </td>
               <td>
                 <strong class="pull-right">Rs. '.$cartItems['item_price'] * $cartItems['item_quantity'].' </strong>
@@ -40,7 +41,8 @@ if($getSelData->num_rows > 0) {
       </table>';
   }
 
-  echo '<hr><input type="hidden" value='.$cartTotal.' id="total_cart_val">            
+  echo '<hr><input type="hidden" value='.$cartTotal.' id="total_cart_val">      
+            <input type="hidden" value='.$getSelData->num_rows.' id="total_cart_count">      
             
             <table class="table table_summary">
             <tbody>
@@ -49,7 +51,7 @@ if($getSelData->num_rows > 0) {
                  Subtotal <span class="pull-right">Rs. '.$cartSubtotal.'</span>
               </td>
             </tr>
-            
+            <input type="hidden" value='.$cartTotal.' id="cart_total">
             <tr>
               <td class="total">                
                  TOTAL <span class="pull-right">Rs. '.$cartTotal.'</span>

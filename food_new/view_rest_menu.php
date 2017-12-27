@@ -65,12 +65,7 @@ word-break: normal;
         </div>
     </div><!-- End Preload -->
 
-    <!-- Header ================================================== -->
-    <header>
-        <?php include_once 'header.php';?>
-    </header>
-<!-- End Header =============================================== -->
-<?php $getRestKey = decryptpassword($_GET['key']); ?>
+    <?php $getRestKey = decryptpassword($_GET['key']); ?>
 <?php //$getRestKey = 3; ?>
 <?php 
 if($_SESSION['CART_TEMP_RANDOM'] == "") {
@@ -87,10 +82,17 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
     $conn->query($delCartIng);
 }
 ?>
+
+    <!-- Header ================================================== -->
+    <header>
+        <?php include_once 'header.php';?>
+    </header>
+<!-- End Header =============================================== -->
+
 <?php $getCategory = getFoodCategoryByRestId('food_products','restaurant_id',$getRestKey); ?>
 <?php $getFoodVendorsBann = getIndividualDetails('food_vendors','id',$getRestKey); ?>
 <!-- SubHeader =============================================== -->
-<section class="parallax-window" data-parallax="scroll" <?php if($getFoodVendorsBann['vendor_banner']!='') { ?>data-image-src="<?php echo $base_url . 'uploads/food_vendor_Banner/'.$getFoodVendorsBann['vendor_banner']; ?>" <?php } else { ?> data-image-src="img/sub_header_home.jpg" <?php } ?>data-natural-width="1400" data-natural-height="470">
+<section class="parallax-window" id="short" data-parallax="scroll" <?php if($getFoodVendorsBann['vendor_banner']!='') { ?>data-image-src="<?php echo $base_url . 'uploads/food_vendor_Banner/'.$getFoodVendorsBann['vendor_banner']; ?>" <?php } else { ?> data-image-src="img/sub_header_home.jpg" <?php } ?>data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
 	<div id="sub_content">
     	<div id="thumb"><img src="<?php echo $base_url . 'uploads/food_vendor_logo/'.$getFoodVendorsBann['logo']; ?>" alt="<?php echo $getMostPopualrRestaurants['restaurant_name']; ?>"></div>
@@ -226,9 +228,9 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 							}
 							?>
 
-							<a href="#0" class="remove_item"> <i class="icon_minus_alt remove_cart_item" data-key="<?php echo $productId; ?>" data-key-check="remove"></i> <a/><span id="cart_count_inc_<?php echo $productId; ?>"> <?php echo $getOnloadProductCount; ?> </span>
-							<a href="#0" class="remove_item"> <i class="icon_plus_alt2 add_cart_item" data-key="<?php echo $productId; ?>"></i> <a/>
-							<!-- <i class="icon_plus_alt2 add_cart_item" data-key="<?php echo $productId; ?>" data-key-price="25"></i> -->
+							<!-- <a href="#0" class="remove_item"> <i class="icon_minus_alt remove_cart_item" data-key="<?php echo $productId; ?>" data-key-check="remove"></i> <a/><span id="cart_count_inc_<?php echo $productId; ?>"> <?php echo $getOnloadProductCount; ?> </span>
+							<a href="#0" class="remove_item"> <i class="icon_plus_alt2 add_cart_item" data-key="<?php echo $productId; ?>"></i> <a/> -->
+							 <a class="btn_full" onClick = "add_cart_item(<?php echo $productId; ?>);" style="padding:8px 4px">Add to cart</a><!--<i class="icon_plus_alt2" onClick = "add_cart_item(<?php echo $productId; ?>);" ></i>-->
 						</td>
 						
 					</tr>
@@ -303,17 +305,59 @@ $('#cat_nav a[href^="#"]').on('click', function (e) {
 </script>
 
 <script type="text/javascript">
-$(".add_cart_item, .remove_cart_item").click(function(){
 
-	var ProductId = $(this).attr("data-key");
+function add_cart_item1(cartId) {
+ $.ajax({
+  type:'post',
+  url:'update_cart_items.php',
+  data:{
+     cart_id:cartId,	     
+  },
+  success:function(response) {  
+  	$('.order_now').removeAttr("style");
+  	document.getElementById("mycart").innerHTML=response;
+    //$("#mycart").slideToggle();
+  }
+ });
+
+}
+
+function remove_cart_item1(cartId) {
+
+ $.ajax({
+  type:'post',
+  url:'remove_item_cart.php',
+  data:{
+     cart_id:cartId,	     
+  },
+  success:function(response) {
+
+  	document.getElementById("mycart").innerHTML=response;
+  	$('#cart_cnt').html($('#total_cart_count').val());
+  	
+  	if($('#cart_total').val() == 0) {
+  		$('.order_now').css({"pointer-events": "none", "cursor": "not-allowed", "background-color": "#d4d4d4"});
+  	} else {
+  		$('.order_now').removeAttr("style");
+  	}
+    //$("#mycart").slideToggle();
+  }
+ });
+
+}
+
+function add_cart_item(ProductId) {	
+
+	//var ProductId = $(this).attr("data-key");	
 	//var ProductPrice = $(this).attr("data-key-price");
 	var ProductPrice = $('#item_price_'+ProductId).val();	
 	var ProductWeighType = $('#item_weight_type_'+ProductId).val();
 	var restaurantId = $('#rest_id').val();
-	var ProductCategoryId = $('#item_category_id_'+ProductId).val();	
+	var ProductCategoryId = $('#item_category_id_'+ProductId).val();
+	//var cartId = $('#cart_id').val();
 
 	var removeItemCheck = $(this).attr("data-key-check");
-	if(removeItemCheck == "remove") {		
+	if(removeItemCheck == "remove") {	
 	    var removeItemCheckPro = 1;	    
 	    if($('#cart_count_inc_'+ProductId).html() == 0) {
 	    	$('.remove_cart_item').css({"pointer-events": "none", "cursor": "not-allowed"});
@@ -338,35 +382,17 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 	     rest_id:restaurantId,
 	     item_cat_id:ProductCategoryId,
 	  },
-	  success:function(response) {  
+	  success:function(response) {
       	$('.order_now').removeAttr("style");
       	document.getElementById("mycart").innerHTML=response;
+      	$('#cart_cnt').html($('#total_cart_count').val());
 	    //$("#mycart").slideToggle();
 	  }
 	 });
 
-	$.ajax({
-	  type:'post',
-	  url:'get_cart_count.php',
-	  data:{
-	     item_id:ProductId,
-	     //item_price:ProductPrice,
-	     item_weight:ProductWeighType,
-	  },
-	  success:function(response) {
-	  	//alert(response);
-	  	var data = response.split(",");	
-	  	var ProductUniqId = data[1];
-	  	if(data[0]!=0)	 {
-	  		var totalProItemsCnt = data[0];
-	  	} else {
-	  		var totalProItemsCnt = 0;		  		
-	  	}	  	
-		$('#cart_count_inc_'+ProductUniqId).html(totalProItemsCnt);	    
-	    //$("#mycart").slideToggle();
-	  }
-	});
-}); 
+}
+</script>
+<script type="text/javascript">
 
  $(function() {
 	$('.get_product_id').change(function() {
@@ -387,26 +413,6 @@ $(".add_cart_item, .remove_cart_item").click(function(){
 			  $('#item_price_'+ProductUniqId).val(data[0]);
 			}
 		});
-
-		$.ajax({
-		  type:'post',
-		  url:'get_cart_count.php',
-		  data:{
-		  	 item_id : productId,
-		     item_weight:weightTypeIncId,		     
-		  },
-		  success:function(response) {
-		    var data = response.split(",");	
-		  	var ProductUniqId = data[1];
-		  	if(data[0]!=0)	 {
-		  		var totalProItemsCnt = data[0];
-		  	} else {
-		  		var totalProItemsCnt = 0;		  		
-		  	}
-			$('#cart_count_inc_'+ProductUniqId).html(totalProItemsCnt);
-		  }
-		});
-	
 	})
 });
 
@@ -423,11 +429,12 @@ function show_cart() {
       success:function(response) {
       	//alert(response);        	
         document.getElementById("mycart").innerHTML=response;   
+        $('#cart_cnt').html($('#total_cart_count').val());
         //alert($('#cart_count_items').val());
       	var myVar = $('#total_cart_val').val();
       	if(typeof myVar=="undefined") {
       		$('.order_now').css({"pointer-events": "none", "cursor": "not-allowed", "background-color": "#d4d4d4"});
-      	} else {		
+      	} else {
       	}     
         //$("#mycart").slideToggle();
       }

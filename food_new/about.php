@@ -49,7 +49,6 @@
     <div id="subheader">
     	<div id="sub_content">
     	 <h1><?php echo $getAboutData['title']; ?></h1>
-         <p><?php echo $getAboutData['meta_title']; ?></p>
          <p></p>
         </div><!-- End sub_content -->
 	</div><!-- End subheader -->
@@ -68,9 +67,6 @@
 
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
-    <div class="main_title margin_mobile">
-            <h2 class="nomargin_top"><?php echo $getAboutData['title']; ?></h2>
-        </div>	
 			<div class="feature_2">
 				<?php echo $getAboutData['description']; ?>
 			</div>
