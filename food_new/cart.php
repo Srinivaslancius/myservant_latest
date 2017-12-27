@@ -230,13 +230,24 @@ th{
                                                <div class="col-sm-10  col-xs-12">
                                                	<?php while ($getIngProdItems = $getIngredenats->fetch_assoc()) { ?>
                                                	<?php $getInDet= getIndividualDetails('food_ingredients','id',$getIngProdItems['ingredient_name_id']); ?>
-                                               	 <input type="hidden" class="ing_price" id="ing_price" value="<?php echo $getIngProdItems['ingredient_price']; ?>">
-                                                   <label class="radio" style="margin-bottom:20px">
-                                                       <h4 style="font-size:15px"><?php echo $getInDet['ingredient_name']; ?><span style="padding-left:50px">Rs:<?php echo $getIngProdItems['ingredient_price']; ?></span></h4>
-                                                       <input type="checkbox" class="check_valid_add_on" value="<?php echo $getIngProdItems['ingredient_price']; ?>" id="check_valid_add_on_<?php echo $getCartItems['id']; ?>" data-key="<?php echo $getCartItems['id']; ?>" data-ing-name="<?php echo $getInDet['ingredient_name']; ?>" data-ing-id="<?php echo $getInDet['id']; ?>" data-ing-price="<?php echo $getIngProdItems['ingredient_price']; ?>">
-                                                       <span class="checkmark"></span>
+
+                                                <?php 
+                                                      $getAddons1 = "SELECT * FROM food_update_cart_ingredients WHERE session_cart_id = '$session_cart_id' AND cart_id = ".$getCartItems['id']." AND item_ingredient_id = ".$getIngProdItems['ingredient_name_id']." ";  
+                                                        $getAddonData1 = $conn->query($getAddons1);
+                                                        $getAddData = $getAddonData1->fetch_assoc();
+                                                        
+                                                      ?> 
+
+                                               	      <input type="hidden" class="ing_price" id="ing_price" value="<?php echo $getIngProdItems['ingredient_price']; ?>">
+                                                      <label class="radio" style="margin-bottom:20px">
+                                                       <h4 style="font-size:15px"><?php echo $getInDet['ingredient_name']; ?><span style="padding-left:50px">Rs:<?php echo $getIngProdItems['ingredient_price']; ?></span></h4>                                                      
+
+                                                      <input type="checkbox" class="check_valid_add_on" value="<?php echo $getIngProdItems['ingredient_price']; ?>" id="check_valid_add_on_<?php echo $getCartItems['id']; ?>" data-key="<?php echo $getCartItems['id']; ?>" data-ing-name="<?php echo $getInDet['ingredient_name']; ?>" data-ing-id="<?php echo $getInDet['id']; ?>" data-ing-price="<?php echo $getIngProdItems['ingredient_price']; ?>">
+                                                      <span class="checkmark"></span>
+
+
                                                    </label>
-                                                <?php } ?>
+                                                <?php } //} ?>
                                                </div>
                                                <div class="col-sm-1">
                                                </div>
