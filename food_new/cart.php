@@ -280,7 +280,7 @@ th{
 							<td>Service Tax <span class="pull-right">Rs. <?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span></td>
 						</tr>
 
-            <!-- <?php
+              <?php
               $getAddOnsPrice = "SELECT * FROM food_update_cart_ingredients WHERE session_cart_id = '$session_cart_id'";
               $getAddontotal = $conn->query($getAddOnsPrice);
               $getAdstotal = 0;
@@ -290,14 +290,14 @@ th{
               ?>
               <tr>
                   <td>Extra Add On's Price <span class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
-              </tr> -->
+              </tr>
 						
 						<!-- <tr>
 							<td>Delivery fee <span class="pull-right">Rs. <?php echo $getFoodSiteSettingsData['delivery_charges'] ; ?></span> </td>
 
 						</tr> -->
 						<tr>
-							<td style="color:#fe6003">TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax; ?></span></td>
+							<td style="color:#fe6003">TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$getAdstotal; ?></span></td>
 						</tr>
 						</tbody>
 						</table>
@@ -414,6 +414,7 @@ $('.update_cart_item').on('click', function (e) {
           success:function(response) {
              //alert();
              $(".modal .close").click();
+             location.reload();
             }
         });
 

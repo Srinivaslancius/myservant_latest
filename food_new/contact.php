@@ -179,11 +179,11 @@ if(mail($to, $subject, $message, $headers)) {
                 </div>
                 <div class="col-sm-6">
                 <label for="email">Email:</label>               
-                <p><input type="email" name="email_contact" class="form-control " placeholder="Email" required></p>
+                <p><input type="email" name="email_contact" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control " placeholder="Email" required></p>
                 </div>
                 <div class="col-sm-6">
                 <label for="text">Mobile No:</label>                
-               <input type="text" class="form-control " name="phone_contact" placeholder="Mobile Number" required>
+               <input type="text" class="form-control " maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" name="phone_contact" placeholder="Mobile Number" required>
                 </div>
                 <div class="col-sm-6">
                 <label for="text">Select:</label>
@@ -247,6 +247,13 @@ if(mail($to, $subject, $message, $headers)) {
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
 <script src="assets/validate.js"></script>
-
+<script>
+      function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+      }
+    </script>
 </body>
 </html>

@@ -197,8 +197,8 @@ hr.styled {
 
 .btn_full,a.btn_full {
     border: none;
-    width: 100%;
-    background: #85c99d;
+    width: 100%; 
+    background: #f26425;
     padding: 12px 20px;
     transition: all .3s;
     -webkit-border-radius: 3px;
