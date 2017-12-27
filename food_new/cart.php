@@ -230,29 +230,38 @@ th{
 										</div>
 										
 
-										<input type="hidden" name="product_tot_price_ind" value="<?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?>" id="product_tot_price_ind_<?php echo $getCartItems['id']; ?>" class="pro_tot_price">
+										<input type="hidden" name="product_tot_price_ind" value="<?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?>" id="product_tot_price_ind_<?php echo $getCartItems['id']; ?>" class="pro_tot_price">
 
 										<div class="modal-body">
-                                           <div class="row">
-                                               <div class="col-sm-1">
-                                               </div>
-                                               <div class="col-sm-10  col-xs-12">
-                                               	<?php while ($getIngProdItems = $getIngredenats->fetch_assoc()) { ?>
-                                               	<?php $getInDet= getIndividualDetails('food_ingredients','id',$getIngProdItems['ingredient_name_id']); ?>
-                                                <?php $getIngredenatsIdsData = getAllDataWhere('food_update_cart_ingredients','food_item_id',$getCartItems['food_item_id']);
-                                               ?>
-                                               	 <input type="hidden" class="ing_price" id="ing_price" value="<?php echo $getIngProdItems['ingredient_price']; ?>">
-                                                   <label class="radio" style="margin-bottom:20px">
-                                                       <h4 style="font-size:15px"><?php echo $getInDet['ingredient_name']; ?><span style="padding-left:50px">Rs:<?php echo $getIngProdItems['ingredient_price']; ?></span></h4>
-                                                       <input type="checkbox" class="check_valid_add_on" value="<?php echo $getIngProdItems['ingredient_price']; ?>" id="check_valid_add_on_<?php echo $getCartItems['id']; ?>" data-key="<?php echo $getCartItems['id']; ?>" data-ing-name="<?php echo $getInDet['ingredient_name']; ?>" data-ing-id="<?php echo $getInDet['id']; ?>" data-ing-price="<?php echo $getIngProdItems['ingredient_price']; ?>">
-                                                       <span class="checkmark"></span>
-                                                   </label>
-                                                <?php } ?>
-                                               </div>
-                                               <div class="col-sm-1">
-                                               </div>
-                                           </div>
-                                        </div>
+                         <div class="row">
+                             <div class="col-sm-1">
+                             </div>
+                             <div class="col-sm-10  col-xs-12">
+                             	<?php while ($getIngProdItems = $getIngredenats->fetch_assoc()) { ?>
+                             	<?php $getInDet= getIndividualDetails('food_ingredients','id',$getIngProdItems['ingredient_name_id']); ?>
+                              <?php $getIngredenatsIdsData = getAllDataWhere('food_update_cart_ingredients','food_item_id',$getCartItems['food_item_id']);
+                             ?>
+
+                              <?php 
+                                $getAddons1 = "SELECT * FROM food_update_cart_ingredients WHERE session_cart_id = '$session_cart_id' AND cart_id = ".$getCartItems['id']." AND item_ingredient_id = ".$getIngProdItems['ingredient_name_id']." ";  
+                                  $getAddonData1 = $conn->query($getAddons1);
+                                  $getAddData = $getAddonData1->fetch_assoc();
+                                  $ingId = $getAddData['item_ingredient_id'];
+                                  
+                              ?> 
+
+                             	 <input type="hidden" class="ing_price" id="ing_price" value="<?php echo $getIngProdItems['ingredient_price']; ?>">
+                                 <label class="radio" style="margin-bottom:20px">
+                                     <h4 style="font-size:15px"><?php echo $getInDet['ingredient_name']; ?><span style="padding-left:50px">Rs:<?php echo $getIngProdItems['ingredient_price']; ?></span></h4>
+                                     <input type="checkbox"  <?php if($ingId == $getInDet['id']) { echo 'checked="checked"'; } ?> class="check_valid_add_on" value="<?php echo $getIngProdItems['ingredient_price']; ?>" id="check_valid_add_on_<?php echo $getCartItems['id']; ?>" data-key="<?php echo $getCartItems['id']; ?>" data-ing-name="<?php echo $getInDet['ingredient_name']; ?>" data-ing-id="<?php echo $getInDet['id']; ?>" data-ing-price="<?php echo $getIngProdItems['ingredient_price']; ?>" name="checkbox_<?php echo $getCartItems['id']; ?>">
+                                     <span class="checkmark"></span>
+                                 </label>
+                              <?php } ?>
+                             </div>
+                             <div class="col-sm-1">
+                             </div>
+                         </div>
+                      </div>
 										
 										<?php } else { ?>
                       No Add on's
@@ -371,27 +380,24 @@ $('#cat_nav a[href^="#"]').on('click', function (e) {
 $('.check_valid_add_on').on('change', function (e) {
 
 	var updateTotalPrice =0;
-    var cartId = $(this).attr("data-key");    	
+  var cartId = $(this).attr("data-key");    	
 	var totalIndPrice = parseInt($('#product_tot_price_ind_'+cartId).val());	
-	$('input:checkbox:checked').each(function(){ // iterate through each checked element.		
-    	updateTotalPrice += isNaN(parseInt($(this).val())) ? 0 : parseInt($(this).val());    
+	$('input:checkbox[name=checkbox_'+cartId+']:checked').each(function(){ // iterate through each checked element.
+      if ($(this).prop('checked')==true){ 
+        updateTotalPrice += isNaN(parseInt($(this).val())) ? 0 : parseInt($(this).val());  
+      }
+    	  
     });     
-  	//alert(updateTotalPrice);
+  	alert(updateTotalPrice);
   	var getTotalVal = updateTotalPrice+totalIndPrice;
 	$('#tot_item_price_'+cartId).html(getTotalVal);
 });
-//Close 
-$('.close').on('click', function (e) {
-    var cartId = $(this).attr("data-key");  
-    $(".check_valid_add_on").prop('checked', false); 
-    var totalIndPrice = parseInt($('#product_tot_price_ind_'+cartId).val());
-    $('#tot_item_price_'+cartId).html(totalIndPrice);
-});
+
 
 //
 $('.update_cart_item').on('click', function (e) {
 
-    if($('[type="checkbox"]').is(":checked")){      
+    if($('[type="checkbox"]').is(":checked")){
     
         var cartId = $(this).attr('data-cart-id'); 
         var productId = $(this).attr('data-item-id');    
@@ -399,7 +405,7 @@ $('.update_cart_item').on('click', function (e) {
 
         var cb = [],
         post_cb = []
-        $.each($('input[type=checkbox]:checked'), function(){
+        $.each($('input:checkbox[name=checkbox_'+cartId+']:checked'), function(){
             var ingId = $(this).attr('data-ing-id'),
                 ingName = $(this).attr('data-ing-name'),
                 ingPrice = $(this).attr('data-ing-price')
@@ -427,21 +433,7 @@ $('.update_cart_item').on('click', function (e) {
              location.reload();
             }
         });
-
-        //Display Add On's
-        $.ajax({
-          type:'post',
-          url:'display_add_ons.php',
-          data:{
-             cartId : cartId,
-             productId : productId, 
-             cartSessionId : cartSessionId,                     
-          },
-          success:function(response) {            
-             $('#dis_add_on_'+cartId).html(response);           
-            }
-        });
-        //End add on code display
+        
 
     } else {
         alert("Please select any extra Add On's");
