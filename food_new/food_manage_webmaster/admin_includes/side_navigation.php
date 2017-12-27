@@ -145,8 +145,8 @@
                 </li>
                 <li  class="<?php if($page_name == 'lkp_locations.php' || $page_name == 'add_lkp_locations.php' || $page_name == 'edit_lkp_locations.php' ) { echo "active"; } ?>"><a href="lkp_locations.php">Locations</a>
                 </li>
-               <!-- <li  class="<?php if($page_name == 'availability_of_locations.php' || $page_name == 'add_availability_of_locations.php' || $page_name == 'edit_availability_of_locations.php' ) { echo "active"; } ?>"><a href="availability_of_locations.php">Availability of Locations</a>
-                </li> -->
+               <li  class="<?php if($page_name == 'availability_of_locations.php' || $page_name == 'add_availability_of_locations.php' || $page_name == 'edit_availability_of_locations.php' ) { echo "active"; } ?>"><a href="availability_of_locations.php">Availability of Locations</a>
+                </li>
               </ul>
             </li>
             <!-- <li  class="<?php if($page_name == 'faqs.php' || $page_name == 'add_faqs.php' || $page_name == 'edit_faqs.php') { echo "active"; } ?>">
