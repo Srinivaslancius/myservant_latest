@@ -113,6 +113,17 @@
     font-size: 12px;
     padding-top: 5px;
 }
+.btn-danger{
+	 height:40px;
+	 background-color:#FE6003;
+	 border-radius:0px;
+	 border-color:#FE6003;
+	 width:80px;
+}
+.btn-danger:hover{
+	background-color:black;
+	 border-color:black;
+}
 </style>
     <!-- End Header =============================================== -->
 <?php
@@ -429,8 +440,22 @@ if($_SESSION['user_login_session_id'] == '') {
 					<input type="hidden" name="getAdstotal" value="<?php echo $getAdstotal; ?>" id="getAdstotal">
 					<input type="hidden" name="user_id" value="<?php echo $user_session_id; ?>">
 					<hr>					
-
+				<div class="row" id="options_2">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<form class="form-inline">
+					<div class="input-group">
+					  <input type="text" class="form-control" size="30" placeholder="Coupon Code" required  style="border-radius:0px">
+					  <div class="input-group-btn">
+						<button type="button" class="btn btn-danger">Apply</button>
+					  </div>
+					</div>
+				  </form>
+				  </div>
+						
+					</div><!-- Edn options 2 -->
+					<hr>
 					<div class="row" id="options_2">
+					
 						<?php $getOnlineDeatils = getIndividualDetails('payment_gateway_options','id',2); 
 							if($getOnlineDeatils['enable_status'] == 0) { ?>
 						<div class="col-lg-8 col-md-12 col-sm-12 col-xs-6">
