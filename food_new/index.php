@@ -157,7 +157,7 @@
           
         </div>
 
-        <?php $getMostPopualrRest = getAllRestaruntsWithProducts('0','0','6'); ?>
+        <?php $getMostPopualrRest = getAllRestaruntsWithProducts('0','0','4'); ?>
         
         <div class="row">
             <?php while($getMostPopualrRestaurants = $getMostPopualrRest->fetch_assoc()) { ?>
