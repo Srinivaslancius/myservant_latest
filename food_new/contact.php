@@ -59,7 +59,7 @@
 <![endif]-->
 <?php
 
-if(!empty($_POST['name_contact']) && !empty($_POST['how_can_help']) && !empty($_POST['email_contact']) && !empty($_POST['phone_contact']) && !empty($_POST['message_contact']))  {
+if(!empty($_POST['name_contact']) && !empty($_POST['how_can_help']) && !empty($_POST['email_contact']) && !empty($_POST['phone_contact']))  {
 
     $name_contact = $_POST['name_contact'];
     $how_can_help = $_POST['how_can_help'];
@@ -90,7 +90,6 @@ $message .= '<body>
     </div>
 
     </body>';
-
 
 //$sendMail = sendEmail($to,$subject,$message,$email_contact);
 $name = "My Servant";
