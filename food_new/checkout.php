@@ -202,7 +202,7 @@ if($_SESSION['user_login_session_id'] == '') {
 				$date = date("ymdhis");
 				$contstr = "MYSER-FOOD";
 				$sub_order_id = $contstr.$random1.$random2.$date;
-				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`,  `payment_method`,`lkp_payment_status_id`,`delivery_type_id`,`service_tax`,`delivery_charges`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city_order"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."','$payment_group','$payment_status','$dev_type','".$_POST["service_tax"]."','$delivery_charges', '$order_id','$sub_order_id','$order_date')";
+				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`,  `payment_method`,`lkp_payment_status_id`,`delivery_type_id`,`service_tax`,`delivery_charges`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."','$payment_group','$payment_status','$dev_type','".$_POST["service_tax"]."','$delivery_charges', '$order_id','$sub_order_id','$order_date')";
 				$servicesOrders = $conn->query($orders);
 			} 
 			if($_SESSION['CART_TEMP_RANDOM'] == "") {
@@ -211,6 +211,17 @@ if($_SESSION['user_login_session_id'] == '') {
 		    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
 			$delCart ="DELETE FROM food_cart WHERE user_id = '$user_id' OR session_cart_id='$session_cart_id' ";
 			$conn->query($delCart);
+			
+			$getIngredenats = getAllDataWhere('food_product_ingredient_prices','product_id',$_POST['food_item_id']);
+			while ($getIngProdItems = $getIngredenats->fetch_assoc()) {
+				$getInDet= getIndividualDetails('food_ingredients','id',$getIngProdItems['ingredient_name_id']);
+			}
+
+			$orderIngredients = "INSERT INTO food_order_ingredients (`user_id`,`cart_id`, `order_id`, `session_cart_id`, `food_item_id`, `item_ingredient_id`, `item_ingredient_price`, `item_ingredient_name) VALUES ('$user_id','','$order_id','$session_cart_id','".$_POST['food_item_id']."','".$getInDet['id']."','".$getIngProdItems['ingredient_price']."','".$getInDet['ingredient_name']."')";
+			$insertorderIngredients = $conn->query($orderIngredients);
+
+			$delCartIngredients ="DELETE FROM food_update_cart_ingredients WHERE user_id = '$user_id' OR session_cart_id='$session_cart_id' ";
+			$conn->query($delCartIngredients);
 			if($payment_group == 1) {
 				//cod 
 				header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=2");				
@@ -371,15 +382,24 @@ if($_SESSION['user_login_session_id'] == '') {
 					<hr>
 					<table class="table table_summary">
 					<tbody>
+					<?php
+			            $getAddOnsPrice = "SELECT * FROM food_update_cart_ingredients WHERE session_cart_id = '$session_cart_id'";
+			            $getAddontotal = $conn->query($getAddOnsPrice);
+			            $getAdstotal = 0;
+			            while($getAdTotal = $getAddontotal->fetch_assoc()) {
+			                $getAdstotal += $getAdTotal['item_ingredient_price'];
+			              }
+					?>
 					<tr>
 						<td>
 							 Subtotal <span class="pull-right">Rs.<?php echo $cartTotal; ?></span>
 						</td>
 					</tr>
-					<?php $getDeliveryCharge = getIndividualDetails('food_vendors','id',$restaurant_id); ?>
+					<?php $getDeliveryCharge = getIndividualDetails('food_vendors','id',$restaurant_id);
+					$DeliveryCharges = $getDeliveryCharge['delivery_charges']; ?>
 					<tr id="hide_del_fee">
 						<td>
-							 Delivery fee <span class="pull-right">Rs.<?php echo $getDeliveryCharge['delivery_charges'] ; ?></span>
+							 Delivery fee <span class="pull-right">Rs.<?php echo $DeliveryCharges ; ?></span>
 						</td>
 					</tr>
 					<?php $service_tax += ($getFoodSiteSettingsData['service_tax']/100)*$cartTotal; ?>
@@ -388,19 +408,25 @@ if($_SESSION['user_login_session_id'] == '') {
 							 Service Tax <span class="pull-right">Rs.<?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span>
 						</td>
 					</tr>
+					<?php if($getAdstotal!=0) { ?>
+		            <tr>
+		                <td>Extra Add On's Price <span class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
+		            </tr>
+					<?php } ?>
 					<tr>
 						<td class="total">
-							 TOTAL <span class="pull-right" id="apply_price_aft_del">Rs. <?php echo $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?></span>
-							 <?php $order_total = $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?> 
+							 TOTAL <span class="pull-right" id="apply_price_aft_del">Rs. <?php echo $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?></span>
+							 <?php $order_total = $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?> 
 						</td>
 					</tr>
 					</tbody>
 					</table>
 
-					<input type="hidden" name="delivery_charge" value="<?php echo $getFoodSiteSettingsData['delivery_charges'];?>" id="delivery_charge">
+					<input type="hidden" name="delivery_charge" value="<?php echo $DeliveryCharges;?>" id="delivery_charge">
 					<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>" id="sub_total">
 					<input type="hidden" name="order_total" value="<?php echo $order_total; ?>" id="order_total">
 					<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>" id="service_tax">
+					<input type="hidden" name="getAdstotal" value="<?php echo $getAdstotal; ?>" id="getAdstotal">
 					<input type="hidden" name="user_id" value="<?php echo $user_session_id; ?>">
 					<hr>					
 
@@ -456,14 +482,15 @@ $('.check_dev_type').click(function(){
 	var getOrderDelCharge = parseInt($('#delivery_charge').val());	
 	var getSubTotal = parseInt($(this).attr('data-pri-key'));
 	var getServiceTax = parseInt($('#service_tax').val());
+	var getAdonsTotal = parseInt($('#getAdstotal').val());
 	if(getcheckRadio == 1) {
 		$('#hide_del_fee').hide();		
-		$('#order_total').val(getSubTotal+getServiceTax);
-		$('#apply_price_aft_del').html(getSubTotal+getServiceTax);
+		$('#order_total').val(getSubTotal+getServiceTax+getAdonsTotal);
+		$('#apply_price_aft_del').html(getSubTotal+getServiceTax+getAdonsTotal);
 	} else {
 		$('#hide_del_fee').show();
-		$('#order_total').val(getSubTotal + getOrderDelCharge+getServiceTax);
-		$('#apply_price_aft_del').html(getSubTotal + getOrderDelCharge+getServiceTax);
+		$('#order_total').val(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal);
+		$('#apply_price_aft_del').html(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal);
 	}
 
 });
