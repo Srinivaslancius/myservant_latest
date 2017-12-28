@@ -6,7 +6,6 @@ if(!empty($_POST['coupon_code']) && !empty($_POST['cart_total']))  {
 	//echo "<pre>"; print_r($_POST); die;
 	$coupon_code = $_POST['coupon_code'];
 	$cart_total = $_POST['cart_total'];
-	$service_tax = $_POST['service_tax'];
 	$sql="SELECT * FROM food_coupons WHERE coupon_code='$coupon_code' AND lkp_status_id = 0";
 	$getCouponPrice = $conn->query($sql);
 	$getCouponPriceData = $getCouponPrice->fetch_assoc();
