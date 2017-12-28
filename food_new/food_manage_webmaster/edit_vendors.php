@@ -116,8 +116,7 @@ if (!isset($_POST['submit'])) {
 
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Delivery Type</label>
-                    <select name="delivery_type_id[]" class="custom-select" multiple="multiple" data-error="This field is required." required>
-                      <option value="">Select Delivery Type</option>
+                    <select name="delivery_type_id[]" class="custom-select" data-plugin="select2" multiple="multiple" data-error="This field is required." required>                      
                       <?php while($row = $getDeliveryTypes->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == in_array($row['id'], $getDeliveryTypeId)) { echo "selected=selected"; }?> ><?php echo $row['delivery_type']; ?></option>
                       <?php } ?>
@@ -127,8 +126,7 @@ if (!isset($_POST['submit'])) {
                   <?php error_reporting(1)?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose Food Cusine Type</label>
-                    <select name="cusine_type_id[]" class="custom-select" multiple="multiple" data-error="This field is required." required>
-                      <option value="">Select Food Cusine Type</option>
+                    <select name="cusine_type_id[]" data-plugin="select2" class="custom-select" multiple="multiple" data-error="This field is required." required>                      
                       <?php while($row1 = $getCusineTypes->fetch_assoc()) {  ?>
                           <option value="<?php echo $row1['id']; ?>" <?php if($row1['id'] == in_array($row1['id'], $getCusineTypeId)) { echo "selected=selected"; } ?> ><?php echo $row1['title']; ?></option>
                       <?php } ?>
@@ -183,7 +181,7 @@ if (!isset($_POST['submit'])) {
 
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your State</label>
-                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);">
+                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a District', allowClear: true }">
                       <option value="">Select State</option>
                       <?php while($row = $getStates->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getVendorsData['lkp_state_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['state_name']; ?></option>
@@ -194,7 +192,7 @@ if (!isset($_POST['submit'])) {
                   <?php $getDistrcits = getAllDataWithStatus('lkp_districts','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your District</label>
-                    <select id="lkp_district_id" name="lkp_district_id" class="custom-select" data-error="This field is required." required onChange="getCities(this.value);">
+                    <select id="lkp_district_id" name="lkp_district_id" class="custom-select" data-error="This field is required." required onChange="getCities(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a District', allowClear: true }">
                       <option value="">Select District</option>
                       <?php while($row = $getDistrcits->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getVendorsData['lkp_district_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['district_name']; ?></option>
@@ -205,7 +203,7 @@ if (!isset($_POST['submit'])) {
                    <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your City</label>
-                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required>
+                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a City', allowClear: true }">
                       <option value="">Select City</option>
                       <?php while($row = $getCities->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getVendorsData['lkp_city_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>
