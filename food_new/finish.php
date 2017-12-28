@@ -93,8 +93,8 @@ if($_SESSION['user_login_session_id'] == '') {
 <?php 
 $user_session_id = $_SESSION['user_login_session_id'];
 $order_session_id = $_SESSION['order_last_session_id'];
-$cartItems1 = "SELECT * FROM food_orders WHERE user_id = '$user_session_id' AND order_id='$order_session_id' ";
-$cartItems = $conn->query($cartItems1);
+$placedOrders = "SELECT * FROM food_orders WHERE user_id = '$user_session_id' AND order_id='$order_session_id' ";
+$placeOrder = $conn->query($placedOrders);
 ?> 
 
 <?php
@@ -120,16 +120,19 @@ $getAddOrder = $orderData->fetch_array();
 				<table class="table table-striped nomargin">
 				<tbody>
 				<?php $cartTotal = 0; $service_tax = 0;
-					while ($getCartItems = $cartItems->fetch_assoc()) { 
-						$restaurant_id = $getCartItems['restaurant_id']; ?>
-				<?php $getProductDetails= getIndividualDetails('food_products','id',$getCartItems['product_id']); ?>
+					while ($getPlaceOrders = $placeOrder->fetch_assoc()) { 
+						$restaurant_id = $getPlaceOrders['restaurant_id']; ?>
+				<?php $getProductDetails= getIndividualDetails('food_products','id',$getPlaceOrders['product_id']); ?>
 				<tr>
 					<td>
-						<strong> <?php echo $getCartItems['item_quantity']; ?> x </strong> <?php echo $getProductDetails['product_name']; ?>
+						<strong> <?php echo $getPlaceOrders['item_quantity']; ?> x </strong> <?php echo $getProductDetails['product_name']; ?>
 					</td>
 					<td>
-						<strong class="pull-right">Rs. <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']; ?></strong>
-						<?php  $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?>
+						<strong>Rs. <?php echo $getPlaceOrders['item_price']; ?></strong>
+					</td>
+					<td>
+						<strong class="pull-right">Rs. <?php echo $getPlaceOrders['item_price']*$getPlaceOrders['item_quantity']; ?></strong>
+						<?php  $cartTotal += $getPlaceOrders['item_price']*$getPlaceOrders['item_quantity']; ?>
 					</td>
 				</tr>
 				<?php } ?>
@@ -146,21 +149,21 @@ $getAddOrder = $orderData->fetch_array();
 						</td>
 					</tr>
 					<?php
-		            $getAddOnsPrice = "SELECT * FROM food_update_cart_ingredients WHERE session_cart_id = '".$getCartItems['session_cart_id']."'";
+		            $getAddOnsPrice = "SELECT * FROM food_order_ingredients WHERE order_id = '$order_session_id'";
 		            $getAddontotal = $conn->query($getAddOnsPrice);
 		            $getAdstotal = 0;
 		            while($getAdTotal = $getAddontotal->fetch_assoc()) {
 		                $getAdstotal += $getAdTotal['item_ingredient_price'];
 		              }
-					$getDeliveryCharge = getIndividualDetails('food_vendors','id',$restaurant_id);
-					if($getCartItems['delivery_type_id'] == 2) { 
-					$DeliveryCharges = $getDeliveryCharge['delivery_charges']; ?>
+					$getDeliveryCharge = getIndividualDetails('food_orders','order_id',$order_session_id);	
+					$delCharge = 0;				
+					if($getDeliveryCharge['delivery_charges']!=0) { $delCharge = $getDeliveryCharge['delivery_charges']; ?>
 					<tr>
 						<td>
-							 Delivery fee <span class="pull-right">Rs.<?php echo $DeliveryCharges ; ?></span>
+							 Delivery fee <span class="pull-right">Rs.<?php echo $delCharge; ?></span>
 						</td>
 					</tr>
-					<?php } else { $DeliveryCharges = 0; } ?>
+					<?php }  ?>
 					<?php $service_tax += ($getFoodSiteSettingsData['service_tax']/100)*$cartTotal; ?>
                     <tr>
 						<td>
@@ -174,8 +177,8 @@ $getAddOrder = $orderData->fetch_array();
 					<?php } ?>					
 					<tr>
 						<td class="total total_confirm">
-							 TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?></span>
-							 <?php $order_total = $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?> 
+							 TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$delCharge+$getAdstotal; ?></span>
+							 <?php $order_total = $cartTotal+$service_tax+$delCharge+$getAdstotal; ?> 
 							 <?php unset($_SESSION['order_last_session_id']); ?>
 						</td>
 					</tr>
