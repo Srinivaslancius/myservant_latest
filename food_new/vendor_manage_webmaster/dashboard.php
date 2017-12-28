@@ -28,7 +28,7 @@
           <div class="col-md-4 col-sm-5">
             <div class="widget widget-tile-2 bg-warning m-b-30">
               <div class="wt-content p-a-20 p-b-50">
-                <div class="wt-title">Products</div>
+                <div class="wt-title">Items</div>
                 <div class="wt-number"><?php echo $getProductsCount ?></div>
               </div>
               <div class="wt-icon">
