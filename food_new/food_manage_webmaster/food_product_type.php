@@ -4,8 +4,8 @@
       <div class="site-content">
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
-            <!-- <a href="add_food_product_type.php" style="float:right">Add Product Type</a> -->
-            <h3 class="m-t-0 m-b-5">Product Type</h3>
+            <!-- <a href="add_food_product_type.php" style="float:right">Add Item Type</a>  -->
+            <h3 class="m-t-0 m-b-5">Item Type</h3>
           </div>
           <div class="panel-body">
             <div class="table-responsive">         
@@ -13,7 +13,7 @@
                 <thead>
                   <tr>
                     <th>S.No</th>
-                    <th>Product Type</th>
+                    <th>Item Type</th>
                     <th>Status</th>
                     <th>Actions</th>
                   </tr>

@@ -19,7 +19,7 @@ $id = $_GET['proTypeid'];
 <div class="site-content">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="m-y-0">Product Type</h3>
+            <h3 class="m-y-0">Item Type</h3>
           </div>
           <div class="panel-body">
             <div class="row">
@@ -29,8 +29,8 @@ $id = $_GET['proTypeid'];
                 <form data-toggle="validator" method="POST">
                   
                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Product Type</label>
-                    <input type="text" name="product_type" class="form-control" id="product_type" placeholder="Product Type" data-error="Please enter product type" required value="<?php echo $getIngredientsData['product_type'];?>">
+                    <label for="form-control-2" class="control-label">Item Type</label>
+                    <input type="text" name="product_type" class="form-control" id="product_type" placeholder="Item Type" data-error="Please enter Item type" required value="<?php echo $getIngredientsData['product_type'];?>">
                     <div class="help-block with-errors"></div>
                   </div>
                   <?php $getStatus = getAllData('lkp_status');?>

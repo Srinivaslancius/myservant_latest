@@ -54,7 +54,7 @@ if (!isset($_POST['submit']))  {
       <div class="site-content">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="m-y-0">Products</h3>
+            <h3 class="m-y-0">Items</h3>
           </div>
           <div class="panel-body">
             <div class="row">
@@ -87,8 +87,8 @@ if (!isset($_POST['submit']))  {
 
                   
                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Product Name</label>
-                    <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Product Name" data-error="Please enter product name." required>
+                    <label for="form-control-2" class="control-label">Item Name</label>
+                    <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Item Name" data-error="Please enter Item name." required>
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
