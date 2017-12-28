@@ -145,7 +145,9 @@
                 </li>
                 <li  class="<?php if($page_name == 'lkp_locations.php' || $page_name == 'add_lkp_locations.php' || $page_name == 'edit_lkp_locations.php' ) { echo "active"; } ?>"><a href="lkp_locations.php">Locations</a>
                 </li>
-                <!-- <li  class="<?php if($page_name == 'availability_of_locations.php' || $page_name == 'add_availability_of_locations.php' || $page_name == 'edit_availability_of_locations.php' ) { echo "active"; } ?>"><a href="availability_of_locations.php">Availability of Locations</a>
+
+               <!-- <li  class="<?php if($page_name == 'availability_of_locations.php' || $page_name == 'add_availability_of_locations.php' || $page_name == 'edit_availability_of_locations.php' ) { echo "active"; } ?>"><a href="availability_of_locations.php">Availability of Locations</a>
+
                 </li> -->
               </ul>
             </li>
@@ -176,6 +178,14 @@
                 </li> 
               </ul>
             </li>
+            <li  class="<?php if($page_name == 'payment_gateway_options.php' ) { echo "active"; } ?>">
+              <a href="payment_gateway_options.php" aria-haspopup="true">
+                <span class="menu-icon">
+                   <i class="zmdi zmdi-collection-image zmdi-hc-fw"></i>
+                </span>
+                <span class="menu-text">Payment Gateway Options</span>
+              </a>
+            </li>
             
             <!-- <li  class="<?php if($page_name == 'food_sub_category.php' || $page_name == 'add_food_sub_category.php' || $page_name == 'edit_food_sub_category.php' ) { echo "active"; } ?>">
               <a href="food_sub_category.php" aria-haspopup="true">
@@ -191,18 +201,6 @@
                    <i class="zmdi zmdi-local-offer zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Restaurants</span>
-              </a>
-            </li> -->
-           
-                       
-            
-
-            <!-- <li  class="<?php if($page_name == 'services_brand_logos.php' || $page_name == 'add_services_brand_logos.php' || $page_name == 'edit_services_brand_logos.php' ) { echo "active"; } ?>">
-              <a href="services_brand_logos.php" aria-haspopup="true">
-                <span class="menu-icon">
-                   <i class="zmdi zmdi-collection-image zmdi-hc-fw"></i>
-                </span>
-                <span class="menu-text">Brand Logos</span>
               </a>
             </li> -->
             <!-- <li  class="<?php if($page_name == 'food_testimonials.php' || $page_name == 'add_food_testimonials.php' || $page_name == 'edit_food_testimonials.php') { echo "active"; } ?>">

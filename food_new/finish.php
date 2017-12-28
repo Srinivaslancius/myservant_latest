@@ -145,7 +145,13 @@ $getAddOrder = $orderData->fetch_array();
 							 Subtotal <span class="pull-right">Rs.<?php echo $cartTotal; ?></span>
 						</td>
 					</tr>
-					<?php 
+					<?php
+		            $getAddOnsPrice = "SELECT * FROM food_update_cart_ingredients WHERE session_cart_id = '".$getCartItems['session_cart_id']."'";
+		            $getAddontotal = $conn->query($getAddOnsPrice);
+		            $getAdstotal = 0;
+		            while($getAdTotal = $getAddontotal->fetch_assoc()) {
+		                $getAdstotal += $getAdTotal['item_ingredient_price'];
+		              }
 					$getDeliveryCharge = getIndividualDetails('food_vendors','id',$restaurant_id);
 					if($getCartItems['delivery_type_id'] == 2) { 
 					$DeliveryCharges = $getDeliveryCharge['delivery_charges']; ?>
@@ -154,19 +160,22 @@ $getAddOrder = $orderData->fetch_array();
 							 Delivery fee <span class="pull-right">Rs.<?php echo $DeliveryCharges ; ?></span>
 						</td>
 					</tr>
-					<?php } else{ $DeliveryCharges = 0; }?>
+					<?php } else { $DeliveryCharges = 0; } ?>
 					<?php $service_tax += ($getFoodSiteSettingsData['service_tax']/100)*$cartTotal; ?>
                     <tr>
 						<td>
 							 Service Tax <span class="pull-right">Rs.<?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span>
 						</td>
 					</tr>
-					<tr>
-					
+					<?php if($getAdstotal!=0) { ?>
+		            <tr>
+		                <td>Extra Add On's Price <span class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
+		            </tr>
+					<?php } ?>					
 					<tr>
 						<td class="total total_confirm">
-							 TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?></span>
-							 <?php $order_total = $cartTotal+$service_tax+$DeliveryCharges; ?> 
+							 TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?></span>
+							 <?php $order_total = $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?> 
 							 <?php unset($_SESSION['order_last_session_id']); ?>
 						</td>
 					</tr>
