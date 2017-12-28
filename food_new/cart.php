@@ -98,8 +98,32 @@
 	background: white;
 }
 th{
+	font-size:14px;
+}
+td{
 	font-size:15px;
 }
+
+.alert-dismissable .close1{
+    position: relative;
+    top: -2px;
+    right: -21px;
+    color: inherit;
+	 right: 110px;
+    opacity: .5;
+    font-size: 20px;
+}
+.close1 {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+
 </style>
 </head>
 
@@ -170,7 +194,7 @@ th{
 							<th>ITEM</th>							
 							<th>PRICE</th>
 							<th>ADDON</th>
-              <th>QUANTITY</th>
+							<th>QUANTITY</th>
 							<th>TOTAL</th>
 							<th>REMOVE</th>
 						</tr>
@@ -189,8 +213,10 @@ th{
                 $getAddons = "SELECT * FROM food_update_cart_ingredients WHERE food_item_id = '".$getCartItems['food_item_id']."' AND cart_id='".$getCartItems['id']."' AND session_cart_id = '$session_cart_id'";
                 $getAddonData = $conn->query($getAddons);
                 while($getadcartItems = $getAddonData->fetch_assoc() ) {
-               ?> 
-                  <p id="dis_add_on_<?php echo $getCartItems['id']; ?>" style="margin-bottom:5px;"><?php echo $getadcartItems['item_ingredient_name'] . ":". $getadcartItems['item_ingredient_price']; ?> </p>			
+               ?>  <div class="alert alert-dismissable" style="margin-top:-15px">
+					<a href="#"class="close1" data-dismiss="alert">×</a>
+                  <p id="dis_add_on_<?php echo $getCartItems['id']; ?>" style="margin-bottom:5px;font-size:12px"><?php echo $getadcartItems['item_ingredient_name'] . ":". $getadcartItems['item_ingredient_price']; ?> </p>
+				  </div>		
                 <?php } ?>		
 
 						</td>
@@ -208,7 +234,7 @@ th{
               }
               ?>
 
-               <a href="#" data-toggle="modal" data-target="#<?php echo $getCartItems['id']; ?>"><i class="icon_plus_alt2" style="font-size:25px"></i></a>
+               <a href="#" data-toggle="modal" data-target="#<?php echo $getCartItems['id']; ?>"> <i class="icon_plus_alt2" style="font-size:22px;margin-left:10px"></i></a>
 							<div class="modal fade" id="<?php echo $getCartItems['id']; ?>" role="dialog">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
@@ -217,10 +243,10 @@ th{
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											  <div class="row">
-												  <div class="col-sm-6">
+												  <div class="col-sm-8">
 												  <h4 class="modal-title" style="font-size:15px"><small>Add On's:</small><br><?php echo $getProductDetails['product_name']; ?></h4>
 												  </div>
-												   <div class="col-sm-6">
+												   <div class="col-sm-4">
 													<div class="btn-group">
 													  <!-- <button style="background-color:#f5f5f5;border-color:#f5f5f5;color:black">Total:₹ <span id="tot_item_price_<?php echo $getCartItems['id']; ?>"><?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?></span></button> -->
 													  <button class="update_cart_item" data-cart-id="<?php echo $getCartItems['id']; ?>" data-item-id="<?php echo $getCartItems['food_item_id']; ?>" >Update Cart</button>					  
@@ -274,10 +300,10 @@ th{
 								</div>
 							</div>                        
 						</td>
-            <td><?php echo $getCartItems['item_quantity']; ?></td>
+            <td style="padding-left:30px;padding-right:30px"> <?php echo $getCartItems['item_quantity']; ?></td>
 						<td>Rs. <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?> /-</td>
 						<?php $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?>
-						<td><i class=" icon-trash del_cart_item" data-cart-id="<?php echo $getCartItems['id']; ?>" style="font-size:25px;color:#fe6003"></li></td>
+						<td> <i class=" icon-trash del_cart_item" data-cart-id="<?php echo $getCartItems['id']; ?>" style="font-size:22px;color:#fe6003;margin-left:10px"></li></td>
 					</tr>
                      <?php } ?>
 					</tbody>
