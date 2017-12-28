@@ -34,7 +34,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your State</label>
-                    <select name="lkp_state_id" class="custom-select chosen" data-error="This field is required." required onChange="getDistricts(this.value);">
+                    <select name="lkp_state_id" class="custom-select chosen" data-error="This field is required." required onChange="getDistricts(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a state', allowClear: true }">
                       <option value="">Select State</option>
                       <?php while($row = $getStates->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['state_name']; ?></option>
@@ -45,7 +45,7 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your District</label>
-                    <select name="lkp_district_id" id="lkp_district_id" class="custom-select " data-error="This field is required." required>
+                    <select name="lkp_district_id" id="lkp_district_id" class="custom-select " data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a District', allowClear: true }">
                       <option value="">Select District</option>
                    </select>
                     <div class="help-block with-errors"></div>

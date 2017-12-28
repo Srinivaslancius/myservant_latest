@@ -102,22 +102,22 @@
                     <textarea name="restaurant_address" id="restaurant_address" class="form-control"  placeholder="Restuarent Address" data-error="This field is required." required></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
+                  
                   <?php $getDeliveryTypes = getAllDataWithStatus('food_product_delivery_type','0');?>
-                   <div class="form-group">
+                  <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Delivery Type</label>
-                    <select name="delivery_type_id[]" class="custom-select" multiple="multiple" data-error="This field is required." required>
-                      <option value="">Select Delivery Type</option>
-                      <?php while($row = $getDeliveryTypes->fetch_assoc()) {  ?>
+                      <select name="delivery_type_id[]" id="form-control-2" class="custom-select" data-plugin="select2" multiple="multiple" data-error="This field is required." required >
+                        <?php while($row = $getDeliveryTypes->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['delivery_type']; ?></option>
-                      <?php } ?>
-                   </select>
+                        <?php } ?>
+                      </select>                    
                     <div class="help-block with-errors"></div>
-                  </div>
+                  </div>                 
+
                   <?php $getAllFoodCusineTypes = getAllDataWithStatus('food_cusine_types','0');?>
                    <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose Food Cusine Type</label>
-                    <select name="cusine_type_id[]" class="custom-select" multiple="multiple" data-error="This field is required." required>
-                      <option value="">Select Food Cusine Type</option>
+                    <select name="cusine_type_id[]" class="custom-select" data-plugin="select2" multiple="multiple" data-error="This field is required." required>                     
                       <?php while($row = $getAllFoodCusineTypes->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['title']; ?></option>
                       <?php } ?>
@@ -191,7 +191,7 @@
                    <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your State</label>
-                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);">
+                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a state', allowClear: true }">
                       <option value="">Select State</option>
                       <?php while($row = $getStates->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['state_name']; ?></option>
@@ -199,10 +199,10 @@
                    </select>
                     <div class="help-block with-errors"></div>
                   </div>
-                  
+                                    
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your District</label>
-                    <select name="lkp_district_id" id="lkp_district_id" class="custom-select" data-error="This field is required." required onChange="getCities(this.value);">
+                    <select name="lkp_district_id" id="lkp_district_id" class="custom-select" data-error="This field is required." required onChange="getCities(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a District', allowClear: true }">
                       <option value="">Select District</option>
                    </select>
                     <div class="help-block with-errors"></div>
@@ -210,7 +210,7 @@
                   
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your City</label>
-                    <select name="lkp_city_id" id="lkp_city_id" class="custom-select" data-error="This field is required." required>
+                    <select name="lkp_city_id" id="lkp_city_id" class="custom-select" data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a City', allowClear: true }">
                       <option value="">Select City</option>
                    </select>
                     <div class="help-block with-errors"></div>
@@ -250,6 +250,7 @@
         </div>
       </div>
 <?php include_once 'admin_includes/footer.php'; ?>
+ 
 <script src="//cdn.ckeditor.com/4.7.0/full/ckeditor.js"></script>
 <script>
     CKEDITOR.replace( 'description' );

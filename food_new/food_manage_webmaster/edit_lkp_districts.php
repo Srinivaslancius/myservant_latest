@@ -36,7 +36,7 @@ if (!isset($_POST['submit'])) {
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your State</label>
-                    <select id="form-control-3" name="lkp_state_id" class="custom-select chosen" data-error="This field is required." required>
+                    <select id="form-control-3" name="lkp_state_id" class="custom-select chosen" data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a state', allowClear: true }">
                       <option value="">Select State</option>
                       <?php while($row = $getStates->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getDistrictsData['lkp_state_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['state_name']; ?></option>
