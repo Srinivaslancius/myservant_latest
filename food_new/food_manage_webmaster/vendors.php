@@ -134,7 +134,7 @@
                             </div>
                             <div class="row">
                               <div class="col-sm-2"></div>
-                              <div class="col-sm-4">Banner:</div>
+                              <div class="col-sm-4">Logo:</div>
                               <div class="col-sm-6"><img src="<?php echo $base_url . 'uploads/food_vendor_logo/'.$row['logo'] ?>" height="100" width="100"/></div>
                             </div>                           
                           </div>

@@ -104,3 +104,6 @@ if(mail($to, $subject, $message, $headers)) {
             </div>
         </div><!-- End row -->
     </div><!-- End container -->
+
+    <!-- This Script For validations -->
+<script type="text/javascript" src="js/check_number_validations.js"></script>

@@ -75,7 +75,7 @@
       <div class="item active">
         <img src="img/slide/slide_1.jpg" alt="image" style="width:100%;">
         <div class="carousel-caption">
-        <h2 style="color:white"><?php echo $getResultsCount; ?> results in your zone</h2>
+        <h2 style="color:white" id="get_total_res"><?php echo $getResultsCount; ?> Results in your zone</h2>
         <?php if(isset($_POST['searchKey'])) { ?><p><i class="icon_pin"></i> <?php echo $_POST['searchKey']; ?></p><?php } ?>
       </div>
       </div>
@@ -174,12 +174,10 @@
                         </div>
                         <?php } ?>
                 </div>
-             <?php if($getResultsCount >= 4) { ?>
-        <center><a class="btn_1 load_more">Load More</a></center>
-        <?php } ?>            
-        </div><!-- End col-md-9-->
-       
-        
+            <?php if($getResultsCount >= 4) { ?>
+                <center><a class="btn_1 load_more">Load More</a></center>
+            <?php } ?>            
+        </div><!-- End col-md-9-->        
     </div><!-- End row -->
 </div><!-- End container -->
 <!-- End Content =============================================== -->
@@ -233,6 +231,7 @@ $(document).on('change','.check_cousin_type',function(){
      {                  
         //alert(data);
         $('.ajax_result').html(data);
+        $('#get_total_res').html($('#get_res_cnt').val() + " Results in your zone");
      }               
    });
   return false;
@@ -248,6 +247,7 @@ $(document).on('change','.check_cousin_type',function(){
             success:function(html){ 
                 $(".ajax_result").html('');
                 $(".ajax_result").append(html);
+                $('#get_total_res').html($('#get_res_cnt').val() + " Results in your zone");
             }
           }); 
         });

@@ -10,7 +10,7 @@ if(isset($_POST['cusine_type']) && $_POST['cusine_type']!='' ) {
     $getSearchResults = getAllRestaruntsWithProducts('0','','');
 }
 ?>
-
+    <input type="hidden" id="get_res_cnt" value="<?php echo  $getReCount = $getSearchResults->num_rows;?>">
     <?php while($getResults = $getSearchResults->fetch_assoc()) { ?>
     <div class="col-md-6 filter_data ajax_result">
         <div class="strip_list wow fadeIn" data-wow-delay="0.1s">

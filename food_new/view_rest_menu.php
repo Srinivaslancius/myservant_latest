@@ -46,6 +46,54 @@ border: 1px solid #fe6003 ;
 -ms-word-break: normal;
 word-break: normal;
 }
+.inner{
+    background-color: #f26426;
+    color: #fff;
+    margin: -25px -25px 25px;
+    padding: 1px 15px;
+    font-size: 22px;
+    font-weight: 600;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.add-on .input-group-btn > .btn {
+  border-left-width:0;
+  left:-2px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+   background-color: white;
+   border-color:white;
+  
+}
+/* stop the glowing blue shadow */
+.add-on .form-control:focus {
+ box-shadow:none;
+ -webkit-box-shadow:none; 
+ border-color:white; 
+}
+.form-control{
+width:20%;
+background-color:white;
+border-color:white;
+font-size:13px;
+}
+/*::-webkit-input-placeholder {
+  color: red;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  color: red;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  color: red;  
+}
+
+:-ms-input-placeholder {  
+   color: red;  */
+}
 </style>
 </head>
 
@@ -153,9 +201,26 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 
 			<div class="col-md-6">
 				<div class="box_style_2" id="main_menu">
-                        <h2 class="inner">Menu <span class="pull-right">
-                        <!-- <label style="color: #fff;"><input name="mobile" type="checkbox" value="" class="icheck">Veg </label> --></span></h2>
-
+				<div class="inner">
+					<div class="row">
+						<div class="col-sm-2">
+							<h2 style="color:white">Menu</h2>
+						</div>
+						<div class="col-sm-8">
+						<form style="margin-top:15px">
+							<div class="input-group add-on">
+								<input class="form-control" placeholder="Search dishes.." name="srch-term" id="srch-term" type="text">
+								<div class="input-group-btn">
+								<button class="btn btn-default" type="submit" style="padding:9px 12px;"><i class="glyphicon glyphicon-search"></i></button>
+								</div>
+							</div>
+						</form>
+						</div>
+						<div class="col-sm-2">
+							<h2><label style="color: #fff;"><input name="mobile" type="checkbox" value="" class="icheck">Veg </label></h2>
+						</div>
+					</div>
+				</div>
                     <?php while($getCatList1 = $getCategory1->fetch_assoc() ) { ?>
                     <hr>
 					<h3 class="nomargin_top" id="<?php echo $getCatList1['category_id']; ?>"><?php $getCatName = getIndividualDetails('food_category','id',$getCatList1['category_id']); echo $getCatName['category_name']; ?></h3>
