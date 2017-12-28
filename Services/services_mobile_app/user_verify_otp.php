@@ -15,19 +15,19 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 		if($getCnt > 0) {
 
-			$mobile_otp = $_POST['mobileOTP'];		
-			$user_full_name = $_POST['userName'];
-			$user_email = $_POST['userEmail'];
-			$user_mobile = $_POST['userMobile'];
-			$user_password = $_POST['userPassword'];	
+			$mobile_otp = $_REQUEST['mobileOTP'];		
+			$user_full_name = $_REQUEST['userName'];
+			$user_email = $_REQUEST['userEmail'];
+			$user_mobile = $_REQUEST['userMobile'];
+			$user_password = $_REQUEST['userPassword'];	
 			$lkp_status_id = 0; //0-active, 1- inactive
 			$login_count = 1;
 			$last_login_visit = date("Y-m-d h:i:s");
-			$lkp_register_device_type_id= $_POST['registerDeviceTypeId']; //1- web, 2- android, 3-ios
+			$lkp_register_device_type_id= $_REQUEST['registerDeviceTypeId']; //1- web, 2- android, 3-ios
 			$user_login_type = 1; //1-Normal, 2-Facebook,3-twitter
 			$user_register_service_id = 1;
 			$created_at = date("Y-m-d h:i:s");
-			$mobile_token = $_POST['mobileToken'];
+			$mobile_token = $_REQUEST['mobileToken'];
 
 			$saveUser = saveUser($user_full_name, $user_email, $user_mobile, $user_password,$lkp_status_id,$login_count,$last_login_visit,$lkp_register_device_type_id,$user_login_type,$mobile_token,$user_register_service_id,$created_at);
 

@@ -19,18 +19,18 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 		} else {
 
-			$userMobile = $_POST['userMobile'];
+			$userMobile = $_REQUEST['userMobile'];
 			//$mobile_otp = rand(1000, 9999); //Your message to send, Add URL encoding here.
 	        $mobile_otp = "1234";
 			$selOTP = getAllDataWhere('user_mobile_otp','user_mobile',$userMobile);	
 			$getNoRows = $selOTP->num_rows;
 
 			if($getNoRows > 0) {
-				$mobOtpSave = "UPDATE user_mobile_otp SET mobile_otp = '$mobile_otp' WHERE user_mobile = '$user_mobile' ";				
+				$mobOtpSave = "UPDATE user_mobile_otp SET mobile_otp = '$mobile_otp' WHERE user_mobile = '$userMobile' ";				
 			} else {
-				$mobOtpSave = "INSERT INTO `user_mobile_otp`(`user_mobile`, `mobile_otp`) VALUES ('$user_mobile', '$mobile_otp') ";				
+				$mobOtpSave = "INSERT INTO `user_mobile_otp`(`user_mobile`, `mobile_otp`) VALUES ('$userMobile', '$mobile_otp') ";				
 			}
-
+			//echo $mobOtpSave; die;
 			$saveOTP = $conn->query($mobOtpSave);
 			$response["success"] = 0;
 			$response["message"] = "OTP Sent to ur mobile number.";
