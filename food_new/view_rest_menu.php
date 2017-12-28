@@ -206,14 +206,14 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 							<h3 style="color:white;font-size:18px;padding-left:10px">Menu</h3>
 						</div>
 						<div class="col-sm-8">
-						<form style="margin-top:10px">
+						<!-- <form style="margin-top:10px">
 							<div class="input-group add-on">
 								<input class="form-control two" placeholder="Search dishes.." name="srch-term" id="srch-term" type="text">
 								<div class="input-group-btn">
 								<button class="btn btn-default" type="submit" style="padding:9px 12px;"><i class="glyphicon glyphicon-search"></i></button>
 								</div>
 							</div>
-						</form>
+						</form> -->
 						</div>
 						<div class="col-sm-2">
 							<h3 style="color:white;font-size:18px"><label><input name="mobile" type="checkbox" value="" class="icheck"></label>Veg</h3>
