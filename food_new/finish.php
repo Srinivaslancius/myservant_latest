@@ -120,7 +120,8 @@ $getAddOrder = $orderData->fetch_array();
 				<table class="table table-striped nomargin">
 				<tbody>
 				<?php $cartTotal = 0; $service_tax = 0;
-					while ($getCartItems = $cartItems->fetch_assoc()) { ?>
+					while ($getCartItems = $cartItems->fetch_assoc()) { 
+						$restaurant_id = $getCartItems['restaurant_id']; ?>
 				<?php $getProductDetails= getIndividualDetails('food_products','id',$getCartItems['product_id']); ?>
 				<tr>
 					<td>
@@ -144,11 +145,16 @@ $getAddOrder = $orderData->fetch_array();
 							 Subtotal <span class="pull-right">Rs.<?php echo $cartTotal; ?></span>
 						</td>
 					</tr>
+					<?php 
+					$getDeliveryCharge = getIndividualDetails('food_vendors','id',$restaurant_id);
+					if($getCartItems['delivery_type_id'] == 2) { 
+					$DeliveryCharges = $getDeliveryCharge['delivery_charges']; ?>
 					<tr>
 						<td>
-							 Delivery fee <span class="pull-right">Rs.<?php echo $getFoodSiteSettingsData['delivery_charges'] ; ?></span>
+							 Delivery fee <span class="pull-right">Rs.<?php echo $DeliveryCharges ; ?></span>
 						</td>
 					</tr>
+					<?php } else{ $DeliveryCharges = 0; }?>
 					<?php $service_tax += ($getFoodSiteSettingsData['service_tax']/100)*$cartTotal; ?>
                     <tr>
 						<td>
@@ -160,7 +166,7 @@ $getAddOrder = $orderData->fetch_array();
 					<tr>
 						<td class="total total_confirm">
 							 TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?></span>
-							 <?php $order_total = $cartTotal+$service_tax+$getFoodSiteSettingsData['delivery_charges']; ?> 
+							 <?php $order_total = $cartTotal+$service_tax+$DeliveryCharges; ?> 
 							 <?php unset($_SESSION['order_last_session_id']); ?>
 						</td>
 					</tr>

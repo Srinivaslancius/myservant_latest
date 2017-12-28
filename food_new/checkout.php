@@ -202,7 +202,7 @@ if($_SESSION['user_login_session_id'] == '') {
 				$date = date("ymdhis");
 				$contstr = "MYSER-FOOD";
 				$sub_order_id = $contstr.$random1.$random2.$date;
-				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`,  `payment_method`,`lkp_payment_status_id`,`service_tax`,`delivery_charges`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city_order"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."','$payment_group','$payment_status','".$_POST["service_tax"]."','$delivery_charges', '$order_id','$sub_order_id','$order_date')";
+				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`,  `payment_method`,`lkp_payment_status_id`,`delivery_type_id`,`service_tax`,`delivery_charges`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city_order"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."','$payment_group','$payment_status','$dev_type','".$_POST["service_tax"]."','$delivery_charges', '$order_id','$sub_order_id','$order_date')";
 				$servicesOrders = $conn->query($orders);
 			} 
 			if($_SESSION['CART_TEMP_RANDOM'] == "") {
@@ -336,7 +336,8 @@ if($_SESSION['user_login_session_id'] == '') {
 					<table class="table table_summary">
 					<tbody>
 					<?php $cartTotal = 0; $service_tax = 0;
-                    	while ($getCartItems = $cartItems->fetch_assoc()) { ?>
+                    	while ($getCartItems = $cartItems->fetch_assoc()) { 
+                    		$restaurant_id = $getCartItems['restaurant_id']; ?>
                     <?php $getProductDetails= getIndividualDetails('food_products','id',$getCartItems['food_item_id']); ?>
 					<tr>
 						<td>
@@ -375,9 +376,10 @@ if($_SESSION['user_login_session_id'] == '') {
 							 Subtotal <span class="pull-right">Rs.<?php echo $cartTotal; ?></span>
 						</td>
 					</tr>
+					<?php $getDeliveryCharge = getIndividualDetails('food_vendors','id',$restaurant_id); ?>
 					<tr id="hide_del_fee">
 						<td>
-							 Delivery fee <span class="pull-right">Rs.<?php echo $getFoodSiteSettingsData['delivery_charges'] ; ?></span>
+							 Delivery fee <span class="pull-right">Rs.<?php echo $getDeliveryCharge['delivery_charges'] ; ?></span>
 						</td>
 					</tr>
 					<?php $service_tax += ($getFoodSiteSettingsData['service_tax']/100)*$cartTotal; ?>

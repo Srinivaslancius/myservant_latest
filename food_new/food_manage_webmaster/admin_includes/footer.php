@@ -10,6 +10,8 @@
         $( "#deal_start_date,#deal_end_date,#last_login_visit" ).datepicker();
       } );
     </script>
+    <!-- This Script For number and price validations -->
+    <script type="text/javascript" src="../js/check_number_validations.js"></script>
     <script>
       function isNumberKey(evt){
         var charCode = (evt.which) ? evt.which : event.keyCode
@@ -114,23 +116,23 @@
         }
         });
     }
+    function getPincodes(val) { 
+        $.ajax({
+        type: "POST",
+        url: "get_pincodes.php",
+        data:'lkp_city_id='+val,
+        success: function(data){
+            $("#lkp_pincode_id").html(data);
+        }
+        });
+    }
     function getLocations(val) { 
         $.ajax({
         type: "POST",
         url: "get_locations.php",
-        data:'lkp_city_id='+val,
+        data:'lkp_pincode_id='+val,
         success: function(data){
             $("#lkp_location_id").html(data);
-        }
-        });
-    }
-    function getPincode(val) { 
-        $.ajax({
-        type: "POST",
-        url: "get_pinode.php",
-        data:'id='+val,
-        success: function(data){
-            $("#lkp_pincode_id").html(data);
         }
         });
     }
