@@ -1,4 +1,5 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
+<link rel="stylesheet" href="css/chosen.min.css">
 <?php  
 error_reporting(0);
 $id = $_GET['cityid'];
@@ -31,11 +32,11 @@ if (!isset($_POST['submit'])) {
               <?php $getCities = getAllDataWhere('lkp_cities','id',$id);
               $getCitiesData = $getCities->fetch_assoc(); ?>   
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                <form data-toggle="validator" method="POST" enctype="multipart/form-data">
+                <form autocomplete="off" data-toggle="validator" method="POST" enctype="multipart/form-data">
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your State</label>
-                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);">
+                    <select name="lkp_state_id" class="custom-select chosen" data-error="This field is required." required onChange="getDistricts(this.value);">
                       <option value="">Select State</option>
                       <?php while($row = $getStates->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getCitiesData['lkp_state_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['state_name']; ?></option>
@@ -56,7 +57,10 @@ if (!isset($_POST['submit'])) {
                   </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">City Name</label>
-                    <input type="text" name="city_name" class="form-control" id="form-control-2" data-error="Please enter City Name" required value="<?php echo $getCitiesData['city_name'];?>">
+                    <input type="text" name="city_name" class="form-control" id="user_input" data-error="Please enter City Name" required onkeyup="checkUserAvailTest()" value="<?php echo $getCitiesData['city_name'];?>">
+                    <span id="input_status" style="color: red;"></span>
+                    <input type="hidden" id="table_name" value="lkp_cities">
+                    <input type="hidden" id="column_name" value="city_name">
                     <div class="help-block with-errors"></div>
                   </div>
                   <?php $getStatus = getAllData('lkp_status');?>
@@ -80,3 +84,6 @@ if (!isset($_POST['submit'])) {
       </div>
   
 <?php include_once 'admin_includes/footer.php'; ?>
+<script type="text/javascript">
+      $(".chosen").chosen();
+</script>

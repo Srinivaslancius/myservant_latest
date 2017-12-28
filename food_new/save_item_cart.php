@@ -65,7 +65,7 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
                   <a href="#0" class="remove_item"><i class="icon_plus_alt" onClick="add_cart_item1('.$cartItems['id'] .')"></i></a> <strong>'.$cartItems['item_quantity'].'x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onClick="remove_cart_item1('.$cartItems['id'] .')"></i></a> '.$getProductsName['product_name'].'
                 </td>
                 <td>
-                  <strong class="pull-right">Rs. '.$cartItems['item_price'] * $cartItems['item_quantity'].' </strong>
+                  <strong class="pull-right">Rs. '.$cartItems['item_price'] .' </strong>
                 </td>
             </tr>
         </tbody>
@@ -77,9 +77,9 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
           <table class="table table_summary">
           <tbody>
           <tr>
-            <td>
+            <!-- <td>
                Subtotal <span class="pull-right">Rs. '.$cartSubtotal.'</span>
-            </td>
+            </td> -->
           </tr>
          <input type="hidden" value='.$cartTotal.' id="cart_total">
           <tr>

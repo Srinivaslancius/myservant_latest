@@ -1,5 +1,3 @@
-<?php include_once './meta_fav.php';?>
-
 <?php
 
 if(!empty($_POST['email']))  {
@@ -72,7 +70,7 @@ if(mail($to, $subject, $message, $headers)) {
                 </div>
                 <form method="post" action="" name="newsletter_2">
                     <div class="form-group">
-                        <input name="email" type="email" value="" placeholder="Your mail" class="form-control" required>
+                        <input name="email" type="email" placeholder="Your mail" class="form-control" required>
                     </div>
                     <input type="submit" value="Subscribe" class="btn_1" >
                 </form>

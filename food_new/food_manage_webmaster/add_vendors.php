@@ -20,6 +20,7 @@
     $password = encryptPassword($_POST['password']);
     $working_timings = $_POST['working_timings'];
     $min_delivery_time = $_POST['min_delivery_time'];
+    $delivery_charges = $_POST['delivery_charges'];
     $lkp_state_id = $_POST['lkp_state_id'];
     $lkp_district_id = $_POST['lkp_district_id'];
     $lkp_city_id = $_POST['lkp_city_id'];
@@ -61,7 +62,7 @@
 
             move_uploaded_file($_FILES["vendor_banner"]["tmp_name"],$vendorbannerpath);
             move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$vendorLogopath);
-           $sql = "INSERT INTO food_vendors (`vendor_name`, `vendor_id`,`vendor_email`, `vendor_mobile`, `description`,  `password`, `working_timings`,`min_delivery_time`, `lkp_state_id`,`lkp_district_id`, `lkp_city_id`,`location`, `logo`, `restaurant_name`,`restaurant_address`,`delivery_type_id`,`created_at`,`pincode`,`meta_title`,`meta_keywords`,`meta_desc`,`cusine_type_id`,`vendor_banner`) VALUES ('$vendor_name','$vendor_id','$vendor_email','$vendor_mobile', '$description','$password','$working_timings','$min_delivery_time','$lkp_state_id','$lkp_district_id','$lkp_city_id','$location','$logoname','$restaurant_name','$restaurant_address','$delivery_type_id','$created_at','$pincode','$meta_title','$meta_keywords','$meta_desc','$cusine_type_id','$bannerName')";
+           $sql = "INSERT INTO food_vendors (`vendor_name`, `vendor_id`,`vendor_email`, `vendor_mobile`, `description`,  `password`, `working_timings`,`min_delivery_time`,`delivery_charges`, `lkp_state_id`,`lkp_district_id`, `lkp_city_id`,`location`, `logo`, `restaurant_name`,`restaurant_address`,`delivery_type_id`,`created_at`,`pincode`,`meta_title`,`meta_keywords`,`meta_desc`,`cusine_type_id`,`vendor_banner`) VALUES ('$vendor_name','$vendor_id','$vendor_email','$vendor_mobile', '$description','$password','$working_timings','$min_delivery_time','$delivery_charges','$lkp_state_id','$lkp_district_id','$lkp_city_id','$location','$logoname','$restaurant_name','$restaurant_address','$delivery_type_id','$created_at','$pincode','$meta_title','$meta_keywords','$meta_desc','$cusine_type_id','$bannerName')";
 
             if($conn->query($sql) === TRUE){
                echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
@@ -166,7 +167,12 @@
                     <input type="text" name="min_delivery_time" class="form-control" id="form-control-2" placeholder="Minimum Delivery Time" data-error="Please enter Minimum Delivery Time" required>
                     <div class="help-block with-errors"></div>
                   </div>
-                 <div class="form-group">
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Delivery charges</label>
+                    <input type="text" name="delivery_charges" class="form-control valid_price_dec" id="form-control-2" placeholder="Delivery charges" data-error="Please enter Delivery charges" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
                     <label for="form-control-4" class="control-label">Logo&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <img id="output" height="100" width="100"/>
                     <label class="btn btn-default file-upload-btn">
@@ -231,7 +237,7 @@
                   </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label"> Meta Description</label>
-                    <textarea name="meta_desc" class="form-control" id="meta_desc" placeholder="Description" data-error="This field is required." required></textarea>
+                    <textarea name="meta_desc" class="form-control" id="category_description" placeholder="Description" data-error="This field is required." required></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
                   
