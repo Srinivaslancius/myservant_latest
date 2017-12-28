@@ -15,8 +15,13 @@ if(isset($_SESSION['order_last_session_id']) && $_SESSION['order_last_session_id
         $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
     }
     $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
-	//$delCart ="DELETE FROM food_cart WHERE user_id = '$user_id' OR session_cart_id='$session_cart_id' ";
-	//$conn->query($delCart);
+	
+	$delCart ="DELETE FROM food_cart WHERE user_id = '$user_id' OR session_cart_id='$session_cart_id' ";
+	$conn->query($delCart);
+
+	$delCartIngredients ="DELETE FROM food_update_cart_ingredients WHERE user_id = '$user_id' OR session_cart_id='$session_cart_id' ";
+	$conn->query($delCartIngredients);
+
 	header("Location: finish.php?odi=".$order_id."");
 }
 ?>

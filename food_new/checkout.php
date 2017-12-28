@@ -203,6 +203,10 @@ if($_SESSION['user_login_session_id'] == '') {
 				$delivery_charges = $_POST["delivery_charge"];
 			}
 
+			if($_SESSION['CART_TEMP_RANDOM'] == "") {
+		        $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
+		    }
+		    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
 
 			for($i=0;$i<$itemCount;$i++) {
 				//Generate sub randon id
@@ -216,23 +220,11 @@ if($_SESSION['user_login_session_id'] == '') {
 				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`,  `payment_method`,`lkp_payment_status_id`,`delivery_type_id`,`service_tax`,`delivery_charges`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."','$payment_group','$payment_status','$dev_type','".$_POST["service_tax"]."','$delivery_charges', '$order_id','$sub_order_id','$order_date')";
 				$servicesOrders = $conn->query($orders);
 			} 
-			if($_SESSION['CART_TEMP_RANDOM'] == "") {
-		        $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
-		    }
-		    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
-			$delCart ="DELETE FROM food_cart WHERE user_id = '$user_id' OR session_cart_id='$session_cart_id' ";
-			$conn->query($delCart);
-			
-			$getIngredenats = getAllDataWhere('food_product_ingredient_prices','product_id',$_POST['food_item_id']);
-			while ($getIngProdItems = $getIngredenats->fetch_assoc()) {
-				$getInDet= getIndividualDetails('food_ingredients','id',$getIngProdItems['ingredient_name_id']);
+			$getOrderIngredients = getAllData('food_update_cart_ingredients');
+			while($Ingeredientsdata = $getOrderIngredients->fetch_assoc()) {
+				$sql = "INSERT INTO food_order_ingredients ( `user_id`,`cart_id`,`order_id`,`session_cart_id`,`food_item_id`,`item_ingredient_id`,`item_ingredient_price`,`item_ingredient_name`) VALUES ('$user_id','".$Ingeredientsdata["cart_id"]."','$order_id','".$Ingeredientsdata["session_cart_id"]."','".$Ingeredientsdata["food_item_id"]."','".$Ingeredientsdata["item_ingredient_id"]."','".$Ingeredientsdata["item_ingredient_price"]."','".$Ingeredientsdata["item_ingredient_name"]."')";
+        		$result = $conn->query($sql);
 			}
-
-			$orderIngredients = "INSERT INTO food_order_ingredients (`user_id`,`cart_id`, `order_id`, `session_cart_id`, `food_item_id`, `item_ingredient_id`, `item_ingredient_price`, `item_ingredient_name) VALUES ('$user_id','','$order_id','$session_cart_id','".$_POST['food_item_id']."','".$getInDet['id']."','".$getIngProdItems['ingredient_price']."','".$getInDet['ingredient_name']."')";
-			$insertorderIngredients = $conn->query($orderIngredients);
-
-			$delCartIngredients ="DELETE FROM food_update_cart_ingredients WHERE user_id = '$user_id' OR session_cart_id='$session_cart_id' ";
-			$conn->query($delCartIngredients);
 			if($payment_group == 1) {
 				//cod 
 				header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=2");				
@@ -424,8 +416,11 @@ if($_SESSION['user_login_session_id'] == '') {
 		                <td>Extra Add On's Price <span class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
 		            </tr>
 					<?php } ?>
+					<tr id="discount_price">
+		                <td>Discount Money <span id="discount_price1" class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
+		            </tr>
 					<tr>
-						<td class="total">
+						<td class="total" id="cart_total2">
 							 TOTAL <span class="pull-right" id="apply_price_aft_del">Rs. <?php echo $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?></span>
 							 <?php $order_total = $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?> 
 						</td>
@@ -438,22 +433,24 @@ if($_SESSION['user_login_session_id'] == '') {
 					<input type="hidden" name="order_total" value="<?php echo $order_total; ?>" id="order_total">
 					<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>" id="service_tax">
 					<input type="hidden" name="getAdstotal" value="<?php echo $getAdstotal; ?>" id="getAdstotal">
+					<input type="hidden" name="discount_money" value="<?php echo $discount_money; ?>" id="discount_money">
 					<input type="hidden" name="user_id" value="<?php echo $user_session_id; ?>">
-					<hr>					
-				<div class="row" id="options_2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<form class="form-inline">
-					<div class="input-group">
-					  <input type="text" class="form-control" size="30" placeholder="Coupon Code" required  style="border-radius:0px">
-					  <div class="input-group-btn">
-						<button type="button" class="btn btn-danger">Apply</button>
-					  </div>
-					</div>
-				  </form>
-				  </div>
-						
+					<hr>
+
+					<div class="row" id="options_2">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<form class="form-inline">
+								<div class="input-group">
+								  	<input type="text" name="coupon_code" id="coupon_code" class="form-control" size="30" placeholder="Coupon Code"  style="border-radius:0px;text-transform:uppercase">
+								  	<div class="input-group-btn">
+										<button type="button" class="btn btn-danger apply_coupon">Apply</button>
+								  	</div>
+								</div>
+					  		</form>
+					 	</div>
 					</div><!-- Edn options 2 -->
 					<hr>
+
 					<div class="row" id="options_2">
 					
 						<?php $getOnlineDeatils = getIndividualDetails('payment_gateway_options','id',2); 
@@ -527,12 +524,12 @@ $('.check_dev_type').click(function(){
 });
 </script>
 <script>
-    	function isNumberKey(evt){
-  	    var charCode = (evt.which) ? evt.which : event.keyCode
-  	    if (charCode > 31 && (charCode < 48 || charCode > 57))
-  	        return false;
-  	    return true;
-    	}
-	  </script>
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+</script>
 </body>
 </html>
