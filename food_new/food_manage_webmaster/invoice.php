@@ -21,6 +21,13 @@ $orderStatus = getIndividualDetails('lkp_order_status','id',$getOrdersData1['lkp
 
 $paymentStatus = getIndividualDetails('lkp_payment_status','id',$getOrdersData1['lkp_payment_status_id']);
 
+$getAddOnsPrice = "SELECT * FROM food_order_ingredients WHERE order_id = '$order_id'";
+$getAddontotal = $conn->query($getAddOnsPrice);
+$getAdstotal = 0;
+while($getAdTotal = $getAddontotal->fetch_assoc()) {
+    $getAdstotal += $getAdTotal['item_ingredient_price'];
+}
+
 $service_tax = $getOrdersData1['sub_total']*$getSiteSettingsData['service_tax']/100;
 
 if($getOrdersData1['delivery_charges'] == '0') {
@@ -115,12 +122,14 @@ if($getOrdersData1['delivery_charges'] == '0') {
 		<td>
 		<p>Subtotal:</p>
 		<p>Tax:</p>
-		<p>Delivery Charges</p>
+		<p>Delivery Charges:</p>
+		<p>Ingredients Price:</p>
 		<p style="color:#f26226">Grand Total:</p>
 		</td>
 		<td style="color:#f26226"><p>Rs. <?php echo $getOrdersData1['sub_total']?></p>
 		<p>Rs. <?php echo $service_tax.'('.$getSiteSettingsData['service_tax'].'%)' ?></p>
 		<p>Rs. <?php echo $delivery_charges?></p>
+		<p>Rs. <?php echo $getAdstotal?></p>
 		<p>Rs. <?php echo $getOrdersData1['order_total']?></p></td>
       </tr>
     </tbody>

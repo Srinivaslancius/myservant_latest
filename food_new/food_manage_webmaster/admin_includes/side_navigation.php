@@ -96,27 +96,14 @@
             </li>
               </ul>
             </li>
-            <!-- <li class="with-sub">
-              <a href="#" aria-haspopup="true">
+            <li  class="<?php if($page_name == 'food_coupons.php' || $page_name == 'add_food_coupons.php' || $page_name == 'edit_food_coupons.php' ) { echo "active"; } ?>">
+              <a href="food_coupons.php" aria-haspopup="true">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-pin zmdi-hc-fw"></i>
+                   <i class="zmdi zmdi-local-offer zmdi-hc-fw"></i>
                 </span>
-                <span class="menu-text">Mangae Master Data</span>
+                <span class="menu-text">Food Coupons</span>
               </a>
-              <ul class="sidebar-submenu collapse">
-                <li class="menu-subtitle">Mangae Master Data</li>
-                 <li  class="<?php if($page_name == 'lkp_states.php' || $page_name == 'add_lkp_states.php' || $page_name == 'edit_lkp_states.php' ) { echo "active"; } ?>">
-                  <a href="lkp_states.php" >States</a>
-                </li>
-                <li  class="<?php if($page_name == 'lkp_districts.php' || $page_name == 'add_lkp_districts.php' || $page_name == 'edit_lkp_districts.php' ) { echo "active"; } ?>">
-                  <a href="lkp_districts.php" >Districts</a>
-                </li>
-                <li  class="<?php if($page_name == 'lkp_cities.php' || $page_name == 'add_lkp_cities.php' || $page_name == 'edit_lkp_cities.php' ) { echo "active"; } ?>">
-                <a href="lkp_cities.php">Cities</a>
-                </li>
-                
-              </ul>
-            </li> -->
+            </li>
             <li  class="<?php if($page_name == 'food_brand_logos.php' || $page_name == 'add_food_brand_logos.php' || $page_name == 'edit_food_brand_logos.php' ) { echo "active"; } ?>">
               <a href="food_brand_logos.php" aria-haspopup="true">
                 <span class="menu-icon">
@@ -181,7 +168,7 @@
             <li  class="<?php if($page_name == 'payment_gateway_options.php' ) { echo "active"; } ?>">
               <a href="payment_gateway_options.php" aria-haspopup="true">
                 <span class="menu-icon">
-                   <i class="zmdi zmdi-collection-image zmdi-hc-fw"></i>
+                   <i class="zmdi zmdi-card zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Payment Gateway Options</span>
               </a>
