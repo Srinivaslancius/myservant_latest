@@ -431,12 +431,18 @@ if($_SESSION['user_login_session_id'] == '') {
 					<hr>					
 
 					<div class="row" id="options_2">
+						<?php $getOnlineDeatils = getIndividualDetails('payment_gateway_options','id',2); 
+							if($getOnlineDeatils['enable_status'] == 0) { ?>
 						<div class="col-lg-8 col-md-12 col-sm-12 col-xs-6">
 							<label class="radiob"><input type="radio" value="2" checked name="pay_mn" id="online_check">Online Payment<span class="checkmark"></span></label>
 						</div>
+						<?php } ?>
+						<?php $getOnlineDeatils = getIndividualDetails('payment_gateway_options','id',1); 
+							if($getOnlineDeatils['enable_status'] == 0) { ?>
 						<div class="col-lg-4 col-md-12 col-sm-12 col-xs-6">
 							<label class="radiob"><input type="radio" value="1" name="pay_mn"id="cod_check">COD<span class="checkmark"></span></label>
 						</div>
+						<?php } ?>
 					</div><!-- Edn options 2 -->
 
 					<hr>
