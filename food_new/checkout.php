@@ -113,16 +113,66 @@
     font-size: 12px;
     padding-top: 5px;
 }
-.btn-danger{
-	 height:40px;
-	 background-color:#FE6003;
-	 border-radius:0px;
-	 border-color:#FE6003;
-	 width:80px;
+
+.button1 {
+    background-color: #fe6003;
+    border-color: #fe6003;
+    color: white;
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top:10px;
+	height:40px;
+    cursor: pointer;
 }
-.btn-danger:hover{
-	background-color:black;
-	 border-color:black;
+.search-box,.close-icon,.search-wrapper {
+	position: relative;
+	padding: 10px;
+}
+.search-wrapper {
+	width: 260px;
+	margin: auto;
+}
+.search-box {
+	width: 80%;
+	border: 1px solid #ccc;
+  outline: 0;
+  border-radius: 0px;
+}
+
+.close-icon {
+	border:1px solid transparent;
+	background-color: transparent;
+	display: inline-block;
+	vertical-align: middle;
+  outline: 0;
+  cursor: pointer;
+}
+.close-icon:after {
+	content: "X";
+	display: block;
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	background-color: #FE6003;
+	z-index:1;
+	right: 35px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	padding-bottom: 2px;
+	border-radius: 50%;
+	text-align: center;
+	color: white;
+	font-weight: normal;
+	font-size: 12px;
+	box-shadow: 0 0 2px #E50F0F;
+	cursor: pointer;
+}
+.search-box:not(:valid) ~ .close-icon {
+	display: none;
 }
 </style>
     <!-- End Header =============================================== -->
@@ -438,16 +488,21 @@ if($_SESSION['user_login_session_id'] == '') {
 					<input type="hidden" name="user_id" value="<?php echo $user_session_id; ?>">
 					<hr>
 
-					<div class="row" id="options_2">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<form class="form-inline">
-								<div class="input-group">
-								  	<input type="text" name="coupon_code" id="coupon_code" class="form-control" size="30" placeholder="Coupon Code"  style="border-radius:0px;text-transform:uppercase">
-								  	<div class="input-group-btn">
-										<button type="button" class="btn btn-danger apply_coupon">Apply</button>
-								  	</div>
-								</div>
-					  		</form>
+					<div class="row">
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+						<div class="search-wrapper">
+						<form>
+						<input type="text" name="focus" required class="search-box" placeholder="Enter search term" />
+							<button class="close-icon" type="reset"></button>
+							</form>
+						</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<form>
+							<div class="input-group-btn">
+							<button class="button1 apply_coupon">Apply</button>
+							</div>
+						</form>
 					 	</div>
 					</div><!-- Edn options 2 -->
 					<hr>
