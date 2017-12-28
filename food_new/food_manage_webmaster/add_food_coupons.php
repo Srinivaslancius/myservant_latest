@@ -9,18 +9,18 @@
       $price_type_id = $_POST['price_type_id'];
       $discount_price = $_POST['discount_price'];
       $status = $_POST['lkp_status_id'];
-      $sql = "INSERT INTO services_coupons (`coupon_code`, `price_type_id`, `discount_price`, `lkp_status_id`) VALUES (UPPER('$coupon_code'), '$price_type_id', '$discount_price','$status')";
+      $sql = "INSERT INTO food_coupons (`coupon_code`, `price_type_id`, `discount_price`, `lkp_status_id`) VALUES (UPPER('$coupon_code'), '$price_type_id', '$discount_price','$status')";
       if($conn->query($sql) === TRUE){
-         echo "<script type='text/javascript'>window.location='services_coupons.php?msg=success'</script>";
+         echo "<script type='text/javascript'>window.location='food_coupons.php?msg=success'</script>";
       } else {
-         echo "<script type='text/javascript'>window.location='services_coupons.php?msg=fail'</script>";
+         echo "<script type='text/javascript'>window.location='food_coupons.php?msg=fail'</script>";
       }
   }
 ?>
       <div class="site-content">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="m-y-0">Services Coupons</h3>
+            <h3 class="m-y-0">Food Coupons</h3>
           </div>
           <div class="panel-body">
             <div class="row">
@@ -31,7 +31,7 @@
                     <input type="text" name="coupon_code" style="text-transform:uppercase" class="form-control" id="user_input" placeholder="Coupon Code" data-error="Please enter Coupon Code" onkeyup="checkUserAvailTest()" required>
                     <span id="input_status" style="color: red;"></span>
                     <div class="help-block with-errors"></div>
-                    <input type="hidden" id="table_name" value="services_coupons">
+                    <input type="hidden" id="table_name" value="food_coupons">
                     <input type="hidden" id="column_name" value="coupon_code">
                   </div>
                   <div class="form-group">

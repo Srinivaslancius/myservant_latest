@@ -177,9 +177,9 @@ if($_SESSION['user_login_session_id'] == '') {
 		if(isset($_POST["submit"]) && $_POST["submit"]!="") {
 			
 			//Save Order function here
-			//$coupon_code = $_POST["coupon_code"];
-			//$coupon_code_type = $_POST["coupon_code_type"];
-			//$discount_money = $_POST["discount_money"];
+			$coupon_code = $_POST["coupon_code"];
+			$coupon_code_type = $_POST["coupon_code_type"];
+			$discount_money = $_POST["discount_money"];
 			//echo "<pre>"; print_r($_POST); die;
 			$payment_group = $_POST["pay_mn"];
 			$order_date = date("Y-m-d h:i:s");
@@ -217,7 +217,7 @@ if($_SESSION['user_login_session_id'] == '') {
 				$date = date("ymdhis");
 				$contstr = "MYSER-FOOD";
 				$sub_order_id = $contstr.$random1.$random2.$date;
-				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`,  `payment_method`,`lkp_payment_status_id`,`delivery_type_id`,`service_tax`,`delivery_charges`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."','$payment_group','$payment_status','$dev_type','".$_POST["service_tax"]."','$delivery_charges', '$order_id','$sub_order_id','$order_date')";
+				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`, `coupen_code`, `coupen_code_type`, `discout_money`,  `payment_method`,`lkp_payment_status_id`,`delivery_type_id`,`service_tax`,`delivery_charges`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."','$coupon_code','$coupon_code_type','$discout_money','$payment_group','$payment_status','$dev_type','".$_POST["service_tax"]."','$delivery_charges', '$order_id','$sub_order_id','$order_date')";
 				$servicesOrders = $conn->query($orders);
 			} 
 			$getOrderIngredients = getAllData('food_update_cart_ingredients');
@@ -398,6 +398,11 @@ if($_SESSION['user_login_session_id'] == '') {
 							 Subtotal <span class="pull-right">Rs.<?php echo $cartTotal; ?></span>
 						</td>
 					</tr>
+					<?php if($getAdstotal!=0) { ?>
+		            <tr>
+		                <td>Extra Add On's Price <span class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
+		            </tr>
+					<?php } ?>
 					<?php $getDeliveryCharge = getIndividualDetails('food_vendors','id',$restaurant_id);
 					$DeliveryCharges = $getDeliveryCharge['delivery_charges']; ?>
 					<tr id="hide_del_fee">
@@ -411,17 +416,12 @@ if($_SESSION['user_login_session_id'] == '') {
 							 Service Tax <span class="pull-right">Rs.<?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span>
 						</td>
 					</tr>
-					<?php if($getAdstotal!=0) { ?>
-		            <tr>
-		                <td>Extra Add On's Price <span class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
-		            </tr>
-					<?php } ?>
 					<tr id="discount_price">
-		                <td>Discount Money <span id="discount_price1" class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
+		                <td>Discount Money<span style="color:green">(Coupon Applied Successfully.) <span id="discount_price1" class="pull-right"></span></td>
 		            </tr>
 					<tr>
-						<td class="total" id="cart_total2">
-							 TOTAL <span class="pull-right" id="apply_price_aft_del">Rs. <?php echo $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?></span>
+						<td class="total">
+							 TOTAL <span class="pull-right cart_total2" id="apply_price_aft_del">Rs. <?php echo $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?></span>
 							 <?php $order_total = $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?> 
 						</td>
 					</tr>
@@ -433,7 +433,8 @@ if($_SESSION['user_login_session_id'] == '') {
 					<input type="hidden" name="order_total" value="<?php echo $order_total; ?>" id="order_total">
 					<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>" id="service_tax">
 					<input type="hidden" name="getAdstotal" value="<?php echo $getAdstotal; ?>" id="getAdstotal">
-					<input type="hidden" name="discount_money" value="<?php echo $discount_money; ?>" id="discount_money">
+					<input type="hidden" name="discount_money" value="" id="discount_money">
+					<input type="hidden" name="coupon_code_type" value="" id="coupon_code_type">
 					<input type="hidden" name="user_id" value="<?php echo $user_session_id; ?>">
 					<hr>
 
@@ -530,6 +531,55 @@ function isNumberKey(evt){
         return false;
     return true;
 }
+</script>
+<script type="text/javascript">
+$('#discount_price').hide();
+    $(".apply_coupon").click(function(){
+        var coupon_code = $("#coupon_code").val();
+        var order_total = $('#order_total').val();
+        var service_tax = $('#service_tax').val();
+        var getOrderDelCharge1 = parseInt($('#delivery_charge').val());
+        var getAdonsTotal1 = parseInt($('#getAdstotal').val());
+        $.ajax({
+           type: "POST",
+           url: "apply_coupon.php",
+           data: "coupon_code="+coupon_code+"&cart_total="+order_total+"&service_tax="+service_tax+"&getOrderDelCharge1="+getOrderDelCharge1+"&getAdonsTotal1="+getAdonsTotal1,
+           success: function(value){
+           		if(value == 0) {
+           			alert('Please Enter Valid Coupon');
+           			$("#coupon_code").val('');
+           		} else if(value == 1) {
+           			alert('Enter Coupon is not valid for this Service');
+           			$("#coupon_code").val('');
+           		} else{
+           			$('#coupon_code').attr('readonly','true');
+           			var data = value.split(",");
+	          		$('.cart_total2').html(data[0]);
+		            $('#order_total').val(data[0]);
+               		$('#discount_price').show();
+               		$('#discount_price1').html(data[1]);
+               		$('#discount_money').val(data[2]);
+               		$('#coupon_code_type').val(data[3]);
+               	}
+        	}
+        });
+        $('.has-clear input[type="text"]').on('input propertychange', function() {
+		  var $this = $(this);
+		  var visible = Boolean($this.val());
+		  $this.siblings('.form-control-clear').toggleClass('hidden', !visible);
+		}).trigger('propertychange');
+
+		$('.form-control-clear').click(function() {
+			$('#coupon_code').removeAttr("readonly");
+		  $(this).siblings('input[type="text"]').val('')
+		    .trigger('propertychange').focus();
+		    $('#cart_total2').html(order_total);
+			$('#order_total').val(order_total);
+			$('#discount_price').hide();
+			$('#discount_money').val('');
+            $('#coupon_code_type').val('');
+		});
+	});
 </script>
 </body>
 </html>
