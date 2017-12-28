@@ -34,7 +34,7 @@
                     <td><?php echo $row['mobile'];?></td>
                     <td><?php echo $row['email'];?></td>
                     <td><?php echo $row['created_at'];?></td>
-                    <?php if($row['assign_delivery_id'] == '0' && $row['assign_delivery_id'] == '') { ?>
+                    <?php if($row['assign_delivery_id'] == '0' || $row['assign_delivery_id'] == '') { ?>
                      <td><a href="assign_to.php?order_id=<?php echo $row['order_id']; ?>">Assign To</a></td>
                      <?php } else { 
                       $getDeliveryBoysNames = getAllDataWhere('food_delivery_boys','id',$row['assign_delivery_id']); $getDeliveryBoysNamesData = $getDeliveryBoysNames->fetch_assoc();
