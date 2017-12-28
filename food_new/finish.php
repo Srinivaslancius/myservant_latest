@@ -119,9 +119,10 @@ $getAddOrder = $orderData->fetch_array();
 				<h4>Summary</h4>
 				<table class="table table-striped nomargin">
 				<tbody>
-				<?php $cartTotal = 0; $service_tax = 0;
+				<?php $cartTotal = 0; $service_tax = 0; $discountMoney = 0;
 					while ($getPlaceOrders = $placeOrder->fetch_assoc()) { 
-						$restaurant_id = $getPlaceOrders['restaurant_id']; ?>
+						$restaurant_id = $getPlaceOrders['restaurant_id'];				
+					if($getPlaceOrders['discout_money']!=0) { $discountMoney = $getPlaceOrders['discout_money']; } ?>
 				<?php $getProductDetails= getIndividualDetails('food_products','id',$getPlaceOrders['product_id']); ?>
 				<tr>
 					<td>
@@ -174,11 +175,17 @@ $getAddOrder = $orderData->fetch_array();
 		            <tr>
 		                <td>Extra Add On's Price <span class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
 		            </tr>
+					<?php } ?>
+					<?php 			
+					if($discountMoney!=0) { ?>
+		            <tr>
+		                <td>Discount Money <span class="pull-right">Rs. <?php echo $discountMoney; ?></span></td>
+		            </tr>
 					<?php } ?>					
 					<tr>
 						<td class="total total_confirm">
-							 TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$delCharge+$getAdstotal; ?></span>
-							 <?php $order_total = $cartTotal+$service_tax+$delCharge+$getAdstotal; ?> 
+							 TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$delCharge+$getAdstotal-$discountMoney; ?></span>
+							 <?php $order_total = $cartTotal+$service_tax+$delCharge+$getAdstotal-$discountMoney; ?> 
 							 <?php unset($_SESSION['order_last_session_id']); ?>
 						</td>
 					</tr>
