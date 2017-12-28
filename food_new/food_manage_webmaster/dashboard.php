@@ -262,7 +262,7 @@
                       <td><?php echo $getTotalOrders['created_at'];?></td>
                       <td><?php echo $getTotalOrders['order_id'];?>
                       </td>
-                      <td><a href="food_orders.php"><i class="zmdi zmdi-eye zmdi-hc-fw"  class=""></i></a>
+                      <td><a href="view_category_orders.php?order_id=<?php echo $getTotalOrders['order_id']; ?>"><i class="zmdi zmdi-eye zmdi-hc-fw"  class=""></i></a>
                       </td>
                       <td>
                       </td>
