@@ -1,3 +1,8 @@
+<?php
+if($_SESSION['user_login_session_id'] == '') {
+    header ("Location: logout.php");
+} 
+?>
 <ul id="cat_nav" style="border:1px solid #ddd;;padding:0px">
 	<li style="font-size:12px"><a href="my_dashboard.php" <?php if($page_name=="my_dashboard.php") { echo "id=active"; } ?> ><i class="icon-cart"></i> MY ORDERS</a></li>
     <li style="font-size:12px"><a href="personal_information.php"><i class="icon-address-book"></i> ACCOUNT SETTINGS</a></li>

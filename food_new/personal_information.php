@@ -106,16 +106,11 @@ ul#cat_nav li a#active {
                   <div class="col-md-12">
 				  <div class="col-md-6">
 					<div class="form-group">
-						<label for="first-name">First name</label>
+						<label for="first-name">Name</label>
 						<input type="text" class="form-control" id="first-name" placeholder="Name" value="">
 					</div>
 					</div>
-					<div class="col-md-6">
-					 <div class="form-group">
-						<label for="sur-name">Last name</label>
-						<input type="text" class="form-control" id="full-name" placeholder="Fullname">
-					</div>
-					</div>
+					
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="email">Email</label>
@@ -127,7 +122,7 @@ ul#cat_nav li a#active {
 						<label for="mobile">Mobile</label>
 						<input type="text" class="form-control" id="mobile" placeholder="9876543210">
 					</div> 
-</div>					
+          </div>					
                   </div>
                   </div><!-- Edn row -->                 
                                                    
