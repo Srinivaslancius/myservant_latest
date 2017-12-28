@@ -4,8 +4,8 @@
       <div class="site-content">
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
-            <a href="add_food_products.php" style="float:right">Add Products</a>
-            <h3 class="m-t-0 m-b-5">Products</h3>
+            <a href="add_food_products.php" style="float:right">Add Items</a>
+            <h3 class="m-t-0 m-b-5">Items</h3>
           </div>
            <div class="panel-body">
             <div class="table-responsive">

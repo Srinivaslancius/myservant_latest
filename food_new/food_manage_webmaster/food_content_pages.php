@@ -3,7 +3,7 @@
      <div class="site-content">
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
-            <a href="add_food_content_pages.php" style="float:right">Add Food Content Pages</a>
+            <!-- <a href="add_food_content_pages.php" style="float:right">Add Food Content Pages</a> -->
             <h3 class="m-t-0 m-b-5">Food Content Pages</h3>
           </div>
           <div class="panel-body">
@@ -17,7 +17,7 @@
                     <th>Meta Title</th>
                     <th>Meta Keywords</th>
                     <th>Meta Description</th>
-                    <th>Actions</th>
+                    <!-- <th>Actions</th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -29,7 +29,7 @@
                     <td><?php echo $row['meta_title'];?></td>
                     <td><?php echo $row['meta_keywords'];?></td>
                     <td><?php echo substr(strip_tags($row['meta_desc']), 0,150);?></td>
-                   <td> <a href="edit_food_content_pages.php?fcid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a></td>
+                   <!-- <td> <a href="edit_food_content_pages.php?fcid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a></td> -->
                   </tr>
                   <?php  $i++; } ?>
                 </tbody>

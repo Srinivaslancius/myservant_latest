@@ -21,7 +21,7 @@
                 <span class="menu-icon">
                    <i class="zmdi zmdi-collection-item  zmdi-hc-fw"></i>
                 </span>
-                <span class="menu-text">Products</span>
+                <span class="menu-text">Items</span>
               </a>
             </li>
             <li  class="<?php if($page_name == 'food_vendor_orders.php') { echo "active"; } ?>">
