@@ -215,7 +215,7 @@ td{
                 $getAddonData = $conn->query($getAddons);
                 while($getadcartItems = $getAddonData->fetch_assoc() ) {
                ?>  <div class="alert alert-dismissable" style="margin-top:-15px">
-					<a href="#"class="close1" data-dismiss="alert"><i class="icon-trash" style="color:#fe6003"></i></a>
+					     <a class="" ><i class="icon-trash" style="color:#fe6003" onclick="removeIngItem(<?php echo $getadcartItems['id']; ?>);"></i></a>
                   <p id="dis_add_on_<?php echo $getCartItems['id']; ?>" style="margin-bottom:5px;font-size:12px"><?php echo $getadcartItems['item_ingredient_name'] . ":". $getadcartItems['item_ingredient_price']; ?> </p>
 				  </div>		
                 <?php } ?>		
@@ -421,7 +421,6 @@ $('.check_valid_add_on').on('change', function (e) {
 	$('#tot_item_price_'+cartId).html(getTotalVal);
 });
 
-
 //
 $('.update_cart_item').on('click', function (e) {
 
@@ -493,6 +492,21 @@ $('.del_cart_item').on('click', function (e) {
         });
       }
 });
+
+function removeIngItem(ingUniqId) {
+ 
+  $.ajax({
+      type:'post',
+      url:'delete_cart_ingredants.php',
+      data:{
+         ingUniqId : ingUniqId,        
+      },
+      success:function(response) {
+        location.reload();
+      }
+    });
+
+}
 </script>
 
 </body>
