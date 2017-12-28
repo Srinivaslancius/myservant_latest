@@ -73,8 +73,7 @@ word-break: normal;
  -webkit-box-shadow:none; 
  border-color:white; 
 }
-.form-control{
-width:20%;
+.two{
 background-color:white;
 border-color:white;
 font-size:13px;
@@ -204,26 +203,26 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 				<div class="inner">
 					<div class="row">
 						<div class="col-sm-2">
-							<h2 style="color:white">Menu</h2>
+							<h3 style="color:white;font-size:18px;padding-left:10px">Menu</h3>
 						</div>
 						<div class="col-sm-8">
-						<form style="margin-top:15px">
+						<!-- <form style="margin-top:10px">
 							<div class="input-group add-on">
-								<input class="form-control" placeholder="Search dishes.." name="srch-term" id="srch-term" type="text">
+								<input class="form-control two" placeholder="Search dishes.." name="srch-term" id="srch-term" type="text">
 								<div class="input-group-btn">
 								<button class="btn btn-default" type="submit" style="padding:9px 12px;"><i class="glyphicon glyphicon-search"></i></button>
 								</div>
 							</div>
-						</form>
+						</form> -->
 						</div>
 						<div class="col-sm-2">
-							<h2><label style="color: #fff;"><input name="mobile" type="checkbox" value="" class="icheck">Veg </label></h2>
+							<h3 style="color:white;font-size:18px"><label><input name="mobile" type="checkbox" value="" class="icheck"></label>Veg</h3>
 						</div>
 					</div>
 				</div>
                     <?php while($getCatList1 = $getCategory1->fetch_assoc() ) { ?>
                     <hr>
-					<h3 class="nomargin_top" id="<?php echo $getCatList1['category_id']; ?>"><?php $getCatName = getIndividualDetails('food_category','id',$getCatList1['category_id']); echo $getCatName['category_name']; ?></h3>
+					<h5 class="nomargin_top" id="<?php echo $getCatList1['category_id']; ?>"><b><?php $getCatName = getIndividualDetails('food_category','id',$getCatList1['category_id']); echo $getCatName['category_name']; ?></b></h5>
 					<p>
 					<?php echo substr($getCatName['category_description'], 0,300); ?>
 					</p>
@@ -253,7 +252,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 						<td>
                         	<figure class="thumb_menu_list"><img src="<?php echo $base_url . 'uploads/food_product_images/'.$getItemsByCategory['product_image']; ?>" alt="<?php echo $getItemsByCategory['product_name']; ?>" ></figure>
 							<h5><?php echo $i; ?>. <?php echo $getItemsByCategory['product_name']; ?></h5>
-							<p>
+							<p style="font-size:13px">
 								<?php echo $getItemsByCategory['specifications']; ?>
 							</p>
 						</td>

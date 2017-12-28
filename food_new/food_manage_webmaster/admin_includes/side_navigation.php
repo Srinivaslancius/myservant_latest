@@ -89,10 +89,10 @@
                   <a href="food_ingredients.php">Ingredients</a>
                 </li>
                 <li  class="<?php if($page_name == 'food_product_type.php' || $page_name == 'add_food_product_type.php' || $page_name == 'edit_food_product_type.php') { echo "active"; } ?>">
-                  <a href="food_product_type.php">Product Type</a>
+                  <a href="food_product_type.php">Items Type</a>
                 </li>
                 <li  class="<?php if($page_name == 'food_products.php' || $page_name == 'add_food_products.php' || $page_name == 'edit_food_products.php') { echo "active"; } ?>">
-              <a href="food_products.php" >Products</a>
+              <a href="food_products.php" >Items</a>
             </li>
               </ul>
             </li>

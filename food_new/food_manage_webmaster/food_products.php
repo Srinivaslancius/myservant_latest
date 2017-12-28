@@ -4,8 +4,8 @@
       <div class="site-content">
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
-           <!-- <a href="add_food_products.php" style="float:right">Add Products</a> -->
-            <h3 class="m-t-0 m-b-5">Products</h3>
+          <!-- <a href="add_food_products.php" style="float:right">Add Items</a> -->
+            <h3 class="m-t-0 m-b-5">Items</h3>
           </div>
            <div class="panel-body">
             <div class="table-responsive">
@@ -27,7 +27,7 @@
                   <tr>
                     <th>S.No</th>
                     <th>Restaurant Name</th>
-                    <th>Product Name</th>
+                    <th>Item Name</th>
                     <th>Category Name</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -54,7 +54,7 @@
                                 <i class="zmdi zmdi-close"></i>
                               </span>
                             </button>
-                            <center><h4 class="modal-title">Product Information</h4></center>
+                            <center><h4 class="modal-title">Item Information</h4></center>
                           </div>
                         <div class="modal-body" id="modal_body">
                           <div class="row">
@@ -79,11 +79,11 @@
                             <div class="col-sm-4">Item Desc: </div>
                             <div class="col-sm-6"><?php echo $row['specifications'];?></div>
                           </div>
-                          <div class="row">
+                          <!-- <div class="row">
                             <div class="col-sm-2"></div>
                             <div class="col-sm-4">Availability: </div>
                             <div class="col-sm-6"><?php if($row['availability_id'] == 0 ){ echo "In Stock";} else{ echo "Out Of Stock";}?></div>
-                          </div>                         
+                          </div> -->                 
                           <div class="row">
                             <div class="col-sm-2"></div>
                             <div class="col-sm-4">Status: </div>

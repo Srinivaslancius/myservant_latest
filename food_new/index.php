@@ -47,39 +47,33 @@
     </header>
     <!-- End Header =============================================== -->
     
-    <!-- SubHeader =============================================== -->
-    <div id="full-slider-wrapper">
-     <div id="layerslider" style="width:100%;height:400px;">
-        <!-- first slide -->
-        <?php $getBanners = getAllDataWhere('food_banners','lkp_status_id','0'); ?>
-        <?php while($getFoodhomeBanners = $getBanners->fetch_assoc()) { ?>
-        <div class="ls-slide" data-ls="slidedelay: 2000; transition2d:5;">
-            <img src="<?php echo $base_url . 'uploads/food_banner_images/'.$getFoodhomeBanners['banner'] ?>" class="ls-bg" alt="Slide background" alt="<?php echo $getFoodhomeBanners['title'];?>">
-            <h3 class="ls-l slide_typo" style="top: 50%; left: 50%;font-size:30px" data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;" ><strong><?php echo $getFoodhomeBanners['title'];?></strong></h3>           
-           <!-- <?php if($getFoodhomeBanners['lkp_banner_type_id']==1) { ?>
-            <p class="ls-l" style="top:64%; left:50%;" data-ls="durationin:2000;delayin:1300;easingin:easeOutElastic;" ><a href="list_page.php" class="button_intro">Read more</a> </p>
-            <?php } ?> -->
+   <div id="myCarousel" class="carousel slide" data-ride="carousel">
+   <div class="carousel-inner">
+      <?php $getBanners = getAllDataWhere('food_banners','lkp_status_id','0'); ?>
+      <?php $i=1; while($getFoodhomeBanners = $getBanners->fetch_assoc()) { ?>
+       <div class="item <?php if($i==1) { echo "active"; } ?>">
+         <img src="<?php echo $base_url . 'uploads/food_banner_images/'.$getFoodhomeBanners['banner'] ?>"  alt="<?php echo $getFoodhomeBanners['title'];?>" style="width:100%;height:400px">
+       </div>
+      <?php $i++; } ?>
+
+      <?php $getBanners1 = getAllRestaruntsWithProducts('0','',''); ?>
+      <?php $j=1; while($getVendorBanners = $getBanners1->fetch_assoc()) { ?>
+        <div class="item">
+           <a href="view_rest_menu.php?key=<?php echo encryptPassword($getVendorBanners['id']);?>"><img src="<?php echo $base_url . 'uploads/food_vendor_Banner/'.$getVendorBanners['vendor_banner'] ?>" alt="<?php echo $getVendorBanners['vendor_name'];?>" style="width:100%;height:400px"><a/>
         </div>
-       <?php } ?>
-       <?php $getBanners = getAllDataWhere('food_vendors','lkp_status_id','0'); ?>
-        <?php while($getVendorBanners = $getBanners->fetch_assoc()) { ?>
-       <a href="about.php"><div class="ls-slide" data-ls="slidedelay: 2000; transition2d:5;">          
-            <img src="<?php echo $base_url . 'uploads/food_vendor_Banner/'.$getVendorBanners['vendor_banner'] ?>" class="ls-bg" alt="Slide background" alt="<?php echo $getVendorBanners['vendor_name'];?>">
-        </div></a>
-       <?php } ?>
-        <?php $getAllFoodOrders = "SELECT * FROM food_orders GROUP BY order_id ORDER BY id DESC";
+      <?php $j++; } ?>
+   </div>
+    <?php $getAllFoodOrders = "SELECT * FROM food_orders GROUP BY order_id ORDER BY id DESC";
           $getFoodOrders = $conn->query($getAllFoodOrders);
           $getFoodOrdersCount = $getFoodOrders->num_rows;?>
-        <div id="count" class="hidden-xs">
-            <ul>
-                <li><span class="number"><?php echo getRowsCount('food_vendors'); ?></span> Restaurants</li>
-                <li><span class="number"><?php echo $getFoodOrdersCount ?></span> People Served</li>
-                <li><span class="number"><?php echo getUsersRowsCount('users','lkp_admin_service_type_id','2'); ?></span> Registered Users</li>
-            </ul>
-        </div>
-    </div>
-    
-    </div><!-- End layerslider -->
+     <div id="count" class="hidden-xs">
+        <ul>
+            <li><span class="number"><?php echo getRowsCount('food_vendors'); ?></span> Restaurants</li>
+            <li><span class="number"><?php echo $getFoodOrdersCount ?></span> People Served</li>
+            <li><span class="number"><?php echo getUsersRowsCount('users','lkp_admin_service_type_id','2'); ?></span> Registered Users</li>
+        </ul>
+   </div>
+ </div>
     
 <?php $getAllSearchByAreaData = getAllDataWhere('food_content_pages','id',2);
           $getSearchByAreaData = $getAllSearchByAreaData->fetch_assoc();
@@ -163,7 +157,7 @@
           
         </div>
 
-        <?php $getMostPopualrRest = getAllRestaruntsWithProducts('0','0','6'); ?>
+        <?php $getMostPopualrRest = getAllRestaruntsWithProducts('0','0','4'); ?>
         
         <div class="row">
             <?php while($getMostPopualrRestaurants = $getMostPopualrRest->fetch_assoc()) { ?>
