@@ -307,10 +307,11 @@ th{
                   $getAdstotal += $getAdTotal['item_ingredient_price'];
               }
               ?>
+              <?php if($getAdstotal!=0) { ?>
               <tr>
                   <td>Extra Add On's Price <span class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
               </tr>
-						
+						  <?php } ?>
 						<!-- <tr>
 							<td>Delivery fee <span class="pull-right">Rs. <?php echo $getFoodSiteSettingsData['delivery_charges'] ; ?></span> </td>
 
