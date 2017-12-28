@@ -101,7 +101,7 @@ ul#cat_nav li a#active {
                 <li><a href="index.php">Home</a></li>
                 <li>My Orders</li>
             </ul>
-            <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
+            
         </div>
     </div><!-- Position -->
 

@@ -6,6 +6,13 @@ $getFoodSiteSettings = getAllDataWhere('food_site_settings','id','1');
 $getFoodSiteSettingsData = $getFoodSiteSettings->fetch_assoc();
 
 ?>
+
+<?php
+    $currentFile = $_SERVER["PHP_SELF"];
+    $parts = Explode('/', $currentFile);
+    $page_name = $parts[count($parts) - 1];
+?>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="">
     <meta name="description" content="">
