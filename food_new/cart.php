@@ -110,8 +110,9 @@ td{
     right: -21px;
     color: inherit;
 	 right: 110px;
-    opacity: .5;
-    font-size: 20px;
+    opacity: 2;
+    font-size: 15px;
+	font-weight:bold;
 }
 .close1 {
     float: right;
@@ -214,7 +215,7 @@ td{
                 $getAddonData = $conn->query($getAddons);
                 while($getadcartItems = $getAddonData->fetch_assoc() ) {
                ?>  <div class="alert alert-dismissable" style="margin-top:-15px">
-					<a href="#"class="close1" data-dismiss="alert">×</a>
+					<a href="#"class="close1" data-dismiss="alert"><i class="icon-trash" style="color:#fe6003"></i></a>
                   <p id="dis_add_on_<?php echo $getCartItems['id']; ?>" style="margin-bottom:5px;font-size:12px"><?php echo $getadcartItems['item_ingredient_name'] . ":". $getadcartItems['item_ingredient_price']; ?> </p>
 				  </div>		
                 <?php } ?>		
@@ -303,7 +304,7 @@ td{
             <td style="padding-left:30px;padding-right:30px"> <?php echo $getCartItems['item_quantity']; ?></td>
 						<td>Rs. <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?> /-</td>
 						<?php $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?>
-						<td> <i class=" icon-trash del_cart_item" data-cart-id="<?php echo $getCartItems['id']; ?>" style="font-size:22px;color:#fe6003;margin-left:10px"></li></td>
+						<td> <i class="icon-trash del_cart_item" data-cart-id="<?php echo $getCartItems['id']; ?>" style="font-size:22px;color:#fe6003;margin-left:10px"></li></td>
 					</tr>
                      <?php } ?>
 					</tbody>
