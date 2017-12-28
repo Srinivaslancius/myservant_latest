@@ -9,8 +9,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 	if (isset($_REQUEST['userMobile']) && !empty($_REQUEST['userPassword'])  ) {
 
-		 	$user_email = $_POST['userMobile'];
-		    $user_password = encryptPassword($_POST['userPassword']);
+		 	$user_email = $_REQUEST['userMobile'];
+		    $user_password = encryptPassword($_REQUEST['userPassword']);
 		    $getLoginData = userLogin($user_email,$user_password);
 		    //Set variable for session
 		    if($getLoggedInDetails = $getLoginData->fetch_assoc()) {

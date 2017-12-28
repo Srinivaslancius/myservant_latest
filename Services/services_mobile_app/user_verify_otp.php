@@ -1,5 +1,5 @@
 <?php 
-error_reporting(1);
+error_reporting(0);
 include "../../admin_includes/config.php";
 include "../../admin_includes/common_functions.php";
 //Set Array for list
@@ -19,7 +19,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			$user_full_name = $_REQUEST['userName'];
 			$user_email = $_REQUEST['userEmail'];
 			$user_mobile = $_REQUEST['userMobile'];
-			$user_password = $_REQUEST['userPassword'];	
+			$user_password = encryptPassword($_REQUEST['userPassword']);	
 			$lkp_status_id = 0; //0-active, 1- inactive
 			$login_count = 1;
 			$last_login_visit = date("Y-m-d h:i:s");
