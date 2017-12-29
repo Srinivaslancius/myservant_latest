@@ -113,20 +113,6 @@
     font-size: 12px;
     padding-top: 5px;
 }
-
-.button1 {
-    background-color: #fe6003;
-    border-color: #fe6003;
-    color: white;
-    padding: 5px 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top:10px;
-	height:40px;
-    cursor: pointer;
-}
 ::-ms-clear {
 	  display: none;
 	}
@@ -136,6 +122,21 @@
 	  pointer-events: auto;
 	  cursor: pointer;
 	}
+	.button1 {
+    background-color: #fe6003;
+    border-color: #fe6003;
+    color: white;
+    padding: 5px 9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+	height:40px;
+	border-top-right-radius:4px;
+	border-bottom-right-radius:4px;
+}
 </style>
     <!-- End Header =============================================== -->
 <?php
@@ -453,13 +454,19 @@ if($_SESSION['user_login_session_id'] == '') {
 
 					<div class="row">
 						<div class="form-group">
-									<div class="field-group has-feedback has-clear">
-								      <input autocomplete="off" type="text" name="coupon_code" style="text-transform:uppercase" id="coupon_code" value="" placeholder="Coupon Code" class="form-control">
-								      <span class="form-control-clear icon-cancel-1 form-control-feedback hidden"></span>
+						<div class="row">
+						<div class="col-sm-8 col-xs-8">
+									<div class="field-group has-feedback has-clear" style="width:203px;margin-left:21px;margin-top:4px">
+								      <input autocomplete="off" type="text" name="coupon_code" style="text-transform:uppercase" id="coupon_code" value="" placeholder="Coupon Code" class="form-control" style="border-radius:0px">
+								      <span class="form-control-clear icon-cancel-1 form-control-feedback hidden" style="border-radius:0px"></span>
 								    </div>
-									<div class="field-group btn-field">
-										<button type="button" class="btn_cart_outine apply_coupon">Apply</button>
 									</div>
+									<div class="col-sm-4 col-xs-4">
+									<div class="field-group btn-field">
+										<button type="button" class="button1 btn_cart_outine apply_coupon">Apply</button>
+									</div>
+									</div>
+								</div>
 								</div>
 					</div><!-- Edn options 2 -->
 					<hr>
