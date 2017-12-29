@@ -215,7 +215,7 @@ td{
                 $getAddonData = $conn->query($getAddons);
                 while($getadcartItems = $getAddonData->fetch_assoc() ) {
                ?>  <div class="alert alert-dismissable" style="margin-top:-15px">
-					     <a class="" ><i class="icon-trash" style="color:#fe6003" onclick="removeIngItem(<?php echo $getadcartItems['id']; ?>);"></i></a>
+					     <a class="close1" ><i class="icon-trash" style="color:#fe6003" onclick="removeIngItem(<?php echo $getadcartItems['id']; ?>);"></i></a>
                   <p id="dis_add_on_<?php echo $getCartItems['id']; ?>" style="margin-bottom:5px;font-size:12px"><?php echo $getadcartItems['item_ingredient_name'] . ":". $getadcartItems['item_ingredient_price']; ?> </p>
 				  </div>		
                 <?php } ?>		

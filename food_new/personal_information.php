@@ -34,16 +34,18 @@ ul#cat_nav li a#active {
    background-color:#fe6003;
    color:white;
 }
-.table>thead>tr>th {
-    vertical-align: bottom;
-    border-bottom:0px;
-	color:#fe6003;
-}
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-   border-top: 0px solid #ddd;
+
+.button1 {
+    background-color: #fe6003;
+    border-color: #fe6003;
+    color: white;
+    padding: 5px 9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }
 </style>
 </head>
@@ -103,32 +105,34 @@ ul#cat_nav li a#active {
         </aside>       
         <div class="col-lg-9 col-md-8 col-sm-8">        
        			 <div class="row">
-                  <div class="col-md-12">
+				 <div class="col-md-1">
+				  </div>
+                  <div class="col-md-11">				 
 				  <div class="col-md-6">
 					<div class="form-group">
 						<label for="first-name">Name</label>
 						<input type="text" class="form-control" id="first-name" placeholder="Name" value="">
 					</div>
-					</div>
-					
-					<div class="col-md-6">
 					<div class="form-group">
 						<label for="email">Email</label>
 						<input type="email" class="form-control" id="email" placeholder="abc@gmail.com">
 					</div>
-					</div>
-					<div class="col-md-6">
 					 <div class="form-group">
 						<label for="mobile">Mobile</label>
 						<input type="text" class="form-control" id="mobile" placeholder="9876543210">
-					</div> 
-          </div>					
-          </div>
-          </div><!-- Edn row -->                 
-                                                   
+					</div>
+					<div class="form-group">
+						<button class="button1">Submit</button>					
+					</div>						
+                  </div>
+				  <div class="col-md-6">
+				  </div>
+                               
+                   </div>                                
         </div><!-- End col-lg-9-->
         </div>
 			</div>
+</div>
 </div>
 	<div class="high_light">
        <?php include_once 'view_restaurants.php'; ?>

@@ -45,7 +45,7 @@ ul#cat_nav li a#active {
     vertical-align: top;
    border-top: 0px solid #ddd;
 }
-.button {
+.button1 {
     background-color: #fe6003;
     border-color: #fe6003;
     color: white;
@@ -115,76 +115,55 @@ ul#cat_nav li a#active {
        		<?php include_once 'my_dashboard_strip.php';?>
             </div>
         </aside>       
-        <div class="col-lg-9 col-md-8 col-sm-8">    
-<table class="table" style="border:1px solid #ddd;width:80%">
-    <thead>
-      <tr>
-        <th>ORDER PLACED</th>
-        <th>Order Price</th>
-        <th>SHIP TO</th>
-		<th>ORDER ID:</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>2017-12-21 12:18:45</td>
-        <td>Rs.1499</td>
-        <td>some one</td>
-		<td>MYSER-SERVICESzvj760171221121845
-		
-		</td>
-      </tr>
-	  <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-		<td>
-		<div class="row">
-		<div class="col-sm-3">
-		<button class="button">Details</button>
-		</div>
-		<div class="col-sm-5">
-		<button class="button button2">Track</button>
-		</div>
-		<div class="col-sm-4">
-		</div>
-		</div>
-		</td>
-      </tr>
-    </tbody>
-  </table>		
-       			 <!--<div class="row">
-                  
-			  <div class="col-sm-3">
-			  <h5>ORDER PLACED</h5>
-			  </div>
-			   <div class="col-sm-3">
-			    <h5>Order Price</h5>
-			  </div>
-			   <div class="col-sm-3">
-			    <h5>SHIP TO</h5>
-			  </div>
-			   <div class="col-sm-3">
-			    <h5>ORDER ID:</h5>
-			  </div>			  		 
-			  <div class="col-sm-3">
-			  <p>2017-12-21 12:18:45</p>
-			  </div>
-			   <div class="col-sm-3">
-			    <p>Rs.1499</p>
-			  </div>
-			   <div class="col-sm-3">
-			    <p>Srinivas</p>
-			  </div>
-			   <div class="col-sm-3">
-			    <p>MYSER-SERVICESzvj760171221121845</p>
-			  </div>
-			  </div>  -->           
-                              
-                                                   
+        <div class="col-lg-9 col-md-8 col-sm-8">
+			<div class="row">
+			<div class="col-sm-1">
+			</div>
+		<div class="col-sm-11 col-xs-12">
+		<div class="table-responsive">		
+			<table class="table" style="border:1px solid #ddd;width:80%">
+		<thead>
+		  <tr>
+			<th>ORDER PLACED</th>
+			<th>Order Price</th>
+			<th>SHIP TO</th>
+			<th>ORDER ID:</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+			<td>2017-12-21 12:18:45</td>
+			<td>Rs.1499</td>
+			<td>some one</td>
+			<td>MYSER-SERVICESzvj760171221121845
+			
+			</td>
+		  </tr>
+		  <tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>
+			<div class="row">
+			<div class="col-sm-3 col-xs-4">
+			<button class="button1">Details</button>
+			</div>
+			<div class="col-sm-5 col-xs-8">
+			<button class="button1 button2">Track</button>
+			</div>
+			<div class="col-sm-4">
+			</div>
+			</div>
+			</td>
+		  </tr>
+		</tbody>
+	  </table>
+	  </div>
+</div>	  
         </div><!-- End col-lg-9-->
         </div>
 			</div>
+</div>
 </div>
 	<div class="high_light">
        <?php include_once 'view_restaurants.php'; ?>
