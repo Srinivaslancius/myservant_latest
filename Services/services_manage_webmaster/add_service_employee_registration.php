@@ -109,7 +109,7 @@
                   <div id = "select_service_provider_id">
                     <div class="form-group">
                       <label for="form-control-3" class="control-label">Choose Service Provider</label>
-                      <select  name="service_provider_registration_id" class="custom-select service_provider_type1" data-error="This field is required.">
+                      <select  name="service_provider_registration_id" class="custom-select service_provider_type1" data-error="This field is required." data-plugin="select2" data-options="{ placeholder: 'Select a Provider', allowClear: true }">
                         <option value="">Select Service Provider</option>
                         <?php while($row = $getServiceProReg->fetch_assoc()) {  ?>
                             <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
