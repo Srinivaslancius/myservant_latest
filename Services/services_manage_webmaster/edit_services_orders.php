@@ -9,36 +9,36 @@ if (!isset($_POST['submit'])) {
     echo "fail";
 } else {
     //If success
-  $order_price = $_POST['order_price']*$_POST['service_quantity'];
+  $order_price = $_POST['order_price'];
   $lkp_order_status_id = $_POST['lkp_order_status_id'];
   $lkp_payment_status_id = $_POST['lkp_payment_status_id'];
   $order_total = $_POST['order_total'];
   $delivery_date = date("Y-m-d h:i:s");
 
-  if($_POST['service_tax'] == 0) {
+  if($_POST['service_tax'] != 0) {
+    $sql = "UPDATE `services_orders` SET lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id' WHERE id = '$id'";
+    $res = $conn->query($sql);
+  } else {
     $service_tax = $getSiteSettingsData['service_tax'];
-  } else {
-    $service_tax = 0;
-  }
+    //Update total and price when payment status success and order status completed
+    if($lkp_payment_status_id == 1 AND $lkp_order_status_id == 2) {
 
-//Update total and price when payment status success and order status completed
-if($lkp_payment_status_id == 1 AND $lkp_order_status_id == 2) {
-
-  if($_POST['service_price_type_id'] == 1) {
-    $order_total = $_POST['order_total']+($order_price*$service_tax/100);
-    $sql = "UPDATE `services_orders` SET service_tax = '$service_tax',lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id', delivery_date ='$delivery_date' WHERE id = '$id'";
-    $res = $conn->query($sql);
-  } else {
-    $order_total = $_POST['order_total']+$order_price+($order_price*$service_tax/100);
-    $sql = "UPDATE `services_orders` SET service_tax = '$service_tax',order_price='$order_price',lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id', delivery_date ='$delivery_date' WHERE id = '$id'";
-    $res = $conn->query($sql);
+      if($_POST['service_price_type_id'] == 1) {
+        $order_total = $_POST['order_total']+($order_price*$_POST['service_quantity']*$service_tax/100);
+        $sql = "UPDATE `services_orders` SET service_tax = '$service_tax',lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id', delivery_date ='$delivery_date' WHERE id = '$id'";
+        $res = $conn->query($sql);
+      } else {
+        $order_total = $_POST['order_total']+($order_price*$_POST['service_quantity'])+($order_price*$_POST['service_quantity']*$service_tax/100);
+        $sql = "UPDATE `services_orders` SET service_tax = '$service_tax',order_price='$order_price',lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id', delivery_date ='$delivery_date' WHERE id = '$id'";
+        $res = $conn->query($sql);
+      }
+      $updateTotal = "UPDATE `services_orders` SET order_total = '$order_total' WHERE order_id = '$order_id'";
+      $updateOrdertotal = $conn->query($updateTotal);
+    } else {
+      $sql = "UPDATE `services_orders` SET order_price='$order_price',lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id' WHERE id = '$id'";
+        $res = $conn->query($sql);
+    }
   }
-  $updateTotal = "UPDATE `services_orders` SET order_total = '$order_total' WHERE order_id = '$order_id'";
-  $updateOrdertotal = $conn->query($updateTotal);
-} else {
-  $sql = "UPDATE `services_orders` SET lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id'WHERE id = '$id'";
-    $res = $conn->query($sql);
-}
 
   header("Location:order_invoice.php?id=".$id."");
 }   
@@ -50,7 +50,8 @@ if($lkp_payment_status_id == 1 AND $lkp_order_status_id == 2) {
           </div>
           <div class="panel-body">
             <div class="row">
-              <?php $getServiceOrders1 = "SELECT * FROM services_orders WHERE id = '$id' AND sub_category_id = '$subcat_id'"; $getServiceOrders = $conn->query($getServiceOrders1);
+              <?php $getServiceOrders1 = "SELECT * FROM services_orders WHERE id = '$id' AND sub_category_id = '$subcat_id'"; 
+              $getServiceOrders = $conn->query($getServiceOrders1);
               $getServiceOrdersData = $getServiceOrders->fetch_assoc(); 
               ?>
               <div class="row">
