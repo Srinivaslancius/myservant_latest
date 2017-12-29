@@ -171,9 +171,6 @@
 	box-shadow: 0 0 2px #E50F0F;
 	cursor: pointer;
 }
-.search-box:not(:valid) ~ .close-icon {
-	display: none;
-}
 </style>
     <!-- End Header =============================================== -->
 <?php
@@ -489,21 +486,19 @@ if($_SESSION['user_login_session_id'] == '') {
 					<hr>
 
 					<div class="row">
-						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-						<div class="search-wrapper">
 						<form>
-						<input type="text" name="focus" required class="search-box" placeholder="Enter search term" />
-							<button class="close-icon" type="reset"></button>
-							</form>
-						</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<form>
-							<div class="input-group-btn">
-							<button class="button1 apply_coupon">Apply</button>
+							<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+								<div class="search-wrapper">
+									<input type="text" name="coupon_code" id="coupon_code" required class="search-box" placeholder="Coupon Code" style="text-transform:uppercase"/>
+									<button class="close-icon" type="reset"></button>
+								</div>
 							</div>
-						</form>
-					 	</div>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+								<div class="input-group-btn">
+								<button type="button" class="button1 apply_coupon">Apply</button>
+								</div>
+						 	</div>
+					 	</form>
 					</div><!-- Edn options 2 -->
 					<hr>
 
@@ -590,16 +585,12 @@ function isNumberKey(evt){
 <script type="text/javascript">
 $('#discount_price').hide();
     $(".apply_coupon").click(function(){
-    	$(".apply_coupon").hide();
         var coupon_code = $("#coupon_code").val();
         var order_total = $('#order_total').val();
-        var service_tax = $('#service_tax').val();
-        var getOrderDelCharge1 = parseInt($('#delivery_charge').val());
-        var getAdonsTotal1 = parseInt($('#getAdstotal').val());
         $.ajax({
            type: "POST",
            url: "apply_coupon.php",
-           data: "coupon_code="+coupon_code+"&cart_total="+order_total+"&service_tax="+service_tax+"&getOrderDelCharge1="+getOrderDelCharge1+"&getAdonsTotal1="+getAdonsTotal1,
+           data: "coupon_code="+coupon_code+"&cart_total="+order_total,
            success: function(value){
            		if(value == 0) {
            			alert('Please Enter Valid Coupon');
@@ -609,6 +600,7 @@ $('#discount_price').hide();
            			$("#coupon_code").val('');
            		} else{
            			$('#coupon_code').attr('readonly','true');
+           			$(".apply_coupon").hide();
            			var data = value.split(",");
 	          		$('.cart_total2').html(data[0]);
 		            $('#order_total').val(data[0]);
@@ -618,23 +610,7 @@ $('#discount_price').hide();
                		$('#coupon_code_type').val(data[3]);
                	}
         	}
-        });
-        $('.has-clear input[type="text"]').on('input propertychange', function() {
-		  var $this = $(this);
-		  var visible = Boolean($this.val());
-		  $this.siblings('.form-control-clear').toggleClass('hidden', !visible);
-		}).trigger('propertychange');
-
-		$('.form-control-clear').click(function() {
-			$('#coupon_code').removeAttr("readonly");
-		  $(this).siblings('input[type="text"]').val('')
-		    .trigger('propertychange').focus();
-		    $('#cart_total2').html(order_total);
-			$('#order_total').val(order_total);
-			$('#discount_price').hide();
-			$('#discount_money').val('');
-            $('#coupon_code_type').val('');
-		});
+        });		
 	});
 </script>
 </body>
