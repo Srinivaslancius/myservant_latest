@@ -63,14 +63,6 @@
 <!-- SubHeader =============================================== -->
 <div class="container-fluid" style="padding:0px">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-  <!--  <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>-->
-
-    <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
         <img src="img/slide/slide_1.jpg" alt="image" style="width:100%;">
@@ -80,16 +72,6 @@
       </div>
       </div>
     </div>
-
-    <!-- Left and right controls -->
-  <!--  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span class="sr-only">Next</span>
-    </a>-->
   </div>
 </div>
 
@@ -115,29 +97,7 @@
             </div>
         
         
-        <div class="col-md-9">
-        
-            <!-- <div id="tools">
-                <div class="row">
-                    <div class="col-md-3 col-sm-3 col-xs-6 pull-right">
-                        <div class="styled-select">
-                            <select name="sort_rating" id="sort_rating">
-                                <option value="" selected>Sort by</option>
-                                <option value="lower">Relevance</option>
-                                <option value="higher">Delivery Time</option>
-                                <option value="higher">Delivery Time</option>
-                                <option value="higher">Restaurant Rating</option>
-                                <option value="higher">Budget</option>
-                            </select>
-                        </div>
-                    </div>
-                                        
-                                    
-                </div>
-            </div> --><!--End tools --> 
-
-                <!-- Load more -->
-               
+        <div class="col-md-9">   
                 <div class="ajax_result">     
 
                         <?php while($getResults = $getSearchResults->fetch_assoc()) { 
@@ -145,14 +105,14 @@
                         <div class="col-md-6 filter_data">
                             <div class="strip_list wow fadeIn" data-wow-delay="0.1s">
                                     <div class="row">
-                                            <div class="col-md-8 col-sm-9">
+                                            <div class="col-md-9 col-sm-9">
                                                     <div class="desc">
                                                             <div class="thumb_strip">
                                                                 <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>"><img src="<?php echo $base_url . 'uploads/food_vendor_logo/'.$getResults['logo'] ?>" alt=""></a>
                                                             </div>
                                                             
                                                             <h4><?php echo $getResults['restaurant_name']; ?></h4>
-                                                            <div class="type">
+                                                            <div class="type" style="text-align:justify">
                                                                 <?php echo substr($getResults['description'], 0,150); ?>
                                                             </div>
                                                             
@@ -162,10 +122,10 @@
                                                             </div>
                                                     </div>
                                             </div>
-                                            <div class="col-md-4 col-sm-3">
+                                            <div class="col-md-3 col-sm-3">
                                                     <div class="go_to">
                                                             <div>
-                                                                <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>" class="btn_1">View Menu</a>
+                                                                <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>" class="btn_1" style="padding:10px">View Menu</a>
                                                             </div>
                                                     </div>
                                             </div>
