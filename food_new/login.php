@@ -140,7 +140,7 @@
 					<p style="text-align:center">(OR)</p>
 					<label for="text">Email/Mobile:</label>				
 					<input type="text" class=" form-control " name="login_email" placeholder="Email or Mobile" required>
-					<label for="pwd">password:</label>
+					<label for="pwd">Password:</label>
 					<input type="password" class=" form-control" name="login_password" placeholder="Password" required>
 					<div class="text-left">
 						<a href="forgot_password.php">Forgot Password?</a>
