@@ -106,7 +106,7 @@ ul#cat_nav li a#active {
     </div><!-- Position -->
 <?php 
     $uid=$_SESSION['user_login_session_id'];
-    $getOrders = "SELECT * from food_orders WHERE user_id = '$uid' GROUP BY order_id ORDER BY id DESC LIMIT 6";
+    $getOrders = "SELECT * from food_orders WHERE user_id = '$uid' GROUP BY order_id ORDER BY id DESC LIMIT 3";
     $getOrders1 = $conn->query($getOrders);   
 ?>    
 <!-- Content ================================================== -->
@@ -119,7 +119,11 @@ ul#cat_nav li a#active {
        		<?php include_once 'my_dashboard_strip.php';?>
             </div>
         </aside>       
-        <div class="col-lg-9 col-md-8 col-sm-8">
+
+        <div class="col-lg-9 col-md-8 total_orders_new">
+        </div>
+
+        <div class="col-lg-9 col-md-8 col-sm-8 total_orders">
 
             <?php if($getOrders1->num_rows > 0) { ?>
              <?php  while($orderData = $getOrders1->fetch_assoc()) { ?> 
@@ -166,6 +170,7 @@ ul#cat_nav li a#active {
             </div>	  
           </div><!-- End col-lg-9-->
           <?php } ?>
+           <a class="btn_full load_more" user-id ="<?php echo $_SESSION['user_login_session_id']; ?>">Load More</a>
           <?php } else { ?>
             No Orders Found
           <?php } ?>
@@ -205,6 +210,26 @@ ul#cat_nav li a#active {
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
 <script src="assets/validate.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $(".total_orders_new").css("display", "none");
+        $('.load_more').on('click', function () {
+            $('.load_more').hide();
+            var user_id = $(this).attr("user-id");
+            $.ajax({
+            type:"post",
+            url:"total_order_details.php",          
+            data:'user_id='+user_id,
+            success:function(html){                          
+                $(".total_orders").css("display", "none");
+                 $(".total_orders_new").css("display", "block");
+                $(".total_orders_new").append(html);
+            }
+          }); 
+        });
+    });
+</script>
 
 </body>
 </html>
