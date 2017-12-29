@@ -79,15 +79,38 @@ ul#cat_nav li a#active {
         </div><!-- End sub_content -->
 	</div><!-- End subheader -->
 </section><!-- End section -->
+
+    <?php 
+    if($_SESSION['user_login_session_id'] == '') {
+        header ("Location: logout.php");
+    }
+    if(isset($_POST["submit"]) && $_POST["submit"]!="") {
+        $uid = $_SESSION["user_login_session_id"];
+        $changePass = "SELECT * FROM users WHERE id = '$uid'";
+        $changePassword = $conn->query($changePass);
+        $getUserPwd = $changePassword->fetch_assoc();
+
+        if($_POST['currentPassword'] == decryptPassword($getUserPwd['user_password'])){
+            $encNewPass = encryptPassword($_POST["confirmPassword"]);
+            $sql1 = "UPDATE users SET user_password = '$encNewPass' WHERE  id = '$uid'";
+            if($conn->query($sql1) === TRUE){             
+                echo "<script type='text/javascript'>window.location='change_password.php?succ=log-success'</script>";
+            }               
+        } else {               
+           header('Location: change_password.php?err=log-fail');
+        }
+    }
+?>
+
 <!-- End SubHeader ============================================ -->
 
     <div id="position">
         <div class="container">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li>About Us</li>
+                <li>Change Password</li>
             </ul>
-            <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
+           
         </div>
     </div><!-- Position -->
 
@@ -95,6 +118,18 @@ ul#cat_nav li a#active {
 <div class="container margin_60_35">
 			<div class="feature_2">
 	<div class="row">
+
+    <?php if(isset($_GET['succ']) && $_GET['succ'] == 'log-success' ) {  ?>                
+        <div class="alert alert-success" style="top:10px; display:block">
+          <strong>Success!</strong> Your Password Changed Successfully.
+        </div>               
+   <?php }?>
+
+    <?php if(isset($_GET['err']) && $_GET['err'] == 'log-fail' ) {  ?>            
+      <div class="alert alert-danger" style="top:10px; display:block">
+        <strong>Failed!</strong> Current Password Is Not Correct.
+      </div>     
+    <?php }?>
         
         <aside class="col-lg-3 col-md-4 col-sm-4">
            <div class="box_style_cat">
@@ -103,7 +138,7 @@ ul#cat_nav li a#active {
             </div>
             </div>
         </aside>
-		
+		<form autocomplete="off" method="POST">
         <div class="col-lg-9 col-md-8 col-sm-8">        
        			 <div class="row">
 				  <div class="col-md-1">
@@ -112,20 +147,20 @@ ul#cat_nav li a#active {
                   <div class="col-md-6">				  
 					<div class="form-group">
 						 <label for="cur-password">Current password</label>
-						<input type="password" class="form-control" id="cur-password" placeholder="*******" autocomplete="off">                                           
+						<input type="password" class="form-control" id="cur-password"  name="currentPassword" placeholder="*******" autocomplete="off">                                           
 					</div>					
 					 <div class="form-group">
 					 <label for="new-password">New password</label>
-						<input type="password" minlength="8" class="form-control" id="user_password" placeholder="*********" autocomplete="off">                                           
+						<input type="password" minlength="8" class="form-control" minlength="8" name="newPassword" id="user_password" placeholder="*********" autocomplete="off">                                           
 					</div>					
 					<div class="form-group">
 					<label for="new-repassword">Repeat password</label>
-						 <input type="password" minlength="8" class="form-control" id="confirm_password" placeholder="********" autocomplete="off">
+						 <input type="password" minlength="8" class="form-control" minlength="8" name="confirmPassword" id="confirm_password" placeholder="********" autocomplete="off" onChange="checkPasswordMatch();">
                                             
 					</div>					
 					 <div class="form-group">
-						 <button class="button1">Submit</button>
-					
+            <div id="divCheckPasswordMatch" style="color:red"></div>
+						 <button type="submit" value="Submit" name="submit" class="button1">Update</button>					
 					</div>					
                   </div>
 				   <div class="col-md-6">
@@ -134,6 +169,8 @@ ul#cat_nav li a#active {
                   </div><!-- Edn row -->                 
                                                    
         </div><!-- End col-lg-9-->
+
+      </form>
         </div>
 			</div>
 </div>
@@ -151,23 +188,26 @@ ul#cat_nav li a#active {
 
 <!-- Login modal -->   
 
-    
-     <!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_close"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon-search-6"></i>
-			</button>
-		</form>
-	</div>
-	<!-- End Search Menu -->
-    
+
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-2.2.4.min.js"></script>
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
 <script src="assets/validate.js"></script>
+
+<script type="text/javascript">
+            function checkPasswordMatch() {
+                var password = $("#user_password").val();
+                var confirmPassword = $("#confirm_password").val();
+                if (confirmPassword != password) {
+                    $("#divCheckPasswordMatch").html("Passwords do not match!");
+                    $("#user_password").val("");
+                    $("#confirm_password").val("");
+                } else {
+                    $("#divCheckPasswordMatch").html("");
+                }
+            }
+        </script>
 
 </body>
 </html>
