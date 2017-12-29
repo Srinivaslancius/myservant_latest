@@ -18,10 +18,11 @@ if (!isset($_POST['submit']))  {
 
     $location_name = $_REQUEST['location_name'];
     foreach($location_name as $key=>$value){
-
+      if(!empty($value)) {
         $location_name = $_REQUEST['location_name'][$key];    
         $sql = "INSERT INTO lkp_locations (`lkp_state_id`, `lkp_district_id`, `lkp_city_id`, `lkp_pincode_id`, `location_name`, `lkp_status_id`) VALUES ('$lkp_state_id', '$lkp_district_id', '$lkp_city_id', '$lkp_pincode_id', '$location_name', '$lkp_status_id')";
         $result = $conn->query($sql);
+      }
     }
 
     if( $result == 1){
