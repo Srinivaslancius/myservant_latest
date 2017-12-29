@@ -113,20 +113,6 @@
     font-size: 12px;
     padding-top: 5px;
 }
-
-.button1 {
-    background-color: #fe6003;
-    border-color: #fe6003;
-    color: white;
-    padding: 5px 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top:10px;
-	height:40px;
-    cursor: pointer;
-}
 ::-ms-clear {
 	  display: none;
 	}
