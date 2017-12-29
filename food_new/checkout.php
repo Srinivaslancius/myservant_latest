@@ -127,50 +127,15 @@
 	height:40px;
     cursor: pointer;
 }
-.search-box,.close-icon,.search-wrapper {
-	position: relative;
-	padding: 10px;
-}
-.search-wrapper {
-	width: 260px;
-	margin: auto;
-}
-.search-box {
-	width: 80%;
-	border: 1px solid #ccc;
-  outline: 0;
-  border-radius: 0px;
-}
+::-ms-clear {
+	  display: none;
+	}
 
-.close-icon {
-	border:1px solid transparent;
-	background-color: transparent;
-	display: inline-block;
-	vertical-align: middle;
-  outline: 0;
-  cursor: pointer;
-}
-.close-icon:after {
-	content: "X";
-	display: block;
-	width: 15px;
-	height: 15px;
-	position: absolute;
-	background-color: #FE6003;
-	z-index:1;
-	right: 35px;
-	top: 0;
-	bottom: 0;
-	margin: auto;
-	padding-bottom: 2px;
-	border-radius: 50%;
-	text-align: center;
-	color: white;
-	font-weight: normal;
-	font-size: 12px;
-	box-shadow: 0 0 2px #E50F0F;
-	cursor: pointer;
-}
+	.form-control-clear {
+	  z-index: 10;
+	  pointer-events: auto;
+	  cursor: pointer;
+	}
 </style>
     <!-- End Header =============================================== -->
 <?php
@@ -468,8 +433,9 @@ if($_SESSION['user_login_session_id'] == '') {
 		            </tr>
 					<tr>
 						<td class="total">
-							 TOTAL <span class="pull-right cart_total2" id="apply_price_aft_del">Rs. <?php echo $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?></span>
-							 <?php $order_total = $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?> 
+							<?php $order_total = $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?>
+							 TOTAL <span class="pull-right cart_total2" id="apply_price_aft_del">Rs. <?php echo $order_total; ?></span>
+							  
 						</td>
 					</tr>
 					</tbody>
@@ -480,25 +446,21 @@ if($_SESSION['user_login_session_id'] == '') {
 					<input type="hidden" name="order_total" value="<?php echo $order_total; ?>" id="order_total">
 					<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>" id="service_tax">
 					<input type="hidden" name="getAdstotal" value="<?php echo $getAdstotal; ?>" id="getAdstotal">
-					<input type="hidden" name="discount_money" value="" id="discount_money">
+					<input type="hidden" name="discount_money" value="0" id="discount_money">
 					<input type="hidden" name="coupon_code_type" value="" id="coupon_code_type">
 					<input type="hidden" name="user_id" value="<?php echo $user_session_id; ?>">
 					<hr>
 
 					<div class="row">
-						<form>
-							<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-								<div class="search-wrapper">
-									<input type="text" name="coupon_code" id="coupon_code" required class="search-box" placeholder="Coupon Code" style="text-transform:uppercase"/>
-									<button class="close-icon" type="reset"></button>
+						<div class="form-group">
+									<div class="field-group has-feedback has-clear">
+								      <input autocomplete="off" type="text" name="coupon_code" style="text-transform:uppercase" id="coupon_code" value="" placeholder="Coupon Code" class="form-control">
+								      <span class="form-control-clear icon-cancel-1 form-control-feedback hidden"></span>
+								    </div>
+									<div class="field-group btn-field">
+										<button type="button" class="btn_cart_outine apply_coupon">Apply</button>
+									</div>
 								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-								<div class="input-group-btn">
-								<button type="button" class="button1 apply_coupon">Apply</button>
-								</div>
-						 	</div>
-					 	</form>
 					</div><!-- Edn options 2 -->
 					<hr>
 
@@ -562,16 +524,16 @@ $('.check_dev_type').click(function(){
 	var getSubTotal = parseInt($(this).attr('data-pri-key'));
 	var getServiceTax = parseInt($('#service_tax').val());
 	var getAdonsTotal = parseInt($('#getAdstotal').val());
+	var appliedCCValue = $('#discount_money').val();
 	if(getcheckRadio == 1) {
 		$('#hide_del_fee').hide();		
-		$('#order_total').val(getSubTotal+getServiceTax+getAdonsTotal);
-		$('#apply_price_aft_del').html(getSubTotal+getServiceTax+getAdonsTotal);
+		$('#order_total').val(getSubTotal+getServiceTax+getAdonsTotal-appliedCCValue);
+		$('#apply_price_aft_del').html(getSubTotal+getServiceTax+getAdonsTotal-appliedCCValue);
 	} else {
 		$('#hide_del_fee').show();
-		$('#order_total').val(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal);
-		$('#apply_price_aft_del').html(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal);
+		$('#order_total').val(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal-appliedCCValue);
+		$('#apply_price_aft_del').html(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal-appliedCCValue);
 	}
-
 });
 </script>
 <script>
@@ -610,7 +572,25 @@ $('#discount_price').hide();
                		$('#coupon_code_type').val(data[3]);
                	}
         	}
-        });		
+        });
+
+            $('.has-clear input[type="text"]').on('input propertychange', function() {
+			  var $this = $(this);
+			  var visible = Boolean($this.val());
+			  $this.siblings('.form-control-clear').toggleClass('hidden', !visible);
+			}).trigger('propertychange');
+
+			$('.form-control-clear').click(function() {
+				$('#coupon_code').removeAttr("readonly");
+			  $(this).siblings('input[type="text"]').val('')
+			    .trigger('propertychange').focus();
+			    $(".apply_coupon").show();
+			    $('.cart_total2').html(order_total);
+				$('#order_total').val(order_total);
+				$('#discount_price').hide();
+				$('#discount_money').val('');
+	            $('#coupon_code_type').val('');
+			});	
 	});
 </script>
 </body>
