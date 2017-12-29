@@ -123,8 +123,8 @@ ul#cat_nav li a#active {
 						<input type="text" class="form-control" id="mobile" placeholder="9876543210">
 					</div> 
           </div>					
-                  </div>
-                  </div><!-- Edn row -->                 
+          </div>
+          </div><!-- Edn row -->                 
                                                    
         </div><!-- End col-lg-9-->
         </div>
