@@ -105,9 +105,8 @@ ul#cat_nav li a#active {
         </div>
     </div><!-- Position -->
 <?php 
-
     $uid=$_SESSION['user_login_session_id'];
-    $getOrders = "SELECT * from food_orders WHERE user_id = '$uid' ORDER BY id DESC LIMIT 3";
+    $getOrders = "SELECT * from food_orders WHERE user_id = '$uid' GROUP BY order_id ORDER BY id DESC LIMIT 3";
     $getOrders1 = $conn->query($getOrders);   
 ?>    
 <!-- Content ================================================== -->
@@ -120,7 +119,11 @@ ul#cat_nav li a#active {
        		<?php include_once 'my_dashboard_strip.php';?>
             </div>
         </aside>       
-        <div class="col-lg-9 col-md-8 col-sm-8">
+
+        <div class="col-lg-9 col-md-8 total_orders_new">
+        </div>
+
+        <div class="col-lg-9 col-md-8 col-sm-8 total_orders">
 
             <?php if($getOrders1->num_rows > 0) { ?>
              <?php  while($orderData = $getOrders1->fetch_assoc()) { ?> 
@@ -140,11 +143,10 @@ ul#cat_nav li a#active {
             		</thead>
             		<tbody>
             		  <tr>
-            			<td>2017-12-21 12:18:45</td>
-            			<td>Rs.1499</td>
-            			<td>some one</td>
-            			<td>MYSER-FOODuwv
-            			</td>
+            			<td><?php echo $orderData['created_at']; ?></td>
+            			<td>Rs.<?php echo $orderData['order_total']; ?></td>
+            			<td><?php echo $orderData['first_name']; ?><br><?php echo $orderData['address']; ?></td>
+            			<td><?php echo $orderData['order_id']; ?></td>
             		  </tr>
             		  <tr>
             			<td></td>
@@ -153,7 +155,7 @@ ul#cat_nav li a#active {
             			<td>
             			<div class="row">
             			<div class="col-sm-4 col-xs-4">
-            			<center><button class="button1">Details</button></center>
+            			<a href="order_details.php?token=<?php echo $orderData['order_id']; ?>"><center><button class="button1">Details</button></center></a>
             			</div>
             			<div class="col-sm-8 col-xs-8">
             			<button class="button1 button2">Track</button>
@@ -168,6 +170,7 @@ ul#cat_nav li a#active {
             </div>	  
           </div><!-- End col-lg-9-->
           <?php } ?>
+           <a class="btn_full load_more" user-id ="<?php echo $_SESSION['user_login_session_id']; ?>">Load More</a>
           <?php } else { ?>
             No Orders Found
           <?php } ?>
@@ -194,6 +197,26 @@ ul#cat_nav li a#active {
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
 <script src="assets/validate.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $(".total_orders_new").css("display", "none");
+        $('.load_more').on('click', function () {
+            $('.load_more').hide();
+            var user_id = $(this).attr("user-id");
+            $.ajax({
+            type:"post",
+            url:"total_order_details.php",          
+            data:'user_id='+user_id,
+            success:function(html){                          
+                $(".total_orders").css("display", "none");
+                 $(".total_orders_new").css("display", "block");
+                $(".total_orders_new").append(html);
+            }
+          }); 
+        });
+    });
+</script>
 
 </body>
 </html>
