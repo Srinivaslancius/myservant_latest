@@ -5,6 +5,11 @@
     <script src="js/application.min.js"></script>
     <script src="js/index.min.js"></script>
     <script src="js/chosen.jquery.min.js"></script>
+
+
+    <script src="js/forms-plugins.min.js"></script>
+
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script>
       $( function() {

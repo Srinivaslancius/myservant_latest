@@ -38,30 +38,17 @@ ul#cat_nav li a#active {
     vertical-align: bottom;
     border-bottom:0px;
 	color:#fe6003;
+	
 }
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    padding: 8px;
+    padding: 4px;
     line-height: 1.42857143;
     vertical-align: top;
-   border-top: 0px solid #ddd;
+ 
 }
-.button1 {
-    background-color: #fe6003;
-    border-color: #fe6003;
-    color: white;
-    padding: 5px 9px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+h5{
+	color:#fe6003;
 }
-
-.button2 {
-	background-color:#fe6003;
- padding: 5px 12px;
-} 
 </style>
 </head>
 <body>
@@ -89,7 +76,7 @@ ul#cat_nav li a#active {
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
     	<div id="sub_content">
-    	 <h1>My Orders</h1>
+    	 <h1>Order Details</h1>
         </div><!-- End sub_content -->
 	</div><!-- End subheader -->
 </section><!-- End section -->
@@ -99,17 +86,12 @@ ul#cat_nav li a#active {
         <div class="container">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li>My Orders</li>
+                <li>Order Details</li>
             </ul>
             
         </div>
     </div><!-- Position -->
-<?php 
 
-    $uid=$_SESSION['user_login_session_id'];
-    $getOrders = "SELECT * from food_orders WHERE user_id = '$uid' ORDER BY id DESC LIMIT 3";
-    $getOrders1 = $conn->query($getOrders);   
-?>    
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
 			<div class="feature_2">
@@ -121,58 +103,94 @@ ul#cat_nav li a#active {
             </div>
         </aside>       
         <div class="col-lg-9 col-md-8 col-sm-8">
-
-            <?php if($getOrders1->num_rows > 0) { ?>
-             <?php  while($orderData = $getOrders1->fetch_assoc()) { ?> 
 			<div class="row">
-        			<div class="col-sm-1">
-        			</div>
-        		<div class="col-sm-11 col-xs-12">
-        		<div class="table-responsive">		
-        			<table class="table" style="border:1px solid #ddd;width:80%">
-            		<thead>
-            		  <tr>
-            			<th>ORDER PLACED</th>
-            			<th>Order Price</th>
-            			<th>SHIP TO</th>
-            			<th>ORDER ID:</th>
-            		  </tr>
-            		</thead>
-            		<tbody>
-            		  <tr>
-            			<td><?php echo $orderData['created_at']; ?></td>
-            			<td>Rs.<?php echo $orderData['order_total']; ?></td>
-            			<td><?php echo $orderData['first_name']; ?><br><?php echo $orderData['address']; ?></td>
-            			<td><?php echo $orderData['order_id']; ?></td>
-            		  </tr>
-            		  <tr>
-            			<td></td>
-            			<td></td>
-            			<td></td>
-            			<td>
-            			<div class="row">
-            			<div class="col-sm-4 col-xs-4">
-            			<center><button class="button1">Details</button></center>
-            			</div>
-            			<div class="col-sm-8 col-xs-8">
-            			<button class="button1 button2">Track</button>
-            			</div>
-            			
-            			</div>
-            			</td>
-            		  </tr>
-            		</tbody>
-        	     </table>
-        	  </div>
-            </div>	  
-          </div><!-- End col-lg-9-->
-          <?php } ?>
-          <?php } else { ?>
-            No Orders Found
-          <?php } ?>
-
+			<div class="col-sm-1">
+			</div>
+		<div class="col-sm-11 col-xs-12">
+		<div class="table-responsive">		
+			<table class="table" style="border:1px solid #ddd;width:100%">
+		<thead>
+		  <tr>
+			<th></th>
+			<th></th>
+			<th colspan="2"><h3>ORDER DETAILS</h3></th>
+			<th></th>
+			<th></th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+			<td colspan="2" style="padding-left:20px">
+			<h3>Order Information</h3>
+			<p>Restaurant Name: Green</p>
+			<p>Payment Method: Cash On Delivery</p>
+			<p>Order Type: Delivery</p>
+			<p>Order Status: Pending</p>
+			<p>Payment Status: InProgress</p></td>
+			<td colspan="2"></td>
+			<td colspan="2">
+			<h3>Shipping Address</h3>
+			<p>Harikanth</p>
+			<p>hari@gmail.com</p>
+			<p>9765764765</p>
+			<p>Hyderabad</p>
+			<p>878687</p></td>
+		  </tr>
+		  <tr>
+			<td><h5>PRODUCT NAME</h5></td>
+			<td><h5>CATEGORY NAME</h5></td>
+			<td><h5>ITEM WEIGHT</h5></td>
+			<td><h5>QUANTITY</h5></td>
+			<td><h5>PRICE</h5></td>
+			<td><h5>TOTAL</h5></td>
+		  </tr>
+		   <tr>
+			<td><p>Kadai Chicken</p></td>
+			<td><p>STARTERS	</p></td>
+			<td><p>Medium</p></td>
+			<td><p>1</p></td>
+			<td><p>500</p></td>
+			<td><p>500</p></td>
+		  </tr>
+		  <tr>
+			<td><p>Kadai Chicken</p></td>
+			<td><p>STARTERS	</p></td>
+			<td><p>Medium</p></td>
+			<td><p>1</p></td>
+			<td><p>500</p></td>
+			<td><p>500</p></td>
+		  </tr>
+		  <tr>
+			<td><p>Kadai Chicken</p></td>
+			<td><p>STARTERS	</p></td>
+			<td><p>Medium</p></td>
+			<td><p>1</p></td>
+			<td><p>500</p></td>
+			<td><p>500</p></td>
+		  </tr>
+		   <tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><p>Subtotal:</p>
+			<p>Tax:</p>
+			<p>Delivery Charges:</p>
+			<p>Ingredients Price:</p>
+			<p style="color:#fe6003;">Grand Total:</p></td>
+			<td><p style="color:#fe6003;">Rs. 2700</p>
+			<p style="color:#fe6003;">Rs. 270(10%)</p>
+			<p style="color:#fe6003;">Rs. 40</p>
+			<p style="color:#fe6003;">Rs. 0</p>
+			<p style="color:#fe6003;">Rs. 3010</p></td>
+		  </tr>
+		</tbody>
+	  </table>
+	  </div>
+</div>	  
+        </div><!-- End col-lg-9-->
         </div>
-	</div>
+			</div>
 </div>
 </div>
 	<div class="high_light">
