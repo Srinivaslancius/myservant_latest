@@ -34,18 +34,8 @@ ul#cat_nav li a#active {
    background-color:#fe6003;
    color:white;
 }
-.table>thead>tr>th {
-    vertical-align: bottom;
-    border-bottom:0px;
-	color:#fe6003;
-}
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-   border-top: 0px solid #ddd;
-}
-.button {
+
+.button1 {
     background-color: #fe6003;
     border-color: #fe6003;
     color: white;
@@ -116,7 +106,9 @@ ul#cat_nav li a#active {
 		
         <div class="col-lg-9 col-md-8 col-sm-8">        
        			 <div class="row">
-				  <div class="col-md-12">
+				  <div class="col-md-1">
+				  </div>
+				  <div class="col-md-11">
                   <div class="col-md-6">				  
 					<div class="form-group">
 						 <label for="cur-password">Current password</label>
@@ -132,7 +124,7 @@ ul#cat_nav li a#active {
                                             
 					</div>					
 					 <div class="form-group">
-						 <button class="button">Submit</button>
+						 <button class="button1">Submit</button>
 					
 					</div>					
                   </div>
