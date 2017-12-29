@@ -57,16 +57,14 @@ ul#cat_nav li a#active {
 <?php 
 if(isset($_POST['update']))  { 
 
-  echo "<pre>"; print_r($_POST); die;
+  //echo "<pre>"; print_r($_POST); die;
 
-  $checkUserAvail = "SELECT * FROM users WHERE user_email='".$_POST['user_email']."' OR user_mobile = '".$_POST['user_mobile']."' ";
-  $userRes = $conn->query($checkUserAvail);
-  $getUserCnt = $userRes->num_rows;
-  
-  if($getUserCnt > 0) {
-    header('Location: login.php?err=already-exists');
+    $uid =$_SESSION['user_login_session_id'];
+
+    $updateUser = "UPDATE users SET user_full_name = '".$_POST['user_full_name']."' , user_email='".$_POST['user_email']."', user_mobile = '".$_POST['user_mobile']."' WHERE id='$uid' ";
+    $conn->query($updateUser);
+    header('Location: personal_information.php?err=success');
   }
-}
 ?>
 
 	<div id="preloader">
@@ -104,11 +102,21 @@ if(isset($_POST['update']))  {
         </div>
     </div><!-- Position -->
 
+      
+
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
 			<div class="feature_2">
 	<div class="row">
-        
+
+    <div class="clear_fix"></div>
+    <?php if(isset($_GET['err']) && $_GET['err'] == 'success' ) {  ?>      
+          <div class="alert alert-success" style="display:block">
+          <strong>Success!</strong> Your Personal Info Updated.
+        </div>
+    <?php }?>
+
+            
         <aside class="col-lg-3 col-md-4 col-sm-4">
            <div class="box_style_cat">
        		<ul id="cat_nav" style="border:1px solid #f5f5f5;padding:0px">
@@ -128,7 +136,7 @@ if(isset($_POST['update']))  {
 				  <div class="col-md-6">
 					<div class="form-group">
 						<label for="first-name">Name</label>
-						<input type="text" class="form-control" id="first-name" placeholder="Name" value="<?php echo $userData['user_full_name']; ?>" required>
+						<input type="text" class="form-control"  name="user_full_name" id="first-name" placeholder="Name" value="<?php echo $userData['user_full_name']; ?>" required>
 					</div>
 					<div class="form-group">
 						<label for="email">Email</label>
