@@ -151,14 +151,13 @@ ul#cat_nav li a#active {
             			<td></td>
             			<td>
             			<div class="row">
-            			<div class="col-sm-3 col-xs-4">
-            			<button class="button1">Details</button>
+            			<div class="col-sm-4 col-xs-4">
+            			<center><button class="button1">Details</button></center>
             			</div>
-            			<div class="col-sm-5 col-xs-8">
+            			<div class="col-sm-8 col-xs-8">
             			<button class="button1 button2">Track</button>
             			</div>
-            			<div class="col-sm-4">
-            			</div>
+            			
             			</div>
             			</td>
             		  </tr>
