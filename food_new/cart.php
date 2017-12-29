@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
-<html>
+<html style="overflow-x:hidden">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -107,12 +107,12 @@ td{
 .alert-dismissable .close1{
     position: relative;
     top: -2px;
-    right: -21px;
     color: inherit;
-	 right: 110px;
+	 right: 10px;
     opacity: 2;
     font-size: 15px;
 	font-weight:bold;
+	cursor:pointer;
 }
 .close1 {
     float: right;
@@ -124,7 +124,18 @@ td{
     filter: alpha(opacity=20);
     opacity: .2;
 }
-
+@media only screen and (max-width: 480px) {
+	.alert-dismissable .close1{
+	right: 45px;	
+	}
+	.table.cart-list td{
+		padding-left: 40%;
+	}
+	.rw_wdth{
+		width:325px;
+	}
+	
+}
 </style>
 </head>
 
@@ -205,21 +216,25 @@ td{
                           while ($getCartItems = $cartItems->fetch_assoc()) {
                     ?>
 					<tr>
-						<td>
+						<td class="rw_wdth"style="width:320px">
+						<div class="row">
+						<div class="col-sm-2 col-xs-12">
 							<?php $getProductDetails= getIndividualDetails('food_products','id',$getCartItems['food_item_id']); ?>
-                        	<figure class="thumb_menu_list"><img src="<?php echo $base_url . 'uploads/food_product_images/'.$getProductDetails['product_image']; ?>" alt="<?php echo $getProductDetails['product_name']; ?>"></figure>                        	
-							<h5 style="margin-bottom:5px;"><?php echo $getProductDetails['product_name']; ?></h5>
-
+                        	<figure class="thumb_menu_list"><img src="<?php echo $base_url . 'uploads/food_product_images/'.$getProductDetails['product_image']; ?>" alt="<?php echo $getProductDetails['product_name']; ?>"></figure>
+							</div> 
+					<div class="col-sm-8 col-xs-12">							
+							<h5 style="margin-left:15px"><?php echo $getProductDetails['product_name']; ?></h5>
               <?php 
                 $getAddons = "SELECT * FROM food_update_cart_ingredients WHERE food_item_id = '".$getCartItems['food_item_id']."' AND cart_id='".$getCartItems['id']."' AND session_cart_id = '$session_cart_id'";
                 $getAddonData = $conn->query($getAddons);
                 while($getadcartItems = $getAddonData->fetch_assoc() ) {
-               ?>  <div class="alert alert-dismissable" style="margin-top:-15px">
+               ?>  <div class="alert alert-dismissable" style="margin-bottom:-20px">
 					     <a class="close1" ><i class="icon-trash" style="color:#fe6003" onclick="removeIngItem(<?php echo $getadcartItems['id']; ?>);"></i></a>
-                  <p id="dis_add_on_<?php echo $getCartItems['id']; ?>" style="margin-bottom:5px;font-size:12px"><?php echo $getadcartItems['item_ingredient_name'] . ":". $getadcartItems['item_ingredient_price']; ?> </p>
+                  <p id="dis_add_on_<?php echo $getCartItems['id']; ?>" style="font-size:12px"><?php echo $getadcartItems['item_ingredient_name'] . ":". $getadcartItems['item_ingredient_price']; ?> </p>
 				  </div>		
                 <?php } ?>		
-
+				</div>
+				</div>
 						</td>
 						<td>Rs. <?php echo $getCartItems['item_price']; ?></td>
 						<td>
