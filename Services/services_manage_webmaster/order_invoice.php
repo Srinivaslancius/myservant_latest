@@ -31,13 +31,11 @@ if($getOrdersData1['coupon_code'] == '') {
 	$discount_money = $getOrdersData1['discount_money']/$ordersCount2;
 }
 if($getOrdersData1['service_price_type_id'] == 1) {
-	$service_tax = $getOrdersData1['service_tax']/$ordersCount2;
-	$order_price = ($getOrdersData1['order_price']*$getOrdersData1['service_quantity'])+($service_tax-$discount_money);
+	$service_tax = 0;
 } else {
 	$service_tax = $getOrdersData1['order_price']*$getOrdersData1['service_quantity']*$getSiteSettingsData['service_tax']/100;
-	$order_price = ($getOrdersData1['order_price']*$getOrdersData1['service_quantity'])+($service_tax-$discount_money);
 }
-
+$order_price = ($getOrdersData1['order_price']*$getOrdersData1['service_quantity'])+($service_tax-$discount_money);
 $sub_total = $getOrdersData1['order_price']*$getOrdersData1['service_quantity'];
 
 $content .='<!DOCTYPE html>
