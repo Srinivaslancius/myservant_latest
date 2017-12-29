@@ -5,11 +5,11 @@ if (!isset($_POST['submit']))  {
   echo "fail";
 }else  {
   //If success
-  $title = $_POST['title'];
+
   $description = $_POST['description'];
   $lkp_status_id = $_POST['lkp_status_id'];
   
-  $sql = "INSERT INTO food_how_can_i_help_you (`title`, `description`,`lkp_status_id`) VALUES ('$title', '$description','$lkp_status_id')"; 
+  $sql = "INSERT INTO food_how_can_i_help_you (`description`,`lkp_status_id`) VALUES ('$description','$lkp_status_id')"; 
         if($conn->query($sql) === TRUE){
            echo "<script type='text/javascript'>window.location='food_howcanhelp_you.php?msg=success'</script>";
         } else {
@@ -28,14 +28,7 @@ if (!isset($_POST['submit']))  {
                 <form data-toggle="validator" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Title</label>
-                    <input type="text" name="title" class="form-control" id="form-control-2" placeholder="Title" data-error="Please enter Title" required>
-                    <div class="help-block with-errors"></div>
-                  </div>
-                  
-
-                  <div class="form-group">
-                    <label for="form-control-2" class="control-label">Description</label>
-                    <textarea name="description" class="form-control" id="category_description" placeholder="Description" data-error="Please enter Description." required></textarea>
+                    <textarea name="description" class="form-control" id="Tile" placeholder="Title" data-error="Please enter Title." required></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
                   
