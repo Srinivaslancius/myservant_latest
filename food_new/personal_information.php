@@ -54,6 +54,21 @@ ul#cat_nav li a#active {
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>.</p>
 <![endif]-->
 
+<?php 
+if(isset($_POST['update']))  { 
+
+  echo "<pre>"; print_r($_POST); die;
+
+  $checkUserAvail = "SELECT * FROM users WHERE user_email='".$_POST['user_email']."' OR user_mobile = '".$_POST['user_mobile']."' ";
+  $userRes = $conn->query($checkUserAvail);
+  $getUserCnt = $userRes->num_rows;
+  
+  if($getUserCnt > 0) {
+    header('Location: login.php?err=already-exists');
+  }
+}
+?>
+
 	<div id="preloader">
         <div class="sk-spinner sk-spinner-wave" id="status">
             <div class="sk-rect1"></div>
@@ -84,7 +99,7 @@ ul#cat_nav li a#active {
         <div class="container">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li>personal information</li>
+                <li>Personal Information</li>
             </ul>            
         </div>
     </div><!-- Position -->
@@ -102,33 +117,38 @@ ul#cat_nav li a#active {
             </div>           
             </ul>
             </div>
-        </aside>       
+        </aside>     
+        <?php $userData = getIndividualDetails('users','id',$_SESSION['user_login_session_id']); ?>  
         <div class="col-lg-9 col-md-8 col-sm-8">        
        			 <div class="row">
 				 <div class="col-md-1">
 				  </div>
+          <form method="post">
                   <div class="col-md-11">				 
 				  <div class="col-md-6">
 					<div class="form-group">
 						<label for="first-name">Name</label>
-						<input type="text" class="form-control" id="first-name" placeholder="Name" value="">
+						<input type="text" class="form-control" id="first-name" placeholder="Name" value="<?php echo $userData['user_full_name']; ?>" required>
 					</div>
 					<div class="form-group">
 						<label for="email">Email</label>
-						<input type="email" class="form-control" id="email" placeholder="abc@gmail.com">
+						<input type="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="user_email" name="user_email" placeholder="Email" value="<?php echo $userData['user_email']; ?>" onkeyup="checkEmail();"  required>
+            <span id="input_status" style="color: red;"></span>
 					</div>
 					 <div class="form-group">
 						<label for="mobile">Mobile</label>
-						<input type="text" class="form-control" id="mobile" placeholder="9876543210">
+						<input type="text" class="form-control valid_mobile_num" name="user_mobile" id="user_mobile" placeholder="Mobile" value="<?php echo $userData['user_mobile']; ?>" onkeyup="checkMobile();" required>
+            <span id="input_status1" style="color: red;"></span>
 					</div>
 					<div class="form-group">
-						<button class="button1">Submit</button>					
+						<button class="button1" type="submit" name="update">Update</button>					
 					</div>						
                   </div>
 				  <div class="col-md-6">
 				  </div>
                                
-                   </div>                                
+                   </div>        
+          </form>
         </div><!-- End col-lg-9-->
         </div>
 			</div>
@@ -149,17 +169,50 @@ ul#cat_nav li a#active {
 <!-- Login modal -->   
 
     
-     <!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_close"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon-search-6"></i>
-			</button>
-		</form>
-	</div>
-	<!-- End Search Menu -->
-    
+
+    <script type="text/javascript">
+     
+      function checkMobile() {
+          var user_mobile = document.getElementById("user_mobile").value;
+          if (user_mobile){
+            $.ajax({
+            type: "POST",
+            url: "user_avail_check.php",
+            data: {
+              user_mobile:user_mobile,
+            },
+            success: function (result) {
+              if (result > 0){
+                $("#input_status1").html("<span style='color:red;'>Mobile Already Exist</span>");
+              $('#user_mobile').val('');
+              } else {
+                $('#input_status1').html("");
+              }       
+              }
+             });          
+          }
+      }
+      function checkEmail() {
+          var user_email = document.getElementById("user_email").value;
+          if (user_email){
+            $.ajax({
+            type: "POST",
+            url: "user_avail_check.php",
+            data: {
+              user_email:user_email,
+            },
+            success: function (result) {
+              if (result > 0){
+                $("#input_status").html("<span style='color:red;'>Email Already Exist</span>");
+              $('#user_email').val('');
+              } else {
+                $('#input_status').html("");
+              }     
+              }
+             });          
+          }
+      }
+    </script>
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-2.2.4.min.js"></script>
 <script src="js/common_scripts_min.js"></script>
