@@ -343,7 +343,7 @@
 	      $('.get_cart_total').val(subTotal);
 	      var cartTotal = $('.get_cart_total').val();
 	      var serviceTax = $('#service_tax').val();
-	      grandTotal = (parseInt(serviceTax)+parseInt(cartTotal));	     
+	      grandTotal = (parseInt(cartTotal));	     
 	    })
  		  $('.grand_total').html(grandTotal);
 	  }
