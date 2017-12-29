@@ -3239,8 +3239,8 @@ th{
 	width:100% !important;
 	}
     #custom-search-input, #custom-search-input .search-query{
-        width:235px !important;
-        margin-left:-11px !important;
+        width:240px !important;
+        margin-left:-14px !important;
     }
     .pad_left{
         padding-left:30px !important;
@@ -3259,8 +3259,15 @@ th{
         padding: 9px 10px;
     }
     #custom-search-input input.btn_search {
-    right: 16px !important;
-    top: 8px !important;
+    right: 9px !important;
+top: 3px !important;
+font-size: 13px;
+font-weight:bold;
+}
+#custom-search-input input.btn_search {
+	/*width: 120px;*/
+	width: 53px;
+height: 38px;
 }
 .btn-danger{
     padding: 5px 2px 5px 2px !important;
