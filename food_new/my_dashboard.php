@@ -140,12 +140,10 @@ ul#cat_nav li a#active {
             		</thead>
             		<tbody>
             		  <tr>
-            			<td>2017-12-21 12:18:45</td>
-            			<td>Rs.1499</td>
-            			<td>some one</td>
-            			<td>MYSER-SERVICESzvj760171221121845
-            			
-            			</td>
+            			<td><?php echo $orderData['created_at']; ?></td>
+            			<td>Rs.<?php echo $orderData['order_total']; ?></td>
+            			<td><?php echo $orderData['first_name']; ?><br><?php echo $orderData['address']; ?></td>
+            			<td><?php echo $orderData['order_id']; ?></td>
             		  </tr>
             		  <tr>
             			<td></td>
