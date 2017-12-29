@@ -6,12 +6,11 @@ if (!isset($_POST['submit'])) {
         echo "fail";
     } else {
     //If success            
-  $title = $_POST['title'];
   $description = $_POST['description'];
   $lkp_status_id = $_POST['lkp_status_id'];
 
                 //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
-                    $sql = "UPDATE food_how_can_i_help_you SET title = '$title', description = '$description',lkp_status_id='$lkp_status_id' WHERE id = '$id' ";
+                    $sql = "UPDATE food_how_can_i_help_you SET description = '$description',lkp_status_id='$lkp_status_id' WHERE id = '$id' ";
                     if($conn->query($sql) === TRUE){
                        echo "<script type='text/javascript'>window.location='food_howcanhelp_you.php?msg=success'</script>";
                     } else {
@@ -34,15 +33,11 @@ if (!isset($_POST['submit'])) {
               $getHowCanIHelpYou = $getHowCanIHelpYouData->fetch_assoc(); ?>   
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <form data-toggle="validator" method="POST" enctype="multipart/form-data">
-                  <div class="form-group">
-                    <label for="form-control-2" class="control-label">Title</label>
-                    <input type="text" name="title" class="form-control" id="form-control-2" data-error="Please enter Title" required value="<?php echo $getHowCanIHelpYou['title'];?>">
-                    <div class="help-block with-errors"></div>
-                  </div>
+                  
         
                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Short Description</label>
-                    <textarea name="description" class="form-control" id="category_description" data-error="This field is required." required><?php echo $getHowCanIHelpYou['description'];?></textarea>
+                    <label for="form-control-2" class="control-label">Title</label>
+                    <textarea name="description" class="form-control" id="description" data-error="This field is required." required><?php echo $getHowCanIHelpYou['description'];?></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
                   

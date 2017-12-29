@@ -104,7 +104,12 @@ ul#cat_nav li a#active {
             
         </div>
     </div><!-- Position -->
+<?php 
 
+    $uid=$_SESSION['user_login_session_id'];
+    $getOrders = "SELECT * from food_orders WHERE user_id = '$uid' ORDER BY id DESC LIMIT 3";
+    $getOrders1 = $conn->query($getOrders);   
+?>    
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
 			<div class="feature_2">
@@ -116,53 +121,61 @@ ul#cat_nav li a#active {
             </div>
         </aside>       
         <div class="col-lg-9 col-md-8 col-sm-8">
+
+            <?php if($getOrders1->num_rows > 0) { ?>
+             <?php  while($orderData = $getOrders1->fetch_assoc()) { ?> 
 			<div class="row">
-			<div class="col-sm-1">
-			</div>
-		<div class="col-sm-11 col-xs-12">
-		<div class="table-responsive">		
-			<table class="table" style="border:1px solid #ddd;width:80%">
-		<thead>
-		  <tr>
-			<th>ORDER PLACED</th>
-			<th>Order Price</th>
-			<th>SHIP TO</th>
-			<th>ORDER ID:</th>
-		  </tr>
-		</thead>
-		<tbody>
-		  <tr>
-			<td>2017-12-21 12:18:45</td>
-			<td>Rs.1499</td>
-			<td>some one</td>
-			<td>MYSER-SERVICESzvj760171221121845
-			
-			</td>
-		  </tr>
-		  <tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td>
-			<div class="row">
-			<div class="col-sm-3 col-xs-4">
-			<button class="button1">Details</button>
-			</div>
-			<div class="col-sm-5 col-xs-8">
-			<button class="button1 button2">Track</button>
-			</div>
-			<div class="col-sm-4">
-			</div>
-			</div>
-			</td>
-		  </tr>
-		</tbody>
-	  </table>
-	  </div>
-</div>	  
-        </div><!-- End col-lg-9-->
+        			<div class="col-sm-1">
+        			</div>
+        		<div class="col-sm-11 col-xs-12">
+        		<div class="table-responsive">		
+        			<table class="table" style="border:1px solid #ddd;width:80%">
+            		<thead>
+            		  <tr>
+            			<th>ORDER PLACED</th>
+            			<th>Order Price</th>
+            			<th>SHIP TO</th>
+            			<th>ORDER ID:</th>
+            		  </tr>
+            		</thead>
+            		<tbody>
+            		  <tr>
+            			<td>2017-12-21 12:18:45</td>
+            			<td>Rs.1499</td>
+            			<td>some one</td>
+            			<td>MYSER-SERVICESzvj760171221121845
+            			
+            			</td>
+            		  </tr>
+            		  <tr>
+            			<td></td>
+            			<td></td>
+            			<td></td>
+            			<td>
+            			<div class="row">
+            			<div class="col-sm-3 col-xs-4">
+            			<button class="button1">Details</button>
+            			</div>
+            			<div class="col-sm-5 col-xs-8">
+            			<button class="button1 button2">Track</button>
+            			</div>
+            			<div class="col-sm-4">
+            			</div>
+            			</div>
+            			</td>
+            		  </tr>
+            		</tbody>
+        	     </table>
+        	  </div>
+            </div>	  
+          </div><!-- End col-lg-9-->
+          <?php } ?>
+          <?php } else { ?>
+            No Orders Found
+          <?php } ?>
+
         </div>
-			</div>
+	</div>
 </div>
 </div>
 	<div class="high_light">
