@@ -105,9 +105,8 @@ ul#cat_nav li a#active {
         </div>
     </div><!-- Position -->
 <?php 
-
     $uid=$_SESSION['user_login_session_id'];
-    $getOrders = "SELECT * from food_orders WHERE user_id = '$uid' ORDER BY id DESC LIMIT 3";
+    $getOrders = "SELECT * from food_orders WHERE user_id = '$uid' GROUP BY order_id ORDER BY id DESC LIMIT 6";
     $getOrders1 = $conn->query($getOrders);   
 ?>    
 <!-- Content ================================================== -->
@@ -152,7 +151,7 @@ ul#cat_nav li a#active {
             			<td>
             			<div class="row">
             			<div class="col-sm-4 col-xs-4">
-            			<center><button class="button1">Details</button></center>
+            			<a href="order_details.php?token=<?php echo $orderData['order_id']; ?>"><center><button class="button1">Details</button></center></a>
             			</div>
             			<div class="col-sm-8 col-xs-8">
             			<button class="button1 button2">Track</button>
