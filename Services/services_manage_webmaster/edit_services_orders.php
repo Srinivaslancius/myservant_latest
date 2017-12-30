@@ -16,8 +16,13 @@ if (!isset($_POST['submit'])) {
   $delivery_date = date("Y-m-d h:i:s");
 
   if($_POST['service_tax'] != 0) {
-    $sql = "UPDATE `services_orders` SET lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id' WHERE id = '$id'";
-    $res = $conn->query($sql);
+    if($lkp_payment_status_id == 1 AND $lkp_order_status_id == 2) {
+      $sql = "UPDATE `services_orders` SET lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id', delivery_date ='$delivery_date' WHERE id = '$id'";
+      $res = $conn->query($sql);
+    } else {
+      $sql = "UPDATE `services_orders` SET lkp_order_status_id='$lkp_order_status_id', lkp_payment_status_id='$lkp_payment_status_id' WHERE id = '$id'";
+      $res = $conn->query($sql);
+    }
   } else {
     $service_tax = $getSiteSettingsData['service_tax'];
     //Update total and price when payment status success and order status completed
