@@ -111,16 +111,16 @@
                                                                 <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>"><img src="<?php echo $base_url . 'uploads/food_vendor_logo/'.$getResults['logo'] ?>" alt=""></a>
                                                             </div>
                                                             <div class="row">
-															<div class="col-md-7 col-sm-7">
-                                                            <h4><?php echo $getResults['restaurant_name']; ?></h4>
-															</div>
-															<div class="col-md-5 col-sm-5">
-																<div class="go_to" style="height:10px">                                                          
-                                                                <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>" class="btn_1" style="padding:10px">View Menu</a>
-                                                            
-																</div>
-															</div>
-											</div>
+    															<div class="col-md-7 col-sm-7">
+                                                                <h4><?php echo $getResults['restaurant_name']; ?></h4>
+    															</div>
+    															<div class="col-md-5 col-sm-5">
+    																<div class="go_to" style="height:10px">                                                          
+                                                                    <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>" class="btn_1" style="padding:10px">View Menu</a>
+                                                                
+    																</div>
+    															</div>
+											                 </div>
                                                             <div class="type" style="text-align:justify">
                                                                 <?php echo substr($getResults['description'], 0,150); ?>
                                                             </div>
@@ -131,13 +131,6 @@
                                                             </div>
                                                     </div>
                                             </div>
-                                            <!--<div class="col-md-3 col-sm-3">
-                                                    <div class="go_to">
-                                                           
-                                                                <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>" class="btn_1" style="padding:10px">View Menu</a>
-                                                            
-                                                    </div>
-                                            </div>-->
                                     </div><!-- End row-->
                             </div><!-- End strip_list-->
                         </div>
