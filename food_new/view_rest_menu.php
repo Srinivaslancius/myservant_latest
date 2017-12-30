@@ -78,21 +78,7 @@ background-color:white;
 border-color:white;
 font-size:13px;
 }
-/*::-webkit-input-placeholder {
-  color: red;
-}
 
-:-moz-placeholder { /* Firefox 18- */
-  color: red;  
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-  color: red;  
-}
-
-:-ms-input-placeholder {  
-   color: red;  */
-}
 </style>
 </head>
 
@@ -252,7 +238,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 						<td>
                         	<figure class="thumb_menu_list"><img src="<?php echo $base_url . 'uploads/food_product_images/'.$getItemsByCategory['product_image']; ?>" alt="<?php echo $getItemsByCategory['product_name']; ?>" ></figure>
 							<h5><?php echo $i; ?>. <?php echo $getItemsByCategory['product_name']; ?></h5>
-							<p style="font-size:13px">
+							<p style="font-size:13px;text-align:justify">
 								<?php echo $getItemsByCategory['specifications']; ?>
 							</p>
 						</td>

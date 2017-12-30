@@ -62,6 +62,11 @@ ul#cat_nav li a#active {
 	background-color:#fe6003;
  padding: 5px 12px;
 } 
+@media only screen and (max-width: 480px) {
+	.table-responsive{
+		border:0px;
+	}
+}
 </style>
 </head>
 <body>
@@ -132,7 +137,7 @@ ul#cat_nav li a#active {
         			</div>
         		<div class="col-sm-11 col-xs-12">
         		<div class="table-responsive">		
-        			<table class="table" style="border:1px solid #ddd;width:80%">
+        			<table class="table" style="border:1px solid #ddd;width:83%">
             		<thead>
             		  <tr>
             			<th>ORDER PLACED</th>
@@ -154,10 +159,10 @@ ul#cat_nav li a#active {
             			<td></td>
             			<td>
             			<div class="row">
-            			<div class="col-sm-4 col-xs-4">
-            			<a href="order_details.php?token=<?php echo $orderData['order_id']; ?>"><center><button class="button1">Details</button></center></a>
+            			<div class="col-sm-4">
+            			<a href="order_details.php?token=<?php echo $orderData['order_id']; ?>"><button class="button1">Details</button></a>
             			</div>
-            			<div class="col-sm-8 col-xs-8">
+            			<div class="col-sm-8">
             			<button class="button1 button2">Track</button>
             			</div>
             			
@@ -170,7 +175,15 @@ ul#cat_nav li a#active {
             </div>	  
           </div><!-- End col-lg-9-->
           <?php } ?>
-           <a class="btn_full load_more" user-id ="<?php echo $_SESSION['user_login_session_id']; ?>">Load More</a>
+		   <div class="row">
+			<div class="col-sm-4">
+			</div>
+			<div class="col-sm-3">					   			
+           <center><a class="btn_full load_more" user-id ="<?php echo $_SESSION['user_login_session_id']; ?>" style="padding:10px;width:80%;font-size:14px">Load More</a></center>
+		   </div>
+		   <div class="col-sm-5">
+			</div>		   
+		   </div>
           <?php } else { ?>
             No Orders Found
           <?php } ?>
