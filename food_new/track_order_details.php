@@ -14,7 +14,7 @@
     
     <!-- SPECIFIC CSS -->
     <link href="layerslider/css/layerslider.css" rel="stylesheet">
-
+ <link href="css/progress.css" rel="stylesheet" />
     <!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
@@ -38,30 +38,17 @@ ul#cat_nav li a#active {
     vertical-align: bottom;
     border-bottom:0px;
 	color:#fe6003;
+	
 }
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    padding: 8px;
+    padding: 4px;
     line-height: 1.42857143;
     vertical-align: top;
-   border-top: 0px solid #ddd;
+ 
 }
-.button1 {
-    background-color: #fe6003;
-    border-color: #fe6003;
-    color: white;
-    padding: 5px 9px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+h5{
+	color:#fe6003;
 }
-
-.button2 {
-	background-color:#fe6003;
- padding: 5px 12px;
-} 
 </style>
 </head>
 <body>
@@ -89,7 +76,7 @@ ul#cat_nav li a#active {
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
     	<div id="sub_content">
-    	 <h1>My Orders</h1>
+    	 <h1>Order Details</h1>
         </div><!-- End sub_content -->
 	</div><!-- End subheader -->
 </section><!-- End section -->
@@ -99,16 +86,12 @@ ul#cat_nav li a#active {
         <div class="container">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li>My Orders</li>
+                <li>Order Details</li>
             </ul>
             
         </div>
     </div><!-- Position -->
-<?php 
-    $uid=$_SESSION['user_login_session_id'];
-    $getOrders = "SELECT * from food_orders WHERE user_id = '$uid' GROUP BY order_id ORDER BY id DESC LIMIT 3";
-    $getOrders1 = $conn->query($getOrders);   
-?>    
+
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
 			<div class="feature_2">
@@ -119,64 +102,37 @@ ul#cat_nav li a#active {
        		<?php include_once 'my_dashboard_strip.php';?>
             </div>
         </aside>       
-
-        <div class="col-lg-9 col-md-8 total_orders_new">
-        </div>
-
-        <div class="col-lg-9 col-md-8 col-sm-8 total_orders">
-
-            <?php if($getOrders1->num_rows > 0) { ?>
-             <?php  while($orderData = $getOrders1->fetch_assoc()) { ?> 
+        <div class="col-lg-9 col-md-8 col-sm-8">
 			<div class="row">
-        			<div class="col-sm-1">
-        			</div>
-        		<div class="col-sm-11 col-xs-12">
-        		<div class="table-responsive">		
-        			<table class="table" style="border:1px solid #ddd;width:80%">
-            		<thead>
-            		  <tr>
-            			<th>ORDER PLACED</th>
-            			<th>Order Price</th>
-            			<th>SHIP TO</th>
-            			<th>ORDER ID:</th>
-            		  </tr>
-            		</thead>
-            		<tbody>
-            		  <tr>
-            			<td><?php echo $orderData['created_at']; ?></td>
-            			<td>Rs.<?php echo $orderData['order_total']; ?></td>
-            			<td><?php echo $orderData['first_name']; ?><br><?php echo $orderData['address']; ?></td>
-            			<td><?php echo $orderData['order_id']; ?></td>
-            		  </tr>
-            		  <tr>
-            			<td></td>
-            			<td></td>
-            			<td></td>
-            			<td>
-            			<div class="row">
-            			<div class="col-sm-4 col-xs-4">
-            			<a href="order_details.php?token=<?php echo $orderData['order_id']; ?>"><center><button class="button1">Details</button></center></a>
-            			</div>
-            			<div class="col-sm-8 col-xs-8">
-            			<button class="button1 button2">Track</button>
-            			</div>
-            			
-            			</div>
-            			</td>
-            		  </tr>
-            		</tbody>
-        	     </table>
-        	  </div>
-            </div>	  
-          </div><!-- End col-lg-9-->
-          <?php } ?>
-           <a class="btn_full load_more" user-id ="<?php echo $_SESSION['user_login_session_id']; ?>">Load More</a>
-          <?php } else { ?>
-            No Orders Found
-          <?php } ?>
-
+			<div class="col-sm-1">
+			</div>
+					<div class="table-responsive">		
+			<table class="table" style="border:1px solid #ddd;width:100%">
+		<tbody>
+		  <tr>
+			<td colspan="2" style="padding-top:20px">
+			<h3>Order Details</h3>
+			<p>Order ID: MYSER-SERVICESkbu896</p>
+			<p>Order Date: 2017-12-21 12:18:45</p>
+			<p>Total Amount: 1798.8</p></td>
+			<td colspan="2" style="padding-top:20px">
+			<h3>Address</h3>
+			<p>Srinivas Dantha</p>
+			<p>Lancius It Solutions</p>
+			<p>Phone: 7894561235</p></td>
+			<td colspan="2" style="padding-top:20px">
+			<h3>Manage Order</h3>
+			<p><span class=" icon-question">Need Help ?</p>
+			</td>
+		  </tr>
+		</tbody>
+	  </table>
+	  </div>
+</div>
+  <div class="progress-bar-wrapper"></div>		
+        </div><!-- End col-lg-9-->
         </div>
-	</div>
+			</div>
 </div>
 </div>
 	<div class="high_light">
@@ -191,32 +147,16 @@ ul#cat_nav li a#active {
 
 <div class="layer"></div><!-- Mobile menu overlay mask -->
 
+
+
     
 <!-- COMMON SCRIPTS -->
+<script src="js/progress-bar.js"></script>
+<script src="js/app.js"></script>
 <script src="js/jquery-2.2.4.min.js"></script>
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
 <script src="assets/validate.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $(".total_orders_new").css("display", "none");
-        $('.load_more').on('click', function () {
-            $('.load_more').hide();
-            var user_id = $(this).attr("user-id");
-            $.ajax({
-            type:"post",
-            url:"total_order_details.php",          
-            data:'user_id='+user_id,
-            success:function(html){                          
-                $(".total_orders").css("display", "none");
-                 $(".total_orders_new").css("display", "block");
-                $(".total_orders_new").append(html);
-            }
-          }); 
-        });
-    });
-</script>
 
 </body>
 </html>
