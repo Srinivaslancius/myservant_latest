@@ -286,7 +286,7 @@
 								<?php if($getCount->num_rows == 0) { ?>
 								<div class="form-group">
 									<div class="field-group has-feedback has-clear">
-								      <input type="text" name="coupon_code" style="text-transform:uppercase" id="coupon_code" value="" placeholder="Coupon Code" class="form-control">
+								      <input type="text" autocomplete="off" name="coupon_code" style="text-transform:uppercase" id="coupon_code" value="" placeholder="Coupon Code" class="form-control">
 								      <span class="form-control-clear icon-cancel-1 form-control-feedback hidden"></span>
 								    </div>
 									<div class="field-group btn-field">

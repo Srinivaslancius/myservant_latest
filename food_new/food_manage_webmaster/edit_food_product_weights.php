@@ -29,7 +29,7 @@ $id = $_GET['wid'];
                 <form data-toggle="validator" method="POST">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Weight Type</label>
-                    <input type="text" name="weight_type" class="form-control" id="user_input" placeholder="Weight Type" data-error="Please enter Name" required onkeyup="checkUserAvailTest()" value="<?php echo $getWeightsData['weight_type'];?>">
+                    <input type="text" name="weight_type" class="form-control" id="user_input" placeholder="Weight Type" data-error="Please enter Weight Type" required onkeyup="checkUserAvailTest()" value="<?php echo $getWeightsData['weight_type'];?>">
                     <span id="input_status" style="color: red;"></span>
                     <div class="help-block with-errors"></div>
                     <input type="hidden" id="table_name" value="food_product_weights">
