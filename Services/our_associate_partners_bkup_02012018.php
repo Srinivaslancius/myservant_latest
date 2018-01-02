@@ -1,5 +1,5 @@
 <div class="white_bg">
-	<div class="container">
+	<div class="container margin20">
 		<div class="banner colored">
 			<h4>Are You  <span>Professional</span> Looking to grow your service Business</h4>
 			<a href="service_provider.php" class="btn_1 white">Join Now</a>
@@ -18,7 +18,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4 wow zoomIn" data-wow-delay="0.2s">
-			<div class="feature_home prdct">
+			<div class="feature_home">
 				<i class="icon_set_1_icon-41"></i>
 				<h3><span><?php echo $getPremiumServices['title'];?></span></h3>
 				<p><?php echo substr(strip_tags($getPremiumServices['description']), 0,200);?></p>
@@ -29,7 +29,7 @@
 		  		$getCustomers = $getCustomersData->fetch_assoc();
 		?>
 		<div class="col-md-4 wow zoomIn" data-wow-delay="0.4s">
-			<div class="feature_home prdct">
+			<div class="feature_home">
 				<i class="icon_set_1_icon-30"></i>
 				<h3><span><?php echo $getCustomers['title'];?></span></h3>
 				<p><?php echo substr(strip_tags($getCustomers['description']), 0,200);?></p>
@@ -40,7 +40,7 @@
 		  		$getSupport = $getSupportData->fetch_assoc();
 		?>
 		<div class="col-md-4 wow zoomIn" data-wow-delay="0.6s">
-			<div class="feature_home prdct">
+			<div class="feature_home">
 				<i class="icon_set_1_icon-57"></i>
 				<h3><span><?php echo $getSupport['title'];?></span></h3>
 				<p><?php echo substr(strip_tags($getSupport['description']), 0,200);?></p>

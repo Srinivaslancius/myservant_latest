@@ -408,14 +408,14 @@ header.sticky #logo .logo_sticky {
 }
 
 #logo_home h1 a,header#colored #logo_home h1 a,header#plain #logo_home h1 a,header.sticky #logo_home h1 a {
-    /* width: 160px; */
-    /* height: 34px; */
+    width: 160px;
+    height: 34px;
     display: block;
     /*background-image: url(../img/logo.png);*/
     background-repeat: no-repeat;
     background-position: left top;
-    /* background-size: 160px 34px; */
-    text-indent: -9999px;
+    background-size: 160px 34px;
+    text-indent: -9999px
 }
 
 header.sticky #logo_home h1 {
@@ -2929,11 +2929,9 @@ ul.list_order li span {
 }
 
 .tour_container .tour_title {
-    /* padding-bottom: 25px; */
+    padding-bottom: 25px;
     position: relative;
     text-align: center;
-    margin-top: 10px;
-    /* vertical-align: bottom; */
 }
 
 .tour_container .tour_title .rating {
@@ -2943,10 +2941,9 @@ ul.list_order li span {
 
 .tour_container .tour_title h3 {
     margin: 0;
-    font-size: 15px;
+    font-size: 13px;
     /* text-transform: uppercase; */
     color: #666666;
-    /* vertical-align: bottom; */
 }
 
 .wishlist {
@@ -4953,10 +4950,12 @@ ul.slides-container li img{
 }
 .language{
         background-color:transparent !important;
-        color: #333 !important;
+        color:white !important;
         width:75px !important;
         -webkit-height:20px !important;
         height:22px !important;
+        
+        
     }
     @media only screen and (min-width: 640px) {
     .cmn-toggle-switch{
@@ -5086,20 +5085,9 @@ ul#top_tools a{
 .mrgin{
     margin-bottom:0px !important;
 }
-.prdct
-{
-    border: none;
-}
-.prdct:hover
-{
-    box-shadow: 4px 4px 26px -6px rgba(0,0,0,0.96);
-transition: box-shadow 0.2s ease-in-out;
-    z-index: 3;
-}
 /*@media (max-width: 480px){
 a#phone, a#email_footer {
     text-align:center !important;
 }
 }*/
     
-

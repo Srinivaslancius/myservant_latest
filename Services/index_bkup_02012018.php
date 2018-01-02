@@ -176,7 +176,7 @@ if(isset($_POST['submit'])) {
 	<!-- Mobile menu overlay mask -->
 
 	<!-- Header================================================== -->
-	<header  id="plain">
+	<header>
 		<?php include_once './top_header.php';?>
 		<!-- End top line-->
 
@@ -235,10 +235,10 @@ if(isset($_POST['submit'])) {
                  <?php  while($getAllCategoriesData = $getCategoriesData->fetch_assoc()) { ?> 
 				<div class="col-md-2 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
 					<a href="sub_categories.php?key=<?php echo encryptPassword($getAllCategoriesData['id']); ?>">
-					<div class="tour_container prdct" style="height:180px">
+					<div class="tour_container" style="height:180px">
 						<div class="ribbon_3 popular"><!-- <span>Popular</span> --></div>
-						<div class="img_container">
-                           <img src="<?php echo $base_url . 'uploads/services_category_images/'.$getAllCategoriesData['category_image'] ?>" class="img-responsive" alt="<?php echo $getAllCategoriesData['category_name']; ?>" style="width:75%; height:auto;">
+						<div class="img_container padd15">
+                           <img src="<?php echo $base_url . 'uploads/services_category_images/'.$getAllCategoriesData['category_image'] ?>" class="img-responsive" alt="<?php echo $getAllCategoriesData['category_name']; ?>" style="width:64px; height:64px;">
 						</div>
 						<div class="tour_title">
 							<h3><?php echo $getAllCategoriesData['category_name']; ?></h3>
@@ -267,7 +267,7 @@ if(isset($_POST['submit'])) {
         <?php $getServiceProvider =  getServicesProviderDataLimit('1','6'); ?>
                 <?php  while($getAllgetServiceProvider = $getServiceProvider->fetch_assoc()) { ?>
         <div class="col-md-6 wow fadeIn" data-wow-delay="0.3s">
-          <div class="feature prdct">
+          <div class="feature">
           <div class="row">
           <div class="col-sm-2">
             <center><img src="<?php echo $base_url . 'uploads/service_provider_business_logo/'.$getAllgetServiceProvider['logo'] ?>" class="img-responsive" alt="<?php echo $getAllgetServiceProvider['company_name']; ?>" style="width:65px; height:65px;margin-top:40px;margin-bottom:40px"></center>
