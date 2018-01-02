@@ -130,8 +130,8 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 	<div id="sub_content">
     	<div id="thumb"><img src="<?php echo $base_url . 'uploads/food_vendor_logo/'.$getFoodVendorsBann['logo']; ?>" alt="<?php echo $getMostPopualrRestaurants['restaurant_name']; ?>"></div>
 	         <div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="#">Read 98 reviews</a></small>)</div>
-	        <h1><?php echo $getFoodVendorsBann['restaurant_name']; ?></h1>
-	        <div><em><?php echo $getFoodVendorsBann['description']; ?></em></div>
+	        <h1 style="font-size:28px"><?php echo $getFoodVendorsBann['restaurant_name']; ?></h1>
+	        <div><em style="font-size:13px"><?php echo $getFoodVendorsBann['description']; ?></em></div>
 	        <div><i class="icon_pin"></i> <?php echo $getFoodVendorsBann['restaurant_address']; ?> </div>
     </div><!-- End sub_content -->
 </div><!-- End subheader -->
@@ -300,7 +300,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
             	<div class="theiaStickySidebar">
 					<div id="cart_box">		
 						<h3>Your order<!--  <i class="icon_cart_alt pull-right"></i> --></h3>			
-						<span id="mycart">
+						<span id="mycart">						
 						</span>
 						<hr>						
                         <a href="cart.php" class="btn_full order_now">Book now <i class="icon-left"></i></a>
@@ -389,6 +389,7 @@ function remove_cart_item1(cartId) {
   	$('#cart_cnt').html($('#total_cart_count').val());
   	
   	if($('#cart_total').val() == 0) {
+  		$('.sub_total,.dev_charge,.total').hide();  		
   		$('.order_now').css({"pointer-events": "none", "cursor": "not-allowed", "background-color": "#d4d4d4"});
   	} else {
   		$('.order_now').removeAttr("style");

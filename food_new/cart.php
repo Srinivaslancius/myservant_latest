@@ -316,7 +316,10 @@ td{
 								</div>
 							</div>                        
 						</td>
-            <td style="padding-left:30px;padding-right:30px"> <?php echo $getCartItems['item_quantity']; ?></td>
+						<td style="padding-left:20px;padding-right:30px">
+						<a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onclick="add_cart_item1(67)"></i></a> <strong>1</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item1(67)"></i></a>
+              </td>
+					<!--<td style="padding-left:30px;padding-right:30px"> <?php echo $getCartItems['item_quantity']; ?></td>-->
 						<td>Rs. <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?> /-</td>
 						<?php $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?>
 						<td> <i class="icon-trash del_cart_item" data-cart-id="<?php echo $getCartItems['id']; ?>" style="font-size:22px;color:#fe6003;margin-left:10px"></li></td>
@@ -338,7 +341,7 @@ td{
 						</tr>						
 						<?php $service_tax += ($getFoodSiteSettingsData['service_tax']/100)*$cartTotal; ?>
 						<tr>
-							<td>Service Tax <span class="pull-right">Rs. <?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span></td>
+							<td>GST <span class="pull-right">Rs. <?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span></td>
 						</tr>
 
               <?php
@@ -354,10 +357,19 @@ td{
                   <td>Extra Add On's Price <span class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
               </tr>
 						  <?php } ?>
-						<!-- <tr>
-							<td>Delivery fee <span class="pull-right">Rs. <?php echo $getFoodSiteSettingsData['delivery_charges'] ; ?></span> </td>
 
-						</tr> -->
+              <?php 
+                $getDeliveryCharge = getIndividualDetails('food_vendors','id',$_SESSION['session_restaurant_id']);
+                $DeliveryCharges = $getDeliveryCharge['delivery_charges'];
+                if($DeliveryCharges!=0) {
+                  $deliveryCharges = $getDeliveryCharge['delivery_charges'];
+                } else {
+                  $deliveryCharges = 0;
+                }
+              ?>
+						 <tr>
+							<td>Delivery Charges <span class="pull-right">Rs. <?php echo $deliveryCharges; ?></span> </td>
+						</tr>
 						<tr>
 							<td style="color:#fe6003">TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$getAdstotal; ?></span></td>
 						</tr>

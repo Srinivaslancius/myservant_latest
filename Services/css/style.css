@@ -1204,7 +1204,7 @@ ul#cat_nav li a {
 
 ul#cat_nav li a span {
     font-size: 11px;
-    color: #999
+    /* color: #999; */
 }
 
 ul#cat_nav li a:after {
@@ -4953,7 +4953,7 @@ ul.slides-container li img{
 }
 .language{
         background-color:transparent !important;
-        color: #333 !important;
+        /* color: #333 !important; */
         width:75px !important;
         -webkit-height:20px !important;
         height:22px !important;
