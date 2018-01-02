@@ -1,11 +1,12 @@
 <?php include_once 'admin_includes/main_header.php';?>
-<?php $i=1; $getFoodCancelledOrders = "SELECT * FROM food_orders WHERE lkp_order_status_id = 6 ";
-$getFoodCancelledOrdersData = $conn->query($getFoodCancelledOrders);
+<?php $i=1; $vendor_id = $_SESSION['food_vendor_user_id'];
+$getFoodFailedOrders = "SELECT * FROM food_orders WHERE lkp_payment_status_id = 3 AND restaurant_id = '$vendor_id' ";
+$getFoodFailedOrders1 = $conn->query($getFoodFailedOrders);
   ?>
      <div class="site-content">
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
-            <h3 class="m-t-0 m-b-5">Cancelled Orders</h3>
+            <h3 class="m-t-0 m-b-5">Failed Orders</h3>
           </div>
           <div class="panel-body">
             <div class="table-responsive">
@@ -21,7 +22,7 @@ $getFoodCancelledOrdersData = $conn->query($getFoodCancelledOrders);
                   </tr>
                 </thead>
                 <tbody>
-                  <?php while ($row = $getFoodCancelledOrdersData->fetch_assoc()) { ?>
+                  <?php while ($row = $getFoodFailedOrders1->fetch_assoc()) { ?>
                   <tr>
                     <td><?php echo $i;?></td>
                     <?php $getProductNames = getAllDataWhere('food_products','id',$row['product_id']); 
