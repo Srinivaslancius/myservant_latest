@@ -130,8 +130,8 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 	<div id="sub_content">
     	<div id="thumb"><img src="<?php echo $base_url . 'uploads/food_vendor_logo/'.$getFoodVendorsBann['logo']; ?>" alt="<?php echo $getMostPopualrRestaurants['restaurant_name']; ?>"></div>
 	         <div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="#">Read 98 reviews</a></small>)</div>
-	        <h1><?php echo $getFoodVendorsBann['restaurant_name']; ?></h1>
-	        <div><em><?php echo $getFoodVendorsBann['description']; ?></em></div>
+	        <h1 style="font-size:28px"><?php echo $getFoodVendorsBann['restaurant_name']; ?></h1>
+	        <div><em style="font-size:13px"><?php echo $getFoodVendorsBann['description']; ?></em></div>
 	        <div><i class="icon_pin"></i> <?php echo $getFoodVendorsBann['restaurant_address']; ?> </div>
     </div><!-- End sub_content -->
 </div><!-- End subheader -->

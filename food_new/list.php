@@ -116,7 +116,7 @@
     															</div>
     															<div class="col-md-5 col-sm-5">
     																<div class="go_to" style="height:10px">                                                          
-                                                                    <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>" class="btn_1" style="padding:10px">View Menu</a>
+                                                                    <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>" class="btn_1 hidden-xs" style="padding:10px">View Menu</a>
                                                                 
     																</div>
     															</div>
@@ -128,7 +128,8 @@
                                                             
                                                             <div class="rating">
                                                                     <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="#0">98 reviews</a></small>)
-                                                            </div>
+                                                            </div><br>
+															 <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>" class="btn_1 visible-xs" style="padding:10px">View Menu</a>
                                                     </div>
                                             </div>
                                     </div><!-- End row-->
