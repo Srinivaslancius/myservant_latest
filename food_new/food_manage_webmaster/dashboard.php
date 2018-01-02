@@ -230,7 +230,7 @@
                 <h3 class="panel-title"> Today Orders</h3>
                 <div class="panel-subtitle"><?php echo date("Y-m-d");?></div>
               </div>
-              <?php $FoodOrders = "SELECT * FROM food_orders WHERE DATE(`delivery_date`) = CURDATE() GROUP BY order_id ORDER BY id DESC"; 
+              <?php $FoodOrders = "SELECT * FROM food_orders WHERE DATE(`created_at`) = CURDATE() AND lkp_order_status_id = 1 AND lkp_payment_status_id!=3 ORDER BY lkp_order_status_id DESC ";
                 $getFoodOrderData = $conn->query($FoodOrders); $i=1; ?>
               <div class="table-responsive">
                 <table class="table table-hover">
@@ -262,7 +262,7 @@
                       <td><?php echo $getTotalOrders['created_at'];?></td>
                       <td><?php echo $getTotalOrders['order_id'];?>
                       </td>
-                      <td><a href="view_category_orders.php?order_id=<?php echo $getTotalOrders['order_id']; ?>"><i class="zmdi zmdi-eye zmdi-hc-fw"  class=""></i></a>
+                      <td><a href="food_orders.php"><i class="zmdi zmdi-eye zmdi-hc-fw"  class=""></i></a>
                       </td>
                       <td>
                       </td>
