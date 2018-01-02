@@ -53,7 +53,7 @@
 	<!-- Mobile menu overlay mask -->
 
 	<!-- Header================================================== -->
-	<header id="plain">
+	<header>
 		<?php include_once './top_header.php';?>
 		<!-- End top line-->
 
