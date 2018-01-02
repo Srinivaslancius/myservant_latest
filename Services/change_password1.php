@@ -53,7 +53,7 @@ ul#cat_nav li a#active, ul#cat_nav li a.active, ul#cat_nav li a:hover {
 }
 ul#cat_nav li a span {
     font-size: 20px;
-    color: #999;
+   
 }
 ul#cat_nav li a span:hover{
 	color:white;

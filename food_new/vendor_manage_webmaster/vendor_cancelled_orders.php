@@ -1,5 +1,6 @@
 <?php include_once 'admin_includes/main_header.php';?>
-<?php $i=1; $getFoodCancelledOrders = "SELECT * FROM food_orders WHERE lkp_order_status_id = 6 ";
+<?php $i=1; $vendor_id = $_SESSION['food_vendor_user_id'];
+$getFoodCancelledOrders = "SELECT * FROM food_orders WHERE lkp_order_status_id = 6 AND restaurant_id = '$vendor_id'";
 $getFoodCancelledOrdersData = $conn->query($getFoodCancelledOrders);
   ?>
      <div class="site-content">

@@ -94,12 +94,9 @@
     <div class="row">
             <div class="col-md-3">
                 <?php include_once './filters.php';?>
-            </div>
-        
-        
+            </div>       
         <div class="col-md-9">   
-                <div class="ajax_result">     
-
+                <div class="ajax_result">
                         <?php while($getResults = $getSearchResults->fetch_assoc()) { 
                              $show_more = $getResults['id'];?>
                         <div class="col-md-6 filter_data">
@@ -116,7 +113,7 @@
     															</div>
     															<div class="col-md-5 col-sm-5">
     																<div class="go_to" style="height:10px">                                                          
-                                                                    <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>" class="btn_1" style="padding:10px">View Menu</a>
+                                                                    <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>" class="btn_1 hidden-xs" style="padding:10px">View Menu</a>
                                                                 
     																</div>
     															</div>
@@ -128,7 +125,8 @@
                                                             
                                                             <div class="rating">
                                                                     <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="#0">98 reviews</a></small>)
-                                                            </div>
+                                                            </div><br>
+															 <a href="view_rest_menu.php?key=<?php echo encryptPassword($getResults['id']);?>" class="btn_1 visible-xs" style="padding:10px">View Menu</a>
                                                     </div>
                                             </div>
                                     </div><!-- End row-->
@@ -136,10 +134,15 @@
                         </div>
                         <?php } ?>
                 </div>
-            <?php if($getResultsCount >= 4) { ?>
+                       
+        </div><!-- End col-md-9--> 
+		<div class="col-md-3">
+		</div>
+		<div class="col-md-9">
+		<?php if($getResultsCount >= 4) { ?>
                 <center><a class="btn_1 load_more">Load More</a></center>
-            <?php } ?>            
-        </div><!-- End col-md-9-->        
+            <?php } ?>
+		</div>	
     </div><!-- End row -->
 </div><!-- End container -->
 <!-- End Content =============================================== -->

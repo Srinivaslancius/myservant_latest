@@ -228,19 +228,7 @@ if(mail($to, $subject, $message, $headers)) {
     </footer>
 <!-- End Footer =============================================== -->
 
-<div class="layer"></div><!-- Mobile menu overlay mask -->
-
-     <!-- Search Menu -->
-    <div class="search-overlay-menu">
-        <span class="search-overlay-close"><i class="icon_close"></i></span>
-        <form role="search" id="searchform" method="get">
-            <input value="" name="q" type="search" placeholder="Search..." />
-            <button type="submit"><i class="icon-search-6"></i>
-            </button>
-        </form>
-    </div>
-    <!-- End Search Menu -->
-    
+<div class="layer"></div><!-- Mobile menu overlay mask -->    
 <!-- COMMON SCRIPTS -->
 <script src="../cdn-cgi/scripts/84a23a00/cloudflare-static/email-decode.min.js"></script><script src="js/jquery-2.2.4.min.js"></script>
 <script src="js/common_scripts_min.js"></script>

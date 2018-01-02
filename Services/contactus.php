@@ -170,7 +170,7 @@ if(mail($to, $subject, $message, $headers)) {
 				 <div class="col-md-4 col-sm-4" style="padding-top:20px">
                     <div class="box_style_1">
                         <h3><span>Information</span></h3>
-                         <p><span class=" icon-location" style="color:#f26226 ;"></span><?php echo $getSiteSettingsData['address']; ?></p>
+                         <p style="text-align:left"><span class=" icon-location" style="color:#f26226 ;"></span><?php echo $getSiteSettingsData['address']; ?></p>
                           <p><span class = "icon-mobile" style="color:#f26226 ;"></span><?php echo $getSiteSettingsData['mobile']; ?></p>
                         <p><span class=" icon-mail-alt" style="color:#f26226 ;"></span><?php echo $getSiteSettingsData['email']; ?></p>
                     </div>

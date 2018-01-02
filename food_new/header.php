@@ -73,7 +73,7 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
 						<!--<span class="icon-search">
                             <input type="submit" class="btn_search1">
                             </span>-->
-							<input type="text" class=" search-query"placeholder="Your Address or postal code" required name="searchKey" id="search-box">	
+							<input type="text" class=" search-query" placeholder="Your Address or postal code" required name="searchKey" id="search-box">	
                             <div id="suggesstion-box"></div>
                             <span class="input-group-btn">
                             <input type="submit" class="btn_search" value="SHOW RESTAURANTS" name="searchFood">

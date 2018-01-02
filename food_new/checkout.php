@@ -174,36 +174,14 @@ if($_SESSION['user_login_session_id'] == '') {
 } 
 ?>
 <!-- SubHeader =============================================== -->
-<section class="parallax-window"  id="short"  data-parallax="scroll" data-image-src="img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
+<section class="parallax-window"  id="short"  data-parallax="scroll" data-image-src="img/img_2.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
     	<div id="sub_content">
-    	 <h1>Place your order</h1>
-            <div class="bs-wizard">
-                <div class="col-xs-4 bs-wizard-step active">
-                  <div class="text-center bs-wizard-stepnum"><strong>1.</strong> Your details</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="#0" class="bs-wizard-dot"></a>
-                </div>
-                               
-                <div class="col-xs-4 bs-wizard-step disabled">
-                  <div class="text-center bs-wizard-stepnum"><strong>2.</strong> Payment</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="#0" class="bs-wizard-dot"></a>
-                </div>
-            
-              <div class="col-xs-4 bs-wizard-step disabled">
-                  <div class="text-center bs-wizard-stepnum"><strong>3.</strong> Finish!</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="#0" class="bs-wizard-dot"></a>
-                </div>  
-		</div><!-- End bs-wizard --> 
+    	 <h1>Place your order</h1>            
         </div><!-- End sub_content -->
 	</div><!-- End subheader -->
 </section><!-- End section -->
 <!-- End SubHeader ============================================ -->
-
-
-
     <div id="position">
         <div class="container">
             <ul>
@@ -362,7 +340,8 @@ if($_SESSION['user_login_session_id'] == '') {
 				
 						</div>
 					</div>
-				</div><!-- End box_style_1 -->
+				</div>
+				
 			</div><!-- End col-md-6 -->
 
 			<?php 
@@ -399,10 +378,16 @@ if($_SESSION['user_login_session_id'] == '') {
 						<td>
 						 <a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onclick="add_cart_item1(67)"></i></a> <strong>1x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item1(67)"></i></a> Biryani
 							 <!--<strong> <?php echo $getCartItems['item_quantity']; ?> x </strong> <?php echo $getProductDetails['product_name']; ?>-->
-							 <div class="alert alert-dismissable" style="margin-bottom:-21px;padding-left:0px">
-							<a class="close1" aria-label="close"><i class="icon-trash" style="color:#fe6003"></i></a>
-							<p style="font-size:12px">Pot Biryani</p>
-							</div>
+							<?php 
+			                $getAddons = "SELECT * FROM food_update_cart_ingredients WHERE food_item_id = '".$getCartItems['food_item_id']."' AND cart_id='".$getCartItems['id']."' AND session_cart_id = '$session_cart_id'";
+			                $getAddonData = $conn->query($getAddons);
+			                while($getadcartItems = $getAddonData->fetch_assoc() ) {
+			               ?>
+			               <div class="alert alert-dismissable" style="margin-bottom:-21px;padding-left:0px">
+						   <a class="close1" ><i class="icon-trash" style="color:#fe6003" onclick="removeIngItem(<?php echo $getadcartItems['id']; ?>);"></i></a>
+						   <p style="font-size:12px"><?php echo $getadcartItems['item_ingredient_name'] . ":". $getadcartItems['item_ingredient_price']; ?> </p>
+						   </div>
+						   <?php } ?>
 						</td>
 						<td>
 							<strong class="pull-right">Rs. <?php echo  $getCartItems['item_price']*$getCartItems['item_quantity']; ?><?php  $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?></strong>
@@ -633,6 +618,18 @@ $('#discount_price').hide();
 	            $('#coupon_code_type').val('');
 			});	
 	});
+	function removeIngItem(ingUniqId) { 
+	  $.ajax({
+	      type:'post',
+	      url:'delete_cart_ingredants.php',
+	      data:{
+	         ingUniqId : ingUniqId,        
+	      },
+	      success:function(response) {
+	        location.reload();
+	      }
+	    });
+	}
 </script>
 </body>
 </html>

@@ -31,7 +31,7 @@ if($_SESSION['lkp_city_id'] != '') {
 					</div>
 					<div class="col-md-5 col-sm-5 col-xs-5">
 						<ul id="top_links">
-						<i class="icon-phone"></i><strong><a href="Tel:<?php echo $getSiteSettingsData['mobile']; ?>" style="color:white;"><?php echo $getSiteSettingsData['mobile']; ?></a></strong>
+						<i class="icon-phone"></i><a href="Tel:<?php echo $getSiteSettingsData['mobile']; ?>"><?php echo $getSiteSettingsData['mobile']; ?></a>
 							<li>
 								<?php if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') { ?>
 									<a href="my_dashboard.php"><?php echo $_SESSION['user_login_session_name']; ?> </a> &nbsp;|&nbsp;<a href="logout.php"> Logout </a>
