@@ -22,6 +22,7 @@ $paymentStatus = getIndividualDetails('lkp_payment_status','id',$getOrdersData1[
 
 $getAddOnsPrice = "SELECT * FROM food_order_ingredients WHERE order_id = '$order_id'";
 $getAddontotal = $conn->query($getAddOnsPrice);
+$getAddontotalCount = $getAddontotal->num_rows;
 $getAdstotal = 0;
 while($getAdTotal = $getAddontotal->fetch_assoc()) {
     $getAdstotal += $getAdTotal['item_ingredient_price'];
@@ -119,16 +120,30 @@ $content .='<html lang="en">
         <td colspan="5"></td>
 		<td>
 		<p>Subtotal:</p>
-		<p>Tax:</p>
-		<p>Delivery Charges:</p>
-		<p>Ingredients Price:</p>
-		<p style="color:#f26226">Grand Total:</p>
+		<p>Tax:</p>';
+		if($getOrdersData1['delivery_charges'] != '0') { 
+	$content .= '<p>Delivery Charges:</p>';
+		}
+		if($getAddontotalCount > 0) {
+	$content .= '<p>Ingredients Price:</p>';
+		}
+		if($getOrdersData1['coupen_code'] != '') {
+	$content .= '<p>Discount:</p>';
+		}
+	$content .= '<p style="color:#f26226">Grand Total:</p>
 		</td>
 		<td style="color:#f26226"><p>Rs. '.$getOrdersData1['sub_total'].'</p>
-		<p>Rs. '. $service_tax.'('.$getSiteSettingsData['service_tax'].'%)'.'</p>
-		<p>Rs. '.$delivery_charges.'</p>
-		<p>Rs. '.$getAdstotal.'</p>
-		<p>Rs. '.$getOrdersData1['order_total'].'</p></td>
+		<p>Rs. '. $service_tax.'('.$getSiteSettingsData['service_tax'].'%)'.'</p>';
+		if($getOrdersData1['delivery_charges'] != '0') {
+	$content .= '<p>Rs. '.$delivery_charges.'</p>';
+		}
+		if($getAddontotalCount > 0) {
+	$content .= '<p>Rs. '.$getAdstotal.'</p>';
+		}
+		if($getOrdersData1['coupen_code'] != '') {
+	$content .= '<p>Rs. '.$getOrdersData1['discout_money'].'(<span style="color:green">Coupon Applied.</span>)</p>';
+		}
+	$content .= '<p>Rs. '.$getOrdersData1['order_total'].'</p></td>
       </tr>
     </tbody>
   </table>

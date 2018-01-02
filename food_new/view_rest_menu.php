@@ -202,10 +202,12 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 						</form> -->
 						</div>
 						<div class="col-sm-2">
-							<h3 style="color:white;font-size:18px"><label><input name="mobile" type="checkbox" value="" class="icheck"></label>Veg</h3>
+							<h3 style="color:white;font-size:18px"><label><input name="item_type" type="checkbox" value="1" class="vegeterian"></label>Veg</h3>
 						</div>
 					</div>
 				</div>
+					<div class="veg_products1">
+					<input type="hidden" id="key" value="<?php echo $getRestKey?>">
                     <?php while($getCatList1 = $getCategory1->fetch_assoc() ) { ?>
                     <hr>
 					<h5 class="nomargin_top" id="<?php echo $getCatList1['category_id']; ?>"><b><?php $getCatName = getIndividualDetails('food_category','id',$getCatList1['category_id']); echo $getCatName['category_name']; ?></b></h5>
@@ -289,6 +291,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 
 					</table>
 					<?php } ?>
+					</div>
 
 				</div><!-- End box_style_1 -->
 			</div><!-- End col-md-6 -->    
@@ -493,7 +496,26 @@ function show_cart() {
 }
 
 </script>
-
+<script type="text/javascript">
+	$(document).on('change','.vegeterian',function(){
+		var key = $("#key").val();
+		if($(".vegeterian").is(":checked")){
+			var item_type = $(this).val();
+		}
+	   var url = "veg_products.php";
+	   $.ajax({
+	     type: "POST",
+	     url: url,
+	     data: "item_type="+item_type+"&key="+key, 
+	     success: function(data)
+	     {                  
+	        //alert(data);
+	        $('.veg_products1').html(data);
+	     }               
+	   });
+	  return false;
+	});
+</script>
 </body>
 
 <?php include "search_js_script.php"; ?>

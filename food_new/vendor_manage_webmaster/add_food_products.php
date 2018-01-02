@@ -9,6 +9,7 @@ if (!isset($_POST['submit']))  {
     $product_name = $_POST['product_name'];
     $category_id = $_POST['category_id'];
     $specifications = $_POST['specifications'];
+    $item_type = $_POST['item_type'];
     //$availability_id = $_POST['availability_id'];
     $lkp_status_id = $_POST['lkp_status_id'];
     $fileToUpload = uniqid().$_FILES["fileToUpload"]["name"];
@@ -20,7 +21,7 @@ if (!isset($_POST['submit']))  {
         $target_file = $target_dir . basename($fileToUpload);
         $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {        
-    $sql1 = "INSERT INTO food_products (`product_name`,`product_image`,`restaurant_id`,`category_id`,`specifications`,`lkp_status_id`,`created_by`,`created_at`) VALUES ('$product_name','$fileToUpload','$restaurant_id','$category_id','$specifications', '$lkp_status_id','$created_by','$created_at')";
+    $sql1 = "INSERT INTO food_products (`product_name`,`product_image`,`restaurant_id`,`category_id`,`specifications`,`item_type`,`lkp_status_id`,`created_by`,`created_at`) VALUES ('$product_name','$fileToUpload','$restaurant_id','$category_id','$specifications','$item_type', '$lkp_status_id','$created_by','$created_at')";
      $result1 = $conn->query($sql1);
      $last_id = $conn->insert_id;
    }else {
@@ -59,6 +60,7 @@ if (!isset($_POST['submit']))  {
           <div class="panel-body">
             <div class="row">
               <?php $getCategories = getAllDataWithStatus('food_category','0');?>
+              <?php $getProductTypes = getAllDataWithStatus('food_product_type','0');?>
               <?php $getWeights = getAllDataWithStatus('food_product_weights','0');?>
               <?php $getIngredients = getAllDataWithStatus('food_ingredients','0');?>
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
@@ -84,7 +86,6 @@ if (!isset($_POST['submit']))  {
                    </select>
                     <div class="help-block with-errors"></div>
                   </div>
-
                   
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Product Name</label>
@@ -141,9 +142,21 @@ if (!isset($_POST['submit']))  {
                     <div class="form-group col-md-2">
                       <a href="javascript:void(0);"  ><img src="add-icon.png" style="margin-top: 28px;" onkeypress="return isNumberKey(event)" onclick="addInput1('dynamicInput1');"/></a>
                     </div>
+                    <div id="dynamicInput1" class="input-field col s12"></div>
                   </div>    
                   
-                  <div id="dynamicInput1" class="input-field col s12"></div>
+
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose Item Type</label>
+                    <select id="form-control-3" name="item_type" class="custom-select" data-error="This field is required." required>
+                      <option value="">Select Item Type</option>
+                      <?php while($row = $getProductTypes->fetch_assoc()) {  ?>
+                        <option value="<?php echo $row['id']; ?>"><?php echo $row['product_type']; ?></option>
+                      <?php } ?>
+                   </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Short Description</label>
                     <textarea name="specifications" class="form-control" maxlength="150" placeholder="Description" data-error="This field is required." required></textarea>
