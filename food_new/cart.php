@@ -129,7 +129,7 @@ td{
 	right: 45px;	
 	}
 	.table.cart-list td{
-		padding-left: 40%;
+		padding-left: 55%;
 	}
 	.rw_wdth{
 		width:325px;
@@ -164,7 +164,9 @@ td{
 <!-- SubHeader =============================================== -->
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
-		
+		<div id="sub_content">
+		 <h1>Place your order</h1>
+		 </div>
 	</div><!-- End subheader -->
 </section><!-- End section -->
 <!-- End SubHeader ============================================ -->
@@ -250,7 +252,7 @@ td{
               }
               ?>
 
-               <a href="#" data-toggle="modal" data-target="#<?php echo $getCartItems['id']; ?>"> <i class="icon_plus_alt2" style="font-size:22px;margin-left:10px"></i></a>
+               <a href="#" data-toggle="modal" data-target="#<?php echo $getCartItems['id']; ?>"> <i class="icon_plus_alt2" style="font-size:22px;margin-left:10px;color:#fe6003;"></i></a>
 							<div class="modal fade" id="<?php echo $getCartItems['id']; ?>" role="dialog">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
@@ -316,7 +318,7 @@ td{
 								</div>
 							</div>                        
 						</td>
-						<td style="padding-left:20px;padding-right:30px">
+						<td>
 						<a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onclick="add_cart_item1(67)"></i></a> <strong>1</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item1(67)"></i></a>
               </td>
 					<!--<td style="padding-left:30px;padding-right:30px"> <?php echo $getCartItems['item_quantity']; ?></td>-->
