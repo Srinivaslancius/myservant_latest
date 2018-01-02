@@ -340,7 +340,8 @@ if($_SESSION['user_login_session_id'] == '') {
 				
 						</div>
 					</div>
-				</div><!-- End box_style_1 -->
+				</div>
+				
 			</div><!-- End col-md-6 -->
 
 			<?php 

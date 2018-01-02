@@ -252,8 +252,8 @@
   padding:10px 30px 1px
  }
  .popup-form {
-  width:100%;
-  margin:60px auto 30px
+  /*! width:100%; */
+  margin:60px auto 30px;
  }
  a.load_more_bt {
   margin-bottom:20px
