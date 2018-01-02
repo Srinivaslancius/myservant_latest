@@ -338,7 +338,7 @@ td{
 						</tr>						
 						<?php $service_tax += ($getFoodSiteSettingsData['service_tax']/100)*$cartTotal; ?>
 						<tr>
-							<td>Service Tax <span class="pull-right">Rs. <?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span></td>
+							<td>GST <span class="pull-right">Rs. <?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span></td>
 						</tr>
 
               <?php
@@ -354,10 +354,19 @@ td{
                   <td>Extra Add On's Price <span class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
               </tr>
 						  <?php } ?>
-						<!-- <tr>
-							<td>Delivery fee <span class="pull-right">Rs. <?php echo $getFoodSiteSettingsData['delivery_charges'] ; ?></span> </td>
 
-						</tr> -->
+              <?php 
+                $getDeliveryCharge = getIndividualDetails('food_vendors','id',$_SESSION['session_restaurant_id']);
+                $DeliveryCharges = $getDeliveryCharge['delivery_charges'];
+                if($DeliveryCharges!=0) {
+                  $deliveryCharges = $getDeliveryCharge['delivery_charges'];
+                } else {
+                  $deliveryCharges = 0;
+                }
+              ?>
+						 <tr>
+							<td>Delivery Charges <span class="pull-right">Rs. <?php echo $deliveryCharges; ?></span> </td>
+						</tr>
 						<tr>
 							<td style="color:#fe6003">TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$getAdstotal; ?></span></td>
 						</tr>

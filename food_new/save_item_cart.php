@@ -54,18 +54,27 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
 
     $cartSubtotal = 0;
     $cartTotal = 0;
+
+    $getDeliveryCharge = getIndividualDetails('food_vendors','id',$_SESSION['session_restaurant_id']);
+    $DeliveryCharges = $getDeliveryCharge['delivery_charges'];
+    if($DeliveryCharges!=0) {
+      $deliveryCharges = $getDeliveryCharge['delivery_charges'];
+    } else {
+      $deliveryCharges = 0;
+    }
+
     while($cartItems = $getSelData->fetch_assoc() ) {
         $cartSubtotal += $cartItems['item_price'] * $cartItems['item_quantity'];
-        $cartTotal = $cartSubtotal;
+        $cartTotal = $cartSubtotal+$deliveryCharges;
     $getProductsName = getIndividualDetails('food_products','id',$cartItems['food_item_id']);    
     $productId = $cartItems['food_item_id'];
     echo '<table class="table table_summary"><tbody >
             <tr>
                 <td>
-                  <a href="#0" class="remove_item"><i class="icon_plus_alt" onClick="add_cart_item1('.$cartItems['id'] .')"></i></a> <strong>'.$cartItems['item_quantity'].'x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onClick="remove_cart_item1('.$cartItems['id'] .')"></i></a> '.$getProductsName['product_name'].'
+                  <a href="#0" class="remove_item"><i class="icon_plus_alt" onClick="add_cart_item1('.$cartItems['id'] .')"></i></a> <strong>'.$cartItems['item_quantity'].' </strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onClick="remove_cart_item1('.$cartItems['id'] .')"></i></a> '.$getProductsName['product_name'].'
                 </td>
                 <td>
-                  <strong class="pull-right">Rs. '.$cartItems['item_price'] .' </strong>
+                  <strong class="pull-right">Rs. '.$cartItems['item_price']*$cartItems['item_quantity'].' </strong>
                 </td>
             </tr>
         </tbody>
@@ -76,11 +85,16 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
                <input type="hidden" value='.$getSelData->num_rows.' id="total_cart_count"> 
           <table class="table table_summary">
           <tbody>
-          <tr>
-            <!-- <td>
+          <tr class="sub_total">
+            <td>
                Subtotal <span class="pull-right">Rs. '.$cartSubtotal.'</span>
-            </td> -->
+            </td>
           </tr>
+            <tr class="dev_charge">
+              <td>
+                 Delivery Charges <span class="pull-right">Rs. '.$deliveryCharges.'</span>
+              </td>
+            </tr>
          <input type="hidden" value='.$cartTotal.' id="cart_total">
           <tr>
             <td class="total">            
@@ -89,5 +103,7 @@ if (isset($_POST['item_id']) && isset($_POST['item_price']) && isset($_POST['ite
           </tr>
           </tbody>
           </table>';
+} else {
+  echo "<p style='text-align:center'>Cart Empty !</p>";
 }
 ?>
