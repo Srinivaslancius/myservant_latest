@@ -162,9 +162,9 @@ ul#cat_nav li a#active {
             			<div class="col-sm-4">
             			<a href="order_details.php?token=<?php echo $orderData['order_id']; ?>"><button class="button1">Details</button></a>
             			</div>
-            			<div class="col-sm-8">
+            			<!-- <div class="col-sm-8">
             			<button class="button1 button2">Track</button>
-            			</div>
+            			</div> -->
             			
             			</div>
             			</td>
@@ -178,8 +178,10 @@ ul#cat_nav li a#active {
 		   <div class="row">
 			<div class="col-sm-4">
 			</div>
-			<div class="col-sm-3">					   			
+			<div class="col-sm-3">	
+            <?php if($getOrders1->num_rows > 3) { ?>				   			
            <center><a class="btn_full load_more" user-id ="<?php echo $_SESSION['user_login_session_id']; ?>" style="padding:10px;width:80%;font-size:14px">Load More</a></center>
+           <?php } ?>
 		   </div>
 		   <div class="col-sm-5">
 			</div>		   
