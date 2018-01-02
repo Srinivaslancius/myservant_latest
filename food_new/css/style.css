@@ -3268,7 +3268,7 @@ font-weight:bold;
 }
 #custom-search-input input.btn_search {
 	/*width: 120px;*/
-	width: 53px;
+	width: 52px;
 height: 38px;
 }
 .btn-danger{
@@ -3427,3 +3427,19 @@ footer ul {
     font-size: 13px;
     margin:12px 0px;
 }
+/*@media only screen and (max-width: 640px) {
+	.container{
+		padding-left:25px !important;
+		padding-right:25px !important;
+	}
+	.myservanrlogo {
+		margin-left:80px !important;
+	}
+	#custom-search-input, #custom-search-input .search-query {
+    width: 270px !important;
+    margin-left: -14px !important;
+}
+#custom-search-input input.btn_search {
+	width:120px !important;;
+}
+}*/

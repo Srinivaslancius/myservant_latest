@@ -165,8 +165,9 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 <div class="container margin_60_35">
 		<div class="row">
         
-			<div class="col-md-3">
+			<div class="col-md-3" id="sidebar1">
                 <p><a onclick="history.go(-1);" class="btn_side">Back to search</a></p>
+				<div class="theiaStickySidebar">
 				<div class="box_style_1">
 					<ul id="cat_nav">						
 						<?php while($getCatList = $getCategory->fetch_assoc() ) { ?>
@@ -180,6 +181,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 					<h4>Need <span>Help?</span></h4>
 					<a href="tel:<?php echo $getFoodVendorsBann['vendor_mobile']; ?>" class="phone">+91- <?php echo $getFoodVendorsBann['vendor_mobile']; ?></a>
 					<small>Monday to Friday <?php echo $getFoodVendorsBann['working_timings']; ?></small>
+				</div>
 				</div>
 			</div><!-- End col-md-3 -->
             <?php $getCategory1 = getFoodCategoryByRestId('food_products','restaurant_id',$getRestKey); ?>
@@ -202,7 +204,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 						</form> -->
 						</div>
 						<div class="col-sm-2">
-							<h3 style="color:white;font-size:18px"><label><input name="item_type" type="checkbox" value="1" class="vegeterian"></label>Veg</h3>
+							<h3 style="color:white;font-size:18px"><label><input name="item_type" type="checkbox" value="1" class="vegeterian"></label> Veg</h3>
 						</div>
 					</div>
 				</div>
@@ -341,6 +343,11 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 <script src="js/theia-sticky-sidebar.js"></script>
 <script>
     jQuery('#sidebar').theiaStickySidebar({
+      additionalMarginTop: 80
+    });
+</script>
+<script>
+    jQuery('#sidebar1').theiaStickySidebar({
       additionalMarginTop: 80
     });
 </script>
