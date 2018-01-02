@@ -16,7 +16,7 @@ $getRestaurants = getIndividualDetails('food_vendors','id',$getOrdersData1['rest
 
 $getpaymentTypes = getIndividualDetails('lkp_payment_types','id',$getOrdersData1['payment_method']);
 
-$orderStatus = getIndividualDetails('lkp_order_status','id',$getOrdersData1['lkp_order_status_id']);
+$orderStatus = getIndividualDetails('lkp_food_order_status','id',$getOrdersData1['lkp_order_status_id']);
 
 $paymentStatus = getIndividualDetails('lkp_payment_status','id',$getOrdersData1['lkp_payment_status_id']);
 
@@ -38,7 +38,7 @@ if($getOrdersData1['delivery_charges'] == '0') {
 	$delivery_charges = $getOrdersData1['delivery_charges'];
 }
 
-if($getOrdersData1['lkp_order_status_id'] == 2 && $getOrdersData1['lkp_payment_status_id'] == 1) {
+if($getOrdersData1['lkp_order_status_id'] == 5 && $getOrdersData1['lkp_payment_status_id'] == 1) {
 $content .='<html lang="en">
 <head>
   <title>Invoice</title>

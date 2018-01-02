@@ -24,22 +24,25 @@
                 <span class="menu-text">Items</span>
               </a>
             </li>
-            <li  class="<?php if($page_name == 'food_vendor_orders.php') { echo "active"; } ?>">
-              <a href="food_vendor_orders.php" aria-haspopup="true">
+            <li class="with-sub">
+              <a href="#" aria-haspopup="true">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-collection-image  zmdi-hc-fw"></i>
+                  <i class="zmdi zmdi-shopping-cart-plus zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Orders</span>
               </a>
-            </li>      
-           <!-- <li class="<?php if($page_name == 'food_orders.php' ) { echo "active"; } ?>">
-              <a href="food_orders.php" aria-haspopup="true">
-                <span class="menu-icon">
-                   <i class="zmdi zmdi-shopping-cart-plus zmdi-hc-fw"></i>
-                </span>
-                <span class="menu-text">Orders</span>
-              </a>
-            </li> -->
+              <ul class="sidebar-submenu collapse">
+                <li class="menu-subtitle">Orders</li>
+                <li  class="<?php if($page_name == 'food_vendor_orders.php' ) { echo "active"; } ?>"><a href="food_vendor_orders.php">Orders</a>
+                </li>
+                <li  class="<?php if($page_name == 'vendor_failed_orders.php' || $page_name == 'edit_vendor_failed_orders.php' ) { echo "active"; } ?>"><a href="vendor_failed_orders.php">Failed Orders</a>
+                </li>
+                <li  class="<?php if($page_name == 'vendor_cancelled_orders.php' ) { echo "active"; } ?>"><a href="vendor_cancelled_orders.php">Cancelled Orders</a>
+                </li>
+                <li  class="<?php if($page_name == 'vendor_today_orders.php' ) { echo "active"; } ?>"><a href="vendor_today_orders.php">Today Orders</a>
+                </li> 
+              </ul>
+            </li>
           </ul>
         </div>
       </div>

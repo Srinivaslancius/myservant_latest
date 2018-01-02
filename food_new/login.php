@@ -154,6 +154,7 @@
 				<form class="popup-form" autocomplete="off" method="post" action="mobile_otp.php">
 				<center> <h2 class="nomargin_top" style="color:#f26226">Register</h2></center>
 					<hr class="more_margin">
+					<input type="hidden" value="<?php echo $_GET['cart_id']?>" name="checkout_key">
 					<div class="form-group">
 	                	<label for="user_name">Name:</label>
 						<input type="text" name="user_name" class=" form-control"  placeholder="Name" required>

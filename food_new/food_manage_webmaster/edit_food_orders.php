@@ -54,13 +54,12 @@ if (!isset($_POST['submit'])) {
                   </div>
                   
                   <?php 
-                  $getStatusData = "SELECT * FROM lkp_order_status WHERE id != 3";
-                  $getStatus = $conn->query($getStatusData);?>
+                  $getStatusData = getAllDataWhere('lkp_food_order_status','lkp_status_id',0);?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Order status</label>
                     <select id="form-control-3" name="lkp_order_status_id" class="custom-select" data-error="This field is required." required>
                       <option value="">Select Order status</option>
-                      <?php while($row = $getStatus->fetch_assoc()) {  ?>
+                      <?php while($row = $getStatusData->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getFoodOrdersData['lkp_order_status_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['order_status']; ?></option>
                       <?php } ?>
                    </select>

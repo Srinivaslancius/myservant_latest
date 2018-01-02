@@ -100,7 +100,7 @@
                     <input type="hidden" name="user_name" value="<?php echo $_POST['user_name']; ?>">
                     <input type="hidden" name="user_mobile_cust" value="<?php echo $_POST['user_mobile']; ?>" id="user_mobile_cust">
                     <input type="hidden" name="user_email" value="<?php echo $_POST['user_email']; ?>">
-                    <input type="hidden" name="user_password" value="<?php echo encryptPassword($_POST['user_password']); ?>">
+                    <input type="hidden" name="user_password" value="<?php echo encryptPassword($_POST['user_password']); ?>"><input type="hidden" name="checkout_key" value="<?php echo $_POST['checkout_key']; ?>" id="checkout_key">
                     
                     <label for="number">Mobile No:</label>
                     <input type="text" id="user_mobile" name="user_mobile" class="form-control valid_mobile_num" placeholder="Enter Phone number" value="<?php echo $_POST['user_mobile']; ?>" maxlength="10" pattern="[0-9]{10}" readonly required>
@@ -132,11 +132,8 @@
 <div class="layer"></div><!-- Mobile menu overlay mask -->
 
 <!-- Login modal -->   
- 
     
-<!-- Register modal -->   
-
-
+<!-- Register modal -->
 
 <script src="js/jquery-2.2.4.min.js"></script>
 <script src="js/common_scripts_min.js"></script>
@@ -152,6 +149,7 @@ $('#verify_otp').on('click', function () {
 
   var user_mobile = $('#user_mobile').val();
   var mobile_otp = $('#mobile_otp').val();
+  var checkout_key = $('#checkout_key').val();
   if(user_mobile!='' && mobile_otp!='') {
 
       $.ajax({
@@ -166,7 +164,11 @@ $('#verify_otp').on('click', function () {
           } else {
             //Success
             alert("OTP verified");
-            window.location.href = 'index.php';
+            if (checkout_key == '') {
+                window.location.href = 'index.php';
+            } else {
+                window.location.href = 'checkout.php';
+            }
           }
         }
       });
