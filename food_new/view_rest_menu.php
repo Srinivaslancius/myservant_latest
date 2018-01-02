@@ -386,6 +386,7 @@ function remove_cart_item1(cartId) {
   	$('#cart_cnt').html($('#total_cart_count').val());
   	
   	if($('#cart_total').val() == 0) {
+  		$('.sub_total,.dev_charge,.total').hide();  		
   		$('.order_now').css({"pointer-events": "none", "cursor": "not-allowed", "background-color": "#d4d4d4"});
   	} else {
   		$('.order_now').removeAttr("style");
