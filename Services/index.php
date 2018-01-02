@@ -238,7 +238,7 @@ if(isset($_POST['submit'])) {
 					<div class="tour_container prdct" style="height:180px">
 						<div class="ribbon_3 popular"><!-- <span>Popular</span> --></div>
 						<div class="img_container">
-                           <img src="<?php echo $base_url . 'uploads/services_category_images/'.$getAllCategoriesData['category_image'] ?>" class="img-responsive" alt="<?php echo $getAllCategoriesData['category_name']; ?>" style="width:75%; height:auto;">
+                           <img src="<?php echo $base_url . 'uploads/services_category_images/'.$getAllCategoriesData['category_image'] ?>" class="img-responsive img_wdth" alt="<?php echo $getAllCategoriesData['category_name']; ?>" style="width:75%; height:75%;">
 						</div>
 						<div class="tour_title">
 							<h3><?php echo $getAllCategoriesData['category_name']; ?></h3>
@@ -267,7 +267,7 @@ if(isset($_POST['submit'])) {
         <?php $getServiceProvider =  getServicesProviderDataLimit('1','6'); ?>
                 <?php  while($getAllgetServiceProvider = $getServiceProvider->fetch_assoc()) { ?>
         <div class="col-md-6 wow fadeIn" data-wow-delay="0.3s">
-          <div class="feature prdct">
+          <div class="feature prdct mrgn_tp">
           <div class="row">
           <div class="col-sm-2">
             <center><img src="<?php echo $base_url . 'uploads/service_provider_business_logo/'.$getAllgetServiceProvider['logo'] ?>" class="img-responsive" alt="<?php echo $getAllgetServiceProvider['company_name']; ?>" style="width:65px; height:65px;margin-top:40px;margin-bottom:40px"></center>

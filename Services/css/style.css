@@ -4953,7 +4953,7 @@ ul.slides-container li img{
 }
 .language{
         background-color:transparent !important;
-        /* color: #333 !important; */
+        color: #333 !important;
         width:75px !important;
         -webkit-height:20px !important;
         height:22px !important;
@@ -4966,7 +4966,13 @@ ul.slides-container li img{
     }
     
     @media only screen and (max-width: 480px) {
-
+		.panel-body{
+			padding:15px!important;
+			text-align:justify;
+		}
+.img_container .img-responsive.img_wdth{
+	width:47% !important;
+}
 /*footer h3,li{
     text-align:center !important;
     }*/
@@ -5025,9 +5031,7 @@ ul.slides-container li img{
         width:100% !important;
         height:100% !important;
     }
-    .search_back{
-        margin-top: 6px !important;
-    }
+   
     .carousel-control.right{
         padding-left:0px !important;
         margin-top:350px !important;
@@ -5060,7 +5064,7 @@ ul#top_tools a{
     height: 25px !important;
 }
 #logo_home h1 a, header.sticky #logo_home h1 a, header#plain #logo_home h1 a, header#colored #logo_home h1 a {
-    background-size: auto 25px !important;
+    background-size: auto 30px !important;
 }
 
 /* New chnages swapna added for banner responsive */
@@ -5068,8 +5072,11 @@ ul#top_tools a{
        width:100% !important;
        height:150px !important;
         padding:0px !important;
-        margin-top:65px !important;
+        margin-top:55px !important;
         margin-bottom:0px !important;
+}
+header#plain{
+	padding-bottom:0px !important;
 }
 .search_back{
    margin-top: -10px !important;
