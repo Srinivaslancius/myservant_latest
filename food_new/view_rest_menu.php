@@ -161,7 +161,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
         $cartItems = getAllDataWhere('food_cart','session_cart_id',$session_cart_id);
     } 
 ?>
-
+<input type="hidden" id="key" value="<?php echo $getRestKey?>">
 <div class="container margin_60_35">
 		<div class="row">
         
@@ -194,14 +194,14 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 							<h3 style="color:white;font-size:18px;padding-left:10px">Menu</h3>
 						</div>
 						<div class="col-sm-8">
-						<!-- <form style="margin-top:10px">
+						<form style="margin-top:10px">
 							<div class="input-group add-on">
-								<input class="form-control two" placeholder="Search dishes.." name="srch-term" id="srch-term" type="text">
+								<input class="form-control two" placeholder="Search dishes.." name="search_item" id="srch-term" type="text">
 								<div class="input-group-btn">
-								<button class="btn btn-default" type="submit" style="padding:9px 12px;"><i class="glyphicon glyphicon-search"></i></button>
+								<!-- <button class="btn btn-default" type="submit" style="padding:9px 12px;"><i class="glyphicon glyphicon-search"></i></button> -->
 								</div>
 							</div>
-						</form> -->
+						</form>
 						</div>
 						<div class="col-sm-2">
 							<h3 style="color:white;font-size:18px"><label><input name="item_type" type="checkbox" value="1" class="vegeterian"></label> Veg</h3>
@@ -209,7 +209,6 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 					</div>
 				</div>
 					<div class="veg_products1">
-					<input type="hidden" id="key" value="<?php echo $getRestKey?>">
                     <?php while($getCatList1 = $getCategory1->fetch_assoc() ) { ?>
                     <hr>
 					<h5 class="nomargin_top" id="<?php echo $getCatList1['category_id']; ?>"><b><?php $getCatName = getIndividualDetails('food_category','id',$getCatList1['category_id']); echo $getCatName['category_name']; ?></b></h5>
@@ -514,6 +513,21 @@ function show_cart() {
 	     type: "POST",
 	     url: url,
 	     data: "item_type="+item_type+"&key="+key, 
+	     success: function(data)
+	     {                  
+	        //alert(data);
+	        $('.veg_products1').html(data);
+	     }               
+	   });
+	  return false;
+	});
+	$('.two').keyup(function() {
+		var item_name = $(".two").val();
+		var key = $("#key").val();
+	   $.ajax({
+	     type: "POST",
+	     url: 'search_dishes.php',
+	     data: "item_name="+item_name+"&key="+key, 
 	     success: function(data)
 	     {                  
 	        //alert(data);
