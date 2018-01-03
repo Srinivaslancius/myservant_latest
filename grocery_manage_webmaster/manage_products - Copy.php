@@ -5,14 +5,9 @@
         } else  {
             //If success
             $product_name = $_POST['product_name'];
-            $grocery_category_id = $_POST['grocery_category_id'];
-            $grocery_sub_category_id = $_POST['grocery_sub_category_id'];
-            $product_description = $_POST['product_description'];
-            $brands_id = implode(',',$_POST["brands_id"]);
-            $keywords = $_POST['keywords'];
             $fileToUpload = $_FILES["fileToUpload"]["name"];
+            $description = $_POST['description'];
             $lkp_status_id = $_POST['lkp_status_id'];
-
             if($fileToUpload!='' ) {
 
                 $target_dir = "../uploads/grocery_product_images/";
@@ -23,11 +18,11 @@
 
                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                     
-                     $sql = "INSERT INTO grocery_products (`product_name`,`product_image`,`grocery_category_id`,`grocery_sub_category_id`,`product_description`,`keywords`,`brands_id`,`lkp_status_id`) VALUES ('$product_name','$fileToUpload','$grocery_category_id','$grocery_sub_category_id','$product_description','$keywords','$brands_id','$lkp_status_id')"; 
+                     $sql = "INSERT INTO grocery_products (`title`,`image`,`description`,`lkp_status_id`) VALUES ('$title','$fileToUpload','$description','$lkp_status_id')"; 
                     if($conn->query($sql) === TRUE){
-                       echo "<script type='text/javascript'>window.location='manage_products.php?msg=success'</script>";
+                       echo "<script type='text/javascript'>window.location='testimonials.php?msg=success'</script>";
                     } else {
-                       echo "<script type='text/javascript'>window.location='manage_products.php?msg=fail'</script>";
+                       echo "<script type='text/javascript'>window.location='testimonials.php?msg=fail'</script>";
                     }
                     //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
                 } else {
@@ -56,7 +51,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Select Category</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <select name="grocery_category_id" id="grocery_category_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required onChange="getSubCategory(this.value);">
+                                    <select name="grocery_category_id" id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }">
                                         <option value="">-- Select Category --</option>
                                         <?php while($row = $getGroceryCategories->fetch_assoc()) {  ?>
                                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['category_name']; ?></option>
@@ -67,34 +62,43 @@
                             <div class="form-group">
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Select Sub Category</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <select name ="grocery_sub_category_id" id="grocery_sub_category_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }">
-                                        <option value="">Select Grocery Sub Category</option>
+                                    <select id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
+                                        <option value="">-- Select Category --</option>
+                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     </select>
                                 </div>
                             </div>
-                    
+                            <div class="form-group">
+                                <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Select Brand</label>
+                                <div class="col-sm-6 col-md-4">
+                                    <select id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
+                                        <option value="">-- Select Category --</option>
+                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-sm-3  col-md-4 control-label" for="form-control-8">Product Description</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <textarea name="product_description" id="product_description" class="form-control" rows="3" required></textarea>
+                                    <textarea id="form-control-8" class="form-control" rows="3" required></textarea>
                                 </div>
                             </div>
-                            <?php $getGroceryBrands = getAllDataWithStatus('grocery_brand_logos','0');?>
                             <div class="form-group">
                                 <label for="form-control-1" class="col-sm-3 col-md-4 control-label">Brands Applicable</label>
                                     <div class="col-sm-6 col-md-4">
-                                        <select name="brands_id[]" id="form-control-2" class="form-control" data-plugin="select2" multiple="multiple">
-                                            <option value="">-- Select Brands --</option>
-                                        <?php while($row = $getGroceryBrands->fetch_assoc()) {  ?>
-                                            <option value="<?php echo $row['id']; ?>" ><?php echo $row['title']; ?></option>
-                                          <?php } ?>
+                                        <select id="form-control-2" class="form-control" data-plugin="select2" multiple="multiple" required>
+                                            <option value="option1">HTML</option>
+                                            <option value="option2">CSS</option>
+                                            <option value="option3">Javascript</option>
+                                            <option value="option4">PHP</option>
+                                            <option value="option5">Bootstrap</option>
                                         </select>
                                     </div>
                             </div>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Keywords</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" name= "keywords" class="form-control" id="keywords" placeholder="Enter Keywords" required>
+                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Keywords" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -128,8 +132,8 @@
             </div>
             <div class="panel panel-default panel-table m-b-0">
                 <div class="panel-heading">
-                    <h3 class="m-t-0 m-b-5 font_sz_view">Products</h3>
-                    <?php $getProductsData = getAllDataWithActiveRecent('grocery_products'); $i=1; ?>
+                    <h3 class="m-t-0 m-b-5 font_sz_view">Testimonials</h3>
+                    <?php $getCategoriesData = getAllDataWithActiveRecent('grocery_testimonials'); $i=1; ?>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -137,28 +141,22 @@
                             <thead>
                                 <tr>
                                     <th>S.NO</th>
-                                    <th>Product Name</th>
-                                    <th>Category Name</th>
-                                    <th>Product Description</th>
-                                    <th>Keywords</th>
-                                    <th>Product Image</th>
+                                    <th>Title</th>
+                                    <th>Image</th>
+                                    <th>Testimonial</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while ($row = $getProductsData->fetch_assoc()) { ?>
+                                <?php while ($row = $getCategoriesData->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?php echo $i;?></td>
-
-                                    <td><?php echo $row['product_name'];?></td>
-                                    <td><?php $getGroceryCategories = getAllData('grocery_category'); while($getGroceryCategories1 = $getGroceryCategories->fetch_assoc()) { 
-                                        if($row['grocery_category_id'] == $getGroceryCategories1['id']) { echo $getGroceryCategories1['category_name']; } } ?></td>
-                                    <td><?php echo substr(strip_tags($row['product_description']), 0,150);?></td>
-                                    <td><?php echo $row['keywords'];?></td>
-                                    <td><img src="<?php echo $base_url . 'uploads/grocery_product_images/'.$row['product_image'] ?>" width="100" height="100"></td>
-                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_products'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_products'>In Active</span>" ;} ?></td>
-                                    <td><span><a href="edit_manage_products.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td>
+                                    <td><?php echo $row['title'];?></td>
+                                    <td><img src="<?php echo $base_url . 'uploads/grocery_testimonials_images/'.$row['image'] ?>" width="100" height="100"></td>
+                                      <td><?php echo substr(strip_tags($row['description']), 0,150);?></td>
+                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_testimonials'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_testimonials'>In Active</span>" ;} ?></td>
+                                    <td><span><a href="edit_manage_testimonials.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td>
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>
@@ -170,20 +168,7 @@
         <div class="site-footer">
           2017 © Cosmos
         </div>
-<script type="text/javascript">
-    
-    function getSubCategory(val) {
-        $.ajax({
-        type: "POST",
-        url: "get_subcategories.php",
-        data:'grocery_category_id='+val,
-        success: function(data){
-            $("#grocery_sub_category_id").html(data);
-        }
-        });
-    }
-    
-    </script>
+
     <script src="js/vendor.min.js"></script>
     <script src="js/cosmos.min.js"></script>
     <script src="js/application.min.js"></script>
