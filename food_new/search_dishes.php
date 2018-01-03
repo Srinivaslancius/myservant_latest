@@ -12,6 +12,7 @@ if(isset($_POST['item_name']) && $_POST['item_name']!='' ) {
 }
 ?>
 <?php if($getItemNames->num_rows > 0) { ?>
+<?php if($getItemNames->num_rows > 0) { ?>
     <?php while($getItemsList = $getItemNames->fetch_assoc()) { ?>
     <hr>
     <h5 class="nomargin_top" id="<?php echo $getItemsList['category_id']; ?>"><b><?php $getItemData = getIndividualDetails('food_category','id',$getItemsList['category_id']); echo $getItemData['category_name']; ?></b></h5>
@@ -98,5 +99,12 @@ if(isset($_POST['item_name']) && $_POST['item_name']!='' ) {
         <tbody>
            <p style="text-align:center"> No Records Found</p>
         </tbody>        
+    </table>
+<?php } ?>
+<?php } else { ?>
+    <table>
+        <tbody>
+            <p style="text-align:center">No Records Found</p>
+        </tbody>
     </table>
 <?php } ?>
