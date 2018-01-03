@@ -5551,7 +5551,7 @@ a.thumbnail.active,a.thumbnail:focus,a.thumbnail:hover {
     box-shadow: inset 0 1px 2px rgba(0,0,0,.1)
 }
 
-.progress-bar {
+/*.progress-bar {
     float: left;
     width: 0;
     height: 100%;
@@ -5565,9 +5565,9 @@ a.thumbnail.active,a.thumbnail:focus,a.thumbnail:hover {
     -webkit-transition: width .6s ease;
     -o-transition: width .6s ease;
     transition: width .6s ease
-}
+}*/
 
-.progress-bar-striped,.progress-striped .progress-bar {
+/*.progress-bar-striped,.progress-striped .progress-bar {
     background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
     background-image: -o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
     background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
@@ -5619,7 +5619,7 @@ a.thumbnail.active,a.thumbnail:focus,a.thumbnail:hover {
     background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
     background-image: -o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
     background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent)
-}
+}*/
 
 .media {
     margin-top: 15px

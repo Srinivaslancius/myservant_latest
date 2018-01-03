@@ -9,7 +9,7 @@ if (!isset($_POST['submit']))  {
     $restaurant_id = $_POST['restaurant_id'];
     $product_name = $_POST['product_name'];
     $category_id = $_POST['category_id'];
-
+    $item_type = $_POST['item_type'];
     $specifications = $_POST['specifications'];
     //$availability_id = $_POST['availability_id'];
     $lkp_status_id = $_POST['lkp_status_id'];
@@ -23,7 +23,7 @@ if (!isset($_POST['submit']))  {
               $getImgUnlink = getImageUnlink('product_image','food_products','id',$id,$target_dir);
                 //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
               if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                $sql1 = "UPDATE food_products SET restaurant_id = '$restaurant_id',product_name = '$product_name',product_image='$fileToUpload', category_id ='$category_id', specifications = '$specifications', lkp_status_id = '$lkp_status_id' WHERE id = '$id'"; 
+                $sql1 = "UPDATE food_products SET restaurant_id = '$restaurant_id',product_name = '$product_name',product_image='$fileToUpload', category_id ='$category_id', specifications = '$specifications',item_type = '$item_type', lkp_status_id = '$lkp_status_id' WHERE id = '$id'"; 
     
         if ($conn->query($sql1) === TRUE) {
         echo "Record updated successfully";
@@ -33,7 +33,7 @@ if (!isset($_POST['submit']))  {
       }  
 
     } else{
-            $sql1 = "UPDATE food_products SET restaurant_id = '$restaurant_id',product_name = '$product_name',category_id ='$category_id', specifications = '$specifications',  lkp_status_id = '$lkp_status_id' WHERE id = '$id'";
+            $sql1 = "UPDATE food_products SET restaurant_id = '$restaurant_id',product_name = '$product_name',category_id ='$category_id', specifications = '$specifications',item_type = '$item_type',  lkp_status_id = '$lkp_status_id' WHERE id = '$id'";
             if ($conn->query($sql1) === TRUE) {
               echo "Record updated successfully";
             } else {
@@ -89,7 +89,8 @@ if (!isset($_POST['submit']))  {
             <div class="row">
               <?php $getProductsData = getAllDataWhereWithActive('food_products','id',$id); 
                 $getProducts = $getProductsData->fetch_assoc();
-                $getCategories = getAllDataWithStatus('food_category','0');;
+                $getCategories = getAllDataWithStatus('food_category','0');
+                $getProductTypes = getAllDataWithStatus('food_product_type','0');
                 ?>
                 
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
@@ -201,8 +202,19 @@ if (!isset($_POST['submit']))  {
                         <label for="form-control-2" class="control-label">Choose More Ingredients&nbsp;</label>
                          <a href="javascript:void(0);"  ><img src="add-icon.png" onkeypress="return isNumberKey(event)" onclick="addInput1('dynamicInput1');"/></a>
                     </div>  
-                      <div id="dynamicInput1" class="input-field col s12"></div>
-                  
+                    <div id="dynamicInput1" class="input-field col s12"></div>
+                    
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose Item Type</label>
+                    <select id="form-control-3" name="item_type" class="custom-select" data-error="This field is required." required>
+                      <option value="">Select Item Type</option>
+                      <?php while($row = $getProductTypes->fetch_assoc()) {  ?>
+                        <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == $getProducts['item_type']) { echo "selected=selected"; }?> ><?php echo $row['product_type']; ?></option>
+                    <?php } ?>
+                   </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Short Description</label>
                     <textarea name="specifications" class="form-control" maxlength="150" placeholder="Product Info" data-error="This field is required." required><?php echo $getProducts['specifications']; ?></textarea>

@@ -14,7 +14,7 @@ $getVendorOrdersData = $conn->query($getAllVendorOrdersData);
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
             <!-- <a href="add_food_products.php" style="float:right">Add Products</a> -->
-            <h3 class="m-t-0 m-b-5"> Vendor Orders</h3>
+            <h3 class="m-t-0 m-b-5">Vendor Orders</h3>
           </div>
            <div class="panel-body">
             <div class="table-responsive">
@@ -23,7 +23,7 @@ $getVendorOrdersData = $conn->query($getAllVendorOrdersData);
                 <thead>
                   <tr>
                     <th>S.No</th>
-                    <th>First Name</th>
+                    <th>User Name</th>
                     <th>Order Price</th>
                     <th>Actions</th>
                     
@@ -34,9 +34,8 @@ $getVendorOrdersData = $conn->query($getAllVendorOrdersData);
                   <tr>
                     <td><?php echo $i;?></td>
                     <td><?php echo $row['first_name'];?></td>
-
                     <td><?php echo $row['order_total'];?></td>
-                    <td><a target="_blank" href="invoice.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-local-printshop"  class=""></i></a></td>
+                    <td><a target="_blank" href="invoice.php?order_id=<?php echo $row['order_id']; ?>"><i class="zmdi zmdi-local-printshop" class=""></i></a></td>
                      
                   </tr>
                   <?php  $i++; } ?>

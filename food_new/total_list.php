@@ -9,14 +9,22 @@ while($getRestaurantsData = $getRestaurants->fetch_assoc()) {
  $output .=  ' <input type="hidden" id="get_res_cnt" value='.$getRestaurants->num_rows .'><div class="col-md-6 filter_data">
                 <div class="strip_list wow fadeIn" data-wow-delay="0.1s">
                         <div class="row">
-                                <div class="col-md-8 col-sm-9">
+                                <div class="col-md-12 col-sm-12">
                                         <div class="desc">
                                                 <div class="thumb_strip">
                                                     <a href="view_rest_menu.php?key='.encryptPassword($getRestaurantsData['id']).'"><img src="'.$img.'" alt=""></a>
                                                 </div>
-                                                
+                                                <div class="row">
+												<div class="col-md-7 col-sm-7">
                                                 <h4>'.$getRestaurantsData['restaurant_name'].'</h4>
-                                                <div class="type">
+												</div>
+												<div class="col-md-5 col-sm-5">
+												 <div  class="go_to"style="height:10px">                                             
+                                                    <a href="view_rest_menu.php?key='.encryptPassword($getRestaurantsData['id']).'" class="btn_1"style="padding:10px">View Menu</a>                                             
+												</div>
+												</div>
+                                                </div>
+                                                <div class="type"style="text-align:justify">
                                                     '.substr($getRestaurantsData['description'], 0,150).'
                                                 </div>
                                                 
@@ -26,13 +34,7 @@ while($getRestaurantsData = $getRestaurants->fetch_assoc()) {
                                                 </div>
                                         </div>
                                 </div>
-                                <div class="col-md-4 col-sm-3">
-                                        <div class="go_to">
-                                                <div>
-                                                    <a href="view_rest_menu.php?key='.encryptPassword($getRestaurantsData['id']).'" class="btn_1">View Menu</a>
-                                                </div>
-                                        </div>
-                                </div>
+                                
                         </div><!-- End row-->
                 </div><!-- End strip_list-->
             </div>';

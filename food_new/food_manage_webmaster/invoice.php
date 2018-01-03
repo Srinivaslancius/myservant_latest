@@ -17,12 +17,13 @@ $getRestaurants = getIndividualDetails('food_vendors','id',$getOrdersData1['rest
 
 $getpaymentTypes = getIndividualDetails('lkp_payment_types','id',$getOrdersData1['payment_method']);
 
-$orderStatus = getIndividualDetails('lkp_order_status','id',$getOrdersData1['lkp_order_status_id']);
+$orderStatus = getIndividualDetails('lkp_food_order_status','id',$getOrdersData1['lkp_order_status_id']);
 
 $paymentStatus = getIndividualDetails('lkp_payment_status','id',$getOrdersData1['lkp_payment_status_id']);
 
 $getAddOnsPrice = "SELECT * FROM food_order_ingredients WHERE order_id = '$order_id'";
 $getAddontotal = $conn->query($getAddOnsPrice);
+$getAddontotalCount = $getAddontotal->num_rows;
 $getAdstotal = 0;
 while($getAdTotal = $getAddontotal->fetch_assoc()) {
     $getAdstotal += $getAdTotal['item_ingredient_price'];
@@ -122,14 +123,28 @@ if($getOrdersData1['delivery_charges'] == '0') {
 		<td>
 		<p>Subtotal:</p>
 		<p>Tax:</p>
+		<?php if($getOrdersData1['delivery_charges'] != '0') { ?>
 		<p>Delivery Charges:</p>
+		<?php } ?>
+		<?php if($getAddontotalCount > 0) { ?>
 		<p>Ingredients Price:</p>
+		<?php } ?>
+		<?php if($getOrdersData1['coupen_code'] != '') { ?>
+		<p>Discount:</p>
+		<?php } ?>
 		<p style="color:#f26226">Grand Total:</p>
 		</td>
 		<td style="color:#f26226"><p>Rs. <?php echo $getOrdersData1['sub_total']?></p>
 		<p>Rs. <?php echo $service_tax.'('.$getSiteSettingsData['service_tax'].'%)' ?></p>
+		<?php if($getOrdersData1['delivery_charges'] != '0') { ?>
 		<p>Rs. <?php echo $delivery_charges?></p>
+		<?php } ?>
+		<?php if($getAddontotalCount > 0) { ?>
 		<p>Rs. <?php echo $getAdstotal?></p>
+		<?php } ?>
+		<?php if($getOrdersData1['coupen_code'] != '') { ?>
+		<p>Rs. <?php echo $getOrdersData1['discout_money']?>(<span style="color:green">Coupon Applied.</span>)</p>
+		<?php } ?>
 		<p>Rs. <?php echo $getOrdersData1['order_total']?></p></td>
       </tr>
     </tbody>

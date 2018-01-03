@@ -127,7 +127,7 @@ h3 .slide_typo strong {
 }
 
 .feature h3 span,a {
-    color: #f26426;
+    color: #555;
     /* margin-left: 100px; */
 }
 
@@ -946,10 +946,11 @@ a.strip_list:hover h3 {
 
 .desc .type {
     font-size: 12px;
-    font-style: italic;
+    /*! font-style: italic; */
     color: #777;
     margin-bottom: 12px;
-    margin-top: 5px
+    margin-top: 5px;
+    text-align: justify;
 }
 
 .desc ul li i.no,.desc ul li i.ok {
@@ -1938,6 +1939,7 @@ select.form-control.form-white {
 
 .add_bottom_30 {
     /* margin-bottom: 30px */
+    text-align: justify;
 }
 
 .add_bottom_45 {
@@ -3266,7 +3268,7 @@ font-weight:bold;
 }
 #custom-search-input input.btn_search {
 	/*width: 120px;*/
-	width: 53px;
+	width: 52px;
 height: 38px;
 }
 .btn-danger{
@@ -3306,7 +3308,7 @@ h3.slide_typo{
     font-size:20px !important;
 }
 #country-list{
-    width:100% !important;
+    width:80% !important;
 }
 .btn-info{
     padding-left:40px !important;
@@ -3318,7 +3320,7 @@ h3.slide_typo{
 }
 #country-list {
     padding: 0;
-    margin-left:-10px !important;
+    margin-left:-13px !important;
 }
 #sub_content h1 {
     font-size: 30px !important;
@@ -3345,6 +3347,16 @@ h3.slide_typo{
 footer ul {
     margin: 0;
     padding: 0 12px 20px;
+}
+.desc .type {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 12px;
+    margin-top: 5px;
+    text-align: center;
+}
+.type{
+	text-align:center !important;
 }
 }
 /*  media query 480 end */
@@ -3415,3 +3427,19 @@ footer ul {
     font-size: 13px;
     margin:12px 0px;
 }
+/*@media only screen and (max-width: 640px) {
+	.container{
+		padding-left:25px !important;
+		padding-right:25px !important;
+	}
+	.myservanrlogo {
+		margin-left:80px !important;
+	}
+	#custom-search-input, #custom-search-input .search-query {
+    width: 270px !important;
+    margin-left: -14px !important;
+}
+#custom-search-input input.btn_search {
+	width:120px !important;;
+}
+}*/

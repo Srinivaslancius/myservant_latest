@@ -100,8 +100,8 @@
 
             <div class="ribbon_3 popular"><!-- <span>Popular</span> --> 
             </div>
-            <div class="img_container padd15">
-                        <img src="<?php echo $base_url . 'uploads/services_sub_category_images/'.$getAllSubCategoriesData['sub_category_image'] ?>" style="width:64px; height:64px;" class="img-responsive" alt="<?php echo $getAllSubCategoriesData['sub_category_name']; ?>">
+            <div class="img_container">
+                        <img src="<?php echo $base_url . 'uploads/services_sub_category_images/'.$getAllSubCategoriesData['sub_category_image'] ?>" style="width:80%; height:auto;" class="img-responsive" alt="<?php echo $getAllSubCategoriesData['sub_category_name']; ?>">
             </div>
             <div class="tour_title">
               <h3><?php echo $getAllSubCategoriesData['sub_category_name']; ?></h3>

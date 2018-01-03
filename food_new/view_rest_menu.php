@@ -78,21 +78,7 @@ background-color:white;
 border-color:white;
 font-size:13px;
 }
-/*::-webkit-input-placeholder {
-  color: red;
-}
 
-:-moz-placeholder { /* Firefox 18- */
-  color: red;  
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-  color: red;  
-}
-
-:-ms-input-placeholder {  
-   color: red;  */
-}
 </style>
 </head>
 
@@ -144,8 +130,8 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 	<div id="sub_content">
     	<div id="thumb"><img src="<?php echo $base_url . 'uploads/food_vendor_logo/'.$getFoodVendorsBann['logo']; ?>" alt="<?php echo $getMostPopualrRestaurants['restaurant_name']; ?>"></div>
 	         <div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="#">Read 98 reviews</a></small>)</div>
-	        <h1><?php echo $getFoodVendorsBann['restaurant_name']; ?></h1>
-	        <div><em><?php echo $getFoodVendorsBann['description']; ?></em></div>
+	        <h1 style="font-size:28px"><?php echo $getFoodVendorsBann['restaurant_name']; ?></h1>
+	        <div><em style="font-size:13px"><?php echo $getFoodVendorsBann['description']; ?></em></div>
 	        <div><i class="icon_pin"></i> <?php echo $getFoodVendorsBann['restaurant_address']; ?> </div>
     </div><!-- End sub_content -->
 </div><!-- End subheader -->
@@ -175,12 +161,13 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
         $cartItems = getAllDataWhere('food_cart','session_cart_id',$session_cart_id);
     } 
 ?>
-
+<input type="hidden" id="key" value="<?php echo $getRestKey?>">
 <div class="container margin_60_35">
 		<div class="row">
         
-			<div class="col-md-3">
+			<div class="col-md-3" id="sidebar1">
                 <p><a onclick="history.go(-1);" class="btn_side">Back to search</a></p>
+				<div class="theiaStickySidebar">
 				<div class="box_style_1">
 					<ul id="cat_nav">						
 						<?php while($getCatList = $getCategory->fetch_assoc() ) { ?>
@@ -195,6 +182,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 					<a href="tel:<?php echo $getFoodVendorsBann['vendor_mobile']; ?>" class="phone">+91- <?php echo $getFoodVendorsBann['vendor_mobile']; ?></a>
 					<small>Monday to Friday <?php echo $getFoodVendorsBann['working_timings']; ?></small>
 				</div>
+				</div>
 			</div><!-- End col-md-3 -->
             <?php $getCategory1 = getFoodCategoryByRestId('food_products','restaurant_id',$getRestKey); ?>
 
@@ -206,20 +194,21 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 							<h3 style="color:white;font-size:18px;padding-left:10px">Menu</h3>
 						</div>
 						<div class="col-sm-8">
-						<!-- <form style="margin-top:10px">
+						<form style="margin-top:10px">
 							<div class="input-group add-on">
-								<input class="form-control two" placeholder="Search dishes.." name="srch-term" id="srch-term" type="text">
+								<input class="form-control two" placeholder="Search dishes.." name="search_item" id="srch-term" type="text">
 								<div class="input-group-btn">
-								<button class="btn btn-default" type="submit" style="padding:9px 12px;"><i class="glyphicon glyphicon-search"></i></button>
+								<!-- <button class="btn btn-default" type="submit" style="padding:9px 12px;"><i class="glyphicon glyphicon-search"></i></button> -->
 								</div>
 							</div>
-						</form> -->
+						</form>
 						</div>
 						<div class="col-sm-2">
-							<h3 style="color:white;font-size:18px"><label><input name="mobile" type="checkbox" value="" class="icheck"></label>Veg</h3>
+							<h3 style="color:white;font-size:18px"><label><input name="item_type" type="checkbox" value="1" class="vegeterian"></label> Veg</h3>
 						</div>
 					</div>
 				</div>
+					<div class="veg_products1">
                     <?php while($getCatList1 = $getCategory1->fetch_assoc() ) { ?>
                     <hr>
 					<h5 class="nomargin_top" id="<?php echo $getCatList1['category_id']; ?>"><b><?php $getCatName = getIndividualDetails('food_category','id',$getCatList1['category_id']); echo $getCatName['category_name']; ?></b></h5>
@@ -252,7 +241,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 						<td>
                         	<figure class="thumb_menu_list"><img src="<?php echo $base_url . 'uploads/food_product_images/'.$getItemsByCategory['product_image']; ?>" alt="<?php echo $getItemsByCategory['product_name']; ?>" ></figure>
 							<h5><?php echo $i; ?>. <?php echo $getItemsByCategory['product_name']; ?></h5>
-							<p style="font-size:13px">
+							<p style="font-size:13px;text-align:justify">
 								<?php echo $getItemsByCategory['specifications']; ?>
 							</p>
 						</td>
@@ -303,6 +292,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 
 					</table>
 					<?php } ?>
+					</div>
 
 				</div><!-- End box_style_1 -->
 			</div><!-- End col-md-6 -->    
@@ -311,7 +301,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
             	<div class="theiaStickySidebar">
 					<div id="cart_box">		
 						<h3>Your order<!--  <i class="icon_cart_alt pull-right"></i> --></h3>			
-						<span id="mycart">
+						<span id="mycart">						
 						</span>
 						<hr>						
                         <a href="cart.php" class="btn_full order_now">Book now <i class="icon-left"></i></a>
@@ -352,6 +342,11 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 <script src="js/theia-sticky-sidebar.js"></script>
 <script>
     jQuery('#sidebar').theiaStickySidebar({
+      additionalMarginTop: 80
+    });
+</script>
+<script>
+    jQuery('#sidebar1').theiaStickySidebar({
       additionalMarginTop: 80
     });
 </script>
@@ -400,6 +395,7 @@ function remove_cart_item1(cartId) {
   	$('#cart_cnt').html($('#total_cart_count').val());
   	
   	if($('#cart_total').val() == 0) {
+  		$('.sub_total,.dev_charge,.total').hide();  		
   		$('.order_now').css({"pointer-events": "none", "cursor": "not-allowed", "background-color": "#d4d4d4"});
   	} else {
   		$('.order_now').removeAttr("style");
@@ -506,7 +502,41 @@ function show_cart() {
 }
 
 </script>
-
+<script type="text/javascript">
+	$(document).on('change','.vegeterian',function(){
+		var key = $("#key").val();
+		if($(".vegeterian").is(":checked")){
+			var item_type = $(this).val();
+		}
+	   var url = "veg_products.php";
+	   $.ajax({
+	     type: "POST",
+	     url: url,
+	     data: "item_type="+item_type+"&key="+key, 
+	     success: function(data)
+	     {                  
+	        //alert(data);
+	        $('.veg_products1').html(data);
+	     }               
+	   });
+	  return false;
+	});
+	$('.two').keyup(function() {
+		var item_name = $(".two").val();
+		var key = $("#key").val();
+	   $.ajax({
+	     type: "POST",
+	     url: 'search_dishes.php',
+	     data: "item_name="+item_name+"&key="+key, 
+	     success: function(data)
+	     {                  
+	        //alert(data);
+	        $('.veg_products1').html(data);
+	     }               
+	   });
+	  return false;
+	});
+</script>
 </body>
 
 <?php include "search_js_script.php"; ?>

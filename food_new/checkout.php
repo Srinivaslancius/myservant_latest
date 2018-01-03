@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
-<html>
+<html style="overflow-x:hidden">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -137,6 +137,35 @@
 	border-top-right-radius:4px;
 	border-bottom-right-radius:4px;
 }
+.alert-dismissable .close1{
+    position: relative;
+    top: -2px;
+    color: inherit;
+	 right: 80px;
+    opacity: 2;
+    font-size: 15px;
+	font-weight:bold;
+	cursor:pointer;
+}
+.close1 {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+@media only screen and (max-width: 480px) {
+	.alert-dismissable .close1{
+	right: 5px;	
+	}
+	.two{
+		width:200px !important;;
+	}
+	
+}
 </style>
     <!-- End Header =============================================== -->
 <?php
@@ -145,36 +174,14 @@ if($_SESSION['user_login_session_id'] == '') {
 } 
 ?>
 <!-- SubHeader =============================================== -->
-<section class="parallax-window"  id="short"  data-parallax="scroll" data-image-src="img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
+<section class="parallax-window"  id="short"  data-parallax="scroll" data-image-src="img/img_2.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
     	<div id="sub_content">
-    	 <h1>Place your order</h1>
-            <div class="bs-wizard">
-                <div class="col-xs-4 bs-wizard-step active">
-                  <div class="text-center bs-wizard-stepnum"><strong>1.</strong> Your details</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="#0" class="bs-wizard-dot"></a>
-                </div>
-                               
-                <div class="col-xs-4 bs-wizard-step disabled">
-                  <div class="text-center bs-wizard-stepnum"><strong>2.</strong> Payment</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="#0" class="bs-wizard-dot"></a>
-                </div>
-            
-              <div class="col-xs-4 bs-wizard-step disabled">
-                  <div class="text-center bs-wizard-stepnum"><strong>3.</strong> Finish!</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="#0" class="bs-wizard-dot"></a>
-                </div>  
-		</div><!-- End bs-wizard --> 
+    	 <h1>Place your order</h1>            
         </div><!-- End sub_content -->
 	</div><!-- End subheader -->
 </section><!-- End section -->
 <!-- End SubHeader ============================================ -->
-
-
-
     <div id="position">
         <div class="container">
             <ul>
@@ -280,7 +287,7 @@ if($_SESSION['user_login_session_id'] == '') {
 			$getUserData = getAllDataWhere('users','id',$id);
 			$getUser = $getUserData->fetch_assoc();?>
             <form method="post" name="form">
-			<div class="col-md-6">
+			<div class="col-md-5">
 				<div class="box_style_2" id="order_process">
 					<h2 class="inner">Your order details</h2>
 					<div class="form-group">
@@ -333,7 +340,8 @@ if($_SESSION['user_login_session_id'] == '') {
 				
 						</div>
 					</div>
-				</div><!-- End box_style_1 -->
+				</div>
+				
 			</div><!-- End col-md-6 -->
 
 			<?php 
@@ -356,7 +364,7 @@ if($_SESSION['user_login_session_id'] == '') {
 			<input type="hidden" name='furl' type='text' value='online_order_success.php'>
 			<input type="hidden" name='surl' type='text' value='online_order_failure.php'>
             
-			<div class="col-md-3" id="sidebar">
+			<div class="col-md-4" id="sidebar">
             	<div class="theiaStickySidebar">
 				<div id="cart_box">
 					<h3>Your order <i class="icon_cart_alt pull-right"></i></h3>
@@ -368,7 +376,18 @@ if($_SESSION['user_login_session_id'] == '') {
                     <?php $getProductDetails= getIndividualDetails('food_products','id',$getCartItems['food_item_id']); ?>
 					<tr>
 						<td>
-							 <strong> <?php echo $getCartItems['item_quantity']; ?> x </strong> <?php echo $getProductDetails['product_name']; ?>
+						 <a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onclick="add_cart_item1(67)"></i></a> <strong>1x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item1(67)"></i></a> Biryani
+							 <!--<strong> <?php echo $getCartItems['item_quantity']; ?> x </strong> <?php echo $getProductDetails['product_name']; ?>-->
+							<?php 
+			                $getAddons = "SELECT * FROM food_update_cart_ingredients WHERE food_item_id = '".$getCartItems['food_item_id']."' AND cart_id='".$getCartItems['id']."' AND session_cart_id = '$session_cart_id'";
+			                $getAddonData = $conn->query($getAddons);
+			                while($getadcartItems = $getAddonData->fetch_assoc() ) {
+			               ?>
+			               <div class="alert alert-dismissable" style="margin-bottom:-21px;padding-left:0px">
+						   <a class="close1" ><i class="icon-trash" style="color:#fe6003" onclick="removeIngItem(<?php echo $getadcartItems['id']; ?>);"></i></a>
+						   <p style="font-size:12px"><?php echo $getadcartItems['item_ingredient_name'] . ":". $getadcartItems['item_ingredient_price']; ?> </p>
+						   </div>
+						   <?php } ?>
 						</td>
 						<td>
 							<strong class="pull-right">Rs. <?php echo  $getCartItems['item_price']*$getCartItems['item_quantity']; ?><?php  $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?></strong>
@@ -456,7 +475,7 @@ if($_SESSION['user_login_session_id'] == '') {
 						<div class="form-group">
 						<div class="row">
 						<div class="col-sm-8 col-xs-8">
-									<div class="field-group has-feedback has-clear" style="width:203px;margin-left:21px;margin-top:4px">
+									<div class="field-group has-feedback has-clear two" style="width:260px;margin-left:40px;margin-top:4px">
 								      <input autocomplete="off" type="text" name="coupon_code" style="text-transform:uppercase" id="coupon_code" value="" placeholder="Coupon Code" class="form-control" style="border-radius:0px">
 								      <span class="form-control-clear icon-cancel-1 form-control-feedback hidden" style="border-radius:0px"></span>
 								    </div>
@@ -599,6 +618,18 @@ $('#discount_price').hide();
 	            $('#coupon_code_type').val('');
 			});	
 	});
+	function removeIngItem(ingUniqId) { 
+	  $.ajax({
+	      type:'post',
+	      url:'delete_cart_ingredants.php',
+	      data:{
+	         ingUniqId : ingUniqId,        
+	      },
+	      success:function(response) {
+	        location.reload();
+	      }
+	    });
+	}
 </script>
 </body>
 </html>

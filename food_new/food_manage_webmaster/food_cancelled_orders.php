@@ -1,5 +1,5 @@
 <?php include_once 'admin_includes/main_header.php';?>
-<?php $i=1; $getFoodCancelledOrders = "SELECT * FROM food_orders WHERE lkp_order_status_id = 3 ";
+<?php $i=1; $getFoodCancelledOrders = "SELECT * FROM food_orders WHERE lkp_order_status_id = 6 ";
 $getFoodCancelledOrdersData = $conn->query($getFoodCancelledOrders);
   ?>
      <div class="site-content">
@@ -29,7 +29,7 @@ $getFoodCancelledOrdersData = $conn->query($getFoodCancelledOrders);
                     <td><?php echo $getProductNamesData['product_name'];?></td>
                     <td><?php echo $row['order_id'];?></td>
                     <td><?php echo $row['item_price'];?></td>
-                    <td><?php $orderStatus = getIndividualDetails('lkp_order_status','id',$row['lkp_order_status_id']); echo $orderStatus['order_status']; ?></td>                   
+                    <td><?php $orderStatus = getIndividualDetails('lkp_food_order_status','id',$row['lkp_order_status_id']); echo $orderStatus['order_status']; ?></td>                   
                     <td><?php $orderPaymentStatus = getIndividualDetails('lkp_payment_status','id',$row['lkp_payment_status_id']); echo $orderPaymentStatus['payment_status']; ?></td>
                    </tr>
                   <?php  $i++; } ?>

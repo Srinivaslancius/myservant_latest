@@ -129,7 +129,7 @@ td{
 	right: 45px;	
 	}
 	.table.cart-list td{
-		padding-left: 40%;
+		padding-left: 55%;
 	}
 	.rw_wdth{
 		width:325px;
@@ -164,7 +164,9 @@ td{
 <!-- SubHeader =============================================== -->
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
-		
+		<div id="sub_content">
+		 <h1>Place your order</h1>
+		 </div>
 	</div><!-- End subheader -->
 </section><!-- End section -->
 <!-- End SubHeader ============================================ -->
@@ -213,9 +215,10 @@ td{
 					</thead>
 					<tbody>
 					<?php $cartTotal = 0; $service_tax = 0;
-                          while ($getCartItems = $cartItems->fetch_assoc()) {
-                    ?>
-					<tr>
+                while ($getCartItems = $cartItems->fetch_assoc()) {
+          ?>
+
+					<tr id="get_inc_id_<?php echo $getCartItems['id']; ?>">
 						<td class="rw_wdth"style="width:320px">
 						<div class="row">
 						<div class="col-sm-2 col-xs-12">
@@ -250,7 +253,7 @@ td{
               }
               ?>
 
-               <a href="#" data-toggle="modal" data-target="#<?php echo $getCartItems['id']; ?>"> <i class="icon_plus_alt2" style="font-size:22px;margin-left:10px"></i></a>
+               <a href="#" data-toggle="modal" data-target="#<?php echo $getCartItems['id']; ?>"> <i class="icon_plus_alt2" style="font-size:22px;margin-left:10px;color:#fe6003;"></i></a>
 							<div class="modal fade" id="<?php echo $getCartItems['id']; ?>" role="dialog">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
@@ -316,8 +319,15 @@ td{
 								</div>
 							</div>                        
 						</td>
-            <td style="padding-left:30px;padding-right:30px"> <?php echo $getCartItems['item_quantity']; ?></td>
-						<td>Rs. <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?> /-</td>
+
+						<td style="padding-left:20px;padding-right:30px">
+						<a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onclick="add_cart_item1(<?php echo $getCartItems['id']; ?>)"></i></a> <strong id="ind_quan_<?php echo $getCartItems['id']; ?>"><?php echo $getCartItems['item_quantity']; ?></strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item1(<?php echo $getCartItems['id']; ?>)"></i></a>
+
+            <input type="hidden" id="cart_ind_price_<?php echo $getCartItems['id']; ?>" value="<?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?>">
+
+              </td>
+					<!--<td style="padding-left:30px;padding-right:30px"> <?php echo $getCartItems['item_quantity']; ?></td>-->
+						<td id="item_inc_price_<?php echo $getCartItems['id']; ?>">Rs. <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?> /-</td>
 						<?php $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?>
 						<td> <i class="icon-trash del_cart_item" data-cart-id="<?php echo $getCartItems['id']; ?>" style="font-size:22px;color:#fe6003;margin-left:10px"></li></td>
 					</tr>
@@ -334,12 +344,15 @@ td{
 						<table class="table table_summary">
 						<tbody>
 						<tr>
-							<td>Subtotal <span class="pull-right">Rs. <?php echo $cartTotal; ?></span></td>
+							<td>Subtotal <span class="pull-right sub_total">Rs. <?php echo $cartTotal; ?></span></td>
+              <input type="hidden" id="sub_total" value="<?php echo $cartTotal; ?>">
 						</tr>						
 						<?php $service_tax += ($getFoodSiteSettingsData['service_tax']/100)*$cartTotal; ?>
 						<tr>
-							<td>Service Tax <span class="pull-right">Rs. <?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span></td>
+							<td>GST <span class="pull-right gst">Rs. <?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax'] ; ?>%)</span></td>
+              <input type="hidden" id="service_tax" value="<?php echo $service_tax; ?>"> 
 						</tr>
+            <input type="hidden" id="tx_site_per" value="<?php echo $getFoodSiteSettingsData['service_tax']; ?>">
 
               <?php
               $getAddOnsPrice = "SELECT * FROM food_update_cart_ingredients WHERE session_cart_id = '$session_cart_id'";
@@ -354,12 +367,23 @@ td{
                   <td>Extra Add On's Price <span class="pull-right">Rs. <?php echo $getAdstotal; ?></span></td>
               </tr>
 						  <?php } ?>
-						<!-- <tr>
-							<td>Delivery fee <span class="pull-right">Rs. <?php echo $getFoodSiteSettingsData['delivery_charges'] ; ?></span> </td>
+              <input type="hidden" value="<?php echo $getAdstotal; ?>" id="add_ons_extra">
 
-						</tr> -->
+              <?php 
+                $getDeliveryCharge = getIndividualDetails('food_vendors','id',$_SESSION['session_restaurant_id']);
+                $DeliveryCharges = $getDeliveryCharge['delivery_charges'];
+                if($DeliveryCharges!=0) {
+                  $deliveryCharges = $getDeliveryCharge['delivery_charges'];
+                } else {
+                  $deliveryCharges = 0;
+                }
+              ?>
+              <input type="hidden" value="<?php echo $deliveryCharges; ?>" id="delivery_charges">
+						 <tr>
+							<td>Delivery Charges <span class="pull-right">Rs. <?php echo $deliveryCharges; ?></span> </td>
+						</tr>
 						<tr>
-							<td style="color:#fe6003">TOTAL <span class="pull-right">Rs. <?php echo $cartTotal+$service_tax+$getAdstotal; ?></span></td>
+							<td style="color:#fe6003">TOTAL <span class="pull-right total_price">Rs. <?php echo $cartTotal+$service_tax+$getAdstotal+$deliveryCharges; ?></span></td>
 						</tr>
 						</tbody>
 						</table>
@@ -523,6 +547,93 @@ function removeIngItem(ingUniqId) {
 
 }
 </script>
+
+<script type="text/javascript">
+
+function add_cart_item1(cartId) {
+  
+ $.ajax({
+  type:'post',
+  url:'cart_page_inc.php',
+  data:{
+     cart_id:cartId,       
+  },
+  success:function(response) {
+    var dataSplit = response.split(","); 
+    var intemIndPrice = parseInt(dataSplit[1]);
+    var totalItemPrice = parseInt(intemIndPrice*dataSplit[0]);
+    var subTotal = parseInt($('#sub_total').val());
+    var deliveryCharges = parseInt($('#delivery_charges').val());   
+    var addOnsCost = parseInt($('#add_ons_extra').val());  
+
+    $('#sub_total').val(subTotal+intemIndPrice);
+    var getServiceTaxCalc = subTotal+intemIndPrice;
+    $('.sub_total').html('Rs. '+getServiceTaxCalc);
+    var serivceTaxPercn = parseInt($('#tx_site_per').val());    
+    var serviceTax = parseInt((serivceTaxPercn/100)*getServiceTaxCalc); 
+    var getTotalPrice = getServiceTaxCalc+serviceTax+deliveryCharges+addOnsCost;
+    $('.gst').html('Rs. '+serviceTax+('('+serivceTaxPercn+'%)'));
+    $('.total_price').html('Rs. '+getTotalPrice);
+    $('#ind_quan_'+cartId).html(dataSplit[0]);
+    $('#cart_ind_price_'+cartId).val(totalItemPrice);
+    $('#item_inc_price_'+cartId).text('Rs. '+totalItemPrice +' /-');
+
+  }
+ });
+
+}
+
+function remove_cart_item1(cartId) {
+
+ $.ajax({
+  type:'post',
+  url:'cart_page_dec.php',
+  data:{
+     cart_id:cartId,       
+  },
+  success:function(response) { 
+    var dataSplit = response.split(","); 
+    if(dataSplit[1] == '') {
+      var dataSplit1 = 0;
+    } else {
+      var dataSplit1 = dataSplit[1];
+    }
+
+    if(dataSplit[0] == '') {
+      var dataSplit0 = 0;
+    } else {
+      var dataSplit0 = dataSplit[0];
+    }
+    var intemIndPrice = parseInt(dataSplit1);
+    var totalItemPrice = parseInt(intemIndPrice*dataSplit0);
+    var subTotal = parseInt($('#sub_total').val());
+    var deliveryCharges = parseInt($('#delivery_charges').val());
+    var addOnsCost = parseInt($('#add_ons_extra').val());  
+     
+    //if(dataSplit[0] == 0) {
+      //Remove item when cart qauntity 0
+      //$('#get_inc_id_'+cartId).remove();
+    //} else {
+      $('#sub_total').val(subTotal-intemIndPrice);
+      var getServiceTaxCalc = subTotal-intemIndPrice;
+      $('.sub_total').html('Rs. '+getServiceTaxCalc);
+      var serivceTaxPercn = parseInt($('#tx_site_per').val());     
+      var serviceTax = parseInt((serivceTaxPercn/100)*getServiceTaxCalc); 
+      var getTotalPrice = getServiceTaxCalc+serviceTax+deliveryCharges+addOnsCost;     
+      $('.gst').html('Rs. '+serviceTax+('('+serivceTaxPercn+'%)'));
+      $('.total_price').html('Rs. '+getTotalPrice);
+      $('#ind_quan_'+cartId).html(dataSplit0);
+      $('#cart_ind_price_'+cartId).val(totalItemPrice);
+      $('#item_inc_price_'+cartId).text('Rs. '+totalItemPrice +' /-');
+    //}    
+  }
+
+ });
+
+}
+
+</script>
+
 
 </body>
 </html>

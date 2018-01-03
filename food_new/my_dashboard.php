@@ -62,6 +62,11 @@ ul#cat_nav li a#active {
 	background-color:#fe6003;
  padding: 5px 12px;
 } 
+@media only screen and (max-width: 480px) {
+	.table-responsive{
+		border:0px;
+	}
+}
 </style>
 </head>
 <body>
@@ -105,9 +110,8 @@ ul#cat_nav li a#active {
         </div>
     </div><!-- Position -->
 <?php 
-
     $uid=$_SESSION['user_login_session_id'];
-    $getOrders = "SELECT * from food_orders WHERE user_id = '$uid' ORDER BY id DESC LIMIT 3";
+    $getOrders = "SELECT * from food_orders WHERE user_id = '$uid' GROUP BY order_id ORDER BY id DESC LIMIT 3";
     $getOrders1 = $conn->query($getOrders);   
 ?>    
 <!-- Content ================================================== -->
@@ -120,7 +124,11 @@ ul#cat_nav li a#active {
        		<?php include_once 'my_dashboard_strip.php';?>
             </div>
         </aside>       
-        <div class="col-lg-9 col-md-8 col-sm-8">
+
+        <div class="col-lg-9 col-md-8 total_orders_new">
+        </div>
+
+        <div class="col-lg-9 col-md-8 col-sm-8 total_orders">
 
             <?php if($getOrders1->num_rows > 0) { ?>
              <?php  while($orderData = $getOrders1->fetch_assoc()) { ?> 
@@ -129,7 +137,7 @@ ul#cat_nav li a#active {
         			</div>
         		<div class="col-sm-11 col-xs-12">
         		<div class="table-responsive">		
-        			<table class="table" style="border:1px solid #ddd;width:80%">
+        			<table class="table" style="border:1px solid #ddd;width:83%">
             		<thead>
             		  <tr>
             			<th>ORDER PLACED</th>
@@ -140,12 +148,10 @@ ul#cat_nav li a#active {
             		</thead>
             		<tbody>
             		  <tr>
-            			<td>2017-12-21 12:18:45</td>
-            			<td>Rs.1499</td>
-            			<td>some one</td>
-            			<td>MYSER-SERVICESzvj760171221121845
-            			
-            			</td>
+            			<td><?php echo $orderData['created_at']; ?></td>
+            			<td>Rs.<?php echo $orderData['order_total']; ?></td>
+            			<td><?php echo $orderData['first_name']; ?><br><?php echo $orderData['address']; ?></td>
+            			<td><?php echo $orderData['order_id']; ?></td>
             		  </tr>
             		  <tr>
             			<td></td>
@@ -153,14 +159,13 @@ ul#cat_nav li a#active {
             			<td></td>
             			<td>
             			<div class="row">
-            			<div class="col-sm-3 col-xs-4">
-            			<button class="button1">Details</button>
-            			</div>
-            			<div class="col-sm-5 col-xs-8">
-            			<button class="button1 button2">Track</button>
-            			</div>
             			<div class="col-sm-4">
+            			<a href="order_details.php?token=<?php echo $orderData['order_id']; ?>"><button class="button1">Details</button></a>
             			</div>
+            			<!-- <div class="col-sm-8">
+            			<button class="button1 button2">Track</button>
+            			</div> -->
+            			
             			</div>
             			</td>
             		  </tr>
@@ -170,6 +175,17 @@ ul#cat_nav li a#active {
             </div>	  
           </div><!-- End col-lg-9-->
           <?php } ?>
+		   <div class="row">
+			<div class="col-sm-4">
+			</div>
+			<div class="col-sm-3">	
+            <?php if($getOrders1->num_rows > 3) { ?>				   			
+           <center><a class="btn_full load_more" user-id ="<?php echo $_SESSION['user_login_session_id']; ?>" style="padding:10px;width:80%;font-size:14px">Load More</a></center>
+           <?php } ?>
+		   </div>
+		   <div class="col-sm-5">
+			</div>		   
+		   </div>
           <?php } else { ?>
             No Orders Found
           <?php } ?>
@@ -190,25 +206,32 @@ ul#cat_nav li a#active {
 
 <div class="layer"></div><!-- Mobile menu overlay mask -->
 
-<!-- Login modal -->   
-
-    
-     <!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_close"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon-search-6"></i>
-			</button>
-		</form>
-	</div>
-	<!-- End Search Menu -->
     
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-2.2.4.min.js"></script>
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
 <script src="assets/validate.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $(".total_orders_new").css("display", "none");
+        $('.load_more').on('click', function () {
+            $('.load_more').hide();
+            var user_id = $(this).attr("user-id");
+            $.ajax({
+            type:"post",
+            url:"total_order_details.php",          
+            data:'user_id='+user_id,
+            success:function(html){                          
+                $(".total_orders").css("display", "none");
+                 $(".total_orders_new").css("display", "block");
+                $(".total_orders_new").append(html);
+            }
+          }); 
+        });
+    });
+</script>
 
 </body>
 </html>

@@ -110,6 +110,34 @@ h5{
 		<div class="table-responsive">		
 			<table class="table" style="border:1px solid #ddd;width:100%">
 		<thead>
+		<?php $orderId = $_GET['token'];
+          $user_id = $_SESSION['user_login_session_id'];
+          $getOrders = "SELECT * FROM food_orders WHERE order_id='$orderId'";
+		  $getOrdersData = $conn->query($getOrders);
+		  $getOrdersData1 = $getOrdersData->fetch_assoc();
+          
+          $getRestaurants = getIndividualDetails('food_vendors','id',$getOrdersData1['restaurant_id']);
+		  $getpaymentTypes = getIndividualDetails('lkp_payment_types','id',$getOrdersData1['payment_method']);
+		  $orderStatus = getIndividualDetails('lkp_order_status','id',$getOrdersData1['lkp_order_status_id']);
+		  $paymentStatus = getIndividualDetails('lkp_payment_status','id',$getOrdersData1['lkp_payment_status_id']);
+		  $getAddOnsPrice = "SELECT * FROM food_order_ingredients WHERE order_id = '$orderId'";
+		  $getAddontotal = $conn->query($getAddOnsPrice);
+		  $getAdstotal = 0;
+		  while($getAdTotal = $getAddontotal->fetch_assoc()) {
+			 $getAdstotal += $getAdTotal['item_ingredient_price'];
+		  }
+
+	    $service_tax = $getOrdersData1['sub_total']*$getFoodSiteSettingsData['service_tax']/100;
+		if($getOrdersData1['delivery_charges'] == '0') {
+			$order_type = "Take Away";
+			$delivery_charges = 0;
+		} else {
+			$order_type = "Delivery";
+			$delivery_charges = $getOrdersData1['delivery_charges'];
+		}
+
+        ?>
+
 		  <tr>
 			<th></th>
 			<th></th>
@@ -122,52 +150,46 @@ h5{
 		  <tr>
 			<td colspan="2" style="padding-left:20px">
 			<h3>Order Information</h3>
-			<p>Restaurant Name: Green</p>
-			<p>Payment Method: Cash On Delivery</p>
-			<p>Order Type: Delivery</p>
-			<p>Order Status: Pending</p>
-			<p>Payment Status: InProgress</p></td>
+			<p>Restaurant Name: <?php echo $getRestaurants['restaurant_name']; ?></p>
+			<p>Payment Method:  <?php echo $getpaymentTypes['status']; ?></p>
+			<p>Order Type: <?php echo $order_type; ?></p>
+			<p>Order Status: <?php echo $orderStatus['order_status']; ?></p>
+			<p>Payment Status: <?php echo $paymentStatus['payment_status']; ?></p></td>
 			<td colspan="2"></td>
 			<td colspan="2">
 			<h3>Shipping Address</h3>
-			<p>Harikanth</p>
-			<p>hari@gmail.com</p>
-			<p>9765764765</p>
-			<p>Hyderabad</p>
-			<p>878687</p></td>
+			<p><?php echo $getOrdersData1['first_name']; ?></p>
+			<p><?php echo $getOrdersData1['email']; ?></p>
+			<p><?php echo $getOrdersData1['mobile']; ?></p>
+			<p><?php echo $getOrdersData1['address']; ?></p>
+			<p><?php echo $getOrdersData1['postal_code']; ?></p></td>
 		  </tr>
 		  <tr>
-			<td><h5>PRODUCT NAME</h5></td>
-			<td><h5>CATEGORY NAME</h5></td>
+			<td><h5>ITEM NAME</h5></td>
+			<td><h5>CUSINE TYPE</h5></td>
 			<td><h5>ITEM WEIGHT</h5></td>
 			<td><h5>QUANTITY</h5></td>
 			<td><h5>PRICE</h5></td>
 			<td><h5>TOTAL</h5></td>
 		  </tr>
+
+		  <?php $getItemDetails = getAllDataWhere('food_orders','order_id',$orderId); ?>
+		  <?php while($getOrdersData2 = $getItemDetails->fetch_assoc() ) { ?>
+		  <?php 
+		  		$getCategories = getIndividualDetails('food_category','id',$getOrdersData2['category_id']);
+		  		$getProducts = getIndividualDetails('food_products','id',$getOrdersData2['product_id']); 
+		  		$getItemWeights = getIndividualDetails('food_product_weights','id',$getOrdersData2['item_weight_type_id']);
+		  ?>
 		   <tr>
-			<td><p>Kadai Chicken</p></td>
-			<td><p>STARTERS	</p></td>
-			<td><p>Medium</p></td>
-			<td><p>1</p></td>
-			<td><p>500</p></td>
-			<td><p>500</p></td>
+			<td><p><?php echo $getProducts['product_name']; ?></p></td>
+			<td><p><?php echo $getCategories['category_name']; ?>	</p></td>
+			<td><p><?php echo $getItemWeights['weight_type']; ?></p></td>
+			<td><p><?php echo $getOrdersData2['item_quantity']; ?></p></td>
+			<td><p><?php echo $getOrdersData2['item_price']; ?></p></td>
+			<td><p><?php echo $getOrdersData2['item_price']*$getOrdersData2['item_quantity']; ?></p></td>
 		  </tr>
-		  <tr>
-			<td><p>Kadai Chicken</p></td>
-			<td><p>STARTERS	</p></td>
-			<td><p>Medium</p></td>
-			<td><p>1</p></td>
-			<td><p>500</p></td>
-			<td><p>500</p></td>
-		  </tr>
-		  <tr>
-			<td><p>Kadai Chicken</p></td>
-			<td><p>STARTERS	</p></td>
-			<td><p>Medium</p></td>
-			<td><p>1</p></td>
-			<td><p>500</p></td>
-			<td><p>500</p></td>
-		  </tr>
+		  <?php } ?>
+		  
 		   <tr>
 			<td></td>
 			<td></td>
@@ -175,14 +197,23 @@ h5{
 			<td></td>
 			<td><p>Subtotal:</p>
 			<p>Tax:</p>
-			<p>Delivery Charges:</p>
-			<p>Ingredients Price:</p>
+			<?php if($delivery_charges!=0) { ?>
+				<p>Delivery Charges:</p>
+			<?php } ?>
+			<?php if($getAdstotal!=0) { ?>
+				<p>Ingredients Price:</p>
+			<?php } ?>
 			<p style="color:#fe6003;">Grand Total:</p></td>
-			<td><p style="color:#fe6003;">Rs. 2700</p>
-			<p style="color:#fe6003;">Rs. 270(10%)</p>
-			<p style="color:#fe6003;">Rs. 40</p>
-			<p style="color:#fe6003;">Rs. 0</p>
-			<p style="color:#fe6003;">Rs. 3010</p></td>
+			<td><p style="color:#fe6003;">Rs. <?php echo $getOrdersData1['sub_total']; ?></p>
+			<p style="color:#fe6003;">Rs. <?php echo $service_tax; ?>(<?php echo $getFoodSiteSettingsData['service_tax']; ?> %)</p>
+			<?php if($delivery_charges!=0) { ?>
+				<p style="color:#fe6003;">Rs. <?php echo $delivery_charges; ?></p>
+			<?php } ?>
+
+			<?php if($getAdstotal!=0) { ?>
+				<p style="color:#fe6003;">Rs. <?php echo $getAdstotal; ?></p>
+			<?php } ?>
+			<p style="color:#fe6003;">Rs. <?php echo $getOrdersData1['order_total']; ?></p></td>
 		  </tr>
 		</tbody>
 	  </table>
@@ -205,20 +236,6 @@ h5{
 
 <div class="layer"></div><!-- Mobile menu overlay mask -->
 
-<!-- Login modal -->   
-
-    
-     <!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_close"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon-search-6"></i>
-			</button>
-		</form>
-	</div>
-	<!-- End Search Menu -->
-    
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-2.2.4.min.js"></script>
 <script src="js/common_scripts_min.js"></script>
