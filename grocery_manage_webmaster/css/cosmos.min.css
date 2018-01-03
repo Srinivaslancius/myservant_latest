@@ -24539,3 +24539,20 @@ a.bg-dribbble:hover {
 {
     margin: 1px !important;   
 }
+.fr1
+{
+    background: #f7f7f7;
+    padding: 15px;
+}
+.mt5
+{
+    margin-top: 5px;
+}.mb5
+{
+    margin-bottom: 5px;
+}
+.brdrbtm
+{
+    border-bottom: 1px solid #ccc;
+    margin-top: 3px;
+}

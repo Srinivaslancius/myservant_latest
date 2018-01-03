@@ -24,7 +24,7 @@
     $orders_email = $_POST['orders_email'];
     $footer_text = $_POST['footer_text'];
 
-    if($_FILES["logo"]["name"]!='' || $_FILES["fav_icon_image"]["name"]!='' ) {
+    if($_FILES["logo"]["name"]!='' && $_FILES["fav_icon_image"]["name"]!='' ) {
             
          /*logo*/                                 
         $logo = $_FILES["logo"]["name"];
@@ -58,7 +58,63 @@
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
-    }  else {
+    }
+
+    elseif($_FILES["logo"]["name"]!='' ) {
+            
+         /*logo*/                                 
+        $logo = $_FILES["logo"]["name"];
+        $target_dir = "../uploads/logo/";
+        $target_file = $target_dir . basename($_FILES["logo"]["name"]);
+        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" && $imageFileType1 != "jpg" && $imageFileType1 != "png" && $imageFileType1 != "jpeg"
+        && $imageFileType1 != "gif") {
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+        }
+        $getImgUnlink = getImageUnlink('logo','grocery_site_settings','id',$id,$target_dir);
+
+        
+        move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
+          
+            $sql = "UPDATE `grocery_site_settings` SET admin_title = '$admin_title', meta_title= '$meta_title', meta_description = '$meta_description', meta_key_words='$meta_key_words', from_email = '$from_email', contact_email ='$contact_email', forgot_password_email = '$forgot_password_email', mobile = '$mobile',minimum_time_to_delivery = '$minimum_time_to_delivery',address='$address', google_analytics_code ='$google_analytics_code',contact_number='$contact_number', orders_email='$orders_email', logo = '$logo', footer_text='$footer_text',customer_care_number = '$customer_care_number' WHERE id = '$id' ";
+            if($conn->query($sql) === TRUE){
+               echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
+            } else {
+               echo "<script type='text/javascript'>window.location='site_settings.php?msg=fail'</script>";
+            }
+            //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        
+    }
+
+    elseif($_FILES["fav_icon_image"]["name"]!='' ) {
+                  
+        $fav_icon_image = $_FILES["fav_icon_image"]["name"];
+        $target_dir1 = "../uploads/fav_icon_image/";
+        $target_file1 = $target_dir1 . basename($_FILES["fav_icon_image"]["name"]);
+        $imageFileType1 = pathinfo($target_file1,PATHINFO_EXTENSION);
+        // Allow certain file formats
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" && $imageFileType1 != "jpg" && $imageFileType1 != "png" && $imageFileType1 != "jpeg"
+        && $imageFileType1 != "gif") {
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+        }
+        $getImgUnlink1 = getImageUnlink('fav_icon_image','grocery_site_settings','id',$id,$target_dir1);
+
+          move_uploaded_file($_FILES["fav_icon_image"]["tmp_name"], $target_file1);
+            $sql = "UPDATE `grocery_site_settings` SET admin_title = '$admin_title', meta_title= '$meta_title', meta_description = '$meta_description', meta_key_words='$meta_key_words', from_email = '$from_email', contact_email ='$contact_email', forgot_password_email = '$forgot_password_email', mobile = '$mobile',minimum_time_to_delivery = '$minimum_time_to_delivery',address='$address', google_analytics_code ='$google_analytics_code',contact_number='$contact_number', orders_email='$orders_email', fav_icon_image='$fav_icon_image', footer_text='$footer_text',customer_care_number = '$customer_care_number' WHERE id = '$id' ";
+            if($conn->query($sql) === TRUE){
+               echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
+            } else {
+               echo "<script type='text/javascript'>window.location='site_settings.php?msg=fail'</script>";
+            }
+            //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        
+    }
+     else {
         $sql = "UPDATE `grocery_site_settings` SET admin_title = '$admin_title', meta_title= '$meta_title', meta_description = '$meta_description', meta_key_words='$meta_key_words', from_email = '$from_email', contact_email ='$contact_email', forgot_password_email = '$forgot_password_email', mobile = '$mobile',minimum_time_to_delivery = '$minimum_time_to_delivery',address='$address', google_analytics_code ='$google_analytics_code',contact_number='$contact_number', orders_email='$orders_email', footer_text='$footer_text', customer_care_number = '$customer_care_number' WHERE id = '$id' ";
         if($conn->query($sql) === TRUE){
            echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
@@ -205,10 +261,6 @@
           2017 © Cosmos
         </div>
 <?php include_once 'admin_includes/footer.php'; ?>
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
-    <script src="js/dashboard-3.min.js"></script>
-    <script src="js/tables-datatables.min.js"></script>
+    
   </body>
 </html>
