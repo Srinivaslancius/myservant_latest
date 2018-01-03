@@ -1,78 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="">
-    <title>Cosmos</title>
-    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="css/vendor.min.css">
-    <link rel="stylesheet" href="css/cosmos.min.css">
-    <link rel="stylesheet" href="css/application.min.css">
-  </head>
-  <body class="layout layout-header-fixed layout-left-sidebar-fixed">
-    <div class="site-overlay"></div>
-    <div class="site-header">
-        <?php include_once './main_header.php';?>
-    </div>
-    <div class="site-main">
-      <div class="site-left-sidebar">
-        <div class="sidebar-backdrop"></div>
-        <div class="custom-scrollbar">
-            <?php include_once './side_menu.php';?>
-        </div>
-      </div>
-      <div class="site-right-sidebar">
-        <?php include_once './right_slide_toggle.php';?>
-      </div>
+<?php include_once 'admin_includes/main_header.php'; ?>
+<?php  if (!isset($_POST['submit']))  {
+          //If fail
+          echo "fail";
+        } else  {
+            //If success
+            $grocery_category_id = $_POST['grocery_category_id'];
+            $sub_category_name = $_POST['sub_category_name'];
+            $brands_id = implode(',',$_POST["brands_id"]);
+            $priority = $_POST['priority'];
+            $lkp_status_id = $_POST['lkp_status_id'];
+        
+                $sql = "INSERT INTO grocery_sub_categories (`grocery_category_id`,`sub_category_name`,`brands_id`,`priority`,`lkp_status_id`) VALUES ('$grocery_category_id','$sub_category_name','$brands_id','$brands_id','$lkp_status_id')"; 
+                    if($conn->query($sql) === TRUE){
+                       echo "<script type='text/javascript'>window.location='manage_sub_categories.php?msg=success'</script>";
+                    } else {
+                       echo "<script type='text/javascript'>window.location='manage_sub_categories.php?msg=fail'</script>";
+                    }
+        }
+        
+?>
         <div class="site-content">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="m-y-0 font_sz_view">Add Sub Categories</h3>
-                </div>
+                </div><?php $getGroceryCategories = getAllDataWithStatus('grocery_category','0');?>
                 <div class="panel-body">
                     <div class="row">
                         
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Select Category</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <select id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }">
+                                    <select name="grocery_category_id" id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
                                         <option value="">-- Select Category --</option>
-                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                        <?php while($row = $getGroceryCategories->fetch_assoc()) {  ?>
+                                          <option value="<?php echo $row['id']; ?>" ><?php echo $row['category_name']; ?></option>
+                                      <?php } ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Sub Category Name</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Sub Category Name">
+                                    <input type="text" name="sub_category_name" class="form-control" id="form-control-3" placeholder="Enter Sub Category Name" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Priority</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Priority">
+                                    <input type="text" name="priority" class="form-control" id="form-control-3" placeholder="Enter Priority" required>
                                 </div>
                             </div>
+                            <?php $getGroceryBrands = getAllDataWithStatus('grocery_brand_logos','0');?>
                             <div class="form-group">
                                 <label for="form-control-1" class="col-sm-3 col-md-4 control-label">Brands Applicable</label>
                                     <div class="col-sm-6 col-md-4">
-                                        <select id="form-control-2" class="form-control" data-plugin="select2" multiple="multiple">
-                                            <option value="option1">HTML</option>
-                                            <option value="option2">CSS</option>
-                                            <option value="option3">Javascript</option>
-                                            <option value="option4">PHP</option>
-                                            <option value="option5">Bootstrap</option>
+                                        <select name="brands_id[]" id="form-control-2" class="form-control" data-plugin="select2" multiple="multiple" required>
+                                            <option value="">-- Select Brands --</option>
+                                        <?php while($row = $getGroceryBrands->fetch_assoc()) {  ?>
+                                            <option value="<?php echo $row['id']; ?>" ><?php echo $row['title']; ?></option>
+                                          <?php } ?>
                                         </select>
                                     </div>
                             </div>
+                            <?php $getStatus = getAllData('lkp_status');?>
+                            <div class="form-group">
+                                <label class="col-sm-3  col-md-4 control-label" for="form-control-8">Choose Your Status</label>
+                                <div class="col-sm-6 col-md-4">
+                                    <select id="form-control-3" name="lkp_status_id" class="custom-select" data-error="This field is required." required>
+                                      <option value="">Select Status</option>
+                                      <?php while($row = $getStatus->fetch_assoc()) {  ?>
+                                          <option value="<?php echo $row['id']; ?>"><?php echo $row['status']; ?></option>
+                                      <?php } ?>
+                                   </select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -82,17 +87,16 @@
             <div class="panel panel-default panel-table m-b-0">
                 <div class="panel-heading">
                     <h3 class="m-t-0 m-b-5 font_sz_view">View Sub Categories</h3>
-                    
+                    <?php $getCategoriesData = getAllDataWithActiveRecent('grocery_sub_categories'); $i=1; ?>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered dataTable" id="table-2">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Sub Category Id</th>
-                                    <th>Sub Category Name</th>
+                                    <th>S.No</th>
                                     <th>Category Name</th>
+                                    <th>Sub Category Name</th>
                                     <th>Brands Applicable</th>
                                     <th>Priority</th>
                                     <th>Status</th>
@@ -100,16 +104,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php for($k=0; $k<10; $k++) {?>
+                                <?php while ($row = $getCategoriesData->fetch_assoc()) { ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Subcat21234</td>
-                                    <td>Papa Johns</td>
-                                    <td>Gohnson</td>
+                                    <td><?php echo $i;?></td>
+                                    <td><?php $getGroceryCategories = getAllData('grocery_category'); while($getGroceryCategories1 = $getGroceryCategories->fetch_assoc()) { 
+                                        if($row['grocery_category_id'] == $getGroceryCategories1['id']) { echo $getGroceryCategories1['category_name']; } } ?></td>
+                                    <td><?php echo $row['sub_category_name'];?></td>
                                     <td><a href="#" data-toggle="modal" data-target="#animatedModal1">View Brands Applicable</a></td>
-                                    <td>2</td>
-                                    <td><span class="label label-outline-success">Active</span></td>
-                                    <td><span><a href="#"><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a></span> <span><a href="#"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td>
+                                    <td><?php echo $row['priority'];?></td>
+                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_sub_categories'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_sub_categories'>In Active</span>" ;} ?></td>
+                                    <td><span><a href="edit_manage_sub_categories.php?sid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td>
                                 </tr>
                                 <?php } ?>
                             </tbody>
@@ -148,11 +152,6 @@
                 </div>
             </div>
         </div>
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
-    <script src="js/dashboard-3.min.js"></script>
-     <script src="js/forms-plugins.min.js"></script>
-    <script src="js/tables-datatables.min.js"></script>
+    <?php include_once 'admin_includes/footer.php'; ?> 
   </body>
 </html>

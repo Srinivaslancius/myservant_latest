@@ -24,8 +24,8 @@
                 <span class="menu-text">Site Settings</span>
               </a>
             </li>
-            <li class="<?php if($page_name == 'social_networks_links.php') { echo "active"; } ?>">
-              <a href="social_networks_links.php" aria-haspopup="true">
+            <li class="<?php if($page_name == 'Social_media_settings.php') { echo "active"; } ?>">
+              <a href="Social_media_settings.php" aria-haspopup="true">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-settings zmdi-hc-fw"></i>
                 </span>
@@ -56,17 +56,16 @@
               </a>
               <ul class="sidebar-submenu collapse">
                 <li class="menu-subtitle">CMS</li>
-                <li  class="<?php if($page_name == 'food_content_pages.php' || $page_name == 'add_food_content_pages.php' || $page_name == 'edit_food_content_pages.php' ) { echo "active"; } ?>"><a href="food_content_pages.php">Content Pages</a>
+                <li  class="<?php if($page_name == 'content_page.php'  || $page_name == 'edit_manage_content_pages.php' ) { echo "active"; } ?>"><a href="content_page.php">Content Pages</a>
                 </li>
-                <li  class="<?php if($page_name == 'food_banners.php' || $page_name == 'add_food_banners.php' || $page_name == 'edit_food_banners.php' ) { echo "active"; } ?>"><a href="food_banners.php">Banners</a>
+                <li  class="<?php if($page_name == 'banners.php' || $page_name == 'edit_manage_banners.php' ) { echo "active"; } ?>"><a href="banners.php">Banners</a>
                 </li>
-                <li  class="<?php if($page_name == 'food_newletter.php' ) { echo "active"; } ?>">
-                  <a href="food_newletter.php">News Letters</a>
+                <li  class="<?php if($page_name == 'testimonials.php'  || $page_name == 'edit_manage_testimonials.php' ) { echo "active"; } ?>"><a href="testimonials.php">Testimonials</a>
                 </li>
-                <li  class="<?php if($page_name == 'faqs.php' || $page_name == 'add_food_faqs.php' || $page_name == 'edit_food_faqs.php') { echo "active"; } ?>"><a href="faqs.php">FAQ'S</a>
+                <li  class="<?php if($page_name == 'advertisements.php'  || $page_name == 'edit_grocery_advertisements.php' ) { echo "active"; } ?>"><a href="advertisements.php">Advertisements</a>
                 </li>
-                <!-- <li  class="<?php if($page_name == 'food_howcanhelp_you.php' || $page_name == 'add_food_howcanhelp_you.php' || $page_name == 'edit_food_howcanhelp_you.php' ) { echo "active"; } ?>"><a href="food_howcanhelp_you.php">How Can I Help You</a>
-                </li> -->
+                <li  class="<?php if($page_name == 'manage_brands.php'  || $page_name == 'edit_manage_brands.php' ) { echo "active"; } ?>"><a href="manage_brands.php">View Brands</a>
+                </li>
                 
               </ul>
             </li>
@@ -79,21 +78,27 @@
               </a>
               <ul class="sidebar-submenu collapse">
                 <li class="menu-subtitle">Catelog</li>
-               <li  class="<?php if($page_name == 'food_cusine.php' || $page_name == 'add_food_food_cusine.php' || $page_name == 'edit_food_cusine.php' ) { echo "active"; } ?>"><a href="food_cusine.php">Cusine Types
-                </a>
+               
+                <li  class="<?php if($page_name == 'manage_categories.php' || $page_name == 'add_manage_categories.php' || $page_name == 'edit_manage_categories.php' ) { echo "active"; } ?>"><a href="manage_categories.php">Categories</a>
                 </li>
-                <li  class="<?php if($page_name == 'food_category.php' || $page_name == 'add_food_category.php' || $page_name == 'edit_food_category.php' ) { echo "active"; } ?>"><a href="food_category.php">Categories</a>
+                <li  class="<?php if($page_name == 'manage_sub_categories.php'  || $page_name == 'edit_manage_sub_categories.php' ) { echo "active"; } ?>"><a href="manage_sub_categories.php">Sub Categories</a>
                 </li>
-                 <li  class="<?php if($page_name == 'food_product_weights.php' || $page_name == 'add_food_product_weights.php' || $page_name == 'edit_food_product_weights.php') { echo "active"; } ?>"><a href="food_product_weights.php">Weights</a>
+                 <!-- <li  class="<?php if($page_name == 'food_product_weights.php' || $page_name == 'add_food_product_weights.php' || $page_name == 'edit_food_product_weights.php') { echo "active"; } ?>"><a href="food_product_weights.php">Weights</a>
                 </li>
                 <li  class="<?php if($page_name == 'food_ingredients.php' || $page_name == 'add_food_ingredients.php' || $page_name == 'edit_food_ingredients.php') { echo "active"; } ?>">
                   <a href="food_ingredients.php">Ingredients</a>
                 </li>
                 <li  class="<?php if($page_name == 'food_product_type.php' || $page_name == 'add_food_product_type.php' || $page_name == 'edit_food_product_type.php') { echo "active"; } ?>">
                   <a href="food_product_type.php">Product Type</a>
-                </li>
-                <li  class="<?php if($page_name == 'food_products.php' || $page_name == 'add_food_products.php' || $page_name == 'edit_food_products.php') { echo "active"; } ?>">
-              <a href="food_products.php" >Products</a>
+                </li> -->
+                <li  class="<?php if($page_name == 'manage_products.php'  || $page_name == 'edit_manage_products.php') { echo "active"; } ?>">
+              <a href="manage_products.php" >Products</a>
+            </li>
+            <li  class="<?php if($page_name == 'product_details.php') { echo "active"; } ?>">
+              <a href="product_details.php" >Product Details</a>
+            </li>
+            <li  class="<?php if($page_name == 'payment_settings.php' || $page_name == 'edit_payment_settings.php') { echo "active"; } ?>">
+              <a href="payment_settings.php" >Payments Settings</a>
             </li>
               </ul>
             </li>
@@ -118,14 +123,7 @@
                 
               </ul>
             </li> -->
-            <li  class="<?php if($page_name == 'food_brand_logos.php' || $page_name == 'add_food_brand_logos.php' || $page_name == 'edit_food_brand_logos.php' ) { echo "active"; } ?>">
-              <a href="food_brand_logos.php" aria-haspopup="true">
-                <span class="menu-icon">
-                  <i class="zmdi zmdi-collection-image  zmdi-hc-fw"></i>
-                </span>
-                <span class="menu-text">Brand Logos</span>
-              </a>
-            </li>
+            
             <!-- <li  class="<?php if($page_name == 'faqs.php' || $page_name == 'add_faqs.php' || $page_name == 'edit_faqs.php') { echo "active"; } ?>">
               <a href="faqs.php" aria-haspopup="true">
                 <span class="menu-icon">
@@ -143,7 +141,7 @@
               </a>
               <ul class="sidebar-submenu collapse">
                 <li class="menu-subtitle">Orders</li>
-                <li  class="<?php if($page_name == 'food_orders.php' || $page_name == 'add_food_orders.php' || $page_name == 'edit_food_orders.php' || $page_name == 'assign_to.php' ) { echo "active"; } ?>"><a href="food_orders.php">Orders</a>
+                <li  class="<?php if($page_name == 'view_orders.php' ) { echo "active"; } ?>"><a href="view_orders.php">Orders</a>
                 </li>
                 <li  class="<?php if($page_name == 'food_failed_orders.php' || $page_name == 'edit_food_failed_orders.php' ) { echo "active"; } ?>"><a href="food_failed_orders.php">Failed Orders</a>
                 </li>
