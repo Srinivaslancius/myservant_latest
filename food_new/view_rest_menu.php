@@ -198,7 +198,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 				<div class="box_style_1">
 					<ul id="cat_nav">						
 						<?php while($getCatList = $getCategory->fetch_assoc() ) { ?>
-							<li><a href="#<?php echo $getCatList['category_id']; ?>" class="active"><?php $getCatName = getIndividualDetails('food_category','id',$getCatList['category_id']); echo $getCatName['category_name']; ?><span>(<?php echo getProductsCountByCat('food_products','category_id',$getCatList['category_id'],'restaurant_id',$getRestKey); ?>)</span></a></li>
+							<li><a href="#<?php echo $getCatList['category_id']; ?>" class="active"><?php $getCatName = getIndividualDetails('food_category','id',$getCatList['category_id']); echo $getCatName['category_name']; ?></a></li>
 						<?php } ?>
 					</ul>
 				</div><!-- End box_style_1 -->
