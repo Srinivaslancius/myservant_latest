@@ -237,7 +237,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 						</div>
 						<div class="col-sm-2">
 							<!--<h3 style="color:white;font-size:18px"><label><input name="item_type" type="checkbox" value="1" class="vegeterian"></label> Veg</h3>-->
-							<h3><label class="checkb" style="color:white;font-size:18px;padding-top: 3px;"><input name="item_type" type="checkbox" value="1" class="vegeterian"><span class="checkmark1"></span>Veg</label></h3>
+							<h3><label class="checkb" style="color:white;font-size:18px;padding-top: 3px;"><input name="item_type" type="checkbox" value="1" class="vegeterian"><span class="checkmark1"></span>Veg</label> <label class="checkb" style="color:white;font-size:18px;padding-top: 3px;"><input name="item_type" type="checkbox" value="2" class="vegeterian"><span class="checkmark1"></span>Non-Veg</label></h3>
 						</div>
 					</div>
 				</div>
