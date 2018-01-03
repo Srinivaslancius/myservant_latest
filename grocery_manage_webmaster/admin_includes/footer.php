@@ -4,6 +4,9 @@
     <script src="js/cosmos.min.js"></script>
     <script src="js/application.min.js"></script>
     <script src="js/index.min.js"></script>
+    <script src="js/dashboard-3.min.js"></script>
+    <script src="js/tables-datatables.min.js"></script>
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script>
       $( function() {
@@ -134,6 +137,17 @@
         }
         });
     }
+    function getSubCategory(val) {
+        $.ajax({
+        type: "POST",
+        url: "get_subcategories.php",
+        data:'grocery_category_id='+val,
+        success: function(data){
+            $("#grocery_sub_category_id").html(data);
+        }
+        });
+    }
+    
     </script>
     <!-- Below script for ck editor -->
     <script src="//cdn.ckeditor.com/4.7.0/full/ckeditor.js"></script>

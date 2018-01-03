@@ -1,12 +1,12 @@
 <?php 
 error_reporting(1);
 ob_start();
-include_once('../../admin_includes/config.php');
-include_once('../../admin_includes/common_functions.php');
-$getSiteSettings = getAllDataWhere('food_site_settings','id',1); 
+include_once('../admin_includes/config.php');
+include_once('../admin_includes/common_functions.php');
+$getSiteSettings = getAllDataWhere('grocery_site_settings','id',1); 
 $getSiteSettingsData = $getSiteSettings->fetch_assoc();
 
-if(!isset($_SESSION['food_admin_user_id'])) {
+if(!isset($_SESSION['grocery_admin_user_id'])) {
   header("Location: logout.php");
   exit;
 }
