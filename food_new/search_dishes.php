@@ -11,6 +11,7 @@ if(isset($_POST['item_name']) && $_POST['item_name']!='' ) {
      $getItemNames = getFoodCategoryByRestId('food_products','restaurant_id',$getRestaurantId);
 }
 ?>
+<?php if($getItemNames->num_rows > 0) { ?>
     <?php while($getItemsList = $getItemNames->fetch_assoc()) { ?>
     <hr>
     <h5 class="nomargin_top" id="<?php echo $getItemsList['category_id']; ?>"><b><?php $getItemData = getIndividualDetails('food_category','id',$getItemsList['category_id']); echo $getItemData['category_name']; ?></b></h5>
@@ -92,3 +93,10 @@ if(isset($_POST['item_name']) && $_POST['item_name']!='' ) {
 
     </table>
     <?php } ?>
+    <?php } else { ?>
+    <table class="table table-striped cart-list">
+        <tbody>
+           <p style="text-align:center"> No Records Found</p>
+        </tbody>        
+    </table>
+<?php } ?>
