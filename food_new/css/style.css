@@ -3427,9 +3427,9 @@ footer ul {
     font-size: 13px;
     margin:12px 0px;
 }
-/*@media only screen and (max-width: 640px) {
+@media screen and (max-width: 640px) and (min-width: 360px) {
 	.container{
-		padding-left:25px !important;
+		padding-left:35px !important;
 		padding-right:25px !important;
 	}
 	.myservanrlogo {
@@ -3440,6 +3440,9 @@ footer ul {
     margin-left: -14px !important;
 }
 #custom-search-input input.btn_search {
-	width:120px !important;;
+	width:120px !important; 
+	right: 9px !important;
+    top: 3px !important;
+    font-size: 11px;
 }
-}*/
+}
