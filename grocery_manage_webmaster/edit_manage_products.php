@@ -151,22 +151,4 @@ if (!isset($_POST['submit'])) {
             </div>
       </div>
   
-<script type="text/javascript">
-    
-    function getSubCategory(val) {
-        $.ajax({
-        type: "POST",
-        url: "get_subcategories.php",
-        data:'grocery_category_id='+val,
-        success: function(data){
-            $("#grocery_sub_category_id").html(data);
-        }
-        });
-    }
-    
-    </script>
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
-    <script src="js/dashboard-3.min.js"></script>
-    <script src="js/tables-datatables.min.js"></script>
+     <?php include_once 'admin_includes/footer.php'; ?> 

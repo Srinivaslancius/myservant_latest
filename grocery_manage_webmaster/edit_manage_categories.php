@@ -12,7 +12,7 @@ if (!isset($_POST['submit'])) {
     $fileToUpload2 = $_FILES["fileToUpload2"]["name"];
     $category_position = $_POST['category_position'];
 
-              if($_FILES["fileToUpload"]["name"]!='' || $_FILES["fileToUpload1"]["name"]!='' || $_FILES["fileToUpload2"]["name"]!='') {
+            if($_FILES["fileToUpload"]["name"]!='' && $_FILES["fileToUpload1"]["name"]!='' && $_FILES["fileToUpload2"]["name"]!='') {
 
               $fileToUpload = $_FILES["fileToUpload"]["name"];
               $target_dir = "../uploads/grocery_category_web_images/";
@@ -35,27 +35,75 @@ if (!isset($_POST['submit'])) {
 
                 //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
               if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    $sql = "UPDATE grocery_category SET category_name = '$category_name',category_web_image = '$fileToUpload', category_position = '$category_position' WHERE id='$id'";
-                    $conn->query($sql);
-
-                    //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-                } elseif (move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1)) {
-                  $sql = "UPDATE grocery_category SET category_name = '$category_name',category_app_image = '$fileToUpload1', category_position = '$category_position' WHERE id='$id'";
-                  $conn->query($sql);
-
-                } elseif (move_uploaded_file($_FILES["fileToUpload2"]["tmp_name"], $target_file2)) {
-                  $sql = "UPDATE grocery_category SET category_name = '$category_name',category_icon = '$fileToUpload2', category_position = '$category_position' WHERE id='$id'";
-                  $conn->query($sql);
-                   
-                }
-                if($conn->query($sql) === TRUE){
+                move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1);
+                move_uploaded_file($_FILES["fileToUpload2"]["tmp_name"], $target_file2);
+                    $sql = "UPDATE grocery_category SET category_name = '$category_name',category_web_image = '$fileToUpload',category_app_image = '$fileToUpload1', category_icon = '$fileToUpload2', category_position = '$category_position' WHERE id='$id'";
+                     if($conn->query($sql) === TRUE){
                 echo "<script type='text/javascript'>window.location='manage_categories.php?msg=success'</script>";
                 } else {
                 echo "<script type='text/javascript'>window.location='manage_categories.php?msg=fail'</script>";
                 } 
+                }  
+               
       }
-              
+      
+      elseif($_FILES["fileToUpload"]["name"]!='') {
 
+              $fileToUpload = $_FILES["fileToUpload"]["name"];
+              $target_dir = "../uploads/grocery_category_web_images/";
+              $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+              $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+              $getImgUnlink = getImageUnlink('category_web_image','grocery_category','id',$id,$target_dir);
+
+              move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+                
+              $sql = "UPDATE grocery_category SET category_name = '$category_name',category_web_image = '$fileToUpload', category_position = '$category_position' WHERE id='$id'";
+                     if($conn->query($sql) === TRUE){
+                echo "<script type='text/javascript'>window.location='manage_categories.php?msg=success'</script>";
+                } else {
+                echo "<script type='text/javascript'>window.location='manage_categories.php?msg=fail'</script>";
+                } 
+                  
+               
+      }       
+
+      elseif($_FILES["fileToUpload1"]["name"]!='') {
+
+              $fileToUpload1 = $_FILES["fileToUpload1"]["name"];
+              $target_dir1 = "../uploads/grocery_category_app_images/";
+              $target_file1 = $target_dir1 . basename($_FILES["fileToUpload1"]["name"]);
+              $imageFileType1 = pathinfo($target_file1,PATHINFO_EXTENSION);
+              $getImgUnlink1 = getImageUnlink('category_app_image','grocery_category','id',$id,$target_dir1);
+              
+              move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1);
+                    $sql = "UPDATE grocery_category SET category_name = '$category_name', category_app_image = '$fileToUpload1', category_position = '$category_position' WHERE id='$id'";
+                     if($conn->query($sql) === TRUE){
+                echo "<script type='text/javascript'>window.location='manage_categories.php?msg=success'</script>";
+                } else {
+                echo "<script type='text/javascript'>window.location='manage_categories.php?msg=fail'</script>";
+                } 
+                 
+               
+      }
+
+      elseif($_FILES["fileToUpload2"]["name"]!='') {
+
+              $fileToUpload2 = $_FILES["fileToUpload2"]["name"];
+              $target_dir2 = "../uploads/grocery_category_icon_images/";
+              $target_file2 = $target_dir2 . basename($_FILES["fileToUpload2"]["name"]);
+              $imageFileType2 = pathinfo($target_file2,PATHINFO_EXTENSION);
+              $getImgUnlink2 = getImageUnlink('category_icon','grocery_category','id',$id,$target_dir2);
+
+                move_uploaded_file($_FILES["fileToUpload2"]["tmp_name"], $target_file2);
+                    $sql = "UPDATE grocery_category SET category_name = '$category_name', category_icon = '$fileToUpload2', category_position = '$category_position' WHERE id='$id'";
+                     if($conn->query($sql) === TRUE){
+                echo "<script type='text/javascript'>window.location='manage_categories.php?msg=success'</script>";
+                } else {
+                echo "<script type='text/javascript'>window.location='manage_categories.php?msg=fail'</script>";
+                } 
+                  
+               
+      }
           else {
 
           $sql = "UPDATE grocery_category SET category_name = '$category_name', category_position = '$category_position' WHERE id = '$id' ";

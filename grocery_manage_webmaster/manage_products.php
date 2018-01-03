@@ -67,7 +67,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Select Sub Category</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <select name ="grocery_sub_category_id" id="grocery_sub_category_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }">
+                                    <select name ="grocery_sub_category_id" id="grocery_sub_category_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
                                         <option value="">Select Grocery Sub Category</option>
                                     </select>
                                 </div>
@@ -83,7 +83,7 @@
                             <div class="form-group">
                                 <label for="form-control-1" class="col-sm-3 col-md-4 control-label">Brands Applicable</label>
                                     <div class="col-sm-6 col-md-4">
-                                        <select name="brands_id[]" id="form-control-2" class="form-control" data-plugin="select2" multiple="multiple">
+                                        <select name="brands_id[]" id="form-control-2" class="form-control" data-plugin="select2" multiple="multiple" required>
                                             <option value="">-- Select Brands --</option>
                                         <?php while($row = $getGroceryBrands->fetch_assoc()) {  ?>
                                             <option value="<?php echo $row['id']; ?>" ><?php echo $row['title']; ?></option>
@@ -170,24 +170,7 @@
         <div class="site-footer">
           2017 © Cosmos
         </div>
-<script type="text/javascript">
-    
-    function getSubCategory(val) {
-        $.ajax({
-        type: "POST",
-        url: "get_subcategories.php",
-        data:'grocery_category_id='+val,
-        success: function(data){
-            $("#grocery_sub_category_id").html(data);
-        }
-        });
-    }
-    
-    </script>
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
-    <script src="js/dashboard-3.min.js"></script>
-    <script src="js/tables-datatables.min.js"></script>
+
+     <?php include_once 'admin_includes/footer.php'; ?> 
   </body>
 </html>

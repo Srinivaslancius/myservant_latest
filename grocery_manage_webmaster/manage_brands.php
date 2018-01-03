@@ -49,7 +49,7 @@
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Brand Name</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" name="title" class="form-control" id="form-control-3" placeholder="Enter Brand Name">
+                                    <input type="text" name="title" class="form-control" id="form-control-3" placeholder="Enter Brand Name" required>
                                 </div>
                             </div>
                             
@@ -58,7 +58,7 @@
                                 
                                 <div class="col-sm-6 col-md-4">
                                     <label class="btn btn-default file-upload-btn">Choose file...
-                                        <input id="form-control-22" name="fileToUpload" id="fileToUpload"  accept="image/*"  class="file-upload-input" type="file" multiple="multiple">
+                                        <input id="form-control-22" name="fileToUpload" id="fileToUpload"  accept="image/*"  class="file-upload-input" type="file" multiple="multiple" required>
                                     </label>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">App Logo</label>
                                 <div class="col-sm-6 col-md-4">
                                     <label class="btn btn-default file-upload-btn">Choose file...
-                                        <input id="form-control-22" class="file-upload-input" type="file" name="fileToUpload1" id="fileToUploa1"  multiple="multiple" accept="image/*">
+                                        <input id="form-control-22" class="file-upload-input" type="file" name="fileToUpload1" id="fileToUploa1"  multiple="multiple" accept="image/*" required>
                                     </label>
                                 </div>
                             </div>
@@ -129,10 +129,6 @@
           2017 © Cosmos
         </div>
 
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
-    <script src="js/dashboard-3.min.js"></script>
-    <script src="js/tables-datatables.min.js"></script>
+ <?php include_once 'admin_includes/footer.php'; ?>
   </body>
 </html>

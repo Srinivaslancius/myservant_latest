@@ -34,7 +34,7 @@
         <div class="site-content">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="m-y-0 font_sz_view">Testimonials</h3>
+                    <h3 class="m-y-0 font_sz_view">Add Testimonials</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -120,10 +120,5 @@
           2017 © Cosmos
         </div>
 <?php include_once 'admin_includes/footer.php'; ?>
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
-    <script src="js/dashboard-3.min.js"></script>
-    <script src="js/tables-datatables.min.js"></script>
   </body>
 </html>

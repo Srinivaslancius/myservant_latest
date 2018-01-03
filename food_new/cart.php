@@ -197,7 +197,7 @@ td{
 ?>
 <input type="hidden" id="session_cart_id" value="<?php echo $_SESSION['CART_TEMP_RANDOM']; ?>">
 <!-- Content ================================================== -->
-	<div class="container margin_60_35">
+	<div class="container margin_60_35 cart">
 		<div class="row">     
 		<?php if($cartItems->num_rows > 0) { ?>  			
 			<div class="col-md-12">
@@ -219,7 +219,7 @@ td{
           ?>
 
 					<tr id="get_inc_id_<?php echo $getCartItems['id']; ?>">
-						<td class="rw_wdth"style="width:320px">
+						<td class="rw_wdth" style="width:320px">
 						<div class="row">
 						<div class="col-sm-2 col-xs-12">
 							<?php $getProductDetails= getIndividualDetails('food_products','id',$getCartItems['food_item_id']); ?>
@@ -244,7 +244,6 @@ td{
 
 						<?php $getIngredenats = getAllDataWhere('food_product_ingredient_prices','product_id',$getCartItems['food_item_id']); ?>
             <?php
-              $itemId = $getCartItems['item_quantity'];
               $getAddOnsPrice = "SELECT * FROM food_update_cart_ingredients WHERE food_item_id = '".$getCartItems['food_item_id']."' AND cart_id='".$getCartItems['id']."' AND session_cart_id = '$session_cart_id'";
               $getAddontotal = $conn->query($getAddOnsPrice);
               $getAdstotalPrice = 0;
@@ -259,6 +258,7 @@ td{
 									<div class="modal-content">
 
 										<?php if($getIngredenats->num_rows > 0) { ?>
+                    <input type="hidden" id="item_id_<?php echo $getCartItems['id']; ?>" name="item_id" value="<?php echo $getCartItems['food_item_id']; ?>">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											  <div class="row">
@@ -268,7 +268,7 @@ td{
 												   <div class="col-sm-4">
 													<div class="btn-group">
 													  <!-- <button style="background-color:#f5f5f5;border-color:#f5f5f5;color:black">Total:₹ <span id="tot_item_price_<?php echo $getCartItems['id']; ?>"><?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?></span></button> -->
-													  <button class="update_cart_item" data-cart-id="<?php echo $getCartItems['id']; ?>" data-item-id="<?php echo $getCartItems['food_item_id']; ?>" >Update Cart</button>					  
+													  <button class="update_cart_item" onclick="updateCartItem(<?php echo $getCartItems['id']; ?>);">Update Cart</button>					  
 													</div>
 												   </div>
 											  </div>
@@ -329,7 +329,7 @@ td{
 					<!--<td style="padding-left:30px;padding-right:30px"> <?php echo $getCartItems['item_quantity']; ?></td>-->
 						<td id="item_inc_price_<?php echo $getCartItems['id']; ?>">Rs. <?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?> /-</td>
 						<?php $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?>
-						<td> <i class="icon-trash del_cart_item" data-cart-id="<?php echo $getCartItems['id']; ?>" style="font-size:22px;color:#fe6003;margin-left:10px"></li></td>
+						<td> <i class="icon-trash" onclick="deleteCartItem(<?php echo $getCartItems['id']; ?>);" style="font-size:22px;color:#fe6003;margin-left:10px"></li></td>
 					</tr>
                      <?php } ?>
 					</tbody>
@@ -461,55 +461,50 @@ $('.check_valid_add_on').on('change', function (e) {
 });
 
 //
-$('.update_cart_item').on('click', function (e) {
+function updateCartItem(cartId) {
 
-    if($('[type="checkbox"]').is(":checked")){
-    
-        var cartId = $(this).attr('data-cart-id'); 
-        var productId = $(this).attr('data-item-id');    
-        var cartSessionId = $('#session_cart_id').val();
+    if($('[type="checkbox"]').is(":checked")){ 
+      var productId = $('#item_id_'+cartId).val();   
+      var cartSessionId = $('#session_cart_id').val();
+      var cb = [],
+      post_cb = []
+      $.each($('input:checkbox[name=checkbox_'+cartId+']:checked'), function(){
+          var ingId = $(this).attr('data-ing-id'),
+              ingName = $(this).attr('data-ing-name'),
+              ingPrice = $(this).attr('data-ing-price')
 
-        var cb = [],
-        post_cb = []
-        $.each($('input:checkbox[name=checkbox_'+cartId+']:checked'), function(){
-            var ingId = $(this).attr('data-ing-id'),
-                ingName = $(this).attr('data-ing-name'),
-                ingPrice = $(this).attr('data-ing-price')
-
-            cb.push(ingId + ' -> ' + ingName + ' -> ' + ingPrice);
-            post_cb.push({
-                'ingId': ingId,
-                'ingName': ingName,
-                'ingPrice': ingPrice,
-            });
-        });
+          cb.push(ingId + ' -> ' + ingName + ' -> ' + ingPrice);
+          post_cb.push({
+              'ingId': ingId,
+              'ingName': ingName,
+              'ingPrice': ingPrice,
+          });
+      });
       
-        $.ajax({
-          type:'post',
-          url:'update_cart_ingredient.php',
-          data:{
-             cartId : cartId,
-             productId : productId, 
-             cartSessionId : cartSessionId,  
-             cb: post_cb      
-          },
-          success:function(response) {
-             //alert();
-             $(".modal .close").click();
-             location.reload();
-            }
-        });
+      $.ajax({
+        type:'post',
+        url:'update_cart_ingredient.php',
+        data:{
+           cartId : cartId,
+           productId : productId, 
+           cartSessionId : cartSessionId,  
+           cb: post_cb      
+        },
+        success:function(response) {
+           //alert();
+           $(".modal .close").click();
+           location.reload();
+          }
+      });
         
 
     } else {
         alert("Please select any extra Add On's");
         return false;
     }
-});
+}
 
-
-$('.del_cart_item').on('click', function (e) {
-  var cartId = $(this).attr('data-cart-id');
+function deleteCartItem(cartId) {
   //Display Add On's
   var x = confirm("Are you sure you want to delete?");
     if(x) {
@@ -530,7 +525,7 @@ $('.del_cart_item').on('click', function (e) {
             }
         });
       }
-});
+}
 
 function removeIngItem(ingUniqId) {
  
@@ -558,26 +553,10 @@ function add_cart_item1(cartId) {
   data:{
      cart_id:cartId,       
   },
-  success:function(response) {
-    var dataSplit = response.split(","); 
-    var intemIndPrice = parseInt(dataSplit[1]);
-    var totalItemPrice = parseInt(intemIndPrice*dataSplit[0]);
-    var subTotal = parseInt($('#sub_total').val());
-    var deliveryCharges = parseInt($('#delivery_charges').val());   
-    var addOnsCost = parseInt($('#add_ons_extra').val());  
-
-    $('#sub_total').val(subTotal+intemIndPrice);
-    var getServiceTaxCalc = subTotal+intemIndPrice;
-    $('.sub_total').html('Rs. '+getServiceTaxCalc);
-    var serivceTaxPercn = parseInt($('#tx_site_per').val());    
-    var serviceTax = parseInt((serivceTaxPercn/100)*getServiceTaxCalc); 
-    var getTotalPrice = getServiceTaxCalc+serviceTax+deliveryCharges+addOnsCost;
-    $('.gst').html('Rs. '+serviceTax+('('+serivceTaxPercn+'%)'));
-    $('.total_price').html('Rs. '+getTotalPrice);
-    $('#ind_quan_'+cartId).html(dataSplit[0]);
-    $('#cart_ind_price_'+cartId).val(totalItemPrice);
-    $('#item_inc_price_'+cartId).text('Rs. '+totalItemPrice +' /-');
-
+  success:function(data) {
+    //alert(data);
+    $('.cart').html(data);
+    $('#cart_cnt').html($('#get_cart_cnt').val());
   }
  });
 
@@ -591,41 +570,10 @@ function remove_cart_item1(cartId) {
   data:{
      cart_id:cartId,       
   },
-  success:function(response) { 
-    var dataSplit = response.split(","); 
-    if(dataSplit[1] == '') {
-      var dataSplit1 = 0;
-    } else {
-      var dataSplit1 = dataSplit[1];
-    }
-
-    if(dataSplit[0] == '') {
-      var dataSplit0 = 0;
-    } else {
-      var dataSplit0 = dataSplit[0];
-    }
-    var intemIndPrice = parseInt(dataSplit1);
-    var totalItemPrice = parseInt(intemIndPrice*dataSplit0);
-    var subTotal = parseInt($('#sub_total').val());
-    var deliveryCharges = parseInt($('#delivery_charges').val());
-    var addOnsCost = parseInt($('#add_ons_extra').val());  
-     
-    //if(dataSplit[0] == 0) {
-      //Remove item when cart qauntity 0
-      //$('#get_inc_id_'+cartId).remove();
-    //} else {
-      $('#sub_total').val(subTotal-intemIndPrice);
-      var getServiceTaxCalc = subTotal-intemIndPrice;
-      $('.sub_total').html('Rs. '+getServiceTaxCalc);
-      var serivceTaxPercn = parseInt($('#tx_site_per').val());     
-      var serviceTax = parseInt((serivceTaxPercn/100)*getServiceTaxCalc); 
-      var getTotalPrice = getServiceTaxCalc+serviceTax+deliveryCharges+addOnsCost;     
-      $('.gst').html('Rs. '+serviceTax+('('+serivceTaxPercn+'%)'));
-      $('.total_price').html('Rs. '+getTotalPrice);
-      $('#ind_quan_'+cartId).html(dataSplit0);
-      $('#cart_ind_price_'+cartId).val(totalItemPrice);
-      $('#item_inc_price_'+cartId).text('Rs. '+totalItemPrice +' /-');
-    //}    
+  success:function(data) { 
+    //alert(data);
+    $('.cart').html(data);
+    $('#cart_cnt').html($('#get_cart_cnt').val());
   }
 
  });

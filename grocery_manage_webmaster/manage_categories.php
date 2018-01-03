@@ -62,7 +62,7 @@
                                 
                                 <div class="col-sm-6 col-md-4">
                                     <label class="btn btn-default file-upload-btn">Choose file...
-                                        <input id="form-control-22" name="fileToUpload" id="fileToUpload"  accept="image/*"  class="file-upload-input" type="file" multiple="multiple">
+                                        <input id="form-control-22" name="fileToUpload" id="fileToUpload"  accept="image/*"  class="file-upload-input" type="file" multiple="multiple" required>
                                     </label>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">App Image</label>
                                 <div class="col-sm-6 col-md-4">
                                     <label class="btn btn-default file-upload-btn">Choose file...
-                                        <input id="form-control-22" class="file-upload-input" type="file" name="fileToUpload1" id="fileToUploa1"  multiple="multiple" accept="image/*">
+                                        <input id="form-control-22" class="file-upload-input" type="file" name="fileToUpload1" id="fileToUploa1"  multiple="multiple" accept="image/*" required>
                                     </label>
                                 </div>
                             </div>
@@ -79,14 +79,14 @@
                                 
                                 <div class="col-sm-6 col-md-4">
                                     <label class="btn btn-default file-upload-btn">Choose file...
-                                        <input id="form-control-22" class="file-upload-input" type="file" name="fileToUpload2" id="fileToUploa2"  multiple="multiple" accept="image/*">
+                                        <input id="form-control-22" class="file-upload-input" type="file" name="fileToUpload2" id="fileToUploa2"  multiple="multiple" accept="image/*" required>
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Priority</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" name="category_position" class="form-control" id="form-control-3" placeholder="Enter Priority">
+                                    <input type="text" name="category_position" class="form-control" id="form-control-3" placeholder="Enter Priority" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -127,7 +127,7 @@
                                     <td><img src="<?php echo $base_url . 'uploads/grocery_category_app_images/'.$row['category_app_image'] ?>" width="100" height="100"></td>
                                      <td><img src="<?php echo $base_url . 'uploads/grocery_category_icon_images/'.$row['category_icon'] ?>" width="100" height="100"></td>
                                       <td><?php echo $row['category_position'];?></td>
-                                    <td><span class="label label-outline-success">Active</span></td>
+                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_category'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_category'>In Active</span>" ;} ?></td>
                                     <td><span><a href="delete_manage_webmaster.php?tid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a></span> <span><a href="edit_manage_categories.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td>
                                 </tr>
                                 <?php $i++; } ?>
@@ -141,10 +141,6 @@
           2017 © Cosmos
         </div>
 
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
-    <script src="js/dashboard-3.min.js"></script>
-    <script src="js/tables-datatables.min.js"></script>
+    <?php include_once 'admin_includes/footer.php'; ?>
   </body>
 </html>

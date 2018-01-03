@@ -6,6 +6,8 @@
     <script src="js/index.min.js"></script>
     <script src="js/dashboard-3.min.js"></script>
     <script src="js/tables-datatables.min.js"></script>
+     <script src="js/forms-plugins.min.js"></script>
+  
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script>
@@ -39,7 +41,10 @@
         var output1 = document.getElementById('output1');
         output1.src = URL.createObjectURL(event.target.files[0]);
       };
-
+      var loadFile2 = function(event) {
+        var output2 = document.getElementById('output2');
+        output2.src = URL.createObjectURL(event.target.files[0]);
+      };
       //check status active or not
         $(".check_active").click(function(){
           var check_active_id = $(this).attr("data-incId");

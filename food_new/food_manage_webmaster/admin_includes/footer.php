@@ -42,6 +42,10 @@
         var output1 = document.getElementById('output1');
         output1.src = URL.createObjectURL(event.target.files[0]);
       };
+      var loadFile2 = function(event) {
+        var output2 = document.getElementById('output2');
+        output2.src = URL.createObjectURL(event.target.files[0]);
+      };
 
       //check status active or not
         $(".check_active").click(function(){
