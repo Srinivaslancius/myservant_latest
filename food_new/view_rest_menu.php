@@ -78,7 +78,34 @@ background-color:white;
 border-color:white;
 font-size:13px;
 }
-
+.close-icon {
+	border:1px solid transparent;
+	background-color: transparent;
+	display: inline-block;
+	vertical-align: middle;
+  outline: 0;
+  cursor: pointer;
+}
+.close-icon:after {
+	content: "X";
+	display: block;
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	z-index:1;
+	right: 5px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	padding: 2px;
+	text-align: center;
+	color: black;
+	font-size: 12px;
+	cursor: pointer;
+}
+.search-box:not(:valid) ~ .close-icon {
+	display: none;
+}
 </style>
 </head>
 
@@ -194,18 +221,23 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 							<h3 style="color:white;font-size:18px;padding-left:10px">Menu</h3>
 						</div>
 						<div class="col-sm-8">
+						<div class="search-wrapper">
 						<form style="margin-top:10px;margin-bottom:10px">
+						<!--<input type="text" name="focus" required class="search-box" placeholder="Search dishes.." />
+						<button class="close-icon" type="reset" id="srch-term"></button>-->
 							<div class="input-group add-on">
 								<input class="form-control two" placeholder="Search dishes.." name="search_item" id="srch-term" type="text">
-								<div class="input-group-btn">
-								<button class="btn btn-default" type="submit" style="padding:9px 12px;"><i class="glyphicon glyphicon-search"></i></button>
+								<!--<button class="close-icon" type="reset"></button>-->
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="reset" style="padding:9px 12px;"><span class="close-icon"></span></button>
 								</div>
 							</div>
 						</form>
 						</div>
+						</div>
 						<div class="col-sm-2">
-						<h3><label class="checkb" style="color:white;font-size:18px;padding-top:3px"><input type="checkbox"><span class="checkmark1"></span>Veg</label></h3>
 							<!--<h3 style="color:white;font-size:18px"><label><input name="item_type" type="checkbox" value="1" class="vegeterian"></label> Veg</h3>-->
+							<h3><label class="checkb" style="color:white;font-size:18px;padding-top: 3px;"><input name="item_type" type="checkbox" value="1" class="vegeterian"><span class="checkmark1"></span>Veg</label></h3>
 						</div>
 					</div>
 				</div>
