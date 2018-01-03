@@ -193,7 +193,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 						<div class="col-sm-2">
 							<h3 style="color:white;font-size:18px;padding-left:10px">Menu</h3>
 						</div>
-						<div class="col-sm-8">
+						<div class="col-sm-6">
 						<form style="margin-top:10px;margin-bottom:10px">
 							<div class="input-group add-on">
 								<input class="form-control two" placeholder="Search dishes.." name="search_item" id="srch-term" type="text">
@@ -203,9 +203,17 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 							</div>
 						</form>
 						</div>
-						<div class="col-sm-2">
-						<h3><label class="checkb" style="color:white;font-size:18px;padding-top:3px"><input type="checkbox"><span class="checkmark1"></span>Veg</label></h3>
-							<!--<h3 style="color:white;font-size:18px"><label><input name="item_type" type="checkbox" value="1" class="vegeterian"></label> Veg</h3>-->
+						<div class="col-sm-4">
+						<div class="row">
+						<div class="col-sm-4 col-xs-4">
+						<label class="radiobt"><input type="radio" value="2" checked name="dev_type">Veg
+							<span class="checkmark2"></span></label>
+						</div>
+						<div class="col-sm-8 col-xs-8">
+						<label class="radiobt"><input type="radio" value="2" name="dev_type">Non Veg
+							<span class="checkmark2"></span></label>
+						</div>
+						</div>
 						</div>
 					</div>
 				</div>
