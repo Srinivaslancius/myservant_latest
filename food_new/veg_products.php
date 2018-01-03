@@ -2,17 +2,15 @@
 include "../admin_includes/config.php";
 include "../admin_includes/common_functions.php";
 include "../admin_includes/food_common_functions.php";
- //echo "<pre>"; print_r($_POST); exit;
+//echo "<pre>"; print_r($_POST); exit;
 $getRestKey1 =$_POST['key'];
-if(isset($_POST['item_type']) && $_POST['item_type']=='1' ) {
-$getFoodItems="SELECT * FROM food_products WHERE restaurant_id = '$getRestKey1' AND lkp_status_id = '0' AND item_type = '1' GROUP BY category_id";
-$getFoodItems1 = $conn->query($getFoodItems);
-} else {
+if(isset($_POST['item_type']) && $_POST['item_type']=='undefined' ) {
     $getFoodItems1 = getFoodCategoryByRestId('food_products','restaurant_id',$getRestKey1);
+} else {
+    $getFoodItems="SELECT * FROM food_products WHERE restaurant_id = '$getRestKey1' AND lkp_status_id = '0' AND item_type = '".$_POST['item_type']."' GROUP BY category_id";
+    $getFoodItems1 = $conn->query($getFoodItems);
 }
 ?>
-
-<?php if($getFoodItems1->num_rows > 0) { ?>
     <?php while($getCategoriesList = $getFoodItems1->fetch_assoc()) { ?>
     <hr>
     <h5 class="nomargin_top" id="<?php echo $getCategoriesList['category_id']; ?>"><b><?php $getCatName1 = getIndividualDetails('food_category','id',$getCategoriesList['category_id']); echo $getCatName1['category_name']; ?></b></h5>
@@ -36,7 +34,12 @@ $getFoodItems1 = $conn->query($getFoodItems);
         </thead>
     <tbody>
     <?php 
-        $getItemsByCat2="SELECT * FROM food_products WHERE restaurant_id = '$getRestKey1' AND lkp_status_id = '0' AND category_id = '".$getCatName1['id']."'";
+    if(isset($_POST['item_type']) && $_POST['item_type']=='undefined' ) {
+        $getItemsByCat2="SELECT * FROM food_products WHERE restaurant_id = '$getRestKey1' AND lkp_status_id = '0'  AND category_id = '".$getCatName1['id']."'";        
+    } else {
+        $getItemsByCat2="SELECT * FROM food_products WHERE restaurant_id = '$getRestKey1' AND lkp_status_id = '0' AND item_type = '".$_POST['item_type']."' AND category_id = '".$getCatName1['id']."'";
+    }
+        
         $getItemsByCat1 = $conn->query($getItemsByCat2);
         //$getItemsByCat1 = getFoodItemsByCategory('food_products','restaurant_id',$getRestKey1,'category_id',$getCatName1['id']); 
         $i=1; while($getItemsByCategory1 = $getItemsByCat1->fetch_assoc()) {
@@ -95,10 +98,3 @@ $getFoodItems1 = $conn->query($getFoodItems);
 
     </table>
     <?php } ?>
-<?php } else { ?>
-    <table>
-        <tbody>
-            <p style="text-align:center">No Records Found</p>
-        </tbody>
-    </table>
-<?php } ?>

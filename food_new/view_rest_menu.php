@@ -171,7 +171,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 				<div class="box_style_1">
 					<ul id="cat_nav">						
 						<?php while($getCatList = $getCategory->fetch_assoc() ) { ?>
-							<li><a href="#<?php echo $getCatList['category_id']; ?>" class="active"><?php $getCatName = getIndividualDetails('food_category','id',$getCatList['category_id']); echo $getCatName['category_name']; ?><span>(<?php echo getProductsCountByCat('food_products','category_id',$getCatList['category_id'],'restaurant_id',$getRestKey); ?>)</span></a></li>
+							<li><a href="#<?php echo $getCatList['category_id']; ?>" class="active"><?php $getCatName = getIndividualDetails('food_category','id',$getCatList['category_id']); echo $getCatName['category_name']; ?></a></li>
 						<?php } ?>
 					</ul>
 				</div><!-- End box_style_1 -->
@@ -194,14 +194,16 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 							<h3 style="color:white;font-size:18px;padding-left:10px">Menu</h3>
 						</div>
 						<div class="col-sm-6">
+						<div class="search-wrapper">
 						<form style="margin-top:10px;margin-bottom:10px">
 							<div class="input-group add-on">
 								<input class="form-control two" placeholder="Search dishes.." name="search_item" id="srch-term" type="text">
-								<div class="input-group-btn">
-								<button class="btn btn-default" type="submit" style="padding:9px 12px;"><i class="glyphicon glyphicon-search"></i></button>
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="reset" style="padding:9px 12px;"><span class=" icon-search"></span></button>
 								</div>
 							</div>
 						</form>
+						</div>
 						</div>
 						<div class="col-sm-4">
 						<div class="row">
