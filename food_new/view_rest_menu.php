@@ -171,7 +171,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 				<div class="box_style_1">
 					<ul id="cat_nav">						
 						<?php while($getCatList = $getCategory->fetch_assoc() ) { ?>
-							<li><a href="#<?php echo $getCatList['category_id']; ?>" class="active"><?php $getCatName = getIndividualDetails('food_category','id',$getCatList['category_id']); echo $getCatName['category_name']; ?><span>(<?php echo getProductsCountByCat('food_products','category_id',$getCatList['category_id'],'restaurant_id',$getRestKey); ?>)</span></a></li>
+							<li><a href="#<?php echo $getCatList['category_id']; ?>" class="active"><?php $getCatName = getIndividualDetails('food_category','id',$getCatList['category_id']); echo $getCatName['category_name']; ?></a></li>
 						<?php } ?>
 					</ul>
 				</div><!-- End box_style_1 -->
@@ -193,18 +193,29 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 						<div class="col-sm-2">
 							<h3 style="color:white;font-size:18px;padding-left:10px">Menu</h3>
 						</div>
-						<div class="col-sm-8">
-						<form style="margin-top:10px">
+						<div class="col-sm-6">
+						<div class="search-wrapper">
+						<form style="margin-top:10px;margin-bottom:10px">
 							<div class="input-group add-on">
 								<input class="form-control two" placeholder="Search dishes.." name="search_item" id="srch-term" type="text">
-								<div class="input-group-btn">
-								<!-- <button class="btn btn-default" type="submit" style="padding:9px 12px;"><i class="glyphicon glyphicon-search"></i></button> -->
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="reset" style="padding:9px 12px;"><span class=" icon-search"></span></button>
 								</div>
 							</div>
 						</form>
 						</div>
-						<div class="col-sm-2">
-							<h3 style="color:white;font-size:18px"><label><input name="item_type" type="checkbox" value="1" class="vegeterian"></label> Veg</h3>
+						</div>
+						<div class="col-sm-4">
+						<div class="row">
+						<div class="col-sm-4 col-xs-4">
+						<label class="radiobt"><input type="checkbox" id="check1" value="1" class="vegeterian" name="dev_type[]">Veg
+							<span class="checkmark2"></span></label>
+						</div>
+						<div class="col-sm-8 col-xs-8">
+						<label class="radiobt"><input type="checkbox" id="check2" value="2" class="vegeterian" name="dev_type">Non Veg
+							<span class="checkmark2"></span></label>
+						</div>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -504,10 +515,18 @@ function show_cart() {
 </script>
 <script type="text/javascript">
 	$(document).on('change','.vegeterian',function(){
+
 		var key = $("#key").val();
 		if($(".vegeterian").is(":checked")){
 			var item_type = $(this).val();
-		}
+			if(item_type == 1) {
+			$('input[id=check2]').attr('checked',false);
+			} else if(item_type == 2) {
+				$('input[id=check1]').attr('checked',false);
+			}
+			
+		}	
+	   //alert(item_type);
 	   var url = "veg_products.php";
 	   $.ajax({
 	     type: "POST",
@@ -521,6 +540,7 @@ function show_cart() {
 	   });
 	  return false;
 	});
+
 	$('.two').keyup(function() {
 		var item_name = $(".two").val();
 		var key = $("#key").val();

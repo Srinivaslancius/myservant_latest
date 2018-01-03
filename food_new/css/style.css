@@ -3427,19 +3427,93 @@ footer ul {
     font-size: 13px;
     margin:12px 0px;
 }
-/*@media only screen and (max-width: 640px) {
+/* checkbox for view_rest_page*/
+.checkmark2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border-radius: 0%;
+}
+.radiobt {
+    /* display: block; */
+    position: relative;
+    padding-left: 25px;
+    margin-top: 16px;
+    cursor: pointer;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: bold;
+    color: white;
+}
+.radiobt input {
+    position: absolute;
+    opacity: 0;
+}
+
+.radiobt:hover input ~ .checkmark2 {
+    background-color: #ccc;
+}
+.radiobt input:checked ~ .checkmark2 {
+    background-color: #555;
+}
+.checkmark2:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.radiobt input:checked ~ .checkmark2:after {
+    display: block;
+}
+
+.radiobt .checkmark2:after {
+ left: 8px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+@media screen and (max-width: 640px) and (min-width: 360px) {
 	.container{
-		padding-left:25px !important;
+		padding-left:35px !important;
 		padding-right:25px !important;
 	}
 	.myservanrlogo {
 		margin-left:80px !important;
 	}
 	#custom-search-input, #custom-search-input .search-query {
-    width: 270px !important;
+    width: 285px !important;
     margin-left: -14px !important;
 }
 #custom-search-input input.btn_search {
-	width:120px !important;;
+	width:120px !important; 
+	right: 9px !important;
+    top: 3px !important;
+    font-size: 11px;
 }
-}*/
+.btn{
+	margin-left:15px;
+}
+#custom-search-input .search-query {
+    padding: 10px 10px;
+	font-size: 11px;
+}
+#country-list {
+    width: 60% !important;
+}
+}
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+	.btn{
+	margin-left:0px;
+}
+}
