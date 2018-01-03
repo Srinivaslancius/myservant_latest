@@ -4,13 +4,14 @@ include "../admin_includes/common_functions.php";
 include "../admin_includes/food_common_functions.php";
  //echo "<pre>"; print_r($_POST); exit;
 $getRestKey1 =$_POST['key'];
-if(isset($_POST['item_type']) && $_POST['item_type']!='' ) {
+if(isset($_POST['item_type']) && $_POST['item_type']=='1' ) {
 $getFoodItems="SELECT * FROM food_products WHERE restaurant_id = '$getRestKey1' AND lkp_status_id = '0' AND item_type = '1' GROUP BY category_id";
 $getFoodItems1 = $conn->query($getFoodItems);
 } else {
     $getFoodItems1 = getFoodCategoryByRestId('food_products','restaurant_id',$getRestKey1);
 }
 ?>
+<?php if($getFoodItems1->num_rows > 0) { ?>
     <?php while($getCategoriesList = $getFoodItems1->fetch_assoc()) { ?>
     <hr>
     <h5 class="nomargin_top" id="<?php echo $getCategoriesList['category_id']; ?>"><b><?php $getCatName1 = getIndividualDetails('food_category','id',$getCategoriesList['category_id']); echo $getCatName1['category_name']; ?></b></h5>
@@ -93,3 +94,10 @@ $getFoodItems1 = $conn->query($getFoodItems);
 
     </table>
     <?php } ?>
+<?php } else { ?>
+    <table class="table table-striped cart-list">
+        <tbody>
+           <p style="text-align:center"> No Records Found</p>
+        </tbody>        
+    </table>
+<?php } ?>
