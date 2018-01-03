@@ -104,7 +104,7 @@ if (isset($_POST['cart_id'])){
                     <td class="rw_wdth" style="width:320px">
                         <div class="row">
                         <div class="col-sm-2">
-                            <figure class="thumb_menu_list"><img src='.$img.' alt='.$getProductDetails1['product_name'].'></figure>
+                            <figure class="thumb_menu_list"><img src="'.$img.'" alt='.$getProductDetails1['product_name'].'></figure>
                         </div>
                         <div class="col-sm-10" style="padding-right:0px">                   
                            <h5 style="margin-left:15px">'.$getProductDetails1['product_name'].'</h5>';
