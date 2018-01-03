@@ -208,11 +208,11 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 						<div class="col-sm-4">
 						<div class="row">
 						<div class="col-sm-4 col-xs-4">
-						<label class="radiobt"><input type="radio" value="2" checked name="dev_type">Veg
+						<label class="radiobt"><input type="checkbox" id="check1" value="1" class="vegeterian" name="dev_type[]">Veg
 							<span class="checkmark2"></span></label>
 						</div>
 						<div class="col-sm-8 col-xs-8">
-						<label class="radiobt"><input type="radio" value="2" name="dev_type">Non Veg
+						<label class="radiobt"><input type="checkbox" id="check2" value="2" class="vegeterian" name="dev_type">Non Veg
 							<span class="checkmark2"></span></label>
 						</div>
 						</div>
@@ -515,10 +515,18 @@ function show_cart() {
 </script>
 <script type="text/javascript">
 	$(document).on('change','.vegeterian',function(){
+
 		var key = $("#key").val();
 		if($(".vegeterian").is(":checked")){
 			var item_type = $(this).val();
-		}
+			if(item_type == 1) {
+			$('input[id=check2]').attr('checked',false);
+			} else if(item_type == 2) {
+				$('input[id=check1]').attr('checked',false);
+			}
+			
+		}	
+	   //alert(item_type);
 	   var url = "veg_products.php";
 	   $.ajax({
 	     type: "POST",
@@ -532,6 +540,7 @@ function show_cart() {
 	   });
 	  return false;
 	});
+
 	$('.two').keyup(function() {
 		var item_name = $(".two").val();
 		var key = $("#key").val();
