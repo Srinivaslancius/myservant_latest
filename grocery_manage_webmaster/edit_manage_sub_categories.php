@@ -38,7 +38,7 @@ if (!isset($_POST['submit'])) {
                           <div class="form-group">
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Select Category</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <select name="grocery_category_id" id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }">
+                                    <select name="grocery_category_id" id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
                                         <option value="">-- Select Category --</option>
                                         <?php while($row = $getGroceryCategories->fetch_assoc()) {  ?>
                                         <option <?php if($row['id'] == $getSubCategories['grocery_category_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['category_name']; ?></option>
@@ -68,7 +68,7 @@ if (!isset($_POST['submit'])) {
                             <div class="form-group">
                                 <label for="form-control-1" class="col-sm-3 col-md-4 control-label">Brands Applicable</label>
                                     <div class="col-sm-6 col-md-4">
-                                        <select name="brands_id[]" id="form-control-2" class="form-control" data-plugin="select2" multiple="multiple">
+                                        <select name="brands_id[]" id="form-control-2" class="form-control" data-plugin="select2" multiple="multiple" required>
                                             <option value="">-- Select Brands --</option>
                                         <?php while($row = $getGroceryBrands->fetch_assoc()) {  ?>
                                             <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == in_array($row['id'], $getAllBrandsId)) { echo "selected=selected"; }?> ><?php echo $row['title']; ?></option>

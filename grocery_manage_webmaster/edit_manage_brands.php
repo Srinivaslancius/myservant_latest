@@ -7,13 +7,10 @@ if (!isset($_POST['submit'])) {
     } else {
     //If success
             $title = $_POST['title'];
-            $fileToUpload = $_FILES["fileToUpload"]["name"];
-            $fileToUpload1 = $_FILES["fileToUpload1"]["name"];
-            $fileToUpload2 = $_FILES["fileToUpload2"]["name"];
             $lkp_status_id = $_POST['lkp_status_id'];
-
-    if($_FILES["fileToUpload"]["name"]!='' || $_FILES["fileToUpload1"]["name"]!='') {
-
+            
+            if($_FILES["fileToUpload"]["name"]!='' && $_FILES["fileToUpload1"]["name"]!='') {
+                      
               $fileToUpload = $_FILES["fileToUpload"]["name"];
               $target_dir = "../uploads/grocery_brands_web_logos/";
               $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -26,24 +23,56 @@ if (!isset($_POST['submit'])) {
               $imageFileType1 = pathinfo($target_file1,PATHINFO_EXTENSION);
               $getImgUnlink1 = getImageUnlink('app_brand_logo','grocery_brand_logos','id',$id,$target_dir1);
 
-
-                //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
               if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    $sql = "UPDATE grocery_brand_logos SET title = '$title', web_brand_logo = '$fileToUpload', lkp_status_id = '$lkp_status_id' WHERE id='$id'";
-                    $conn->query($sql);
-
-                    //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-                } elseif (move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1)) {
-                  $sql = "UPDATE grocery_brand_logos SET title = '$title',app_brand_logo = '$fileToUpload1', lkp_status_id = '$lkp_status_id' WHERE id='$id'";
-                  $conn->query($sql);
-
-                } 
-                if($conn->query($sql) === TRUE){
+                move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1);
+                    $sql = "UPDATE grocery_brand_logos SET title = '$title', web_brand_logo = '$fileToUpload',app_brand_logo = '$fileToUpload1', lkp_status_id = '$lkp_status_id' WHERE id='$id'";
+                    if($conn->query($sql) === TRUE){
                 echo "<script type='text/javascript'>window.location='manage_brands.php?msg=success'</script>";
                 } else {
                 echo "<script type='text/javascript'>window.location='manage_brands.php?msg=fail'</script>";
                 } 
-      } else {
+
+                    
+                } 
+                
+      } 
+      elseif($_FILES["fileToUpload"]["name"]!=''){
+         $fileToUpload = $_FILES["fileToUpload"]["name"];
+              $target_dir = "../uploads/grocery_brands_web_logos/";
+              $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+              $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+              $getImgUnlink = getImageUnlink('web_brand_logo','grocery_brand_logos','id',$id,$target_dir);
+
+
+              move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+              
+                    $sql = "UPDATE grocery_brand_logos SET title = '$title', web_brand_logo = '$fileToUpload', lkp_status_id = '$lkp_status_id' WHERE id='$id'";
+                    if($conn->query($sql) === TRUE){
+                echo "<script type='text/javascript'>window.location='manage_brands.php?msg=success'</script>";
+                } else {
+                echo "<script type='text/javascript'>window.location='manage_brands.php?msg=fail'</script>";
+                } 
+              
+      }
+      elseif ( $_FILES["fileToUpload1"]["name"]!='') {
+
+              $fileToUpload1 = $_FILES["fileToUpload1"]["name"];
+              $target_dir1 = "../uploads/grocery_brands_app_logos/";
+              $target_file1 = $target_dir1 . basename($_FILES["fileToUpload1"]["name"]);
+              $imageFileType1 = pathinfo($target_file1,PATHINFO_EXTENSION);
+              $getImgUnlink1 = getImageUnlink('app_brand_logo','grocery_brand_logos','id',$id,$target_dir1);
+
+              move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1);
+                
+                    $sql = "UPDATE grocery_brand_logos SET title = '$title', app_brand_logo = '$fileToUpload1', lkp_status_id = '$lkp_status_id' WHERE id='$id'";
+                    if($conn->query($sql) === TRUE){
+                    echo "<script type='text/javascript'>window.location='manage_brands.php?msg=success'</script>";
+                    } else {
+                    echo "<script type='text/javascript'>window.location='manage_brands.php?msg=fail'</script>";
+                    } 
+              
+      }
+      else {
 
           $sql = "UPDATE grocery_brand_logos SET title = '$title', lkp_status_id = '$lkp_status_id' WHERE id = '$id' ";
           if($conn->query($sql) === TRUE){

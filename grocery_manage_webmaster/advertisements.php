@@ -4,66 +4,81 @@
           echo "fail";
         } else  {
             //If success
-            $grocery_category_id = $_POST['grocery_category_id'];
-            $sub_category_name = $_POST['sub_category_name'];
-            $brands_id = implode(',',$_POST["brands_id"]);
-            $priority = $_POST['priority'];
+            $title = $_POST['title'];
+            $link = $_POST['link'];
+            $fileToUpload = $_FILES["fileToUpload"]["name"];
             $lkp_status_id = $_POST['lkp_status_id'];
-        
-                $sql = "INSERT INTO grocery_sub_categories (`grocery_category_id`,`sub_category_name`,`brands_id`,`priority`,`lkp_status_id`) VALUES ('$grocery_category_id','$sub_category_name','$brands_id','$brands_id','$lkp_status_id')"; 
+
+            if($fileToUpload!='' ) {
+
+                $target_dir = "../uploads/grocery_advertisements_images/";
+                $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+                $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+    
+
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                    
+                     $sql = "INSERT INTO grocery_advertisements (`title`,`image`,`link`,`lkp_status_id`) VALUES ('$title','$fileToUpload','$link','$lkp_status_id')"; 
                     if($conn->query($sql) === TRUE){
-                       echo "<script type='text/javascript'>window.location='manage_sub_categories.php?msg=success'</script>";
+                       echo "<script type='text/javascript'>window.location='advertisements.php?msg=success'</script>";
                     } else {
-                       echo "<script type='text/javascript'>window.location='manage_sub_categories.php?msg=fail'</script>";
+                       echo "<script type='text/javascript'>window.location='advertisements.php?msg=fail'</script>";
                     }
+                    //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+                } else {
+                    echo "Sorry, there was an error uploading your file.";
+                }
+            }   
         }
-        
 ?>
         <div class="site-content">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="m-y-0 font_sz_view">Add Sub Categories</h3>
-                </div><?php $getGroceryCategories = getAllDataWithStatus('grocery_category','0');?>
+                    <h3 class="m-y-0 font_sz_view">Add Advertisements</h3>
+                </div>
                 <div class="panel-body">
                     <div class="row">
                         
                         <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Select Category</label>
+                            <!-- <div class="form-group">
+                                <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Type</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <select name="grocery_category_id" id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
-                                        <option value="">-- Select Category --</option>
-                                        <?php while($row = $getGroceryCategories->fetch_assoc()) {  ?>
-                                          <option value="<?php echo $row['id']; ?>" ><?php echo $row['category_name']; ?></option>
-                                      <?php } ?>
+                                    <select id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }">
+                                        <option value="">-- Select Type --</option>
+                                        <option value="Andhra Pradesh">Top</option>
+                                        <option value="Andhra Pradesh">Bottom</option>
+                                        <option value="Andhra Pradesh">Home</option>
+                                        <option value="Andhra Pradesh">Category</option>
+                                        <option value="Andhra Pradesh">Sub Category</option>
+                                        <option value="Andhra Pradesh">Left</option>
+                                        <option value="Andhra Pradesh">Right</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
+                            
                             <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Sub Category Name</label>
+                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Link</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" name="sub_category_name" class="form-control" id="form-control-3" placeholder="Enter Sub Category Name" required>
+                                    <input type="url" name="link" class="form-control" id="form-control-3" placeholder="Enter Link" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Priority</label>
+                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Title</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" name="priority" class="form-control" id="form-control-3" placeholder="Enter Priority" required>
+                                    <input type="text" name="title" class="form-control" id="form-control-3" placeholder="Enter Title" required>
                                 </div>
                             </div>
-                            <?php $getGroceryBrands = getAllDataWithStatus('grocery_brand_logos','0');?>
                             <div class="form-group">
-                                <label for="form-control-1" class="col-sm-3 col-md-4 control-label">Brands Applicable</label>
-                                    <div class="col-sm-6 col-md-4">
-                                        <select name="brands_id[]" id="form-control-2" class="form-control" data-plugin="select2" multiple="multiple" required>
-                                            <option value="">-- Select Brands --</option>
-                                        <?php while($row = $getGroceryBrands->fetch_assoc()) {  ?>
-                                            <option value="<?php echo $row['id']; ?>" ><?php echo $row['title']; ?></option>
-                                          <?php } ?>
-                                        </select>
-                                    </div>
+                                <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Image</label>
+                                
+                                <div class="col-sm-6 col-md-4">
+                                    <label class="btn btn-default file-upload-btn">Choose file...
+                                        <input id="form-control-22" name="fileToUpload" id="fileToUpload"  accept="image/*"  class="file-upload-input" type="file" multiple="multiple" required>
+                                    </label>
+                                </div>
                             </div>
-                            <?php $getStatus = getAllData('lkp_status');?>
+                             <?php $getStatus = getAllData('lkp_status');?>
                             <div class="form-group">
                                 <label class="col-sm-3  col-md-4 control-label" for="form-control-8">Choose Your Status</label>
                                 <div class="col-sm-6 col-md-4">
@@ -80,40 +95,40 @@
                                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
+                           
                         </form>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default panel-table m-b-0">
                 <div class="panel-heading">
-                    <h3 class="m-t-0 m-b-5 font_sz_view">View Sub Categories</h3>
-                    <?php $getCategoriesData = getAllDataWithActiveRecent('grocery_sub_categories'); $i=1; ?>
+                    <h3 class="m-t-0 m-b-5 font_sz_view">View Advertisements</h3>
+                    <?php $getAdvertisementsData = getAllDataWithActiveRecent('grocery_advertisements'); $i=1; ?>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered dataTable" id="table-2">
                             <thead>
                                 <tr>
-                                    <th>S.No</th>
-                                    <th>Category Name</th>
-                                    <th>Sub Category Name</th>
-                                    <th>Brands Applicable</th>
-                                    <th>Priority</th>
+                                    <th>S.NO</th>
+                                    <th>Title</th>
+                                    <th>Image</th>
+                                    <th>Link</th>
+                                    
                                     <th>Status</th>
+                                    
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while ($row = $getCategoriesData->fetch_assoc()) { ?>
+                                <?php while ($row = $getAdvertisementsData->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?php echo $i;?></td>
-                                    <td><?php $getGroceryCategories = getAllData('grocery_category'); while($getGroceryCategories1 = $getGroceryCategories->fetch_assoc()) { 
-                                        if($row['grocery_category_id'] == $getGroceryCategories1['id']) { echo $getGroceryCategories1['category_name']; } } ?></td>
-                                    <td><?php echo $row['sub_category_name'];?></td>
-                                    <td><a href="#" data-toggle="modal" data-target="#animatedModal1">View Brands Applicable</a></td>
-                                    <td><?php echo $row['priority'];?></td>
-                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_sub_categories'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_sub_categories'>In Active</span>" ;} ?></td>
-                                    <td><span><a href="edit_manage_sub_categories.php?sid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td>
+                                    <td><?php echo $row['title'];?></td>
+                                    <td><img src="<?php echo $base_url . 'uploads/grocery_advertisements_images/'.$row['image'] ?>" width="100" height="100"></td>
+                                    <td><?php echo $row['link'];?></td>
+                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_advertisements'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_advertisements'>In Active</span>" ;} ?></td>
+                                    <td><span><a href="edit_grocery_advertisements.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td>
                                 </tr>
                                 <?php } ?>
                             </tbody>
@@ -152,6 +167,6 @@
                 </div>
             </div>
         </div>
-    <?php include_once 'admin_includes/footer.php'; ?> 
+    <?php include_once 'admin_includes/footer.php'; ?>
   </body>
 </html>
