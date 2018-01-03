@@ -19,7 +19,36 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+<style>
+.table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom:0px;
+	color:#fe6003;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+   border-top: 0px solid #ddd;
+}
+.button1 {
+    background-color: #fe6003;
+    border-color: #fe6003;
+    color: white;
+    padding: 4px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 
+.button2 {
+	background-color:#fe6003;
+ padding: 5px 12px;
+} 
+</style>
 </head>
 <body>
 <!--[if lte IE 8]>
@@ -48,7 +77,7 @@
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
     	<div id="sub_content">
-    	 <h1>My Account</h1>
+    	 <h1>Update Profile</h1>
          <p></p>
         </div><!-- End sub_content -->
 	</div><!-- End subheader -->
@@ -57,7 +86,7 @@
         <div class="container">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="#0">Myaccount</a></li>
+                <li><a href="#0">Update Profile</a></li>
             </ul>
             
         </div>
@@ -81,87 +110,35 @@
          <div class="panel-group">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <h3 class="nomargin_top">My Dashbaord</h3>
+                      <h3 class="nomargin_top">Update Profile</h3>
                     </div>
                       <div class="panel-body">
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="one">
-                                        
-                                        <h3>Grocery Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="two">
-                                        
-                                        <h3>Food Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="three">
-                                        
-                                        <h3>Services Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="four">
-                                        
-                                        <h3>My Profile</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="five">
-                                        
-                                        <h3>My Addresses</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="six">
-                                        
-                                        <h3>Wallet</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="seven">
-                                        
-                                        <h3>Reward Points</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="eight">
-                                        
-                                        <h3>My Wishlist</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
+                 <form method="post">
+                  <div class="col-md-12">				 
+				  <div class="col-md-6">
+					<div class="form-group">
+						<label for="first-name">Name</label>
+						<input type="text" class="form-control"  name="user_full_name" id="first-name" placeholder="Name" value="<?php echo $userData['user_full_name']; ?>" required>
+					</div>
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input type="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="user_email" name="user_email" placeholder="Email" value="<?php echo $userData['user_email']; ?>" onkeyup="checkEmail();"  required>
+            <span id="input_status" style="color: red;"></span>
+					</div>
+					 <div class="form-group">
+						<label for="mobile">Mobile</label>
+						<input type="text" class="form-control valid_mobile_num" name="user_mobile" id="user_mobile" placeholder="Mobile" value="<?php echo $userData['user_mobile']; ?>" onkeyup="checkMobile();" required>
+            <span id="input_status1" style="color: red;"></span>
+					</div>
+					<div class="form-group">
+						<button class="button1" type="submit" name="update">Update</button>					
+					</div>						
+                  </div>
+				  <div class="col-md-6">
+				  </div>
+                               
+                   </div>        
+          </form>
                       </div>
                   </div>
                   
