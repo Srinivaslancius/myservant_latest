@@ -105,7 +105,7 @@
             </p>
         </div>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-3">
                 <div class="box_home" id="one">
                     <span>1</span>
                     <h3><?php echo $getSearchByAreaData['title']; ?></h3>
@@ -114,7 +114,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-3">
                 <div class="box_home" id="two">
                     <span>2</span>
                     <h3><?php echo $getChooseRestaurant['title']; ?></h3>
@@ -123,7 +123,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-3">
                 <div class="box_home" id="three">
                     <span>3</span>
                     <h3><?php echo $getPayByCardData['title']; ?></h3>
@@ -132,7 +132,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-3">
                 <div class="box_home" id="four">
                     <span>4</span>
                     <h3><?php echo $getDeliveryData['title']; ?></h3>
@@ -161,7 +161,7 @@
         
         <div class="row">
             <?php while($getMostPopualrRestaurants = $getMostPopualrRest->fetch_assoc()) { ?>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6">
                
                 <a href="view_rest_menu.php?key=<?php echo encryptPassword($getMostPopualrRestaurants['id']);?>" class="strip_list">
                     <div class="ribbon_1">Popular</div>
@@ -225,7 +225,7 @@
              <?php $getBrands = getAllDataWithStatus('food_brand_logos','0'); ?>
           <?php while($getAllBrands = $getBrands->fetch_assoc()) { ?>
           <div class="item <?php if($getAllBrands['id']==4) { echo "active"; } ?>">
-            <div class="col-xs-12 col-sm-2 col-md-2"><a href=""> <img src="<?php echo $base_url . 'uploads/food_brand_logos/'.$getAllBrands['brand_logo'] ?>" alt="" width="200px" height="150px"></a>
+            <div class="col-xs-12 col-sm-3 col-md-2"><a href=""> <img src="<?php echo $base_url . 'uploads/food_brand_logos/'.$getAllBrands['brand_logo'] ?>" alt="" width="200px" height="150px"></a>
             </div>
           </div>
           <?php } ?>

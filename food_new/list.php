@@ -92,10 +92,10 @@
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
     <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-3">
                 <?php include_once './filters.php';?>
             </div>       
-        <div class="col-md-9">   
+        <div class="col-md-9 col-sm-9">   
                 <div class="ajax_result">
                         <?php while($getResults = $getSearchResults->fetch_assoc()) { 
                              $show_more = $getResults['id'];?>
@@ -136,9 +136,9 @@
                 </div>
                        
         </div><!-- End col-md-9--> 
-		<div class="col-md-3">
+		<div class="col-md-3 col-sm-3">
 		</div>
-		<div class="col-md-9">
+		<div class="col-md-9 col-sm-9">
 		<?php if($getResultsCount >= 4) { ?>
                 <center><a class="btn_1 load_more">Load More</a></center>
             <?php } ?>

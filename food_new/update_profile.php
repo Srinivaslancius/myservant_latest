@@ -96,7 +96,7 @@
 <div class="container margin_60_35">
 	<div class="row">
     
-    <div class="col-md-3" id="sidebar">
+    <div class="col-md-3 col-sm-3" id="sidebar">
     <div class="theiaStickySidebar">
         <div class="box_style_1" id="faq_box">
 			<?php include_once 'dashboard_strip.php';?>
@@ -104,7 +104,7 @@
         </div><!-- End theiaStickySidebar -->
      </div><!-- End col-md-3 -->
         
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-9">
         
        	 
          <div class="panel-group">
@@ -114,8 +114,8 @@
                     </div>
                       <div class="panel-body">
                  <form method="post">
-                  <div class="col-md-12">				 
-				  <div class="col-md-6">
+                  <div class="col-md-12 col-sm-12">				 
+				  <div class="col-md-6 col-sm-6">
 					<div class="form-group">
 						<label for="first-name">Name</label>
 						<input type="text" class="form-control"  name="user_full_name" id="first-name" placeholder="Name" value="<?php echo $userData['user_full_name']; ?>" required>
@@ -134,7 +134,7 @@
 						<button class="button1" type="submit" name="update">Update</button>					
 					</div>						
                   </div>
-				  <div class="col-md-6">
+				  <div class="col-md-6 col-sm-6">
 				  </div>
                                
                    </div>        

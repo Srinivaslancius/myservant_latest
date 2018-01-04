@@ -165,7 +165,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 <div class="container margin_60_35">
 		<div class="row">
         
-			<div class="col-md-3" id="sidebar1">
+			<div class="col-md-3 col-sm-3" id="sidebar1">
                 <p><a onclick="history.go(-1);" class="btn_side">Back to search</a></p>
 				<div class="theiaStickySidebar">
 				<div class="box_style_1">
@@ -186,7 +186,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 			</div><!-- End col-md-3 -->
             <?php $getCategory1 = getFoodCategoryByRestId('food_products','restaurant_id',$getRestKey); ?>
 
-			<div class="col-md-6">
+			<div class="col-md-6 col-sm-6">
 				<div class="box_style_2" id="main_menu">
 				<div class="inner">
 					<div class="row">
@@ -308,7 +308,7 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 				</div><!-- End box_style_1 -->
 			</div><!-- End col-md-6 -->    
 
-			<div class="col-md-3" id="sidebar">	
+			<div class="col-md-3 col-sm-3" id="sidebar">	
             	<div class="theiaStickySidebar">
 					<div id="cart_box">		
 						<h3>Your order<!--  <i class="icon_cart_alt pull-right"></i> --></h3>			

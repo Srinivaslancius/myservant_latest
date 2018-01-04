@@ -122,9 +122,9 @@
         </div>
 	<div class="row">
 		
-	<div class="col-md-1">
+	<div class="col-md-1 col-sm-1">
 	</div>
-	<div class="col-md-5 wow fadeIn" data-wow-delay="0.1s">
+	<div class="col-md-5 col-sm-5 wow fadeIn" data-wow-delay="0.1s">
 			<div class="feature">
 				<form method="POST" class="popup-form" autocomplete="off">
 				<center> <h2 class="nomargin_top" style="color:#f26226">Login</h2></center>
@@ -149,7 +149,7 @@
 				</form>
 			</div>
 		</div>
-		<div class="col-md-5 wow fadeIn" data-wow-delay="0.1s">
+		<div class="col-md-5 col-sm-5 wow fadeIn" data-wow-delay="0.1s">
 			<div class="feature">
 				<form class="popup-form" autocomplete="off" method="post" action="mobile_otp.php">
 				<center> <h2 class="nomargin_top" style="color:#f26226">Register</h2></center>
@@ -183,7 +183,7 @@
 				</form>
 			</div>
 		</div>
-		<div class="col-md-1">
+		<div class="col-md-1 col-sm-1">
 	</div>
 	</div><!-- End row -->
 	

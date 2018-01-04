@@ -31,7 +31,7 @@ $getSearchResults1 = $conn->query($query);
                       if($getSearchResults1->num_rows > 0) {
                         	while($row = $getSearchResults1->fetch_assoc()){ 
                       ?>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="strip_list wow fadeIn" data-wow-delay="0.1s">
                                     <div class="row">
                                             <div class="col-md-8 col-sm-9">

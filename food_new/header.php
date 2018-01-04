@@ -19,7 +19,7 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
             <div class="col-md-12">
               <div class="col-md-1">
 			</div>			  
-                <div class="col-md-8 col-xs-12">
+                <div class="col-md-8 col-sm-8 col-xs-12">
                     <p><span style="margin-right:10px"><i class="icon-location"></i>Vijayawada </span>
 					<span> <select style="background-color:transparent;color:white">
 					<option style="color:black">English</option>
@@ -27,7 +27,7 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
 					<option style="color:black">Telugu</option>
 					</select> </span></p>
                 </div>
-                <div class="col-md-3 col-xs-12">
+                <div class="col-md-3 col-sm-4 col-xs-12">
                     <p>
 					<span class="icon-phone"> 9876543210</span>
                         <?php if($_SESSION['user_login_session_id'] =='') { ?>
@@ -46,15 +46,6 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                 
             </div> 
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                   
-                </div>
-                <div class="col-md-3"></div>
-            </div>
-        </div>
         <div class="row myseranr_header">
             <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top:-6px">
                 <?php  
@@ -66,7 +57,7 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                 <?php }?>
                 </a>
             </div>
-            <div class="col-md-6 col-xs-9">
+            <div class="col-md-6 col-sm-6 col-xs-9">
                 <form method="post" action="list.php" autocomplete="off">
                     <div id="custom-search-input">
                         <div class="input-group">
@@ -83,10 +74,10 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                 </form>
             </div>
 
-             <div class="col-md-2">
+             <div class="col-md-2 col-sm-2">
              </div>
 
-            <div class="col-md-1 col-xs-3" style="margin-top:3px">
+            <div class="col-md-1 col-sm-1 col-xs-3" style="margin-top:3px">
                 <a href="cart.php"><button type="button" class="btn btn-danger c_pad" style="background-color:transparent;border-color:white"><span class=" icon-cart" style="font-size:18px"></span> <span class="badge" style="font-size:10px" id="cart_cnt">(<?php echo $cartItems->num_rows; ?>)</span></button></a>
 
             </div>
