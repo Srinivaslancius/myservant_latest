@@ -90,7 +90,7 @@
 					</li>
 					<li><a href="services.php">Services</a>
 					</li>
-					<li>Service Sub Categories</li>
+					<li><?php $catName = getIndividualDetails('services_category','id',$sub_cat_id); echo $catName['category_name']; ?></li>
 				</ul>
 			</div>
 		</div>
@@ -98,7 +98,7 @@
     <div class="container margin_60">
 
       <div class="main_title">
-        <h2>Our <span>Services</span> Sub Categories</h2>
+        <h2><?php $catName = getIndividualDetails('services_category','id',$sub_cat_id); echo $catName['category_name']; ?> Sub Categories</h2>
         
       </div>
 
