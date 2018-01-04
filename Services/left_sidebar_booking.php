@@ -50,7 +50,7 @@
 								</tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Total Amount</th>
+                                        <th>Total Amount<br>(*Minimum Charges applicable.)</th>
                                         <th  colspan="2">Rs. <?php echo $cartTotal; ?>/-</th>
                                     </tr>
                                 </tfoot>

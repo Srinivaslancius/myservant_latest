@@ -266,7 +266,7 @@
 								<input type="hidden" name="discount_money" id="discount_money" value="">
                                                                 <tfoot>
                                                                 <tr>
-                                                                    <td><b>Order Total </b></th>
+                                                                    <td><b>Sub Total </b></th>
                                                                     
                                                                     <td colspan="2" class="text-right"><b>Rs. <?php echo $cartTotal; ?></b></th>
                                                                 </tr>

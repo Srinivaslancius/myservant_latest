@@ -85,18 +85,21 @@
 		</div>
 		<div class="container margin_60">
 			<div class="row">
-				
+				<?php 
+				if($subcatid = decryptpassword($_GET['sub_cat_id'])) {
+					$getGroups = getAllDataWhereWithActive('services_groups','services_sub_category_id',$subcatid); $i=1;
+				} else {
+					$subcatid = decryptpassword($_GET['key2']);
+					$getGroups = getAllDataWhereWithActive('services_groups','services_sub_category_id',$subcatid); $i=1;
+				}
+				$getSubcategories = getIndividualDetails('services_sub_category','id',$subcatid);
+				$getCategories = getIndividualDetails('services_category','id',$getSubcategories['services_category_id']); 
+				?>
 				<div class="col-lg-7 col-md-7" id="faq">
-					<h3 class="nomargin_top">Group Level</h3>
+					<h3 class="nomargin_top"><?php echo $getCategories['category_name'].' / '.$getSubcategories['sub_category_name']?></h3>
 
 					<div class="panel-group" id="payment">
-						<?php 
-						if($subcatid = decryptpassword($_GET['sub_cat_id'])) {
-							$getGroups = getAllDataWhereWithActive('services_groups','services_sub_category_id',$subcatid); $i=1;
-						} else {
-							$subcatid = decryptpassword($_GET['key2']);
-							$getGroups = getAllDataWhereWithActive('services_groups','services_sub_category_id',$subcatid); $i=1;
-						}
+						<?php
 						if($getGroups->num_rows > 0) {
 							while ($getGroupsData = $getGroups->fetch_assoc()) {
 								$services_group_id = $getGroupsData['id'];

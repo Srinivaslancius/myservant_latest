@@ -57,7 +57,7 @@
 		<!-- Slider -->
 		 <div class="container-fluid page-title">
 			<?php  
-				  if(!empty($getPartnersBanner['image'])) { ?> 	
+				  if(!empty($getPrivacyPolicyData['image'])) { ?> 	
 					<div class="row">
 						<?php include_once './common_slider.php';?>
 					</div>
