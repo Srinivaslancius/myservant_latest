@@ -10,20 +10,31 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 	if(isset($_REQUEST['restaurantId']) && !empty($_REQUEST['restaurantId']) && !empty($_REQUEST['categoryId'])) {
 
-		$getItemsByCat = getFoodItemsByCategory('food_products','restaurant_id',$getRestKey,'category_id',$getCatName['id']);
+		$getItemsByCat = getFoodItemsByCategory('food_products','restaurant_id',$_REQUEST['restaurantId'],'category_id',$_REQUEST['categoryId']);
 		if ($getItemsByCat->num_rows > 0) {
 				$response["lists"] = array();
 				while($row = $getItemsByCat->fetch_assoc()) {
 
-					$productId = $getItemsByCategory['id'];
+					$productId = $row['id'];
 					$getCatName = getIndividualDetails('food_category','id',$row['category_id']);
 					//Chedck the condioton for emptty or not		
 					$lists = array();
-					$lists["productId"]    = $row['id'];
+					$lists["productId"]    = $productId;
 			    	$lists["productName"]   = $row["product_name"];	
 			    	$lists["productDesc"] = strip_tags($row["specifications"]); 		    	
 			    	$lists["productImage"] = $base_url."uploads/food_product_images/".$row["product_image"];
 			    	$lists["categoryName"] = $getCatName["category_name"];
+			    	//get products weights and product weight type names with prices
+			    	$getPriceDetails = getAllDataWhere('food_product_weight_prices','product_id',$productId);
+			    	$getPriceDet = array();
+			    	while($getPriceDet = $getPriceDetails->fetch_assoc()) {
+			    		$lists["price"] .=  $getPriceDet['product_price'] .",";
+			    		$lists["priceTypeId"] .=  $getPriceDet['id'] .",";
+				    	$getWeights = getIndividualDetails('food_product_weights','id',$getPriceDet['weight_type_id']);
+				    	$lists["weightTypeId"] .=  $getWeights['id'] .",";
+			    		$lists["weightType"] .=  $getWeights['weight_type'] .",";		    		
+			    	}
+
 			    	array_push($response["lists"], $lists);		
 				}
 				
