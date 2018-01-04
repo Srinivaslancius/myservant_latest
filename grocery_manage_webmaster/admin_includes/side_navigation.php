@@ -89,9 +89,7 @@
                 <li  class="<?php if($page_name == 'groceries_types.php'  || $page_name == 'edit_groceries_types.php') { echo "active"; } ?>">
                   <a href="groceries_types.php">Groceries Item Types</a>
                 </li>
-                <li  class="<?php if($page_name == 'food_product_type.php' || $page_name == 'add_food_product_type.php' || $page_name == 'edit_food_product_type.php') { echo "active"; } ?>">
-                  <a href="food_product_type.php">Product Type</a>
-                </li> 
+   
                 <li  class="<?php if($page_name == 'manage_products.php'  || $page_name == 'edit_manage_products.php') { echo "active"; } ?>">
               <a href="manage_products.php" >Products</a>
             </li>
