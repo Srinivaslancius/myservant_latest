@@ -63,7 +63,12 @@ if (!isset($_POST['submit']))  {
   //If success
   //echo "<pre>";print_r($_POST);exit;
   $title = $_POST['title'];
+  $email = $_POST['email'];
+  $phone_number = $_POST['phone_number'];
+  $reason = $_POST['reason'];
   $description = $_POST['description'];
+  $created_at = date('Y-m-d H:i:s', time() + 24 * 60 * 60);
+
   $fileToUpload = uniqid().$_FILES["fileToUpload"]["name"];
   if($fileToUpload!='') {
 
@@ -72,7 +77,7 @@ if (!isset($_POST['submit']))  {
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        $sql = "INSERT INTO services_testimonials (`title`,`email`,`phone_number`,`reason`, `description`, `image`, `lkp_status_id`) VALUES ('$title','$email','$phone_number','$reason', '$description','$fileToUpload', 1)";
+        $sql = "INSERT INTO services_testimonials (`title`,`email`,`phone_number`,`reason`, `description`, `image`, `lkp_status_id`, `created_at`) VALUES ('$title','$email','$phone_number','$reason', '$description','$fileToUpload', 1, '$created_at')";
         if($conn->query($sql) === TRUE){
            echo "<script type='text/javascript'>window.location='user_feedback_form.php?succ=log-success'</script>";
         } else {

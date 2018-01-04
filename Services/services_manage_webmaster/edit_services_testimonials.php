@@ -7,7 +7,11 @@ if (!isset($_POST['submit'])) {
     } else {
     //If success            
       $title = $_POST['title'];
+      $email = $_POST['email'];
+      $phone_number = $_POST['phone_number'];
+      $reason = $_POST['reason'];
       $description = $_POST['description'];
+      $created_at = date('Y-m-d H:i:s', time() + 24 * 60 * 60);
       $lkp_status_id = $_POST['lkp_status_id'];
       $fileToUpload = $_FILES["fileToUpload"]["name"];
 
@@ -20,7 +24,7 @@ if (!isset($_POST['submit'])) {
               $getImgUnlink = getImageUnlink('image','services_content_pages','id',$id,$target_dir);
                 //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
               if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    $sql = "UPDATE `services_testimonials` SET title = '$title', description = '$description', image = '$fileToUpload',lkp_status_id = '$lkp_status_id' WHERE id = '$id' ";
+                    $sql = "UPDATE `services_testimonials` SET title = '$title',email = '$email',phone_number = '$phone_number',reason = '$reason', description = '$description', image = '$fileToUpload',lkp_status_id = '$lkp_status_id' WHERE id = '$id' ";
                     if($conn->query($sql) === TRUE){
                        echo "<script type='text/javascript'>window.location='services_testimonials.php?msg=success'</script>";
                     } else {
@@ -32,7 +36,7 @@ if (!isset($_POST['submit'])) {
                 }
       } else {
 
-          $sql = "UPDATE `services_testimonials` SET title = '$title', description = '$description',lkp_status_id = '$lkp_status_id' WHERE id = '$id' ";
+          $sql = "UPDATE `services_testimonials` SET title = '$title',email = '$email',phone_number = '$phone_number',reason = '$reason', description = '$description',lkp_status_id = '$lkp_status_id' WHERE id = '$id' ";
           if($conn->query($sql) === TRUE){
              echo "<script type='text/javascript'>window.location='services_testimonials.php?msg=success'</script>";
           } else {
@@ -58,6 +62,34 @@ if (!isset($_POST['submit'])) {
                     <input type="text" name="title" class="form-control" id="form-control-2" placeholder="Title" data-error="Please enter Title" required value="<?php echo $getTestimonialsData['title'];?>">
                     <div class="help-block with-errors"></div>
                   </div>
+
+
+
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Email</label>
+                    <input type="email" name="email" class="form-control" id="form-control-2" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" value="<?php echo $getTestimonialsData['email'];?>">
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Phone Number</label>
+                    <input type="text" name="phone_number" class="form-control valid_mobile_num" id="form-control-2" placeholder="Phone Number" required maxlength="10" pattern="[0-9]{10}" value="<?php echo $getTestimonialsData['phone_number'];?>">
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <?php $getFeedReasons = getAllDataWithStatus('services_customer_feedback_reasons','0');?>
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Choose reason</label>
+                    <select name="reason" class="form-control" required>
+                      <option value="">Select reason</option>
+                      <?php while($row = $getFeedReasons->fetch_assoc()) {  ?>
+                          <option <?php if($row['title'] == $getTestimonialsData['reason']) { echo "Selected"; } ?> value="<?php echo $row['title']; ?>" ><?php echo $row['title']; ?></option>
+                      <?php } ?>
+                   </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+
                   <div class="form-group">
                     <label for="form-control-4" class="control-label">Image</label>
                     <img src="<?php echo $base_url . 'uploads/services_testimonials_images/'.$getTestimonialsData['image'] ?>"  id="output" height="100" width="100"/>
