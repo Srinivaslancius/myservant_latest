@@ -189,7 +189,7 @@ if(isset($_POST['submit'])) {
 			    </section>
         </header>
 	<!-- End Header -->
-
+        <div class="clear"></div>
 	<main>
 		<!-- Slider -->
 		<?php $getAllServiceNewsFeedData = getAllDataWithStatus('services_newsfeed','0');

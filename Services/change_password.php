@@ -39,7 +39,7 @@
     <!-- Mobile menu overlay mask -->
 
     <!-- Header================================================== -->
-    <header>
+    <header id="plain">
         <?php include_once './top_header.php';?>
         <!-- End top line-->
 
@@ -77,6 +77,17 @@
                 <img src="img/slides/slide_1.jpg" class="img-responsive">
             </div>
     </div>
+    <div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="#">Home</a>
+					</li>
+					<li><a href="#">Category</a>
+					</li>
+					<li>Page active</li>
+				</ul>
+			</div>
+		</div>
         <?php if(isset($_GET['succ']) && $_GET['succ'] == 'log-success' ) {  ?>
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6 alert alert-success" style="top:10px; display:block">

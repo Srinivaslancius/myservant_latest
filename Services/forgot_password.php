@@ -86,7 +86,7 @@
 	<!-- Mobile menu overlay mask -->
 
 	<!-- Header================================================== -->
-	<header>
+        <header id="plain">
 		<?php include_once './top_header.php';?>
 		<!-- End top line-->
 
@@ -104,6 +104,17 @@
 			<img src="img/slides/slide_3.jpg" class="img-responsive">
 		</div>
     </div>
+                <div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="#">Home</a>
+					</li>
+					<li><a href="#">Category</a>
+					</li>
+					<li>Page active</li>
+				</ul>
+			</div>
+		</div>
 		<div class="container" style="margin-top:-70px">		
 
            <div class="row">

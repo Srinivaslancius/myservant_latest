@@ -65,13 +65,7 @@
         </header>
 	<!-- End Header -->
 
-	<section class="parallax-window" data-parallax="scroll" data-image-src="img/home_bg_1.jpg" data-natural-width="1400" data-natural-height="470">
-		<div class="parallax-content-1">
-			<div class="animated fadeInDown">
-				<p></p>
-			</div>
-		</div>
-	</section>
+	
 	<!-- End Section -->
 
 	<main>
@@ -88,7 +82,30 @@
         $cartItems = getAllDataWhere('services_cart','session_cart_id',$session_cart_id);
     } 
 ?>
-
+            <div class="container-fluid page-title">
+			<?php  
+				  if(!empty($getPartnersBanner['image'])) { ?> 	
+					<div class="row">
+						<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getPartnersBanner['image'] ?>" alt="<?php echo $getPartnersBanner['title'];?>" class="img-responsive" style="width:100%; height:400px;">
+					</div>
+				<?php } else { ?>
+					<div class="row">
+						<img src="img/slides/slide_1.jpg" class="img-responsive" style="width:100%; height:400px;">
+					</div>
+				<?php }?>
+    	</div>
+            
+<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="#">Home</a>
+					</li>
+					<li><a href="#">Category</a>
+					</li>
+					<li>Page active</li>
+				</ul>
+			</div>
+		</div>
 		<div class="container margin_60">
 			<div class="cart-section">
 				 <?php if($cartItems->num_rows > 0) { ?>
