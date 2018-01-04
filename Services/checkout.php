@@ -274,13 +274,18 @@
 									$service_tax += ($getSiteSettingsData['service_tax']/100)*$cartTotal;
 								?>
                                                                 <tr>
-                                                                    <td><b>Service Tax (<?php echo $getSiteSettingsData['service_tax'] ; ?>%)</b></th>
+                                                                    <td><b>GST (<?php echo $getSiteSettingsData['service_tax'] ; ?>%)</b></th>
                                                                     <td colspan="2" class="text-right"><b>Rs. <?php echo $service_tax ; ?></b></th>
+                                                                </tr>
+                                                                <?php } else { ?>
+                                                                <tr>
+                                                                    <td><b>GST </b></th>
+                                                                    <td colspan="2" class="text-right"><b>Rs. 0</b></th>
                                                                 </tr>
                                                                 <?php } ?>
                                                                 <input type="hidden" name="service_tax" id="service_tax" value="<?php echo $service_tax ; ?>">
                                                                 <tr>
-                                                                    <td><strong>Order Total</strong></td>
+                                                                    <td><strong>Order Total<br>(*Minimum Charges applicable.)</strong></td>
                                                                     <td colspan="2" class="text-right"><strong>Rs. <?php echo $cartTotal+$service_tax; ?></strong></td>
                                                                 </tr>
                                                                 <input type="hidden" name="order_total" id="order_total" value="<?php echo $cartTotal1+$service_tax; ?>">
