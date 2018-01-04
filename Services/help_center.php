@@ -24,6 +24,9 @@
 	<!-- Radio and check inputs -->
 	<link href="css/skins/square/grey.css" rel="stylesheet">
 
+	<!-- REVOLUTION SLIDER CSS -->
+	<link href="layerslider/css/layerslider.css" rel="stylesheet">
+
 	<!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
@@ -151,6 +154,26 @@
 	<script src="js/cat_nav_mobile.js"></script>
 	<script>
 		$('#cat_nav').mobileMenu();
+	</script>
+
+	<!-- Validation purpose add scripts -->
+	<!-- Specific scripts for slider-->
+	<script src="layerslider/js/greensock.js"></script>
+	<script src="layerslider/js/layerslider.transitions.js"></script>
+	<script src="layerslider/js/layerslider.kreaturamedia.jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			'use strict';
+			$('#layerslider').layerSlider({
+				autoStart: true,
+				responsive: true,
+				responsiveUnder: 1280,
+				layersContainer: 1170,
+				skinsPath: 'layerslider/skins/'
+					// Please make sure that you didn't forget to add a comma to the line endings
+					// except the last line!
+			});
+		});
 	</script>
 
 </body>
