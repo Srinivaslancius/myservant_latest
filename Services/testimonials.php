@@ -25,9 +25,8 @@
 	<!-- Radio and check inputs -->
 	<link href="css/skins/square/grey.css" rel="stylesheet">
 
-	<!-- Range slider -->
-	<link href="css/ion.rangeSlider.css" rel="stylesheet">
-	<link href="css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+	<!-- REVOLUTION SLIDER CSS -->
+	<link href="layerslider/css/layerslider.css" rel="stylesheet">
 
 	<!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
@@ -63,18 +62,13 @@
 
 	<main>
 		
-	 <div class="container-fluid page-title">
-		<?php  
-		if(!empty($getTestimonialsBanner['image'])) { ?> 	
-				<div class="row">
-					<?php include_once './common_slider.php';?>
-				</div>
-			<?php } else { ?>
-				<div class="row">
-					<img src="img/slides/slide_1.jpg" class="img-responsive" style="width:100%; height:400px;">
-				</div>
-			<?php }?>
-    </div>
+			 <div class="container-fluid page-title">
+			 	
+			<div class="row">
+				<?php include_once './common_slider.php';?>
+			</div>
+					
+		    </div>
             <div id="position">
 			<div class="container">
 				<ul>
@@ -149,5 +143,25 @@
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
 	<script src="js/map_restaurants.js"></script>
 	<script src="js/infobox.js"></script>
+
+	<!-- Specific scripts for slider-->
+	<script src="layerslider/js/greensock.js"></script>
+	<script src="layerslider/js/layerslider.transitions.js"></script>
+	<script src="layerslider/js/layerslider.kreaturamedia.jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			'use strict';
+			$('#layerslider').layerSlider({
+				autoStart: true,
+				responsive: true,
+				responsiveUnder: 1280,
+				layersContainer: 1170,
+				skinsPath: 'layerslider/skins/'
+					// Please make sure that you didn't forget to add a comma to the line endings
+					// except the last line!
+			});
+		});
+	</script>
+
 </body>
 </html>
