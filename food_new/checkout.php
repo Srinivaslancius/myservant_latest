@@ -141,7 +141,7 @@
     position: relative;
     top: -2px;
     color: inherit;
-	 right: 80px;
+	 right: 0px;
     opacity: 2;
     font-size: 15px;
 	font-weight:bold;
