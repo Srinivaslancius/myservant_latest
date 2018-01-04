@@ -83,14 +83,14 @@
                 </li>
                 <li  class="<?php if($page_name == 'manage_sub_categories.php'  || $page_name == 'edit_manage_sub_categories.php' ) { echo "active"; } ?>"><a href="manage_sub_categories.php">Sub Categories</a>
                 </li>
-                 <!-- <li  class="<?php if($page_name == 'food_product_weights.php' || $page_name == 'add_food_product_weights.php' || $page_name == 'edit_food_product_weights.php') { echo "active"; } ?>"><a href="food_product_weights.php">Weights</a>
+                 <li  class="<?php if($page_name == 'grocery_weight.php' || $page_name == 'add_food_product_weights.php' || $page_name == 'edit_grocery_weight.php') { echo "active"; } ?>"><a href="grocery_weight.php">Weights</a>
                 </li>
-                <li  class="<?php if($page_name == 'food_ingredients.php' || $page_name == 'add_food_ingredients.php' || $page_name == 'edit_food_ingredients.php') { echo "active"; } ?>">
-                  <a href="food_ingredients.php">Ingredients</a>
+                <li  class="<?php if($page_name == 'groceries_types.php'  || $page_name == 'edit_groceries_types.php') { echo "active"; } ?>">
+                  <a href="groceries_types.php">Groceries Types</a>
                 </li>
                 <li  class="<?php if($page_name == 'food_product_type.php' || $page_name == 'add_food_product_type.php' || $page_name == 'edit_food_product_type.php') { echo "active"; } ?>">
                   <a href="food_product_type.php">Product Type</a>
-                </li> -->
+                </li> 
                 <li  class="<?php if($page_name == 'manage_products.php'  || $page_name == 'edit_manage_products.php') { echo "active"; } ?>">
               <a href="manage_products.php" >Products</a>
             </li>
