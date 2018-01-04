@@ -72,7 +72,7 @@ if (!isset($_POST['submit']))  {
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        $sql = "INSERT INTO services_testimonials (`title`, `description`, `image`, `lkp_status_id`) VALUES ('$title', '$description','$fileToUpload', 1)";
+        $sql = "INSERT INTO services_testimonials (`title`,`email`,`phone_number`,`reason`, `description`, `image`, `lkp_status_id`) VALUES ('$title','$email','$phone_number','$reason', '$description','$fileToUpload', 1)";
         if($conn->query($sql) === TRUE){
            echo "<script type='text/javascript'>window.location='user_feedback_form.php?succ=log-success'</script>";
         } else {
@@ -89,9 +89,9 @@ if (!isset($_POST['submit']))  {
 		<!-- Slider -->
 		 <div class="container-fluid page-title">
 			<?php  
-    if(!empty($getTestimonialsBanner['image'])) { ?>  
+    if(!empty($getPartnersBanner['image'])) { ?>  
         <div class="row">
-          <img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getTestimonialsBanner['image'] ?>" class="img-responsive">
+          <?php include_once './common_slider.php';?>
         </div>
       <?php } else { ?>
         <div class="row">
@@ -141,8 +141,32 @@ if (!isset($_POST['submit']))  {
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <form autocomplete="off" data-toggle="validator" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Title</label>
-                    <input type="text" name="title" class="form-control" id="form-control-2" placeholder="Title" data-error="Please enter title" required>
+                    <label for="form-control-2" class="control-label">Name</label>
+                    <input type="text" name="title" class="form-control" id="form-control-2" placeholder="Name" data-error="Please enter title" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Email</label>
+                    <input type="email" name="email" class="form-control" id="form-control-2" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Phone Number</label>
+                    <input type="text" name="phone_number" class="form-control valid_mobile_num" id="form-control-2" placeholder="Phone Number" required maxlength="10" pattern="[0-9]{10}">
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <?php $getFeedReasons = getAllDataWithStatus('services_customer_feedback_reasons','0');?>
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Choose reason</label>
+                    <select name="reason" class="form-control" required>
+                      <option value="">Select reason</option>
+                      <?php while($row = $getFeedReasons->fetch_assoc()) {  ?>
+                          <option value="<?php echo $row['title']; ?>" ><?php echo $row['title']; ?></option>
+                      <?php } ?>
+                   </select>
                     <div class="help-block with-errors"></div>
                   </div>
 
