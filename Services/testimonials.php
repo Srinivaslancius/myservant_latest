@@ -78,11 +78,9 @@
             <div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="index.php">Home</a>
 					</li>
-					<li><a href="#">Category</a>
-					</li>
-					<li>Page active</li>
+					<li>Testimonials</li>
 				</ul>
 			</div>
 		</div>

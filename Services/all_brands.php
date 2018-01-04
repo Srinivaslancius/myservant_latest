@@ -68,6 +68,15 @@
 				</div>
 			<?php }?>
     	</div>
+    	<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="index.php">Home</a>
+					</li>
+					<li>Our Brands</li>
+				</ul>
+			</div>
+		</div>
 		<div class="container margin_60">
 
 			<div class="main_title">

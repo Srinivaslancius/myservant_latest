@@ -147,8 +147,6 @@
                                     <th>Title</th>
                                     <th>Web Image</th>
                                     <th>App Image</th>
-                                    <th>Category</th>
-                                    <th>Sub category</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -161,9 +159,7 @@
                                     <td><?php echo $row['title'];?></td>
                                     <td><img src="<?php echo $base_url . 'uploads/grocery_banners_web_images/'.$row['banners_web_imge'] ?>" width="100" height="100"></td>
                                     <td><img src="<?php echo $base_url . 'uploads/grocery_banners_app_images/'.$row['banners_app_image'] ?>" width="100" height="100"></td>
-                                    <td><?php $getGroceryCategories = getAllData('grocery_category'); while($getGroceryCategories1 = $getGroceryCategories->fetch_assoc()) { 
-                                        if($row['grocery_category_id'] == $getGroceryCategories1['id']) { echo $getGroceryCategories1['category_name']; } } ?></td>
-                                        <td><?php $getGrocerySubCategories = getAllData('grocery_sub_categories'); while($getServicesSubCategories1 = $getGrocerySubCategories->fetch_assoc()) { if($row['grocery_sub_category_id'] == $getServicesSubCategories1['id']) { echo $getServicesSubCategories1['sub_category_name']; } } ?></td>
+                        
                                      <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_banners'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_banners'>In Active</span>" ;} ?></td>
                                     
                                     <td><span><a href="edit_manage_banners.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td>

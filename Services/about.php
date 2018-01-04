@@ -74,25 +74,13 @@
                 <div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="index.php">Home</a>
 					</li>
-					<li><a href="#">Category</a>
-					</li>
-					<li>Page active</li>
+					<li>About Us</li>
 				</ul>
 			</div>
 		</div>
-                <div id="position">
-			<div class="container">
-				<ul>
-					<li><a href="#">Home</a>
-					</li>
-					<li><a href="#">Category</a>
-					</li>
-					<li>Page active</li>
-				</ul>
-			</div>
-		</div>
+        
 		<div class="container margin_60">
 		<div class="main_title">
 				<h2><?php echo $getAboutDataData['title'];?></h2>				
