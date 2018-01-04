@@ -152,7 +152,7 @@ html * {
 	<!-- Mobile menu overlay mask -->
 
 	<!-- Header================================================== -->
-	<header>
+        <header id="plain">
 		<?php include_once './top_header.php';?>
 		<!-- End top line-->
 
@@ -178,6 +178,17 @@ html * {
 				</div>
 			<?php }?>	
     	</div>
+                <div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="#">Home</a>
+					</li>
+					<li><a href="#">Category</a>
+					</li>
+					<li>Page active</li>
+				</ul>
+			</div>
+		</div>
     	<?php $order_id = $_GET['token'];
               $orderDetails ="SELECT * FROM services_orders WHERE order_sub_id ='$order_id' ORDER BY id DESC";
               $orderDetails1 = $conn->query($orderDetails);

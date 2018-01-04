@@ -44,7 +44,7 @@
 	<!-- Mobile menu overlay mask -->
 
 	<!-- Header================================================== -->
-	<header>
+        <header id="plain">
 		<?php include_once './top_header.php';?>
 		<!-- End top line-->
 
@@ -57,6 +57,7 @@
 	<!-- End Header -->
 
 	<main>
+            
 		<!-- Slider -->
 		 <div class="container-fluid page-title">
 			<?php  
@@ -70,6 +71,16 @@
 					</div>
 				<?php }?>
     	</div>
+                <div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="index.php">Home</a>
+					</li>
+					<li>About Us</li>
+				</ul>
+			</div>
+		</div>
+        
 		<div class="container margin_60">
 		<div class="main_title">
 				<h2><?php echo $getAboutDataData['title'];?></h2>				

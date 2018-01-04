@@ -1,8 +1,8 @@
-<div class="white_bg">
+<div>
 	<div class="container">
 		<div class="banner colored">
 			<h4>Are You  <span>Professional</span> Looking to grow your service Business</h4>
-			<a href="service_provider.php" class="btn_1 white">Join Now</a>
+			<a href="service_provider.php" class="btn_1 white">Join With Us</a>
 		</div>				
 		<!-- End row -->
 	</div>

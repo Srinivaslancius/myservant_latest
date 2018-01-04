@@ -42,7 +42,7 @@
 	<!-- Mobile menu overlay mask -->
 
 	<!-- Header================================================== -->
-	<header>
+        <header id="plain">
 		<?php include_once './top_header.php';?>
 		<!-- End top line-->
 
@@ -68,6 +68,15 @@
 					</div>
 				<?php }?>
     	</div>
+                <div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="index.php">Home</a>
+					</li>
+					<li>Partners</li>
+				</ul>
+			</div>
+		</div>
 		<div class="container margin_60">
 <div class="main_title">
 				<h2>Our <span>Associate</span> Partners</h2>

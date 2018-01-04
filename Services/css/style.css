@@ -50,7 +50,7 @@ i.color_4 {
 }
 
 body {
-    background: #EFEFEF;
+    /* background: #EFEFEF; */
     font-size: 14px;
     line-height: 20px;
     font-family: 'Open Sans', sans-serif;
@@ -77,12 +77,13 @@ h3 {
 }
 
 .main_title h2 {
-    text-transform: uppercase;
-    font-weight: 700;
+    text-transform: none;
+    font-weight: bold;
     letter-spacing: -1px;
-    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
     margin-bottom: 0;
-    margin-top: 0
+    margin-top: 0;
 }
 
 .main_title p {
@@ -403,13 +404,13 @@ header.sticky #logo .logo_sticky {
 }
 
 #logo_home h1 {
-    margin: 10px 0 0;
-    padding: 0
+    /* margin: 10px 0 0; */
+    padding: 0;
 }
 
 #logo_home h1 a,header#colored #logo_home h1 a,header#plain #logo_home h1 a,header.sticky #logo_home h1 a {
     /* width: 160px; */
-    /* height: 34px; */
+    height: 80px;
     display: block;
     /*background-image: url(../img/logo.png);*/
     background-repeat: no-repeat;
@@ -466,11 +467,11 @@ header.sticky {
 }
 
 nav {
-    margin-top: 12px;
+    margin-top: 4%;
 }
 
 .sticky nav {
-    margin-top: 10px
+    margin-top: 3%;
 }
 
 .sticky #logo {
@@ -634,7 +635,7 @@ header#colored.sticky ul#top_tools a {
 }
 
 #hero,#hero_2 .intro_title h1,#hero_video,#nav-search-in #nav-search-in-content,.features-content h3,.intro_title h3,.marker_info h3,.parallax-content-2 div h1,.table.cart-list th,.table.confirm th,.table.options_cart th,.table.table_summary tr.total {
-    text-transform: uppercase
+    /* text-transform: uppercase */
 }
 
 .dropdown-access .dropdown-menu:before,.dropdown-cart .dropdown-menu:before,.dropdown-search .dropdown-menu:before {
@@ -928,9 +929,9 @@ a#email_footer:before {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-    border: 1px dashed #ccc;
+    border: 1px dashed #fe6003;
     font-size: 62px;
-    color: #6dcff6
+    color: #6dcff6;
 }
 
 #hero_video,iframe {
@@ -1044,7 +1045,7 @@ video {
 
 #search_bar_container {
     background: #333;
-    background-color: rgba(0,0,0,.4);
+    background-color: rgba(0,0,0,.1);
     padding: 5px 0;
     position: absolute;
     left: 0;
@@ -1060,21 +1061,22 @@ video {
 
 #nav-search-in {
     display: inline-block;
-    height: 30px;
+    height: 40px;
     left: 0;
+    width: 100%;
     overflow: hidden;
     position: absolute;
-    top: 0;
+    top: 1px;
     background: #fe6003;
 }
 
 #nav-search-in #nav-search-in-content {
     color: #fff;
     display: inline-block;
-    font-size: 11px;
+    font-size: 14px;
     height: 45px;
-    line-height: 22px;
-    margin: 5px 65px 0 15px;
+    line-height: 30px;
+    margin: 5px 65px 0 8px;
     text-indent: 1px;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1089,8 +1091,8 @@ video {
 
 #nav-search-in.nav-facade-active .nav-down-arrow {
     display: inline-block;
-    right: 2px;
-    top: 13px;
+    right: 10px;
+    top: 19px;
     background: url(../img/arrow_down_2.png);
     height: 6px;
     width: 10px;
@@ -1099,7 +1101,7 @@ video {
 
 .nav-facade-active #searchDropdownBox {
     cursor: pointer;
-    height: 30px;
+    height: 45px;
     -ms-height:10px !important;
     left: 0px;
     opacity: 0;
@@ -1126,20 +1128,20 @@ video {
 
 .nav-searchfield-outer {
        background: #fff;
-   color: #888;
-   display: block;
-   font-size: 13px;
-   left: 0;  
-   position: realtive;
-   width: 100%;
-   font-family: 'Open Sans', sans-serif;
-   border: 1px solid white;
-   height: 30px;
-   /*font-weight: 600; */
-   margin-top: 1px;
-    padding-left:90px;
-    padding-top:3px;
-    outline: 0;
+       color: #888;
+       display: block;
+       font-size: 13px;
+       left: 0;
+       position: realtive;
+       width: 100%;
+       font-family: 'Open Sans', sans-serif;
+       /* border: 1px solid white; */
+       height: 40px;
+       /*font-weight: 600; */
+       margin-top: 1px;
+       /* padding-left:90px; */
+       padding-top: 4px;
+       outline: 0;
 }
 
 /*#twotabsearchtextbox {
@@ -1161,13 +1163,19 @@ video {
 
 .nav-submit-button {
     
-    border: none;
-    display: block;
-    height: 45px;
-    right: 5px;
-    position: absolute;
-    top: 0;
-    width: 40px
+border: none;
+    
+display: block;
+    
+height: 45px;
+    
+right: 60px;
+    
+position: absolute;
+    
+top: 1px;
+    
+width: 40px;
 }
 
 .nav-submit-button .nav-submit-input {
@@ -1609,7 +1617,7 @@ a#filters_col_bt .icon_set_1_icon-65 {
 
 .table.table_summary td {
     border-top: 1px solid #ededed;
-    width: 50%
+    /* width: 50% */
 }
 
 .table.table_summary tr.total {
@@ -2040,7 +2048,7 @@ input.qty2 {
     background: #fff;
     margin-bottom: 15px;
     color: #888;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
+    box-shadow: 0 0 5px 0 rgba(254,96,3,.1);
 }
 
 .review_strip,.transfer_container {
@@ -2523,10 +2531,10 @@ ul.list_icons li i {
     -moz-border-radius: 3px;
     border-radius: 3px;
     border: 1px solid #ddd;
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
     padding: 30px;
     position: relative;
-    color: #666
+    color: #666;
 }
 
 .box_style_2,.box_style_3,.box_style_4 {
@@ -2929,7 +2937,7 @@ ul.list_order li span {
 }
 
 .tour_container .tour_title {
-    /* padding-bottom: 25px; */
+    padding-bottom: 25px;
     position: relative;
     text-align: center;
     margin-top: 10px;
@@ -3301,9 +3309,9 @@ ul.list_order li span {
 }
 
 #position {
-    background-color: #333;
+    background-color: #fff;
     padding: 10px 0;
-    font-size: 11px
+    font-size: 11px;
 }
 
 #position ul li:first-child {
@@ -3321,12 +3329,12 @@ ul.list_order li span {
 #position ul {
     margin: 0;
     padding: 0;
-    color: #888
+    color: #fe6003;
 }
 
 #position ul li a {
-    color: #fff;
-    opacity: .7
+    color: #333;
+    opacity: .7;
 }
 
 #position ul li a:hover {
@@ -4624,9 +4632,10 @@ a.btn_infobox_phone:before {
 }
 
 main {
-    background-color: #f9f9f9;
+    background-color: #f7f7f7;
     z-index: 2;
-    position: relative
+    position: relative;
+    margin-top: 5%;
 }
 
 .parallax-content-1 {
@@ -5099,8 +5108,8 @@ header#plain{
 }
 .prdct:hover
 {
-    box-shadow: 4px 4px 26px -6px rgba(0,0,0,0.96);
-transition: box-shadow 0.2s ease-in-out;
+    box-shadow: 4px 4px 26px -6px rgba(254,96,3,0.96);
+    transition: box-shadow 0.2s ease-in-out;
     z-index: 3;
 }
 /*@media (max-width: 480px){

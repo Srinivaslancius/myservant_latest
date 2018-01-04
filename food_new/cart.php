@@ -300,7 +300,7 @@ td{
 							</div>                        
 						</td>
 
-						<td style="padding-left:20px;padding-right:30px">
+						<td>
 						<a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onclick="add_cart_item1(<?php echo $getCartItems['id']; ?>)"></i></a> <strong id="ind_quan_<?php echo $getCartItems['id']; ?>"><?php echo $getCartItems['item_quantity']; ?></strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item1(<?php echo $getCartItems['id']; ?>)"></i></a>
 
             <input type="hidden" id="cart_ind_price_<?php echo $getCartItems['id']; ?>" value="<?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?>">
@@ -317,8 +317,8 @@ td{
 					
 				</div>
 			</div>
-            <div class="col-md-9"></div>
-			<div class="col-md-3">
+            <div class="col-md-9 col-sm-8"></div>
+			<div class="col-md-3 col-sm-4">
 				<div class="theiaStickySidebar">
 					<div id="cart_box" >
 						<table class="table table_summary">

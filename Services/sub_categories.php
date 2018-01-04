@@ -41,7 +41,7 @@
   <!-- Mobile menu overlay mask -->
 
   <!-- Header================================================== -->
-  <header>
+  <header id="plain">
     <?php include_once './top_header.php';?>
     <!-- End top line-->
 
@@ -83,6 +83,17 @@
         </div>
       <?php }?>
     </div>
+    <div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="index.php">Home</a>
+					</li>
+					<li><a href="services.php">Services</a>
+					</li>
+					<li>Service Sub Categories</li>
+				</ul>
+			</div>
+		</div>
 
     <div class="container margin_60">
 

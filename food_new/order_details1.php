@@ -99,7 +99,7 @@ h3,h5{
 <div class="container margin_60_35">
 	<div class="row">
     
-    <div class="col-md-3" id="sidebar">
+    <div class="col-md-3 col-sm-3" id="sidebar">
     <div class="theiaStickySidebar">
         <div class="box_style_1" id="faq_box">
 				  <?php include_once 'dashboard_strip.php';?>
@@ -107,7 +107,7 @@ h3,h5{
         </div><!-- End theiaStickySidebar -->
      </div><!-- End col-md-3 -->
         
-        <div class="col-md-9">      	 
+        <div class="col-md-9 col-sm-9">      	 
          <div class="panel-group">
                   <div class="panel panel-default">
                     <div class="panel-heading">

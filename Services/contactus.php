@@ -81,7 +81,7 @@ if(mail($to, $subject, $message, $headers)) {
 	<!-- Mobile menu overlay mask -->
 
 	<!-- Header================================================== -->
-	<header>
+	<header id="plain">
 		<?php include_once './top_header.php';?>
 		<!-- End top line-->
 
@@ -106,6 +106,15 @@ if(mail($to, $subject, $message, $headers)) {
 				</div>
 			<?php }?>
     </div>
+    <div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="index.php">Home</a>
+					</li>
+					<li>Contact Us</li>
+				</ul>
+			</div>
+		</div>
 		<div class="container margin_60">
 		  <div class="main_title">
 				<h2>Contact <span>Us</span></h2>				

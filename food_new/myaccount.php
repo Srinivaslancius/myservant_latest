@@ -67,7 +67,7 @@
 <div class="container margin_60_35">
 	<div class="row">
     
-    <div class="col-md-3" id="sidebar">
+    <div class="col-md-3 col-sm-3" id="sidebar">
     <div class="theiaStickySidebar">
         <div class="box_style_1" id="faq_box">
 			<?php include_once 'dashboard_strip.php';?>
@@ -75,7 +75,7 @@
         </div><!-- End theiaStickySidebar -->
      </div><!-- End col-md-3 -->
         
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-9">
         
        	 
          <div class="panel-group">
@@ -85,7 +85,7 @@
                     </div>
                       <div class="panel-body">
                             <a href="#">
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="one">
                                         
                                         <h3>Grocery Orders</h3>
@@ -95,8 +95,8 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="#">
-                                <div class="col-md-4">
+                            <a href="#"> 
+                                <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="two">
                                         
                                         <h3>Food Orders</h3>
@@ -107,7 +107,7 @@
                                 </div>
                             </a>
                             <a href="#">
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="three">
                                         
                                         <h3>Services Orders</h3>
@@ -118,7 +118,7 @@
                                 </div>
                             </a>
                             <a href="#">
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="four">
                                         
                                         <h3>My Profile</h3>
@@ -127,7 +127,7 @@
                                 </div>
                             </a>
                             <a href="#">
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="five">
                                         
                                         <h3>My Addresses</h3>
@@ -136,7 +136,7 @@
                                 </div>
                             </a>
                             <a href="#">
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="six">
                                         
                                         <h3>Wallet</h3>
@@ -145,7 +145,7 @@
                                 </div>
                             </a>
                             <a href="#">
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="seven">
                                         
                                         <h3>Reward Points</h3>
@@ -154,7 +154,7 @@
                                 </div>
                             </a>
                             <a href="#">
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="eight">
                                         
                                         <h3>My Wishlist</h3>

@@ -37,7 +37,7 @@
     <!-- Mobile menu overlay mask -->
 
     <!-- Header================================================== -->
-    <header>
+    <header id="plain">
         <?php include_once './top_header.php';?>
         <!-- End top line-->
 
@@ -51,10 +51,28 @@
 <main>
         <!-- Slider -->
          <div class="container-fluid page-title">
+			<?php  
+    if(!empty($getTestimonialsBanner['image'])) { ?>  
         <div class="row">
-            <img src="img/slides/slide_3.jpg" class="img-responsive">
+          <img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getTestimonialsBanner['image'] ?>" class="img-responsive" style="width:100%; height:400px;">
         </div>
-    </div>
+      <?php } else { ?>
+        <div class="row">
+          <img src="img/slides/slide_1.jpg" class="img-responsive" style="width:100%; height:400px;">
+        </div>
+      <?php }?>
+    	</div>
+                <div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="#">Home</a>
+					</li>
+					<li><a href="#">Category</a>
+					</li>
+					<li>Page active</li>
+				</ul>
+			</div>
+		</div>
 
             <?php
                 header( "refresh:10;url=index.php" );
