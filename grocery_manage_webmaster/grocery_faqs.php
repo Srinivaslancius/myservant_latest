@@ -4,14 +4,15 @@
           echo "fail";
         } else  {
             //If success
-            $item_type = $_POST['item_type'];
+            $question = $_POST['question'];
+            $answer = $_POST['answer'];
             $lkp_status_id = $_POST['lkp_status_id'];
-            
-            $sql = "INSERT INTO grocery_item_types (`item_type`,`lkp_status_id`) VALUES ('$item_type','$lkp_status_id')"; 
+                    
+                     $sql = "INSERT INTO grocery_faqs (`question`,`answer`,`lkp_status_id`) VALUES ('$question','$answer','$lkp_status_id')"; 
                     if($conn->query($sql) === TRUE){
-                       echo "<script type='text/javascript'>window.location='groceries_types.php?msg=success'</script>";
+                       echo "<script type='text/javascript'>window.location='grocery_faqs.php?msg=success'</script>";
                     } else {
-                       echo "<script type='text/javascript'>window.location='groceries_types.php?msg=fail'</script>";
+                       echo "<script type='text/javascript'>window.location='grocery_faqs.php?msg=fail'</script>";
                     }
                     //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
                 
@@ -21,23 +22,24 @@
         <div class="site-content">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="m-y-0 font_sz_view">Add Grocery Item Types</h3>
+                    <h3 class="m-y-0 font_sz_view">Add Faq's</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         
                         <form class="form-horizontal" method="post" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Item Type</label>
+                                <label class="col-sm-3  col-md-4 control-label" for="form-control-8">Question</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" name="item_type" class="form-control" id="user_input" placeholder="Item Type"  data-error="Please enter Item Type" required onkeyup="checkUserAvailTest()">
-                                    <span id="input_status" style="color: red;"></span>
-                                    <div class="help-block with-errors"></div>
-                                    <input type="hidden" id="table_name" value="grocery_item_types">
-                                    <input type="hidden" id="column_name" value="item_type">
+                                    <textarea id="form-control-8" name= "question" class="form-control" rows="3" placeholder="Question" required></textarea>
                                 </div>
                             </div>
-                            
+                            <div class="form-group">
+                                <label class="col-sm-3  col-md-4 control-label" for="form-control-8">Answer</label>
+                                <div class="col-sm-6 col-md-4">
+                                    <textarea id="form-control-8" name= "answer" class="form-control" rows="5" placeholder="Answer" required></textarea>
+                                </div>
+                            </div>
                             <?php $getStatus = getAllData('lkp_status');?>
                             <div class="form-group">
                                 <label class="col-sm-3  col-md-4 control-label" for="form-control-8">Choose Your Status</label>
@@ -61,8 +63,8 @@
             </div>
             <div class="panel panel-default panel-table m-b-0">
                 <div class="panel-heading">
-                    <h3 class="m-t-0 m-b-5 font_sz_view">Grocery Item Types</h3>
-                    <?php $getAllGroceriesData = getAllDataWithActiveRecent('grocery_item_types'); $i=1; ?>
+                    <h3 class="m-t-0 m-b-5 font_sz_view">Faq's</h3>
+                    <?php $getGroceriesData = getAllDataWithActiveRecent('grocery_faqs'); $i=1; ?>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -70,18 +72,20 @@
                             <thead>
                                 <tr>
                                     <th>S.No</th>
-                                    <th>Item Type</th>
+                                    <th>Question</th>
+                                    <th>Answer</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while ($row = $getAllGroceriesData->fetch_assoc()) { ?>
+                                <?php while ($row = $getGroceriesData->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?php echo $i;?></td>
-                                    <td><?php echo $row['item_type'];?></td>
-                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_item_types'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_item_types'>In Active</span>" ;} ?></td>
-                                    <td><span><a href="edit_groceries_types.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td>
+                                    <td><?php echo substr(strip_tags($row['question']), 0,150);?></td>
+                                    <td><?php echo substr(strip_tags($row['answer']), 0,150);?></td>
+                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_faqs'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_faqs'>In Active</span>" ;} ?></td>
+                                    <td><span><a href="edit_grocery_faqs.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td>
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>
