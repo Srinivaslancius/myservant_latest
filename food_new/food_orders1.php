@@ -19,7 +19,36 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+<style>
+.table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom:0px;
+	color:#fe6003;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+   border-top: 0px solid #ddd;
+}
+.button1 {
+    background-color: #fe6003;
+    border-color: #fe6003;
+    color: white;
+    padding: 4px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 
+.button2 {
+	background-color:#fe6003;
+ padding: 5px 12px;
+} 
+</style>
 </head>
 <body>
 <!--[if lte IE 8]>
@@ -48,7 +77,7 @@
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
     	<div id="sub_content">
-    	 <h1>My Account</h1>
+    	 <h1>Food Orders</h1>
          <p></p>
         </div><!-- End sub_content -->
 	</div><!-- End subheader -->
@@ -57,7 +86,7 @@
         <div class="container">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="#0">Myaccount</a></li>
+                <li><a href="#0">Food Orders</a></li>
             </ul>
             
         </div>
@@ -81,87 +110,40 @@
          <div class="panel-group">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <h3 class="nomargin_top">My Dashbaord</h3>
+                      <h3 class="nomargin_top">Food Orders</h3>
                     </div>
                       <div class="panel-body">
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="one">
-                                        
-                                        <h3>Grocery Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="two">
-                                        
-                                        <h3>Food Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="three">
-                                        
-                                        <h3>Services Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="four">
-                                        
-                                        <h3>My Profile</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="five">
-                                        
-                                        <h3>My Addresses</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="six">
-                                        
-                                        <h3>Wallet</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="seven">
-                                        
-                                        <h3>Reward Points</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="eight">
-                                        
-                                        <h3>My Wishlist</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
+                     <div class="table-responsive">	
+				<?php for($i=0; $i<4; $i++) {?>					 
+        			<table class="table" style="border:1px solid #ddd;width:100%">
+					
+            		<thead>
+            		  <tr>
+					  <th>ITEM</th>
+					  <th>NAME</th>
+            			<th>ITEM PLACED</th>
+            			<th>ITEM Price</th>
+            			<th>SHIP TO</th>
+            			<th>ORDER ID</th>
+						<th>ACTION</th>
+            		  </tr>
+            		</thead>
+            		<tbody>
+            		  <tr>
+					  <td><img src="img/menu-thumb-1.jpg" style="width:50px;height:50px"></td>
+					  <td>Biryani</td>
+            			<td>2018-01-02 11:11:15	</td>
+            			<td>Rs.264</td>
+            			<td>some one</td>
+            			<td>MYSER-FOODkej354</td>
+						<td><a href="order_details1.php"><button class="button1">View Details</button></a></td>
+            		  </tr>
+            		  
+            		</tbody>
+					
+        	     </table>
+				 <?php } ?>
+        	  </div>
                       </div>
                   </div>
                   

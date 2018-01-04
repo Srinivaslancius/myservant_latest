@@ -376,8 +376,7 @@ if($_SESSION['user_login_session_id'] == '') {
                     <?php $getProductDetails= getIndividualDetails('food_products','id',$getCartItems['food_item_id']); ?>
 					<tr>
 						<td>
-						 <a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onclick="add_cart_item1(67)"></i></a> <strong>1x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item1(67)"></i></a> Biryani
-							 <!--<strong> <?php echo $getCartItems['item_quantity']; ?> x </strong> <?php echo $getProductDetails['product_name']; ?>-->
+						 <a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onclick="add_cart_item1(67)"></i></a> <strong><?php echo $getCartItems['item_quantity']; ?>x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item1(67)"></i></a> <?php echo $getProductDetails['product_name']; ?>
 							<?php 
 			                $getAddons = "SELECT * FROM food_update_cart_ingredients WHERE food_item_id = '".$getCartItems['food_item_id']."' AND cart_id='".$getCartItems['id']."' AND session_cart_id = '$session_cart_id'";
 			                $getAddonData = $conn->query($getAddons);

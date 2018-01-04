@@ -1165,8 +1165,8 @@ ul#cat_nav li:last-child a.active,ul#cat_nav li:last-child a:hover {
 }
 
 ul#cat_nav li a.active,ul#cat_nav li a:hover {
-    background: #f9f9f9;
-    color: #111
+    background: #f18b49;
+    color: #fff;
 }
 
 #sub_content {
@@ -3485,7 +3485,7 @@ footer ul {
 }
 @media screen and (max-width: 640px) and (min-width: 360px) {
 	.container{
-		padding-left:35px !important;
+		padding-left:25px !important;
 		padding-right:25px !important;
 	}
 	.myservanrlogo {
@@ -3511,9 +3511,43 @@ footer ul {
 #country-list {
     width: 60% !important;
 }
+.carousel-inner {
+    padding-left: 20px
+}
 }
 @media screen and (max-width: 1024px) and (min-width: 768px) {
 	.btn{
-	margin-left:0px;
+	padding: 7px 9px;
+}
+#custom-search-input, #custom-search-input .search-query {
+    width: 550px !important;
+}
+#custom-search-input input.btn_search {
+    position: absolute;
+    right: 0px;
+}
+.container{
+	padding-left:10px;
+}
+#country-list{
+	width:390px;
+}
+}
+@media screen and (max-width: 736px) and (min-width: 414px) {
+#custom-search-input, #custom-search-input .search-query {
+    width: 320px !important;
+    margin-left: -14px !important;
+}
+.container{
+	padding-left:25px;
+}	
+.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
+    margin-right: 1px !important;
+}
+.carousel-inner {
+    padding-left: 25px
+}
+#country-list {
+    width: 205px !important;
 }
 }

@@ -19,7 +19,39 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+<style>
+.table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom:0px;
+	color:#fe6003;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+   border-top: 1px solid #ddd;
+}
+.button1 {
+    background-color: #fe6003;
+    border-color: #fe6003;
+    color: white;
+    padding: 4px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 
+.button2 {
+	background-color:#fe6003;
+ padding: 5px 12px;
+} 
+h3,h5{
+	color:#fe6003;
+}
+</style>
 </head>
 <body>
 <!--[if lte IE 8]>
@@ -70,98 +102,73 @@
     <div class="col-md-3" id="sidebar">
     <div class="theiaStickySidebar">
         <div class="box_style_1" id="faq_box">
-			<?php include_once 'dashboard_strip.php';?>
+				  <?php include_once 'dashboard_strip.php';?>
 		</div><!-- End box_style_1 -->
         </div><!-- End theiaStickySidebar -->
      </div><!-- End col-md-3 -->
         
-        <div class="col-md-9">
-        
-       	 
+        <div class="col-md-9">      	 
          <div class="panel-group">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <h3 class="nomargin_top">My Dashbaord</h3>
+                      <h3 class="nomargin_top">Services Orders</h3>
                     </div>
                       <div class="panel-body">
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="one">
-                                        
-                                        <h3>Grocery Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="two">
-                                        
-                                        <h3>Food Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="three">
-                                        
-                                        <h3>Services Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="four">
-                                        
-                                        <h3>My Profile</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="five">
-                                        
-                                        <h3>My Addresses</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="six">
-                                        
-                                        <h3>Wallet</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="seven">
-                                        
-                                        <h3>Reward Points</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="eight">
-                                        
-                                        <h3>My Wishlist</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
+                     <div class="table-responsive">	
+								 
+        			<table class="table" style="border:1px solid #ddd;width:100%">
+            		<tbody>
+		  <tr>
+			<td colspan="2" style="padding-left:20px">
+			<h3>Order Information</h3>
+			<p>Restaurant Name: Sweet Magic</p>
+			<p>Payment Method:Cash On Delivery</p>
+			<p>Order Type:Take Away</p>
+			<p>Order Status: InProgress</p>
+			<p>Payment Status: InProgress</p></td>
+			<td colspan="2"></td>
+			<td colspan="2">
+			<h3>Shipping Address</h3>
+			<p>srinu</p>
+			<p>srinivas@lanciussolutions.com</p>
+			<p>7894561235</p>
+			<p>test</p>
+			<p>345345</td>
+		  </tr>
+		  <tr>
+			<td><h5>ITEM NAME</h5></td>
+			<td><h5>CUSINE TYPE</h5></td>
+			<td><h5>ITEM WEIGHT</h5></td>
+			<td><h5>QUANTITY</h5></td>
+			<td><h5>PRICE</h5></td>
+			<td><h5>TOTAL</h5></td>
+		  </tr>
+		   <tr>
+			<td><p>Biryani</p></td>
+			<td><p>MAIN COURSES1</p></td>
+			<td><p>Medium</p></td>
+			<td><p>3</p></td>
+			<td><p>80</p></td>
+			<td><p>240</p></td>
+		  </tr>
+		   <tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><p>Subtotal:</p>
+			<p>Tax:</p>
+			<p style="color:#fe6003;">Grand Total:</p></td>
+			<td><p style="color:#fe6003;">Rs. 240</p>
+			<p style="color:#fe6003;">Rs. 24(10 %)</p>
+			
+				<p style="color:#fe6003;">Rs. 264</p>
+		  </tr>
+		</tbody>
+					
+        	</table>    
+				
+        	  </div>
                       </div>
                   </div>
                   
@@ -171,6 +178,7 @@
         </div><!-- End col-md-9 -->
     </div><!-- End row -->
 </div><!-- End container -->
+</div>
 <!-- End Content =============================================== -->
 
 <div class="high_light">
