@@ -13,21 +13,19 @@ if (isset($_REQUEST['userId']) && !empty($_REQUEST['serviceQuantity']) && !empty
 	$serviceDate=date_create($_REQUEST["serviceDate"]);
 	$getServiceDate=date_format($serviceDate,"Y-m-d");	
 	$service_selected_time = date('H:i:s', strtotime($_REQUEST["serviceTime"]));	 
-
-	$cart_id = $getcartIt['cart_id'];
+	
 	$updateq = "UPDATE services_cart SET service_quantity = '$service_quantity',service_selected_date='$getServiceDate',service_selected_time='$service_selected_time' WHERE user_id='$user_id' AND id='$cart_id' ";
 	if($conn->query($updateq) === TRUE) {
 
-		$getCartServicesData = getAllDataWhere('services_cart','user_id',$user_id); 
-		$response["cartCount"] = $getCartServicesData->num_rows;
+	    $getCartServicesData = getAllDataWhere('services_cart','user_id',$user_id); 
+	    $response["cartCount"] = $getCartServicesData->num_rows;
 	    $response["success"] = 0;
 	    $response["message"] = "Success";
 	} else {
 
 	    $response["success"] = 1;
 	    $response["message"] = "Error";
-	}
-    
+	}    
           
 } else {
     $response["success"] = 2;

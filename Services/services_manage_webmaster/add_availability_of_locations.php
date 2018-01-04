@@ -34,7 +34,7 @@
                   <?php $getServiceNames = getAllDataWithStatus('services_category','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose Service Name</label>
-                    <select name="service_id[]" class="custom-select multi_select" multiple="multiple" data-error="This field is required." required>
+                    <select name="service_id[]" class="custom-select multi_select" multiple="multiple" data-error="This field is required." required data-plugin="select2">
                       <!-- <option value="">Select Service Name</option> -->
                       <?php while($row = $getServiceNames->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>"><?php echo $row['category_name']; ?></option>
@@ -46,7 +46,7 @@
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your State</label>
-                    <select name="lkp_state_id" class="custom-select chosen" data-error="This field is required." required onChange="getDistricts(this.value);">
+                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a state', allowClear: true }">
                       <option value="">Select State</option>
                       <?php while($row = $getStates->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" ><?php echo $row['state_name']; ?></option>
@@ -57,7 +57,7 @@
 
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your District</label>
-                    <select name="lkp_district_id" id="lkp_district_id" class="custom-select" data-error="This field is required." required onChange="getCities(this.value);">
+                    <select name="lkp_district_id" id="lkp_district_id" class="custom-select" data-error="This field is required." required onChange="getCities(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a District', allowClear: true }">
                       <option value="">Select District</option>
                    </select>
                     <div class="help-block with-errors"></div>
@@ -65,7 +65,7 @@
 
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your City</label>
-                    <select name="lkp_city_id" id="lkp_city_id" class="custom-select" data-error="This field is required." required onChange="getPincodes1(this.value);">
+                    <select name="lkp_city_id" id="lkp_city_id" class="custom-select" data-error="This field is required." required onChange="getPincodes1(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a City', allowClear: true }">
                       <option value="">Select City</option>
                    </select>
                     <div class="help-block with-errors"></div>
@@ -110,6 +110,3 @@
         });
     }
   </script>
-  <script type="text/javascript">
-      $(".chosen").chosen();
-</script>

@@ -77,7 +77,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getServicesCategories = getAllDataWithStatus('services_category','0');?>
                   <div class="form-group" id="service_category_id">
                     <label for="form-control-3" class="control-label">Choose your Service Category</label>
-                    <select name="service_category_id" class="custom-select check_valid_cust chosen">
+                    <select name="service_category_id" class="custom-select check_valid_cust" data-plugin="select2" data-options="{ placeholder: 'Select a City', allowClear: true }">
                       <option value="">Select Service Category</option>
                       <?php while($row = $getServicesCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>"><?php echo $row['category_name']; ?></option>

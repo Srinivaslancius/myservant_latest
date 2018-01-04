@@ -35,7 +35,7 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                             <a href="login.php"><span class="icon-user"> Register</span> </a>
 
                         <?php } else { ?>
-                          <span class="icon-user"></span><a href="my_dashboard.php"><?php echo $_SESSION['user_login_session_name']; ?></a>
+                          <span class="icon-user"></span><a href="myaccount.php"><?php echo $_SESSION['user_login_session_name']; ?></a>
                         | <span class="icon-logout"></span><a href="logout.php">Logout</a>
 						
                         <?php } ?>
@@ -87,7 +87,7 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
              </div>
 
             <div class="col-md-1 col-xs-3" style="margin-top:3px">
-                <a href="cart.php"><button type="button" class="btn btn-danger" style="background-color:transparent;border-color:white"><span class=" icon-cart" style="font-size:18px"></span> <span class="badge" style="font-size:10px" id="cart_cnt">(<?php echo $cartItems->num_rows; ?>)</span></button></a>
+                <a href="cart.php"><button type="button" class="btn btn-danger c_pad" style="background-color:transparent;border-color:white"><span class=" icon-cart" style="font-size:18px"></span> <span class="badge" style="font-size:10px" id="cart_cnt">(<?php echo $cartItems->num_rows; ?>)</span></button></a>
 
             </div>
         </div><!-- End row -->

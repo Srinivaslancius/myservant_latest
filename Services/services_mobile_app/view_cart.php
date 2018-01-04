@@ -10,9 +10,12 @@ if (isset($_REQUEST['userId'])  ) {
 	$user_id = $_REQUEST['userId'];
 	$response["lists"] = array();
 	$getCartServicesData = getAllDataWhere('services_cart','user_id',$user_id); 
-	while($row = $getCartServicesData->fetch_assoc()) {
+	if ($getCartServicesData->num_rows > 0) {
+
+		while($row = $getCartServicesData->fetch_assoc()) {
 		$lists = array();
 		$lists["cartId"] = $row["id"];
+		$lists["serviceId"] = $row["service_id"];
 		$lists["servicePrice"] = $row["service_price"];
 		$lists["serviceQuantity"] = $row["service_quantity"];	
 		$lists["serviceSelectedDate"] = date('m/d/Y', strtotime($row['service_selected_date']));
@@ -21,9 +24,13 @@ if (isset($_REQUEST['userId'])  ) {
 		$lists["groupServiceName"] = $getSerName['group_service_name'];
 		array_push($response["lists"], $lists);
 	}
-
 	$response["success"] = 0;
 	$response["message"] = "Success";
+	} else {
+
+		$response["success"] = 1;
+	    $response["message"] = "No items in your cart!";	   
+	}	
           
 } else {
     $response["success"] = 2;

@@ -1165,8 +1165,8 @@ ul#cat_nav li:last-child a.active,ul#cat_nav li:last-child a:hover {
 }
 
 ul#cat_nav li a.active,ul#cat_nav li a:hover {
-    background: #f9f9f9;
-    color: #111
+    background: #f18b49;
+    color: #fff;
 }
 
 #sub_content {
@@ -3224,142 +3224,6 @@ th{
     font-size:12px;
 }
 
-@media only screen and (max-width: 480px) {
-	.myservanrlogo {
-    margin-top: 1px;
-    margin-left: 50px;
-	}
-	#short #subheader {
-	width:100% !important;
-    height: 240px !important;
-	}
-	#sub_content{
-		padding-top:0px !important
-	}
-	.parallax-window#short {
-    height: 0px !important;
-	width:100% !important;
-	}
-    #custom-search-input, #custom-search-input .search-query{
-        width:240px !important;
-        margin-left:-14px !important;
-    }
-    .pad_left{
-        padding-left:30px !important;
-    }
-    .pull-right{
-        margin-left:20px !important;
-    }
-    .chromeframe, header {
-    position: relative !important;
-    }
-    .myseranr_header{
-        padding-top:0px !important;
-        padding-left:20px !important;
-    }
-    #custom-search-input .search-query{
-        padding: 9px 10px;
-    }
-    #custom-search-input input.btn_search {
-    right: 9px !important;
-top: 3px !important;
-font-size: 13px;
-font-weight:bold;
-}
-#custom-search-input input.btn_search {
-	/*width: 120px;*/
-	width: 52px;
-height: 38px;
-}
-.btn-danger{
-    padding: 5px 2px 5px 2px !important;
-margin-bottom: 5px;
-}
-.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
-  
-    margin-left: -30px !important;
-}
-.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
-   
-    margin-right: -30px !important;
-}
-.container {
-    padding-left: 23px !important;
-}
-.margin_10{
-	padding-left:15px !important;
-}
-.carousel-caption{
-	bottom:50px;
-}
-.carousel-caption h2{
-    font-size:20px !important;
-}
-.carousel-caption p {
-    margin: 0 0 -35px;
-}
-header {
-    padding: 0px 0;
-}
-.ls-slide{
-    height:240px !important;
-}
-h3.slide_typo{
-    font-size:20px !important;
-}
-#country-list{
-    width:80% !important;
-}
-.btn-info{
-    padding-left:40px !important;
-    padding-right:35px !important;
-}
-.btn-primary{
-    padding-left:30px !important;
-    padding-right:30px !important;
-}
-#country-list {
-    padding: 0;
-    margin-left:-13px !important;
-}
-#sub_content h1 {
-    font-size: 30px !important;
-    font-weight: bold !important;
-}
-.carousel-inner > .item > a > img, .carousel-inner > .item > img {
-    line-height: 1;
-    height: 140px !important;
-}
-.feature_2 {
-    padding: 30px 13px 20px 13px !important;
-}
-.panel-title a .indicator {
-    color: #fe6003;
-    text-align: left;
-    font-size:15px;
-}
-.panel-title a {
-    display: block;
-    color: #444;
-    text-align: left;
-    font-size: 14px;
-}
-footer ul {
-    margin: 0;
-    padding: 0 12px 20px;
-}
-.desc .type {
-    font-size: 12px;
-    color: #777;
-    margin-bottom: 12px;
-    margin-top: 5px;
-    text-align: center;
-}
-.type{
-	text-align:center !important;
-}
-}
-/*  media query 480 end */
 .checkb {
    display: block;
    position: relative;
@@ -3483,9 +3347,178 @@ footer ul {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+/* view_rest_menu checkbox end */
+
+.alert-dismissable .close1{
+    position: relative;
+    top: -2px;
+    color: inherit;
+	 right: 0px;
+    opacity: 2;
+    font-size: 15px;
+	font-weight:bold;
+	cursor:pointer;
+}
+.close1 {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+
+@media only screen and (max-width: 480px) {
+	.myservanrlogo {
+    margin-top: 1px;
+    margin-left: 50px;
+	}
+	#short #subheader {
+	width:100% !important;
+    height: 240px !important;
+	}
+	#sub_content{
+		padding-top:0px !important
+	}
+	.parallax-window#short {
+    height: 0px !important;
+	width:100% !important;
+	}
+    #custom-search-input, #custom-search-input .search-query{
+        width:240px !important;
+        margin-left:-14px !important;
+    }
+    .pad_left{
+        padding-left:30px !important;
+    }
+    .pull-right{
+        margin-left:20px !important;
+    }
+    .chromeframe, header {
+    position: relative !important;
+    }
+    .myseranr_header{
+        padding-top:0px !important;
+        padding-left:20px !important;
+    }
+    #custom-search-input .search-query{
+        padding: 9px 10px;
+    }
+    #custom-search-input input.btn_search {
+    right: 9px !important;
+	top: 3px !important;
+	font-size: 13px;
+	font-weight:bold;
+}
+#custom-search-input input.btn_search {
+	/*width: 120px;*/
+	width: 52px;
+	height: 38px;
+}
+.btn-danger{
+    padding: 5px 2px 5px 2px !important;
+	margin-bottom: 5px;
+}
+.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+  
+    margin-left: -30px !important;
+}
+.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
+   
+    margin-right: -30px !important;
+}
+.container.carousel1 {
+    padding-left: 23px !important;
+}
+.margin_10{
+	padding-left:15px !important;
+}
+.carousel-caption{
+	bottom:50px;
+}
+.carousel-caption h2{
+    font-size:20px !important;
+}
+.carousel-caption p {
+    margin: 0 0 -35px;
+}
+header {
+    padding: 0px 0;
+}
+.ls-slide{
+    height:240px !important;
+}
+h3.slide_typo{
+    font-size:20px !important;
+}
+#country-list{
+    width:80% !important;
+}
+.btn-info{
+    padding-left:40px !important;
+    padding-right:35px !important;
+}
+.btn-primary{
+    padding-left:30px !important;
+    padding-right:30px !important;
+}
+#country-list {
+    padding: 0;
+    margin-left:-13px !important;
+}
+#sub_content h1 {
+    font-size: 30px !important;
+    font-weight: bold !important;
+}
+.carousel-inner > .item > a > img, .carousel-inner > .item > img {
+    line-height: 1;
+    height: 140px !important;
+}
+.feature_2 {
+    padding: 30px 13px 20px 13px !important;
+}
+.panel-title a .indicator {
+    color: #fe6003;
+    text-align: left;
+    font-size:15px;
+}
+.panel-title a {
+    display: block;
+    color: #444;
+    text-align: left;
+    font-size: 14px;
+}
+footer ul {
+    margin: 0;
+    padding: 0 12px 20px;
+}
+.desc .type {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 12px;
+    margin-top: 5px;
+    text-align: center;
+}
+.type{
+	text-align:center !important;
+}
+.carousel-inner.pad_lft {
+    padding-left: 15px !important;
+}
+.twof{
+    width: 200px !important;
+}
+.itm_wdth{
+	width:0px !important;
+}
+}
+/*  media query 480 end */
+
 @media screen and (max-width: 640px) and (min-width: 360px) {
-	.container{
-		padding-left:35px !important;
+	.container .carousel1{
+		padding-left:25px !important;
 		padding-right:25px !important;
 	}
 	.myservanrlogo {
@@ -3501,7 +3534,7 @@ footer ul {
     top: 3px !important;
     font-size: 11px;
 }
-.btn{
+.btn.btn-danger.c_pad{
 	margin-left:15px;
 }
 #custom-search-input .search-query {
@@ -3511,9 +3544,62 @@ footer ul {
 #country-list {
     width: 60% !important;
 }
+.carousel-inner.pad_lft {
+    padding-left: 25px !important;
+}
+.twof {
+    width: 220px !important;
+}
 }
 @media screen and (max-width: 1024px) and (min-width: 768px) {
-	.btn{
-	margin-left:0px;
+	.btn.btn-danger.c_pad{
+	padding: 7px 9px;
+}
+#custom-search-input, #custom-search-input .search-query {
+    width: 550px !important;
+}
+#custom-search-input input.btn_search {
+    position: absolute;
+    right: 0px;
+}
+.container.carousel1{
+	padding-left:10px;
+}
+#country-list{
+	width:390px;
+}
+.strip_list{
+	min-height:250px;
+}
+.itm_wdth{
+	width:0px !important;
 }
 }
+@media screen and (max-width: 736px) and (min-width: 414px) {
+#custom-search-input, #custom-search-input .search-query {
+    width: 320px !important;
+    margin-left: -14px !important;
+}
+.container.carousel1{
+	padding-left:50px;
+}	
+.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
+    margin-right: 1px !important;
+}
+
+#country-list {
+    width: 205px !important;
+}
+.carousel-inner.pad_lft {
+    padding-left: 50px !important;
+}
+}
+@media screen and (max-width: 1280px) and (min-width: 720px) {
+	/*.container{
+		width:1280px;
+	}*/
+	.container .carousel1{
+		padding-right:50px !important;
+	}
+}
+
