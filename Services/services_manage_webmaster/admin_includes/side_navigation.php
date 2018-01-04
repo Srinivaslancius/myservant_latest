@@ -129,14 +129,14 @@
                 <span class="menu-text">SEO</span>
               </a>
             </li>
-            <li  class="<?php if($page_name == 'services_our_branches.php' || $page_name == 'add_services_our_branches.php' || $page_name == 'edit_services_our_branches.php' ) { echo "active"; } ?>">
+            <!-- <li  class="<?php if($page_name == 'services_our_branches.php' || $page_name == 'add_services_our_branches.php' || $page_name == 'edit_services_our_branches.php' ) { echo "active"; } ?>">
               <a href="services_our_branches.php" aria-haspopup="true">
                 <span class="menu-icon">
                    <i class="zmdi zmdi-pin zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Delivery Areas</span>
               </a>
-            </li>
+            </li> -->
             <li class="with-sub">
               <a href="#" aria-haspopup="true">
                 <span class="menu-icon">
