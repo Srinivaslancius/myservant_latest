@@ -32,17 +32,31 @@ if($getSelData->num_rows > 0) {
   } else {
     $deliveryCharges = 0;
   }
+  $getAddOnsPrice = "SELECT * FROM food_update_cart_ingredients WHERE session_cart_id = '$session_cart_id'";
+  $getAddontotal = $conn->query($getAddOnsPrice);
+  $getAdstotal = 0;
+  while($getAdTotal = $getAddontotal->fetch_assoc()) {
+      $getAdstotal += $getAdTotal['item_ingredient_price'];
+  }
 
   while($cartItems = $getSelData->fetch_assoc() ) {
   $cartSubtotal += $cartItems['item_price'] * $cartItems['item_quantity'];
-  $cartTotal = $cartSubtotal+$deliveryCharges;
+  $cartTotal = $cartSubtotal+$deliveryCharges+$getAdstotal;
   $getProductsName = getIndividualDetails('food_products','id',$cartItems['food_item_id']);  
   $productId = $cartItems['food_item_id'];
+  $getAddons = "SELECT * FROM food_update_cart_ingredients WHERE food_item_id = '".$cartItems['food_item_id']."' AND cart_id='".$cartItems['id']."' AND session_cart_id = '$session_cart_id'";
+  $getAddonData = $conn->query($getAddons);
   echo '<table class="table table_summary cart_total_items"><tbody >
           <tr>
               <td>
-                <a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onClick="add_cart_item1('.$cartItems['id'] .')" ></i></a> <strong>'.$cartItems['item_quantity'].' </strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onClick="remove_cart_item1('.$cartItems['id'] .')"></i></a> '.$getProductsName['product_name'].'
-              </td>
+                <a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onClick="add_cart_item1('.$cartItems['id'] .')" ></i></a> <strong>'.$cartItems['item_quantity'].' </strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onClick="remove_cart_item1('.$cartItems['id'] .')"></i></a> '.$getProductsName['product_name'].'';
+                  while($getadcartItems = $getAddonData->fetch_assoc() ) {
+                     echo'<div class="alert alert-dismissable"  style="margin-bottom:-20px">
+                           <a class="close1" ><i class="icon-trash" style="color:#fe6003" onclick="removeIngItem('.$getadcartItems['id'].');"></i></a>
+                           <p style="font-size:12px">'.$getadcartItems['item_ingredient_name'].':'.$getadcartItems['item_ingredient_price'].'</p>
+                          </div>';
+                    }
+                echo'</td>
               <td>
                 <strong class="pull-right">Rs. '.$cartItems['item_price']*$cartItems['item_quantity'].' </strong>
               </td>
@@ -60,8 +74,15 @@ if($getSelData->num_rows > 0) {
               <td>
                  Subtotal <span class="pull-right">Rs. '.$cartSubtotal.'</span>
               </td>
-            </tr>
-            <tr class="dev_charge">
+            </tr>';
+          if($getAdstotal!=0) {
+            echo'<tr>
+            <td>
+               Extra Addons Price <span class="pull-right">Rs. '.$getAdstotal.'</span>
+            </td>
+          </tr>';
+          }
+          echo'<tr class="dev_charge">
               <td>
                  Delivery Charges <span class="pull-right">Rs. '.$deliveryCharges.'</span>
               </td>
