@@ -35,10 +35,6 @@
                 <li class="menu-subtitle">Orders</li>
                 <li  class="<?php if($page_name == 'food_vendor_orders.php' ) { echo "active"; } ?>"><a href="food_vendor_orders.php">Orders</a>
                 </li>
-                <li  class="<?php if($page_name == 'vendor_failed_orders.php' || $page_name == 'edit_vendor_failed_orders.php' ) { echo "active"; } ?>"><a href="vendor_failed_orders.php">Failed Orders</a>
-                </li>
-                <li  class="<?php if($page_name == 'vendor_cancelled_orders.php' ) { echo "active"; } ?>"><a href="vendor_cancelled_orders.php">Cancelled Orders</a>
-                </li>
                 <li  class="<?php if($page_name == 'vendor_today_orders.php' ) { echo "active"; } ?>"><a href="vendor_today_orders.php">Today Orders</a>
                 </li> 
               </ul>
