@@ -13,14 +13,6 @@ $getOrdersData1 = $getOrdersData->fetch_assoc();
 
 $getSiteSettingsData = getIndividualDetails('food_site_settings','id',1);
 
-$getRestaurants = getIndividualDetails('food_vendors','id',$getOrdersData1['restaurant_id']);
-
-$getpaymentTypes = getIndividualDetails('lkp_payment_types','id',$getOrdersData1['payment_method']);
-
-$orderStatus = getIndividualDetails('lkp_food_order_status','id',$getOrdersData1['lkp_order_status_id']);
-
-$paymentStatus = getIndividualDetails('lkp_payment_status','id',$getOrdersData1['lkp_payment_status_id']);
-
 $getAddOnsPrice = "SELECT * FROM food_order_ingredients WHERE order_id = '$order_id'";
 $getAddontotal = $conn->query($getAddOnsPrice);
 $getAddontotalCount = $getAddontotal->num_rows;
@@ -62,38 +54,6 @@ if($getOrdersData1['delivery_charges'] == '0') {
       </tr>
     </thead>
     <tbody>
-      <tr>     
-        <td colspan="2"></td>
-        <td colspan="2" style="padding-left:150px"><center><h4 style="color:#f26226">ORDER DETAILS</h4></center></td>
-		<td colspan="3"></td>
-      </tr>
-      <tr  style="border-top:0px">
-	  
-       <td colspan="3"><p style="color:#f26226">Order Information</p>
-		<p>Restaurant Name: <?php echo $getRestaurants['restaurant_name']; ?></p>
-		<p>Payment Method: <?php echo $getpaymentTypes['status']; ?></p>
-		<p>Order Type: <?php echo $order_type; ?></p>
-		<p>Order Status: <?php echo $orderStatus['order_status']; ?></p>
-		<p>Payment Status: <?php echo $paymentStatus['payment_status']; ?></p>
-		</td>
-		
-        <td colspan="2"><p style="color:#f26226">Billing Address</p>
-		<p><?php echo $getOrdersData1['first_name']; ?></p>
-		<p><?php echo $getOrdersData1['email']; ?></p>
-		<p><?php echo $getOrdersData1['mobile']; ?></p>
-		<p><?php echo $getOrdersData1['address']; ?></p>
-		<p><?php echo $getOrdersData1['postal_code']; ?></p>
-		
-		</td>
-		
-        <td colspan="2"><p style="color:#f26226">Shipping Address</p>
-		<p><?php echo $getOrdersData1['first_name']; ?></p>
-		<p><?php echo $getOrdersData1['email']; ?></p>
-		<p><?php echo $getOrdersData1['mobile']; ?></p>
-		<p><?php echo $getOrdersData1['address']; ?></p>
-		<p><?php echo $getOrdersData1['postal_code']; ?></p></td>
-		
-      </tr>
       <?php $getOrders1 = "SELECT * FROM food_orders WHERE order_id='$order_id'";
 		$getOrdersData3 = $conn->query($getOrders1); ?>
       <tr style="color:#f26226">
@@ -101,7 +61,7 @@ if($getOrdersData1['delivery_charges'] == '0') {
         <td>CATEGORY NAME</td>
         <td>ITEM WEIGHT</td>
 		<td>QUANTITY</td>
-		<td>PRICE</td>
+		<td></td>
 		<td></td>
       </tr>
       <?php while($getOrdersData2 = $getOrdersData3->fetch_assoc()) { 
@@ -114,39 +74,10 @@ if($getOrdersData1['delivery_charges'] == '0') {
         <td><?php echo  $getCategories['category_name']?></td>
         <td><?php echo $getItemWeights['weight_type'] ?></td>
 		<td><?php echo $getOrdersData2['item_quantity'] ?></td>
-		<td><?php echo $getOrdersData2['item_price'] ?></td>
+		<td></td>
 		<td></td>
       </tr>
       <?php  } ?>
-	   <tr style="background-color:#f2f2f2">
-        <td colspan="5"></td>
-		<td>
-		<p>Subtotal:</p>
-		<p>Tax:</p>
-		<?php if($getOrdersData1['delivery_charges'] != '0') { ?>
-		<p>Delivery Charges:</p>
-		<?php } ?>
-		<?php if($getAddontotalCount > 0) { ?>
-		<p>Ingredients Price:</p>
-		<?php } ?>
-		<?php if($getOrdersData1['coupen_code'] != '') { ?>
-		<p>Discount:</p>
-		<?php } ?>
-		<p style="color:#f26226">Grand Total:</p>
-		</td>
-		<td style="color:#f26226"><p>Rs. <?php echo $getOrdersData1['sub_total']?></p>
-		<p>Rs. <?php echo $service_tax.'('.$getSiteSettingsData['service_tax'].'%)' ?></p>
-		<?php if($getOrdersData1['delivery_charges'] != '0') { ?>
-		<p>Rs. <?php echo $delivery_charges?></p>
-		<?php } ?>
-		<?php if($getAddontotalCount > 0) { ?>
-		<p>Rs. <?php echo $getAdstotal?></p>
-		<?php } ?>
-		<?php if($getOrdersData1['coupen_code'] != '') { ?>
-		<p>Rs. <?php echo $getOrdersData1['discout_money']?>(<span style="color:green">Coupon Applied.</span>)</p>
-		<?php } ?>
-		<p>Rs. <?php echo $getOrdersData1['order_total']?></p></td>
-      </tr>
     </tbody>
   </table>
 </div>

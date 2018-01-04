@@ -81,16 +81,19 @@
 		<div class="main_title">
 				<h2>Delivery Areas</h2>					
 			</div>
-			<?php $getOurBranchesData = getAllDataWhere('services_our_branches','lkp_status_id','0'); ?>
+			<?php //$getOurBranchesData = getAllDataWhere('services_our_branches','lkp_status_id','0'); ?>
+			<?php $getAvailLocations = "SELECT * FROM availability_of_locations WHERE lkp_status_id='0' GROUP BY lkp_city_id "; 
+				$getAvailLoc = $conn->query($getAvailLocations);
+			?>
+
 			<div class="row">			
-					<div class="feature">
-					<h4>MY SERVANT CASH ON DELIVERY AVAILABLE IN VIJAYAWADA</h4><br>
-					<ol type="1" style="line-height:35px;font-size:13px">
-                    <?php while ($row = $getOurBranchesData->fetch_assoc()) { ?>
-                    <li>MY SERVANT CASH ON DELIVERY AVAILABLE IN <?php echo strip_tags($row['address']); ?></li>
-                    <?php } ?>
-                    </ol>					
-					</div>
+			<div class="feature">					
+			<ul style="line-height:35px;font-size:13px">
+            <?php while ($row = $getAvailLoc->fetch_assoc()) { ?>
+            <li><?php $getDisLoca = getIndividualDetails('lkp_cities','id',$row['lkp_city_id']); echo $getDisLoca['city_name']; ?></li>
+            <?php } ?>
+            </ul>					
+			</div>
 
 			</div>
 			<!-- End row -->						

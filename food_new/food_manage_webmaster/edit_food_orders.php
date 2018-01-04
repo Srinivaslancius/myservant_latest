@@ -17,11 +17,6 @@ if (!isset($_POST['submit'])) {
 
   $sql = "UPDATE `food_orders` SET lkp_payment_status_id = '$lkp_payment_status_id',lkp_order_status_id = '$lkp_order_status_id' WHERE order_id = '$order_id' ";
   $res = $conn->query($sql);
-  // if($conn->query($sql) === TRUE){
-  //    echo "<script type='text/javascript'>window.location='food_orders.php?order_id=$order_id&msg=success'</script>";
-  // } else {
-  //    echo "<script type='text/javascript'>window.location='food_orders.php?order_id=$order_id&msg=fail'</script>";
-  // }
   header("Location:food_order_invoice.php?id=".$order_id."");
 }   
 ?>
@@ -53,8 +48,9 @@ if (!isset($_POST['submit'])) {
                     <div class="help-block with-errors"></div>
                   </div>
                   
-                  <?php 
-                  $getStatusData = getAllDataWhere('lkp_food_order_status','lkp_status_id',0);?>
+                  <?php
+                  $getOrderStatusData = "SELECT * FROM lkp_food_order_status WHERE lkp_status_id = 0 LIMIT 2,6";
+                  $getStatusData = $conn->query($getOrderStatusData);?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Order status</label>
                     <select id="form-control-3" name="lkp_order_status_id" class="custom-select" data-error="This field is required." required>
