@@ -89,9 +89,9 @@ if (!isset($_POST['submit']))  {
 		<!-- Slider -->
 		 <div class="container-fluid page-title">
 			<?php  
-    if(!empty($getTestimonialsBanner['image'])) { ?>  
+    if(!empty($getPartnersBanner['image'])) { ?>  
         <div class="row">
-          <img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getTestimonialsBanner['image'] ?>" class="img-responsive">
+          <?php include_once './common_slider.php';?>
         </div>
       <?php } else { ?>
         <div class="row">
