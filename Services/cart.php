@@ -180,22 +180,7 @@
 				</table>
 
 				<div class="cart-options clearfix">
-					<!-- <div class="pull-left">
-						<div class="apply-coupon">
-							<div class="form-group">
-								<input type="text" name="coupon_code" id="coupon_code" value="" placeholder="Your Coupon Code" class="form-control">
-							</div>
-							<div class="form-group">
-								<div id="remove_icon"></div>
-							</div>
-							<div class="form-group">
-								<button type="button" class="btn_cart_outine coupon">Apply Coupon</button>
-							</div>
-						</div>
-					</div> 
-					<div class="pull-right fix_mobile">
-						<input type="submit" class="btn_cart_outine" value="Update Cart" name="submit">
-					</div> -->
+					<center><strong style="font-size: 12px">FOR LAUNDRY SERVICES THE SELECTED TIME IS PICK UP TIME</strong></center>
 				</div>
 				<?php 
 				//below condition for check service type prices fixed or variant for payment gateway display
