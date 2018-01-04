@@ -36,7 +36,7 @@
                   </div>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose Price Types</label>
-                    <select id="form-control-3" name="price_type_id" class="custom-select" data-error="This field is required." required>
+                    <select id="form-control-3" name="price_type_id" class="custom-select" data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a Price Types', allowClear: true }">
                       <option value="">Select Price Types</option>
                       <option value="1">Price</option>
                       <option value="2">Percentage</option>
