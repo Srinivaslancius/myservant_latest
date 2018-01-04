@@ -217,11 +217,11 @@
             <h2 class="nomargin_top">Our Brands</h2>
         </div>
         
-        <div class="container" style="padding-left:5px;padding-right:35px">
+        <div class="container carousel1" style="padding-left:5px;padding-right:35px">
   <div class="row">
     <div class="col-md-12">
       <div class="carousel carousel-showmanymoveone slide" id="carousel123">
-        <div class="carousel-inner">
+        <div class="carousel-inner pad_lft">
              <?php $getBrands = getAllDataWithStatus('food_brand_logos','0'); ?>
           <?php while($getAllBrands = $getBrands->fetch_assoc()) { ?>
           <div class="item <?php if($getAllBrands['id']==4) { echo "active"; } ?>">

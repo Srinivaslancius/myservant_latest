@@ -160,11 +160,7 @@
 @media only screen and (max-width: 480px) {
 	.alert-dismissable .close1{
 	right: 5px;	
-	}
-	.two{
-		width:200px !important;;
-	}
-	
+	}	
 }
 </style>
     <!-- End Header =============================================== -->
@@ -474,7 +470,7 @@ if($_SESSION['user_login_session_id'] == '') {
 						<div class="form-group">
 						<div class="row">
 						<div class="col-sm-8 col-xs-8">
-									<div class="field-group has-feedback has-clear two" style="width:260px;margin-left:40px;margin-top:4px">
+									<div class="field-group has-feedback has-clear twof" style="width:260px;margin-left:40px;margin-top:4px">
 								      <input autocomplete="off" type="text" name="coupon_code" style="text-transform:uppercase" id="coupon_code" value="" placeholder="Coupon Code" class="form-control" style="border-radius:0px">
 								      <span class="form-control-clear icon-cancel-1 form-control-feedback hidden" style="border-radius:0px"></span>
 								    </div>
