@@ -95,17 +95,17 @@ if(mail($to, $subject, $message, $headers)) {
 
 	<main>
 	 <div class="container-fluid page-title">
-		<?php  
-		if(!empty($getContactUsBanner['image'])) { ?> 	
-				<div class="row">
-					<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getContactUsBanner['image'] ?>" alt="<?php echo $getContactUsBanner['title'];?>" class="img-responsive" style="width:100%; height:400px;">
-				</div>
-			<?php } else { ?>
-				<div class="row">
-					<img src="img/slides/slide_1.jpg" class="img-responsive" style="width:100%; height:400px;">
-				</div>
-			<?php }?>
-    </div>
+			<?php  
+				  if(!empty($getContactUsBanner['image'])) { ?> 	
+					<div class="row">
+						<?php include_once './common_slider.php';?>
+					</div>
+				<?php } else { ?>
+					<div class="row">
+						<img src="img/slides/slide_1.jpg" class="img-responsive" style="width:100%; height:400px;">
+					</div>
+				<?php }?>
+    	</div>
     <div id="position">
 			<div class="container">
 				<ul>

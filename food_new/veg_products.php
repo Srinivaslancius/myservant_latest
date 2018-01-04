@@ -11,6 +11,7 @@ if(isset($_POST['item_type']) && $_POST['item_type']=='undefined' ) {
     $getFoodItems1 = $conn->query($getFoodItems);
 }
 ?>
+<?php if($getFoodItems1->num_rows > 0) { ?>
     <?php while($getCategoriesList = $getFoodItems1->fetch_assoc()) { ?>
     <hr>
     <h5 class="nomargin_top" id="<?php echo $getCategoriesList['category_id']; ?>"><b><?php $getCatName1 = getIndividualDetails('food_category','id',$getCategoriesList['category_id']); echo $getCatName1['category_name']; ?></b></h5>
@@ -95,6 +96,12 @@ if(isset($_POST['item_type']) && $_POST['item_type']=='undefined' ) {
     </tr>
         <?php $i++; } ?>
     </tbody>
-
     </table>
     <?php } ?>
+    <?php } else { ?>
+    <table class="table table-striped cart-list">
+        <tbody>
+           <p style="text-align:center"> No Records Found</p>
+        </tbody>        
+    </table>
+<?php } ?>

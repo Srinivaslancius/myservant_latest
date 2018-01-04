@@ -81,7 +81,7 @@
 		<!-- Slider -->
 		 <div class="container-fluid page-title">
 		<div class="row">
-			<?php include_once './common_slider.php';?>
+			<img src="img/slides/slide_3.jpg" class="img-responsive" style="width:100%; height:400px;">
 		</div>
     </div>
                 <div id="position">
