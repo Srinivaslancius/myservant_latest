@@ -13,6 +13,7 @@ if (isset($_REQUEST['userId'])  ) {
 	while($row = $getCartServicesData->fetch_assoc()) {
 		$lists = array();
 		$lists["cartId"] = $row["id"];
+		$lists["serviceId"] = $row["service_id"];
 		$lists["servicePrice"] = $row["service_price"];
 		$lists["serviceQuantity"] = $row["service_quantity"];	
 		$lists["serviceSelectedDate"] = date('m/d/Y', strtotime($row['service_selected_date']));
