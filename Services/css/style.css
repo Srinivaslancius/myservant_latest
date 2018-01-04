@@ -1061,21 +1061,21 @@ video {
 
 #nav-search-in {
     display: inline-block;
-    height: 49px;
+    height: 40px;
     left: 0;
     width: 100%;
     overflow: hidden;
     position: absolute;
-    top: 0;
+    top: 1px;
     background: #fe6003;
 }
 
 #nav-search-in #nav-search-in-content {
     color: #fff;
     display: inline-block;
-    font-size: 11px;
+    font-size: 14px;
     height: 45px;
-    line-height: 45px;
+    line-height: 30px;
     margin: 5px 65px 0 8px;
     text-indent: 1px;
     text-overflow: ellipsis;
@@ -1091,8 +1091,8 @@ video {
 
 #nav-search-in.nav-facade-active .nav-down-arrow {
     display: inline-block;
-    right: 2px;
-    top: 22px;
+    right: 10px;
+    top: 19px;
     background: url(../img/arrow_down_2.png);
     height: 6px;
     width: 10px;
@@ -1101,7 +1101,7 @@ video {
 
 .nav-facade-active #searchDropdownBox {
     cursor: pointer;
-    height: 49px;
+    height: 45px;
     -ms-height:10px !important;
     left: 0px;
     opacity: 0;
@@ -1136,11 +1136,11 @@ video {
        width: 100%;
        font-family: 'Open Sans', sans-serif;
        /* border: 1px solid white; */
-       height: 49px;
+       height: 40px;
        /*font-weight: 600; */
        margin-top: 1px;
        /* padding-left:90px; */
-       padding-top:3px;
+       padding-top: 4px;
        outline: 0;
 }
 
@@ -1163,13 +1163,19 @@ video {
 
 .nav-submit-button {
     
-    border: none;
-    display: block;
-    height: 45px;
-    right: 5px;
-    position: absolute;
-    top: 0;
-    width: 40px
+border: none;
+    
+display: block;
+    
+height: 45px;
+    
+right: 60px;
+    
+position: absolute;
+    
+top: 1px;
+    
+width: 40px;
 }
 
 .nav-submit-button .nav-submit-input {
