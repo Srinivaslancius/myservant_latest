@@ -67,7 +67,7 @@
 		<?php  
 		if(!empty($getTestimonialsBanner['image'])) { ?> 	
 				<div class="row">
-					<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getTestimonialsBanner['image'] ?>" class="img-responsive" style="width:100%; height:400px;">
+					<?php include_once './common_slider.php';?>
 				</div>
 			<?php } else { ?>
 				<div class="row">

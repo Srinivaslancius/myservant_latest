@@ -58,9 +58,9 @@
 		<!-- Slider -->
 		 <div class="container-fluid page-title">
 			<?php  
-				  if(!empty($getPartnersBanner['image'])) { ?> 	
+				  if(!empty($getReturnPolicyData['image'])) { ?> 	
 					<div class="row">
-						<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getPartnersBanner['image'] ?>" alt="<?php echo $getPartnersBanner['title'];?>" class="img-responsive" style="width:100%; height:400px;">
+						<?php include_once './common_slider.php';?>
 					</div>
 				<?php } else { ?>
 					<div class="row">
