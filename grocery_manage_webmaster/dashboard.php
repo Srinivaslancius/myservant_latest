@@ -23,28 +23,8 @@
             </div>
           </div>
           </a>
-          <?php $getAllFoodDeliveryBoys = "SELECT * FROM food_delivery_boys ORDER BY lkp_status_id, id DESC";
-          $getFoodDeliveryBoys = $conn->query($getAllFoodDeliveryBoys);
-          $getFoodDeliveryBoysCount = $getFoodDeliveryBoys->num_rows;?>
-        
-          <a href="food_delivery_boys.php">
-          <div class="col-md-4 col-sm-5">
-            <div class="widget widget-tile-2 bg-primary m-b-30">
-              <div class="wt-content p-a-20 p-b-50">
-                <div class="wt-title">Delivery Boys
-                  <span class="t-caret text-success">
-                    <i class="zmdi zmdi-caret-up"></i>
-                  </span>
-                </div>
-                <div class="wt-number"><?php echo $getFoodDeliveryBoysCount ?></div>
-              </div>
-              <div class="wt-icon">
-                <i class="zmdi zmdi-accounts"></i>
-              </div>
-            </div>
-          </div>
-          </a>
-          <?php $getAdminUsers = "SELECT * FROM admin_users WHERE lkp_admin_service_type_id = 2 ORDER BY lkp_status_id,id DESC";
+      
+          <?php $getAdminUsers = "SELECT * FROM admin_users WHERE lkp_admin_service_type_id = 3 ORDER BY lkp_status_id,id DESC";
           $getAdminUsersData = $conn->query($getAdminUsers);
           $getAdminusersCount = $getAdminUsersData->num_rows;?>
 
@@ -67,7 +47,7 @@
           $getFoodOrdersCount = $getFoodOrders->num_rows;?>
           <a href="food_orders.php">
           <div class="col-md-4 col-sm-5">
-            <div class="widget widget-tile-2 bg-warning m-b-30">
+            <div class="widget widget-tile-2 bg-primary m-b-30">
               <div class="wt-content p-a-20 p-b-50">
                 <div class="wt-title">Orders</div>
                 <div class="wt-number"><?php echo $getFoodOrdersCount ?></div>
@@ -78,22 +58,7 @@
             </div>
           </div>
           </a>
-          <?php $getTodayOrders = "SELECT * FROM food_orders WHERE DATE(`delivery_date`) = CURDATE() AND lkp_order_status_id = 2 AND lkp_payment_status_id = 1 ORDER BY lkp_order_status_id DESC"; 
-          $getTodayOrders1 = $conn->query($getTodayOrders); 
-          $getRowsCount = $getTodayOrders1->num_rows; ?>
-          <a href="food_today_orders.php">
-          <div class="col-md-4 col-sm-5">
-            <div class="widget widget-tile-2 bg-danger m-b-30">
-              <div class="wt-content p-a-20 p-b-50">
-                <div class="wt-title">Today Orders</div>
-                <div class="wt-number"><?php echo $getRowsCount; ?></div>
-              </div>
-              <div class="wt-icon">
-                <i class="zmdi zmdi-shopping-cart-plus"></i>
-              </div>
-            </div>
-          </div>
-          </a>
+          
         </div>
         <div class="row">
         <div class="col-md-4">
@@ -104,13 +69,13 @@
                 <h3 class="panel-title">Users</h3>
                 <div class="panel-subtitle">Users count based on register device type</div>
               </div>
-              <?php $getAndroidUsers = "SELECT * FROM users WHERE lkp_register_device_type_id = 2 AND lkp_admin_service_type_id = 2";
+              <?php $getAndroidUsers = "SELECT * FROM users WHERE lkp_register_device_type_id = 2 AND lkp_admin_service_type_id = 3";
               $getAndroidUsers1 = $conn->query($getAndroidUsers);
               $getAndroidUsersCount = $getAndroidUsers1->num_rows; ?>
-              <?php $getIosUsers = "SELECT * FROM users WHERE lkp_register_device_type_id = 3 AND lkp_admin_service_type_id = 2";
+              <?php $getIosUsers = "SELECT * FROM users WHERE lkp_register_device_type_id = 3 AND lkp_admin_service_type_id = 3";
               $getIosUsers1 = $conn->query($getIosUsers);
               $getIosUsersCount = $getIosUsers1->num_rows; ?>
-              <?php $getWindowsUsers = "SELECT * FROM users WHERE lkp_register_device_type_id = 1 AND lkp_admin_service_type_id = 2";
+              <?php $getWindowsUsers = "SELECT * FROM users WHERE lkp_register_device_type_id = 1 AND lkp_admin_service_type_id = 3";
               $getWindowsUsers1 = $conn->query($getWindowsUsers);
               $getWindowsUsersCount = $getWindowsUsers1->num_rows; ?>
               <table class="table">
