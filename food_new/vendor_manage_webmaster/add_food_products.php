@@ -159,7 +159,7 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Short Description</label>
-                    <textarea name="specifications" class="form-control" maxlength="150" placeholder="Description" data-error="This field is required." required></textarea>
+                    <textarea name="specifications" class="form-control" maxlength="30" placeholder="Description" data-error="This field is required." required></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
                   

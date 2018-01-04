@@ -217,7 +217,7 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Short Description</label>
-                    <textarea name="specifications" class="form-control" maxlength="150" placeholder="Product Info" data-error="This field is required." required><?php echo $getProducts['specifications']; ?></textarea>
+                    <textarea name="specifications" class="form-control" maxlength="30" placeholder="Product Info" data-error="This field is required." required><?php echo $getProducts['specifications']; ?></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
 

@@ -556,6 +556,18 @@ function show_cart() {
 	   });
 	  return false;
 	});
+	function removeIngItem(ingUniqId) { 
+	  $.ajax({
+	      type:'post',
+	      url:'delete_cart_ingredants.php',
+	      data:{
+	         ingUniqId : ingUniqId,        
+	      },
+	      success:function(response) {
+	        location.reload();
+	      }
+	    });
+	}
 </script>
 </body>
 
