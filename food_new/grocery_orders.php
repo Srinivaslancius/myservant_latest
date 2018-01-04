@@ -152,19 +152,7 @@
     <div class="col-md-3" id="sidebar">
     <div class="theiaStickySidebar">
         <div class="box_style_1" id="faq_box">
-			<ul id="cat_nav">
-                            <li><a href="" class="active">My Account</a></li>
-                            <li><a href="">Services Orders</a></li>
-                            <li><a href="">Food Orders</a></li>
-                            <li><a href="">Grocery Orders</a></li>
-                            <li><a href="">Wishlist Grocery</a></li>
-                            <li><a href="">My Addresses</a></li>
-                            <li><a href="">Wallet</a></li>
-                            <li><a href="">Update Profile</a></li>
-                            <li><a href="">Reward Points</a></li>
-                            <li><a href="">Change Password</a></li>
-                            <li><a href="">Logout</a></li>
-			</ul>
+			<?php include_once 'dashboard_strip.php';?>
 		</div><!-- End box_style_1 -->
         </div><!-- End theiaStickySidebar -->
      </div><!-- End col-md-3 -->

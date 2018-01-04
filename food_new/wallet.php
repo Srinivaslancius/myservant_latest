@@ -19,7 +19,36 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+<style>
+.table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom:0px;
+	color:#fe6003;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+   border-top: 1px solid #ddd;
+}
+.button1 {
+    background-color: #fe6003;
+    border-color: #fe6003;
+    color: white;
+    padding: 4px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 
+.button2 {
+	background-color:#fe6003;
+ padding: 5px 12px;
+} 
+</style>
 </head>
 <body>
 <!--[if lte IE 8]>
@@ -48,7 +77,7 @@
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
     	<div id="sub_content">
-    	 <h1>My Account</h1>
+    	 <h1>Wallet</h1>
          <p></p>
         </div><!-- End sub_content -->
 	</div><!-- End subheader -->
@@ -57,7 +86,7 @@
         <div class="container">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="#0">Myaccount</a></li>
+                <li><a href="#0">Wallet</a></li>
             </ul>
             
         </div>
@@ -81,87 +110,57 @@
          <div class="panel-group">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <h3 class="nomargin_top">My Dashbaord</h3>
+                      <h3 class="nomargin_top">My Wallet</h3>
                     </div>
                       <div class="panel-body">
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="one">
-                                        
-                                        <h3>Grocery Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="two">
-                                        
-                                        <h3>Food Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="three">
-                                        
-                                        <h3>Services Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="four">
-                                        
-                                        <h3>My Profile</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="five">
-                                        
-                                        <h3>My Addresses</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="six">
-                                        
-                                        <h3>Wallet</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="seven">
-                                        
-                                        <h3>Reward Points</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="eight">
-                                        
-                                        <h3>My Wishlist</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
+                     <div class="table-responsive">				 
+        			<table class="table" style="border:1px solid #ddd;width:100%">
+					<h4>My Subscriptions</h4>
+            		<thead>
+            		  <tr>
+            			<th>SUBSCRIPTION</th>
+            			<th>STATUS</th>
+            			<th>NEXT PAYMENT</th>
+            			<th>TOTAL</th>
+						<th></th>
+            		  </tr>
+            		</thead>
+            		<tbody>
+            		  <tr>
+            			<td>68</td>
+            			<td>Active</td>
+            			<td>september 6,2015 via<br>visacard missing in 4242</td>
+						<td>₹99.9/month</td>
+						<td><a href="order_details1.php"><button class="button1">View</button></a></td>
+            		  </tr>
+            		  
+            		</tbody>
+					
+        	     </table>
+				 <table class="table" style="border:1px solid #ddd;width:100%">
+					<h4>Recent Orders</h4>
+            		<thead>
+            		  <tr>
+            			<th>ORDER</th>
+            			<th>DATE</th>
+            			<th>STATUS</th>
+            			<th>TOTAL</th>
+						<th></th>
+            		  </tr>
+            		</thead>
+            		<tbody>
+            		  <tr>
+            			<td>#67</td>
+            			<td>August 6,2015</td>
+            			<td>Processing</td>
+						<td>₹99.9 for item</td>
+						<td><a href="order_details1.php"><button class="button1">View</button></a></td>
+            		  </tr>
+            		  
+            		</tbody>
+					
+        	     </table>
+        	  </div>
                       </div>
                   </div>
                   

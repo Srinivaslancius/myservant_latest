@@ -19,7 +19,36 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+<style>
+.table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom:0px;
+	color:#fe6003;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+   border-top: 0px solid #ddd;
+}
+.button1 {
+    background-color: #fe6003;
+    border-color: #fe6003;
+    color: white;
+    padding: 4px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 
+.button2 {
+	background-color:#fe6003;
+ padding: 5px 12px;
+} 
+</style>
 </head>
 <body>
 <!--[if lte IE 8]>
@@ -81,87 +110,43 @@
          <div class="panel-group">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <h3 class="nomargin_top">My Dashbaord</h3>
+                      <h3 class="nomargin_top">Food Orders</h3>
                     </div>
                       <div class="panel-body">
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="one">
-                                        
-                                        <h3>Grocery Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
+                    <div class="strip_list wow fadeIn" data-wow-delay="0.1s"  style="height:250px">
+                            
+                            <div class="col-md-9 col-sm-9">
+                                <div class="desc">
+                                        <div class="thumb_strip">
+                                                <a href="detail_page.html"><img src="img/menu-thumb-1.jpg" alt=""></a>
+                                        </div>
+                                      
+                                        <h4>Vegeterian</h4>
+                                        <div class="type">
+                                         <p><strong>Brand:</strong> Vegeterian <br>
+											<strong>Product code:</strong> 123456<br>
+											<strong>Availability:</strong> 993</p>
+                                        </div>
+										<h5><b>Available Options</b></h5>
+										 <div class="rating">
+                                                <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="#0">98 reviews</a></small>)
+                                        </div>
+										<h5><b>Addtional sauce</b></h5>
+										 <input type="checkbox" name="" value=""> Cheese &nbsp&nbsp&nbsp&nbsp
+										 <input type="checkbox" name="" value=""> Ghee &nbsp&nbsp&nbsp&nbsp
+										  <input type="checkbox" name="" value=""> Cheese &nbsp&nbsp&nbsp&nbsp
+										   <input type="checkbox" name="" value=""> Ghee &nbsp&nbsp&nbsp&nbsp
+										
                                 </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="two">
-                                        
-                                        <h3>Food Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="go_to">
+                                        <div>
+                                                <a href="#" class="btn_1">View Details</a>
+                                        </div>
                                 </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="three">
-                                        
-                                        <h3>Services Orders</h3>
-                                        <p>
-                                            Count
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="four">
-                                        
-                                        <h3>My Profile</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="five">
-                                        
-                                        <h3>My Addresses</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="six">
-                                        
-                                        <h3>Wallet</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="seven">
-                                        
-                                        <h3>Reward Points</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-4">
-                                    <div class="box_home" id="eight">
-                                        
-                                        <h3>My Wishlist</h3>
-                                       
-                                    </div>
-                                </div>
-                            </a>
+                            </div>
+			</div><!-- End strip_list-->
                       </div>
                   </div>
                   
