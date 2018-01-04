@@ -233,7 +233,7 @@ if($_SESSION['user_login_session_id'] == '') {
 				$date = date("ymdhis");
 				$contstr = "MYSER-FOOD";
 				$sub_order_id = $contstr.$random1.$random2.$date;
-				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`, `coupen_code`, `coupen_code_type`, `discout_money`,  `payment_method`,`lkp_payment_status_id`,`delivery_type_id`,`service_tax`,`delivery_charges`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."','$coupon_code','$coupon_code_type','$discount_money','$payment_group','$payment_status','$dev_type','".$_POST["service_tax"]."','$delivery_charges', '$order_id','$sub_order_id','$order_date')";
+				$orders = "INSERT INTO food_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `address`, `country`, `postal_code`, `city`, `order_note`, `category_id`, `product_id`, `item_weight_type_id`, `item_price`, `item_quantity`,`restaurant_id`, `sub_total`, `order_total`, `coupen_code`, `coupen_code_type`, `discout_money`,  `payment_method`,`lkp_payment_status_id`,`delivery_type_id`,`service_tax`,`delivery_charges`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','".$_POST["firstname_order"]."','".$_POST["lastname_order"]."', '".$_POST["email_order"]."','".$_POST["tel_order"]."','".$_POST["address_order"]."','$country','".$_POST["pcode_oder"]."','".$_POST["city"]."','".$_POST["order_note"]."','" . $_POST["food_category_id"][$i] . "','" . $_POST["food_item_id"][$i] . "','" . $_POST["item_weight_type_id"][$i] . "','" . $_POST["item_price"][$i] . "','" . $_POST["item_quantity"][$i] . "','".$_POST["restaurant_id"]."','".$_POST["sub_total"]."','".$_POST["order_total"]."',UPPER('$coupon_code'),'$coupon_code_type','$discount_money','$payment_group','$payment_status','$dev_type','".$_POST["service_tax"]."','$delivery_charges', '$order_id','$sub_order_id','$order_date')";
 				$servicesOrders = $conn->query($orders);
 			} 
 			$getOrderIngredients = getAllDataWhere('food_update_cart_ingredients','session_cart_id',$session_cart_id);
@@ -372,7 +372,7 @@ if($_SESSION['user_login_session_id'] == '') {
                     <?php $getProductDetails= getIndividualDetails('food_products','id',$getCartItems['food_item_id']); ?>
 					<tr>
 						<td>
-						 <a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onclick="add_cart_item1(67)"></i></a> <strong><?php echo $getCartItems['item_quantity']; ?>x</strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item1(67)"></i></a> <?php echo $getProductDetails['product_name']; ?>
+						 <strong> <?php echo $getProductDetails['product_name']; ?></strong>
 							<?php 
 			                $getAddons = "SELECT * FROM food_update_cart_ingredients WHERE food_item_id = '".$getCartItems['food_item_id']."' AND cart_id='".$getCartItems['id']."' AND session_cart_id = '$session_cart_id'";
 			                $getAddonData = $conn->query($getAddons);
@@ -383,6 +383,9 @@ if($_SESSION['user_login_session_id'] == '') {
 						   <p style="font-size:12px"><?php echo $getadcartItems['item_ingredient_name'] . ":". $getadcartItems['item_ingredient_price']; ?> </p>
 						   </div>
 						   <?php } ?>
+						</td>
+						<td>
+							<strong><?php echo $getCartItems['item_quantity']; ?> x Rs. <?php echo $getCartItems['item_price']; ?></strong>
 						</td>
 						<td>
 							<strong class="pull-right">Rs. <?php echo  $getCartItems['item_price']*$getCartItems['item_quantity']; ?><?php  $cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity']; ?></strong>
@@ -444,7 +447,7 @@ if($_SESSION['user_login_session_id'] == '') {
 						</td>
 					</tr>
 					<tr id="discount_price">
-		                <td>Discount Money<span style="color:green">(Coupon Applied Successfully.) <span id="discount_price1" class="pull-right"></span></td>
+		                <td>Discount<span style="color:green">(Coupon Applied.) <span id="discount_price1" class="pull-right"></span></td>
 		            </tr>
 					<tr>
 						<td class="total">
@@ -545,15 +548,24 @@ $('.check_dev_type').click(function(){
 	var getSubTotal = parseInt($(this).attr('data-pri-key'));
 	var getServiceTax = parseInt($('#service_tax').val());
 	var getAdonsTotal = parseInt($('#getAdstotal').val());
-	var appliedCCValue = $('#discount_money').val();
 	if(getcheckRadio == 1) {
 		$('#hide_del_fee').hide();		
-		$('#order_total').val(getSubTotal+getServiceTax+getAdonsTotal-appliedCCValue);
-		$('#apply_price_aft_del').html(getSubTotal+getServiceTax+getAdonsTotal-appliedCCValue);
+		$('#order_total').val(getSubTotal+getServiceTax+getAdonsTotal);
+		$('#apply_price_aft_del').html(getSubTotal+getServiceTax+getAdonsTotal);
+		$('#coupon_code').removeAttr("readonly");
+		$('.form-control-clear').siblings('input[type="text"]').val('').trigger('propertychange').focus();
+		$(".apply_coupon").show();
+		$('#discount_price').hide();
+		$('#discount_money,#coupon_code,#coupon_code_type').val('');
 	} else {
 		$('#hide_del_fee').show();
-		$('#order_total').val(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal-appliedCCValue);
-		$('#apply_price_aft_del').html(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal-appliedCCValue);
+		$('#order_total').val(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal);
+		$('#apply_price_aft_del').html(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal);
+		$('#coupon_code').removeAttr("readonly");
+		$('.form-control-clear').siblings('input[type="text"]').val('').trigger('propertychange').focus();
+		$(".apply_coupon").show();
+		$('#discount_price').hide();
+		$('#discount_money,#coupon_code,#coupon_code_type').val('');
 	}
 });
 </script>
@@ -595,23 +607,21 @@ $('#discount_price').hide();
         	}
         });
 
-            $('.has-clear input[type="text"]').on('input propertychange', function() {
-			  var $this = $(this);
-			  var visible = Boolean($this.val());
-			  $this.siblings('.form-control-clear').toggleClass('hidden', !visible);
-			}).trigger('propertychange');
+        $('.has-clear input[type="text"]').on('input propertychange', function() {            	
+		  var $this = $(this);
+		  var visible = Boolean($this.val());
+		  $this.siblings('.form-control-clear').toggleClass('hidden', !visible);
+		}).trigger('propertychange');
 
-			$('.form-control-clear').click(function() {
-				$('#coupon_code').removeAttr("readonly");
-			  $(this).siblings('input[type="text"]').val('')
-			    .trigger('propertychange').focus();
-			    $(".apply_coupon").show();
-			    $('.cart_total2').html(order_total);
-				$('#order_total').val(order_total);
-				$('#discount_price').hide();
-				$('#discount_money').val('');
-	            $('#coupon_code_type').val('');
-			});	
+		$('.form-control-clear').click(function() {
+			$('#coupon_code').removeAttr("readonly");
+		    $(this).siblings('input[type="text"]').val('').trigger('propertychange').focus();
+		    $(".apply_coupon").show();
+		    $('.cart_total2').html(order_total);
+			$('#order_total').val(order_total);
+			$('#discount_price').hide();
+			$('#discount_money,#coupon_code_type').val('');
+		});	
 	});
 	function removeIngItem(ingUniqId) { 
 	  $.ajax({

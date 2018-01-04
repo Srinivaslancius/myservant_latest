@@ -39,7 +39,7 @@
     <!-- Mobile menu overlay mask -->
 
     <!-- Header================================================== -->
-    <header>
+    <header id="plain">
         <?php include_once './top_header.php';?>
         <!-- End top line-->
 
@@ -68,6 +68,7 @@
                 </div>
             <?php }?>   
         </div>
+    
     <br>
     <div class="container margin_60">
         <div class="main_title">
