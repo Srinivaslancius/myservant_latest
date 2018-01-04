@@ -3550,6 +3550,14 @@ footer ul {
 .twof {
     width: 220px !important;
 }
+.btn-info {
+    padding-left: 40px !important;
+    padding-right: 45px !important;
+}
+.btn-primary {
+    padding-left: 30px !important;
+    padding-right: 40px !important;
+}
 }
 @media screen and (max-width: 1024px) and (min-width: 768px) {
 	.btn.btn-danger.c_pad{
@@ -3593,6 +3601,17 @@ footer ul {
 .carousel-inner.pad_lft {
     padding-left: 50px !important;
 }
+.twof {
+    width: 250px !important;
+}
+.btn-primary {
+    padding-left:40px !important;
+    padding-right: 50px !important;
+}
+.btn-info {
+    padding-left: 55px !important;
+    padding-right: 55px !important;
+}
 }
 @media screen and (max-width: 1280px) and (min-width: 720px) {
 	/*.container{
@@ -3602,4 +3621,33 @@ footer ul {
 		padding-right:50px !important;
 	}
 }
-
+@media screen and (max-width: 732px) and (min-width: 412px) {
+	.btn-info {
+    padding-left: 50px !important;
+    padding-right: 65px !important;
+}
+.btn-primary {
+    padding-left: 40px !important;
+    padding-right: 55px !important;
+}
+}
+@media screen and (max-width: 960px) and (min-width: 600px) {
+	.btn.btn-danger.c_pad {
+    padding: 7px 4px;
+	}
+	.btn-primary {
+    padding-left: 40px!important;
+    padding-right: 50px!important;
+}
+.btn-info {
+    padding-left: 50px!important;
+    padding-right: 50px!important;
+}
+footer {
+    background-color: #fff;
+    padding: 35px 0 20px 30px;
+}
+#country-list {
+    width: 390px !important;
+}
+}

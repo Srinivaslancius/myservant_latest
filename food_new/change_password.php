@@ -141,10 +141,10 @@ ul#cat_nav li a#active {
 		<form autocomplete="off" method="POST">
         <div class="col-lg-9 col-md-8 col-sm-8">        
        			 <div class="row">
-				  <div class="col-md-1">
+				  <div class="col-md-1 col-sm-1">
 				  </div>
-				  <div class="col-md-11">
-                  <div class="col-md-6">				  
+				  <div class="col-md-11 col-sm-11">
+                  <div class="col-md-6 col-sm-6">				  
 					<div class="form-group">
 						 <label for="cur-password">Current password</label>
 						<input type="password" class="form-control" id="cur-password"  name="currentPassword" placeholder="*******" autocomplete="off">                                           
@@ -163,7 +163,7 @@ ul#cat_nav li a#active {
 						 <button type="submit" value="Submit" name="submit" class="button1">Update</button>					
 					</div>					
                   </div>
-				   <div class="col-md-6">
+				   <div class="col-md-6 col-sm-6">
 				   </div>
 				   </div>
                   </div><!-- Edn row -->                 

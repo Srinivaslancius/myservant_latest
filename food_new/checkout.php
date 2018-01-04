@@ -256,7 +256,7 @@ if($_SESSION['user_login_session_id'] == '') {
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-3">
             
 				<div class="box_style_2 hidden-xs info">
 					<h4 class="nomargin_top">Delivery time <i class="icon_clock_alt pull-right"></i></h4>
@@ -283,7 +283,7 @@ if($_SESSION['user_login_session_id'] == '') {
 			$getUserData = getAllDataWhere('users','id',$id);
 			$getUser = $getUserData->fetch_assoc();?>
             <form method="post" name="form">
-			<div class="col-md-5">
+			<div class="col-md-5 col-sm-5">
 				<div class="box_style_2" id="order_process">
 					<h2 class="inner">Your order details</h2>
 					<div class="form-group">
@@ -360,7 +360,7 @@ if($_SESSION['user_login_session_id'] == '') {
 			<input type="hidden" name='furl' type='text' value='online_order_success.php'>
 			<input type="hidden" name='surl' type='text' value='online_order_failure.php'>
             
-			<div class="col-md-4" id="sidebar">
+			<div class="col-md-4 col-sm-4" id="sidebar">
             	<div class="theiaStickySidebar">
 				<div id="cart_box">
 					<h3>Your order <i class="icon_cart_alt pull-right"></i></h3>
