@@ -49,7 +49,7 @@
                   <?php $getAdminSetviceTypes = getAllDataWhereWithActive('lkp_admin_service_types','id',1);?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose Admin Service Types</label>
-                    <select id="form-control-3" name="lkp_admin_service_type_id" class="custom-select" data-error="This field is required." required>
+                    <select id="form-control-3" name="lkp_admin_service_type_id" class="custom-select" data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a User Types', allowClear: true }">
                       <option value="">Select Admin Service Types</option>
                       <?php while($row = $getAdminSetviceTypes->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>"><?php echo $row['admin_service_type']; ?></option>
@@ -60,7 +60,7 @@
                   <?php $getAdminUserTypes = getAllDataWithStatus('lkp_admin_user_types','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose Admin User Types</label>
-                    <select id="form-control-3" name="lkp_admin_user_type_id" class="custom-select" data-error="This field is required." required>
+                    <select id="form-control-3" name="lkp_admin_user_type_id" class="custom-select" data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a User Types', allowClear: true }">
                       <option value="">Select Admin User Types</option>
                       <?php while($row = $getAdminUserTypes->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>"><?php echo $row['admin_type']; ?></option>
