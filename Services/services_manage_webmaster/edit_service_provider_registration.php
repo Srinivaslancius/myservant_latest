@@ -126,7 +126,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your State</label>
-                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);">
+                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a State', allowClear: true }">
                       <option value="">Select State</option>
                       <?php while($row = $getStates->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getServiceProviderRegistrationsData['lkp_state_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['state_name']; ?></option>
@@ -138,7 +138,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getDistrcits = getAllDataWithStatus('lkp_districts','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your District</label>
-                    <select id="lkp_district_id" name="lkp_district_id" class="custom-select" data-error="This field is required." required onChange="getCities(this.value);">
+                    <select id="lkp_district_id" name="lkp_district_id" class="custom-select" data-error="This field is required." required onChange="getCities(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a District', allowClear: true }">
                       <option value="">Select District</option>
                       <?php while($row = $getDistrcits->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getServiceProviderRegistrationsData['lkp_district_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['district_name']; ?></option>
@@ -150,7 +150,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your City</label>
-                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required  onChange="getPincodes(this.value);">
+                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required  onChange="getPincodes(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a City', allowClear: true }">
                       <option value="">Select City</option>
                       <?php while($row = $getCities->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getServiceProviderRegistrationsData['lkp_city_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>
@@ -162,7 +162,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getPincodes = getAllDataWithStatus('lkp_pincodes','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Pincode</label>
-                    <select id="lkp_pincode_id" name="lkp_pincode_id" class="custom-select" data-error="This field is required." required   onChange="getLocations(this.value);">
+                    <select id="lkp_pincode_id" name="lkp_pincode_id" class="custom-select" data-error="This field is required." required   onChange="getLocations(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a Pincode', allowClear: true }">
                       <option value="">Select Pincode</option>
                       <?php while($row = $getPincodes->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getServiceProviderRegistrationsData['lkp_pincode_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['pincode']; ?></option>
@@ -174,7 +174,7 @@ if (!isset($_POST['submit']))  {
                   <?php $getLocations = getAllDataWithStatus('lkp_locations','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Location</label>
-                    <select id="lkp_location_id" name="lkp_location_id" class="custom-select" data-error="This field is required." required>
+                    <select id="lkp_location_id" name="lkp_location_id" class="custom-select" data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a Locations', allowClear: true }">
                       <option value="">Select Location</option>
                       <?php while($row = $getLocations->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getServiceProviderRegistrationsData['lkp_location_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['location_name']; ?></option>
@@ -262,7 +262,7 @@ if (!isset($_POST['submit']))  {
                     $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                     <div class="form-group">
                       <label for="form-control-3" class="control-label">Choose your Specialization</label>
-                      <select name="sub_category_id[]" class="custom-select multi_select" multiple="multiple" id="sub_category_id" data-error="This field is required." required="true" >
+                      <select name="sub_category_id[]" class="custom-select multi_select" multiple="multiple" id="sub_category_id" data-error="This field is required." required="true" data-plugin="select2">
                         <!-- <option value="">Select Specialization</option> -->
                         <?php while($row = $getSubCategories->fetch_assoc()) {  ?>
                           <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == in_array($row['id'], $getSubCategoryTypeId)) { echo "selected=selected"; }?> ><?php echo $row['sub_category_name']; ?></option>
@@ -307,7 +307,7 @@ if (!isset($_POST['submit']))  {
                     $getSubCategories1 = getAllDataWithStatus('services_sub_category','0');?>
                     <div class="form-group">
                       <label for="form-control-3" class="control-label">Choose your Specialization</label>
-                      <select name="sub_category_id1[]" class="custom-select multi_select" id="sub_category_id1" multiple="multiple" data-error="This field is required." required>
+                      <select name="sub_category_id1[]" class="custom-select multi_select" id="sub_category_id1" multiple="multiple" data-error="This field is required." required data-plugin="select2">
                         <!-- <option value="">Select Specialization</option> -->
                         <?php while($row1 = $getSubCategories1->fetch_assoc()) {  ?>
                           <option value="<?php echo $row1['id']; ?>" <?php if($row1['id'] == in_array($row1['id'], $getSubCategoryTypeId1)) { echo "selected=selected"; } ?> ><?php echo $row1['sub_category_name']; ?></option>

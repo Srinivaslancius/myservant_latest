@@ -39,7 +39,7 @@ if (!isset($_POST['submit'])) {
                 <form data-toggle="validator" method="POST" autocomplete="off">
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose Service Name</label>
-                    <select name="service_id[]" class="custom-select multi_select" multiple="multiple" data-error="This field is required." required>
+                    <select name="service_id[]" class="custom-select multi_select" multiple="multiple" data-error="This field is required." required data-plugin="select2">
                       <!-- <option value="">Select Service Name</option> -->
                       <?php while($row1 = $getServiceNames->fetch_assoc()) {  ?>
                           <option value="<?php echo $row1['id']; ?>" <?php if($row1['id'] == in_array($row1['id'], $getServiceId)) { echo "selected=selected"; } ?> ><?php echo $row1['category_name']; ?></option>
@@ -51,7 +51,7 @@ if (!isset($_POST['submit'])) {
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your State</label>
-                    <select name="lkp_state_id" class="custom-select chosen" data-error="This field is required." required onChange="getDistricts(this.value);">
+                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a state', allowClear: true }">
                       <option value="">Select State</option>
                       <?php while($row = $getStates->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getAvailableLocationsData['lkp_state_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['state_name']; ?></option>
@@ -62,7 +62,7 @@ if (!isset($_POST['submit'])) {
                   <?php $getDistrcits = getAllDataWithStatus('lkp_districts','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your District</label>
-                    <select id="lkp_district_id" name="lkp_district_id" class="custom-select" data-error="This field is required." required onChange="getCities(this.value);">
+                    <select id="lkp_district_id" name="lkp_district_id" class="custom-select" data-error="This field is required." required onChange="getCities(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a state', allowClear: true }">
                       <option value="">Select District</option>
                       <?php while($row = $getDistrcits->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getAvailableLocationsData['lkp_district_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['district_name']; ?></option>
@@ -73,7 +73,7 @@ if (!isset($_POST['submit'])) {
                    <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your City</label>
-                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required  onChange="getPincodes1(this.value);">
+                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required  onChange="getPincodes1(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a state', allowClear: true }">
                       <option value="">Select City</option>
                       <?php while($row = $getCities->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getAvailableLocationsData['lkp_city_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>

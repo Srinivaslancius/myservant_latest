@@ -104,26 +104,6 @@ td{
 	font-size:15px;
 }
 
-.alert-dismissable .close1{
-    position: relative;
-    top: -2px;
-    color: inherit;
-	 right: 10px;
-    opacity: 2;
-    font-size: 15px;
-	font-weight:bold;
-	cursor:pointer;
-}
-.close1 {
-    float: right;
-    font-size: 21px;
-    font-weight: 700;
-    line-height: 1;
-    color: #000;
-    text-shadow: 0 1px 0 #fff;
-    filter: alpha(opacity=20);
-    opacity: .2;
-}
 @media only screen and (max-width: 480px) {
 	.alert-dismissable .close1{
 	right: 45px;	
@@ -233,7 +213,7 @@ td{
                 while($getadcartItems = $getAddonData->fetch_assoc() ) {
                ?>  <div class="alert alert-dismissable" style="margin-bottom:-20px">
 					     <a class="close1" ><i class="icon-trash" style="color:#fe6003" onclick="removeIngItem(<?php echo $getadcartItems['id']; ?>);"></i></a>
-                  <p id="dis_add_on_<?php echo $getCartItems['id']; ?>" style="font-size:12px"><?php echo $getadcartItems['item_ingredient_name'] . ":". $getadcartItems['item_ingredient_price']; ?> </p>
+                  <p id="dis_add_on_<?php echo $getCartItems['id']; ?>" style="font-size:12px"><?php echo $getadcartItems['item_ingredient_name'] .":". $getadcartItems['item_ingredient_price']; ?> </p>
 				  </div>		
                 <?php } ?>		
 				</div>
