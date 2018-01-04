@@ -60,7 +60,7 @@
 			<?php  
 				  if(!empty($getPartnersBanner['image'])) { ?> 	
 					<div class="row">
-						<?php include_once './common_slider.php';?>
+						<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getPartnersBanner['image'] ?>" alt="<?php echo $getPartnersBanner['title'];?>" class="img-responsive" style="width:100%;height:400px">
 					</div>
 				<?php } else { ?>
 					<div class="row">
@@ -88,11 +88,25 @@
 
 			<div class="row">			
 			<div class="feature">					
-			<ul style="line-height:35px;font-size:13px">
-            <?php while ($row = $getAvailLoc->fetch_assoc()) { ?>
-            <li><?php $getDisLoca = getIndividualDetails('lkp_cities','id',$row['lkp_city_id']); echo $getDisLoca['city_name']; ?></li>
-            <?php } ?>
-            </ul>					
+			<div class="row">
+			<div class="col-sm-4">	
+			</div>
+			<div class="col-sm-5">
+			<div class="row">
+			<div class="col-sm-6">			
+			<p><span class="icon-play-circled-1" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
+			</div>
+			<div class="col-sm-6">				
+			<p><span class="icon-play-circled-1" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
+			</div>
+			</div>
+			</div>
+			<div class="col-sm-3">
+			</div>
+			</div>
+          					
 			</div>
 
 			</div>
