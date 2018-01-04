@@ -29,7 +29,7 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
                 </div>
                 <div class="col-md-3 col-sm-4 col-xs-12">
                     <p>
-					<span class="icon-phone"> 9876543210</span>
+					<span class="icon-phone"> <?php echo $getFoodSiteSettingsData['mobile'];?></span>
                         <?php if($_SESSION['user_login_session_id'] =='') { ?>
                             <a href="login.php"><span class="icon-lock"></span> Login</a>
                             <a href="login.php"><span class="icon-user"> Register</span> </a>
