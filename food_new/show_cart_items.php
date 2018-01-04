@@ -53,7 +53,7 @@ if($getSelData->num_rows > 0) {
                   while($getadcartItems = $getAddonData->fetch_assoc() ) {
                      echo'<div class="alert alert-dismissable"  style="margin-bottom:-20px">
                            <a class="close1" ><i class="icon-trash" style="color:#fe6003" onclick="removeIngItem('.$getadcartItems['id'].');"></i></a>
-                           <p style="font-size:12px;width:130px">'.$getadcartItems['item_ingredient_name'].':'.$getadcartItems['item_ingredient_price'].'</p>
+                           <p class="itm_wdth"style="font-size:12px;width:130px">'.$getadcartItems['item_ingredient_name'].':'.$getadcartItems['item_ingredient_price'].'</p>
                           </div>';
                     }
                 echo'</td>
