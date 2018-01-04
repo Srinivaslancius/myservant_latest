@@ -20,6 +20,13 @@
         return $result;
     }
 
+    function getCommonBanners() {
+        global $conn;
+        $sql="SELECT * FROM `services_banners` WHERE `lkp_status_id` = '0 ' AND lkp_banner_type_id='2' ";
+        $result = $conn->query($sql);        
+        return $result;
+    }
+
     function userLogin($user_email,$user_pwd) {
         global $conn;
         $sql="SELECT * FROM users WHERE (user_email = '$user_email' OR user_mobile = '$user_email') AND user_password = '$user_pwd' AND lkp_status_id = 0";
