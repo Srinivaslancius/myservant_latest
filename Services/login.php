@@ -148,6 +148,7 @@
                     		<div class="text-center"><h2><span>Register</span></h2></div>
                             <hr>
                            <form autocomplete="off" method="post" action="mobile_otp.php">
+                           		<input type="hidden" value="<?php echo $_GET['cart_id']?>" name="checkout_key">
                                 <div class="form-group">
                                 	<label>Name</label>
                                     <input type="text" name="user_name" class=" form-control"  placeholder="Name" required>
