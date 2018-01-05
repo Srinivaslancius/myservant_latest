@@ -133,33 +133,49 @@
 										</label>
 										<input type="tel" name="mobile" id="phone_contact" value="<?php echo $getUser['user_mobile']; ?>" placeholder="" maxlength="10" pattern="[0-9]{10}" class="form-control valid_mobile_num" required>
 									</div>
+									<?php $getStates = getAllDataWithStatus('lkp_states','0'); ?>
+									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+										<label>State <sup>*</sup>
+										</label>
+										<select name="state" id="lkp_state_id" class="form-control" onChange="getDistricts(this.value);" required>
+											<option value="">Select State</option>
+											<?php while($getStatesData = $getStates->fetch_assoc()) { ?>
+											<option value="<?php echo $getStatesData['id'];?>"><?php echo $getStatesData['state_name'];?></option>
+											<?php } ?>
+										</select>
+									</div>
+									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+										<label>District <sup>*</sup>
+										</label>
+										<select name="district" id="lkp_district_id" placeholder="District" class="form-control" onChange="getCities(this.value);" required>
+											<option value="">Select District</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+										<label>City <sup>*</sup>
+										</label>
+										<select name="city" id="lkp_city_id" class="form-control" placeholder="City" onChange="getPincodes(this.value);" required>
+											<option value="">Select City</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+										<label>Pincode <sup>*</sup>
+										</label>
+										<select name="postal_code" id="lkp_pincode_id" class="form-control" class="form-control valid_mobile_num" maxlength="6" onChange="getLocations(this.value);" placeholder="Zip / Postal Code" required>
+											<option value="">Select Pincode</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+										<label>Location <sup>*</sup>
+										</label>
+										<select name="location" id="lkp_location_id" class="form-control" placeholder="Location" required>
+											<option value="">Select Location</option>
+										</select>
+									</div>
 									<div class="form-group col-md-12 col-sm-12 col-xs-12">
 										<label>Address <sup>*</sup>
 										</label>
 										<input type="text" name="address" value="" placeholder="" class="form-control" required>
-									</div>
-									<?php $getCountriesData = getAllDataWithActiveRecent('lkp_countries'); ?>
-									<div class="form-group col-md-12 col-sm-12 col-xs-12">
-										<label>Country <sup>*</sup>
-										</label>
-										<select name="country" id="lkp_country_id" class="form-control" onChange="getCities(this.value);" required>
-											<option value="99">India</option>
-										</select>
-									</div>
-									<div class="form-group col-md-6 col-sm-6 col-xs-12">
-										<label>Zip / Postal Code  <sup>*</sup></label>
-										<input type="tel" name="postal_code" value="" placeholder="Zip / Postal Code" class="form-control valid_mobile_num" maxlength="6" required>
-									</div>
-									<?php $getCitiesData = getAllDataWhere('lkp_cities','lkp_status_id',0); ?>
-									<div class="form-group col-md-6 col-sm-6 col-xs-12">
-										<label>City <sup>*</sup>
-										</label>
-										<select name="city" id="lkp_city_id" class="form-control" required>
-											<option value="">Select City</option>
-											<?php while($getCities = $getCitiesData->fetch_assoc()) { ?>
-											<option value="<?php echo $getCities['id'];?>"><?php echo $getCities['city_name'];?></option>
-											<?php } ?>
-										</select>
 									</div>
 									<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 										<label>Order note</label>
@@ -374,13 +390,43 @@
 	</script>
 	<!-- Script to get Cities -->
     <script type="text/javascript">
+    function getDistricts(val) { 
+        $.ajax({
+        type: "POST",
+        url: "services_manage_webmaster/get_districts.php",
+        data:'lkp_state_id='+val,
+        success: function(data){
+            $("#lkp_district_id").html(data);
+        }
+        });
+    }
     function getCities(val) { 
         $.ajax({
         type: "POST",
-        url: "get_cities.php",
-        data:'lkp_country_id='+val,
+        url: "services_manage_webmaster/get_cities.php",
+        data:'lkp_district_id='+val,
         success: function(data){
             $("#lkp_city_id").html(data);
+        }
+        });
+    }
+    function getPincodes(val) { 
+        $.ajax({
+        type: "POST",
+        url: "services_manage_webmaster/get_pincodes.php",
+        data:'lkp_city_id='+val,
+        success: function(data){
+            $("#lkp_pincode_id").html(data);
+        }
+        });
+    }
+    function getLocations(val) { 
+        $.ajax({
+        type: "POST",
+        url: "services_manage_webmaster/get_locations.php",
+        data:'lkp_pincode_id='+val,
+        success: function(data){
+            $("#lkp_location_id").html(data);
         }
         });
     }
