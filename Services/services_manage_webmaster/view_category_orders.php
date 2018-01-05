@@ -59,8 +59,10 @@ $order_id = $_GET['order_id'];
                                  <?php } ?>
                                  <?php if($row['lkp_order_status_id'] == 2 && $row['lkp_payment_status_id'] == 1) { ?>
                                  <td><a href="../../uploads/generate_invoice/<?php echo $row['order_sub_id']; ?>.pdf" target="_blank"><i class="zmdi zmdi-local-printshop"></i></a></td>
-                                 <?php } else { ?>
+                                 <?php } elseif($row['assign_service_provider_id'] > 0) { ?>
                                   <td><a href="edit_services_orders.php?id=<?php echo $row['id']; ?>&subcat_id=<?php echo $row['sub_category_id'] ?>&order_id=<?php echo $row['order_id']; ?>&category_id=<?php echo $category_id ?>"><i class="zmdi zmdi-edit"></i></a></td>
+                                  <?php } else { ?>
+                                  <td></td>
                                   <?php } ?>
                                 </tr>
                             <?php } ?>
