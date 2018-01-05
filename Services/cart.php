@@ -204,7 +204,9 @@
 							<input type="hidden" name="service_tax" id="service_tax" value="<?php echo $service_tax; ?>">
 
 							<li class="clearfix total"><span class="col">Order Total</span><span class="col">Rs. <span class="grand_total"><?php echo $cartTotal; ?></span>/-</span>
+								<span style="font-size: 11px;font-weight: normal">(*Min visiting charges applicable.)</span>
 							</li>
+
 							
 						</ul>
 						<?php if(!isset($_SESSION['user_login_session_id'])) { ?>
