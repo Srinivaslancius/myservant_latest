@@ -23,7 +23,7 @@
     if($_FILES["logo"]["name"]!='') {
                                           
         $logo = $_FILES["logo"]["name"];
-        $target_dir = "../../uploads/logo/";
+        $target_dir = "../../uploads/food_logo/";
         $target_file = $target_dir . basename($_FILES["logo"]["name"]);
         $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
         // Allow certain file formats
@@ -104,7 +104,7 @@
                     <textarea type="text" name="google_analytics_code" class="form-control" id="form-control-2" placeholder="Google Analytics Code" data-error="This field is required." required><?php echo $getSiteSettingsData['google_analytics_code'];?></textarea>
                   </div>
                   <div class="form-group">
-                    <img src="<?php echo $base_url . 'uploads/logo/'.$getSiteSettingsData['logo'] ?>" accept="image/*" height="100" width="100" id="output"/>
+                    <img src="<?php echo $base_url . 'uploads/food_logo/'.$getSiteSettingsData['logo'] ?>" accept="image/*" height="100" width="100" id="output"/>
                   </div>
 
                   <div class="form-group">
