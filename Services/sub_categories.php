@@ -124,8 +124,6 @@
         <!-- End col-md-4 -->
     </div>
       <!-- End row -->
-      
-      <hr>
     </div>
     <?php include_once 'our_associate_partners.php';?>
     <!-- End section -->

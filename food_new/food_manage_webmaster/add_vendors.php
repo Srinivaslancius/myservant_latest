@@ -9,8 +9,7 @@
     $restaurant_name = $_POST['restaurant_name'];
     $restaurant_address = $_POST['restaurant_address'];
     $pincode = $_POST['pincode'];
-    $delivery_type_id = implode(',',$_POST["delivery_type_id"]);
-    $cusine_type_id = implode(',',$_POST["cusine_type_id"]);
+    $delivery_type_id = implode(',',$_POST["delivery_type_id"]);   
     $meta_title = $_POST['meta_title'];
     $meta_keywords = $_POST['meta_keywords'];
     $meta_desc = $_POST['meta_desc'];
@@ -46,8 +45,7 @@
        $rand=rand(10000,99999);
        $encname=$date.$rand;
        $logoname=md5($encname).'.'.$logoxptype;
-       $vendorLogopath="../../uploads/food_vendor_logo/".$logoname;            
-
+       $vendorLogopath="../../uploads/food_vendor_logo/".$logoname;
        //Vendor banner update
        $vendorBanner=$_FILES['vendor_banner']['name']; 
        $expBanner=explode('.',$vendorBanner);
@@ -62,12 +60,13 @@
 
             move_uploaded_file($_FILES["vendor_banner"]["tmp_name"],$vendorbannerpath);
             move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$vendorLogopath);
-           $sql = "INSERT INTO food_vendors (`vendor_name`, `vendor_id`,`vendor_email`, `vendor_mobile`, `description`,  `password`, `working_timings`,`min_delivery_time`,`delivery_charges`, `lkp_state_id`,`lkp_district_id`, `lkp_city_id`,`location`, `logo`, `restaurant_name`,`restaurant_address`,`delivery_type_id`,`created_at`,`pincode`,`meta_title`,`meta_keywords`,`meta_desc`,`cusine_type_id`,`vendor_banner`) VALUES ('$vendor_name','$vendor_id','$vendor_email','$vendor_mobile', '$description','$password','$working_timings','$min_delivery_time','$delivery_charges','$lkp_state_id','$lkp_district_id','$lkp_city_id','$location','$logoname','$restaurant_name','$restaurant_address','$delivery_type_id','$created_at','$pincode','$meta_title','$meta_keywords','$meta_desc','$cusine_type_id','$bannerName')";
+           $sql = "INSERT INTO food_vendors (`vendor_name`, `vendor_id`,`vendor_email`, `vendor_mobile`, `description`,  `password`, `working_timings`,`min_delivery_time`,`delivery_charges`, `lkp_state_id`,`lkp_district_id`, `lkp_city_id`,`location`, `logo`, `restaurant_name`,`restaurant_address`,`delivery_type_id`,`created_at`,`pincode`,`meta_title`,`meta_keywords`,`meta_desc`,`vendor_banner`) VALUES ('$vendor_name','$vendor_id','$vendor_email','$vendor_mobile', '$description','$password','$working_timings','$min_delivery_time','$delivery_charges','$lkp_state_id','$lkp_district_id','$lkp_city_id','$location','$logoname','$restaurant_name','$restaurant_address','$delivery_type_id','$created_at','$pincode','$meta_title','$meta_keywords','$meta_desc','$bannerName')";
 
             if($conn->query($sql) === TRUE){
-               echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
+              $last_id = $conn->insert_id;
+              echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
             } else {
-               echo "<script type='text/javascript'>window.location='vendors.php?msg=fail'</script>";
+              echo "<script type='text/javascript'>window.location='vendors.php?msg=fail'</script>";
             }
             //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         } else {
@@ -75,6 +74,16 @@
         }
 
       }
+      //Cusine type add here
+      if($last_id!=0) {
+        $rest_cusine_types = $_REQUEST['cusine_type_id'];
+        foreach($rest_cusine_types as $key=>$value){
+            $vendor_cusines = $_REQUEST['cusine_type_id'][$key];          
+            $sql = "INSERT INTO food_vendor_add_cusine_types ( `vendor_id`,`vendor_cusine_type_id`) VALUES ('$last_id','$vendor_cusines')";
+            $result = $conn->query($sql);
+        }
+      }
+      
       echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
   }
 ?>

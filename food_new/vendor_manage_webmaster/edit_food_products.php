@@ -89,7 +89,7 @@ if (!isset($_POST['submit']))  {
             <div class="row">
               <?php $getProductsData = getAllDataWhereWithActive('food_products','id',$id); 
                 $getProducts = $getProductsData->fetch_assoc();
-                $getCategories = getAllDataWithStatus('food_category','0');
+                $getCategories = getAllDataWhereWithActive('food_category','vendor_id',$_SESSION['food_vendor_user_id']);
                 $getProductTypes = getAllDataWithStatus('food_product_type','0');
                 ?>
                 

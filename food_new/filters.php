@@ -4,18 +4,16 @@
 		<form id="search_form">
 		<div class="filter_type">
         	<?php //$getFoodCusineData = getAllDataWhere('food_cusine_types','lkp_status_id','0'); ?>
-        	<?php $getReFilt="SELECT * FROM food_vendors WHERE `lkp_status_id`= '0' AND id IN (SELECT restaurant_id FROM food_products WHERE lkp_status_id = 0 ) GROUP BY cusine_type_id DESC";
-        		$getFoodCusineData = $conn->query($getReFilt);
-
+        	<?php
+        		$getCus = "SELECT * FROM food_vendor_add_cusine_types GROUP BY vendor_cusine_type_id ";
+        		$getFoodCusineData = $conn->query($getCus);
         	?>
 			<h6>Cusine Types</h6>
 			<ul>
 				<?php while($getFoodCusineData1 = $getFoodCusineData->fetch_assoc()) { ?>
-				<?php $exp= explode(",", $getFoodCusineData1['cusine_type_id']); ?>
-				<?php foreach($exp as $key => $value) { ?>
-					<li><label class="checkb check_cousin_type"><?php $getRestCusItem = getIndividualDetails('food_cusine_types','id',$value); ?><?php echo $getRestCusItem['title']; ?><input type="checkbox" class="filter" name="cusine_type[]" value="<?php echo $value; ?>">
-					<span class="checkmark1"></span></label></li>
-				<?php } ?>
+				<?php //$exp= explode(",", $getFoodCusineData1['cusine_type_id']); ?>				
+					<li><label class="checkb check_cousin_type"><?php $getRestCusItem = getIndividualDetails('food_cusine_types','id',$getFoodCusineData1['vendor_cusine_type_id']); ?><?php echo $getRestCusItem['title']; ?><input type="checkbox" class="filter" name="cusine_type[]" value="<?php echo $getFoodCusineData1['vendor_cusine_type_id']; ?>">
+					<span class="checkmark1"></span></label></li>				
 				<?php } ?>
 			</ul>
 		</div>
