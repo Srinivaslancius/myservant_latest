@@ -18,6 +18,7 @@
     $mobile = $_POST['mobile'];
     $minimum_time_to_delivery = $_POST['minimum_time_to_delivery']; 
     $address = $_POST['address'];
+    $service_tax = $_POST['service_tax'];
     $google_analytics_code  = $_POST['google_analytics_code'];
     $contact_number = $_POST['contact_number'];
     $customer_care_number = $_POST['customer_care_number'];
@@ -48,7 +49,7 @@
         //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
         if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
           move_uploaded_file($_FILES["fav_icon_image"]["tmp_name"], $target_file1);
-            $sql = "UPDATE `grocery_site_settings` SET admin_title = '$admin_title', meta_title= '$meta_title', meta_description = '$meta_description', meta_key_words='$meta_key_words', from_email = '$from_email', contact_email ='$contact_email', forgot_password_email = '$forgot_password_email', mobile = '$mobile',minimum_time_to_delivery = '$minimum_time_to_delivery',address='$address', google_analytics_code ='$google_analytics_code',contact_number='$contact_number', orders_email='$orders_email', logo = '$logo', fav_icon_image='$fav_icon_image', footer_text='$footer_text',customer_care_number = '$customer_care_number' WHERE id = '$id' ";
+            $sql = "UPDATE `grocery_site_settings` SET admin_title = '$admin_title', meta_title= '$meta_title', meta_description = '$meta_description', meta_key_words='$meta_key_words', from_email = '$from_email', contact_email ='$contact_email', forgot_password_email = '$forgot_password_email', mobile = '$mobile',minimum_time_to_delivery = '$minimum_time_to_delivery',address='$address', google_analytics_code ='$google_analytics_code',contact_number='$contact_number', orders_email='$orders_email', logo = '$logo', fav_icon_image='$fav_icon_image', footer_text='$footer_text',customer_care_number = '$customer_care_number',service_tax = '$service_tax' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
             } else {
@@ -79,7 +80,7 @@
         
         move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
           
-            $sql = "UPDATE `grocery_site_settings` SET admin_title = '$admin_title', meta_title= '$meta_title', meta_description = '$meta_description', meta_key_words='$meta_key_words', from_email = '$from_email', contact_email ='$contact_email', forgot_password_email = '$forgot_password_email', mobile = '$mobile',minimum_time_to_delivery = '$minimum_time_to_delivery',address='$address', google_analytics_code ='$google_analytics_code',contact_number='$contact_number', orders_email='$orders_email', logo = '$logo', footer_text='$footer_text',customer_care_number = '$customer_care_number' WHERE id = '$id' ";
+            $sql = "UPDATE `grocery_site_settings` SET admin_title = '$admin_title', meta_title= '$meta_title', meta_description = '$meta_description', meta_key_words='$meta_key_words', from_email = '$from_email', contact_email ='$contact_email', forgot_password_email = '$forgot_password_email', mobile = '$mobile',minimum_time_to_delivery = '$minimum_time_to_delivery',address='$address', google_analytics_code ='$google_analytics_code',contact_number='$contact_number', orders_email='$orders_email', logo = '$logo', footer_text='$footer_text',customer_care_number = '$customer_care_number',service_tax = '$service_tax' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
             } else {
@@ -105,7 +106,7 @@
         $getImgUnlink1 = getImageUnlink('fav_icon_image','grocery_site_settings','id',$id,$target_dir1);
 
           move_uploaded_file($_FILES["fav_icon_image"]["tmp_name"], $target_file1);
-            $sql = "UPDATE `grocery_site_settings` SET admin_title = '$admin_title', meta_title= '$meta_title', meta_description = '$meta_description', meta_key_words='$meta_key_words', from_email = '$from_email', contact_email ='$contact_email', forgot_password_email = '$forgot_password_email', mobile = '$mobile',minimum_time_to_delivery = '$minimum_time_to_delivery',address='$address', google_analytics_code ='$google_analytics_code',contact_number='$contact_number', orders_email='$orders_email', fav_icon_image='$fav_icon_image', footer_text='$footer_text',customer_care_number = '$customer_care_number' WHERE id = '$id' ";
+            $sql = "UPDATE `grocery_site_settings` SET admin_title = '$admin_title', meta_title= '$meta_title', meta_description = '$meta_description', meta_key_words='$meta_key_words', from_email = '$from_email', contact_email ='$contact_email', forgot_password_email = '$forgot_password_email', mobile = '$mobile',minimum_time_to_delivery = '$minimum_time_to_delivery',address='$address', google_analytics_code ='$google_analytics_code',contact_number='$contact_number', orders_email='$orders_email', fav_icon_image='$fav_icon_image', footer_text='$footer_text',customer_care_number = '$customer_care_number',service_tax = '$service_tax' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
             } else {
@@ -115,7 +116,7 @@
         
     }
      else {
-        $sql = "UPDATE `grocery_site_settings` SET admin_title = '$admin_title', meta_title= '$meta_title', meta_description = '$meta_description', meta_key_words='$meta_key_words', from_email = '$from_email', contact_email ='$contact_email', forgot_password_email = '$forgot_password_email', mobile = '$mobile',minimum_time_to_delivery = '$minimum_time_to_delivery',address='$address', google_analytics_code ='$google_analytics_code',contact_number='$contact_number', orders_email='$orders_email', footer_text='$footer_text', customer_care_number = '$customer_care_number' WHERE id = '$id' ";
+        $sql = "UPDATE `grocery_site_settings` SET admin_title = '$admin_title', meta_title= '$meta_title', meta_description = '$meta_description', meta_key_words='$meta_key_words', from_email = '$from_email', contact_email ='$contact_email', forgot_password_email = '$forgot_password_email', mobile = '$mobile',minimum_time_to_delivery = '$minimum_time_to_delivery',address='$address', google_analytics_code ='$google_analytics_code',contact_number='$contact_number', orders_email='$orders_email', footer_text='$footer_text', customer_care_number = '$customer_care_number',service_tax = '$service_tax' WHERE id = '$id' ";
         if($conn->query($sql) === TRUE){
            echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
         } else {
@@ -195,6 +196,12 @@
                                 <label class="col-sm-3  col-md-4 control-label" for="form-control-8">Address</label>
                                 <div class="col-sm-6 col-md-4">
                                     <textarea id="form-control-8" name="address" class="form-control" rows="3" required><?php echo $getGrocerySiteSettings['address'];?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">GST (%)</label>
+                                <div class="col-sm-6 col-md-4">
+                                    <input type="text" name="service_tax" class="form-control" id="form-control-3" placeholder="Enter GST" value="<?php echo $getGrocerySiteSettings['service_tax'];?>" required>
                                 </div>
                             </div>
                             <div class="form-group">

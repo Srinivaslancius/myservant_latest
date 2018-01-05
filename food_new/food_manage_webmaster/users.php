@@ -7,7 +7,7 @@ $getUsersData = $conn->query($getUsers);
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
             <!-- <a href="add_users.php" style="float:right">Add User</a> -->
-            <h3 class="m-t-0 m-b-5">Users</h3>
+            <h3 class="m-t-0 m-b-5">Customers</h3>
           </div>
           <div class="panel-body">
             <div class="table-responsive">
@@ -43,7 +43,7 @@ $getUsersData = $conn->query($getUsers);
                                 <i class="zmdi zmdi-close"></i>
                               </span>
                             </button>
-                            <center><h4 class="modal-title">User Information</h4></center>
+                            <center><h4 class="modal-title">Customer Information</h4></center>
                           </div>
                           <div class="modal-body" id="modal_body">
                             <div class="row">

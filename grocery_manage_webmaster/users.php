@@ -95,7 +95,7 @@
 			?>
             <div class="panel panel-default panel-table m-b-0">
                 <div class="panel-heading">
-                    <h3 class="m-t-0 m-b-5 font_sz_view">Users</h3>
+                    <h3 class="m-t-0 m-b-5 font_sz_view">Customers</h3>
                     
                 </div>
                 <div class="panel-body">
@@ -131,7 +131,7 @@
                                                             <i class="zmdi zmdi-close"></i>
                                                         </span>
                                                     </button>
-                                                    <h4 class="modal-title">Users</h4>
+                                                    <h4 class="modal-title">Customer Information</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="row">
