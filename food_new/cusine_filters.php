@@ -4,7 +4,9 @@ include "../admin_includes/common_functions.php";
 include "../admin_includes/food_common_functions.php";
 
 if(isset($_POST['cusine_type']) && $_POST['cusine_type']!='' ) {
-    $getFoodVendors="SELECT * FROM food_vendors WHERE cusine_type_id IN (".implode(',', $_POST['cusine_type']).") AND `lkp_status_id`= '$status' AND id IN (SELECT restaurant_id FROM food_products WHERE lkp_status_id = 0) ORDER BY id DESC";
+    //$getFoodVendors="SELECT * FROM food_vendor_add_cusine_types WHERE vendor_cusine_type_id IN (".implode(',', $_POST['cusine_type']).")  AND vendor_id IN (SELECT restaurant_id FROM food_products WHERE lkp_status_id = 0) GROUP BY vendor_id ORDER BY id DESC";
+
+   $getFoodVendors = "SELECT food_vendors.id,food_vendors.restaurant_name,food_vendors.restaurant_address,food_vendors.description,food_vendors.logo,food_vendors.lkp_status_id,food_vendor_add_cusine_types.vendor_id,food_vendor_add_cusine_types.vendor_cusine_type_id FROM food_vendors LEFT JOIN food_vendor_add_cusine_types ON food_vendors.id=food_vendor_add_cusine_types.vendor_id AND food_vendor_add_cusine_types.vendor_cusine_type_id IN (".implode(',', $_POST['cusine_type']).") GROUP BY food_vendor_add_cusine_types.vendor_id";
     $getSearchResults=$conn->query($getFoodVendors); 
 } else {
     $getSearchResults = getAllRestaruntsWithProducts('0','','');
@@ -12,6 +14,7 @@ if(isset($_POST['cusine_type']) && $_POST['cusine_type']!='' ) {
 ?>
     <input type="hidden" id="get_res_cnt" value="<?php echo  $getReCount = $getSearchResults->num_rows;?>">
     <?php while($getResults = $getSearchResults->fetch_assoc()) { ?>
+    <?php //$getResults = getIndividualDetails('food_vendors','id',$getResults1['vendor_id']);?>
     <div class="col-md-6 filter_data ajax_result">
         <div class="strip_list wow fadeIn" data-wow-delay="0.1s">
                 <div class="row">
