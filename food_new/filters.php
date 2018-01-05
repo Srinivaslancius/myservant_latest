@@ -11,13 +11,8 @@
 			<h6>Cusine Types</h6>
 			<ul>
 				<?php while($getFoodCusineData1 = $getFoodCusineData->fetch_assoc()) { ?>
-				<?php $exp[]= explode(",", $getFoodCusineData1['cusine_type_id']); ?>
-				<?php foreach($exp as $key => $value) { 
-
-					$volume[$key]  = $value['volume'];
-    				$edition[$key] = $value['edition'];
-
-    			?>
+				<?php $exp= explode(",", $getFoodCusineData1['cusine_type_id']); ?>
+				<?php foreach($exp as $key => $value) { ?>
 					<li><label class="checkb check_cousin_type"><?php $getRestCusItem = getIndividualDetails('food_cusine_types','id',$value); ?><?php echo $getRestCusItem['title']; ?><input type="checkbox" class="filter" name="cusine_type[]" value="<?php echo $value; ?>">
 					<span class="checkmark1"></span></label></li>
 				<?php } ?>
