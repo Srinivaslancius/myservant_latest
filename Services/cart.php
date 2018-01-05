@@ -42,6 +42,9 @@
 .table.cart-list.shopping-cart th, .table.options_cart.shopping-cart th{
 	color:#fe6003;
 }
+.cart-section .totals-table li .col:last-child {
+    text-align: right;
+}
 </style>
 </head>
 
@@ -194,8 +197,8 @@
 
 							<input type="hidden" name="service_tax" id="service_tax" value="<?php echo $service_tax; ?>">
 
-							<li class="clearfix total"><span class="col">Order Total</span><span class="col" style="padding-left:110px" >Rs. <span class="grand_total"><?php echo $cartTotal; ?></span></span>
-								<span style="font-size: 11px;font-weight:normal">(*Min visiting charges applicable.)</span>
+							<li class="clearfix total"><span class="col">Order Total<br><span style="font-size: 11px;font-weight:normal;text-transform:capitalize">(*Min visiting charges applicable.)</span></span><span class="col">Rs. <span class="grand_total"><?php echo $cartTotal; ?></span></span>
+								
 							</li>
 
 							
