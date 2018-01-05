@@ -180,7 +180,7 @@
 				</table>
 
 				<div class="cart-options clearfix">
-					<center><strong style="font-size: 12px">FOR LAUNDRY SERVICES THE SELECTED TIME IS PICK UP TIME</strong></center>
+					<span style="font-size: 11px">(*For Laundry services the selected time is pickup time.)</span>
 				</div>
 				<?php 
 				//below condition for check service type prices fixed or variant for payment gateway display

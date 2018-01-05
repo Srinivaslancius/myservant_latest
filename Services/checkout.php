@@ -123,10 +123,6 @@
 										</label>
 										<input type="text" name="last_name" id="lastname_contact" value="" placeholder="" class="form-control" required>
 									</div>
-									<div class="form-group col-md-12 col-sm-12 col-xs-12">
-										<label>Company name</label>
-										<input type="text" name="company_name" value="" placeholder="" class="form-control">
-									</div>
 									<div class="form-group col-md-6 col-sm-6 col-xs-12">
 										<label>Email Address <sup>*</sup>
 										</label>
@@ -285,7 +281,7 @@
                                                                 <?php } ?>
                                                                 <input type="hidden" name="service_tax" id="service_tax" value="<?php echo $service_tax ; ?>">
                                                                 <tr>
-                                                                    <td><strong>Order Total<br>(*Minimum Charges applicable.)</strong></td>
+                                                                    <td><strong>Order Total<span style="font-size: 11px;font-weight: normal"><br>(*Min Visiting Charges applicable.)</span></strong></td>
                                                                     <td colspan="2" class="text-right"><strong>Rs. <?php echo $cartTotal+$service_tax; ?></strong></td>
                                                                 </tr>
                                                                 <input type="hidden" name="order_total" id="order_total" value="<?php echo $cartTotal1+$service_tax; ?>">
