@@ -23,6 +23,51 @@
         <link href="site_launch/css/style.css" rel="stylesheet">
     <link href="layerslider/css/layerslider.css" rel="stylesheet">
     <!-- REVOLUTION SLIDER CSS -->
+	<style>
+	.table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom:0px solid #ddd;
+	background-color:#f8f8f8;
+	font-weight:normal;
+	font-size:13px;
+	padding-bottom:0px;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+ 
+    line-height: 1.42857143;
+    vertical-align: top;
+   border-top: 0px solid #ddd;
+  
+}
+.table>caption+thead>tr:first-child>td, .table>caption+thead>tr:first-child>th, .table>colgroup+thead>tr:first-child>td, .table>colgroup+thead>tr:first-child>th, .table>thead:first-child>tr:first-child>td, .table>thead:first-child>tr:first-child>th {
+    border-top: 2px solid #ddd;
+}
+.table>tbody>tr>td{
+	border-bottom:0px;
+}
+	.table {
+     border-top: 1px solid #ddd;
+}
+.table>thead{
+	  border-bottom:1px solid #ddd;
+}
+.box_style_1{
+	border:0px;
+	padding:0px;
+}
+.box_style_1 h3.inner{
+	background-color:#fe6003;
+}
+.box_style_1 h3.inner {
+    margin: -30px -31px 30px;
+	height:50px;
+	
+}
+.table>thead>tr>th>p{
+	line-height:5px;
+}
+
+	</style>
 </head>
 
 <body>
@@ -88,16 +133,63 @@
             <div class="col-sm-3"></div>
            <div class="col-sm-6">
                     <div id="login">
-                            <div class="text-center"><h2><strong>Thank<span> You</span></strong></h2>
-                            <hr>
-                            <span class="icon-ok" style="color:green;font-size:100px;"></span>
-                            <p style="text-align:center"><b>Your order has been received</b></p>
-                            <p style="text-align:center">Your Order is: <strong><?php echo $orderId; ?></strong></p>
-                            <p style="text-align:center">Billing & Shipping Information: <?php echo $getservicesOrders['address']; ?></p>
-                            <p style="text-align:center">You will be redirected to the Home in 10 seconds.</p>  
-                        </div>
-                        </div>
-                </div>
+					<div class="box_style_1">
+						<h3 class="inner" style="text-align:left">Order Confirmed!</h3>
+						
+					<center><span class="icon-ok-circled2" style="color:#fe6003;;font-size:150px;font-weight:normal"></span></center>
+					
+                           <div class="text-center"><h2 style="color:#333"><strong>Thank You!</strong></h2>
+						   <p style="text-align:center">Your Order No is: <b>MYSER-SERVICESqde043</b><br>
+							You will be redirected to the Home in 10 seconds.<br>
+						   <b>Delivery Address:</b> Madhapur, Hyderabad</p>
+                            
+                        </div><h4>Summary</h4>
+						
+						<table class="table table-striped" style="border-top:2px">
+						<thead>
+						  <tr>
+							<th>1*biryani
+							</th>
+							<th>Rs.50
+							</th>
+							<th style="text-align:right">Rs.50
+							</th>
+						  </tr>
+						  <tr>
+							<th>1*biryani
+							</th>
+							<th>Rs.50
+							</th>
+							<th style="text-align:right">Rs.50
+							</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr style="background-color:white">
+							<td><p>Sub Total</p>
+							<p>Delivery fee</p>
+							<p>Service Tax</p></td>
+							<td></td>
+							<td><p style="text-align:right">Rs.50</p>
+							<p style="text-align:right">Rs.50</p>
+							<p style="text-align:right">Rs.50</p></td>
+							</tr>
+							
+						<tr style="background-color:#333;color:white">
+					<td>
+						 TOTAL
+					</td>
+					<td></td>
+					<td style="text-align:right">
+						Rs. 76
+					</td>
+					</tr>						  
+						</tbody>
+						</table>
+						
+						
+                    </div>
+                </div></div>
             <div class="col-sm-3"></div>    
             
                 <div class="col-sm-1">

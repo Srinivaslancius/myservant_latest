@@ -107,7 +107,11 @@ background-color: #fe6003;
 				<?php
 				$id = $_SESSION['user_login_session_id'];
 				$getUserData = getAllDataWhere('users','id',$id);
-				$getUser = $getUserData->fetch_assoc();?>
+				$getUser = $getUserData->fetch_assoc();
+				$getUserAdress = "SELECT * FROM services_orders WHERE user_id = $id ORDER BY id DESC";
+				$getUserAdress1 = $conn->query($getUserAdress);
+				$getUserAdressDetails = $getUserAdress1->fetch_assoc();
+				?>
 				<form method="post" action="save_order.php" name="form">
 				<div class="row">
 					<div class="col-md-7 col-sm-12 col-xs-12"  style="padding-right:20px">
@@ -145,36 +149,52 @@ background-color: #fe6003;
 										<select name="state" id="lkp_state_id" class="form-control" onChange="getDistricts(this.value);" required>
 											<option value="">Select State</option>
 											<?php while($getStatesData = $getStates->fetch_assoc()) { ?>
-											<option value="<?php echo $getStatesData['id'];?>"><?php echo $getStatesData['state_name'];?></option>
+											<option <?php if($getStatesData['id'] == $getUserAdressDetails['state']) { echo "Selected"; } ?> value="<?php echo $getStatesData['id'];?>"><?php echo $getStatesData['state_name'];?></option>
 											<?php } ?>
 										</select>
 									</div>
+									<?php $getDistrcits = getAllDataWithStatus('lkp_districts','0');?>
 									<div class="form-group col-md-6 col-sm-6 col-xs-12">
 										<label>District <sup>*</sup>
 										</label>
 										<select name="district" id="lkp_district_id" placeholder="District" class="form-control" onChange="getCities(this.value);" required>
 											<option value="">Select District</option>
+											<?php while($row = $getDistrcits->fetch_assoc()) {  ?>
+					                          <option <?php if($row['id'] == $getUserAdressDetails['district']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['district_name']; ?></option>
+					                      	<?php } ?>
 										</select>
 									</div>
+									<?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
 									<div class="form-group col-md-6 col-sm-6 col-xs-12">
 										<label>City <sup>*</sup>
 										</label>
 										<select name="city" id="lkp_city_id" class="form-control" placeholder="City" onChange="getPincodes(this.value);" required>
 											<option value="">Select City</option>
+											<?php while($row = $getCities->fetch_assoc()) {  ?>
+					                          <option <?php if($row['id'] == $getUserAdressDetails['city']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>
+					                      	<?php } ?>
 										</select>
 									</div>
+									<?php $getPincodes = getAllDataWithStatus('lkp_pincodes','0');?>
 									<div class="form-group col-md-6 col-sm-6 col-xs-12">
 										<label>Pincode <sup>*</sup>
 										</label>
 										<select name="postal_code" id="lkp_pincode_id" class="form-control" class="form-control valid_mobile_num" maxlength="6" onChange="getLocations(this.value);" placeholder="Zip / Postal Code" required>
 											<option value="">Select Pincode</option>
+											<?php while($row = $getPincodes->fetch_assoc()) {  ?>
+					                          <option <?php if($row['id'] == $getUserAdressDetails['postal_code']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['pincode']; ?></option>
+					                      	<?php } ?>
 										</select>
 									</div>
+									<?php $getLocations = getAllDataWithStatus('lkp_locations','0');?>
 									<div class="form-group col-md-6 col-sm-6 col-xs-12">
 										<label>Location <sup>*</sup>
 										</label>
 										<select name="location" id="lkp_location_id" class="form-control" placeholder="Location" required>
 											<option value="">Select Location</option>
+											<?php while($row = $getLocations->fetch_assoc()) {  ?>
+					                          <option <?php if($row['id'] == $getUserAdressDetails['location']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['location_name']; ?></option>
+					                      	<?php } ?>
 										</select>
 									</div>
 									<div class="form-group col-md-12 col-sm-12 col-xs-12">
