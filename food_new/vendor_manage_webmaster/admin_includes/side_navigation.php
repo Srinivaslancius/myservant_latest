@@ -16,14 +16,24 @@
                 <span class="menu-text">Dashboard</span>
               </a>
             </li>    
-            <li class="<?php if($page_name == 'food_products.php' || $page_name == 'add_food_products.php' || $page_name == 'edit_food_products.php') { echo "active"; } ?>">
-              <a href="food_products.php" aria-haspopup="true">
+            
+            <li class="with-sub">
+              <a href="#" aria-haspopup="true">
                 <span class="menu-icon">
-                   <i class="zmdi zmdi-collection-item  zmdi-hc-fw"></i>
+                  <i class="zmdi zmdi-shopping-cart-plus zmdi-hc-fw"></i>
                 </span>
-                <span class="menu-text">Items</span>
+                <span class="menu-text">Catelog</span>
               </a>
+              <ul class="sidebar-submenu collapse">
+                <li class="menu-subtitle">Catelog</li>              
+                <li  class="<?php if($page_name == 'food_category.php' || $page_name == 'add_food_category.php' || $page_name == 'edit_food_category.php' ) { echo "active"; } ?>"><a href="food_category.php">Categories</a>
+                </li>                
+                <li  class="<?php if($page_name == 'food_products.php' || $page_name == 'add_food_products.php' || $page_name == 'edit_food_products.php') { echo "active"; } ?>">
+              <a href="food_products.php" >Items</a>
+                </li>
+              </ul>
             </li>
+
             <li class="with-sub">
               <a href="#" aria-haspopup="true">
                 <span class="menu-icon">
