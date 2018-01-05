@@ -13,6 +13,9 @@
         $description = $_POST['description'];
         $specalization = $_POST['specalization'];
         $address = $_POST['address'];
+        $lkp_state_id = $_POST['lkp_state_id'];
+        $lkp_district_id = $_POST['lkp_district_id'];
+        $lkp_city_id = $_POST['lkp_city_id'];
         $created_at = date("Y-m-d h:i:s");
         $employee_belongs_to = $_POST['employee_belongs_to'];
         $service_provider_registration_id = $_POST['service_provider_registration_id'];
@@ -27,7 +30,7 @@
           $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
           $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        $sql = "INSERT INTO services_employee_registration (`name`, `email`, `mobile_number`, `photo`,`experience`, `description`, `specalization`, `address`,`employee_belongs_to`,`service_provider_registration_id`,`created_at`,`lkp_status_id`) VALUES ('$name', '$email', '$mobile_number','$fileToUpload','$experience','$description','$specalization','$address','$employee_belongs_to','$service_provider_registration_id','$created_at','$status')";
+        $sql = "INSERT INTO services_employee_registration (`name`, `email`, `mobile_number`, `photo`,`experience`, `description`, `specalization`, `address`,`employee_belongs_to`,`service_provider_registration_id`,`created_at`,`lkp_status_id`, `lkp_state_id`, `lkp_district_id`, `lkp_city_id`) VALUES ('$name', '$email', '$mobile_number','$fileToUpload','$experience','$description','$specalization','$address','$employee_belongs_to','$service_provider_registration_id','$created_at','$status','$lkp_state_id','$lkp_district_id','$lkp_city_id')";
           if($conn->query($sql) === TRUE){
              echo "<script type='text/javascript'>window.location='service_employee_registration.php?msg=success'</script>";
           } else {
@@ -64,6 +67,33 @@
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Mobile</label>
                     <input type="text" name="mobile_number" class="form-control valid_mobile_num" id="mobile_number" placeholder="Mobile" data-error="Please enter mobile number." required maxlength="10" pattern="[0-9]{10}" >
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose your State</label>
+                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a state', allowClear: true }">
+                      <option value="">Select State</option>
+                      <?php while($row = $getStates->fetch_assoc()) {  ?>
+                          <option value="<?php echo $row['id']; ?>" ><?php echo $row['state_name']; ?></option>
+                      <?php } ?>
+                   </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose your District</label>
+                    <select name="lkp_district_id" id="lkp_district_id" class="custom-select" data-error="This field is required." required onChange="getCities(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a District', allowClear: true }">
+                      <option value="">Select District</option>
+                   </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose your City</label>
+                    <select name="lkp_city_id" id="lkp_city_id" class="custom-select" data-error="This field is required." required onChange="getPincodes(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a City', allowClear: true }">
+                      <option value="">Select City</option>
+                   </select>
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">

@@ -42,7 +42,7 @@
               <ul class="sidebar-submenu collapse">
                 <li class="menu-subtitle">Users</li>
                 <li class="<?php if($page_name == 'admin_users.php' || $page_name == 'add_admin_users.php' || $page_name == 'edit_admin_users.php') { echo "active"; } ?>"><a href="admin_users.php">Admin Users</a></li> 
-                <li class="<?php if($page_name == 'users.php' || $page_name == 'add_users.php' || $page_name == 'edit_users.php') { echo "active"; } ?>"><a href="users.php">Users</a></li>
+                <li class="<?php if($page_name == 'users.php' || $page_name == 'add_users.php' || $page_name == 'edit_users.php') { echo "active"; } ?>"><a href="users.php">Customers</a></li>
                 <!-- <li class="<?php if($page_name == 'vendors.php' || $page_name == 'add_vendors.php' || $page_name == 'edit_vendors.php') { echo "active"; } ?>"><a href="vendors.php">Vendors</a></li>
                 <li class="<?php if($page_name == 'food_delivery_boys.php' || $page_name == 'add_food_delivery_boys.php' || $page_name == 'edit_food_deliveryboys.php') { echo "active"; } ?>"><a href="food_delivery_boys.php">Delivery Boys</a></li> -->
               </ul>
@@ -64,7 +64,7 @@
                 </li>
                 <li  class="<?php if($page_name == 'advertisements.php'  || $page_name == 'edit_grocery_advertisements.php' ) { echo "active"; } ?>"><a href="advertisements.php">Advertisements</a>
                 </li>
-                <li  class="<?php if($page_name == 'manage_brands.php'  || $page_name == 'edit_manage_brands.php' ) { echo "active"; } ?>"><a href="manage_brands.php">View Brands</a>
+                <li  class="<?php if($page_name == 'manage_brands.php'  || $page_name == 'edit_manage_brands.php' ) { echo "active"; } ?>"><a href="manage_brands.php">Brands</a>
                 </li>
                 <li  class="<?php if($page_name == 'grocery_faqs.php'  || $page_name == 'edit_grocery_faqs.php' ) { echo "active"; } ?>"><a href="grocery_faqs.php">FAQ'S</a>
                 </li>

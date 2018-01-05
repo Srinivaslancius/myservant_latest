@@ -115,8 +115,8 @@
                       </label>
                   </div>
                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Service Tax (%)</label>
-                    <input type="text" name="service_tax" class="form-control" id="form-control-2" placeholder="Service Tax" data-error="Please enter valid Service Tax." value="<?php echo $getSiteSettingsData['service_tax'];?>" required>
+                    <label for="form-control-2" class="control-label">GST (%)</label>
+                    <input type="text" name="service_tax" class="form-control" id="form-control-2" placeholder="GST" data-error="Please enter valid GST." value="<?php echo $getSiteSettingsData['service_tax'];?>" required>
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
