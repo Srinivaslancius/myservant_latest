@@ -64,7 +64,7 @@
                 </li>
                 <li  class="<?php if($page_name == 'advertisements.php'  || $page_name == 'edit_grocery_advertisements.php' ) { echo "active"; } ?>"><a href="advertisements.php">Advertisements</a>
                 </li>
-                <li  class="<?php if($page_name == 'manage_brands.php'  || $page_name == 'edit_manage_brands.php' ) { echo "active"; } ?>"><a href="manage_brands.php">View Brands</a>
+                <li  class="<?php if($page_name == 'manage_brands.php'  || $page_name == 'edit_manage_brands.php' ) { echo "active"; } ?>"><a href="manage_brands.php">Brands</a>
                 </li>
                 <li  class="<?php if($page_name == 'grocery_faqs.php'  || $page_name == 'edit_grocery_faqs.php' ) { echo "active"; } ?>"><a href="grocery_faqs.php">FAQ'S</a>
                 </li>
