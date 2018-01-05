@@ -136,58 +136,10 @@
 					<div class="box_style_1">
 						<h3 class="inner" style="text-align:left">Order Confirmed!</h3>
 						
-					<center><span class="icon-ok-circled2" style="color:#fe6003;;font-size:150px;font-weight:normal"></span></center>
-					
-                           <div class="text-center"><h2 style="color:#333"><strong>Thank You!</strong></h2>
-						   <p style="text-align:center">Your Order No is: <b>MYSER-SERVICESqde043</b><br>
-							You will be redirected to the Home in 10 seconds.<br>
-						   <b>Delivery Address:</b> Madhapur, Hyderabad</p>
-                            
-                        </div><h4>Summary</h4>
-						
-						<table class="table table-striped" style="border-top:2px">
-						<thead>
-						  <tr>
-							<th>1*biryani
-							</th>
-							<th>Rs.50
-							</th>
-							<th style="text-align:right">Rs.50
-							</th>
-						  </tr>
-						  <tr>
-							<th>1*biryani
-							</th>
-							<th>Rs.50
-							</th>
-							<th style="text-align:right">Rs.50
-							</th>
-						  </tr>
-						</thead>
-						<tbody>
-						  <tr style="background-color:white">
-							<td><p>Sub Total</p>
-							<p>Delivery fee</p>
-							<p>Service Tax</p></td>
-							<td></td>
-							<td><p style="text-align:right">Rs.50</p>
-							<p style="text-align:right">Rs.50</p>
-							<p style="text-align:right">Rs.50</p></td>
-							</tr>
-							
-						<tr style="background-color:#333;color:white">
-					<td>
-						 TOTAL
-					</td>
-					<td></td>
-					<td style="text-align:right">
-						Rs. 76
-					</td>
-					</tr>						  
-						</tbody>
-						</table>
-						
-						
+					   <center><span class="icon-ok-circled2" style="color:#fe6003;;font-size:150px;font-weight:normal"></span></center>
+                        <div class="text-center"><h2 style="color:#333"><strong>Thank You!</strong></h2>
+						  <p style="text-align:center"><b>Your order has been received</b><br>Your Order No is: <b><?php echo $orderId; ?></b><br>Name: <b><?php echo $getservicesOrders['first_name'];?></b><br>Order Total: Rs.<b> <?php echo $getservicesOrders['order_total'];?></b><br>Billing & Shipping Information: <?php echo $getservicesOrders['address']; ?><br>You will be redirected to the Home in 10 seconds.<br></p>
+                        </div>
                     </div>
                 </div></div>
             <div class="col-sm-3"></div>    
