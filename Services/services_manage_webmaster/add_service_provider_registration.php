@@ -11,6 +11,8 @@ if (!isset($_POST['submit']))  {
   $name = $_POST['name'];
   $email = $_POST['email'];
   $mobile_number = $_POST['mobile_number'];
+  $landline_number = $_POST['landline_number'];
+  $website = $_POST['website'];
   $address = $_POST['address'];
   $service_provider_type_id = $_POST['service_provider_type_id'];
   $company_name = $_POST['company_name'];
@@ -23,7 +25,6 @@ if (!isset($_POST['submit']))  {
   $contact_numbers = $_POST['contact_numbers'];
   $email_id = $_POST['email_id'];
   $sub_category_id = implode(',',$_POST["sub_category_id"]);
-
   $sub_category_id1 = implode(',',$_POST["sub_category_id1"]);
   $associate_or_not = $_POST['associate_or_not'];
   $experience = $_POST['experience'];
@@ -46,7 +47,7 @@ if (!isset($_POST['submit']))  {
     $specialization_name1 = 0;
   }
   
-  $service_provider = "INSERT INTO service_provider_registration (`name`, `email`, `mobile_number`, `lkp_state_id`, `lkp_district_id`, `lkp_city_id`, `lkp_pincode_id`, `lkp_location_id`, `address`,`service_provider_type_id`,`created_at`) VALUES ('$name', '$email', '$mobile_number','$lkp_state_id','$lkp_district_id','$lkp_city_id','$lkp_pincode_id','$lkp_location_id', '$address','$service_provider_type_id', '$created_at')";
+  $service_provider = "INSERT INTO service_provider_registration (`name`, `email`, `mobile_number`,`landline_number`,`website`, `lkp_state_id`, `lkp_district_id`, `lkp_city_id`, `lkp_pincode_id`, `lkp_location_id`, `address`,`service_provider_type_id`,`created_at`) VALUES ('$name', '$email', '$mobile_number', '$landline_number', '$website','$lkp_state_id','$lkp_district_id','$lkp_city_id','$lkp_pincode_id','$lkp_location_id', '$address','$service_provider_type_id', '$created_at')";
   $result1 = $conn->query($service_provider);
   $last_id = $conn->insert_id;
 
@@ -112,6 +113,18 @@ if (!isset($_POST['submit']))  {
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Mobile Number</label>
                     <input type="text" name="mobile_number" class="form-control valid_mobile_num" id="form-control-2" placeholder="Mobile Number" data-error="Please enter mobile number." required maxlength="10" pattern="[0-9]{10}">
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Landline Number</label>
+                    <input type="text" name="landline_number" class="form-control valid_mobile_num" id="form-control-2" placeholder="landline Number" data-error="Please enter landline number." >
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Website</label>
+                    <input type="url" name="website" class="form-control" id="form-control-2" placeholder="Website" data-error="Please enter Website." required >
                     <div class="help-block with-errors"></div>
                   </div>
 
@@ -219,8 +232,45 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Working Hours</label>
-                    <input type="text" name="working_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Working Hours" data-error="Please enter Working Hours">
+					<div class="row">
+					<div class="col-sm-6">
+					<div class="row">
+					<div class="col-sm-3">
+					 <p style="margin-top:8px">Morning:</p>
+					</div>
+					<div class="col-sm-4">
+                   <input type="text" name="working_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Time" data-error="Please enter Working Hours">
                     <div class="help-block with-errors"></div>
+					</div>
+					<div class="col-sm-5">
+                  <select class="form-control" id="sel1">
+					<option>AM</option>
+					<option>PM</option>
+				  </select>
+                    <div class="help-block with-errors"></div>
+					</div>
+					</div>
+					</div>
+					
+					<div class="col-sm-6">
+                   <div class="row">
+					<div class="col-sm-3">
+					 <p style="margin-top:8px">Evening:</p>
+					</div>
+					<div class="col-sm-4">
+                   <input type="text" name="working_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Time" data-error="Please enter Working Hours">
+                    <div class="help-block with-errors"></div>
+					</div>
+					<div class="col-sm-5">
+                  <select class="form-control" id="sel1">
+					<option>PM</option>
+					<option>AM</option>
+				  </select>
+                    <div class="help-block with-errors"></div>
+					</div>
+					</div>
+					</div>
+					</div>
                   </div>
 
                   <div class="form-group">
@@ -259,10 +309,13 @@ if (!isset($_POST['submit']))  {
                       <!--- //if associate value = 0 (Yes) & if associate value = 1 (No) -->
                         <h4>Associate With Us</h4>
                         <label>
-                          <input type="radio" value="0" name="associate_or_not" />&nbsp;Yes</label>&nbsp;&nbsp;
+                          <input type="radio" value="0" name="associate_or_not" required/>&nbsp;Yes
+                          <div class="help-block with-errors"></div>
+                        </label>&nbsp;&nbsp;
                         <label>
-                          <input type="radio" value="1" name="associate_or_not"/>&nbsp;No</label>
-                        <label>
+                          <input type="radio" value="1" name="associate_or_not" required/>&nbsp;No
+                          <div class="help-block with-errors"></div>
+                        </label>
                   </div>
                   </div>
                    
