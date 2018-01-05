@@ -144,7 +144,7 @@ if(isset($_POST['submit'])) {
   	</div>
   	<div class="selectdiv">
    		<label>
-      		<select name="lkp_pincode_id" id="lkp_pincode_id" required>
+      		<select name="lkp_pincode_id" id="lkp_pincode_id">
           		<option selected value=""> Select Pincode</option>
       		</select>
   		</label>
@@ -219,8 +219,12 @@ if(isset($_POST['submit'])) {
 				
 			</div>
 			<?php 
-			if($_SESSION['lkp_city_id'] != '') {
+			if($_SESSION['lkp_city_id'] != '' && $_SESSION['lkp_pincode_id'] != '') {
 				$getAvailableLocationsData = "SELECT * FROM availability_of_locations WHERE lkp_status_id = 0 AND lkp_city_id = '".$_SESSION['lkp_city_id']."' AND FIND_IN_SET('".$_SESSION['lkp_pincode_id']."', pincodes) ORDER BY id DESC";
+				$getAvailableLocations = $conn->query($getAvailableLocationsData); $getAvailableLocations1 =$getAvailableLocations->fetch_assoc();
+				$service_id = $getAvailableLocations1['service_id'];
+			} elseif($_SESSION['lkp_city_id'] != '') {
+				$getAvailableLocationsData = "SELECT * FROM availability_of_locations WHERE lkp_status_id = 0 AND lkp_city_id = '".$_SESSION['lkp_city_id']."' ORDER BY id DESC";
 				$getAvailableLocations = $conn->query($getAvailableLocationsData); $getAvailableLocations1 =$getAvailableLocations->fetch_assoc();
 				$service_id = $getAvailableLocations1['service_id'];
 			} else {
