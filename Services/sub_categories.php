@@ -56,20 +56,16 @@
   <main>
     <!-- Slider -->
     <?php if ($_GET['cat_id']) {
-      $cat_id = decryptPassword($_GET['cat_id']);
-      $getSubCategories = "SELECT * from services_sub_category WHERE services_category_id = '$cat_id' AND id IN (SELECT services_sub_category_id FROM services_groups WHERE lkp_status_id = 0) AND lkp_status_id = '0' ORDER BY id DESC";
-      $getSubCategoriesData = $conn->query($getSubCategories);
-      $getBanners1 = "SELECT * FROM `services_banners` WHERE lkp_status_id = 0 ANd service_category_id = $cat_id ORDER BY id DESC";
-      $getBanners = $conn->query($getBanners1);
-      $getAllBanners = $getBanners->fetch_assoc();
+      $sub_cat_id = decryptPassword($_GET['cat_id']);
     } else {
       $sub_cat_id = decryptPassword($_GET['key']);
-      $getSubCategories = "SELECT * from services_sub_category WHERE services_category_id = '$sub_cat_id' AND id IN (SELECT services_sub_category_id FROM services_groups WHERE lkp_status_id = 0) AND lkp_status_id = '0' ORDER BY id DESC";
+    }
+    $getSubCategories = "SELECT * from services_sub_category WHERE services_category_id = '$sub_cat_id' AND id IN (SELECT services_sub_category_id FROM services_groups WHERE lkp_status_id = 0) AND lkp_status_id = '0' ORDER BY id DESC";
       $getSubCategoriesData = $conn->query($getSubCategories);
       $getBanners1 = "SELECT * FROM `services_banners` WHERE lkp_status_id = 0 ANd service_category_id = $sub_cat_id ORDER BY id DESC";
       $getBanners = $conn->query($getBanners1);
       $getAllBanners = $getBanners->fetch_assoc();
-    } ?>
+    ?>
 
     <div class="container-fluid page-title">
       <?php  
