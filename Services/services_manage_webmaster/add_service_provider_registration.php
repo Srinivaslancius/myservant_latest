@@ -65,6 +65,7 @@ if (!isset($_POST['submit']))  {
   if($service_provider_type_id == 1) {
 
     if($fileToUpload!='') {
+      
 
       $target_dir = "../../uploads/service_provider_business_logo/";
       $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);

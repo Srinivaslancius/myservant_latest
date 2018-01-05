@@ -6,6 +6,7 @@ if (!isset($_POST['submit']))  {
   //If fail
   echo "fail";
 }else  {
+  
   //If success
 //echo "<pre>";print_r($_POST);exit;
   $name = $_POST['name'];
