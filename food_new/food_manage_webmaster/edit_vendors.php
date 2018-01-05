@@ -11,8 +11,7 @@ if (!isset($_POST['submit'])) {
     $restaurant_name = $_POST['restaurant_name'];
     $restaurant_address = $_POST['restaurant_address'];
     $pincode = $_POST['pincode'];
-    $delivery_type_id = implode(',',$_POST["delivery_type_id"]);
-    $cusine_type_id = implode(',',$_POST["cusine_type_id"]);
+    $delivery_type_id = implode(',',$_POST["delivery_type_id"]);    
     $meta_title = $_POST['meta_title'];
     $meta_keywords = $_POST['meta_keywords'];
     $meta_desc = $_POST['meta_desc'];
@@ -66,15 +65,30 @@ if (!isset($_POST['submit'])) {
                     $conn->query($sql);
               } elseif($vendorLogo!='') {
                     move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$vendorLogopath);
-                    $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',delivery_charges = '$delivery_charges',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', logo = '$logoname',restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' "; 
+                    $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',delivery_charges = '$delivery_charges',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', logo = '$logoname',restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name' WHERE id = '$id' "; 
                     $conn->query($sql);
               }
             //echo $sql; die;
             //echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
 } else {
-        $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',delivery_charges = '$delivery_charges',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' ";
+        $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',delivery_charges = '$delivery_charges',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name' WHERE id = '$id' ";
           $conn->query($sql);
       }
+
+      //Cusine type add here
+
+      //Cusine type add here
+      if($id!=0) {
+        $cusDel = "DELETE FROM food_vendor_add_cusine_types WHERE vendor_id = '$id' ";
+        $conn->query($cusDel);
+        $rest_cusine_types = $_REQUEST['cusine_type_id'];
+        foreach($rest_cusine_types as $key=>$value){
+            $vendor_cusines = $_REQUEST['cusine_type_id'][$key];          
+            $sql = "INSERT INTO food_vendor_add_cusine_types ( `vendor_id`,`vendor_cusine_type_id`) VALUES ('$id','$vendor_cusines')";
+            $result = $conn->query($sql);
+        }
+      }
+
       echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
       //echo $sql; die;
 }   
@@ -93,7 +107,16 @@ if (!isset($_POST['submit'])) {
                   $getDeliveryTypes = getAllDataWithStatus('food_product_delivery_type','0');
               ?> 
               <?php
-                  $getCusineTypeId = explode(',',$getVendorsData['cusine_type_id']);
+
+                  $getSelectedCustypes = "SELECT * FROM food_vendor_add_cusine_types WHERE vendor_id='$id' ";
+                  $getSelCs = $conn->query($getSelectedCustypes);
+                  $getCus = array();
+                  while ($impCusids = $getSelCs->fetch_assoc()){
+                    $getCus[] = $impCusids['vendor_cusine_type_id'];
+                  }
+                  //echo "<pre>"; print_r($getCus);
+                  $getVendorsDataCusines = implode(',', $getCus);
+                  $getCusineTypeId = explode(',',$getVendorsDataCusines);
                   $getCusineTypes = getAllDataWithStatus('food_cusine_types','0');
               ?> 
               <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
@@ -123,9 +146,9 @@ if (!isset($_POST['submit'])) {
                    </select>
                     <div class="help-block with-errors"></div>
                   </div>
-                  <?php error_reporting(1)?>
+                  
                   <div class="form-group">
-                    <label for="form-control-3" class="control-label">Choose Food Cusine Type</label>
+                    <label for="form-control-3" class="control-label">Choose Cusine Type</label>
                     <select name="cusine_type_id[]" data-plugin="select2" class="custom-select" multiple="multiple" data-error="This field is required." required>                      
                       <?php while($row1 = $getCusineTypes->fetch_assoc()) {  ?>
                           <option value="<?php echo $row1['id']; ?>" <?php if($row1['id'] == in_array($row1['id'], $getCusineTypeId)) { echo "selected=selected"; } ?> ><?php echo $row1['title']; ?></option>

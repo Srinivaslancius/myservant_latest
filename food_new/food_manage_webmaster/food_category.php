@@ -3,7 +3,7 @@
      <div class="site-content">
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
-            <a href="add_food_category.php" style="float:right">Add Categories</a>
+            <!-- <a href="add_food_category.php" style="float:right">Add Categories</a> -->
             <h3 class="m-t-0 m-b-5">Categories</h3>
           </div>
           <div class="panel-body">
@@ -16,7 +16,7 @@
                     <th>Meta Title</th>
                     <th>Meta KeyWwords</th>
                     <th>Status</th>
-                    <th>Actions</th>
+                   <!-- <th>Actions</th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -26,8 +26,8 @@
                     <td><?php echo $row['category_name'];?></td>
                     <td><?php echo $row['meta_title'];?></td>
                     <td><?php echo $row['meta_keywords'];?></td>
-                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='food_category'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='food_category'>In Active</span>" ;} ?></td>
-                    <td> <a href="edit_food_category.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp;  &nbsp;<a href="#"><i class="zmdi zmdi-eye zmdi-hc-fw" data-toggle="modal" data-target="#<?php echo $row['id']; ?>" class=""></i></a></td>
+                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success ' >Active</span>" ;} else { echo "<span class='label label-outline-info  ' >In Active</span>" ;} ?></td>
+                   <!-- <td> <a href="edit_food_category.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp;  &nbsp;<a href="#"><i class="zmdi zmdi-eye zmdi-hc-fw" data-toggle="modal" data-target="#<?php echo $row['id']; ?>" class=""></i></a></td> -->
                      <!-- Open Modal Box  here -->
                     <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog">
                       <div class="modal-dialog">

@@ -59,7 +59,7 @@ if (!isset($_POST['submit']))  {
           </div>
           <div class="panel-body">
             <div class="row">
-              <?php $getCategories = getAllDataWithStatus('food_category','0');?>
+              <?php $getCategories = getAllDataWhereWithActive('food_category','vendor_id',$_SESSION['food_vendor_user_id']); ?>
               <?php $getProductTypes = getAllDataWithStatus('food_product_type','0');?>
               <?php $getWeights = getAllDataWithStatus('food_product_weights','0');?>
               <?php $getIngredients = getAllDataWithStatus('food_ingredients','0');?>
