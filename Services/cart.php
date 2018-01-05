@@ -170,7 +170,8 @@
 				</table>
 
 				<div class="cart-options clearfix">
-					<center><strong style="font-size:12px;color:#fe6003">FOR LAUNDRY SERVICES THE SELECTED TIME IS PICK UP TIME</strong></center>
+					<span style="font-size: 11px">(*For Laundry services the selected time is pickup time.)</span>
+
 				</div>
 				<?php 
 				//below condition for check service type prices fixed or variant for payment gateway display
@@ -193,8 +194,10 @@
 
 							<input type="hidden" name="service_tax" id="service_tax" value="<?php echo $service_tax; ?>">
 
-							<li class="clearfix total"><span class="col">Order Total</span><span class="col">Rs. <span class="grand_total"><?php echo $cartTotal; ?></span>/-</span>
+							<li class="clearfix total"><span class="col">Order Total</span><span class="col" style="padding-left:110px" >Rs. <span class="grand_total"><?php echo $cartTotal; ?></span></span>
+								<span style="font-size: 11px;font-weight:normal">(*Min visiting charges applicable.)</span>
 							</li>
+
 							
 						</ul>
 						<?php if(!isset($_SESSION['user_login_session_id'])) { ?>
