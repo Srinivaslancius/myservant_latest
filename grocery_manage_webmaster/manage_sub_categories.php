@@ -153,5 +153,6 @@
             </div>
         </div>
     <?php include_once 'admin_includes/footer.php'; ?> 
+    <script src="js/forms-plugins.min.js"></script>
   </body>
 </html>

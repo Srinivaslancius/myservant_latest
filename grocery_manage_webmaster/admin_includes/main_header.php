@@ -32,8 +32,8 @@ if(!isset($_SESSION['grocery_admin_user_id'])) {
       <nav class="navbar navbar-default" style="background-color:#D4E6F1 !important;">
         <div class="navbar-header">
           <a class="navbar-brand" href="dashboard.php">
-            <img src="<?php echo $base_url . 'uploads/logo/'.$getSiteSettingsData['logo'] ?>" accept="image/*" height="20">
-            <span><?php echo $getSiteSettingsData['admin_title'];?></span>
+            <img src="<?php echo $base_url . 'uploads/logo/'.$getSiteSettingsData['logo'] ?>" accept="image/*" height="45">
+            <!-- <span><?php echo $getSiteSettingsData['admin_title'];?></span> -->
           </a>
           <button class="navbar-toggler left-sidebar-toggle pull-left visible-xs" type="button">
             <span class="hamburger"></span>
