@@ -85,6 +85,7 @@
 
                             <input type="hidden" name="user_name" value="<?php echo $_POST['user_name']; ?>">
 							<input type="hidden" name="user_mobile_cust" value="<?php echo $_POST['user_mobile']; ?>" id="user_mobile_cust">
+							<input type="hidden" name="checkout_key" value="<?php echo $_POST['checkout_key']; ?>" id="checkout_key">
 							<input type="hidden" name="user_email" value="<?php echo $_POST['user_email']; ?>">
 							<input type="hidden" name="user_password" value="<?php echo encryptPassword($_POST['user_password']); ?>">
 
@@ -147,6 +148,7 @@ $('#verify_otp').on('click', function () {
 
   var user_mobile = $('#user_mobile').val();
   var mobile_otp = $('#mobile_otp').val();
+  var checkout_key = $('#checkout_key').val();
   if(user_mobile!='' && mobile_otp!='') {
 
 	  $.ajax({
@@ -161,7 +163,11 @@ $('#verify_otp').on('click', function () {
 	      } else {
 	      	//Success
 	      	alert("OTP verified");
-	      	window.location.href = 'index.php';
+	      	if (checkout_key == '') {
+                window.location.href = 'index.php';
+            } else {
+                window.location.href = 'checkout.php';
+            }
 	      }
 	    }
 	  });

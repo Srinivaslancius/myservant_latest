@@ -300,10 +300,13 @@ if (!isset($_POST['submit']))  {
                           ?>
                           <h4>Associate With Us</h4>
                           <label>
-                            <input type="radio"  value="0" <?php if($getAssoc == 0) echo $checked; ?> name="associate_or_not" />&nbsp;Yes</label>&nbsp;&nbsp;
+                            <input type="radio"  value="0" <?php if($getAssoc == 0) echo $checked; ?> name="associate_or_not" required/>&nbsp;Yes
+                            <div class="help-block with-errors"></div>
+                          </label>&nbsp;&nbsp;
                           <label>
-                            <input type="radio"  value="1" <?php if($getAssoc == 1) echo $checked; ?> name="associate_or_not"/>&nbsp;No</label>
-                          <label>
+                            <input type="radio"  value="1" <?php if($getAssoc == 1) echo $checked; ?> name="associate_or_not" required />&nbsp;No
+                            <div class="help-block with-errors"></div>
+                          </label>
                     </div>
                   </div>
 

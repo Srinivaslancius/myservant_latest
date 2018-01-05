@@ -384,10 +384,9 @@ if (!isset($_POST['submit']))  {
                       <!--- //if associate value = 0 (Yes) & if associate value = 1 (No) -->
                         <h4>Associate with us</h4>
                         <label>
-                          <input type="radio" value="0" name="associate_or_not" />&nbsp;Yes</label>&nbsp;&nbsp;
+                          <input type="radio" value="0" name="associate_or_not" required/>&nbsp;Yes</label>&nbsp;&nbsp;
                         <label>
-                          <input type="radio" value="1" name="associate_or_not"/>&nbsp;No</label>
-                        <label>
+                          <input type="radio" value="1" name="associate_or_not" required/>&nbsp;No</label>
                   </div>
                       </div>
                   </div>
