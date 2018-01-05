@@ -92,11 +92,9 @@ background-color: #fe6003;
             <div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="index.php">Home</a>
 					</li>
-					<li><a href="#">Category</a>
-					</li>
-					<li>Page active</li>
+					<li>Checkout</li>
 				</ul>
 			</div>
 		</div>
@@ -114,7 +112,7 @@ background-color: #fe6003;
 				?>
 				<form method="post" action="save_order.php" name="form">
 				<div class="row">
-					<div class="col-md-7 col-sm-12 col-xs-12"  style="padding-right:20px">
+					<div class="col-md-7 col-sm-12"  style="padding-right:20px">
 
 						<div class="billing-details">
 							<div class="shop-form">
@@ -122,28 +120,28 @@ background-color: #fe6003;
 									<h2>Billing Details</h2>
 								</div>
 								<div class="row">
-									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group col-md-6 col-sm-6">
 										<label>First name <sup>*</sup>
 										</label>
 										<input type="text" name="first_name" id="name_contact" value="<?php echo $getUser['user_full_name']; ?>" placeholder="" class="form-control" required>
 									</div>
-									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group col-md-6 col-sm-6">
 										<label>Last name <sup>*</sup>
 										</label>
 										<input type="text" name="last_name" id="lastname_contact" value="" placeholder="" class="form-control" required>
 									</div>
-									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group col-md-6 col-sm-6">
 										<label>Email Address <sup>*</sup>
 										</label>
 										<input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email_contact" value="<?php echo $getUser['user_email']; ?>" placeholder="" class="form-control" required>
 									</div>
-									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group col-md-6 col-sm-6">
 										<label>Phone <sup>*</sup>
 										</label>
 										<input type="tel" name="mobile" id="phone_contact" value="<?php echo $getUser['user_mobile']; ?>" placeholder="" maxlength="10" pattern="[0-9]{10}" class="form-control valid_mobile_num" required>
 									</div>
 									<?php $getStates = getAllDataWithStatus('lkp_states','0'); ?>
-									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group col-md-6 col-sm-6">
 										<label>State <sup>*</sup>
 										</label>
 										<select name="state" id="lkp_state_id" class="form-control" onChange="getDistricts(this.value);" required>
@@ -154,7 +152,7 @@ background-color: #fe6003;
 										</select>
 									</div>
 									<?php $getDistrcits = getAllDataWithStatus('lkp_districts','0');?>
-									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group col-md-6 col-sm-6">
 										<label>District <sup>*</sup>
 										</label>
 										<select name="district" id="lkp_district_id" placeholder="District" class="form-control" onChange="getCities(this.value);" required>
@@ -165,7 +163,7 @@ background-color: #fe6003;
 										</select>
 									</div>
 									<?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
-									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group col-md-6 col-sm-6">
 										<label>City <sup>*</sup>
 										</label>
 										<select name="city" id="lkp_city_id" class="form-control" placeholder="City" onChange="getPincodes(this.value);" required>
@@ -176,7 +174,7 @@ background-color: #fe6003;
 										</select>
 									</div>
 									<?php $getPincodes = getAllDataWithStatus('lkp_pincodes','0');?>
-									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group col-md-6 col-sm-6">
 										<label>Pincode <sup>*</sup>
 										</label>
 										<select name="postal_code" id="lkp_pincode_id" class="form-control" class="form-control valid_mobile_num" maxlength="6" onChange="getLocations(this.value);" placeholder="Zip / Postal Code" required>
@@ -187,7 +185,7 @@ background-color: #fe6003;
 										</select>
 									</div>
 									<?php $getLocations = getAllDataWithStatus('lkp_locations','0');?>
-									<div class="form-group col-md-6 col-sm-6 col-xs-12">
+									<div class="form-group col-md-6 col-sm-6">
 										<label>Location <sup>*</sup>
 										</label>
 										<select name="location" id="lkp_location_id" class="form-control" placeholder="Location" required>
@@ -197,7 +195,7 @@ background-color: #fe6003;
 					                      	<?php } ?>
 										</select>
 									</div>
-									<div class="form-group col-md-12 col-sm-12 col-xs-12">
+									<div class="form-group col-md-12 col-sm-12">
 										<label>Address <sup>*</sup>
 										</label>
 										<input type="text" name="address" value="" placeholder="" class="form-control" required>

@@ -103,12 +103,12 @@
         while($getAllSubCategoriesData = $getSubCategoriesData->fetch_assoc()) { ?>           
         <div class="col-md-2 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
           <a href="list.php?key2=<?php echo encryptPassword($getAllSubCategoriesData['id']); ?>">
-          <div class="tour_container" style="height:180px">
+          <div class="tour_container" style="min-height:220px">
 
             <div class="ribbon_3 popular"><!-- <span>Popular</span> --> 
             </div>
-            <div class="img_container">
-                        <img src="<?php echo $base_url . 'uploads/services_sub_category_images/'.$getAllSubCategoriesData['sub_category_image'] ?>" style="width:80%; height:auto;" class="img-responsive" alt="<?php echo $getAllSubCategoriesData['sub_category_name']; ?>">
+            <div class="img_container"style="padding:10px 0px 10px">
+                        <img src="<?php echo $base_url . 'uploads/services_sub_category_images/'.$getAllSubCategoriesData['sub_category_image'] ?>" class="img-responsive" alt="<?php echo $getAllSubCategoriesData['sub_category_name']; ?>">
             </div>
             <div class="tour_title">
               <h3><?php echo $getAllSubCategoriesData['sub_category_name']; ?></h3>
@@ -124,8 +124,6 @@
         <!-- End col-md-4 -->
     </div>
       <!-- End row -->
-      
-      <hr>
     </div>
     <?php include_once 'our_associate_partners.php';?>
     <!-- End section -->

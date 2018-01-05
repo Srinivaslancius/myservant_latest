@@ -102,7 +102,11 @@ display: none;
   -ms-word-break: normal;
   word-break: normal;
 }
-
+@media only screen and (max-width: 480px) {
+	#layerslider{
+		margin-top:60px !important;
+	}
+}
 </style>
 </head>
 

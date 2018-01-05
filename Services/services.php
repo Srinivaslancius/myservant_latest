@@ -102,11 +102,11 @@
                  <?php  while($getAllCategoriesData = $getCategoriesData->fetch_assoc()) { ?>           
 				<div class="col-md-2 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
 					<a href="sub_categories.php?key=<?php echo encryptPassword($getAllCategoriesData['id']); ?>">
-					<div class="tour_container" style="height:180px">
+					<div class="tour_container" style="min-height:220px">
 						<div class="ribbon_3 popular"><!-- <span>Popular</span> --> 
 						</div>
-						<div class="img_container padd15">
-                        <img src="<?php echo $base_url . 'uploads/services_category_images/'.$getAllCategoriesData['category_image'] ?>" style="width:64px; height:64px;" class="img-responsive" alt="<?php echo $getAllCategoriesData['category_name']; ?>">
+						<div class="img_container" style="padding:10px 0px 10px">
+                        <img src="<?php echo $base_url . 'uploads/services_category_images/'.$getAllCategoriesData['category_image'] ?>" class="img-responsive" alt="<?php echo $getAllCategoriesData['category_name']; ?>">
 						</div>
 						<div class="tour_title">
 							<h3><?php echo $getAllCategoriesData['category_name']; ?></h3>

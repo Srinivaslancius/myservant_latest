@@ -134,6 +134,18 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
 
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Landline Number</label>
+                    <input type="text" name="landline_number" class="form-control valid_mobile_num" id="form-control-2" placeholder="Landline Number" data-error="Please enter Landline number." value="<?php echo $getServiceProviderRegistrationsData['landline_number'];?>">
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Website</label>
+                    <input type="url" name="website" class="form-control" id="form-control-2" placeholder="Website" data-error="Please enter Website." required value="<?php echo $getServiceProviderRegistrationsData['website'];?>">
+                    <div class="help-block with-errors"></div>
+                  </div>
+
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your State</label>

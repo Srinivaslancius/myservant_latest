@@ -194,7 +194,7 @@ if(mail($to, $subject, $message, $headers)) {
 		</div>	
 		<!-- End container -->
 		<script src="https://maps.google.com/maps/api/js?key=AIzaSyA04qekzxWtnZq6KLkabMN_4abcJt9nCDk" type="text/javascript"></script>
-		<div class="container" style="margin-bottom:70px; width:100%">
+		<div class="container map-responsive" style="margin-bottom:70px; width:100%">
         	<div id="map"></div>
         </div>
             <script type="text/javascript">
