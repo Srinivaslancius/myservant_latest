@@ -127,7 +127,7 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Landline Number</label>
-                    <input type="text" name="landline_number" class="form-control valid_mobile_num" id="form-control-2" placeholder="Landline Number" data-error="Please enter Landline number." required value="<?php echo $getServiceProviderRegistrationsData['landline_number'];?>">
+                    <input type="text" name="landline_number" class="form-control valid_mobile_num" id="form-control-2" placeholder="Landline Number" data-error="Please enter Landline number." value="<?php echo $getServiceProviderRegistrationsData['landline_number'];?>">
                     <div class="help-block with-errors"></div>
                   </div>
 
