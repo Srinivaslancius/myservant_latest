@@ -153,7 +153,7 @@
                          <td>
                             <div class="">
                                <!-- <input type="number" name="service_quantity[]" min="1" max="5" value="<?php echo $getCartItems['service_quantity'];?>"> -->
-                               <input class="form-control"type="text" name="service_quantity[]" minlength="1" value="<?php echo $getCartItems['service_quantity'];?>" data-service-get-price="<?php echo $getCartItems['service_price'];?>" data-cart-id="<?php echo $getCartItems['id'];?>" data-price-type-id="<?php echo $getSerName['service_price_type_id'];?>" class="service_quantity valid_mobile_num">
+                               <input type="text" name="service_quantity[]" minlength="1" value="<?php echo $getCartItems['service_quantity'];?>" data-service-get-price="<?php echo $getCartItems['service_price'];?>" data-cart-id="<?php echo $getCartItems['id'];?>" data-price-type-id="<?php echo $getSerName['service_price_type_id'];?>" class="service_quantity valid_mobile_num form-control">
                             </div>
                         </td> 
                         <td>
