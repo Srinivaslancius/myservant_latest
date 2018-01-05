@@ -94,11 +94,15 @@
 			<div class="col-sm-5">
 			<div class="row">
 			<div class="col-sm-6">			
-			<p><span class="icon-play-circled-1" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
 			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
 			</div>
 			<div class="col-sm-6">				
-			<p><span class="icon-play-circled-1" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
 			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
 			</div>
 			</div>

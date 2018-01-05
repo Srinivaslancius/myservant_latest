@@ -192,7 +192,7 @@ if (!isset($_POST['submit']))  {
                     <div class="col-sm-8 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Email</label>
-                    <input type="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="user_input" placeholder="email" data-error="Please enter Valid Email Address" onkeyup="checkUserAvailTest()" required>
+                    <input type="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="user_input" placeholder="Email" data-error="Please enter Valid Email Address" onkeyup="checkUserAvailTest()" required>
                     <span id="input_status" style="color: red;"></span>
                     <div class="help-block with-errors"></div>
                     <input type="hidden" id="table_name" value="service_provider_registration">
@@ -265,7 +265,8 @@ if (!isset($_POST['submit']))  {
                     <div class="col-sm-8 col-md-6 ">
                   <?php $getServiceProviderTypes = getAllDataWithStatus('service_provider_types','0');?>
                   <div class="form-group">
-                    <label for="form-control-3" class="control-label">Choose your Service Provider</label><br>
+				 
+                  <label for="form-control-3" class="control-label">Choose your Service Provider</label><br>
                     <select name="service_provider_type_id" class="custom-select service_provider_type_id" id="service_provider_type_id" data-error="This field is required." required style="width:100%;height:38px">
                       <option value="">Select Service Provider</option>
                       <?php while($row = $getServiceProviderTypes->fetch_assoc()) {  ?>
@@ -275,6 +276,7 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
                     </div>
+					
                   <div id="service_provider_business_type">
                       <div class="col-sm-8 col-md-6 ">
                   <div class="form-group">
@@ -421,7 +423,14 @@ if (!isset($_POST['submit']))  {
                   </div>
                        </div>
                   </div>
-                
+                <div class="col-sm-12 col-md-12">
+					 <div class="form-group">
+					  <label class="checkb1">Terms and Conditions
+					<input type="checkbox" checked="checked">
+					<span class="checkmark1"></span>
+					</label>
+					 </div>
+					</div>
                   <button type="submit" name="submit" value="submit" class="btn btn-default btn-block">Submit</button>
                 </form>
               </div>

@@ -36,7 +36,11 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
-
+<style>
+.box_style_1 h3.inner {
+background-color: #fe6003;
+}
+</style>
 </head>
 
 <body>
@@ -97,6 +101,7 @@
 			</div>
 		</div>
 		<div class="container margin_60">
+		<div class="feature">
 			<div class="checkout-page">
 
 				<?php
@@ -204,9 +209,9 @@
 						<table class="table table_summary">
                                                     <thead>
                                                         <tr>
-                                                            <th>Service</th>
-                                                            <th>Quantity</th>
-                                                            <th>Price</th>
+                                                            <th>SERVICE</th>
+                                                            <th>QUANTITY</th>
+                                                            <th>PRICE</th>
                                                         </tr>
                                                     </thead>
                                                     <?php $cartTotal = 0; $service_tax = 0;
@@ -266,26 +271,26 @@
 								<input type="hidden" name="discount_money" id="discount_money" value="">
                                                                 <tfoot>
                                                                 <tr>
-                                                                    <td><b>Sub Total </b></th>
+                                                                    <td>Sub Total</td>
                                                                     
-                                                                    <td colspan="2" class="text-right"><b>Rs. <?php echo $cartTotal; ?></b></th>
+                                                                    <td colspan="2" class="text-right">Rs. <?php echo $cartTotal; ?></td>
                                                                 </tr>
                                                                 <?php if($getCount->num_rows == 0) { 
 									$service_tax += ($getSiteSettingsData['service_tax']/100)*$cartTotal;
 								?>
                                                                 <tr>
-                                                                    <td><b>GST (<?php echo $getSiteSettingsData['service_tax'] ; ?>%)</b></th>
-                                                                    <td colspan="2" class="text-right"><b>Rs. <?php echo $service_tax ; ?></b></th>
+                                                                    <td>GST (<?php echo $getSiteSettingsData['service_tax'] ; ?>%)</td>
+                                                                    <td colspan="2" class="text-right">Rs. <?php echo $service_tax ; ?></td>
                                                                 </tr>
                                                                 <?php } else { ?>
                                                                 <tr>
-                                                                    <td><b>GST </b></th>
-                                                                    <td colspan="2" class="text-right"><b>Rs. 0</b></th>
+                                                                    <td>GST</td>
+                                                                    <td colspan="2" class="text-right">Rs. 0</td>
                                                                 </tr>
                                                                 <?php } ?>
                                                                 <input type="hidden" name="service_tax" id="service_tax" value="<?php echo $service_tax ; ?>">
                                                                 <tr>
-                                                                    <td><strong>Order Total<br>(*Minimum Charges applicable.)</strong></td>
+                                                                    <td><strong>Order Total</strong><br><small>(*Minimum Charges applicable.)<small></td>
                                                                     <td colspan="2" class="text-right"><strong>Rs. <?php echo $cartTotal+$service_tax; ?></strong></td>
                                                                 </tr>
                                                                 <input type="hidden" name="order_total" id="order_total" value="<?php echo $cartTotal1+$service_tax; ?>">
@@ -295,8 +300,8 @@
 						
 					</div>
 					<div class="box_style_4">
-						<i class="icon_set_1_icon-57"></i>
-						<h4>Payment<span>Method</span></h4>
+						<span class="icon_set_1_icon-57" style="font-size:50px"></span>
+						<h4>Payment Method</h4>
                                                 <div id="policy">
                                                     <?php if($getCount->num_rows == 0) { ?>
 									<?php $getOnlineDeatils = getIndividualDetails('payment_gateway_options','id',2); ?>
@@ -331,6 +336,7 @@
 				<?php if(!isset($_SESSION['user_login_session_id'])) { ?>
 				<script type="text/javascript">document.getElementById('divId').style.display = 'none';</script>
 				<?php } ?>
+			</div>
 			</div>
 		</div>
 		<!-- End Container -->
