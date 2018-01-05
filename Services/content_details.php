@@ -58,7 +58,7 @@
 		<!-- Slider -->
 		 <div class="container-fluid page-title">
 			<?php if($getAboutUsData['image']!='') { ?>
-			<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getAboutUsData['image'] ?>" alt="<?php echo $getAboutUsData['title'];?>" class="img-responsive">
+			<?php include_once './common_slider.php';?>
 		<?php } else { ?>
 			<img src="img/slides/slide_3.jpg" class="img-responsive">
 		<?php } ?>

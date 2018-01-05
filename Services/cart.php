@@ -38,7 +38,11 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
-
+<style>
+.table.cart-list.shopping-cart th, .table.options_cart.shopping-cart th{
+	color:#fe6003;
+}
+</style>
 </head>
 
 <body>
@@ -95,7 +99,7 @@
 				<?php }?>
     	</div>
             
-<div id="position">
+	<div id="position">
 			<div class="container">
 				<ul>
 					<li><a href="#">Home</a>
@@ -107,33 +111,19 @@
 			</div>
 		</div>
 		<div class="container margin_60">
+		<div class="feature">
 			<div class="cart-section">
 				 <?php if($cartItems->num_rows > 0) { ?>
 				<table class="table table-striped cart-list shopping-cart">
 					<thead>
 						<tr>
-							<th>
-								Particulars
-							</th>
-							<th>
-								Price
-							</th>
-							<th>
-								Date
-							</th>
-                            <th>
-                                Time
-                            </th>
-                             <th>
-								Quantity
-							</th> 
-                                                        
-							<th>
-								Total
-							</th> 
-							<th>
-								Remove
-							</th>
+							<th>Particulars</th>
+							<th>Price</th>
+							<th>Date</th>
+                            <th>Time</th>
+                            <th>Quantity</th> 
+                            <th>Total</th> 
+							<th>Remove</th>
 						</tr>
 					</thead>
 					<form name="cart_form" method="post">
@@ -163,16 +153,16 @@
                          <td>
                             <div class="">
                                <!-- <input type="number" name="service_quantity[]" min="1" max="5" value="<?php echo $getCartItems['service_quantity'];?>"> -->
-                               <input type="text" name="service_quantity[]" minlength="1" value="<?php echo $getCartItems['service_quantity'];?>" data-service-get-price="<?php echo $getCartItems['service_price'];?>" data-cart-id="<?php echo $getCartItems['id'];?>" data-price-type-id="<?php echo $getSerName['service_price_type_id'];?>" class="service_quantity valid_mobile_num">
+                               <input type="text" name="service_quantity[]" minlength="1" value="<?php echo $getCartItems['service_quantity'];?>" data-service-get-price="<?php echo $getCartItems['service_price'];?>" data-cart-id="<?php echo $getCartItems['id'];?>" data-price-type-id="<?php echo $getSerName['service_price_type_id'];?>" class="service_quantity valid_mobile_num form-control">
                             </div>
                         </td> 
                         <td>
-                        	Rs. <span class="changePrice_<?php echo $getCartItems['id']; ?>"><?php echo $getSerName['service_price']*$getCartItems['service_quantity']; ?></span> /-
+                        	Rs.<span class="changePrice_<?php echo $getCartItems['id']; ?>"><?php echo $getSerName['service_price']*$getCartItems['service_quantity']; ?></span>
                         	<input type="hidden" class="get_total_class" id="get_total_class_<?php echo $getCartItems['id']; ?>" value="<?php echo $getSerName['service_price']*$getCartItems['service_quantity']; ?>">
                         	
                         </td>
 							<td class="options">
-								<a <a class="delete_cart_item" data-cart-id ="<?php echo $getCartItems['id']; ?>"><i class=" icon-trash"></i></a>
+								<a class="delete_cart_item" data-cart-id ="<?php echo $getCartItems['id']; ?>"><span class=" icon-trash" style="color:#fe6003;font-size:20px"></span></a>
 							</td>
 						</tr>
 						<?php } ?>
@@ -181,6 +171,7 @@
 
 				<div class="cart-options clearfix">
 					<span style="font-size: 11px">(*For Laundry services the selected time is pickup time.)</span>
+
 				</div>
 				<?php 
 				//below condition for check service type prices fixed or variant for payment gateway display
@@ -203,18 +194,18 @@
 
 							<input type="hidden" name="service_tax" id="service_tax" value="<?php echo $service_tax; ?>">
 
-							<li class="clearfix total"><span class="col">Order Total</span><span class="col">Rs. <span class="grand_total"><?php echo $cartTotal; ?></span>/-</span>
-								<span style="font-size: 11px;font-weight: normal">(*Min visiting charges applicable.)</span>
+							<li class="clearfix total"><span class="col">Order Total</span><span class="col" style="padding-left:110px" >Rs. <span class="grand_total"><?php echo $cartTotal; ?></span></span>
+								<span style="font-size: 11px;font-weight:normal">(*Min visiting charges applicable.)</span>
 							</li>
 
 							
 						</ul>
 						<?php if(!isset($_SESSION['user_login_session_id'])) { ?>
-						<a href="login.php?cart_id=<?php echo encryptPassword(1);?>" class="btn_full">Proceed to Checkout <i class="icon-left"></i></a>
+						<a href="login.php?cart_id=<?php echo encryptPassword(1);?>" class="btn_full">Proceed to Checkout <span class="icon-left"></span></a>
 						<?php } else { ?>
-                        <a href="checkout.php" class="btn_full">Proceed to Checkout <i class="icon-left"></i></a>
+                        <a href="checkout.php" class="btn_full">Proceed to Checkout <span class="icon-left"></span></a>
                         <?php } ?>
-                        <a href="services.php" class="btn_full">Continue Shopping  <i class="icon-right"></i></a>
+                        <a href="services.php" class="btn_full">Continue Shopping  <span class="icon-right"></span></a>
 					</div>
 				</div>
 				</form>
@@ -222,7 +213,8 @@
         			<p style="text-align:center; color:#f26226">No Services In Your Cart</p>
         			<center><a href="services.php" style="color:#f26226">Click here for SERVICES</a></center>
         		<?php } ?>
-			</div>			
+			</div>
+		</div>			
 		</div>
 		
 		<!-- End Container -->

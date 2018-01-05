@@ -6,6 +6,7 @@
         } else  {
             //If success
             $category_name = $_POST['category_name'];
+            $lkp_status_id =$_POST['lkp_status_id'];
             $fileToUpload = $_FILES["fileToUpload"]["name"];
             $fileToUpload1 = $_FILES["fileToUpload1"]["name"];
             $fileToUpload2 = $_FILES["fileToUpload2"]["name"];
@@ -28,7 +29,7 @@
                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                     move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1);
                     move_uploaded_file($_FILES["fileToUpload2"]["tmp_name"], $target_file2);
-                     $sql = "INSERT INTO grocery_category (`category_name`,`category_web_image`,`category_app_image`, `category_icon`, `category_position`) VALUES ('$category_name','$fileToUpload','$fileToUpload1','$fileToUpload2','$category_position')"; 
+                     $sql = "INSERT INTO grocery_category (`category_name`,`category_web_image`,`category_app_image`, `category_icon`, `category_position`,`lkp_status_id`) VALUES ('$category_name','$fileToUpload','$fileToUpload1','$fileToUpload2','$category_position','$lkp_status_id')"; 
                     if($conn->query($sql) === TRUE){
                        echo "<script type='text/javascript'>window.location='manage_categories.php?msg=success'</script>";
                     } else {
@@ -87,6 +88,18 @@
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Priority</label>
                                 <div class="col-sm-6 col-md-4">
                                     <input type="text" name="category_position" class="form-control" id="form-control-3" placeholder="Enter Priority" required>
+                                </div>
+                            </div>
+                            <?php $getStatus = getAllData('lkp_status');?>
+                            <div class="form-group">
+                                <label class="col-sm-3  col-md-4 control-label" for="form-control-8">Choose Your Status</label>
+                                <div class="col-sm-6 col-md-4">
+                                    <select id="form-control-3" name="lkp_status_id" class="custom-select" data-error="This field is required." required>
+                                      <option value="">Select Status</option>
+                                      <?php while($row = $getStatus->fetch_assoc()) {  ?>
+                                          <option value="<?php echo $row['id']; ?>"><?php echo $row['status']; ?></option>
+                                      <?php } ?>
+                                   </select>
                                 </div>
                             </div>
                             <div class="form-group">

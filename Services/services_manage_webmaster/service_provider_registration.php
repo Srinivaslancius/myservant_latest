@@ -8,17 +8,26 @@
           </div>
           <div class="panel-body">
             <div class="table-responsive">
-              <?php $getAllSpecilizationData = getAllDataWithActiveRecent('service_provider_registration');?>
+              <?php $getAllSpecilizationData = getAllDataWithActiveRecent('service_provider_types');?>
               <div class="col s4 m9 l2">                  
 
-                  <!-- <div class="form-group col-md-4">                    
-                    <select id="select-specilization" class="custom-select">
+                  <div class="form-group col-md-4">                    
+                    <select id="select-specilization1" class="custom-select">
                        <option value="">Select Specalization</option>
                         <?php while ($getSpecilizationData = $getAllSpecilizationData->fetch_assoc()) { ?>
-                          <option value="<?php echo $getSpecilizationData['specalization']; ?>"><?php echo $getSpecilizationData['specalization']; ?></option>
+                          <option value="<?php echo $getSpecilizationData['service_provider_type']; ?>"><?php echo $getSpecilizationData['service_provider_type']; ?></option>
                         <?php } ?>
                     </select>                    
-                  </div> -->
+                  </div>
+                   <?php $getAllLocationsData = getAllDataWithActiveRecent('lkp_locations');?>
+                  <div class="form-group col-md-4">                    
+                    <select id="select-location1" class="custom-select">
+                       <option value="">Select Location</option>
+                        <?php while ($getAllLocationsData1 = $getAllLocationsData->fetch_assoc()) { ?>
+                          <option value="<?php echo $getAllLocationsData1['location_name']; ?>"><?php echo $getAllLocationsData1['location_name']; ?></option>
+                        <?php } ?>
+                    </select>                    
+                  </div>
                 </div>
               <div class="clear_fix"></div>
               <table class="table table-striped table-bordered dataTable" id="table-1">
@@ -29,6 +38,7 @@
                     <th>Email</th>
                     <th>Mobile Number</th>
                     <th>Service Provide Type</th>
+                    <th>Location</th>
                     <th>Status</th>
                     <th>Associate Or Not</th>
                     <th>Actions</th>
@@ -42,6 +52,8 @@
                     <td><?php echo $row['email'];?></td>
                     <td><?php echo $row['mobile_number'];?></td>
                     <td><?php $getServiceProviderTypes = getAllDataWithStatus('service_provider_types','0'); while($getServiceProviderTypes1 = $getServiceProviderTypes->fetch_assoc()) { if($row['service_provider_type_id'] == $getServiceProviderTypes1['id']) { echo $getServiceProviderTypes1['service_provider_type']; } } ?></td>
+                    <?php $getLocationNames = getIndividualDetails('lkp_locations','id',$row['lkp_location_id']); ?>
+                    <td><?php echo $getLocationNames['location_name'];?></td>
                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active1 open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='service_provider_registration'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active1 open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='service_provider_registration'>In Active</span>" ;} ?></td>
                     <?php if($row['service_provider_type_id'] == 1) { ?>
                     <td><?php $associateornot = getIndividualDetails('service_provider_business_registration','service_provider_registration_id',$row['id']); if ($associateornot['associate_or_not']==0) { echo "<span class='label label-outline-success check_associate_or_not open_cursor' data-incId=".$row['id']." data-status=".$associateornot['associate_or_not']." data-tbname='service_provider_registration'>Yes</span>" ;} else { echo "<span class='label label-outline-info check_associate_or_not open_cursor' style='border-color:red;color:red' data-status=".$associateornot['associate_or_not']." data-incId=".$row['id']." data-tbname='service_provider_registration'>No</span>" ;} ?></td>

@@ -60,7 +60,7 @@
 			<?php  
 				  if(!empty($getPartnersBanner['image'])) { ?> 	
 					<div class="row">
-						<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getPartnersBanner['image'] ?>" alt="<?php echo $getPartnersBanner['title'];?>" class="img-responsive" style="width:100%;height:400px">
+						<?php include_once './common_slider.php';?>
 					</div>
 				<?php } else { ?>
 					<div class="row">
@@ -94,11 +94,15 @@
 			<div class="col-sm-5">
 			<div class="row">
 			<div class="col-sm-6">			
-			<p><span class="icon-play-circled-1" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
 			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
 			</div>
 			<div class="col-sm-6">				
-			<p><span class="icon-play-circled-1" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
+			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
 			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
 			</div>
 			</div>

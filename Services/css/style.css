@@ -2843,8 +2843,8 @@ ul.list_order li span {
 }
 
 .margin_60 {
-    padding-top: 60px;
-    padding-bottom: 10px;
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
 
 .margin_30 {
@@ -5119,3 +5119,68 @@ a#phone, a#email_footer {
 }*/
     
 
+/* The container */
+.checkb1 {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 32px;
+    cursor: pointer;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	padding-top:3px;
+}
+
+/* Hide the browser's default checkbox */
+.checkb1 input {
+    position: absolute;
+    opacity: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkb1:hover input ~ .checkmark1 {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkb1 input:checked ~ .checkmark1 {
+    background-color: #fe6003;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark1:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.checkb1 input:checked ~ .checkmark1:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkb1 .checkmark1:after {
+    left: 7px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

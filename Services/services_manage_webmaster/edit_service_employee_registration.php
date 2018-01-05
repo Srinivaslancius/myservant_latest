@@ -14,6 +14,9 @@ if (!isset($_POST['submit'])) {
         $description = $_POST['description'];
         $specalization = $_POST['specalization'];
         $address = $_POST['address'];
+        $lkp_state_id = $_POST['lkp_state_id'];
+        $lkp_district_id = $_POST['lkp_district_id'];
+        $lkp_city_id = $_POST['lkp_city_id'];
         $created_at = date("Y-m-d h:i:s");
         $employee_belongs_to = $_POST['employee_belongs_to'];
         $service_provider_registration_id = $_POST['service_provider_registration_id'];
@@ -33,7 +36,7 @@ if (!isset($_POST['submit'])) {
               $getImgUnlink = getImageUnlink('photo','services_employee_registration','id',$id,$target_dir);
                 //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
               if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    $sql = "UPDATE `services_employee_registration` SET name = '$name',email = '$email',mobile_number = '$mobile_number',photo='$fileToUpload',experience = '$experience', description='$description',specalization='$specalization',address = '$address', employee_belongs_to='$employee_belongs_to',service_provider_registration_id='$service_provider_registration_id',lkp_status_id='$status' WHERE id = '$id' ";
+                    $sql = "UPDATE `services_employee_registration` SET name = '$name',email = '$email',mobile_number = '$mobile_number',photo='$fileToUpload',experience = '$experience', description='$description',specalization='$specalization',address = '$address', employee_belongs_to='$employee_belongs_to',service_provider_registration_id='$service_provider_registration_id',lkp_status_id='$status', lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',  lkp_city_id = '$lkp_city_id' WHERE id = '$id' ";
                     if($conn->query($sql) === TRUE){
                        echo "<script type='text/javascript'>window.location='service_employee_registration.php?msg=success'</script>";
                     } else {
@@ -44,7 +47,7 @@ if (!isset($_POST['submit'])) {
                     echo "Sorry, there was an error uploading your file.";
                 }
       } else {
-          $sql = "UPDATE `services_employee_registration` SET name = '$name',email = '$email',mobile_number = '$mobile_number',experience = '$experience', description='$description',specalization='$specalization',address = '$address', employee_belongs_to='$employee_belongs_to',service_provider_registration_id='$service_provider_registration_id',lkp_status_id='$status' WHERE id = '$id' ";
+          $sql = "UPDATE `services_employee_registration` SET name = '$name',email = '$email',mobile_number = '$mobile_number',experience = '$experience', description='$description',specalization='$specalization',address = '$address', employee_belongs_to='$employee_belongs_to',service_provider_registration_id='$service_provider_registration_id',lkp_status_id='$status' , lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',  lkp_city_id = '$lkp_city_id' WHERE id = '$id' ";
           if($conn->query($sql) === TRUE){
              echo "<script type='text/javascript'>window.location='service_employee_registration.php?msg=success'</script>";
           } else {
@@ -83,6 +86,41 @@ if (!isset($_POST['submit'])) {
                     <label for="form-control-2" class="control-label">Mobile</label>
                     <input type="text" name="mobile_number" class="form-control valid_mobile_num" id="mobile_number" placeholder="Mobile" data-error="Please enter mobile number." required maxlength="10" pattern="[0-9]{10}" value="<?php echo $getServiceEmployeesData['mobile_number'];?>">
                     <span id="email_status" style="color: red;"></span>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose your State</label>
+                    <select name="lkp_state_id" class="custom-select" data-error="This field is required." required onChange="getDistricts(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a State', allowClear: true }">
+                      <option value="">Select State</option>
+                      <?php while($row = $getStates->fetch_assoc()) {  ?>
+                          <option <?php if($row['id'] == $getServiceEmployeesData['lkp_state_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['state_name']; ?></option>
+                      <?php } ?>
+                   </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <?php $getDistrcits = getAllDataWithStatus('lkp_districts','0');?>
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose your District</label>
+                    <select id="lkp_district_id" name="lkp_district_id" class="custom-select" data-error="This field is required." required onChange="getCities(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a District', allowClear: true }">
+                      <option value="">Select District</option>
+                      <?php while($row = $getDistrcits->fetch_assoc()) {  ?>
+                          <option <?php if($row['id'] == $getServiceEmployeesData['lkp_district_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['district_name']; ?></option>
+                      <?php } ?>
+                    </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+
+                  <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose your City</label>
+                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required  onChange="getPincodes(this.value);" data-plugin="select2" data-options="{ placeholder: 'Select a City', allowClear: true }">
+                      <option value="">Select City</option>
+                      <?php while($row = $getCities->fetch_assoc()) {  ?>
+                          <option <?php if($row['id'] == $getServiceEmployeesData['lkp_city_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>
+                      <?php } ?>
+                    </select>
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
