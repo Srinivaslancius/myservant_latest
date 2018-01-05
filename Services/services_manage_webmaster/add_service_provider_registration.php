@@ -219,8 +219,45 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Working Hours</label>
-                    <input type="text" name="working_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Working Hours" data-error="Please enter Working Hours">
+					<div class="row">
+					<div class="col-sm-6">
+					<div class="row">
+					<div class="col-sm-3">
+					 <p style="margin-top:8px">Morning:</p>
+					</div>
+					<div class="col-sm-4">
+                   <input type="text" name="working_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Time" data-error="Please enter Working Hours">
                     <div class="help-block with-errors"></div>
+					</div>
+					<div class="col-sm-5">
+                  <select class="form-control" id="sel1">
+					<option>AM</option>
+					<option>PM</option>
+				  </select>
+                    <div class="help-block with-errors"></div>
+					</div>
+					</div>
+					</div>
+					
+					<div class="col-sm-6">
+                   <div class="row">
+					<div class="col-sm-3">
+					 <p style="margin-top:8px">Evening:</p>
+					</div>
+					<div class="col-sm-4">
+                   <input type="text" name="working_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Time" data-error="Please enter Working Hours">
+                    <div class="help-block with-errors"></div>
+					</div>
+					<div class="col-sm-5">
+                  <select class="form-control" id="sel1">
+					<option>PM</option>
+					<option>AM</option>
+				  </select>
+                    <div class="help-block with-errors"></div>
+					</div>
+					</div>
+					</div>
+					</div>
                   </div>
 
                   <div class="form-group">

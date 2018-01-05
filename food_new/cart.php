@@ -111,8 +111,10 @@ td{
 	.table.cart-list td{
 		padding-left: 55%;
 	}
-	.rw_wdth{
-		width:325px;
+	
+	.rw_wdth h5{
+		margin-left:0px !important;
+	
 	}
 	
 }
@@ -185,7 +187,7 @@ td{
 					<table class="table table-striped cart-list">
 					<thead>
 						<tr>
-							<th>ITEM</th>							
+							<th style="width:320px">ITEM</th>							
 							<th>PRICE</th>
 							<th>ADDON</th>
 							<th>QUANTITY</th>
@@ -199,7 +201,7 @@ td{
           ?>
 
 					<tr id="get_inc_id_<?php echo $getCartItems['id']; ?>">
-						<td class="rw_wdth" style="width:320px">
+						<td class="rw_wdth">
 						<div class="row">
 						<div class="col-sm-2 col-xs-12">
 							<?php $getProductDetails= getIndividualDetails('food_products','id',$getCartItems['food_item_id']); ?>
@@ -242,10 +244,10 @@ td{
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											  <div class="row">
-												  <div class="col-sm-8">
+												  <div class="col-sm-8 col-xs-6">
 												  <h4 class="modal-title" style="font-size:15px"><small>Add On's:</small><br><?php echo $getProductDetails['product_name']; ?></h4>
 												  </div>
-												   <div class="col-sm-4">
+												   <div class="col-sm-4 col-xs-6">
 													<div class="btn-group">
 													  <!-- <button style="background-color:#f5f5f5;border-color:#f5f5f5;color:black">Total:₹ <span id="tot_item_price_<?php echo $getCartItems['id']; ?>"><?php echo $getCartItems['item_price']*$getCartItems['item_quantity']+$getAdstotalPrice; ?></span></button> -->
 													  <button class="update_cart_item" onclick="updateCartItem(<?php echo $getCartItems['id']; ?>);">Update Cart</button>					  
