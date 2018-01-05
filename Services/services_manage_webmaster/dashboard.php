@@ -8,12 +8,22 @@
           <?php $getUsers = "SELECT * FROM users WHERE lkp_admin_service_type_id = 1 ORDER BY lkp_status_id, id DESC";
           $getUsersData = $conn->query($getUsers);
           $getUsersCount = $getUsersData->num_rows;?>
+
+          <?php $getUsers1 = "SELECT * FROM users WHERE lkp_status_id =0 AND lkp_admin_service_type_id = 1 ORDER BY lkp_status_id, id DESC";
+          $getUsersData1 = $conn->query($getUsers1);
+          $getUsersCount1 = $getUsersData1->num_rows;?>
+
+          <?php $getUsers2 = "SELECT * FROM users WHERE lkp_status_id =1 AND lkp_admin_service_type_id = 1 ORDER BY lkp_status_id, id DESC";
+          $getUsersData2 = $conn->query($getUsers2);
+          $getUsersCount2 = $getUsersData2->num_rows;?>
           <a href="users.php">
           <div class="col-md-4 col-sm-5">
-            <div class="widget widget-tile-2 bg-primary m-b-30">
+            <div class="widget widget-tile-2 bg-danger m-b-30">
               <div class="wt-content p-a-20 p-b-50">
-                <div class="wt-title">Users</div>
-                <div class="wt-number"><?php echo $getUsersCount?></div>
+                <div class="wt-title">Customers</div>
+                <div class="wt-number"><?php echo $getUsersCount?>
+                </div>
+                Active :  &nbsp;<?php echo $getUsersCount1?> &nbsp;&nbsp;&nbsp; In Active :  &nbsp;<?php echo $getUsersCount2?>
               </div>
               <div class="wt-icon">
                 <i class="zmdi zmdi-accounts"></i>
@@ -21,12 +31,47 @@
             </div>
           </div>
           </a>
+          <?php $getAllServiceProvider = "SELECT * FROM service_provider_registration WHERE lkp_status_id =0  ORDER BY lkp_status_id, id DESC";
+          $getServiceProvider = $conn->query($getAllServiceProvider);
+          $getServiceProviderCount = $getServiceProvider->num_rows;?>
+
+          <?php $getAllServiceProvider1 = "SELECT * FROM service_provider_registration WHERE lkp_status_id =1  ORDER BY lkp_status_id, id DESC";
+          $getServiceProvider1 = $conn->query($getAllServiceProvider1);
+          $getServiceProviderCount1 = $getServiceProvider1->num_rows;?>
           <a href="service_provider_registration.php">
+          <div class="col-md-4 col-sm-5">
+            <div class="widget widget-tile-2 bg-warning m-b-30">
+              <div class="wt-content p-a-20 p-b-50">
+                <div class="wt-title">Service Providers</div>
+                <div class="wt-number"><?php echo getRowsCount('service_provider_registration')?>
+                </div>
+                Active :  &nbsp;<?php echo $getServiceProviderCount?> &nbsp;&nbsp;&nbsp; In Active :  &nbsp;<?php echo $getServiceProviderCount1 ?>
+              </div>
+              <div class="wt-icon">
+                <i class="zmdi zmdi-accounts"></i>
+              </div>
+            </div>
+          </div>
+          </a>
+          
+          <?php $getAdminUsers = "SELECT * FROM admin_users WHERE lkp_admin_service_type_id = 1 ORDER BY lkp_status_id,id DESC";
+          $getAdminUsersData = $conn->query($getAdminUsers);
+          $getAdminusersCount = $getAdminUsersData->num_rows;?> 
+
+          <?php $getAdminUsers1 = "SELECT * FROM admin_users WHERE lkp_status_id =0 AND lkp_admin_service_type_id = 1 ORDER BY lkp_status_id,id DESC";
+          $getAdminUsersData1 = $conn->query($getAdminUsers1);
+          $getAdminusersCount1 = $getAdminUsersData1->num_rows;?>
+
+          <?php $getAdminUsers2 = "SELECT * FROM admin_users WHERE lkp_status_id =1 AND lkp_admin_service_type_id = 1 ORDER BY lkp_status_id,id DESC";
+          $getAdminUsersData2 = $conn->query($getAdminUsers2);
+          $getAdminusersCount2 = $getAdminUsersData2->num_rows;?> 
+          <a href="admin_users.php">
           <div class="col-md-4 col-sm-5">
             <div class="widget widget-tile-2 bg-primary m-b-30">
               <div class="wt-content p-a-20 p-b-50">
-                <div class="wt-title">Service Providers</div>
-                <div class="wt-number"><?php echo getRowsCount('service_provider_registration')?></div>
+                <div class="wt-title">Admin Users</div>
+                <div class="wt-number"><?php echo $getAdminusersCount?></div>
+                 Active :  &nbsp;<?php echo $getAdminusersCount1?> &nbsp;&nbsp;&nbsp; In Active :  &nbsp;<?php echo $getAdminusersCount2?>
               </div>
               <div class="wt-icon">
                 <i class="zmdi zmdi-accounts"></i>
@@ -47,27 +92,11 @@
             </div>
           </div>
           </a>
-          <?php $getAdminUsers = "SELECT * FROM admin_users WHERE lkp_admin_service_type_id = 1 ORDER BY lkp_status_id,id DESC";
-          $getAdminUsersData = $conn->query($getAdminUsers);
-          $getAdminusersCount = $getAdminUsersData->num_rows;?>
-          <a href="admin_users.php">
-          <div class="col-md-4 col-sm-5">
-            <div class="widget widget-tile-2 bg-primary m-b-30">
-              <div class="wt-content p-a-20 p-b-50">
-                <div class="wt-title">Admin Users</div>
-                <div class="wt-number"><?php echo $getAdminusersCount?></div>
-              </div>
-              <div class="wt-icon">
-                <i class="zmdi zmdi-accounts"></i>
-              </div>
-            </div>
-          </div>
-          </a>
           <?php $getOrders = "SELECT * FROM services_orders GROUP BY order_id"; 
           $getOrders1 = $conn->query($getOrders); $getRowsCount1 = $getOrders1->num_rows; ?>
           <a href="view_orders.php">
           <div class="col-md-4 col-sm-5">
-            <div class="widget widget-tile-2 bg-warning m-b-30">
+            <div class="widget widget-tile-2 bg-danger m-b-30">
               <div class="wt-content p-a-20 p-b-50">
                 <div class="wt-title">Orders</div>
                 <div class="wt-number"><?php echo $getRowsCount1; ?></div>

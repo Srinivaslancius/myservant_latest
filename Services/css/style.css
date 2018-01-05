@@ -3338,7 +3338,7 @@ ul.list_order li span {
 }
 
 #position ul li a:hover {
-    color: #fff;
+    color:  #333;
     opacity: 1
 }
 
