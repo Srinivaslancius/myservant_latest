@@ -1,6 +1,6 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
 <?php  
-$id = $_GET['bid'];
+$id = $_SESSION['food_vendor_user_id'];
 
 if (!isset($_POST['submit'])) {
       //If fail
@@ -25,10 +25,7 @@ if (!isset($_POST['submit'])) {
     $lkp_district_id = $_POST['lkp_district_id'];
     $lkp_city_id = $_POST['lkp_city_id'];
     $location = $_POST['location'];
-    $created_at = date("Y-m-d h:i:s");   
-
-    $delivery_charges = $_POST['delivery_charges'];
-    $admin_comission = $_POST['admin_comission'];
+    $created_at = date("Y-m-d h:i:s"); 
 
       if($_FILES["fileToUpload"]["name"]!='' || $_FILES["vendor_banner"]["name"]!='') {
 
@@ -59,21 +56,21 @@ if (!isset($_POST['submit'])) {
               if ($vendorLogo!='' && $vendorBanner!='') {
                     move_uploaded_file($_FILES["vendor_banner"]["tmp_name"],$vendorbannerpath);
                     move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$vendorLogopath);
-                    $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',delivery_charges = '$delivery_charges',admin_comission = '$admin_comission',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', logo = '$logoname', vendor_banner = '$bannerName', restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' ";
+                    $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', logo = '$logoname', vendor_banner = '$bannerName', restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' ";
                       $conn->query($sql);
               } elseif($vendorBanner!='') {
                     move_uploaded_file($_FILES["vendor_banner"]["tmp_name"],$vendorbannerpath);
-                    $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',delivery_charges = '$delivery_charges',admin_comission = '$admin_comission',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', vendor_banner = '$bannerName',restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' "; 
+                    $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', vendor_banner = '$bannerName',restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name',cusine_type_id= '$cusine_type_id'  WHERE id = '$id' "; 
                     $conn->query($sql);
               } elseif($vendorLogo!='') {
                     move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$vendorLogopath);
-                    $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',delivery_charges = '$delivery_charges',admin_comission = '$admin_comission',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', logo = '$logoname',restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name' WHERE id = '$id' "; 
+                    $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', logo = '$logoname',restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name' WHERE id = '$id' "; 
                     $conn->query($sql);
               }
             //echo $sql; die;
             //echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
 } else {
-        $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',delivery_charges = '$delivery_charges',admin_comission = '$admin_comission',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name' WHERE id = '$id' ";
+        $sql = "UPDATE food_vendors SET vendor_name = '$vendor_name', vendor_email = '$vendor_email', vendor_mobile = '$vendor_mobile',description = '$description', password = '$password',working_timings = '$working_timings',min_delivery_time = '$min_delivery_time',lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',location = '$location', restaurant_address = '$restaurant_address',pincode = '$pincode', delivery_type_id ='$delivery_type_id', meta_title ='$meta_title', meta_desc= '$meta_desc',meta_keywords='$meta_keywords' , restaurant_name ='$restaurant_name' WHERE id = '$id' ";
           $conn->query($sql);
       }
 
@@ -91,7 +88,7 @@ if (!isset($_POST['submit'])) {
         }
       }
 
-      echo "<script type='text/javascript'>window.location='vendors.php?msg=success'</script>";
+      echo "<script type='text/javascript'>window.location='vendor_details.php?msg=success'</script>";
       //echo $sql; die;
 }   
 ?>
@@ -130,7 +127,7 @@ if (!isset($_POST['submit'])) {
                   </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Restaurant Name</label>
-                    <input type="text" name="restaurant_name" readonly class="form-control" id="form-control-2" placeholder="Restaurant Name" data-error="Please enter restaurant name" required value="<?php echo $getVendorsData['restaurant_name'];?>">
+                    <input type="text" name="restaurant_name" class="form-control" id="form-control-2" placeholder="Restaurant Name" data-error="Please enter restaurant name" required value="<?php echo $getVendorsData['restaurant_name'];?>">
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
@@ -161,13 +158,13 @@ if (!isset($_POST['submit'])) {
                   
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Email</label>
-                    <input type="email" name="vendor_email" readonly class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="user_input" placeholder="Email" data-error="Please enter a valid email address." required value="<?php echo $getVendorsData['vendor_email'];?>">
+                    <input type="email" name="vendor_email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="user_input" placeholder="Email" data-error="Please enter a valid email address." required value="<?php echo $getVendorsData['vendor_email'];?>">
                     <div class="help-block with-errors"></div>
             
                   </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Mobile</label>
-                    <input type="text" name="vendor_mobile" readonly class="form-control" id="form-control-2" placeholder="Mobile" data-error="Please enter Correct Mobile Number." required maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" value="<?php echo $getVendorsData['vendor_mobile'];?>">
+                    <input type="text" name="vendor_mobile" class="form-control" id="form-control-2" placeholder="Mobile" data-error="Please enter Correct Mobile Number." required maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" value="<?php echo $getVendorsData['vendor_mobile'];?>">
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
@@ -188,19 +185,10 @@ if (!isset($_POST['submit'])) {
                     <input type="text" name="working_timings" class="form-control" id="form-control-2" placeholder="Working Timings" data-error="Please enter Working Timings" required  value="<?php echo $getVendorsData['working_timings'];?>">
                     <div class="help-block with-errors"></div>
                   </div>
+
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Minimum Delivery Time</label>
                     <input type="text" name="min_delivery_time" class="form-control" id="form-control-2" placeholder="Minimum Delivery Time" data-error="Please enter Minimum Delivery Time" required  value="<?php echo $getVendorsData['min_delivery_time'];?>">
-                    <div class="help-block with-errors"></div>
-                  </div>
-                  <div class="form-group">
-                    <label for="form-control-2" class="control-label">Delivery charges</label>
-                    <input type="text" name="delivery_charges" class="form-control valid_price_dec" id="form-control-2" placeholder="Delivery charges" data-error="Please enter Delivery charges" required  value="<?php echo $getVendorsData['delivery_charges'];?>">
-                    <div class="help-block with-errors"></div>
-                  </div>
-                  <div class="form-group">
-                    <label for="form-control-2" class="control-label">Admin Comission (%)</label>
-                    <input type="text" name="admin_comission" class="form-control valid_price_dec" id="form-control-2" placeholder="Admin Comission (%)" data-error="Please enter Admin Comission (%)" required  value="<?php echo $getVendorsData['admin_comission'];?>">
                     <div class="help-block with-errors"></div>
                   </div>
                 
@@ -230,7 +218,7 @@ if (!isset($_POST['submit'])) {
                    <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your City</label>
-                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required data-plugin="select2" onChange="getPincodes(this.value);" data-options="{ placeholder: 'Select a City', allowClear: true }">
+                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required data-plugin="select2" onChange="getPincodes(this.value);"  data-options="{ placeholder: 'Select a City', allowClear: true }">
                       <option value="">Select City</option>
                       <?php while($row = $getCities->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getVendorsData['lkp_city_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>
@@ -238,7 +226,7 @@ if (!isset($_POST['submit'])) {
                     </select>
                     <div class="help-block with-errors"></div>
                   </div>
-                  <?php $getPincodes = getAllDataWithStatus('lkp_pincodes','0');?>
+                   <?php $getPincodes = getAllDataWithStatus('lkp_pincodes','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Pincode</label>
                     <select id="lkp_pincode_id" name="pincode" class="custom-select" data-error="This field is required." required data-plugin="select2" onChange="getLocations(this.value);" data-options="{ placeholder: 'Select a pincode', allowClear: true }">
@@ -308,21 +296,50 @@ if (!isset($_POST['submit'])) {
     CKEDITOR.replace( 'meta_desc' );
 
 </script>
+<script type="text/javascript">
+    function getDistricts(val) { 
+        $.ajax({
+        type: "POST",
+        url: "../food_manage_webmaster/get_districts.php",
+        data:'lkp_state_id='+val,
+        success: function(data){
+            $("#lkp_district_id").html(data);
+        }
+        });
+    }
+    function getCities(val) { 
+        $.ajax({
+        type: "POST",
+        url: "../food_manage_webmaster/get_cities.php",
+        data:'lkp_district_id='+val,
+        success: function(data){
+            $("#lkp_city_id").html(data);
+        }
+        });
+    }
+    function getPincodes(val) { 
+        $.ajax({
+        type: "POST",
+        url: "../food_manage_webmaster/get_pincodes.php",
+        data:'lkp_city_id='+val,
+        success: function(data){
+            $("#lkp_pincode_id").html(data);
+        }
+        });
+    }
+    function getLocations(val) { 
+        $.ajax({
+        type: "POST",
+        url: "../food_manage_webmaster/get_locations.php",
+        data:'lkp_pincode_id='+val,
+        success: function(data){
+            $("#lkp_location_id").html(data);
+        }
+        });
+    }
+    </script>
 <style type="text/css">
     .cke_top, .cke_contents, .cke_bottom {
         border: 1px solid #333;
     }
 </style>
-<script type="text/javascript">
-      
-      function checkPasswordMatch() {
-        var password = $("#password").val();
-        var confirmPassword = $("#confirm_password").val();
-        if (confirmPassword != password) {
-            $("#divCheckPasswordMatch").html("Passwords do not match!");
-            $("#confirm_password").val("");
-        } else {
-            $("#divCheckPasswordMatch").html("");
-        }
-    }
-    </script>
