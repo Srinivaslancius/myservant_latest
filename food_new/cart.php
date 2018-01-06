@@ -277,10 +277,10 @@ td{
                                   
                               ?> 
 
-                             	 <input type="hidden" class="ing_price" id="ing_price" value="<?php echo $getIngProdItems['ingredient_price']; ?>">
+                             	 <input type="hidden" class="ing_price" id="ing_price" value="<?php echo $getIngProdItems['admin_price']; ?>">
                                  <label class="radio" style="margin-bottom:20px">
-                                     <h4 style="font-size:15px"><?php echo $getInDet['ingredient_name']; ?><span style="padding-left:50px">Rs:<?php echo $getIngProdItems['ingredient_price']; ?></span></h4>
-                                     <input type="checkbox"  <?php if($ingId == $getInDet['id']) { echo 'checked="checked"'; } ?> class="check_valid_add_on" value="<?php echo $getIngProdItems['ingredient_price']; ?>" id="check_valid_add_on_<?php echo $getCartItems['id']; ?>" data-key="<?php echo $getCartItems['id']; ?>" data-ing-name="<?php echo $getInDet['ingredient_name']; ?>" data-ing-id="<?php echo $getInDet['id']; ?>" data-ing-price="<?php echo $getIngProdItems['ingredient_price']; ?>" name="checkbox_<?php echo $getCartItems['id']; ?>">
+                                     <h4 style="font-size:15px"><?php echo $getInDet['ingredient_name']; ?><span style="padding-left:50px">Rs:<?php echo $getIngProdItems['admin_price']; ?></span></h4>
+                                     <input type="checkbox"  <?php if($ingId == $getInDet['id']) { echo 'checked="checked"'; } ?> class="check_valid_add_on" value="<?php echo $getIngProdItems['admin_price']; ?>" id="check_valid_add_on_<?php echo $getCartItems['id']; ?>" data-key="<?php echo $getCartItems['id']; ?>" data-ing-name="<?php echo $getInDet['ingredient_name']; ?>" data-ing-id="<?php echo $getInDet['id']; ?>" data-ing-price="<?php echo $getIngProdItems['admin_price']; ?>" name="checkbox_<?php echo $getCartItems['id']; ?>">
                                      <span class="checkmark"></span>
                                  </label>
                               <?php } ?>

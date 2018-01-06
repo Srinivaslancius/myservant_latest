@@ -6,8 +6,9 @@ if (!isset($_POST['submit']))  {
   //If fail
   echo "fail";
 }else  {
+  
   //If success
-  //echo "<pre>";print_r($_POST);exit;
+//echo "<pre>";print_r($_POST);exit;
   $name = $_POST['name'];
   $email = $_POST['email'];
   $mobile_number = $_POST['mobile_number'];
@@ -20,8 +21,8 @@ if (!isset($_POST['submit']))  {
   $total_no_of_emp = $_POST['total_no_of_emp'];
   $description = $_POST['description'];
   $certification = $_POST['certification'];
-  $working_hours = $_POST['working_hours'];
-  $working_hours1 = $_POST['working_hours1'];
+  
+  
   $contact_numbers = $_POST['contact_numbers'];
   $email_id = $_POST['email_id'];
   $sub_category_id = implode(',',$_POST["sub_category_id"]);
@@ -37,6 +38,17 @@ if (!isset($_POST['submit']))  {
   $lkp_location_id = $_POST['lkp_location_id'];
   $fileToUpload = $_FILES["fileToUpload"]["name"];
   $fileToUpload1 = $_FILES["fileToUpload1"]["name"];
+
+  $working_hours = $_POST['working_hours'];
+  $strat_time = $_POST['strat_time'];
+  $evening_hours = $_POST['evening_hours'];
+  $night_time = $_POST['night_time'];
+
+  $working_hours1 = $_POST['working_hours1'];
+  $strat_time1 = $_POST['strat_time1'];
+  $evening_hours1 = $_POST['evening_hours1'];
+  $night_time1 = $_POST['night_time1'];
+
   if($sub_category_id == 0) {
     $specialization_name = $_POST['specialization_name'];
   } else {
@@ -61,11 +73,11 @@ if (!isset($_POST['submit']))  {
 
       if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-        $sql = "UPDATE service_provider_business_registration SET company_name ='$company_name',est_year = '$est_year',total_no_of_emp ='$total_no_of_emp',description ='$description',certification ='$certification',working_hours ='$working_hours',contact_numbers ='$contact_numbers',email_id ='$email_id',specialization_name ='$specialization_name',sub_category_id ='$sub_category_id',associate_or_not ='$associate_or_not',logo ='$fileToUpload' WHERE service_provider_registration_id = '$id'";
+        $sql = "UPDATE service_provider_business_registration SET company_name ='$company_name',est_year = '$est_year',total_no_of_emp ='$total_no_of_emp',description ='$description',certification ='$certification',contact_numbers ='$contact_numbers',email_id ='$email_id',specialization_name ='$specialization_name',sub_category_id ='$sub_category_id',associate_or_not ='$associate_or_not',logo ='$fileToUpload' ,working_hours = '$working_hours',strat_time = '$strat_time', evening_hours = '$evening_hours', night_time = '$night_time'   WHERE service_provider_registration_id = '$id'";
         $res = $conn->query($sql);
       }
     } else {
-       $sql = "UPDATE service_provider_business_registration SET company_name ='$company_name',est_year = '$est_year',total_no_of_emp ='$total_no_of_emp',description ='$description',certification ='$certification',working_hours ='$working_hours',contact_numbers ='$contact_numbers',email_id ='$email_id',specialization_name ='$specialization_name',sub_category_id ='$sub_category_id',associate_or_not ='$associate_or_not' WHERE service_provider_registration_id = '$id'";
+       $sql = "UPDATE service_provider_business_registration SET company_name ='$company_name',est_year = '$est_year',total_no_of_emp ='$total_no_of_emp',description ='$description',certification ='$certification',contact_numbers ='$contact_numbers',email_id ='$email_id',specialization_name ='$specialization_name',sub_category_id ='$sub_category_id',associate_or_not ='$associate_or_not' ,working_hours = '$working_hours',strat_time = '$strat_time', evening_hours = '$evening_hours', night_time = '$night_time' WHERE service_provider_registration_id = '$id'";
         $res = $conn->query($sql);
     }
   } else {
@@ -77,11 +89,11 @@ if (!isset($_POST['submit']))  {
       $imageFileType = pathinfo($target_file1,PATHINFO_EXTENSION);
 
       if (move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1)) {
-       $sql1 = "UPDATE service_provider_personal_registration SET experience ='$experience',image = '$fileToUpload1',working_hours ='$working_hours1',specialization_name ='$specialization_name1',sub_category_id ='$sub_category_id1' WHERE service_provider_registration_id = '$id'";
+       $sql1 = "UPDATE service_provider_personal_registration SET experience ='$experience',image = '$fileToUpload1',working_hours ='$working_hours1',specialization_name ='$specialization_name1',sub_category_id ='$sub_category_id1', strat_time = '$strat_time1', evening_hours = '$evening_hours1', night_time = '$night_time1' WHERE service_provider_registration_id = '$id'";
         $res1 = $conn->query($sql1);
       }
     } else {
-      $sql1 = "UPDATE service_provider_personal_registration SET experience ='$experience',working_hours ='$working_hours1',specialization_name ='$specialization_name1',sub_category_id ='$sub_category_id1' WHERE service_provider_registration_id = '$id'"; 
+      $sql1 = "UPDATE service_provider_personal_registration SET experience ='$experience',working_hours ='$working_hours1',specialization_name ='$specialization_name1',sub_category_id ='$sub_category_id1',strat_time = '$strat_time1', evening_hours = '$evening_hours1', night_time = '$night_time1' WHERE service_provider_registration_id = '$id'"; 
       $res1 = $conn->query($sql1);
     }
   }
@@ -253,6 +265,51 @@ if (!isset($_POST['submit']))  {
                     </div>
 
                     <div class="form-group">
+                    <label for="form-control-2" class="control-label">Working Hours</label>
+                        <div class="row">
+                        <div class="col-sm-6">
+                        <div class="row">
+                        <div class="col-sm-3">
+                         <p style="margin-top:8px">Morning:</p>
+                        </div>
+                        <div class="col-sm-4">
+                         <input type="text" name="working_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Time" data-error="Please enter Morning Timings" value="<?php echo $getServiceProviderBusinessRegistrationsData['working_hours'];?>">
+                        <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="col-sm-5">
+                                <select name="strat_time" class="form-control" id="sel1">
+                        <option value="1" <?php if($getServiceProviderBusinessRegistrationsData['strat_time'] == 1) { echo "Selected=Selected"; }?>>AM</option>
+                        <option value="2" <?php if($getServiceProviderBusinessRegistrationsData['strat_time'] == 2) { echo "Selected=Selected"; }?>>PM</option>
+                        </select>
+                                  <div class="help-block with-errors"></div>
+                        </div>
+                        </div>
+                        </div>
+                        
+                        <div class="col-sm-6">
+                                 <div class="row">
+                        <div class="col-sm-3">
+                         <p style="margin-top:8px">Evening:</p>
+                        </div>
+                        <div class="col-sm-4">
+                         <input type="text" name="evening_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Time" data-error="Please enter Working Hours" value="<?php echo $getServiceProviderBusinessRegistrationsData['evening_hours'];?>">
+                          <div class="help-block with-errors"></div>
+                          </div>
+                          <div class="col-sm-5">
+                                  <select name="night_time" class="form-control" id="sel1">
+                          <option value="1" <?php if($getServiceProviderBusinessRegistrationsData['night_time'] == 1) { echo "Selected=Selected"; }?>>AM</option>
+
+                          <option value="2" <?php if($getServiceProviderBusinessRegistrationsData['night_time'] == 2) { echo "Selected=Selected"; }?>>PM</option>
+                          </select>
+                                    <div class="help-block with-errors"></div>
+                          </div>
+                          </div>
+                          </div>
+                          </div>
+                        </div>
+
+
+                    <div class="form-group">
                       <label for="form-control-2" class="control-label">Working Hours</label>
                       <input type="text" name="working_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Working Hours" data-error="Please enter Working Hours" value="<?php echo $getServiceProviderBusinessRegistrationsData['working_hours'];?>">
                       <div class="help-block with-errors"></div>
@@ -300,25 +357,64 @@ if (!isset($_POST['submit']))  {
                           ?>
                           <h4>Associate With Us</h4>
                           <label>
-                            <input type="radio"  value="0" <?php if($getAssoc == 0) echo $checked; ?> name="associate_or_not" required/>&nbsp;Yes
-                            <div class="help-block with-errors"></div>
-                          </label>&nbsp;&nbsp;
+                            <input type="radio"  value="0" <?php if($getAssoc == 0) echo $checked; ?> name="associate_or_not" />&nbsp;Yes</label>&nbsp;&nbsp;
                           <label>
-                            <input type="radio"  value="1" <?php if($getAssoc == 1) echo $checked; ?> name="associate_or_not" required />&nbsp;No
-                            <div class="help-block with-errors"></div>
-                          </label>
+                            <input type="radio"  value="1" <?php if($getAssoc == 1) echo $checked; ?> name="associate_or_not"/>&nbsp;No</label>
+                          <label>
                     </div>
                   </div>
 
                   <?php $getServiceProviderPersonalRegistrations = getAllDataWhere('service_provider_personal_registration','service_provider_registration_id',$id);
                   $getServiceProviderPersonalRegistrationsData = $getServiceProviderPersonalRegistrations->fetch_assoc(); ?>
                   <div id="service_provider_personal_type">
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                     <label for="form-control-2" class="control-label">Working Hours</label>
                     <input type="text" name="working_hours1" class="form-control service_provider_personal valid_mobile_num" id="form-control-2" placeholder="Working Hours" data-error="Please enter Working Hours" value="<?php echo $getServiceProviderPersonalRegistrationsData['working_hours'];?>">
                     <div class="help-block with-errors"></div>
-                    </div>
+                    </div> -->
 
+                    <div class="form-group">
+                    <label for="form-control-2" class="control-label">Working Hours</label>
+                  <div class="row">
+                  <div class="col-sm-6">
+                  <div class="row">
+                  <div class="col-sm-3">
+                   <p style="margin-top:8px">Morning:</p>
+                  </div>
+                  <div class="col-sm-4">
+                   <input type="text" name="working_hours1" class="form-control service_provider_personal valid_mobile_num" id="form-control-2" placeholder="Time" data-error="Please enter Morning Timings" value="<?php echo $getServiceProviderPersonalRegistrationsData['working_hours'];?>">
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="col-sm-5">
+                          <select name="strat_time1" class="form-control" id="sel1">
+                  <option value="1" <?php if($getServiceProviderPersonalRegistrationsData['strat_time'] == 1) { echo "Selected=Selected"; }?>>AM</option>
+                  <option value="2" <?php if($getServiceProviderPersonalRegistrationsData['strat_time'] == 2) { echo "Selected=Selected"; }?>>PM</option>
+                  </select>
+                            <div class="help-block with-errors"></div>
+                  </div>
+                  </div>
+                  </div>
+          
+                  <div class="col-sm-6">
+                           <div class="row">
+                  <div class="col-sm-3">
+                   <p style="margin-top:8px">Evening:</p>
+                  </div>
+                  <div class="col-sm-4">
+                           <input type="text" name="evening_hours1" class="form-control service_provider_personal valid_mobile_num" id="form-control-2" placeholder="Time" data-error="Please enter Working Hours" value="<?php echo $getServiceProviderPersonalRegistrationsData['evening_hours'];?>">
+                            <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="col-sm-5">
+                          <select name="night_time1" class="form-control" id="sel2">
+                   <option value="1" <?php if($getServiceProviderPersonalRegistrationsData['night_time'] == 1) { echo "Selected=Selected"; }?>>AM</option>
+                  <option value="2" <?php if($getServiceProviderPersonalRegistrationsData['night_time'] == 2) { echo "Selected=Selected"; }?>>PM</option>
+                  </select>
+                            <div class="help-block with-errors"></div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
                     <?php 
                     $getSubCategoryTypeId1 = explode(',',$getServiceProviderPersonalRegistrationsData['sub_category_id']);
                     $getSubCategories1 = getAllDataWithStatus('services_sub_category','0');?>

@@ -94,7 +94,9 @@ background-color: #fe6003;
 				<ul>
 					<li><a href="index.php">Home</a>
 					</li>
+
 					<li>checkout</li>
+
 				</ul>
 			</div>
 		</div>

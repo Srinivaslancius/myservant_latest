@@ -17,6 +17,7 @@
                     <th>Mobile</th>
                     <th>Created Date</th>
                     <th>Status</th>
+                    <th>Admin Comission</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -29,8 +30,68 @@
                     <td><?php echo $row['vendor_mobile'];?></td>
                     <td><?php echo $row['created_at'];?></td>
                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='food_vendors'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='food_vendors'>In Active</span>" ;} ?></td>
-                   <td><a href="edit_vendors.php?bid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a>&nbsp;<a href="#"><i class="zmdi zmdi-eye zmdi-hc-fw" data-toggle="modal" data-target="#<?php echo $row['id']; ?>" class=""></i></a></td>
+                    <td>
+                      <?php if ($row['vendor_charges_approved']==1 || ($row['delivery_charges'] == '' && $row['admin_comission'] == '')) { ?>
+                      <p data-toggle="modal" data-target="#<?php echo $row['id']; ?>_1" class="open_cursor">Pending</p>
+                      <?php } else { ?>
+                      <p>Approved</p>
+                      <?php } ?>
+
+                    </td>
+                    <td><a href="edit_vendors.php?bid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a>&nbsp;<a href="#"><i class="zmdi zmdi-eye zmdi-hc-fw" data-toggle="modal" data-target="#<?php echo $row['id']; ?>" class=""></i></a></td>
                     <!-- Open Modal Box  here -->
+
+                     <div id="<?php echo $row['id']; ?>_1" class="modal fade" tabindex="-1" role="dialog">
+                     
+                      <div class="modal-dialog">
+                        <div class="modal-content animated flipInX">
+                          <div class="modal-header bg-success">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">
+                                <i class="zmdi zmdi-close"></i>
+                              </span>
+                            </button>
+                            <center><h4 class="modal-title">Update Charges</h4></center>
+                          </div>
+                          <form method="POST" action="update_vendor_prices.php">
+
+                          <input type="hidden" name="vid" value="<?php echo $row['id']; ?>">
+                          <div class="modal-body" id="modal_body">
+
+                            <div class="row">
+                              <div class="col-sm-2"></div>
+                              <div class="col-sm-4">Delivery Charges:</div>
+                              <div class="col-sm-6"><input type="text" name="delivery_charges" class="form-control valid_price_dec" id="form-control-2" placeholder="Delivery charges" data-error="Please enter Delivery charges" required></div>
+                            </div>  <br /> 
+
+                            <div class="row">
+                              <div class="col-sm-2"></div>
+                              <div class="col-sm-4">Admin Comission (%) :</div>
+                              <div class="col-sm-6"><input type="text" name="admin_comin" class="form-control valid_price_dec" id="form-control-2" placeholder="Admin Comission" data-error="Please enter Delivery charges" required></div>
+                            </div>  <br /> 
+
+                            <div class="row">
+                              <div class="col-sm-6"></div>                              
+                              <div class="col-sm-2"><button type="submit" name="submit" class="btn btn-primary btn-block">Submit</button></div>
+                            </div>
+
+                          </div>
+                          </form>
+                          <div class="modal-footer">                           
+                            <style>
+                              #modal_body{
+                                font-size:14px;
+                                padding-top:30px;
+                                padding-left: 0px;
+                                font-family:Roboto,sans-serif;
+                              }
+                            </style>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
                     <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog">
                       <div class="modal-dialog">
                         <div class="modal-content animated flipInX">

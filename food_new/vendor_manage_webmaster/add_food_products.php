@@ -28,20 +28,31 @@ if (!isset($_POST['submit']))  {
             echo "Sorry, there was an error uploading your file.";
     }
   }
+
+   $getAdminComm = getIndividualDetails('food_vendors','id',$_SESSION['food_vendor_user_id']);
+   $adminComssion = $getAdminComm['admin_comission'];
+
     $product_weights = $_REQUEST['weight_type_id'];
     foreach($product_weights as $key=>$value){
 
         $product_weights1 = $_REQUEST['weight_type_id'][$key];
-        $product_price = $_REQUEST['product_price'][$key];
-        $sql = "INSERT INTO food_product_weight_prices ( `product_id`,`weight_type_id`,`product_price`) VALUES ('$last_id','$product_weights1','$product_price')";
+        $vendor_price = $_REQUEST['product_price'][$key];  
+       
+        $admin_price = (($adminComssion/ 100) * $vendor_price)+$vendor_price;
+
+       $sql = "INSERT INTO food_product_weight_prices ( `product_id`,`weight_type_id`,`vendor_price`,`admin_price`) VALUES ('$last_id','$product_weights1','$vendor_price','$admin_price')";
         $result = $conn->query($sql);
     }
+
     $product_ingredients = $_REQUEST['ingredient_name_id'];
     foreach($product_ingredients as $key=>$value){
 
         $product_ingredients1 = $_REQUEST['ingredient_name_id'][$key];
         $ingredient_price = $_REQUEST['ingredient_price'][$key];
-        $sql = "INSERT INTO food_product_ingredient_prices ( `product_id`,`ingredient_name_id`,`ingredient_price`) VALUES ('$last_id','$product_ingredients1','$ingredient_price')";
+
+        $admin_price = (($adminComssion/ 100) * $ingredient_price)+$ingredient_price;
+
+        $sql = "INSERT INTO food_product_ingredient_prices ( `product_id`,`ingredient_name_id`,`ingredient_price`,`admin_price`) VALUES ('$last_id','$product_ingredients1','$ingredient_price','$admin_price')";
         $result = $conn->query($sql);
     }
      

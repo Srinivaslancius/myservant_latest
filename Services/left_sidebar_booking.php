@@ -58,7 +58,7 @@
                         <a class="btn_full" href="cart.php">Book now</a>
 						<a class="btn_full_outline" href="index.php">Continue</a>
                         <?php } else { ?>
-                            <p style="text-align:center; color:#e04f67">No Services In Your Cart</p>
+                            <p style="text-align:center; color:#fe6003">No Services In Your Cart</p>
                         <?php } ?>
 					</div>
 					<!--/box_style_1 -->

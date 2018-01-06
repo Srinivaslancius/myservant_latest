@@ -46,13 +46,17 @@ if (!isset($_POST['submit']))  {
     $del = "DELETE FROM food_product_weight_prices WHERE product_id = '$id' ";
     $result = $conn->query($del);
 
+    $getAdminComm = getIndividualDetails('food_vendors','id',$_SESSION['food_vendor_user_id']);
+    $adminComssion = $getAdminComm['admin_comission'];
+
     $product_weights = $_REQUEST['weight_type_id'];
     foreach($product_weights as $key=>$value){
 
         $product_weights1 = $_REQUEST['weight_type_id'][$key];
-        $product_price = $_REQUEST['product_price'][$key];
-        if($product_weights1 && $product_price!=''){
-        $sql = "INSERT INTO food_product_weight_prices ( `product_id`,`weight_type_id`,`product_price`) VALUES ('$id','$product_weights1','$product_price')";
+        $vendor_price = $_REQUEST['product_price'][$key];
+        $admin_price = (($adminComssion/ 100) * $vendor_price)+$vendor_price;
+        if($product_weights1 && $vendor_price!=''){
+        $sql = "INSERT INTO food_product_weight_prices ( `product_id`,`weight_type_id`,`vendor_price`,`admin_price`) VALUES ('$id','$product_weights1','$vendor_price','$admin_price')";
         $result = $conn->query($sql);
         }
     }
@@ -66,8 +70,9 @@ if (!isset($_POST['submit']))  {
 
         $product_ingredients1 = $_REQUEST['ingredient_name_id'][$key];
         $ingredient_price = $_REQUEST['ingredient_price'][$key];
+        $admin_price = (($adminComssion/ 100) * $ingredient_price)+$ingredient_price;
         if($product_ingredients1 && $ingredient_price!=''){
-        $sql = "INSERT INTO food_product_ingredient_prices ( `product_id`,`ingredient_name_id`,`ingredient_price`) VALUES ('$id','$product_ingredients1','$ingredient_price')";
+        $sql = "INSERT INTO food_product_ingredient_prices ( `product_id`,`ingredient_name_id`,`ingredient_price`,`admin_price`) VALUES ('$id','$product_ingredients1','$ingredient_price','$admin_price')";
         $result = $conn->query($sql);
         }
     }
@@ -155,7 +160,7 @@ if (!isset($_POST['submit']))  {
                       ?>
                         <div class="form-group col-md-6">
                           <label for="form-control-2" class="control-label">Product Price</label>                         
-                          <input type="text" class="form-control" id="form-control-2" name="product_price[]" required onkeypress="return isNumberKey(event)" data-error="Please enter product actual price." placeholder="Actual Price" required value="<?php echo $row2['product_price']; ?>">
+                          <input type="text" class="form-control" id="form-control-2" name="product_price[]" required onkeypress="return isNumberKey(event)" data-error="Please enter product actual price." placeholder="Actual Price" required value="<?php echo $row2['vendor_price']; ?>">
                           <div class="help-block with-errors"></div>
                         </div>
                       
