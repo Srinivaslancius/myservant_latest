@@ -547,10 +547,10 @@ if($_SESSION['user_login_session_id'] == '') {
 $('.check_dev_type').click(function(){
 
 	var getcheckRadio = $(this).val();	
-	var getOrderDelCharge = parseInt($('#delivery_charge').val());	
-	var getSubTotal = parseInt($(this).attr('data-pri-key'));
-	var getServiceTax = parseInt($('#service_tax').val());
-	var getAdonsTotal = parseInt($('#getAdstotal').val());
+	var getOrderDelCharge = parseFloat($('#delivery_charge').val());	
+	var getSubTotal = parseFloat($(this).attr('data-pri-key'));
+	var getServiceTax = parseFloat($('#service_tax').val());
+	var getAdonsTotal = parseFloat($('#getAdstotal').val());
 	if(getcheckRadio == 1) {
 		$('#hide_del_fee').hide();		
 		$('#order_total').val(getSubTotal+getServiceTax+getAdonsTotal);
