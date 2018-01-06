@@ -184,14 +184,14 @@ if (!isset($_POST['submit']))  {
 					<div class="row">
               
                 <form autocomplete="off" data-toggle="validator" method="POST" enctype="multipart/form-data">
-                    <div class="col-sm-8 col-md-6 ">
+                    <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Name</label>
                     <input type="text" name="name" class="form-control" id="form-control-2" placeholder="Name" data-error="Please enter Name" required>
                     <div class="help-block with-errors"></div>
                   </div>
                     </div> 
-                    <div class="col-sm-8 col-md-6 ">
+                    <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Email</label>
                     <input type="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="user_input" placeholder="Email" data-error="Please enter Valid Email Address" onkeyup="checkUserAvailTest()" required>
@@ -201,26 +201,26 @@ if (!isset($_POST['submit']))  {
                     <input type="hidden" id="column_name" value="email">
                   </div>
                 </div> 
-                    <div class="col-sm-8 col-md-6 ">
+                    <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Mobile Number</label>
                     <input type="text" name="mobile_number" class="form-control valid_mobile_num" id="form-control-2" placeholder="Mobile Number" data-error="Please enter mobile number." required maxlength="10" pattern="[0-9]{10}">
                     <div class="help-block with-errors"></div>
                   </div>
                         </div>
-                  <div class="col-sm-8 col-md-6 ">
+                  <div class="col-sm-12 col-md-6 ">
                     <div class="form-group">
                       <label for="form-control-2" class="control-label">Landline Number</label>
                       <input type="text" name="landline_number" class="form-control valid_mobile_num" id="form-control-2" placeholder="landline Number" data-error="Please enter landline number." >
                       <div class="help-block with-errors"></div>
                     </div>
                   </div> 
-                  <div class="col-sm-8 col-md-6 ">
+                  <div class="col-sm-12 col-md-6 ">
                     <label for="form-control-2" class="control-label">Website</label>
                     <input type="url" name="website" class="form-control" id="form-control-2" placeholder="Website" data-error="Please enter Website." required >
                     <div class="help-block with-errors"></div>
                   </div> 
-                    <div class="col-sm-8 col-md-6 ">
+                    <div class="col-sm-12 col-md-6 ">
                   <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Choose your State</label>
@@ -233,7 +233,7 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
 </div> 
-                    <div class="col-sm-8 col-md-6 ">
+                    <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Choose your District</label>
                     <select name="lkp_district_id" id="lkp_district_id" class="form-control" data-error="This field is required." required onChange="getCities(this.value);">
@@ -242,7 +242,7 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
 </div> 
-                    <div class="col-sm-8 col-md-6 ">
+                    <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Choose your City</label>
                     <select name="lkp_city_id" id="lkp_city_id" class="form-control" data-error="This field is required." required onChange="getPincodes(this.value);">
@@ -251,7 +251,7 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
 </div> 
-                    <div class="col-sm-8 col-md-6 ">
+                    <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Choose your Pincode</label>
                     <select name="lkp_pincode_id" id="lkp_pincode_id" class="form-control" data-error="This field is required." required onChange="getLocations(this.value);">
@@ -260,7 +260,7 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
 </div> 
-                    <div class="col-sm-8 col-md-6 ">
+                    <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Choose your Locations</label>
                     <select name="lkp_location_id" id="lkp_location_id" class="form-control" data-error="This field is required." required>
@@ -269,14 +269,14 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
                         </div> 
-                    <div class="col-sm-8 col-md-12 ">
+                    <div class="col-sm-12 col-md-12 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Address</label>
                     <textarea name="address" class="form-control" id="category_description" placeholder="Address" data-error="Please enter Address." required></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
 </div> 
-                    <div class="col-sm-8 col-md-6 ">
+                    <div class="col-sm-12 col-md-6 ">
                   <?php $getServiceProviderTypes = getAllDataWithStatus('service_provider_types','0');?>
                   <div class="form-group">
 				 
@@ -292,28 +292,28 @@ if (!isset($_POST['submit']))  {
                     </div>
 					
                   <div id="service_provider_business_type">
-                      <div class="col-sm-8 col-md-6 ">
+                      <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Company Name</label>
                     <input type="text" name="company_name" class="form-control service_provider_business" id="form-control-2" placeholder="Company Name" data-error="Please enter Company Name">
                     <div class="help-block with-errors"></div>
                   </div>
                       </div>
-                      <div class="col-sm-8 col-md-6 ">
+                      <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Years</label>
                     <input type="text" name="est_year" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Years" data-error="Please enter Years">
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                      <div class="col-sm-8 col-md-6 ">
+                      <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Total Number of Employees</label>
                     <input type="text" name="total_no_of_emp" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Total Number of Employees" data-error="Please enter Total Number of Employees">
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                      <div class="col-sm-8 col-md-6 ">
+                      <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-4" class="control-label">Logo</label>
                     <!-- <img id="output" height="100" width="100"/> -->
@@ -322,35 +322,35 @@ if (!isset($_POST['submit']))  {
                       </label>
                   </div>
 </div>
-                      <div class="col-sm-8 col-md-6 ">
+                      <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Description</label>
                     <textarea name="description" class="form-control" id="meta_desc" placeholder="Description" data-error="Please enter Description."></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                      <div class="col-sm-8 col-md-6 ">
+                      <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Certification</label>
                     <input type="text" name="certification" class="form-control service_provider_business" id="form-control-2" placeholder="Certification" data-error="Please enter Certification">
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                      <div class="col-sm-8 col-md-6 ">
+                      <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Working Hours</label>
                     <input type="text" name="working_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Working Hours" data-error="Please enter Working Hours">
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                      <div class="col-sm-8 col-md-6 ">
+                      <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Contact Numbers</label>
                     <input type="text" name="contact_numbers" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Contact Numbers" data-error="Please enter Contact Numbers." maxlength="10" pattern="[0-9]{10}">
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                      <div class="col-sm-8 col-md-6 ">
+                      <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Email id</label>
                     <input type="email" name="email_id" id="user_input" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control service_provider_business" id="email" placeholder="email" data-error="Please enter Valid Email Address">
@@ -358,7 +358,7 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                      <div class="col-sm-8 col-md-6 ">
+                      <div class="col-sm-12 col-md-6 ">
                   <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Specialization</label>
@@ -372,14 +372,14 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                      <div class="col-sm-8 col-md-6 ">
+                      <div class="col-sm-12 col-md-6 ">
                   <div class="form-group" id="specialization_name">
                     <label for="form-control-2" class="control-label">Specialization Name</label>
                     <input type="text" name="specialization_name" class="form-control specialization_name" id="form-control-2" placeholder="Specialization" data-error="Please enter Specialization">
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                      <div class="col-sm-8 col-md-6 ">
+                      <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                       <!--- //if associate value = 0 (Yes) & if associate value = 1 (No) -->
                         <h4>Associate with us</h4>
@@ -392,14 +392,14 @@ if (!isset($_POST['submit']))  {
                   </div>
                    
                   <div id="service_provider_personal_type">
-                      <div class="col-sm-8 col-md-6 ">
+                      <div class="col-sm-12 col-md-6 ">
                     <div class="form-group">
                     <label for="form-control-2" class="control-label">Working Hours</label>
                     <input type="text" name="working_hours1" class="form-control service_provider_personal valid_mobile_num" id="form-control-2" placeholder="Working Hours" data-error="Please enter Working Hours">
                     <div class="help-block with-errors"></div>
                   </div>
                       </div>
-                       <div class="col-sm-8 col-md-6 ">
+                       <div class="col-sm-12 col-md-6 ">
                   <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Specialization</label>
@@ -413,14 +413,14 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                       <div class="col-sm-8 col-md-6 ">
+                       <div class="col-sm-12 col-md-6 ">
                   <div class="form-group" id="specialization_name1">
                     <label for="form-control-2" class="control-label">Specialization Name</label><br>
                     <input type="text" name="specialization_name1" class="form-control specialization_name1" id="form-control-2" placeholder="Specialization" data-error="Please enter Specialization" style="width:100%;height:40px">
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                       <div class="col-sm-8 col-md-6 ">
+                       <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Experience</label>
                     <input type="text" name="experience" class="form-control service_provider_personal valid_mobile_num" id="form-control-2" placeholder="Experience" data-error="Please enter Experience">
@@ -444,7 +444,13 @@ if (!isset($_POST['submit']))  {
 					</label>
 					 </div>
 					</div>
+					 <div class="col-sm-4">
+				  </div>
+					<div class="col-sm-4">
                   <button type="submit" name="submit" value="submit" class="btn btn-default btn-block">Submit</button>
+				  </div>
+				  <div class="col-sm-4">
+				  </div>
                 </form>
               </div>
             </div>

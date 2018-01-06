@@ -5178,11 +5178,11 @@ ul#top_tools a{
 /* New chnages swapna added for banner responsive */
 #layerslider{
        width:100% !important;
-       height:150px !important;
-        padding:0px !important;
-        margin-top:55px !important;
+      
+        padding-top:50px!important;       
         margin-bottom:0px !important;
 }
+
 header#plain{
 	padding-bottom:0px !important;
 }
@@ -5197,5 +5197,38 @@ header#plain{
 }
 /* 480 media query end */
   @media screen and (max-width: 640px) and (min-width: 360px){
+#twotabsearchtextbox {
+padding: 0px 30px 0 0px !important;
+}
 
   }
+   @media screen and (max-width: 1024px) and (min-width: 768px){
+	 .banner a {
+	right: 15px !important;
+}
+  
+	.img_container.padd_sp{
+	padding:20px !important;
+	  }
+  #twotabsearchtextbox{
+	 width:570px !important; 
+  }
+   }
+    @media screen and (max-width: 667px) and (min-width: 375px){
+		.img_container.padd_sp{
+		margin: 0 auto;
+		padding:10px !important;
+	}
+	}
+	@media screen and (max-width: 960px) and (min-width: 600px){
+	.banner a {
+    position: absolute;
+    top: 55%;
+	}
+	#twotabsearchtextbox {
+    width: 450px !important;
+}
+header#plain {
+    padding-bottom: 0px !important;
+}
+	}
