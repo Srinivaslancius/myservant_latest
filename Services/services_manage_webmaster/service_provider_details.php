@@ -76,7 +76,7 @@ $content .='<!DOCTYPE html>
       </tr>
     <tr>
         <td style="border-bottom:1px solid gray;color:#f26226">Total Working Hrs</td>
-     <td style="border-bottom:1px solid gray">'.'mrng :'.$getServiceBusinessProviderDetails['working_hours'].       'evng :'.$getServiceBusinessProviderDetails['evening_hours'].'</td>
+     <td style="border-bottom:1px solid gray">'.'mrng :'.$getServiceBusinessProviderDetails['working_hours'].'  '.'evng :'.$getServiceBusinessProviderDetails['evening_hours'].'</td>
      <td style="border-bottom:1px solid gray;color:#f26226">E-Mail</td>
      <td style="border-bottom:1px solid gray">'.$getServiceBusinessProviderDetails['email_id'].'</td>
       </tr>
