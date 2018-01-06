@@ -96,13 +96,15 @@
                               <div class="div-table">
                                     <div class="div-table-row">                                        
                                         <div  class="div-table-col">Weight Type</div>
-                                        <div  class="div-table-col">Price</div>
+                                        <div  class="div-table-col">Vendor Item Price</div>
+                                        <div  class="div-table-col">Admin Item Price</div>
                                     </div>
                                     <?php while ($getWeight = $getAllWeightTypes->fetch_assoc()) { ?>
                                     <div class="div-table-row">
                                         <div class="div-table-col"><?php $getWeightType = getAllDataWhere('food_product_weights','id',$getWeight['weight_type_id']);
                                           $getWeightTypes = $getWeightType->fetch_assoc(); echo $getWeightTypes['weight_type']; ?></div>
-                                        <div class="div-table-col"><?php echo $getWeight['product_price']; ?></div>
+                                        <div class="div-table-col"><?php echo $getWeight['vendor_price']; ?></div>
+                                        <div class="div-table-col"><?php echo $getWeight['admin_price']; ?></div>
                                     </div> 
                                     <?php } ?>                                                                      
                               </div>                               
@@ -112,13 +114,15 @@
                           <div class="div-table">
                                     <div class="div-table-row">                                        
                                         <div  class="div-table-col">Ingredient Type</div>
-                                        <div  class="div-table-col">Price</div>
+                                        <div  class="div-table-col">Vendor Ingredient Price</div>
+                                        <div  class="div-table-col">Admin Ingredient Price</div>
                                     </div>
                                     <?php while ($getWeight1 = $getAllIngredientTypes->fetch_assoc()) { ?>
                                     <div class="div-table-row">
                                         <div class="div-table-col"><?php $getIngredientType = getAllDataWhere('food_ingredients','id',$getWeight1['ingredient_name_id']);
                                           $getWeightTypes = $getIngredientType->fetch_assoc(); echo $getWeightTypes['ingredient_name']; ?></div>
                                         <div class="div-table-col"><?php echo $getWeight1['ingredient_price']; ?></div>
+                                        <div class="div-table-col"><?php echo $getWeight1['admin_price']; ?></div>
                                     </div> 
                                     <?php } ?>                                                                      
                             </div>
@@ -136,7 +140,7 @@
                             .div-table {
                               display: table;         
                               /*width: auto;*/
-                              width: 64%;
+                              width: 80%;
                              margin: auto;
                               background-color: #eee;         
                               border: 1px solid #666666;         
@@ -151,7 +155,7 @@
                               float: left; /* fix for  buggy browsers */
                               display: table-column;         
                               /*width: 150px;*/
-                              width: 180px;
+                              width: 150px;
                               background-color: #ccc;  
                             }
                           </style>

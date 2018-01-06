@@ -10,7 +10,7 @@ $getOrdersData = $conn->query($getOrders);
 $getOrdersData1 = $getOrdersData->fetch_assoc();
 
 $getSiteSettingsData = getIndividualDetails('food_site_settings','id',1);
-$img = $base_url . 'uploads/logo/'.$getSiteSettingsData['logo'];
+$img = $base_url . 'uploads/food_logo/'.$getSiteSettingsData['logo'];
 
 $getRestaurants = getIndividualDetails('food_vendors','id',$getOrdersData1['restaurant_id']);
 
