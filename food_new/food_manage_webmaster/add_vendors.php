@@ -235,7 +235,7 @@
 
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your Location</label>
-                    <select name="lkp_location_id" id="lkp_location_id" class="custom-select" data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a location', allowClear: true }">
+                    <select name="location" id="lkp_location_id" class="custom-select" data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a location', allowClear: true }">
                       <option value="">Select Location</option>
                    </select>
                     <div class="help-block with-errors"></div>
