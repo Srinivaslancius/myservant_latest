@@ -191,7 +191,7 @@
 
                                     <td>Rs. <?php echo $getCartItems['service_price']*$getCartItems['service_quantity']; ?></td>
 									<td class="options">
-										<a href="#"><i class=" icon-trash"></i></a></a>
+										<a class="delete_cart_item" data-cart-id ="<?php echo $getCartItems['id']; ?>"><i class=" icon-trash"></i></a>
 									</td>
 							</tr>
 
@@ -216,24 +216,26 @@
 										Sub Total
 									</td>
 									<td class="text-right">
-										10000
+										Rs. <?php echo $cartTotal; ?>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										GST(20%)
+										GST(<?php echo $getSiteSettingsData['service_tax']; ?>%)
 									</td>
 									<td class="text-right">
-										2000
+										<?php $service_tax += ($getSiteSettingsData['service_tax']/100)*$cartTotal; ?>
+										<?php echo $service_tax; ?>
 									</td>
 								</tr>
 								
 								<tr class="total">
 									<td>
-										Total cost
+										Total cost <br/>
+										<span style="font-size: 11px;font-weight:normal;text-transform:capitalize">(*Min visiting charges applicable.)</span>
 									</td>
 									<td class="text-right">
-										Rs. 12000
+										Rs. <?php echo $cartTotal+$service_tax; ?>
 									</td>
 								</tr>
 							</tbody>
@@ -327,86 +329,10 @@
             return false;
         });
         </script>
+        
         <script type="text/javascript">
-	        
-
- 		//Price calculations for cart items
-		$('.service_quantity').on('keyup', function () {
-			var priceTypeId = $(this).attr("data-price-type-id");
-			var serviceCurrentQuantity = $(this).val();	
-			var field_clause = 'quantity';   
-			var cartId = $(this).attr("data-cart-id");  	
-			if(serviceCurrentQuantity != 0) {
-				if(priceTypeId == 1) {									
-			    	var servicePrice = $(this).attr("data-service-get-price");		    	
-			    	var final_service_price = parseInt(serviceCurrentQuantity*servicePrice);	    	
-			    	$('.changePrice_'+cartId).text(final_service_price);
-			    	$('#get_total_class_'+cartId).val(final_service_price);	
-			    	calcTotal();
-			    } 
-			} else {
-				$(this).val('1');
-				alert("Please enter valid quantity!");
-				return false;
-			}
-			//Auto ssave db in quantity
-			$.ajax({
-			    type:"post",
-			    url:"update_cart.php",		    
-			    data: {
-		            cartId:cartId,service_quantity:serviceCurrentQuantity,field_clause:field_clause,
-		        },
-			    success:function(result){
-			    	//alert(result);
-			    }
-			});
-	    	
-		});
-		function calcTotal() {
-	    var subTotal = 0
-	    $(".get_total_class").each(function() {
-	      subTotal += $(this).val() != "" ? parseInt($(this).val()) : 0;
-	      $('#cart_total').html(subTotal);
-	      $('.get_cart_total').val(subTotal);
-	      var cartTotal = $('.get_cart_total').val();
-	      var serviceTax = $('#service_tax').val();
-	      grandTotal = (parseInt(cartTotal));	     
-	    })
- 		  $('.grand_total').html(grandTotal);
-	  }
-
-	  //cart auto update using ajax	   
-     $('.date-pick').on('change', function () {
-     	    var element = $(this).val();
-            var cartId = $(this).attr("data-cart-id");      
-            var field_clause = 'date';     
-            $.ajax({
-		    type:"post",
-		    url:"update_cart.php",		    
-		    data: {
-	            cartId:cartId,filed_value:element,field_clause:field_clause,
-	        },
-		    success:function(result){	
-		    	
-		    }
-		  }); 
-     });
-     $('.time-pick').on('change', function () {
-     	    var element = $(this).val();
-            var cartId = $(this).attr("data-cart-id");      
-            var field_clause = 'time';     
-            $.ajax({
-		    type:"post",
-		    url:"update_cart.php",		    
-		    data: {
-	            cartId:cartId,service_visit_time:element,field_clause:field_clause,
-	        },
-		    success:function(result){	
-		    //alert(result);	    	
-		    }
-		  }); 
-     });
-    </script>
+        
+        </script>
 
 </body>
 
