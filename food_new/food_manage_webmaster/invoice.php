@@ -53,7 +53,7 @@ if($getOrdersData1['delivery_charges'] == '0') {
     <thead>
       <tr style="background-color:#f2f2f2">
         <th colspan="2"></th>
-        <th colspan="2" style="padding-bottom:40px;padding-left:120px"><center><img src="<?php echo $base_url . 'uploads/logo/'.$getSiteSettingsData['logo'] ?>" class="logo-responsive" width="210px" height="100px;"></center></th>
+        <th colspan="2" style="padding-bottom:40px;padding-left:120px"><center><img src="<?php echo $base_url . 'uploads/food_logo/'.$getSiteSettingsData['logo'] ?>" class="logo-responsive" width="210px" height="100px;"></center></th>
 		<th></th>
 		<th colspan="2"><h3 style="color:#f26226">Invoice</h3>
 		<p>Oreder Id:<?php echo $getOrdersData1['order_id']; ?></p>

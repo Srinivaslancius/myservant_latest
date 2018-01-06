@@ -31,7 +31,7 @@
                     <td><?php echo $row['created_at'];?></td>
                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='food_vendors'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='food_vendors'>In Active</span>" ;} ?></td>
                     <td>
-                      <?php if ($row['vendor_charges_approved']==1) { ?>
+                      <?php if ($row['vendor_charges_approved']==1 || ($row['delivery_charges'] == '' && $row['admin_comission'] == '')) { ?>
                       <p data-toggle="modal" data-target="#<?php echo $row['id']; ?>_1" class="open_cursor">Pending</p>
                       <?php } else { ?>
                       <p>Approved</p>
