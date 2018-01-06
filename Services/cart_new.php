@@ -75,7 +75,7 @@
     
     if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
 
-    	$getCartBySubCat = "SELECT * FROM services_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' ";
+    	$getCartBySubCat = "SELECT * FROM services_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' GROUP BY service_sub_category_id";
 	    
     } else {
     	$getCartBySubCat = "SELECT * FROM services_cart WHERE session_cart_id='$session_cart_id' GROUP BY service_sub_category_id ";	    
@@ -189,9 +189,18 @@
 
                                     <td><input class="time-pick form-control selTime_<?php echo $subCatId; ?>" type="text" name="service_visit_time[]" value="<?php echo $service_visit_time1; ?>" ></td>
 
-                                    <td><input type="text" name="service_quantity[]" minlength="1" value="<?php echo $getCartItems['service_quantity'];?>" class="service_quantity valid_mobile_num form-control"></td>
+                                    <td><a href="#0" class="remove_item"><i class="icon_plus_alt" onclick="add_cart_item(<?php echo $getCartItems['id']; ?>)" style="color:#fe6003" ></i></a> <span id="cart_inc_id_<?php echo $getCartItems['id']; ?>"> <?php echo $getCartItems['service_quantity'];?> </span><a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item(<?php echo $getCartItems['id']; ?>)"style="color:#fe6003"></i></a>
 
-                                    <td>Rs. <?php echo $getCartItems['service_price']*$getCartItems['service_quantity']; ?></td>
+                                    <input type="hidden" value="<?php echo $getCartItems['service_quantity'];?>" id="cart_quantity_<?php echo $getCartItems['id'];?>">
+
+                                    	<!--<input type="text" name="service_quantity[]" minlength="1" value="<?php echo $getCartItems['service_quantity'];?>" data-service-get-price="<?php echo $getCartItems['service_price'];?>" data-cart-id="<?php echo $getCartItems['id'];?>" data-price-type-id="<?php echo $getSerName['service_price_type_id'];?>" class="service_quantity valid_mobile_num form-control">--></td>
+
+                                    <td class="changePrice_<?php echo $getCartItems['id']; ?>">Rs. <?php echo $getCartItems['service_price']*$getCartItems['service_quantity']; ?></td>
+
+                                    <input type="text" value="<?php echo $getCartItems['service_price']; ?>" id="individual_intem_price_<?php echo $getCartItems['id']; ?>">
+
+                                    <input type="hidden" class="get_total_class" id="get_total_class_<?php echo $getCartItems['id']; ?>" value="<?php echo $getSerName['service_price']*$getCartItems['service_quantity']; ?>">
+
 									<td class="options">
 										<a class="delete_cart_item" data-cart-id ="<?php echo $getCartItems['id']; ?>"><i class=" icon-trash"></i></a>
 									</td>
@@ -281,17 +290,17 @@
 	<link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css" />
 
 	<?php //$getCurMinTime = date("h:ia"); ?>
-	<?php 
+	<?php 	
 	$cur_time=date("ha");
 	$duration='+180 minutes';
 	$min_time= date('ha', strtotime($duration, strtotime($cur_time)));
 	?>
     <script>
 	$('input.date-pick').datepicker({minDate: 0, maxDate: "+2M"});
-	$('input.time-pick').timepicker({
-		'step': 30,
+	$('input.time-pick').timepicker({		
 		'minTime': '<?php echo $min_time; ?>',
-	    'maxTime': '11:30pm',
+	    'maxTime': '7:30pm',
+	    'step': 30,
 	    
 	    //'showDuration': true
 	});
@@ -325,6 +334,30 @@
             }))  
             return false;
         });
+
+		//Price calculations for cart items
+		$('.service_quantity').on('keyup', function () {
+			var priceTypeId = $(this).attr("data-price-type-id");
+			var serviceCurrentQuantity = $(this).val();	
+			var field_clause = 'quantity';   
+			var cartId = $(this).attr("data-cart-id");  	
+			if(serviceCurrentQuantity != 0) {
+				if(priceTypeId == 1) {					
+			    	var servicePrice = $(this).attr("data-service-get-price");		    	
+			    	var final_service_price = parseInt(serviceCurrentQuantity*servicePrice);	    	
+			    	$('.changePrice_'+cartId).text('Rs.'+final_service_price);
+			    	$('#get_total_class_'+cartId).val(final_service_price);	
+			    	calcTotal();
+			    } 
+			} else {
+				$(this).val('1');
+				alert("Please enter valid quantity!");
+				return false;
+			}
+			
+	    	
+		});
+
         </script>
         
         <script type="text/javascript">
@@ -344,6 +377,38 @@
 	        	$('.selTime_'+subCategoryId).val(selTime);
         	}        	
         	
+        }
+
+        function add_cart_item(cartId) {
+        	
+        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())+1;
+        	var cartPrice = parseInt($('#individual_intem_price_'+cartId).val());     
+        	
+        	if(cartPrice == 'Price') {
+        		var cartPrice1 = 0;
+        	} else {
+        		var cartPrice1 = cartPrice;
+        	}
+        	if(cartPrice!= null && cartPrice!='') {
+        		
+        		$('#cart_quantity_'+cartId).val(IncQuan);        	
+	        	$('#cart_inc_id_'+cartId).html(IncQuan);
+	        	$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice1);
+        	}        	            	
+        }
+
+        function remove_cart_item(cartId) {
+        	
+        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())-1;
+        	var cartPrice = parseInt($('#individual_intem_price_'+cartId).val());
+        	if(IncQuan!=0) {
+        		if(cartPrice!=0) {
+	        		$('#cart_quantity_'+cartId).val(IncQuan);
+	        		$('#cart_inc_id_'+cartId).html(IncQuan);
+	        		$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice);
+	        		return false;
+	        	}
+        	}        	
         }
         </script>
 
