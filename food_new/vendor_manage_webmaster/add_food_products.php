@@ -30,6 +30,7 @@ if (!isset($_POST['submit']))  {
   }
 
    $getAdminComm = getIndividualDetails('food_vendors','id',$_SESSION['food_vendor_user_id']);
+   $adminComssion = $getAdminComm['admin_comission'];
 
     $product_weights = $_REQUEST['weight_type_id'];
     foreach($product_weights as $key=>$value){
@@ -37,8 +38,7 @@ if (!isset($_POST['submit']))  {
         $product_weights1 = $_REQUEST['weight_type_id'][$key];
         $vendor_price = $_REQUEST['product_price'][$key];  
        
-        $adminComssion = $getAdminComm['admin_comission'];
-        $admin_price = ($adminComssion/ 100) * $vendor_price;
+        $admin_price = (($adminComssion/ 100) * $vendor_price)+$vendor_price;
 
        $sql = "INSERT INTO food_product_weight_prices ( `product_id`,`weight_type_id`,`vendor_price`,`admin_price`) VALUES ('$last_id','$product_weights1','$vendor_price','$admin_price')";
         $result = $conn->query($sql);
@@ -50,8 +50,7 @@ if (!isset($_POST['submit']))  {
         $product_ingredients1 = $_REQUEST['ingredient_name_id'][$key];
         $ingredient_price = $_REQUEST['ingredient_price'][$key];
 
-        $adminComssion = $getAdminComm['admin_comission'];
-        $admin_price = ($adminComssion/ 100) * $ingredient_price;
+        $admin_price = (($adminComssion/ 100) * $ingredient_price)+$ingredient_price;
 
         $sql = "INSERT INTO food_product_ingredient_prices ( `product_id`,`ingredient_name_id`,`ingredient_price`,`admin_price`) VALUES ('$last_id','$product_ingredients1','$ingredient_price','$admin_price')";
         $result = $conn->query($sql);

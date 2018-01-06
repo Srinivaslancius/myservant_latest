@@ -81,7 +81,7 @@
                                     <div class="div-table-row">
                                         <div class="div-table-col"><?php $getWeightType = getAllDataWhere('food_product_weights','id',$getWeight['weight_type_id']);
                                           $getWeightTypes = $getWeightType->fetch_assoc(); echo $getWeightTypes['weight_type']; ?></div>
-                                        <div class="div-table-col"><?php echo $getWeight['product_price']; ?></div>
+                                        <div class="div-table-col"><?php echo $getWeight['vendor_price']; ?></div>
                                     </div> 
                                     <?php } ?>                                                                      
                               </div>                               

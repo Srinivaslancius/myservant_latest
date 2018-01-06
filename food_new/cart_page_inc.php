@@ -149,8 +149,8 @@ if (isset($_POST['cart_id'])){
                                                     $ingredientId2 = $ingredientId1->fetch_assoc();
                                                     $ingId = $ingredientId2['item_ingredient_id'];
                                                     echo'<label class="radio" style="margin-bottom:20px">
-                                                        <h4 style="font-size:15px">'.$getInDet['ingredient_name'].'<span style="padding-left:50px">Rs:'.$getIngProdItems['ingredient_price'].'</span></h4>
-                                                        <input type="checkbox"'; if($ingId == $getInDet['id']) { echo 'checked="checked"'; } echo ' class="check_valid_add_on" value="'.$getIngProdItems['ingredient_price'].'" id="check_valid_add_on_'.$getCartItems1['id'].'" data-key="'.$getCartItems1['id'].'" data-ing-name="'.$getInDet['ingredient_name'].'" data-ing-id="'.$getInDet['id'].'" data-ing-price="'.$getIngProdItems['ingredient_price'].'" name="checkbox_'.$getCartItems1['id'].'">
+                                                        <h4 style="font-size:15px">'.$getInDet['ingredient_name'].'<span style="padding-left:50px">Rs:'.$getIngProdItems['admin_price'].'</span></h4>
+                                                        <input type="checkbox"'; if($ingId == $getInDet['id']) { echo 'checked="checked"'; } echo ' class="check_valid_add_on" value="'.$getIngProdItems['admin_price'].'" id="check_valid_add_on_'.$getCartItems1['id'].'" data-key="'.$getCartItems1['id'].'" data-ing-name="'.$getInDet['ingredient_name'].'" data-ing-id="'.$getInDet['id'].'" data-ing-price="'.$getIngProdItems['admin_price'].'" name="checkbox_'.$getCartItems1['id'].'">
                                                         <span class="checkmark"></span>
                                                     </label>';
                                                 }
