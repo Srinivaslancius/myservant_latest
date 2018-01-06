@@ -153,7 +153,7 @@
         <div class="main_title">
             <h2 class="nomargin_top"><?php echo $getchooseFrom1['title']; ?></h2>
             
-               <?php echo $getchooseFrom1['description']; ?>
+               <!-- <?php echo $getchooseFrom1['description']; ?> -->
           
         </div>
 
