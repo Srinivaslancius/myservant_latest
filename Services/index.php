@@ -110,11 +110,11 @@ display: none;
  @media screen and (max-width: 1024px) and (min-width: 768px){
 	 #layerslider{
   width:100% !important;
-  padding-top:100px;
+  margin-top:70px;
   }
  }
  #layerslider{
-	 padding-top:60px;
+	 padding-top:70px;
  }</style>
 </head>
 

@@ -315,9 +315,9 @@ if (!isset($_POST['submit']))  {
 </div>
                       <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
-                    <label for="form-control-4" class="control-label">Logo</label>
+                    <label for="form-control-4" class="control-label">Logo</label><br>
                     <!-- <img id="output" height="100" width="100"/> -->
-                    <label for="exampleFormControlFile1">                    
+						<label for="exampleFormControlFile1">                    
                         <input id="form-control-22" class="file-upload-input service_provider_business" type="file" accept="image/*" name="fileToUpload" id="fileToUpload"  onchange="loadFile(event)"  multiple="multiple" >
                       </label>
                   </div>
@@ -336,13 +336,7 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                      <div class="col-sm-12 col-md-6 ">
-                  <div class="form-group">
-                    <label for="form-control-2" class="control-label">Working Hours</label>
-                    <input type="text" name="working_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Working Hours" data-error="Please enter Working Hours">
-                    <div class="help-block with-errors"></div>
-                  </div>
-</div>
+                     
                       <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Contact Numbers</label>
@@ -350,14 +344,57 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                      <div class="col-sm-12 col-md-6 ">
+                      <div class="col-sm-12 col-md-12">
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Email id</label>
                     <input type="email" name="email_id" id="user_input" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control service_provider_business" id="email" placeholder="email" data-error="Please enter Valid Email Address">
                     <span id="email_status" style="color: red;"></span>
                     <div class="help-block with-errors"></div>
                   </div>
-</div>
+				</div>
+				 <div class="col-sm-12 col-md-12 ">
+                  <div class="form-group">
+                    <label for="form-control-2" class="control-label">Working Hours</label>
+					<div class="row">
+					<div class="col-sm-6 col-md-6">
+                    <div class="row">
+					<div class="col-sm-3">
+					 <p style="margin-top:8px">Morning:</p>
+					</div>
+					<div class="col-sm-4">
+                   <input type="text" name="working_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Time" data-error="Please enter Morning Timings">
+                    <div class="help-block with-errors"></div>
+					</div>
+					<div class="col-sm-4">
+                  <select name="strat_time" class="form-control" id="sel1">
+					<option value="1">AM</option>
+					<option value="2">PM</option>
+				  </select>
+                    <div class="help-block with-errors"></div>
+					</div>
+					</div>
+					</div>
+					<div class="col-sm-6 col-md-6"style="padding-left:5px">
+                    <div class="row">
+					<div class="col-sm-3">
+					 <p style="margin-top:8px">Evening:</p>
+					</div>
+					<div class="col-sm-4">
+                   <input type="text" name="evening_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Time" data-error="Please enter Working Hours">
+                    <div class="help-block with-errors"></div>
+					</div>
+					<div class="col-sm-4">
+                  <select name="night_time" class="form-control" id="sel1">
+					<option value="1">AM</option>
+          <option value="2">PM</option>
+				  </select>
+                    <div class="help-block with-errors"></div>
+					</div>
+					</div>
+					</div>
+					</div>
+                  </div>
+						</div> 
                       <div class="col-sm-12 col-md-6 ">
                   <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                   <div class="form-group">
@@ -371,7 +408,7 @@ if (!isset($_POST['submit']))  {
                    </select>
                     <div class="help-block with-errors"></div>
                   </div>
-</div>
+				</div>
                       <div class="col-sm-12 col-md-6 ">
                   <div class="form-group" id="specialization_name">
                     <label for="form-control-2" class="control-label">Specialization Name</label>
@@ -392,13 +429,49 @@ if (!isset($_POST['submit']))  {
                   </div>
                    
                   <div id="service_provider_personal_type">
-                      <div class="col-sm-12 col-md-6 ">
-                    <div class="form-group">
+                      <div class="col-sm-12 col-md-12 ">
+                  <div class="form-group">
                     <label for="form-control-2" class="control-label">Working Hours</label>
-                    <input type="text" name="working_hours1" class="form-control service_provider_personal valid_mobile_num" id="form-control-2" placeholder="Working Hours" data-error="Please enter Working Hours">
+					<div class="row">
+					<div class="col-sm-6 col-md-6">
+                    <div class="row">
+					<div class="col-sm-3">
+					 <p style="margin-top:8px">Morning:</p>
+					</div>
+					<div class="col-sm-4">
+                   <input type="text" name="working_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Time" data-error="Please enter Morning Timings">
                     <div class="help-block with-errors"></div>
+					</div>
+					<div class="col-sm-4">
+                  <select name="strat_time" class="form-control" id="sel1">
+					<option value="1">AM</option>
+					<option value="2">PM</option>
+				  </select>
+                    <div class="help-block with-errors"></div>
+					</div>
+					</div>
+					</div>
+					<div class="col-sm-6 col-md-6"style="padding-left:5px">
+                    <div class="row">
+					<div class="col-sm-3">
+					 <p style="margin-top:8px">Evening:</p>
+					</div>
+					<div class="col-sm-4">
+                   <input type="text" name="evening_hours" class="form-control service_provider_business valid_mobile_num" id="form-control-2" placeholder="Time" data-error="Please enter Working Hours">
+                    <div class="help-block with-errors"></div>
+					</div>
+					<div class="col-sm-4">
+                  <select name="night_time" class="form-control" id="sel1">
+					<option value="1">AM</option>
+          <option value="2">PM</option>
+				  </select>
+                    <div class="help-block with-errors"></div>
+					</div>
+					</div>
+					</div>
+					</div>
                   </div>
-                      </div>
+						</div> 
                        <div class="col-sm-12 col-md-6 ">
                   <?php $getSubCategories = getAllDataWithStatus('services_sub_category','0');?>
                   <div class="form-group">
@@ -420,13 +493,8 @@ if (!isset($_POST['submit']))  {
                     <div class="help-block with-errors"></div>
                   </div>
 </div>
-                       <div class="col-sm-12 col-md-6 ">
-                  <div class="form-group">
-                    <label for="form-control-2" class="control-label">Experience</label>
-                    <input type="text" name="experience" class="form-control service_provider_personal valid_mobile_num" id="form-control-2" placeholder="Experience" data-error="Please enter Experience">
-                    <div class="help-block with-errors"></div>
-                  </div>
-
+                   
+ <div class="col-sm-12 col-md-6 ">
                   <div class="form-group">
                     <label for="form-control-4" class="control-label">image</label>
                     <!-- <img id="output1" height="100" width="100"/> -->
