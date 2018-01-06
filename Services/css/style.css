@@ -5177,8 +5177,7 @@ ul#top_tools a{
 
 /* New chnages swapna added for banner responsive */
 #layerslider{
-       width:100% !important;
-      
+        width:100% !important;      
         padding-top:50px!important;       
         margin-bottom:0px !important;
 }
@@ -5200,19 +5199,32 @@ header#plain{
 #twotabsearchtextbox {
 padding: 0px 30px 0 0px !important;
 }
+#layerslider{
+	padding-top:40px !important;
+}
+
+  }
+  @media screen and (max-width: 568px) and (min-width: 320px){
+
+#layerslider{
+	padding-top:40px !important;
+}
 
   }
    @media screen and (max-width: 1024px) and (min-width: 768px){
 	 .banner a {
 	right: 15px !important;
 }
-  
 	.img_container.padd_sp{
 	padding:20px !important;
 	  }
   #twotabsearchtextbox{
 	 width:570px !important; 
   }
+  #layerslider{
+	width:100%;
+	padding-top:40px !important;
+}
    }
     @media screen and (max-width: 667px) and (min-width: 375px){
 		.img_container.padd_sp{
@@ -5228,7 +5240,23 @@ padding: 0px 30px 0 0px !important;
 	#twotabsearchtextbox {
     width: 450px !important;
 }
-header#plain {
-    padding-bottom: 0px !important;
+	header#plain {
+		padding-bottom: 0px !important;
+	}
+.cmn-toggle-switch {
+	right:-60px !important;
+}
+#layerslider{
+	width:100%;
+	padding:0px !important;
+}
+ul#top_tools{
+	right: -60px;
+}
+	}
+	@media screen and (max-width: 732px) and (min-width: 412px){
+		#layerslider{
+	width:100%;
+	padding-top:40px !important;
 }
 	}

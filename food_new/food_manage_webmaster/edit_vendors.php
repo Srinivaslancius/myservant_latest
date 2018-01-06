@@ -130,7 +130,7 @@ if (!isset($_POST['submit'])) {
                   </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Restaurant Name</label>
-                    <input type="text" name="restaurant_name" class="form-control" id="form-control-2" placeholder="Restaurant Name" data-error="Please enter restaurant name" required value="<?php echo $getVendorsData['restaurant_name'];?>">
+                    <input type="text" name="restaurant_name" readonly class="form-control" id="form-control-2" placeholder="Restaurant Name" data-error="Please enter restaurant name" required value="<?php echo $getVendorsData['restaurant_name'];?>">
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
@@ -161,16 +161,13 @@ if (!isset($_POST['submit'])) {
                   
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Email</label>
-                    <input type="email" name="vendor_email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" id="user_input" placeholder="Email" data-error="Please enter a valid email address." required value="<?php echo $getVendorsData['vendor_email'];?>" onkeyup="checkUserAvailTest()">
-                    <span id="input_status" style="color: red;"></span>
+                    <input type="email" name="vendor_email" readonly class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="user_input" placeholder="Email" data-error="Please enter a valid email address." required value="<?php echo $getVendorsData['vendor_email'];?>">
                     <div class="help-block with-errors"></div>
-                    <input type="hidden" id="table_name" value="food_vendors">
-                    <input type="hidden" id="column_name" value="vendor_email">
             
                   </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Mobile</label>
-                    <input type="text" name="vendor_mobile" class="form-control" id="form-control-2" placeholder="Mobile" data-error="Please enter Correct Mobile Number." required maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" value="<?php echo $getVendorsData['vendor_mobile'];?>">
+                    <input type="text" name="vendor_mobile" readonly class="form-control" id="form-control-2" placeholder="Mobile" data-error="Please enter Correct Mobile Number." required maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" value="<?php echo $getVendorsData['vendor_mobile'];?>">
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
@@ -233,7 +230,7 @@ if (!isset($_POST['submit'])) {
                    <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your City</label>
-                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a City', allowClear: true }">
+                    <select id="lkp_city_id" name="lkp_city_id" class="custom-select" data-error="This field is required." required data-plugin="select2" onChange="getPincodes(this.value);" data-options="{ placeholder: 'Select a City', allowClear: true }">
                       <option value="">Select City</option>
                       <?php while($row = $getCities->fetch_assoc()) {  ?>
                           <option <?php if($row['id'] == $getVendorsData['lkp_city_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>
@@ -241,14 +238,26 @@ if (!isset($_POST['submit'])) {
                     </select>
                     <div class="help-block with-errors"></div>
                   </div>
-                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Location</label>
-                    <input type="text" name="location" class="form-control" id="form-control-2" placeholder="Location Name" data-error="Please enter Location" required value="<?php echo $getVendorsData['location'];?>">
+                  <?php $getPincodes = getAllDataWithStatus('lkp_pincodes','0');?>
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Choose your Pincode</label>
+                    <select id="lkp_pincode_id" name="pincode" class="custom-select" data-error="This field is required." required data-plugin="select2" onChange="getLocations(this.value);" data-options="{ placeholder: 'Select a pincode', allowClear: true }">
+                      <option value="">Select Pincode</option>
+                      <?php while($row = $getPincodes->fetch_assoc()) {  ?>
+                          <option <?php if($row['id'] == $getVendorsData['pincode']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['pincode']; ?></option>
+                      <?php } ?>
+                    </select>
                     <div class="help-block with-errors"></div>
                   </div>
+                  <?php $getLocations = getAllDataWithStatus('lkp_locations','0');?>
                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Pincode</label>
-                    <input type="text" name="pincode" class="form-control" id="form-control-2" placeholder="Pincode" data-error="Please enter Pincode." required maxlength="6"  onkeypress="return isNumberKey(event)" required value="<?php echo $getVendorsData['pincode'];?>" >
+                    <label for="form-control-3" class="control-label">Choose your Location</label>
+                    <select id="lkp_location_id" name="location" class="custom-select" data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a location', allowClear: true }">
+                      <option value="">Select Location</option>
+                      <?php while($row = $getLocations->fetch_assoc()) {  ?>
+                          <option <?php if($row['id'] == $getVendorsData['location']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['location_name']; ?></option>
+                      <?php } ?>
+                    </select>
                     <div class="help-block with-errors"></div>
                   </div>
                     <div class="form-group">
