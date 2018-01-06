@@ -118,7 +118,7 @@ $content .='<!DOCTYPE html>
        <td style="border-bottom:1px solid gray;color:#f26226">Experience</td>
     <td style="border-bottom:1px solid gray">'.$getServicePersonalProviderDetails['experience'].'</td>
      <td style="border-bottom:1px solid gray;color:#f26226">Working Hours</td>
-     <td style="border-bottom:1px solid gray">'.$getServicePersonalProviderDetails['working_hours'].'</td>
+     <td style="border-bottom:1px solid gray">'.'mrng :'.$getServicePersonalProviderDetails['working_hours'].'  '.'evng :'.$getServicePersonalProviderDetails['evening_hours'].'</td>
       </tr>
     <tr>
         <td style="color:#f26226">Specialization</td>
