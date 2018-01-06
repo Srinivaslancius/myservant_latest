@@ -105,13 +105,6 @@ td{
 }
 
 @media only screen and (max-width: 480px) {
-	.alert-dismissable .close1{
-	right: 45px;	
-	}
-	.table.cart-list td{
-		padding-left: 55%;
-	}
-	
 	.rw_wdth h5{
 		margin-left:0px !important;
 	
@@ -192,7 +185,7 @@ td{
 							<th>ADDON</th>
 							<th>QUANTITY</th>
 							<th>TOTAL</th>
-							<th>REMOVE</th>
+							<th class="visible-xs">REMOVE</th>
 						</tr>
 					</thead>
 					<tbody>

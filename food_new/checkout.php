@@ -157,11 +157,7 @@
     filter: alpha(opacity=20);
     opacity: .2;
 }
-@media only screen and (max-width: 480px) {
-	.alert-dismissable .close1{
-	right: 5px;	
-	}	
-}
+
 </style>
     <!-- End Header =============================================== -->
 <?php
