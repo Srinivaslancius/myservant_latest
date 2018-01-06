@@ -18,6 +18,9 @@ if (isset($_REQUEST['userId'])  ) {
 		$lists["serviceId"] = $row["service_id"];
 		$lists["servicePrice"] = $row["service_price"];
 		$lists["serviceQuantity"] = $row["service_quantity"];	
+		$lists["groupId"] = $row["group_id"];
+		$groupName= getIndividualDetails('services_groups','id',$row['group_id']);
+		$lists["groupName"] = $groupName['group_name'];
 		$lists["serviceSelectedDate"] = date('m/d/Y', strtotime($row['service_selected_date']));
 		$lists["serviceSelectedTime"] = date('H:i:s A', strtotime($row['service_selected_time']));
 		$getSerName= getIndividualDetails('services_group_service_names','id',$row['service_id']);
