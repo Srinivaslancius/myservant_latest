@@ -107,7 +107,15 @@ display: none;
 		margin-top:60px !important;
 	}
 }
-</style>
+ @media screen and (max-width: 1024px) and (min-width: 768px){
+	 #layerslider{
+  width:100% !important;
+  padding-top:100px;
+  }
+ }
+ #layerslider{
+	 padding-top:60px;
+ }</style>
 </head>
 
 <body>
@@ -241,12 +249,12 @@ if(isset($_POST['submit'])) {
 			?>
 			<div class="row">
                  <?php  while($getAllCategoriesData = $getCategoriesData->fetch_assoc()) { ?> 
-				<div class="col-md-2 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
+				<div class="col-md-2 col-sm-4 wow zoomIn" data-wow-delay="0.1s">
 					<a href="sub_categories.php?key=<?php echo encryptPassword($getAllCategoriesData['id']); ?>">
-					<div class="tour_container prdct" style="height:180px">
+					<div class="tour_container prdct" style="height:220px">
 						<div class="ribbon_3 popular"><!-- <span>Popular</span> --></div>
-						<div class="img_container">
-                           <img src="<?php echo $base_url . 'uploads/services_category_images/'.$getAllCategoriesData['category_image'] ?>" class="img-responsive img_wdth" alt="<?php echo $getAllCategoriesData['category_name']; ?>" style="width:75%; height:75%;">
+						<div class="img_container padd_sp" style="padding:10px 0px 10px">
+                           <center><img src="<?php echo $base_url . 'uploads/services_category_images/'.$getAllCategoriesData['category_image'] ?>" class="img-responsive img_wdth" alt="<?php echo $getAllCategoriesData['category_name']; ?>"></center>
 						</div>
 						<div class="tour_title">
 							<h3><?php echo $getAllCategoriesData['category_name']; ?></h3>
@@ -274,7 +282,7 @@ if(isset($_POST['submit'])) {
       <div class="row">
         <?php $getServiceProvider =  getServicesProviderDataLimit('1','6'); ?>
                 <?php  while($getAllgetServiceProvider = $getServiceProvider->fetch_assoc()) { ?>
-        <div class="col-md-6 wow fadeIn" data-wow-delay="0.3s">
+        <div class="col-md-6 col-sm-12 wow fadeIn" data-wow-delay="0.3s">
           <div class="feature prdct mrgn_tp">
           <div class="row">
           <div class="col-sm-2">

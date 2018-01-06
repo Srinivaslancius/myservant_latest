@@ -24,7 +24,7 @@
         <div class="row">
     <form method="post" action="">
         <div class="search_bar">
-            <div class="col-md-3 col-xs-5 padd0">
+            <div class="col-md-3 col-sm-3 col-xs-5 padd0">
         <span class="nav-facade-active" id="nav-search-in">
             <span id="nav-search-in-content">Services Categories</span>
             <span class="nav-down-arrow nav-sprite"></span>
@@ -37,7 +37,7 @@
             </select>
             </span>
             </div>
-            <div class="col-md-9 col-xs-7 padd0">
+            <div class="col-md-9 col-sm-9 col-xs-7 padd0">
             <div class="nav-searchfield-outer">
             <input type="text" autocomplete="off" name="service_name" class="service_name" placeholder=" Search your related service" id="twotabsearchtextbox" style="width:700px; line-height:30px; border:1px solid white">
             </div>

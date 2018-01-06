@@ -56,7 +56,7 @@
 	<!-- Mobile menu overlay mask -->
 
 	<!-- Header================================================== -->
-	<header>
+	<header id="plain">
 	<?php include_once './top_header.php';?>
 		<!-- End top line-->
 		<div class="container">
