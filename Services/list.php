@@ -93,7 +93,7 @@
 				$getSubcategories = getIndividualDetails('services_sub_category','id',$subcatid);
 				$getCategories = getIndividualDetails('services_category','id',$getSubcategories['services_category_id']); 
 				?>
-				<div class="col-lg-7 col-md-7" id="faq">
+				<div class="col-lg-7 col-sm-7 col-md-7" id="faq">
 					<h3 class="nomargin_top"><?php echo $getCategories['category_name'].' / '.$getSubcategories['sub_category_name']?></h3>
 
 					<div class="panel-group" id="payment">
@@ -169,7 +169,7 @@
 				</div>
 				<!-- End col lg-9 -->
                                 
-                                <div class="col-lg-5 col-md-5">
+                                <div class="col-lg-5 col-sm-5 col-md-5">
                                     <?php include_once './left_sidebar_booking.php';?>
                                 </div>
 			</div>
