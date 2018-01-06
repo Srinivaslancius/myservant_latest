@@ -13,18 +13,26 @@ if (!isset($_POST['submit'])) {
     $meta_keywords = $_POST['meta_keywords'];
     $meta_desc = $_POST['meta_desc'];
     $lkp_status_id = $_POST['lkp_status_id'];
-    $fileToUpload = $_FILES["fileToUpload"]["name"];
+    
 
-    if($_FILES["fileToUpload"]["name"]!='') {
+    if($_FILES["fileToUpload"]["name"]!='' && $_FILES["fileToUpload1"]["name"]!='') {
 
               $fileToUpload = $_FILES["fileToUpload"]["name"];
               $target_dir = "../../uploads/services_category_images/";
               $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
               $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
               $getImgUnlink = getImageUnlink('category_image','services_category','id',$id,$target_dir);
+
+              $fileToUpload1 = $_FILES["fileToUpload1"]["name"];
+              $target_dir1 = "../../uploads/services_category_app_images/";
+              $target_file1 = $target_dir1 . basename($_FILES["fileToUpload1"]["name"]);
+              $imageFileType1 = pathinfo($target_file1,PATHINFO_EXTENSION);
+              $getImgUnlink1 = getImageUnlink('app_image','services_category','id',$id,$target_dir1);
+
                 //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
               if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    $sql = "UPDATE `services_category` SET category_name = '$category_name', category_description = '$category_description', category_position = '$category_position',category_image = '$fileToUpload',meta_title = '$meta_title',meta_keywords = '$meta_keywords',meta_desc = '$meta_desc', lkp_status_id='$lkp_status_id' WHERE id = '$id' ";
+                  move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1);
+                    $sql = "UPDATE `services_category` SET category_name = '$category_name', category_description = '$category_description', category_position = '$category_position',category_image = '$fileToUpload',app_image ='$fileToUpload1',meta_title = '$meta_title',meta_keywords = '$meta_keywords',meta_desc = '$meta_desc', lkp_status_id='$lkp_status_id' WHERE id = '$id' ";
                     if($conn->query($sql) === TRUE){
                        echo "<script type='text/javascript'>window.location='services_category.php?msg=success'</script>";
                     } else {
@@ -34,7 +42,44 @@ if (!isset($_POST['submit'])) {
                 } else {
                     echo "Sorry, there was an error uploading your file.";
                 }
-      } else {
+      }
+      elseif($_FILES["fileToUpload"]["name"]!=''){
+              $fileToUpload = $_FILES["fileToUpload"]["name"];
+              $target_dir = "../../uploads/services_category_images/";
+              $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+              $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+              $getImgUnlink = getImageUnlink('category_image','services_category','id',$id,$target_dir);
+
+
+              move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+              
+                    $sql = "UPDATE `services_category` SET category_name = '$category_name', category_description = '$category_description', category_position = '$category_position',category_image = '$fileToUpload',meta_title = '$meta_title',meta_keywords = '$meta_keywords',meta_desc = '$meta_desc', lkp_status_id='$lkp_status_id' WHERE id = '$id' ";
+                    if($conn->query($sql) === TRUE){
+                echo "<script type='text/javascript'>window.location='services_category.php?msg=success'</script>";
+                } else {
+                echo "<script type='text/javascript'>window.location='services_category.php?msg=fail'</script>";
+                } 
+              
+      }
+      elseif ( $_FILES["fileToUpload1"]["name"]!='') {
+
+              $fileToUpload1 = $_FILES["fileToUpload1"]["name"];
+              $target_dir1 = "../../uploads/services_category_app_images/";
+              $target_file1 = $target_dir1 . basename($_FILES["fileToUpload1"]["name"]);
+              $imageFileType1 = pathinfo($target_file1,PATHINFO_EXTENSION);
+              $getImgUnlink1 = getImageUnlink('app_image','services_category','id',$id,$target_dir1);
+
+              move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1);
+                
+                    $sql = "UPDATE `services_category` SET category_name = '$category_name', category_description = '$category_description', category_position = '$category_position',app_image ='$fileToUpload1',meta_title = '$meta_title',meta_keywords = '$meta_keywords',meta_desc = '$meta_desc', lkp_status_id='$lkp_status_id' WHERE id = '$id' ";
+                    if($conn->query($sql) === TRUE){
+                    echo "<script type='text/javascript'>window.location='services_category.php?msg=success'</script>";
+                    } else {
+                    echo "<script type='text/javascript'>window.location='services_category.php?msg=fail'</script>";
+                    } 
+              
+      }
+       else {
 
           $sql = "UPDATE `services_category` SET category_name = '$category_name', category_description = '$category_description', category_position = '$category_position',meta_title = '$meta_title',meta_keywords = '$meta_keywords',meta_desc = '$meta_desc', lkp_status_id='$lkp_status_id' WHERE id = '$id' ";
           if($conn->query($sql) === TRUE){
@@ -69,6 +114,14 @@ if (!isset($_POST['submit'])) {
                     <label class="btn btn-default file-upload-btn">
                         Choose file...
                         <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload" id="fileToUpload"  onchange="loadFile(event)"  multiple="multiple" >
+                      </label>
+                  </div>
+                  <div class="form-group">
+                    <label for="form-control-4" class="control-label">App Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <img src="<?php echo $base_url . 'uploads/services_category_app_images/'.$getCategoriesData['app_image'] ?>"  id="output1" height="100" width="100"/>
+                    <label class="btn btn-default file-upload-btn">
+                        Choose file...
+                        <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload1" id="fileToUpload1"  onchange="loadFile1(event)"  multiple="multiple" >
                       </label>
                   </div>
                   <div class="form-group">

@@ -13,15 +13,21 @@ if (!isset($_POST['submit']))  {
   $meta_desc = $_POST['meta_desc'];
   $lkp_status_id = $_POST['lkp_status_id'];
   $fileToUpload = $_FILES["fileToUpload"]["name"];
+  $fileToUpload1 = $_FILES["fileToUpload1"]["name"];
   
-  if($fileToUpload!='') {
+  if($fileToUpload!='' && $fileToUpload1!='') {
 
     $target_dir = "../../uploads/services_category_images/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
+    $target_dir1 = "../../uploads/services_category_app_images/";
+    $target_file1 = $target_dir1 . basename($_FILES["fileToUpload1"]["name"]);
+    $imageFileType1 = pathinfo($target_file1,PATHINFO_EXTENSION);
+
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        $sql = "INSERT INTO services_category (`category_name`, `category_description`,`category_image`, `category_position`, `meta_title`, `meta_keywords`, `meta_desc`, `lkp_status_id`) VALUES ('$category_name', '$category_description','$fileToUpload', '$category_position', '$meta_title', '$meta_keywords', '$meta_desc', '$lkp_status_id')"; 
+      move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1);
+        $sql = "INSERT INTO services_category (`category_name`, `category_description`,`category_image`,`app_image`,`category_position`, `meta_title`, `meta_keywords`, `meta_desc`, `lkp_status_id`) VALUES ('$category_name', '$category_description','$fileToUpload','$fileToUpload1' ,'$category_position', '$meta_title', '$meta_keywords', '$meta_desc', '$lkp_status_id')"; 
         if($conn->query($sql) === TRUE){
            echo "<script type='text/javascript'>window.location='services_category.php?msg=success'</script>";
         } else {
@@ -57,7 +63,14 @@ if (!isset($_POST['submit']))  {
                         <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload" id="fileToUpload"  onchange="loadFile(event)"  multiple="multiple" required >
                       </label>
                   </div>
-
+                  <div class="form-group">
+                    <label for="form-control-4" class="control-label">App Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <img id="output1" height="100" width="100"/>
+                    <label class="btn btn-default file-upload-btn">
+                      Choose file...
+                        <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload1" id="fileToUpload1"  onchange="loadFile1(event)"  multiple="multiple" required >
+                      </label>
+                  </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Category Description</label>
                     <textarea name="category_description" class="form-control" id="category_description" placeholder="Category Description" data-error="Please enter Category Description." required></textarea>
