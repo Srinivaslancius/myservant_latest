@@ -118,11 +118,12 @@
                                             <p>*Select Same date and time for all the same category orders</p>
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="date-pick form-control" type="text" name="service_visit_date[]" data-cart-id="<?php echo $getSubCats['id'];?>"  value="<?php echo $service_selected_date1; ?>">
+                                            <input class="date-pick form-control" type="text" name="service_visit_date[]" value="<?php echo $service_selected_date1; ?>" id="sel_date_<?php echo $subCatName['id']; ?>" readonly onChange="selectDate(<?php echo $subCatName['id']; ?>)">
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="time-pick form-control cart_update_value" type="text" name="service_visit_time[]" data-cart-id="<?php echo $getSubCats['id'];?>"  value="<?php echo $service_visit_time1; ?>">
+                                            <input class="time-pick form-control" type="text" name="service_visit_time[]" value="<?php echo $service_visit_time1; ?>" id="sel_time_<?php echo $subCatName['id']; ?>" onChange="selectTime(<?php echo $subCatName['id']; ?>)">
                                         </div>
+                                       
                                     </div>
                                         
 					<table class="table table-striped cart-list add_bottom_30">
@@ -162,7 +163,7 @@
 									$getCartItems = "SELECT * FROM services_cart WHERE service_sub_category_id = '$subCatId' AND session_cart_id='$session_cart_id'  ";
 								}
 								
-								  $getServicenames = $conn->query($getCartItems); ?>
+								$getServicenames = $conn->query($getCartItems); ?>
 
                             <?php 
 								$cartTotal = 0; $service_tax = 0;
@@ -182,10 +183,11 @@
 			                            <td><?php echo $getSerName['price_after_visiting']; ?></td>
 			                        <?php } else { ?>
 			                            <td><?php echo $getSerName['service_min_price']; ?> - <?php echo $getSerName['service_max_price']; ?></td>
-			                        <?php } ?>
+			                        <?php } ?>			                       
 
-                                    <td><input class="date-pick form-control" type="text" name="service_visit_date[]" value="<?php echo $service_selected_date1; ?>"></td>
-                                    <td><input class="time-pick form-control cart_update_value" type="text" name="service_visit_time[]" value="<?php echo $service_visit_time1; ?>"></td>
+                                    <td><input class="date-pick form-control selDate_<?php echo $subCatId; ?>" type="text" name="service_visit_date[]" value="<?php echo $service_selected_date1; ?>" ></td>
+
+                                    <td><input class="time-pick form-control selTime_<?php echo $subCatId; ?>" type="text" name="service_visit_time[]" value="<?php echo $service_visit_time1; ?>" ></td>
 
                                     <td><input type="text" name="service_quantity[]" minlength="1" value="<?php echo $getCartItems['service_quantity'];?>" class="service_quantity valid_mobile_num form-control"></td>
 
@@ -274,32 +276,27 @@
 	<script data-cfasync="false" src="/cdn-cgi/scripts/af2821b0/cloudflare-static/email-decode.min.js"></script><script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery.timepicker.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css" />
-        <script>
-		$('input.date-pick').datepicker({minDate: 0, maxDate: "+2M"});
-		$('input.time-pick').timepicker({
-			'step': 30,
-			showInpunts: false
-		})
+
+	<?php //$getCurMinTime = date("h:ia"); ?>
+	<?php 
+	$cur_time=date("ha");
+	$duration='+180 minutes';
+	$min_time= date('ha', strtotime($duration, strtotime($cur_time)));
+	?>
+    <script>
+	$('input.date-pick').datepicker({minDate: 0, maxDate: "+2M"});
+	$('input.time-pick').timepicker({
+		'step': 30,
+		'minTime': '<?php echo $min_time; ?>',
+	    'maxTime': '11:30pm',
+	    
+	    //'showDuration': true
+	});
 	</script>
 
-	<script>
-		if ($('.prod-tabs .tab-btn').length) {
-			$('.prod-tabs .tab-btn').on('click', function (e) {
-				e.preventDefault();
-				var target = $($(this).attr('href'));
-				$('.prod-tabs .tab-btn').removeClass('active-btn');
-				$(this).addClass('active-btn');
-				$('.prod-tabs .tab').fadeOut(0);
-				$('.prod-tabs .tab').removeClass('active-tab');
-				$(target).fadeIn(500);
-				$(target).addClass('active-tab');
-			});
-
-		}
-	</script>
 	<script type="text/javascript">
         $(".delete_cart_item").click(function(){
             var element = $(this);
@@ -331,7 +328,23 @@
         </script>
         
         <script type="text/javascript">
-        
+        function selectDate(subCategoryId) {
+
+        	var selDate = $('#sel_date_'+subCategoryId).val();        	
+        	if(selDate!='') {
+        		$('.selDate_'+subCategoryId).val(selDate);	        	
+        	}        	
+        	
+        }
+
+        function selectTime(subCategoryId) {
+
+        	var selTime = $('#sel_time_'+subCategoryId).val();
+        	if(selTime != '') {
+	        	$('.selTime_'+subCategoryId).val(selTime);
+        	}        	
+        	
+        }
         </script>
 
 </body>
