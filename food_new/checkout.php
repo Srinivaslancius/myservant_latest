@@ -451,7 +451,7 @@ if($_SESSION['user_login_session_id'] == '') {
 					<tr>
 						<td class="total">
 							<?php $order_total = $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?>
-							 TOTAL <span class="pull-right cart_total2" id="apply_price_aft_del">Rs. <?php echo $order_total; ?></span>
+							 TOTAL <span class="pull-right cart_total2" id="apply_price_aft_del">Rs. <?php echo round($order_total); ?></span>
 							  
 						</td>
 					</tr>
@@ -460,7 +460,7 @@ if($_SESSION['user_login_session_id'] == '') {
 
 					<input type="hidden" name="delivery_charge" value="<?php echo $DeliveryCharges;?>" id="delivery_charge">
 					<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>" id="sub_total">
-					<input type="hidden" name="order_total" value="<?php echo $order_total; ?>" id="order_total">
+					<input type="hidden" name="order_total" value="<?php echo round($order_total); ?>" id="order_total">
 					<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>" id="service_tax">
 					<input type="hidden" name="getAdstotal" value="<?php echo $getAdstotal; ?>" id="getAdstotal">
 					<input type="hidden" name="discount_money" value="0" id="discount_money">

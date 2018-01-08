@@ -130,3 +130,6 @@ element.style {
 #delivery_time, #hero_video, #hero_video>div, .box_home, .high_light a, .thumb_strip {
     text-align: center;
 }
+.table>thead>tr>th,.table>thead>tr>td{
+	width:20%;
+}

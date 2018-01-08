@@ -99,11 +99,13 @@
 			</div>
 		</div>
 		<!-- End position -->
+		<?php if($cartSubCat->num_rows > 0) { ?>
 		<form method="POST" action="update_new_cart.php">
 		<div class="container margin_60">
 			<div class="row">
                             <div class="col-md-9">
-                           <?php 
+						
+                           <?php                            
 							$cartTotal = 0; $service_tax = 0; $cartSubTotal=0;
                            while ($getSubCats = $cartSubCat->fetch_assoc()) { ?>
 				<div class="col-md-12 back_white mtop10 padd0">
@@ -193,9 +195,9 @@
 
 			                        <input type="hidden" name="cart_inc_id[]" value="<?php echo $getCartItems['id']; ?>">                       
 
-                                    <td><input class="date-pick form-control selDate_<?php echo $subCatId; ?>" type="text" name="service_visit_date[]" value="<?php echo $service_selected_date1; ?>" ></td>
+                                    <td><input required class="date-pick form-control selDate_<?php echo $subCatId; ?>" type="text" name="service_visit_date[]" value="<?php echo $service_selected_date1; ?>" ></td>
 
-                                    <td><input class="time-pick form-control selTime_<?php echo $subCatId; ?>" type="text" name="service_visit_time[]" value="<?php echo $service_visit_time1; ?>" ></td>
+                                    <td><input required class="time-pick form-control selTime_<?php echo $subCatId; ?>" type="text" name="service_visit_time[]" value="<?php echo $service_visit_time1; ?>" ></td>
 
                                     <td><a href="#0" class="remove_item"><i class="icon_plus_alt" onclick="add_cart_item(<?php echo $getCartItems['id']; ?>)" style="color:#fe6003" ></i></a> <span id="cart_inc_id_<?php echo $getCartItems['id']; ?>"> <?php echo $getCartItems['service_quantity'];?> </span><a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item(<?php echo $getCartItems['id']; ?>)"style="color:#fe6003"></i></a>
 
@@ -210,7 +212,7 @@
                                     <input type="hidden" value="<?php echo $getCartItems['service_price']; ?>" id="individual_intem_price_<?php echo $getCartItems['id']; ?>">
 
 									<td class="options">
-										<a class="delete_cart_item" data-cart-id ="<?php echo $getCartItems['id']; ?>"><i class=" icon-trash"></i></a>
+										<a class="delete_cart_item" data-cart-id ="<?php echo $getCartItems['id']; ?>"><i class=" icon-trash" style="color:#fe6003"></i></a>
 									</td>
 							</tr>
 
@@ -224,7 +226,9 @@
 				</div>
 				<!-- End col-md-8 -->
                             <?php } ?>
+							
                             </div>
+							
                                 <aside class="col-md-3">
 					<div class="box_style_1">
 						<h3 class="inner">- Your Order Total -</h3>
@@ -274,7 +278,8 @@
 							<input type="submit" class="btn_full" name="submit" value="Proceed To Check out">	
 
 						<?php } ?>
-						<a class="btn_full_outline" href="services.php"><i class="icon-right"></i> Continue shopping</a>
+						<a class="btn_full_outline" href="services.php"><i class="icon-right"></i> Continue shopping</a><br>
+						<a class="btn_full" href="#">Clear cart</a>
 					</div>
 					
 				</aside>
@@ -284,6 +289,10 @@
 			<!--End row -->
 		</div>
 		</form>
+		<?php }  else { ?> <br />
+			<p style="text-align:center; color:#f26226">No Services In Your Cart</p>
+        	<center><a href="services.php" style="color:#f26226">Click here for SERVICES</a></center><br /><br />
+		<?php } ?>
 		<!--End container -->
 	</main>
 	<!-- End main -->
@@ -368,7 +377,7 @@
         }
         function add_cart_item(cartId) {
         	
-        	if($('#individual_intem_price_'+cartId).val() == 'Price') {
+        	if(isNaN($('#individual_intem_price_'+cartId).val())) {
         		var cartPrice1 = 0;
         	} else {
         		var cartPrice1 = $('#individual_intem_price_'+cartId).val();
@@ -382,20 +391,37 @@
         }
         function remove_cart_item(cartId) {
         	
-        	if($('#individual_intem_price_'+cartId).val() == 'Price') {
+        	if(isNaN($('#individual_intem_price_'+cartId).val())) {
         		var cartPrice1 = 0;
         	} else {
         		var cartPrice1 = $('#individual_intem_price_'+cartId).val();
         	}
-        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())-1;        	
-        	if(IncQuan!=0) {
-        		$('#cart_quantity_'+cartId).val(IncQuan);
-        		$('#cart_inc_id_'+cartId).html(IncQuan);
-        		$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice1);
-        		$('#individual_total_'+cartId).val(IncQuan*cartPrice1);
-        		calculateSum();
+        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())-1; 
+
+        	if(IncQuan == 0) {        		
+        		$.ajax({
+			      type:'post',
+			      url:'delete_cart_items.php',
+			      data:{
+			         cart_id : cartId,        
+			      },
+			      success:function(response) {
+			        location.reload();
+			      }
+			    });
+
+        	} else {
+
+        		if(IncQuan!=0) {
+	        		$('#cart_quantity_'+cartId).val(IncQuan);
+	        		$('#cart_inc_id_'+cartId).html(IncQuan);
+	        		$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice1);
+	        		$('#individual_total_'+cartId).val(IncQuan*cartPrice1);
+	        		calculateSum();
         		//return false;
+        		}
         	}
+        	
         		
         }
         function calculateSum() { 

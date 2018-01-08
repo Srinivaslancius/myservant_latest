@@ -258,14 +258,14 @@ if($_SESSION['session_restaurant_id']!= $getRestKey) {
 						</td>
 						<td>
 							<?php $getFirstPrice =  getIndividualDetails('food_product_weight_prices','product_id',$productId); ?>
-							<strong id="get_price_<?php echo $productId; ?>">Rs. <?php echo $getFirstPrice['admin_price']; ?></strong>							
+							<strong id="get_price_<?php echo $productId; ?>">Rs. <?php echo round($getFirstPrice['admin_price']); ?></strong>							
 						</td>
 
 
 						<td>
 							<div class="selectdiv">
 							<label>
-							<input type="hidden" id="item_price_<?php echo $productId; ?>" name="item_price" value="<?php echo $getFirstPrice['admin_price']; ?>">
+							<input type="hidden" id="item_price_<?php echo $productId; ?>" name="item_price" value="<?php echo round($getFirstPrice['admin_price']); ?>">
 							<input type="hidden" id="item_category_id_<?php echo $productId; ?>" name="item_category_id" value="<?php echo $getItemsByCategory['category_id']; ?>">
 							<?php $getWeightTypes = getAllDataWhere('food_product_weight_prices','product_id',$productId); ?>
 							<select name="item_weight_type" id="item_weight_type_<?php echo $productId; ?>" class="get_product_id" data-key-product-id="<?php echo $productId?>" >

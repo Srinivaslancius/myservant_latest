@@ -358,7 +358,7 @@ td{
 							<td>Delivery Charges <span class="pull-right">Rs. <?php echo $deliveryCharges; ?></span> </td>
 						</tr>
 						<tr>
-							<td style="color:#fe6003">TOTAL <span class="pull-right total_price">Rs. <?php echo $cartTotal+$service_tax+$getAdstotal+$deliveryCharges; ?></span></td>
+							<td style="color:#fe6003">TOTAL <span class="pull-right total_price">Rs. <?php echo round($cartTotal+$service_tax+$getAdstotal+$deliveryCharges); ?></span></td>
 						</tr>
 						</tbody>
 						</table>
