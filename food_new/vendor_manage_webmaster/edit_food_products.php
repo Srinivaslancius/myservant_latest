@@ -183,7 +183,7 @@ if (!isset($_POST['submit']))  {
                       <div class="form-group col-md-6">
                           <label for="form-control-3" class="control-label">Choose Ingredient Type</label>
                           <?php $result = getAllDataWithStatus('food_ingredients','0'); ?>                                                
-                              <select name="ingredient_name_id[]" required id="form-control-3" class="custom-select" data-error="This field is required." required>
+                              <select name="ingredient_name_id[]" id="form-control-3" class="custom-select" >
                                   <?php while($row = $result->fetch_assoc()) { ?>
                                   <?php $getTermName =getAllDataWhereWithActive('food_ingredients',$clause,$row2['ingredient_name_id']); ?>
                                       <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == $row2['ingredient_name_id']) { echo "Selected"; } ?>><?php echo $row['ingredient_name']; ?></option>
@@ -198,7 +198,7 @@ if (!isset($_POST['submit']))  {
                       ?>
                       <div class="form-group col-md-6">
                         <label for="form-control-2" class="control-label">Ingredient Price</label>                         
-                        <input type="text" class="form-control" id="form-control-2" name="ingredient_price[]" required onkeypress="return isNumberKey(event)" data-error="Please enter product actual price." placeholder="Ingredient Price" required value="<?php echo $row2['ingredient_price']; ?>">
+                        <input type="text" class="form-control" id="form-control-2" name="ingredient_price[]" required onkeypress="return isNumberKey(event)" placeholder="Ingredient Price" value="<?php echo $row2['ingredient_price']; ?>">
                         <div class="help-block with-errors"></div>
                       </div>
 
@@ -307,8 +307,8 @@ function addInput1(divName1) {
     var newDiv = document.createElement('div');
     newDiv.className = 'new_appen_class';
     var selectHTML = "";    
-    selectHTML="<div class='input-field form-group col-md-6'><select required name='ingredient_name_id[]' id='form-control-3' class='custom-select' style='display:block !important'><option value=''>Select Ingredient Type</option>";
-    var newTextBox = "<div class='form-group col-md-4'><input type='text' onkeypress='return isNumberKey(event)' onclick='addInput1('dynamicInput1');' required name='ingredient_price[]' class='form-control' id='form-control-2' placeholder='Ingrediet Price'></div>";
+    selectHTML="<div class='input-field form-group col-md-6'><select name='ingredient_name_id[]' id='form-control-3' class='custom-select' style='display:block !important'><option value=''>Select Ingredient Type</option>";
+    var newTextBox = "<div class='form-group col-md-4'><input type='text' onkeypress='return isNumberKey(event)' onclick='addInput1('dynamicInput1');' name='ingredient_price[]' class='form-control' id='form-control-2' placeholder='Ingrediet Price'></div>";
     removeBox="<div class='input-field  form-group col-md-2'><a class='remove_button' ><img src='remove-icon.png'/></a></div><div class='clearfix'></div>";
     for(i = 0; i < choices.length; i = i + 1) {
         selectHTML += "<option value='" + choices[i] + "'>" + choices_names1[i] + "</option>";

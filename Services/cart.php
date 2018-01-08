@@ -194,9 +194,9 @@
 
 			                        <input type="hidden" name="cart_inc_id[]" value="<?php echo $getCartItems['id']; ?>">                       
 
-                                    <td><input class="date-pick form-control selDate_<?php echo $subCatId; ?>" type="text" name="service_visit_date[]" value="<?php echo $service_selected_date1; ?>" ></td>
+                                    <td><input required class="date-pick form-control selDate_<?php echo $subCatId; ?>" type="text" name="service_visit_date[]" value="<?php echo $service_selected_date1; ?>" ></td>
 
-                                    <td><input class="time-pick form-control selTime_<?php echo $subCatId; ?>" type="text" name="service_visit_time[]" value="<?php echo $service_visit_time1; ?>" ></td>
+                                    <td><input required class="time-pick form-control selTime_<?php echo $subCatId; ?>" type="text" name="service_visit_time[]" value="<?php echo $service_visit_time1; ?>" ></td>
 
                                     <td><a href="#0" class="remove_item"><i class="icon_plus_alt" onclick="add_cart_item(<?php echo $getCartItems['id']; ?>)" style="color:#fe6003" ></i></a> <span id="cart_inc_id_<?php echo $getCartItems['id']; ?>"> <?php echo $getCartItems['service_quantity'];?> </span><a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item(<?php echo $getCartItems['id']; ?>)"style="color:#fe6003"></i></a>
 
