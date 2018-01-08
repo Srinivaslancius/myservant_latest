@@ -86,6 +86,23 @@
                 
         </header>
 	<!-- End Header -->
+	<?php 
+	  if($_SESSION['user_login_session_id'] == '') {
+	      header ("Location: logout.php");
+	  }
+	  if(isset($_POST["submit"]) && $_POST["submit"]!="") {
+	      $uid = $_SESSION["user_login_session_id"];
+	      $user_full_name = $_POST["user_full_name"];
+	      $user_email = $_POST["user_email"];
+	      $user_mobile = $_POST["user_mobile"];
+	      $sql1 = "UPDATE users SET user_full_name = '$user_full_name', user_email = '$user_email', user_mobile = '$user_mobile' WHERE  id = '$uid'";
+	      if($conn->query($sql1) === TRUE){             
+	        echo "<script type='text/javascript'>window.location='update_profile.php?succ=log-success'</script>";
+	      }  else { 
+	        header('Location: update_profile.php?err=log-fail');
+	      } 
+	  }
+	?>
 
 	<main>
 		<!-- Slider -->
@@ -113,7 +130,19 @@
      </div><!-- End col-md-3 -->
         
         <div class="col-md-9 col-sm-9">
-        
+        <?php if(isset($_GET['succ']) && $_GET['succ'] == 'log-success' ) {  ?>                
+            <div class="alert alert-success" style="top:10px; display:block" id="set_valid_msg">
+              <strong>Success!</strong> Your Data Updated Successfully.
+            </div>               
+       <?php }?>
+
+        <?php if(isset($_GET['err']) && $_GET['err'] == 'log-fail' ) {  ?>            
+          <div class="alert alert-danger" style="top:10px; display:block" id="set_valid_msg">
+            <strong>Failed!</strong> Data Updation Failed.
+          </div>     
+        <?php } 
+          $uid = $_SESSION["user_login_session_id"];
+       	  $userData = getIndividualDetails('users','id',$uid); ?>
        	 
          <div class="panel-group">
                   <div class="panel panel-default">
@@ -121,26 +150,24 @@
                       <h3 class="nomargin_top">Update Profile</h3>
                     </div>
                       <div class="panel-body">
-                 <form method="post">
+                 <form method="post" autocomplete="off">
                   <div class="col-md-12 col-sm-12">				 
 				  <div class="col-md-6 col-sm-6">
-					<div class="form-group">
-						<label for="first-name">Name</label>
-						<input type="text" class="form-control"  name="user_full_name" id="first-name" placeholder="Name" value="<?php echo $userData['user_full_name']; ?>" required>
-					</div>
-					<div class="form-group">
-						<label for="email">Email</label>
-						<input type="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="user_email" name="user_email" placeholder="Email" value="<?php echo $userData['user_email']; ?>" onkeyup="checkEmail();"  required>
-            <span id="input_status" style="color: red;"></span>
-					</div>
-					 <div class="form-group">
-						<label for="mobile">Mobile</label>
-						<input type="text" class="form-control valid_mobile_num" name="user_mobile" id="user_mobile" placeholder="Mobile" value="<?php echo $userData['user_mobile']; ?>" onkeyup="checkMobile();" required>
-            <span id="input_status1" style="color: red;"></span>
-					</div>
-					<div class="form-group">
-						<button class="button1" type="submit" name="update">Update</button>					
-					</div>						
+	  					<div class="form-group">
+	  						<label for="first-name">Name</label>
+	  						<input type="text" class="form-control"  name="user_full_name" id="first-name" placeholder="Name" value="<?php echo $userData['user_full_name']; ?>" required>
+	  					</div>
+	  					<div class="form-group">
+	  						<label for="email">Email</label>
+	  						<input type="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="user_email" name="user_email" placeholder="Email" value="<?php echo $userData['user_email']; ?>" required>
+	  					</div>
+	  					 <div class="form-group">
+	  						<label for="mobile">Mobile</label>
+	  						<input type="text" class="form-control valid_mobile_num" name="user_mobile" id="user_mobile" placeholder="Mobile" value="<?php echo $userData['user_mobile']; ?>" maxlength="10" pattern="[0-9]{10}" required>
+	  					</div>
+	  					<div class="form-group">
+	  						<button type="submit" value="Submit" name="submit" class="button1">Update</button>					
+	  					</div>						
                   </div>
 				  <div class="col-md-6 col-sm-6">
 				  </div>

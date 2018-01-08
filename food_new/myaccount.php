@@ -84,7 +84,7 @@
                       <h3 class="nomargin_top">My Dashbaord</h3>
                     </div>
                       <div class="panel-body">
-                            <a href="#">
+                            <a href="grocery_orders1.php">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="one">
                                         
@@ -95,7 +95,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="#"> 
+                            <a href="food_orders1.php"> 
                                 <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="two">
                                         
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="#">
+                            <a href="../Services/service_orders.php">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="three">
                                         
@@ -117,16 +117,16 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="#">
+                            <a href="update_profile.php">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="four">
                                         
-                                        <h3>My Profile</h3>
+                                        <h3>Update Profile</h3>
                                        
                                     </div>
                                 </div>
                             </a>
-                            <a href="#">
+                            <a href="my_address.php">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="five">
                                         
@@ -135,7 +135,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="#">
+                            <a href="wallet.php">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="six">
                                         

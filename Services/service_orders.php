@@ -122,9 +122,13 @@
                     <div class="panel-heading">
                       <h3 class="nomargin_top">Service Orders</h3>
                     </div>
-                      <div class="panel-body">
-                     <div class="table-responsive">	
-							 
+                    <div class="panel-body">
+                    <div class="table-responsive">	
+					<?php $uid=$_SESSION['user_login_session_id'];
+                    $getOrders = "SELECT * from services_orders WHERE user_id = '$uid' GROUP BY order_id ORDER BY id DESC"; 
+                    $getOrders1 = $conn->query($getOrders);
+                    if($getOrders1->num_rows > 0) { 
+                    while($orderData = $getOrders1->fetch_assoc()) { ?>	 
         			<table class="table" style="border:1px solid #ddd;width:100%">
 					
             		<thead>
@@ -138,39 +142,19 @@
             		</thead>
             		<tbody>
             		  <tr>
-            			<td>2018-01-02 11:11:15	</td>
-            			<td>Rs.264</td>
-            			<td>some one</td>
-            			<td>MYSER-FOODkej354</td>
-						<td><a href="order_details1.php"><button class="button1">View Details</button></a></td>
+            			<td><?php echo $orderData['created_at']; ?></td>
+            			<td>Rs.<?php echo $orderData['order_total']; ?></td>
+            			<td><?php echo $orderData['first_name']; ?><br><?php echo $orderData['address']; ?></td>
+            			<td><?php echo $orderData['order_id']; ?></td>
+						<td><a href="services_category_orders.php?order_id=<?php echo $orderData['order_id']; ?>"><button class="button1">View Details</button></a></td>
             		  </tr>
             		  
             		</tbody>
 					
         	     </table>
-				 	<table class="table" style="border:1px solid #ddd;width:100%">
-					
-            		<thead>
-            		  <tr>
-            			<th style="width:20%">ORDER PLACED</th>
-            			<th style="width:20%">Order Price</th>
-            			<th style="width:20%">SHIP TO</th>
-            			<th style="width:20%">ORDER ID</th>
-						<th style="width:20%">ACTION</th>
-            		  </tr>
-            		</thead>
-            		<tbody>
-            		  <tr>
-            			<td style="width:20%">2018-01-02 11:11:15	</td>
-            			<td style="width:20%">Rs.264</td>
-            			<td style="width:20%">some onesome onesome one</td>
-            			<td style="width:20%">MYSER-FOODkej354</td>
-						<td style="width:20%"><a href="order_details1.php"><button class="button1">View Details</button></a></td>
-            		  </tr>
-            		  
-            		</tbody>
-					
-        	     </table>
+        	     <?php } } else { ?>
+                     <h3 style="text-align:center;color:#fe6003;">No Orders Found</h3>
+                <?php } ?>
 				
         	  </div>
                       </div>

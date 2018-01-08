@@ -34,6 +34,7 @@
     vertical-align: bottom;
     border-bottom:0px;
 	color:#fe6003;
+	font-size:13px;
 }
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     padding: 8px;
@@ -58,29 +59,17 @@
 	background-color:#fe6003;
  padding: 5px 12px;
 } 
-
+.table>thead>tr>th,.table>thead>tr>td{
+	width:20%;
+}
+.collapse.in{
+    display:block;
+.collapse{
+	display:block;
+}
 </style>
 
 </head>
-<?php 
-  if($_SESSION['user_login_session_id'] == '') {
-      header ("Location: logout.php");
-  }
-  if(isset($_POST["submit"]) && $_POST["submit"]!="") {
-      $uid = $_SESSION["user_login_session_id"];
-      $getUserPwd = getIndividualDetails('users','id',$uid);
-
-      if($_POST['currentPassword'] == decryptPassword($getUserPwd['user_password'])){
-          $encNewPass = encryptPassword($_POST["confirmPassword"]);
-          $sql1 = "UPDATE users SET user_password = '$encNewPass' WHERE  id = '$uid'";
-          if($conn->query($sql1) === TRUE){             
-              echo "<script type='text/javascript'>window.location='change_password2.php?succ=log-success'</script>";
-          }               
-      } else {               
-         header('Location: change_password2.php?err=log-fail');
-      }
-  }
-?>
 
 <body>
 
@@ -120,8 +109,8 @@
 					</div>
 				<?php }?>
     	</div>
-		<div class="container margin_60">
-<div class="row">
+<div class="container margin_60">
+    <div class="row">
     
     <div class="col-md-3 col-sm-3" id="sidebar">
     <aside>
@@ -132,59 +121,53 @@
      </div><!-- End col-md-3 -->
         
         <div class="col-md-9 col-sm-9">
-        <?php if(isset($_GET['succ']) && $_GET['succ'] == 'log-success' ) {  ?>                
-            <div class="alert alert-success" style="top:10px; display:block" id="set_valid_msg">
-              <strong>Success!</strong> Your Password Changed Successfully.
-            </div>               
-       <?php }?>
-
-        <?php if(isset($_GET['err']) && $_GET['err'] == 'log-fail' ) {  ?>            
-          <div class="alert alert-danger" style="top:10px; display:block" id="set_valid_msg">
-            <strong>Failed!</strong> Current Password Is Not Correct.
-          </div>     
-        <?php }?>
-       	 
+        
          <div class="panel-group">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h3 class="nomargin_top">Change Password</h3>
-                    </div>
-                      <div class="panel-body">
-                 <form method="post">
-                  <div class="col-md-12 col-sm-12">				 
-				   <div class="col-md-6 col-sm-6">				  
-    					<div class="form-group">
-    						<label for="cur-password">Current password</label>
-    						<input type="password" class="form-control" id="cur-password"  name="currentPassword" placeholder="*******" autocomplete="off">                                           
-    					</div>					
-    					 <div class="form-group">
-    					 <label for="new-password">New password</label>
-    						<input type="password" minlength="8" class="form-control" minlength="8" name="newPassword" id="user_password" placeholder="*********" autocomplete="off">                                           
-    					</div>					
-    					<div class="form-group">
-    					<label for="new-repassword">Repeat password</label>
-    						<input type="password" minlength="8" class="form-control" minlength="8" name="confirmPassword" id="confirm_password" placeholder="********" autocomplete="off" onChange="checkPasswordMatch();">
-                		<div id="divCheckPasswordMatch" style="color:red"></div>                              
-    					</div>					
-    					 <div class="form-group">
-    						 <button type="submit" value="Submit" name="submit" class="button1">Update</button>					
-    					</div>					
-                  </div>
-				   <div class="col-md-6 col-sm-6">
-				   </div>
-                               
-                   </div>        
-          </form>
-                      </div>
-                  </div>
-                  
-                </div><!-- End panel-group -->
-                
-            
-        </div><!-- End col-md-9 -->
-    </div><!-- End row -->
-			<!-- End row -->						
-		</div>
+            <?php 
+            $order_id = $_GET['order_id'];
+            $serviceOrders = "SELECT * FROM services_orders WHERE order_id = '$order_id' GROUP BY category_id ORDER BY id DESC"; 
+            $getServiceOrderData = $conn->query($serviceOrders);
+            while ($row = $getServiceOrderData->fetch_assoc()) { 
+            ?>
+		 <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#payment" href="#collapseOne"><h3 class="margin-top">Service Orders</h3></a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+               <div class="panel-body">
+                    <div class="table-responsive">
+			            <table class="table" style="border:1px solid #ddd;width:100%">
+    		              <thead>
+                    		  <tr>
+                    			<th>ORDER PLACED</th>
+                    			<th>Order Price</th>
+                    			<th>SHIP TO</th>
+                    			<th>ORDER ID</th>
+                				<th>ACTION</th>
+                    		  </tr>
+    		              </thead>
+    		              <tbody>
+                    		  <tr>
+                    			<td>2018-01-02 11:11:15	</td>
+                    			<td>Rs.264</td>
+                    			<td>some one</td>
+                    			<td>MYSER-FOODkej354</td>
+                				<td><a href="order_details1.php"><button class="button1">View Details</button></a></td>
+                    		  </tr>
+    		              </tbody>
+	                    </table>
+	               </div>
+                </div>
+            </div>
+        </div>
+        <?php } ?>
+    </div>
+    </div><!-- End panel-group -->
+    </div>
+</div>
+			
 		<?php include_once 'our_associate_partners.php';?>
 		<!-- End section -->
 
@@ -227,33 +210,6 @@
 	<script>
     jQuery('#sidebar').theiaStickySidebar({
       additionalMarginTop: 80
-    });
-</script>
-<script>
-$(document).ready(function(){
-	 $(".two").hide();
-    $(".one").click(function(){
-        $(".one").hide();
-		$(".two").show();
-    });
-});
-</script>
-<script type="text/javascript">
-  function checkPasswordMatch() {
-      var password = $("#user_password").val();
-      var confirmPassword = $("#confirm_password").val();
-      if (confirmPassword != password) {
-          $("#divCheckPasswordMatch").html("Passwords do not match!");
-          $("#user_password").val("");
-          $("#confirm_password").val("");
-      } else {
-          $("#divCheckPasswordMatch").html("");
-      }
-  }
-  $(document).ready(function () {
-      setTimeout(function () {
-        $('#set_valid_msg').hide();
-      }, 2000);
     });
 </script>
 
