@@ -146,7 +146,6 @@ ul#cat_nav li a#active {
 				  <div class="col-md-11 col-sm-11">
                   <div class="col-md-6 col-sm-6">				  
 					<div class="form-group">
-                        <?php echo decryptPassword('4d335843736f596930534547664a31347a76534c49413d3d'); ?>
 						 <label for="cur-password">Current password</label>
 						<input type="password" class="form-control" id="cur-password"  name="currentPassword" placeholder="*******" autocomplete="off">                                           
 					</div>					
