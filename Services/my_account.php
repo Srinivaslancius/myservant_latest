@@ -248,11 +248,7 @@
 			});
 		});
 	</script>
-	<script>
-    jQuery('#sidebar').theiaStickySidebar({
-      additionalMarginTop: 80
-    });
-</script>
+	
 
 </body>
 

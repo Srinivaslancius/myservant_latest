@@ -104,6 +104,7 @@
 		<div class="container margin_60">
 			<div class="row">
                             <div class="col-md-9">
+						
                            <?php                            
 							$cartTotal = 0; $service_tax = 0; $cartSubTotal=0;
                            while ($getSubCats = $cartSubCat->fetch_assoc()) { ?>
@@ -211,7 +212,7 @@
                                     <input type="hidden" value="<?php echo $getCartItems['service_price']; ?>" id="individual_intem_price_<?php echo $getCartItems['id']; ?>">
 
 									<td class="options">
-										<a class="delete_cart_item" data-cart-id ="<?php echo $getCartItems['id']; ?>"><i class=" icon-trash"></i></a>
+										<a class="delete_cart_item" data-cart-id ="<?php echo $getCartItems['id']; ?>"><i class=" icon-trash" style="color:#fe6003"></i></a>
 									</td>
 							</tr>
 
@@ -225,7 +226,9 @@
 				</div>
 				<!-- End col-md-8 -->
                             <?php } ?>
+							
                             </div>
+							
                                 <aside class="col-md-3">
 					<div class="box_style_1">
 						<h3 class="inner">- Your Order Total -</h3>
@@ -275,7 +278,8 @@
 							<input type="submit" class="btn_full" name="submit" value="Proceed To Check out">	
 
 						<?php } ?>
-						<a class="btn_full_outline" href="services.php"><i class="icon-right"></i> Continue shopping</a>
+						<a class="btn_full_outline" href="services.php"><i class="icon-right"></i> Continue shopping</a><br>
+						<a class="btn_full" href="#">Clear cart</a>
 					</div>
 					
 				</aside>
