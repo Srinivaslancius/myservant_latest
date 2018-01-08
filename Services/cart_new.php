@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if IE 8]><html class="ie ie8"> <![endif]-->
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
@@ -74,7 +73,6 @@
     $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
     
     if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
-
     	$getCartBySubCat = "SELECT * FROM services_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' GROUP BY service_sub_category_id";
 	    
     } else {
@@ -158,7 +156,6 @@
 
 							<?php 
 								$subCatId = $getSubCats['service_sub_category_id'];
-
 								if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
 									$getCartItems = "SELECT * FROM services_cart WHERE user_id = '$user_session_id' session_cart_id='$session_cart_id' AND service_sub_category_id = '$subCatId' ";
 								} else {
@@ -342,7 +339,6 @@
             }))  
             return false;
         });
-
         </script>
         
         <script type="text/javascript">
@@ -353,7 +349,6 @@
         	}        	
         	
         }
-
         function selectTime(subCategoryId) {
         	var selTime = $('#sel_time_'+subCategoryId).val();
         	if(selTime != '') {
@@ -361,7 +356,6 @@
         	}        	
         	
         }
-
         function add_cart_item(cartId) {
         	
         	if($('#individual_intem_price_'+cartId).val() == 'Price') {
@@ -376,7 +370,6 @@
         	$('#individual_total_'+cartId).val(IncQuan*cartPrice1);
         	calculateSum();	
         }
-
         function remove_cart_item(cartId) {
         	
         	if($('#individual_intem_price_'+cartId).val() == 'Price') {
@@ -395,7 +388,6 @@
         	}
         		
         }
-
         function calculateSum() { 
         	var sum = 0;
 			//iterate through each textboxes and add the values
@@ -419,7 +411,6 @@
 			}
 			
         }
-
         </script>
 
 </body>
