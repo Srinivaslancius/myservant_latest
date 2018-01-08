@@ -93,18 +93,13 @@
 			</div>
 			<div class="col-sm-5">
 			<div class="row">
-			<div class="col-sm-6">			
-			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
-			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
-			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
-			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
+			<div class="col-sm-6">	
+			<?php while($row = $getAvailLoc->fetch_assoc() ) { ?>	
+			<?php $geLocName = getIndividualDetails('lkp_cities','id',$row['lkp_city_id']); ?>
+				<p><span class="icon-right-open-3" style="color:#fe6003"></span><?php echo $geLocName['city_name']; ?></P>			
+			<?php } ?>
 			</div>
-			<div class="col-sm-6">				
-			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
-			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
-			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
-			<p><span class="icon-right-open-3" style="color:#fe6003"></span> Vijayawada</P>
-			</div>
+			
 			</div>
 			</div>
 			<div class="col-sm-3">
