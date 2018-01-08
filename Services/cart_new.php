@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if IE 8]><html class="ie ie8"> <![endif]-->
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
@@ -74,9 +73,8 @@
     $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
     
     if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
-
-    	$getCartBySubCat = "SELECT * FROM services_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' GROUP BY service_sub_category_id";
-	    
+    	$user_session_id = $_SESSION['user_login_session_id'];
+    	$getCartBySubCat = "SELECT * FROM services_cart WHERE user_id = '$user_session_id' GROUP BY service_sub_category_id";
     } else {
     	$getCartBySubCat = "SELECT * FROM services_cart WHERE session_cart_id='$session_cart_id' GROUP BY service_sub_category_id ";	    
     }
@@ -101,7 +99,7 @@
 			</div>
 		</div>
 		<!-- End position -->
-
+		<form method="POST" action="update_new_cart.php">
 		<div class="container margin_60">
 			<div class="row">
                             <div class="col-md-9">
@@ -120,10 +118,11 @@
                                             <p>*Select Same date and time for all the same category orders</p>
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="date-pick form-control" type="text" name="service_visit_date[]" value="<?php echo $service_selected_date1; ?>" id="sel_date_<?php echo $subCatName['id']; ?>" readonly onChange="selectDate(<?php echo $subCatName['id']; ?>)">
+                                            <input class="date-pick form-control" type="text" 
+                                             id="sel_date_<?php echo $subCatName['id']; ?>" readonly onChange="selectDate(<?php echo $subCatName['id']; ?>)">
                                         </div>
                                         <div class="col-md-3">
-                                            <input class="time-pick form-control" type="text" name="service_visit_time[]" value="<?php echo $service_visit_time1; ?>" id="sel_time_<?php echo $subCatName['id']; ?>" onChange="selectTime(<?php echo $subCatName['id']; ?>)">
+                                            <input class="time-pick form-control" type="text"  id="sel_time_<?php echo $subCatName['id']; ?>" onChange="selectTime(<?php echo $subCatName['id']; ?>)">
                                         </div>
                                        
                                     </div>
@@ -158,9 +157,9 @@
 
 							<?php 
 								$subCatId = $getSubCats['service_sub_category_id'];
-
 								if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
-									$getCartItems = "SELECT * FROM services_cart WHERE user_id = '$user_session_id' session_cart_id='$session_cart_id' AND service_sub_category_id = '$subCatId' ";
+									$user_session_id = $_SESSION['user_login_session_id'];
+									$getCartItems = "SELECT * FROM services_cart WHERE user_id = '$user_session_id' AND service_sub_category_id = '$subCatId' ";
 								} else {
 									$getCartItems = "SELECT * FROM services_cart WHERE service_sub_category_id = '$subCatId' AND session_cart_id='$session_cart_id'  ";
 								}
@@ -185,7 +184,14 @@
 			                            <td><?php echo $getSerName['price_after_visiting']; ?></td>
 			                        <?php } else { ?>
 			                            <td><?php echo $getSerName['service_min_price']; ?> - <?php echo $getSerName['service_max_price']; ?></td>
-			                        <?php } ?>			                       
+			                        <?php } ?>			
+
+									<?php
+			                        $service_selected_date1 = date('m/d/Y', strtotime($getCartItems['service_selected_date']));
+			                        $service_visit_time1 = date('H:i:s A', strtotime($getCartItems['service_selected_time']));
+			                        ?>
+
+			                        <input type="hidden" name="cart_inc_id[]" value="<?php echo $getCartItems['id']; ?>">                       
 
                                     <td><input class="date-pick form-control selDate_<?php echo $subCatId; ?>" type="text" name="service_visit_date[]" value="<?php echo $service_selected_date1; ?>" ></td>
 
@@ -193,7 +199,7 @@
 
                                     <td><a href="#0" class="remove_item"><i class="icon_plus_alt" onclick="add_cart_item(<?php echo $getCartItems['id']; ?>)" style="color:#fe6003" ></i></a> <span id="cart_inc_id_<?php echo $getCartItems['id']; ?>"> <?php echo $getCartItems['service_quantity'];?> </span><a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item(<?php echo $getCartItems['id']; ?>)"style="color:#fe6003"></i></a>
 
-                                    <input type="hidden" value="<?php echo $getCartItems['service_quantity'];?>" id="cart_quantity_<?php echo $getCartItems['id'];?>">
+                                    <input type="hidden" value="<?php echo $getCartItems['service_quantity'];?>" id="cart_quantity_<?php echo $getCartItems['id'];?>" name="service_quantity[]">
 
                                     	<!--<input type="text" name="service_quantity[]" minlength="1" value="<?php echo $getCartItems['service_quantity'];?>" data-service-get-price="<?php echo $getCartItems['service_price'];?>" data-cart-id="<?php echo $getCartItems['id'];?>" data-price-type-id="<?php echo $getSerName['service_price_type_id'];?>" class="service_quantity valid_mobile_num form-control">--></td>
 
@@ -259,8 +265,16 @@
 								</tr>
 							</tbody>
 						</table>
-						<a class="btn_full" href="#">Proceed To Check out</a>
-						<a class="btn_full_outline" href="#"><i class="icon-right"></i> Continue shopping</a>
+
+						<?php if(!isset($_SESSION['user_login_session_id'])) { ?>
+							<!-- <a class="btn_full" href="login.php?cart_id=<?php echo encryptPassword(1);?>">Proceed To Check out</a> -->
+							<input type="submit" class="btn_full" name="submit" value="Proceed To Check out">
+							<input type="hidden" name="login_cart_id" value="<?php echo encryptPassword(1);?>">
+						<?php } else { ?>
+							<input type="submit" class="btn_full" name="submit" value="Proceed To Check out">	
+
+						<?php } ?>
+						<a class="btn_full_outline" href="services.php"><i class="icon-right"></i> Continue shopping</a>
 					</div>
 					
 				</aside>
@@ -269,6 +283,7 @@
 			</div>
 			<!--End row -->
 		</div>
+		</form>
 		<!--End container -->
 	</main>
 	<!-- End main -->
@@ -279,15 +294,6 @@
 
 	<div id="toTop"></div><!-- Back to top button -->
 	
-	<!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon_set_1_icon-78"></i>
-			</button>
-		</form>
-	</div><!-- End Search Menu -->
 
 	<!-- Jquery -->
 	<script data-cfasync="false" src="/cdn-cgi/scripts/af2821b0/cloudflare-static/email-decode.min.js"></script><script src="js/jquery-2.2.4.min.js"></script>
@@ -304,6 +310,7 @@
 	$min_time= date('ha', strtotime($duration, strtotime($cur_time)));
 	?>
     <script>
+    
 	$('input.date-pick').datepicker({minDate: 0, maxDate: "+2M"});
 	$('input.time-pick').timepicker({		
 		'minTime': '<?php echo $min_time; ?>',
@@ -342,7 +349,6 @@
             }))  
             return false;
         });
-
         </script>
         
         <script type="text/javascript">
@@ -353,7 +359,6 @@
         	}        	
         	
         }
-
         function selectTime(subCategoryId) {
         	var selTime = $('#sel_time_'+subCategoryId).val();
         	if(selTime != '') {
@@ -361,7 +366,6 @@
         	}        	
         	
         }
-
         function add_cart_item(cartId) {
         	
         	if($('#individual_intem_price_'+cartId).val() == 'Price') {
@@ -376,7 +380,6 @@
         	$('#individual_total_'+cartId).val(IncQuan*cartPrice1);
         	calculateSum();	
         }
-
         function remove_cart_item(cartId) {
         	
         	if($('#individual_intem_price_'+cartId).val() == 'Price') {
@@ -395,7 +398,6 @@
         	}
         		
         }
-
         function calculateSum() { 
         	var sum = 0;
 			//iterate through each textboxes and add the values
@@ -419,7 +421,6 @@
 			}
 			
         }
-
         </script>
 
 </body>
