@@ -20,11 +20,10 @@
 	<!-- Google web fonts -->
     <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Lato:300,400|Montserrat:400,400i,700,700i" rel="stylesheet">
 
-    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-    <link href="https://bootswatch.com/slate/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<!-- CSS -->
 	<link href="css/base.css" rel="stylesheet">
 
+	<!-- CSS -->
 	<!-- SPECIFIC CSS -->
 	<link href="css/shop.css" rel="stylesheet">
 
@@ -38,14 +37,7 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
-<style>
-.table.cart-list.shopping-cart th, .table.options_cart.shopping-cart th{
-	color:#fe6003;
-}
-.cart-section .totals-table li .col:last-child {
-    text-align: right;
-}
-</style>
+
 </head>
 
 <body>
@@ -55,12 +47,9 @@
 <![endif]-->
 
 	
+	<!-- End Preload -->
 
-	<div class="layer"></div>
-	<!-- Mobile menu overlay mask -->
-
-	<!-- Header================================================== -->
-	<header id="plain">
+<header id="plain">
 		<?php include_once './top_header.php';?>
 		<!-- End top line-->
 
@@ -70,204 +59,268 @@
 		<!-- container -->
                 
         </header>
+	<!-- Header================================================== -->
+	
 	<!-- End Header -->
 
 	
-	<!-- End Section -->
 
 	<main>
-<?php
+    <?php
     if($_SESSION['CART_TEMP_RANDOM'] == "") {
         $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
     }
     $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
+    
     if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
-        $user_session_id = $_SESSION['user_login_session_id'];
-        $cartItems1 = "SELECT * FROM services_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' ";
-        $cartItems = $conn->query($cartItems1);
+    	$user_session_id = $_SESSION['user_login_session_id'];
+    	$getCartBySubCat = "SELECT * FROM services_cart WHERE user_id = '$user_session_id' GROUP BY service_sub_category_id";
     } else {
-        $cartItems = getAllDataWhere('services_cart','session_cart_id',$session_cart_id);
-    } 
+    	$getCartBySubCat = "SELECT * FROM services_cart WHERE session_cart_id='$session_cart_id' GROUP BY service_sub_category_id ";	    
+    }
+    $cartSubCat = $conn->query($getCartBySubCat);
+	    
 ?>
             <div class="container-fluid page-title">
-			<?php  
-				  if(!empty($getPartnersBanner['image'])) { ?> 	
-					<div class="row">
-						<img src="<?php echo $base_url . 'uploads/services_content_pages_images/'.$getPartnersBanner['image'] ?>" alt="<?php echo $getPartnersBanner['title'];?>" class="img-responsive" style="width:100%; height:400px;">
-					</div>
-				<?php } else { ?>
+				
 					<div class="row">
 						<img src="img/slides/slide_1.jpg" class="img-responsive" style="width:100%; height:400px;">
 					</div>
-				<?php }?>
+				
     	</div>
-            
-	<div id="position">
+		<div id="position">
 			<div class="container">
 				<ul>
 					<li><a href="index.php">Home</a>
 					</li>
-					<li>cart</li>
+					<li><a href="#">Cart</a>
+					</li>					
 				</ul>
 			</div>
 		</div>
+		<!-- End position -->
+		<form method="POST" action="update_new_cart.php">
 		<div class="container margin_60">
-		<div class="feature">
-			<div class="cart-section">
-				 <?php if($cartItems->num_rows > 0) { ?>
-				<table class="table table-striped cart-list shopping-cart">
-					<thead>
-						<tr>
-							<th>Particulars</th>
-							<th>Price</th>
-							<th>Date</th>
-                            <th>Time</th>
-                            <th>Quantity</th> 
-                            <th>Total</th> 
-							<th>Remove</th>
-						</tr>
-					</thead>
-					<form name="cart_form" method="post">
-					<tbody>
-						<?php $cartTotal = 0; $service_tax = 0;
-                              while ($getCartItems = $cartItems->fetch_assoc()) {
-                        ?>
-                         <input type="hidden" name="cart_id[]" value="<?php echo $getCartItems['id']; ?>">
-						<tr>
-						<?php $getSerName= getIndividualDetails('services_group_service_names','id',$getCartItems['service_id']); ?>
-                        <td><?php echo $getSerName['group_service_name']; ?></td>
-                        <?php if($getSerName['service_price_type_id'] == 1) {
-                             $cartTotal += $getSerName['service_price']*$getCartItems['service_quantity'];
-                         ?>
-                            <td><?php echo $getSerName['service_price']; ?></td>
-                        <?php } elseif($getSerName['price_after_visit_type_id'] == 1) { ?>
-                            <td><?php echo $getSerName['price_after_visiting']; ?></td>
-                        <?php } else { ?>
-                            <td><?php echo $getSerName['service_min_price']; ?> - <?php echo $getSerName['service_max_price']; ?></td>
-                        <?php } ?>
-                        <?php
-                        $service_selected_date1 = date('m/d/Y', strtotime($getCartItems['service_selected_date']));
-                        $service_visit_time1 = date('H:i:s A', strtotime($getCartItems['service_selected_time']));
-                        ?>
-                        <td><input class="date-pick form-control" type="text" name="service_visit_date[]" data-cart-id="<?php echo $getCartItems['id'];?>"  value="<?php echo $service_selected_date1; ?>"></td>
-                        <td><input class="time-pick form-control cart_update_value" type="text" name="service_visit_time[]" data-cart-id="<?php echo $getCartItems['id'];?>"  value="<?php echo $service_visit_time1; ?>"></td>
-                         <td>
-                            <div class="">
-                               <!-- <input type="number" name="service_quantity[]" min="1" max="5" value="<?php echo $getCartItems['service_quantity'];?>"> -->
-                               <input type="text" name="service_quantity[]" minlength="1" value="<?php echo $getCartItems['service_quantity'];?>" data-service-get-price="<?php echo $getCartItems['service_price'];?>" data-cart-id="<?php echo $getCartItems['id'];?>" data-price-type-id="<?php echo $getSerName['service_price_type_id'];?>" class="service_quantity valid_mobile_num form-control">
-                            </div>
-                        </td> 
-                        <td>
-                        	Rs.<span class="changePrice_<?php echo $getCartItems['id']; ?>"><?php echo $getSerName['service_price']*$getCartItems['service_quantity']; ?></span>
-                        	<input type="hidden" class="get_total_class" id="get_total_class_<?php echo $getCartItems['id']; ?>" value="<?php echo $getSerName['service_price']*$getCartItems['service_quantity']; ?>">
-                        	
-                        </td>
-							<td class="options">
-								<a class="delete_cart_item" data-cart-id ="<?php echo $getCartItems['id']; ?>"><span class=" icon-trash" style="color:#fe6003;font-size:20px"></span></a>
-							</td>
-						</tr>
-						<?php } ?>
-					</tbody>
-				</table>
+			<div class="row">
+                            <div class="col-md-9">
+                           <?php 
+							$cartTotal = 0; $service_tax = 0; $cartSubTotal=0;
+                           while ($getSubCats = $cartSubCat->fetch_assoc()) { ?>
+				<div class="col-md-12 back_white mtop10 padd0">
+                                    <div class="col-md-12 padd0">
+                                    	<?php $subCatName = getIndividualDetails('services_sub_category','id',$getSubCats['service_sub_category_id']); ?>
+                                        <div class="col-md-6"><h4><?php echo $subCatName['sub_category_name']; ?></h4></div>
+                                        <div class="col-md-3"><h4>Select Date </h4></div>
+                                        <div class="col-md-3"><h4>Select Time </h4></div>
+                                    </div>
+                                    <div class="col-md-12 padd0">
+                                        <div class="col-md-6">
+                                            <p>*Select Same date and time for all the same category orders</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input class="date-pick form-control" type="text" 
+                                             id="sel_date_<?php echo $subCatName['id']; ?>" readonly onChange="selectDate(<?php echo $subCatName['id']; ?>)">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input class="time-pick form-control" type="text"  id="sel_time_<?php echo $subCatName['id']; ?>" onChange="selectTime(<?php echo $subCatName['id']; ?>)">
+                                        </div>
+                                       
+                                    </div>
+                                        
+					<table class="table table-striped cart-list add_bottom_30">
+						<thead>
+							<tr>
+								<th>
+									Particulars
+								</th>
+								<th>
+									Price
+								</th>
+								<th>
+									Date
+								</th>
+								<th>
+									Time
+								</th>
+								<th>
+									Quantity
+								</th>
+                                <th>
+									Total
+								</th>
+                                <th>
+									Remove
+								</th>
+							</tr>
+						</thead>
+						<tbody>
 
-				<div class="cart-options clearfix">
-					<span style="font-size: 11px">(*For Laundry services the selected time is pickup time.)</span>
-
-				</div>
-				<?php 
-				//below condition for check service type prices fixed or variant for payment gateway display
-				$getPriceType = "SELECT * FROM services_cart WHERE (services_price_type_id=2) AND (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') ";
-        		$getCount = $conn->query($getPriceType);
-        		$count = $cartItems->num_rows;
-        		?>
-				<div class="row">
-					<div class="column pull-right col-md-4 col-sm-6 col-xs-12">
-						<ul class="totals-table">
-							<li class="clearfix"><span class="col">Sub Total</span><span class="col" id="cart_total">Rs. <?php echo $cartTotal; ?></span>
-							</li>
-							<input type="hidden" class="get_cart_total">
-
-							<?php if($getCount->num_rows == 0) {
-							$service_tax += ($getSiteSettingsData['service_tax']/100)*$cartTotal; ?>
-							<!-- <li class="clearfix"><span class="col">Service Tax</span><span class="col" >Rs. <?php echo $service_tax; ?>(<?php echo $getSiteSettingsData['service_tax'] ; ?>%)</span>
-							</li> -->	
-							<?php } ?>
-
-							<input type="hidden" name="service_tax" id="service_tax" value="<?php echo $service_tax; ?>">
-
-							<li class="clearfix total"><span class="col">Order Total<br><span style="font-size: 11px;font-weight:normal;text-transform:capitalize">(*Min visiting charges applicable.)</span></span><span class="col">Rs. <span class="grand_total"><?php echo $cartTotal; ?></span></span>
+							<?php 
+								$subCatId = $getSubCats['service_sub_category_id'];
+								if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
+									$user_session_id = $_SESSION['user_login_session_id'];
+									$getCartItems = "SELECT * FROM services_cart WHERE user_id = '$user_session_id' AND service_sub_category_id = '$subCatId' ";
+								} else {
+									$getCartItems = "SELECT * FROM services_cart WHERE service_sub_category_id = '$subCatId' AND session_cart_id='$session_cart_id'  ";
+								}
 								
-							</li>
+								$getServicenames = $conn->query($getCartItems); ?>
 
-							
-						</ul>
-						<?php if(!isset($_SESSION['user_login_session_id'])) { ?>
-						<a href="login.php?cart_id=<?php echo encryptPassword(1);?>" class="btn_full">Proceed to Checkout <span class="icon-left"></span></a>
-						<?php } else { ?>
-                        <a href="checkout.php" class="btn_full">Proceed to Checkout <span class="icon-left"></span></a>
-                        <?php } ?>
-                        <a href="services.php" class="btn_full">Continue Shopping  <span class="icon-right"></span></a>
+                            <?php 
+								
+                            	while ($getCartItems = $getServicenames->fetch_assoc()) { 
+                            ?>
+							<tr>
+									<?php 
+									$getSerName = getIndividualDetails('services_group_service_names','id',$getCartItems["service_id"]); 
+									?>                                    
+                                    <td><?php echo $getSerName['group_service_name']; ?></td>
+
+			                        <?php if($getSerName['service_price_type_id'] == 1) {
+			                             $cartSubTotal += $getCartItems['service_price']*$getCartItems['service_quantity'];
+			                         ?>
+			                        <td><?php echo $getSerName['service_price']; ?></td>
+			                        <?php } elseif($getSerName['price_after_visit_type_id'] == 1) { ?>
+			                            <td><?php echo $getSerName['price_after_visiting']; ?></td>
+			                        <?php } else { ?>
+			                            <td><?php echo $getSerName['service_min_price']; ?> - <?php echo $getSerName['service_max_price']; ?></td>
+			                        <?php } ?>			
+
+									<?php
+			                        $service_selected_date1 = date('m/d/Y', strtotime($getCartItems['service_selected_date']));
+			                        $service_visit_time1 = date('H:i:s A', strtotime($getCartItems['service_selected_time']));
+			                        ?>
+
+			                        <input type="hidden" name="cart_inc_id[]" value="<?php echo $getCartItems['id']; ?>">                       
+
+                                    <td><input class="date-pick form-control selDate_<?php echo $subCatId; ?>" type="text" name="service_visit_date[]" value="<?php echo $service_selected_date1; ?>" ></td>
+
+                                    <td><input class="time-pick form-control selTime_<?php echo $subCatId; ?>" type="text" name="service_visit_time[]" value="<?php echo $service_visit_time1; ?>" ></td>
+
+                                    <td><a href="#0" class="remove_item"><i class="icon_plus_alt" onclick="add_cart_item(<?php echo $getCartItems['id']; ?>)" style="color:#fe6003" ></i></a> <span id="cart_inc_id_<?php echo $getCartItems['id']; ?>"> <?php echo $getCartItems['service_quantity'];?> </span><a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item(<?php echo $getCartItems['id']; ?>)"style="color:#fe6003"></i></a>
+
+                                    <input type="hidden" value="<?php echo $getCartItems['service_quantity'];?>" id="cart_quantity_<?php echo $getCartItems['id'];?>" name="service_quantity[]">
+
+                                    	<!--<input type="text" name="service_quantity[]" minlength="1" value="<?php echo $getCartItems['service_quantity'];?>" data-service-get-price="<?php echo $getCartItems['service_price'];?>" data-cart-id="<?php echo $getCartItems['id'];?>" data-price-type-id="<?php echo $getSerName['service_price_type_id'];?>" class="service_quantity valid_mobile_num form-control">--></td>
+
+                                    <td class="changePrice_<?php echo $getCartItems['id']; ?>">Rs.<?php echo $getCartItems['service_price']*$getCartItems['service_quantity']; ?></td>
+
+                                    <input type="hidden" id="individual_total_<?php echo $getCartItems['id']; ?>" class="txt">	
+
+                                    <input type="hidden" value="<?php echo $getCartItems['service_price']; ?>" id="individual_intem_price_<?php echo $getCartItems['id']; ?>">
+
+									<td class="options">
+										<a class="delete_cart_item" data-cart-id ="<?php echo $getCartItems['id']; ?>"><i class=" icon-trash"></i></a>
+									</td>
+							</tr>
+
+                            <?php } ?>
+						
+						</tbody>
+					</table>
+					
+					<div class="add_bottom_15"><small>* Prices for person.</small>
 					</div>
 				</div>
-				</form>
-				<?php }  else { ?>
-        			<p style="text-align:center; color:#f26226">No Services In Your Cart</p>
-        			<center><a href="services.php" style="color:#f26226">Click here for SERVICES</a></center>
-        		<?php } ?>
+				<!-- End col-md-8 -->
+                            <?php } ?>
+                            </div>
+                                <aside class="col-md-3">
+					<div class="box_style_1">
+						<h3 class="inner">- Your Order Total -</h3>
+						<table class="table table_summary">
+							<tbody>
+								<tr>
+									<td>
+										Sub Total
+									</td>
+									<td class="text-right cart_sub_total">
+										Rs. <?php echo $cartSubTotal; ?>	
+														
+									</td>
+								</tr>
+								<input type="hidden" id="cart_sub_total">
+								<tr>
+									<td>
+										GST(<?php echo $getSiteSettingsData['service_tax']; ?>%)
+									</td>
+									<input type="hidden" id="service_tax_perc" value="<?php echo $getSiteSettingsData['service_tax']; ?>">
+									<td class="text-right" id="gst_calc">
+										<?php $service_tax += ($getSiteSettingsData['service_tax']/100)*$cartSubTotal; ?>
+										Rs. <?php echo $service_tax; ?>
+									</td>
+									
+								</tr>
+								
+								
+								<tr class="total">
+									<td>
+										Total cost <br/>
+										<span style="font-size: 11px;font-weight:normal;text-transform:capitalize">(*Min visiting charges applicable.)</span>
+									</td>
+									<td class="text-right grand_total1">
+										Rs. <?php echo $cartSubTotal+$service_tax; ?>
+									</td>
+									<input type="hidden" id="grand_total">
+								</tr>
+							</tbody>
+						</table>
+
+						<?php if(!isset($_SESSION['user_login_session_id'])) { ?>
+							<!-- <a class="btn_full" href="login.php?cart_id=<?php echo encryptPassword(1);?>">Proceed To Check out</a> -->
+							<input type="submit" class="btn_full" name="submit" value="Proceed To Check out">
+							<input type="hidden" name="login_cart_id" value="<?php echo encryptPassword(1);?>">
+						<?php } else { ?>
+							<input type="submit" class="btn_full" name="submit" value="Proceed To Check out">	
+
+						<?php } ?>
+						<a class="btn_full_outline" href="services.php"><i class="icon-right"></i> Continue shopping</a>
+					</div>
+					
+				</aside>
+				<!-- End aside -->
+
 			</div>
-		</div>			
+			<!--End row -->
 		</div>
-		
-		<!-- End Container -->
+		</form>
+		<!--End container -->
 	</main>
 	<!-- End main -->
 
 	<footer>
             <?php include_once 'footer.php';?>
-        </footer><!-- End footer -->
+        </footer>
 
 	<div id="toTop"></div><!-- Back to top button -->
 	
-	<!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon_set_1_icon-78"></i>
-			</button>
-		</form>
-	</div><!-- End Search Menu -->
 
-	<!-- Common scripts -->
-	<script src="/cdn-cgi/scripts/84a23a00/cloudflare-static/email-decode.min.js"></script><script src="js/jquery-2.2.4.min.js"></script>
+	<!-- Jquery -->
+	<script data-cfasync="false" src="/cdn-cgi/scripts/af2821b0/cloudflare-static/email-decode.min.js"></script><script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery.timepicker.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css" />
-        <script>
-		$('input.date-pick').datepicker({minDate: 0, maxDate: "+2M"});
-		$('input.time-pick').timepicker({
-			'step': 15,
-			showInpunts: false
-		})
+
+	<?php //$getCurMinTime = date("h:ia"); ?>
+	<?php 	
+	$cur_time=date("ha");
+	$duration='+180 minutes';
+	$min_time= date('ha', strtotime($duration, strtotime($cur_time)));
+	?>
+    <script>
+    
+	$('input.date-pick').datepicker({minDate: 0, maxDate: "+2M"});
+	$('input.time-pick').timepicker({		
+		'minTime': '<?php echo $min_time; ?>',
+	    'maxTime': '7:30pm',
+	    'step': 30,
+	    
+	    //'showDuration': true
+	});
 	</script>
 
-	<script>
-		if ($('.prod-tabs .tab-btn').length) {
-			$('.prod-tabs .tab-btn').on('click', function (e) {
-				e.preventDefault();
-				var target = $($(this).attr('href'));
-				$('.prod-tabs .tab-btn').removeClass('active-btn');
-				$(this).addClass('active-btn');
-				$('.prod-tabs .tab').fadeOut(0);
-				$('.prod-tabs .tab').removeClass('active-tab');
-				$(target).fadeIn(500);
-				$(target).addClass('active-tab');
-			});
-
-		}
-	</script>
 	<script type="text/javascript">
         $(".delete_cart_item").click(function(){
             var element = $(this);
@@ -297,86 +350,78 @@
             return false;
         });
         </script>
+        
         <script type="text/javascript">
-	        
-
- 		//Price calculations for cart items
-		$('.service_quantity').on('keyup', function () {
-			var priceTypeId = $(this).attr("data-price-type-id");
-			var serviceCurrentQuantity = $(this).val();	
-			var field_clause = 'quantity';   
-			var cartId = $(this).attr("data-cart-id");  	
-			if(serviceCurrentQuantity != 0) {
-				if(priceTypeId == 1) {									
-			    	var servicePrice = $(this).attr("data-service-get-price");		    	
-			    	var final_service_price = parseInt(serviceCurrentQuantity*servicePrice);	    	
-			    	$('.changePrice_'+cartId).text(final_service_price);
-			    	$('#get_total_class_'+cartId).val(final_service_price);	
-			    	calcTotal();
-			    } 
-			} else {
-				$(this).val('1');
-				alert("Please enter valid quantity!");
-				return false;
-			}
-			//Auto ssave db in quantity
-			$.ajax({
-			    type:"post",
-			    url:"update_cart.php",		    
-			    data: {
-		            cartId:cartId,service_quantity:serviceCurrentQuantity,field_clause:field_clause,
-		        },
-			    success:function(result){
-			    	//alert(result);
-			    }
+        function selectDate(subCategoryId) {
+        	var selDate = $('#sel_date_'+subCategoryId).val();        	
+        	if(selDate!='') {
+        		$('.selDate_'+subCategoryId).val(selDate);	        	
+        	}        	
+        	
+        }
+        function selectTime(subCategoryId) {
+        	var selTime = $('#sel_time_'+subCategoryId).val();
+        	if(selTime != '') {
+	        	$('.selTime_'+subCategoryId).val(selTime);
+        	}        	
+        	
+        }
+        function add_cart_item(cartId) {
+        	
+        	if($('#individual_intem_price_'+cartId).val() == 'Price') {
+        		var cartPrice1 = 0;
+        	} else {
+        		var cartPrice1 = $('#individual_intem_price_'+cartId).val();
+        	}
+        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())+1;        	
+    		$('#cart_quantity_'+cartId).val(IncQuan);        	
+        	$('#cart_inc_id_'+cartId).html(IncQuan);
+        	$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice1);
+        	$('#individual_total_'+cartId).val(IncQuan*cartPrice1);
+        	calculateSum();	
+        }
+        function remove_cart_item(cartId) {
+        	
+        	if($('#individual_intem_price_'+cartId).val() == 'Price') {
+        		var cartPrice1 = 0;
+        	} else {
+        		var cartPrice1 = $('#individual_intem_price_'+cartId).val();
+        	}
+        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())-1;        	
+        	if(IncQuan!=0) {
+        		$('#cart_quantity_'+cartId).val(IncQuan);
+        		$('#cart_inc_id_'+cartId).html(IncQuan);
+        		$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice1);
+        		$('#individual_total_'+cartId).val(IncQuan*cartPrice1);
+        		calculateSum();
+        		//return false;
+        	}
+        		
+        }
+        function calculateSum() { 
+        	var sum = 0;
+			//iterate through each textboxes and add the values
+			$(".txt").each(function() {
+				//add only if the value is number
+				if(!isNaN(this.value) && this.value.length!=0) {
+					sum += parseInt(this.value);
+				}
 			});
-	    	
-		});
-		function calcTotal() {
-	    var subTotal = 0
-	    $(".get_total_class").each(function() {
-	      subTotal += $(this).val() != "" ? parseInt($(this).val()) : 0;
-	      $('#cart_total').html(subTotal);
-	      $('.get_cart_total').val(subTotal);
-	      var cartTotal = $('.get_cart_total').val();
-	      var serviceTax = $('#service_tax').val();
-	      grandTotal = (parseInt(cartTotal));	     
-	    })
- 		  $('.grand_total').html(grandTotal);
-	  }
-
-	  //cart auto update using ajax	   
-     $('.date-pick').on('change', function () {
-     	    var element = $(this).val();
-            var cartId = $(this).attr("data-cart-id");      
-            var field_clause = 'date';     
-            $.ajax({
-		    type:"post",
-		    url:"update_cart.php",		    
-		    data: {
-	            cartId:cartId,filed_value:element,field_clause:field_clause,
-	        },
-		    success:function(result){	
-		    	
-		    }
-		  }); 
-     });
-     $('.time-pick').on('change', function () {
-     	    var element = $(this).val();
-            var cartId = $(this).attr("data-cart-id");      
-            var field_clause = 'time';     
-            $.ajax({
-		    type:"post",
-		    url:"update_cart.php",		    
-		    data: {
-	            cartId:cartId,service_visit_time:element,field_clause:field_clause,
-	        },
-		    success:function(result){	
-		    //alert(result);	    	
-		    }
-		  }); 
-     });
-    </script>
+			if(sum!= '') {
+				//.toFixed() method will roundoff the final sum to 2 decimal places
+				$(".cart_sub_total").html('Rs. '+sum);
+				$('#cart_sub_total').val(sum);
+				var calcGst = ($('#service_tax_perc').val()/100)*sum;
+				$('#gst_calc').html('Rs. '+calcGst);
+				//parseInt($('.gst_calc_val').val(calcGst));  
+				$('#grand_total').val(sum+calcGst);
+				$('.grand_total1').html(sum+calcGst);
+				
+				//alert(calcGst+sum);
+			}
+			
+        }
+        </script>
 
 </body>
 
