@@ -28,7 +28,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			    	$getPriceDetails = getAllDataWhere('food_product_weight_prices','product_id',$productId);
 			    	$getPriceDet = array();
 			    	while($getPriceDet = $getPriceDetails->fetch_assoc()) {
-			    		$lists["price"] .=  $getPriceDet['product_price'] .",";
+			    		$lists["price"] .=  round($getPriceDet['admin_price'] .",");
 			    		$lists["priceTypeId"] .=  $getPriceDet['id'] .",";
 				    	$getWeights = getIndividualDetails('food_product_weights','id',$getPriceDet['weight_type_id']);
 				    	$lists["weightTypeId"] .=  $getWeights['id'] .",";
