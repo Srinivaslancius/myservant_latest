@@ -377,7 +377,7 @@
         }
         function add_cart_item(cartId) {
         	
-        	if($('#individual_intem_price_'+cartId).val() == 'Price') {
+        	if(isNaN($('#individual_intem_price_'+cartId).val())) {
         		var cartPrice1 = 0;
         	} else {
         		var cartPrice1 = $('#individual_intem_price_'+cartId).val();
@@ -391,7 +391,7 @@
         }
         function remove_cart_item(cartId) {
         	
-        	if($('#individual_intem_price_'+cartId).val() == 'Price') {
+        	if(isNaN($('#individual_intem_price_'+cartId).val())) {
         		var cartPrice1 = 0;
         	} else {
         		var cartPrice1 = $('#individual_intem_price_'+cartId).val();
