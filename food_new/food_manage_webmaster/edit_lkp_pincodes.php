@@ -78,7 +78,10 @@ if (!isset($_POST['submit']))  {
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label for="form-control-2" class="control-label">Pincode</label>
-                        <input type="text" name="pincode" class="form-control valid_mobile_num" id="user_input" placeholder="Pincode" data-error="Please enter Pincode" required maxlength="6" minlength="6" value="<?php echo $getLocationsData['pincode'];?>">
+                        <input type="text" name="pincode" class="form-control valid_mobile_num" id="user_input" placeholder="Pincode" data-error="Please enter Pincode" required maxlength="6" minlength="6" value="<?php echo $getLocationsData['pincode'];?>" onkeyup="checkUserAvailTest()" >
+                        <span id="input_status" style="color: red;"></span>
+                        <input type="hidden" id="table_name" value="lkp_pincodes">
+                        <input type="hidden" id="column_name" value="pincode">
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
