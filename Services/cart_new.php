@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if IE 8]><html class="ie ie8"> <![endif]-->
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
@@ -74,7 +73,6 @@
     $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
     
     if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
-
     	$getCartBySubCat = "SELECT * FROM services_cart WHERE user_id = '$user_session_id' OR session_cart_id='$session_cart_id' GROUP BY service_sub_category_id";
 	    
     } else {
@@ -105,7 +103,9 @@
 		<div class="container margin_60">
 			<div class="row">
                             <div class="col-md-9">
-                           <?php while ($getSubCats = $cartSubCat->fetch_assoc()) { ?>
+                           <?php 
+							$cartTotal = 0; $service_tax = 0; $cartSubTotal=0;
+                           while ($getSubCats = $cartSubCat->fetch_assoc()) { ?>
 				<div class="col-md-12 back_white mtop10 padd0">
                                     <div class="col-md-12 padd0">
                                     	<?php $subCatName = getIndividualDetails('services_sub_category','id',$getSubCats['service_sub_category_id']); ?>
@@ -156,9 +156,8 @@
 
 							<?php 
 								$subCatId = $getSubCats['service_sub_category_id'];
-
 								if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
-									$getCartItems = "SELECT * FROM services_cart WHERE service_sub_category_id = '$subCatId' AND user_id = '$user_session_id' OR (session_cart_id='$session_cart_id' ) ";
+									$getCartItems = "SELECT * FROM services_cart WHERE user_id = '$user_session_id' session_cart_id='$session_cart_id' AND service_sub_category_id = '$subCatId' ";
 								} else {
 									$getCartItems = "SELECT * FROM services_cart WHERE service_sub_category_id = '$subCatId' AND session_cart_id='$session_cart_id'  ";
 								}
@@ -166,7 +165,7 @@
 								$getServicenames = $conn->query($getCartItems); ?>
 
                             <?php 
-								$cartTotal = 0; $service_tax = 0;
+								
                             	while ($getCartItems = $getServicenames->fetch_assoc()) { 
                             ?>
 							<tr>
@@ -176,7 +175,7 @@
                                     <td><?php echo $getSerName['group_service_name']; ?></td>
 
 			                        <?php if($getSerName['service_price_type_id'] == 1) {
-			                             $cartTotal += $getSerName['service_price']*$getCartItems['service_quantity'];
+			                             $cartSubTotal += $getCartItems['service_price']*$getCartItems['service_quantity'];
 			                         ?>
 			                        <td><?php echo $getSerName['service_price']; ?></td>
 			                        <?php } elseif($getSerName['price_after_visit_type_id'] == 1) { ?>
@@ -195,11 +194,11 @@
 
                                     	<!--<input type="text" name="service_quantity[]" minlength="1" value="<?php echo $getCartItems['service_quantity'];?>" data-service-get-price="<?php echo $getCartItems['service_price'];?>" data-cart-id="<?php echo $getCartItems['id'];?>" data-price-type-id="<?php echo $getSerName['service_price_type_id'];?>" class="service_quantity valid_mobile_num form-control">--></td>
 
-                                    <td class="changePrice_<?php echo $getCartItems['id']; ?>">Rs. <?php echo $getCartItems['service_price']*$getCartItems['service_quantity']; ?></td>
+                                    <td class="changePrice_<?php echo $getCartItems['id']; ?>">Rs.<?php echo $getCartItems['service_price']*$getCartItems['service_quantity']; ?></td>
+
+                                    <input type="hidden" id="individual_total_<?php echo $getCartItems['id']; ?>" class="txt">	
 
                                     <input type="hidden" value="<?php echo $getCartItems['service_price']; ?>" id="individual_intem_price_<?php echo $getCartItems['id']; ?>">
-
-                                    <input type="hidden" class="get_total_class" id="get_total_class_<?php echo $getCartItems['id']; ?>" value="<?php echo $getSerName['service_price']*$getCartItems['service_quantity']; ?>">
 
 									<td class="options">
 										<a class="delete_cart_item" data-cart-id ="<?php echo $getCartItems['id']; ?>"><i class=" icon-trash"></i></a>
@@ -226,28 +225,34 @@
 									<td>
 										Sub Total
 									</td>
-									<td class="text-right">
-										Rs. <?php echo $cartTotal; ?>
+									<td class="text-right cart_sub_total">
+										Rs. <?php echo $cartSubTotal; ?>	
+														
 									</td>
 								</tr>
+								<input type="hidden" id="cart_sub_total">
 								<tr>
 									<td>
 										GST(<?php echo $getSiteSettingsData['service_tax']; ?>%)
 									</td>
-									<td class="text-right">
-										<?php $service_tax += ($getSiteSettingsData['service_tax']/100)*$cartTotal; ?>
-										<?php echo $service_tax; ?>
+									<input type="hidden" id="service_tax_perc" value="<?php echo $getSiteSettingsData['service_tax']; ?>">
+									<td class="text-right" id="gst_calc">
+										<?php $service_tax += ($getSiteSettingsData['service_tax']/100)*$cartSubTotal; ?>
+										Rs. <?php echo $service_tax; ?>
 									</td>
+									
 								</tr>
+								
 								
 								<tr class="total">
 									<td>
 										Total cost <br/>
 										<span style="font-size: 11px;font-weight:normal;text-transform:capitalize">(*Min visiting charges applicable.)</span>
 									</td>
-									<td class="text-right">
-										Rs. <?php echo $cartTotal+$service_tax; ?>
+									<td class="text-right grand_total1">
+										Rs. <?php echo $cartSubTotal+$service_tax; ?>
 									</td>
+									<input type="hidden" id="grand_total">
 								</tr>
 							</tbody>
 						</table>
@@ -334,81 +339,77 @@
             }))  
             return false;
         });
-
-		//Price calculations for cart items
-		$('.service_quantity').on('keyup', function () {
-			var priceTypeId = $(this).attr("data-price-type-id");
-			var serviceCurrentQuantity = $(this).val();	
-			var field_clause = 'quantity';   
-			var cartId = $(this).attr("data-cart-id");  	
-			if(serviceCurrentQuantity != 0) {
-				if(priceTypeId == 1) {					
-			    	var servicePrice = $(this).attr("data-service-get-price");		    	
-			    	var final_service_price = parseInt(serviceCurrentQuantity*servicePrice);	    	
-			    	$('.changePrice_'+cartId).text('Rs.'+final_service_price);
-			    	$('#get_total_class_'+cartId).val(final_service_price);	
-			    	calcTotal();
-			    } 
-			} else {
-				$(this).val('1');
-				alert("Please enter valid quantity!");
-				return false;
-			}
-			
-	    	
-		});
-
         </script>
         
         <script type="text/javascript">
         function selectDate(subCategoryId) {
-
         	var selDate = $('#sel_date_'+subCategoryId).val();        	
         	if(selDate!='') {
         		$('.selDate_'+subCategoryId).val(selDate);	        	
         	}        	
         	
         }
-
         function selectTime(subCategoryId) {
-
         	var selTime = $('#sel_time_'+subCategoryId).val();
         	if(selTime != '') {
 	        	$('.selTime_'+subCategoryId).val(selTime);
         	}        	
         	
         }
-
         function add_cart_item(cartId) {
         	
-        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())+1;
-        	var cartPrice = parseInt($('#individual_intem_price_'+cartId).val());     
-        	
-        	if(cartPrice == 'Price') {
+        	if($('#individual_intem_price_'+cartId).val() == 'Price') {
         		var cartPrice1 = 0;
         	} else {
-        		var cartPrice1 = cartPrice;
+        		var cartPrice1 = $('#individual_intem_price_'+cartId).val();
         	}
-        	if(cartPrice!= null && cartPrice!='') {
-        		
-        		$('#cart_quantity_'+cartId).val(IncQuan);        	
-	        	$('#cart_inc_id_'+cartId).html(IncQuan);
-	        	$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice1);
-        	}        	            	
+        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())+1;        	
+    		$('#cart_quantity_'+cartId).val(IncQuan);        	
+        	$('#cart_inc_id_'+cartId).html(IncQuan);
+        	$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice1);
+        	$('#individual_total_'+cartId).val(IncQuan*cartPrice1);
+        	calculateSum();	
         }
-
         function remove_cart_item(cartId) {
         	
-        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())-1;
-        	var cartPrice = parseInt($('#individual_intem_price_'+cartId).val());
+        	if($('#individual_intem_price_'+cartId).val() == 'Price') {
+        		var cartPrice1 = 0;
+        	} else {
+        		var cartPrice1 = $('#individual_intem_price_'+cartId).val();
+        	}
+        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())-1;        	
         	if(IncQuan!=0) {
-        		if(cartPrice!=0) {
-	        		$('#cart_quantity_'+cartId).val(IncQuan);
-	        		$('#cart_inc_id_'+cartId).html(IncQuan);
-	        		$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice);
-	        		return false;
-	        	}
-        	}        	
+        		$('#cart_quantity_'+cartId).val(IncQuan);
+        		$('#cart_inc_id_'+cartId).html(IncQuan);
+        		$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice1);
+        		$('#individual_total_'+cartId).val(IncQuan*cartPrice1);
+        		calculateSum();
+        		//return false;
+        	}
+        		
+        }
+        function calculateSum() { 
+        	var sum = 0;
+			//iterate through each textboxes and add the values
+			$(".txt").each(function() {
+				//add only if the value is number
+				if(!isNaN(this.value) && this.value.length!=0) {
+					sum += parseInt(this.value);
+				}
+			});
+			if(sum!= '') {
+				//.toFixed() method will roundoff the final sum to 2 decimal places
+				$(".cart_sub_total").html('Rs. '+sum);
+				$('#cart_sub_total').val(sum);
+				var calcGst = ($('#service_tax_perc').val()/100)*sum;
+				$('#gst_calc').html('Rs. '+calcGst);
+				//parseInt($('.gst_calc_val').val(calcGst));  
+				$('#grand_total').val(sum+calcGst);
+				$('.grand_total1').html(sum+calcGst);
+				
+				//alert(calcGst+sum);
+			}
+			
         }
         </script>
 
