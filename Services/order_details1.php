@@ -34,33 +34,18 @@
     vertical-align: bottom;
     border-bottom:0px;
 	color:#fe6003;
-	font-size:13px;
 }
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     padding: 8px;
     line-height: 1.42857143;
     vertical-align: top;
-   border-top: 0px solid #ddd;
+   border-top: 1px solid #ddd;
 }
-.button1 {
-    background-color: #fe6003;
-    border-color: #fe6003;
-    color: white;
-    padding: 5px 9px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+.table>thead>tr>td h3,h5 {
+	color:#fe6003;
 }
-
-.button2 {
-	background-color:#fe6003;
- padding: 5px 12px;
-} 
-.table>thead>tr>th,.table>thead>tr>td{
-	width:20%;
+.table>thead>tr>td p{
+	line-height:10px;
 }
 </style>
 
@@ -116,61 +101,65 @@
      </div><!-- End col-md-3 -->
         
         <div class="col-md-9 col-sm-9">
-        
-         <div class="panel-group">
+        <div class="panel-group">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <h3 class="nomargin_top">Service Orders</h3>
+                      <h3 class="nomargin_top">Services Orders</h3>
                     </div>
                       <div class="panel-body">
                      <div class="table-responsive">	
-							 
+								 
         			<table class="table" style="border:1px solid #ddd;width:100%">
-					
-            		<thead>
-            		  <tr>
-            			<th>ORDER PLACED</th>
-            			<th>Order Price</th>
-            			<th>SHIP TO</th>
-            			<th>ORDER ID</th>
-						<th>ACTION</th>
-            		  </tr>
-            		</thead>
             		<tbody>
-            		  <tr>
-            			<td>2018-01-02 11:11:15	</td>
-            			<td>Rs.264</td>
-            			<td>some one</td>
-            			<td>MYSER-FOODkej354</td>
-						<td><a href="order_details1.php"><button class="button1">View Details</button></a></td>
-            		  </tr>
-            		  
-            		</tbody>
+		  <tr>
+			<td colspan="2" style="padding-left:20px">
+			<h3>Order Information</h3>
+			<p>Restaurant Name: Sweet Magic</p>
+			<p>Payment Method:Cash On Delivery</p>
+			<p>Order Type:Take Away</p>
+			<p>Order Status: InProgress</p>
+			<p>Payment Status: InProgress</p></td>
+			<td colspan="2"></td>
+			<td colspan="2">
+			<h3>Shipping Address</h3>
+			<p>srinu</p>
+			<p>srinivas@lanciussolutions.com</p>
+			<p>7894561235</p>
+			<p>test</p>
+			<p>345345</td>
+		  </tr>
+		  <tr>
+			<td><h5>ITEM NAME</h5></td>
+			<td><h5>CUSINE TYPE</h5></td>
+			<td><h5>ITEM WEIGHT</h5></td>
+			<td><h5>QUANTITY</h5></td>
+			<td><h5>PRICE</h5></td>
+			<td><h5>TOTAL</h5></td>
+		  </tr>
+		   <tr>
+			<td><p>Biryani</p></td>
+			<td><p>MAIN COURSES1</p></td>
+			<td><p>Medium</p></td>
+			<td><p>3</p></td>
+			<td><p>80</p></td>
+			<td><p>240</p></td>
+		  </tr>
+		   <tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><p>Subtotal:</p>
+			<p>Tax:</p>
+			<p style="color:#fe6003;">Grand Total:</p></td>
+			<td><p style="color:#fe6003;">Rs. 240</p>
+			<p style="color:#fe6003;">Rs. 24(10 %)</p>
+			
+				<p style="color:#fe6003;">Rs. 264</p>
+		  </tr>
+		</tbody>
 					
-        	     </table>
-				 	<table class="table" style="border:1px solid #ddd;width:100%">
-					
-            		<thead>
-            		  <tr>
-            			<th>ORDER PLACED</th>
-            			<th>Order Price</th>
-            			<th>SHIP TO</th>
-            			<th>ORDER ID</th>
-						<th>ACTION</th>
-            		  </tr>
-            		</thead>
-            		<tbody>
-            		  <tr>
-            			<td>2018-01-02 11:11:15	</td>
-            			<td>Rs.264</td>
-            			<td>some onesome onesome one</td>
-            			<td>MYSER-FOODkej354</td>
-						<td><a href="order_details1.php"><button class="button1">View Details</button></a></td>
-            		  </tr>
-            		  
-            		</tbody>
-					
-        	     </table>
+        	</table>    
 				
         	  </div>
                       </div>
