@@ -5068,6 +5068,9 @@ a#phone, a#email_footer {
 			padding:15px!important;
 			text-align:justify;
 		}
+		.container.carousel1{
+			padding-right:0px !important;
+		}
 .img_container .img-responsive.img_wdth{
 	width:47% !important;
 }
@@ -5143,6 +5146,7 @@ a#phone, a#email_footer {
     .carousel-control.right{
         padding-left:0px !important;
         margin-top:350px !important;
+		margin-right:20px !important;
     }
 .carousel-control.left{
     margin-top:350px !important;
@@ -5153,6 +5157,7 @@ a#phone, a#email_footer {
 .search_bar{
     width:100% !important;
 }
+
 #nav-search-in #nav-search-in-content{
    font-size: 12px !important;
 margin: 5px 16px 0 1px !important;
@@ -5225,6 +5230,9 @@ padding: 0px 30px 0 0px !important;
 	width:100%;
 	padding-top:40px !important;
 }
+.carousel-control.right{
+	margin-right:20px !important;
+}
    }
     @media screen and (max-width: 667px) and (min-width: 375px){
 		.img_container.padd_sp{
@@ -5253,10 +5261,16 @@ padding: 0px 30px 0 0px !important;
 ul#top_tools{
 	right: -60px;
 }
+.carousel-control.left{
+	margin-left:-40px !important;
+}
 	}
 	@media screen and (max-width: 732px) and (min-width: 412px){
 		#layerslider{
 	width:100%;
 	padding-top:40px !important;
 }
+	}
+	.container.carousel1{
+			padding-right:35px;
 	}

@@ -135,7 +135,7 @@ background-color: #fe6003;
 									<div class="form-group col-md-6">
 										<label>Email Address <sup>*</sup>
 										</label>
-										<input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email_contact" value="<?php echo $getUser['user_email']; ?>" placeholder="" class="form-control" required>
+										<input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email_contact" value="<?php echo $getUser['user_email']; ?>" placeholder="" class="form-control" required readonly>
 									</div>
 									<div class="form-group col-md-6">
 										<label>Phone <sup>*</sup>
