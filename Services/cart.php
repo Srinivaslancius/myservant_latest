@@ -99,11 +99,12 @@
 			</div>
 		</div>
 		<!-- End position -->
+		<?php if($cartSubCat->num_rows > 0) { ?>
 		<form method="POST" action="update_new_cart.php">
 		<div class="container margin_60">
 			<div class="row">
                             <div class="col-md-9">
-                           <?php 
+                           <?php                            
 							$cartTotal = 0; $service_tax = 0; $cartSubTotal=0;
                            while ($getSubCats = $cartSubCat->fetch_assoc()) { ?>
 				<div class="col-md-12 back_white mtop10 padd0">
@@ -284,6 +285,10 @@
 			<!--End row -->
 		</div>
 		</form>
+		<?php }  else { ?> <br />
+			<p style="text-align:center; color:#f26226">No Services In Your Cart</p>
+        	<center><a href="services.php" style="color:#f26226">Click here for SERVICES</a></center><br /><br />
+		<?php } ?>
 		<!--End container -->
 	</main>
 	<!-- End main -->
@@ -387,15 +392,32 @@
         	} else {
         		var cartPrice1 = $('#individual_intem_price_'+cartId).val();
         	}
-        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())-1;        	
-        	if(IncQuan!=0) {
-        		$('#cart_quantity_'+cartId).val(IncQuan);
-        		$('#cart_inc_id_'+cartId).html(IncQuan);
-        		$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice1);
-        		$('#individual_total_'+cartId).val(IncQuan*cartPrice1);
-        		calculateSum();
+        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())-1; 
+
+        	if(IncQuan == 0) {        		
+        		$.ajax({
+			      type:'post',
+			      url:'delete_cart_items.php',
+			      data:{
+			         cart_id : cartId,        
+			      },
+			      success:function(response) {
+			        location.reload();
+			      }
+			    });
+
+        	} else {
+
+        		if(IncQuan!=0) {
+	        		$('#cart_quantity_'+cartId).val(IncQuan);
+	        		$('#cart_inc_id_'+cartId).html(IncQuan);
+	        		$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice1);
+	        		$('#individual_total_'+cartId).val(IncQuan*cartPrice1);
+	        		calculateSum();
         		//return false;
+        		}
         	}
+        	
         		
         }
         function calculateSum() { 
