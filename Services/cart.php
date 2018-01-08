@@ -316,15 +316,7 @@
 	?>
     <script>
     
-	$('input.date-pick').datepicker({
-
-		minDate: 0, maxDate: "+2M",		
-		onSelect:function(selectedDate) {
-	        alert(selectedDate);
-	    }
-
-	});
-
+	$('input.date-pick').datepicker({minDate: 0, maxDate: "+2M"});
 	$('input.time-pick').timepicker({		
 		'minTime': '<?php echo $min_time; ?>',
 	    'maxTime': '7:30pm',
