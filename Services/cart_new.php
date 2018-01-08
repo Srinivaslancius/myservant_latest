@@ -197,7 +197,7 @@
 
                                     <td class="changePrice_<?php echo $getCartItems['id']; ?>">Rs. <?php echo $getCartItems['service_price']*$getCartItems['service_quantity']; ?></td>
 
-                                    <input type="text" value="<?php echo $getCartItems['service_price']; ?>" id="individual_intem_price_<?php echo $getCartItems['id']; ?>">
+                                    <input type="hidden" value="<?php echo $getCartItems['service_price']; ?>" id="individual_intem_price_<?php echo $getCartItems['id']; ?>">
 
                                     <input type="hidden" class="get_total_class" id="get_total_class_<?php echo $getCartItems['id']; ?>" value="<?php echo $getSerName['service_price']*$getCartItems['service_quantity']; ?>">
 
