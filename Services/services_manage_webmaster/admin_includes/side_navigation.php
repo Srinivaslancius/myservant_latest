@@ -172,8 +172,8 @@
                 <li class="menu-subtitle">Orders</li>
                 <li  class="<?php if($page_name == 'view_orders.php' || $page_name == 'view_category_orders.php' ) { echo "active"; } ?>"><a href="view_orders.php">Orders</a>
                 </li> 
-                <li  class="<?php if($page_name == 'services_failed_orders.php' || $page_name == 'edit_services_failed_orders.php' ) { echo "active"; } ?>"><a href="services_failed_orders.php">Failed Orders</a>
-                </li>
+                <!-- <li  class="<?php if($page_name == 'services_failed_orders.php' || $page_name == 'edit_services_failed_orders.php' ) { echo "active"; } ?>"><a href="services_failed_orders.php">Failed Orders</a>
+                </li> -->
                 <li  class="<?php if($page_name == 'services_cancelled_orders.php' ) { echo "active"; } ?>"><a href="services_cancelled_orders.php">Cancelled Orders</a>
                 </li>
                 <li  class="<?php if($page_name == 'services_today_orders.php' ) { echo "active"; } ?>"><a href="services_today_orders.php">Today Orders</a>
