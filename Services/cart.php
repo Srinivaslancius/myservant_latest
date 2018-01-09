@@ -241,19 +241,31 @@
 														
 									</td>
 								</tr>
+
+								<?php 
+								//below condition for check service type prices fixed or variant for payment gateway display
+								$getPriceType = "SELECT * FROM services_cart WHERE (services_price_type_id=2) AND (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') ";
+				        		$getCount = $conn->query($getPriceType);
+				        		$count = $cartItems->num_rows;
+				        		?>
+
 								<input type="hidden" id="cart_sub_total">
 								<tr>
-									<td>
-										GST(<?php echo $getSiteSettingsData['service_tax']; ?>%)
-									</td>
+									<?php if($getCount->num_rows == 0) { ?>
+										<td>
+											GST(<?php echo $getSiteSettingsData['service_tax']; ?>%)
+										</td>
+									<?php } ?>
 									
 									<input type="hidden" class="get_cart_total">
-									
+									<?php if($getCount->num_rows == 0) { ?>
 									<td class="text-right" id="gst_calc">
 										<?php $service_tax += ($getSiteSettingsData['service_tax']/100)*$cartSubTotal; ?>
 										Rs. <?php echo $service_tax; ?>
 									</td>
+									<?php } ?>
 									<input type="hidden" id="service_tax" value="<?php echo $service_tax; ?>">
+									<input type="hidden" value="<?php echo $getSiteSettingsData['service_tax']; ?>" id="service_tax_perc">
 								</tr>
 								
 								
@@ -380,7 +392,8 @@
 			var priceTypeId = $(this).attr("data-price-type-id");
 			var serviceCurrentQuantity = $(this).val();	
 			var field_clause = 'quantity';   
-			var cartId = $(this).attr("data-cart-id");  	
+			var cartId = $(this).attr("data-cart-id");
+			//alert(serviceTaxPer);
 			if(serviceCurrentQuantity != 0) {
 				if(priceTypeId == 1) {								
 			    	var servicePrice = $(this).attr("data-service-get-price");		    	
@@ -417,9 +430,17 @@
 	      grandTotal = (parseInt(cartTotal));	     
 	    })
 	    var ServiceTax = parseInt($('#service_tax').val());	   
-	    var getTotal =  ServiceTax+grandTotal;
-	    $('.cart_sub_total').html('Rs.'+grandTotal);
- 		$('.grand_total').html('Rs.'+getTotal);
+	   if(ServiceTax!='') {
+	   	var serviceTaxPer = $('#service_tax_perc').val();
+	   } else {
+	   	var serviceTaxPer = 0;
+	   }	    
+	   var calculateGst = ((serviceTaxPer/100)*grandTotal);	   
+	   $('#gst_calc').html('Rs.'+calculateGst);
+	   //alert(calculateGst);
+	   var getTotal =  calculateGst+grandTotal;
+	   $('.cart_sub_total').html('Rs.'+grandTotal);
+ 	   $('.grand_total').html('Rs.'+getTotal);
 	  }
 
       

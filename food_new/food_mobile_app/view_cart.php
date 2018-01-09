@@ -33,6 +33,16 @@ if (isset($_REQUEST['userId'])  ) {
     		$lists["weightType"] .=  $getWeights['weight_type'] .",";		    		
     	}
 
+    	$getMoreAddonsDet = getAllDataWhere('food_product_ingredient_prices','product_id',$row["food_item_id"]);
+    	$getMoreAddons = array();
+    	while($getMoreAddons = $getMoreAddonsDet->fetch_assoc()) {
+    		$lists["price"] .=  round($getMoreAddons['admin_price'] .",");
+    		$lists["ingTypeId"] .=  $getMoreAddons['id'] .",";
+	    	$getIng = getIndividualDetails('food_ingredients','id',$getMoreAddons['ingredient_name_id']);
+	    	//$lists["weightTypeId"] .=  $getIng['id'] .",";
+    		$lists["ingredient_name"] .=  $getIng['ingredient_name'] .",";		    		
+    	}
+
 		array_push($response["lists"], $lists);
 	}
 	$response["success"] = 0;

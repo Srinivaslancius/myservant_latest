@@ -27,7 +27,7 @@
                     <td><?php echo $row['meta_title'];?></td>
                     <td><?php echo $row['meta_keywords'];?></td>
                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success ' >Active</span>" ;} else { echo "<span class='label label-outline-info  ' >In Active</span>" ;} ?></td>
-                    <td> <a href="edit_food_category.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a></td> -->
+                    <td> <a href="edit_food_category.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a></td>
                      <!-- Open Modal Box  here -->
                     <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog">
                       <div class="modal-dialog">
