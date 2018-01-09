@@ -32,7 +32,7 @@ $getLocationsData = $conn->query($getLocations); $i=1; ?>
                    <td><?php $getPincodes = getAllData('lkp_pincodes'); while($getPincodesData = $getPincodes->fetch_assoc()) { if($row['lkp_pincode_id'] == $getPincodesData['id']) { echo $getPincodesData['pincode']; } } ?></td>
                    <?php $Locations = "SELECT * FROM lkp_locations WHERE lkp_pincode_id = '".$row['lkp_pincode_id']."'";
                     $locationNames = $conn->query($Locations); ?>
-                   <td><?php $location = ""; while ($row1 = $locationNames->fetch_assoc()) { $location .= $row1['location_name'].','; } echo rtrim($location,",");?></td>
+                   <td><?php $location = ""; while ($row1 = $locationNames->fetch_assoc()) { $location .= $row1['location_name'].','; } echo rtrim(wordwrap($location,40,"<br />\n"),",");?></td>
                    <td> <a href="edit_lkp_locations.php?lkp_pincode_id=<?php echo $row['lkp_pincode_id']; ?>"><i class="zmdi zmdi-edit"></i></a>  &nbsp; <!-- <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "lkp_locations" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></td>
                   </tr>
                   <?php  $i++; } ?>
