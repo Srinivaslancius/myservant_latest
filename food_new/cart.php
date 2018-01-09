@@ -557,6 +557,6 @@ function remove_cart_item1(cartId) {
 
 </script>
 
-
+<?php include "search_js_script.php"; ?>
 </body>
 </html>

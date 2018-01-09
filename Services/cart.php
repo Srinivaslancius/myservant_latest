@@ -199,13 +199,13 @@
 
                                     <td><input required class="time-pick form-control selTime_<?php echo $subCatId; ?>" type="text" name="service_visit_time[]" value="<?php echo $service_visit_time1; ?>" ></td>
 
-                                    <td><a href="#0" class="remove_item"><i class="icon_plus_alt" onclick="add_cart_item(<?php echo $getCartItems['id']; ?>)" style="color:#fe6003" ></i></a> <span id="cart_inc_id_<?php echo $getCartItems['id']; ?>"> <?php echo $getCartItems['service_quantity'];?> </span><a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item(<?php echo $getCartItems['id']; ?>)"style="color:#fe6003"></i></a>
-
-                                    <input type="hidden" value="<?php echo $getCartItems['service_quantity'];?>" id="cart_quantity_<?php echo $getCartItems['id'];?>" name="service_quantity[]">
-
-                                    	<!--<input type="text" name="service_quantity[]" minlength="1" value="<?php echo $getCartItems['service_quantity'];?>" data-service-get-price="<?php echo $getCartItems['service_price'];?>" data-cart-id="<?php echo $getCartItems['id'];?>" data-price-type-id="<?php echo $getSerName['service_price_type_id'];?>" class="service_quantity valid_mobile_num form-control">--></td>
+                                    <td>
+                                    	<input type="text" name="service_quantity[]" minlength="1" value="<?php echo $getCartItems['service_quantity'];?>" data-service-get-price="<?php echo $getCartItems['service_price'];?>" data-cart-id="<?php echo $getCartItems['id'];?>" data-price-type-id="<?php echo $getSerName['service_price_type_id'];?>" class="service_quantity valid_mobile_num form-control">
+                                    </td>
 
                                     <td class="changePrice_<?php echo $getCartItems['id']; ?>">Rs.<?php echo $getCartItems['service_price']*$getCartItems['service_quantity']; ?></td>
+
+                                    <input type="hidden" class="get_total_class" id="get_total_class_<?php echo $getCartItems['id']; ?>" value="<?php echo $getSerName['service_price']*$getCartItems['service_quantity']; ?>">
 
                                     <input type="hidden" id="individual_total_<?php echo $getCartItems['id']; ?>" class="txt">	
 
@@ -248,12 +248,14 @@
 									<td>
 										GST(<?php echo $getSiteSettingsData['service_tax']; ?>%)
 									</td>
-									<input type="hidden" id="service_tax_perc" value="<?php echo $getSiteSettingsData['service_tax']; ?>">
+									
+									<input type="hidden" class="get_cart_total">
+									
 									<td class="text-right" id="gst_calc">
 										<?php $service_tax += ($getSiteSettingsData['service_tax']/100)*$cartSubTotal; ?>
 										Rs. <?php echo $service_tax; ?>
 									</td>
-									
+									<input type="hidden" id="service_tax" value="<?php echo $service_tax; ?>">
 								</tr>
 								
 								
@@ -262,8 +264,8 @@
 										Total cost <br/>
 										<span style="font-size: 11px;font-weight:normal;text-transform:capitalize">(*Min visiting charges applicable.)</span>
 									</td>
-									<td class="text-right grand_total1">
-										Rs. <?php echo $cartSubTotal+$service_tax; ?>
+									<td class="text-right grand_total">
+										Rs.<?php echo $cartSubTotal+$service_tax; ?>
 									</td>
 									<input type="hidden" id="grand_total">
 								</tr>
@@ -375,78 +377,55 @@
         	}        	
         	
         }
-        function add_cart_item(cartId) {
-        	
-        	if(isNaN($('#individual_intem_price_'+cartId).val())) {
-        		var cartPrice1 = 0;
-        	} else {
-        		var cartPrice1 = $('#individual_intem_price_'+cartId).val();
-        	}
-        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())+1;        	
-    		$('#cart_quantity_'+cartId).val(IncQuan);        	
-        	$('#cart_inc_id_'+cartId).html(IncQuan);
-        	$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice1);
-        	$('#individual_total_'+cartId).val(IncQuan*cartPrice1);
-        	calculateSum();	
-        }
-        function remove_cart_item(cartId) {
-        	
-        	if(isNaN($('#individual_intem_price_'+cartId).val())) {
-        		var cartPrice1 = 0;
-        	} else {
-        		var cartPrice1 = $('#individual_intem_price_'+cartId).val();
-        	}
-        	var IncQuan = parseInt($('#cart_quantity_'+cartId).val())-1; 
 
-        	if(IncQuan == 0) {        		
-        		$.ajax({
-			      type:'post',
-			      url:'delete_cart_items.php',
-			      data:{
-			         cart_id : cartId,        
-			      },
-			      success:function(response) {
-			        location.reload();
-			      }
-			    });
-
-        	} else {
-
-        		if(IncQuan!=0) {
-	        		$('#cart_quantity_'+cartId).val(IncQuan);
-	        		$('#cart_inc_id_'+cartId).html(IncQuan);
-	        		$('.changePrice_'+cartId).text('Rs.'+IncQuan*cartPrice1);
-	        		$('#individual_total_'+cartId).val(IncQuan*cartPrice1);
-	        		calculateSum();
-        		//return false;
-        		}
-        	}
-        	
-        		
-        }
-        function calculateSum() { 
-        	var sum = 0;
-			//iterate through each textboxes and add the values
-			$(".txt").each(function() {
-				//add only if the value is number
-				if(!isNaN(this.value) && this.value.length!=0) {
-					sum += parseInt(this.value);
-				}
-			});
-			if(sum!= '') {
-				//.toFixed() method will roundoff the final sum to 2 decimal places
-				$(".cart_sub_total").html('Rs. '+sum);
-				$('#cart_sub_total').val(sum);
-				var calcGst = ($('#service_tax_perc').val()/100)*sum;
-				$('#gst_calc').html('Rs. '+calcGst);
-				//parseInt($('.gst_calc_val').val(calcGst));  
-				$('#grand_total').val(sum+calcGst);
-				$('.grand_total1').html(sum+calcGst);
-				
-				//alert(calcGst+sum);
+        //Price calculations for cart items
+		$('.service_quantity').on('keyup', function () {
+			var priceTypeId = $(this).attr("data-price-type-id");
+			var serviceCurrentQuantity = $(this).val();	
+			var field_clause = 'quantity';   
+			var cartId = $(this).attr("data-cart-id");  	
+			if(serviceCurrentQuantity != 0) {
+				if(priceTypeId == 1) {								
+			    	var servicePrice = $(this).attr("data-service-get-price");		    	
+			    	var final_service_price = parseInt(serviceCurrentQuantity*servicePrice);	    	
+			    	$('.changePrice_'+cartId).text('Rs.'+final_service_price);
+			    	$('#get_total_class_'+cartId).val(final_service_price);	
+			    	calcTotal();
+			    } 
+			} else {
+				$(this).val('1');
+				alert("Please enter valid quantity!");
+				return false;
 			}
-			
-        }
+			//Auto ssave db in quantity
+			/*$.ajax({
+			    type:"post",
+			    url:"update_cart.php",		    
+			    data: {
+		            cartId:cartId,service_quantity:serviceCurrentQuantity,field_clause:field_clause,
+		        },
+			    success:function(result){
+			    	//alert(result);
+			    }
+			});*/
+	    	
+		});
+		function calcTotal() {
+	    var subTotal = 0
+	    $(".get_total_class").each(function() {
+	      subTotal += $(this).val() != "" ? parseInt($(this).val()) : 0;
+	      $('#cart_total').html(subTotal);
+	      $('.get_cart_total').val(subTotal);
+	      var cartTotal = $('.get_cart_total').val();	      
+	      grandTotal = (parseInt(cartTotal));	     
+	    })
+	    var ServiceTax = parseInt($('#service_tax').val());	   
+	    var getTotal =  ServiceTax+grandTotal;
+	    $('.cart_sub_total').html('Rs.'+grandTotal);
+ 		$('.grand_total').html('Rs.'+getTotal);
+	  }
+
+      
         </script>
 
 </body>
