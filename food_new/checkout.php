@@ -272,7 +272,7 @@ if($_SESSION['user_login_session_id'] == '') {
 					<h4 class="nomargin_top">Delivery time <i class="icon_clock_alt pull-right"></i></h4>
 					<?php $getDeliveryTime = getIndividualDetails('food_vendors','id',$restaurant_id1); ?>
 					<p>
-						Minimum Delivery Time: 
+						Minimum Delivery Time: <?php echo $getDeliveryTime['min_delivery_time']; ?>
 					</p>
 					<hr>
 					<?php $getCheckoutDetails = getIndividualDetails('food_content_pages','id',16); ?>
@@ -285,8 +285,8 @@ if($_SESSION['user_login_session_id'] == '') {
 				<div class="box_style_2 hidden-xs" id="help">
 					<i class="icon_lifesaver"></i>
 					<h4>Need <span>Help?</span></h4>
-					<a href="tel://004542344599" class="phone">+45 423 445 99</a>
-					<small>Monday to Friday 9.00am - 7.30pm</small>
+					<a href="tel://<?php echo $getFoodSiteSettingsData['mobile'];?>" class="phone"><?php echo $getFoodSiteSettingsData['mobile'];?></a>
+					<!-- <small>Monday to Friday 9.00am - 7.30pm</small> -->
 				</div>
                 
 			</div><!-- End col-md-3 -->
