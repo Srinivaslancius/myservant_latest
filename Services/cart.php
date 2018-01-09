@@ -261,10 +261,10 @@
 									<?php if($getCount->num_rows == 0) { ?>
 									<td class="text-right" id="gst_calc">
 										<?php $service_tax += ($getSiteSettingsData['service_tax']/100)*$cartSubTotal; ?>
-										Rs. <?php echo $service_tax; ?>
+										Rs. <?php echo round($service_tax); ?>
 									</td>
 									<?php } ?>
-									<input type="hidden" id="service_tax" value="<?php echo $service_tax; ?>">
+									<input type="hidden" id="service_tax" value="<?php echo round($service_tax); ?>">
 									<input type="hidden" value="<?php echo $getSiteSettingsData['service_tax']; ?>" id="service_tax_perc">
 								</tr>
 								
@@ -353,10 +353,11 @@
                        url: "delete_cart_items.php",
                        data: info,
                        success: function(result){
-                        if(result == 1) {
+                        if(result == 1) {	
                             //alert('Cart Item Deleted Successfully');
                             //setTimeout(function() {
-                                location.reload();
+                                //location.reload();
+                                document.location.reload(true);
                             //}, 600);
                            
                         } else {
@@ -436,7 +437,7 @@
 	   	var serviceTaxPer = 0;
 	   }	    
 	   var calculateGst = ((serviceTaxPer/100)*grandTotal);	   
-	   $('#gst_calc').html('Rs.'+calculateGst);
+	   $('#gst_calc').html('Rs.'+Math.round(calculateGst));
 	   //alert(calculateGst);
 	   var getTotal =  calculateGst+grandTotal;
 	   $('.cart_sub_total').html('Rs.'+grandTotal);
