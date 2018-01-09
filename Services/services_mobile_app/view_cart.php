@@ -15,7 +15,10 @@ if (isset($_REQUEST['userId'])  ) {
 		while($row = $getCartServicesData->fetch_assoc()) {
 		$lists = array();
 		$lists["cartId"] = $row["id"];
+		$lists["serviceCatId"] = $row["service_category_id"];
+		$lists["serviceSubId"] = $row["service_sub_category_id"];
 		$lists["serviceId"] = $row["service_id"];
+		$lists["servicePriceTypeId"] = $row["services_price_type_id"];
 		$lists["servicePrice"] = $row["service_price"];
 		$lists["serviceQuantity"] = $row["service_quantity"];	
 		$lists["groupId"] = $row["group_id"];

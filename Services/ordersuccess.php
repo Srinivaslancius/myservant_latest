@@ -1,4 +1,5 @@
 <?php 
+ob_start(); 
 include_once 'meta.php';
 //echo "<pre>"; print_r($_POST); die;
 //Order id generating using sessions

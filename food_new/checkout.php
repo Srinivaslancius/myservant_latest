@@ -245,7 +245,7 @@ if($_SESSION['user_login_session_id'] == '') {
 				header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=2");				
 			} elseif ($payment_group == 2) {
 				//online 
-				header("Location: hdfc_form.php");
+				header("Location: PayUMoney_form.php?odi=".$order_id."&pay_stau=2");
 			} else {
 				header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=1");
 			}			
