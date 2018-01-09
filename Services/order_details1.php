@@ -99,7 +99,29 @@
             </div>
         </aside>   
      </div><!-- End col-md-3 -->
-        
+        <?php 
+        $id = $_GET['id'];
+		$getOrdersData1 = getIndividualDetails('services_orders','id',$id);
+		$ordersCount1 = getAllDataWhere('services_orders','order_id',$getOrdersData1['order_id']);
+		$ordersCount2 = $ordersCount1->num_rows;
+		$getServiceNamesData = getIndividualDetails('services_group_service_names','id',$getOrdersData1['service_id']);
+		$getPaymentMethodData = getIndividualDetails('lkp_payment_types','id',$getOrdersData1['payment_method']);
+		$getOrderStataus = getIndividualDetails('lkp_order_status','id',$getOrdersData1['lkp_order_status_id']);
+		$getSiteSettingsData = getIndividualDetails('services_site_settings','id',1);
+		$getPincodes = getIndividualDetails('lkp_pincodes','id',$getOrdersData1['postal_code']);
+		if($getOrdersData1['coupon_code'] == '') {
+			$discount_money = 0;
+		} else {
+			$discount_money = $getOrdersData1['discount_money']/$ordersCount2;
+		}
+		if($getOrdersData1['service_price_type_id'] == 1) {
+			$service_tax = 0;
+		} else {
+			$service_tax = $getOrdersData1['order_price']*$getOrdersData1['service_quantity']*$getSiteSettingsData['service_tax']/100;
+		}
+		$order_price = ($getOrdersData1['order_price']*$getOrdersData1['service_quantity'])+($service_tax-$discount_money);
+		$sub_total = $getOrdersData1['order_price']*$getOrdersData1['service_quantity'];
+		?>
         <div class="col-md-9 col-sm-9">
         <div class="panel-group">
                   <div class="panel panel-default">
@@ -114,35 +136,35 @@
 		  <tr>
 			<td colspan="2" style="padding-left:20px">
 			<h3>Order Information</h3>
-			<p>Restaurant Name: Sweet Magic</p>
-			<p>Payment Method:Cash On Delivery</p>
-			<p>Order Type:Take Away</p>
-			<p>Order Status: InProgress</p>
-			<p>Payment Status: InProgress</p></td>
+			<p>Order Sub Id: <?php echo $getOrdersData1['order_sub_id'];?></p>
+			<p>Order Date:: <?php echo $getOrdersData1['created_at'];?></p>
+			<p>Payment method: <?php echo $getPaymentMethodData['status'];?></p>
+			<p>Order Status: <?php echo $getOrderStataus['order_status'];?></p>
+			<p>Note: <?php echo $getOrdersData1['service_provider_note'];?></p></td>
 			<td colspan="2"></td>
 			<td colspan="2">
 			<h3>Shipping Address</h3>
-			<p>srinu</p>
-			<p>srinivas@lanciussolutions.com</p>
-			<p>7894561235</p>
-			<p>test</p>
-			<p>345345</td>
+			<p><?php echo $getOrdersData1['first_name'] ?></p>
+			<p><?php echo $getOrdersData1['email'] ?></p>
+			<p><?php echo $getOrdersData1['mobile'] ?></p>
+			<p><?php echo $getOrdersData1['address'] ?></p>
+			<p><?php echo $getPincodes['pincode'] ?></td>
 		  </tr>
 		  <tr>
-			<td><h5>ITEM NAME</h5></td>
-			<td><h5>CUSINE TYPE</h5></td>
-			<td><h5>ITEM WEIGHT</h5></td>
+			<td><h5>SERVICE NAME</h5></td>
+			<td><h5>ORDER PRICE</h5></td>
 			<td><h5>QUANTITY</h5></td>
-			<td><h5>PRICE</h5></td>
-			<td><h5>TOTAL</h5></td>
+			<td><h5>SELECTED DATE</h5></td>
+			<td><h5>SELECTED TIME</h5></td>
+			<td><h5></h5></td>
 		  </tr>
 		   <tr>
-			<td><p>Biryani</p></td>
-			<td><p>MAIN COURSES1</p></td>
-			<td><p>Medium</p></td>
-			<td><p>3</p></td>
-			<td><p>80</p></td>
-			<td><p>240</p></td>
+			<td><p><?php echo $getServiceNamesData['group_service_name'] ?></p></td>
+			<td><p><?php echo $getOrdersData1['order_price'] ?></p></td>
+			<td><p><?php echo $getOrdersData1['service_quantity'] ?></p></td>
+			<td><p><?php echo $getOrdersData1['service_selected_date'] ?></p></td>
+			<td><p><?php echo $getOrdersData1['service_selected_time'] ?></p></td>
+			<td><p></p></td>
 		  </tr>
 		   <tr>
 			<td></td>
@@ -152,10 +174,9 @@
 			<td><p>Subtotal:</p>
 			<p>Tax:</p>
 			<p style="color:#fe6003;">Grand Total:</p></td>
-			<td><p style="color:#fe6003;">Rs. 240</p>
-			<p style="color:#fe6003;">Rs. 24(10 %)</p>
-			
-				<p style="color:#fe6003;">Rs. 264</p>
+			<td><p style="color:#fe6003;">Rs. <?php echo $sub_total ?>
+			<p style="color:#fe6003;">Rs. <?php echo $service_tax ?>(<?php echo $getSiteSettingsData['service_tax'] ?>%)</p>
+			<p style="color:#fe6003;">Rs. <?php echo $order_price ?></p>
 		  </tr>
 		</tbody>
 					

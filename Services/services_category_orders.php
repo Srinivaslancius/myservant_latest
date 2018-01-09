@@ -62,11 +62,6 @@
 .table>thead>tr>th,.table>thead>tr>td{
 	width:20%;
 }
-.collapse.in{
-    display:block;
-.collapse{
-	display:block;
-}
 </style>
 
 </head>
@@ -127,42 +122,53 @@
             $order_id = $_GET['order_id'];
             $serviceOrders = "SELECT * FROM services_orders WHERE order_id = '$order_id' GROUP BY category_id ORDER BY id DESC"; 
             $getServiceOrderData = $conn->query($serviceOrders);
+            $i=1;
             while ($row = $getServiceOrderData->fetch_assoc()) { 
             ?>
 		 <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#payment" href="#collapseOne"><h3 class="margin-top">Service Orders</h3></a>
+                <a role="button" data-toggle="collapse" data-parent="#<?php echo $row['category_id']; ?>" href="#accordion-<?php echo $row['category_id']; ?>" aria-expanded="true">
+                    <i class="zmdi zmdi-chevron-down"></i> <?php $getCatname = getIndividualDetails('services_category','id',$row['category_id']); ?><h3 class="margin-top"><?php echo $getCatname['category_name']; ?></h3>
+                </a>
               </h4>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse">
+            <div id="accordion-<?php echo $row['category_id']; ?>" class="panel-collapse collapse <?php if($i==1){ echo "in"; } ?>">
                <div class="panel-body">
                     <div class="table-responsive">
 			            <table class="table" style="border:1px solid #ddd;width:100%">
     		              <thead>
                     		  <tr>
-                    			<th>ORDER PLACED</th>
-                    			<th>Order Price</th>
-                    			<th>SHIP TO</th>
-                    			<th>ORDER ID</th>
+                    		  	<th>ORDER SUB ID</th>
+                    			<th>SERVICE NAME</th>
+                    			<th>ORDER PRICE</th>
+                    			<th>ORDER STATUS</th>
+                    			<th>PAYMENT STATUS</th>
                 				<th>ACTION</th>
                     		  </tr>
     		              </thead>
     		              <tbody>
+    		              	<?php $category_id = $row['category_id']; 
+                                $getServiceOrders1 = "SELECT * FROM services_orders WHERE order_id = '$order_id' AND category_id = '$category_id' AND lkp_payment_status_id != 3 AND lkp_order_status_id != 3 ORDER BY id DESC";
+                            	$getServiceOrders = $conn->query($getServiceOrders1);
+                                while ($row = $getServiceOrders->fetch_assoc()) { 
+                                	$getServicenamesData = getIndividualDetails('services_group_service_names','id',$row['service_id']); ?>
                     		  <tr>
-                    			<td>2018-01-02 11:11:15	</td>
-                    			<td>Rs.264</td>
-                    			<td>some one</td>
-                    			<td>MYSER-FOODkej354</td>
-                				<td><a href="order_details1.php"><button class="button1">View Details</button></a></td>
+                    		  	<td><?php echo $row['order_sub_id'];?></td>
+                    			<td><?php echo $getServicenamesData['group_service_name'];?></td>
+                    			<td><?php echo $row['order_price'];?></td>
+                    			<td><?php $orderStatus = getIndividualDetails('lkp_order_status','id',$row['lkp_order_status_id']); echo $orderStatus['order_status']; ?></td>
+                    			<td><?php $orderPaymentStatus = getIndividualDetails('lkp_payment_status','id',$row['lkp_payment_status_id']); echo $orderPaymentStatus['payment_status']; ?></td>
+                				<td><a href="order_details1.php?id=<?php echo $row['id']; ?>"><button class="button1">View Details</button></a></td>
                     		  </tr>
+                    		  <?php } ?>
     		              </tbody>
 	                    </table>
 	               </div>
                 </div>
             </div>
         </div>
-        <?php } ?>
+        <?php $i++; } ?>
     </div>
     </div><!-- End panel-group -->
     </div>

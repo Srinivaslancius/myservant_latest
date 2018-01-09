@@ -251,6 +251,17 @@ if($_SESSION['user_login_session_id'] == '') {
 			}			
 		}
     ?>
+    <?php 
+	if($_SESSION['CART_TEMP_RANDOM'] == "") {
+        $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
+    }
+    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
+    $user_session_id = $_SESSION['user_login_session_id'];
+	$getRest = "SELECT * FROM food_cart WHERE (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') AND item_quantity!='0' ";
+	$getRest1 = $conn->query($getRest);
+   	$getRest2 = $getRest1->fetch_assoc();
+    $restaurant_id1 = $getRest2['restaurant_id'];
+	?>
 
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
@@ -259,13 +270,15 @@ if($_SESSION['user_login_session_id'] == '') {
             
 				<div class="box_style_2 hidden-xs info">
 					<h4 class="nomargin_top">Delivery time <i class="icon_clock_alt pull-right"></i></h4>
+					<?php $getDeliveryTime = getIndividualDetails('food_vendors','id',$restaurant_id1); ?>
 					<p>
-						Lorem ipsum dolor sit amet, in pri partem essent. Qui debitis meliore ex, tollit debitis conclusionemque te eos.
+						Minimum Delivery Time: 
 					</p>
 					<hr>
-					<h4>Secure payment <i class="icon_creditcard pull-right"></i></h4>
+					<?php $getCheckoutDetails = getIndividualDetails('food_content_pages','id',16); ?>
+					<h4><?php echo $getCheckoutDetails['title']; ?><i class="icon_creditcard pull-right"></i></h4>
 					<p>
-						Lorem ipsum dolor sit amet, in pri partem essent. Qui debitis meliore ex, tollit debitis conclusionemque te eos.
+						<?php echo $getCheckoutDetails['description']; ?>
 					</p>
 				</div><!-- End box_style_1 -->
                 
@@ -549,8 +562,8 @@ $('.check_dev_type').click(function(){
 	var getAdonsTotal = parseFloat($('#getAdstotal').val());
 	if(getcheckRadio == 1) {
 		$('#hide_del_fee').hide();		
-		$('#order_total').val(getSubTotal+getServiceTax+getAdonsTotal);
-		$('#apply_price_aft_del').html(getSubTotal+getServiceTax+getAdonsTotal);
+		$('#order_total').val(Math.round(getSubTotal+getServiceTax+getAdonsTotal));
+		$('#apply_price_aft_del').html(Math.round(getSubTotal+getServiceTax+getAdonsTotal));
 		$('#coupon_code').removeAttr("readonly");
 		$('.form-control-clear').siblings('input[type="text"]').val('').trigger('propertychange').focus();
 		$(".apply_coupon").show();
@@ -558,8 +571,8 @@ $('.check_dev_type').click(function(){
 		$('#discount_money,#coupon_code,#coupon_code_type').val('');
 	} else {
 		$('#hide_del_fee').show();
-		$('#order_total').val(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal);
-		$('#apply_price_aft_del').html(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal);
+		$('#order_total').val(Math.round(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal));
+		$('#apply_price_aft_del').html(Math.round(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal));
 		$('#coupon_code').removeAttr("readonly");
 		$('.form-control-clear').siblings('input[type="text"]').val('').trigger('propertychange').focus();
 		$(".apply_coupon").show();
@@ -635,5 +648,8 @@ $('#discount_price').hide();
 	    });
 	}
 </script>
+
+
+<?php include "search_js_script.php"; ?>
 </body>
 </html>
