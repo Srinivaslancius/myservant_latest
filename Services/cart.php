@@ -220,9 +220,7 @@
 						
 						</tbody>
 					</table>
-					
-					<div class="add_bottom_15"><small>* Prices for person.</small>
-					</div>
+				
 				</div>
 				<!-- End col-md-8 -->
                             <?php } ?>
@@ -277,11 +275,10 @@
 							<input type="submit" class="btn_full" name="submit" value="Proceed To Check out">
 							<input type="hidden" name="login_cart_id" value="<?php echo encryptPassword(1);?>">
 						<?php } else { ?>
-							<input type="submit" class="btn_full" name="submit" value="Proceed To Check out">	
-
+							<input type="submit" class="btn_full" name="submit" value="Proceed To Check out">
 						<?php } ?>
-						<a class="btn_full_outline" href="services.php"><i class="icon-right"></i> Continue shopping</a><br>
-						<a class="btn_full" href="#">Clear cart</a>
+						<a class="btn_full" href="clear_total_cart.php">Clear cart</a>
+						<a class="btn_full_outline" href="services.php"><i class="icon-right"></i> Continue shopping</a><br>						
 					</div>
 					
 				</aside>
