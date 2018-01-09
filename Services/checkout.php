@@ -308,18 +308,13 @@ background-color: #fe6003;
                                                                     <td colspan="2" class="text-right">Rs. <?php echo $cartTotal; ?></td>
                                                                 </tr>
                                                                 <?php if($getCount->num_rows == 0) { 
-									$service_tax += ($getSiteSettingsData['service_tax']/100)*$cartTotal;
-								?>
+																	$service_tax += ($getSiteSettingsData['service_tax']/100)*$cartTotal;
+																?>
                                                                 <tr>
                                                                     <td>GST (<?php echo $getSiteSettingsData['service_tax'] ; ?>%)</td>
                                                                     <td colspan="2" class="text-right">Rs. <?php echo $service_tax ; ?></td>
                                                                 </tr>
-                                                                <?php } else { ?>
-                                                                <tr>
-                                                                    <td>GST</td>
-                                                                    <td colspan="2" class="text-right">Rs. 0</td>
-                                                                </tr>
-                                                                <?php } ?>
+                                                                <?php }  ?>
                                                                 <input type="hidden" name="service_tax" id="service_tax" value="<?php echo $service_tax ; ?>">
                                                                 <tr>
 
