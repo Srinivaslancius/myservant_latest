@@ -74,9 +74,6 @@
           $getAboutData = $getAllAboutData->fetch_assoc();
 ?>
 <?php 
-  if($_SESSION['user_login_session_id'] == '') {
-      header ("Location: logout.php");
-  }
   if(isset($_POST["submit"]) && $_POST["submit"]!="") {
       $user_id =$_SESSION["user_login_session_id"];
       $name = $_POST['name'];
@@ -89,16 +86,6 @@
       $created_at = date("ymdhis");
       $sql1 = "INSERT INTO add_user_address (`user_id`,`name`,`email`,`mobile`,`last_name`,`city`,`pincode`,`address`,`created_at`) VALUES ('$user_id','$name','$email','$mobile','$last_name','$city','$pincode','$address','$created_at')";
       if($conn->query($sql1) === TRUE){             
-         echo "<script type='text/javascript'>window.location='my_address.php?succ=log-success'</script>";
-      } else {               
-         header('Location: my_address.php?err=log-fail');
-      } 
-  }
-  if(isset($_POST["address_status"]) && $_POST["address_status"]!="") {
-      $id = $_POST['id'];
-      $address_status = 1;
-      $sql2 = "UPDATE add_user_address SET address_status = '$address_status' WHERE id = '$id' ";
-      if($conn->query($sql2) === TRUE){             
          echo "<script type='text/javascript'>window.location='my_address.php?succ=log-success'</script>";
       } else {               
          header('Location: my_address.php?err=log-fail');
@@ -156,17 +143,18 @@
                     </div>
 					<!---start-->
 					<?php
-					$getAddress = getAllData('add_user_address');
+					$user_id = $_SESSION["user_login_session_id"];
+          $getAddress = getAllDataWhereWithActive('add_user_address','user_id',$user_id);
 					if($getAddress->num_rows) { ?>
-					<div class="panel-body one">
+					<div class="panel-body address">
 						<?php while($getAddressDetails = $getAddress->fetch_assoc()) { ?>
 	                    <div class="strip_list wow fadeIn" data-wow-delay="0.1s" style="min-height:180px">                  
 	                        <div class="col-md-9 col-sm-9">
 	                            <h3 style="color:#fe6003">Address </h3>
 	                                <div class="type">
-	                                    <p><?php echo $getAddressDetails['name']; ?></p>
-										<p><?php echo $getAddressDetails['mobile']; ?></p>
-										<p><?php echo $getAddressDetails['address']; ?></p>	
+	                                  <p><?php echo $getAddressDetails['name']; ?></p>
+                										<p><?php echo $getAddressDetails['mobile']; ?></p>
+                										<p><?php echo $getAddressDetails['address']; ?></p>	
 	                                </div>
 	                        </div>
 	                        <input type="hidden" name="id" value="<?php echo $getAddressDetails['id']; ?>">
@@ -174,10 +162,10 @@
 	                            <div class="">								
 	                                <div>
 	                                	<?php if($getAddressDetails['address_status'] == 0) { ?>
-										<button type="submit" style="background-color: #fba775" name="address_status" value="address_status" class="button1">Make As Default</button>
-										<?php } else { ?> 
-										<button type="submit" name="address_status" value="address_status" class="button1">Make As Default</button>
-										<?php } ?>
+                  										<a href="../Services/make_as_default.php?default_id=<?php echo $getAddressDetails['id']; ?>"><button style="background-color: #fba775" class="button1">Make As Default</button></a>
+                                      <?php } else { ?> 
+                                      <a href="../Services/make_as_default.php?default_id=<?php echo $getAddressDetails['id']; ?>"><button class="button1">Make As Default</button></a>
+                                      <?php } ?>
 	                                </div> 							
 	                          </div> 
 	                        </div>
@@ -185,19 +173,19 @@
 						<?php } ?>
                         <div class="go_to">								
                             <div>
-								<center><button class="button1">ADD ADDRESS</button></center>
+								<center><button class="button1 one">ADD ADDRESS</button></center>
                             </div> 							
                        </div> 
                     </div>
                     <?php } else { ?>
-                    <div class="panel-body one">
+                    <div class="panel-body address">
 						<div class="row">
 						  	<div class="col-sm-3"></div>
 						  	<div class="col-sm-6">
 								<center><img src="img/myaddress.png">
 								<h4>No Addresses found in your account!</h4>
 								<p>Add a delivery address.</p>
-								<button class="button1">ADD ADDRESS</button></center>
+								<button class="button1 one">ADD ADDRESS</button></center>
 							</div>
 							<div class="col-sm-3"></div>
 						</div>
@@ -228,7 +216,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="mobile">Email*</label>
-							<input type="text" class="form-control" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Mobile" value="<?php echo $userData['user_email']; ?>" required>
+							<input type="text" class="form-control" readonly name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Mobile" value="<?php echo $userData['user_email']; ?>" required>
 						</div>
 					</div>
 					<div class="col-sm-6">
@@ -327,6 +315,7 @@ $(document).ready(function(){
 	 $(".two").hide();
     $(".one").click(function(){
         $(".one").hide();
+        $(".address").hide();
 		$(".two").show();
     });
 });
