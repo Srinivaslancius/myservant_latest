@@ -40,34 +40,34 @@
                 $web_logo = uniqid().$_FILES["web_logo"]["name"];
                 $target_dir = "uploads/grocery_brands_web_logo/";
                 $target_file = $target_dir . basename($web_logo);
-                $getImgUnlink = getImageUnlink('web_logo','grocery_brands_web_logo','id',$brand_id,$target_dir);
+                //$getImgUnlink = getImageUnlink('web_logo','grocery_brands_web_logo','id',$brand_id,$target_dir);
 
                 $app_logo = uniqid().$_FILES["app_logo"]["name"];
                 $app_logo_dir = "uploads/grocery_brands_app_logo/";
                 $app_logo_file = $app_logo_dir . basename($app_logo);
-                $getImgUnlink = getImageUnlink('app_logo','grocery_brands_app_logo','id',$brand_id,$app_logo_dir);
-                if($_FILES["web_logo"]["name"] !='') {
-                    move_uploaded_file($_FILES["web_logo"]["tmp_name"], $target_file);
+                //$getImgUnlink = getImageUnlink('app_logo','grocery_brands_app_logo','id',$brand_id,$app_logo_dir);
+                if(move_uploaded_file($_FILES["web_logo"]["tmp_name"], $target_file)) {
+                   // move_uploaded_file($_FILES["web_logo"]["tmp_name"], $target_file);
                     $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name', web_logo = '$web_logo' WHERE id = '$brand_id' ";
-                } elseif($_FILES["app_logo"]["name"] !='') {
-                    move_uploaded_file($_FILES["app_logo"]["tmp_name"], $app_logo_file);
+                    //$conn->query($sql);
+                } elseif(move_uploaded_file($_FILES["app_logo"]["tmp_name"], $app_logo_file)) {
+                    //move_uploaded_file($_FILES["app_logo"]["tmp_name"], $app_logo_file);
                     $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name', app_logo = '$app_logo' WHERE id = '$brand_id' ";
-                } elseif($_FILES["web_logo"]["name"] !='' && $_FILES["app_logo"]["name"] !='') {
-                    move_uploaded_file($_FILES["web_logo"]["tmp_name"], $target_file);
-                    move_uploaded_file($_FILES["app_logo"]["tmp_name"], $app_logo_file);
-                    $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name', web_logo = '$web_logo', app_logo = '$app_logo' WHERE id = '$brand_id' ";
-                }
+                    //$conn->query($sql);
+                } 
+
             } else{
                $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name' WHERE id = '$brand_id' ";
+               //$conn->query($sql);
             }          
             //echo $sql; die;
 
-            $result = $conn->query($sql);
-            if( $result == 1){
+            $conn->query($sql);
+            //if($conn->query($sql) === TRUE){
                 echo "<script type='text/javascript'>window.location='manage_brands.php?msg=success'</script>";
-            } else {
-                echo "<script type='text/javascript'>window.location='manage_brands.php?msg=fail'</script>";
-            }
+            //} else {
+               // echo "<script type='text/javascript'>window.location='manage_brands.php?msg=fail'</script>";
+            //}
         }
         ?>
         
@@ -90,7 +90,7 @@
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Web Logo</label>
                                 <div class="col-sm-6 col-md-4">
                                     <?php if($getBrands['web_logo']!='') { ?>
-                                        <img src="<?php echo $base_url . 'uploads/grocery_brands_web_logo/'.$getBrands['web_logo']; ?>" id="output" height="100" width="100"/>
+                                        <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brands_web_logo/'.$getBrands['web_logo']; ?>" id="output" height="100" width="100"/>
                                     <?php } ?>
                                     <label class="btn btn-default file-upload-btn">Choose file...
                                         <input id="form-control-22" class="file-upload-input" type="file" name="web_logo" accept="image/*" onchange="loadFile(event)">
@@ -101,7 +101,7 @@
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">App Logo</label>
                                 <div class="col-sm-6 col-md-4">
                                     <?php if($getBrands['app_logo']!='') { ?>
-                                        <img src="<?php echo $base_url . 'uploads/grocery_brands_app_logo/'.$getBrands['app_logo']; ?>"  id="output1" height="100" width="100"/>
+                                        <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brands_app_logo/'.$getBrands['app_logo']; ?>"  id="output1" height="100" width="100"/>
                                     <?php } ?>
                                     <label class="btn btn-default file-upload-btn">Choose file...
                                         <input id="form-control-22" class="file-upload-input" type="file" name="app_logo" accept="image/*" onchange="loadFile1(event)">

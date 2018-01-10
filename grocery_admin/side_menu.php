@@ -1,3 +1,8 @@
+<?php
+    $currentFile = $_SERVER["PHP_SELF"];
+    $parts = Explode('/', $currentFile);
+    $page_name = $parts[count($parts) - 1];
+?>
 <ul class="sidebar-menu">
             <li class="menu-title">Dashboard</li>
             <li class="with-sub">
@@ -9,17 +14,22 @@
               </a>
               <ul class="sidebar-submenu">
                 <li class="menu-subtitle">Dashboards</li>
-                <li><a href="add_state.php">Manage States</a></li>
-                <li><a href="add_districts.php">Manage Districts</a></li>
-                <li><a href="add_cities.php">Manage Cities</a></li>
-                <li><a href="manage_pincodes.php">Manage Pin Codes</a></li>
-                <li><a href="manage_areas.php">Manage Areas</a></li>
-                <li><a href="manage_sub_areas.php">Manage Sub Areas</a></li>
-                <li><a href="manage_languages.php">Manage Languages</a></li>
-                <li><a href="manage_brands.php">Manage Brands</a></li>
-                <li><a href="manage_categories.php">Manage Categories</a></li>
-                <li><a href="manage_sub_categories.php">Manage Sub Categories</a></li>
-                <li><a href="">Manage Time Slots</a></li>
+                <li class="<?php if($page_name == 'add_state.php') { echo "active"; } ?>"><a href="add_state.php">Manage States</a></li> 
+                <li class="<?php if($page_name == 'add_districts.php') { echo "active"; } ?>"><a href="add_districts.php">Manage Districts</a></li> 
+
+                <li class="<?php if($page_name == 'add_cities.php') { echo "active"; } ?>"><a href="add_cities.php">Manage Cities</a></li>
+                <li class="<?php if($page_name == 'manage_pincodes.php') { echo "active"; } ?>"><a href="manage_pincodes.php">Manage Pin Codes</a></li>
+  
+                <li class="<?php if($page_name == 'manage_areas.php') { echo "active"; } ?>"><a href="manage_areas.php">Manage Areas</a></li>
+
+                <li class="<?php if($page_name == 'manage_sub_areas.php') { echo "active"; } ?>"><a href="manage_sub_areas.php">Manage Sub Areas</a></li>
+                
+                <li class="<?php if($page_name == 'manage_languages.php') { echo "active"; } ?>"><a href="manage_languages.php">Manage Languages</a></li>
+                <li class="<?php if($page_name == 'manage_brands.php') { echo "active"; } ?>"><a href="manage_brands.php">Manage Brands</a></li>
+                <li class="<?php if($page_name == 'manage_categories.php') { echo "active"; } ?>"><a href="manage_categories.php">Manage Categories</a></li>
+                <li class="<?php if($page_name == 'manage_sub_categories.php') { echo "active"; } ?>"><a href="manage_sub_categories.php">Manage Sub Categories</a></li>
+                <li class="<?php if($page_name == '') { echo "active"; } ?>"><a href="">Manage Time Slots</a></li>
+                <!-- <li><a href="">Manage Time Slots</a></li> -->
               </ul>
             </li>
             <li class="with-sub">
@@ -31,10 +41,9 @@
               </a>
               <ul class="sidebar-submenu">
                 <li class="menu-subtitle">Settings</li>
-                <li><a href="basic_settings.php">Site Level Settings</a></li>
-                <li><a href="payment_settings.php">Payment Settings</a></li>
-                <li><a href="Social_media_settings.php">Social Media Settings</a></li>
-                
+                <li class="<?php if($page_name == 'basic_settings.php') { echo "active"; } ?>"><a href="basic_settings.php">Site Level Settings</a></li>
+                <li class="<?php if($page_name == 'payment_settings.php') { echo "active"; } ?>"><a href="payment_settings.php">Payment Settings</a></li>
+                <li class="<?php if($page_name == 'Social_media_settings.php') { echo "active"; } ?>"><a href="Social_media_settings.php">Social Media Settings</a></li>
               </ul>
             </li>
             
@@ -64,6 +73,13 @@
                   <i class="zmdi zmdi-dot-circle-alt"></i>
                 </span>
                 <span class="menu-text">Brand Logos</span>
+              </a>
+            </li>
+            <li><a href="grocery_banners.php">
+                <span class="menu-icon">
+                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                </span>
+                <span class="menu-text">Banners</span>
               </a>
             </li>
             <li><a href="grocery_tags.php">

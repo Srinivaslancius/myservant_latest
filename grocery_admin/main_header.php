@@ -4,11 +4,14 @@ ob_start();
 include_once('admin_includes/config.php');
 include_once('../admin_includes/common_functions.php');
 ?>
+<?php $getSiteSettings = getAllDataWhere('grocery_site_settings','id',1); 
+$getSiteSettingsData = $getSiteSettings->fetch_assoc();
+?>
 <nav class="navbar navbar-default">
         <div class="navbar-header">
-          <a class="navbar-brand" href="index.html">
-            <img src="img/logo.png" alt="" height="25">
-            <span>cosmos</span>
+          <a class="navbar-brand" href="">
+            <img src="<?php echo $base_url . 'uploads/logo/'.$getSiteSettingsData['logo'] ?>" alt="<?php echo $getSiteSettingsData['admin_title'];?>" height="45">
+            <!-- <span><?php echo $getSiteSettingsData['admin_title'];?></span> -->
           </a>
           <button class="navbar-toggler left-sidebar-toggle pull-left visible-xs" type="button">
             <span class="hamburger"></span>
