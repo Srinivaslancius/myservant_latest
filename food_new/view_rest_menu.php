@@ -37,7 +37,7 @@ height: 32px;
 float: right;
 margin: 5px 0px;
 padding: 0px 2px;
-font-size: 13px;
+font-size: 12px;
 line-height: 1.75;
 color: #333;
 background-color: #ffffff ;

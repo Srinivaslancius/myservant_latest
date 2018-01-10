@@ -721,23 +721,39 @@ iframe {
     margin-left: -20px;
 }
 
+
 .box_home#one {
-    background: url(../img/icon_home_1.svg) center 40px no-repeat #fff;
+    background: url(../img/dashboard/services.png) center 40px no-repeat #fff
 }
-
 .box_home#two {
-    background: url(../img/icon_home_2.svg) center 40px no-repeat #fff
+    background: url(../img/dashboard/food.png) center 40px no-repeat #fff
 }
-
 .box_home#three {
-    background: url(../img/icon_home_3.svg) center 40px no-repeat #fff
+    background: url(../img/dashboard/grocery.png) center 40px no-repeat #fff;
+}
+.box_home#four {
+    background: url(../img/dashboard/wishlist.png) center 40px no-repeat #fff
+}
+.box_home#five {
+    background: url(../img/dashboard/my-address.png) center 40px no-repeat #fff
+}
+.box_home#six {
+    background: url(../img/dashboard/wallet.png) center 40px no-repeat #fff
+}
+.box_home#seven {
+    background: url(../img/dashboard/profile.png) center 40px no-repeat #fff
 }
 
-.box_home#four {
-    background: url(../img/icon_home_4.svg) center 40px no-repeat #fff
+.box_home#eight {
+    background: url(../img/dashboard/rewards.png) center 40px no-repeat #fff
+}
+
+.box_home#nine {
+    background: url(../img/dashboard/change-passsword.png) center 40px no-repeat #fff
 }
 
 .box_home h3 {
+	margin-top:35px;
     margin-bottom: 3px
 }
 
