@@ -120,7 +120,7 @@
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Tags</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" name="tags" placeholder="Enter Keywords" required="required">
+                                    <input type="text" class="form-control" id="form-control-3" name="tags" placeholder="Enter Tags" required="required">
                                 </div>
                             </div>
                             <?php $getStatus = getAllData('lkp_status');?>

@@ -28,28 +28,23 @@
       <div class="site-right-sidebar">
         <?php include_once './right_slide_toggle.php';?>
       </div>
-
+        <?php $pid = $_GET['pid']; ?>
         <?php
         if (!isset($_POST['submit']))  {
           echo "fail";
         } else  { 
-            //echo "<pre>"; print_r($_POST); die;
-            $product_name = $_REQUEST['product_name'];            
-            $grocery_category_id = $_REQUEST['grocery_category_id'];
-            $grocery_sub_category_id = $_REQUEST['grocery_sub_category_id'];
-            $product_description = $_REQUEST['product_description'];
-            $tags = $_REQUEST['tags'];
-            $lkp_status_id = $_REQUEST['lkp_status_id'];
 
-            $sql = "INSERT INTO grocery_products (`product_name`, `grocery_category_id`, `grocery_sub_category_id`, `product_description`, `tags`, `lkp_status_id`) VALUES ('$product_name', '$grocery_category_id', '$grocery_sub_category_id', '$product_description',  '$tags', '$lkp_status_id')";
-            $result = $conn->query($sql);
-            $last_id = $conn->insert_id;
-
-            $brands = $_REQUEST['brands'];
-            foreach($brands as $key=>$value){
-                $brandsType = $_REQUEST['brands'][$key];          
-                $sql = "INSERT INTO product_bind_brands ( `product_id`,`brand_id`) VALUES ('$last_id','$brandsType')";
-                $result = $conn->query($sql);
+            //echo "<pre>"; print_r($_FILES); die;
+            $product_images = $_FILES['product_images']['name'];
+            foreach($product_images as $key=>$value){
+                if(!empty($value)) {
+                    $product_images1 = uniqid().$_FILES['product_images']['name'][$key];
+                    $file_tmp = $_FILES["product_images"]["tmp_name"][$key];
+                    $file_destination = 'uploads/product_images/' . $product_images1;
+                    move_uploaded_file($file_tmp, $file_destination);    
+                    $sql = "INSERT INTO product_bind_images ( `product_id`,`image`) VALUES ('$pid','$product_images1')";
+                    $result = $conn->query($sql);
+                }
             }
            
             if( $result == 1){
@@ -67,28 +62,58 @@
                 <div class="panel-body">
                     <div class="row">
                         
-                        <form class="form-horizontal">
-                            
-                            <div class="form-group">
-                                <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Product Image</label>
-                                <div class="col-sm-6 col-md-2">
-                                    <label class="btn btn-default file-upload-btn">Choose file...
-                                        <input id="form-control-22" class="file-upload-input" type="file" name="files[]" multiple="multiple">
-                                    </label>
-                                </div>
-                                <div class="col-sm-6 col-md-2">
-                                    <span><button type="button" class="btn btn-success"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i></button></span>
-                                    <span><button type="button" class="btn btn-warning"> <i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></button></span>
+                        <form class="form-horizontal" method="post" autocomplete="off" enctype="multipart/form-data">
+                            <div class="clear_fix"></div>
+                            <div class="input_fields_container">
+                                <div class="form-group">
+                                    <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Product Image</label>
+                                    <div class="col-sm-6 col-md-2">
+                                        <label class="btn btn-default file-upload-btn">Choose file...
+                                            <input id="form-control-22" class="file-upload-input" type="file" name="product_images[]" accept="image/*" required>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6 col-md-2">
+                                        <span><button type="button" class="btn btn-success add_more_button"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i></button></span>                                    
+                                    </div>
                                 </div>
                             </div>
-                            
                             
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default panel-table m-b-0">
+                <div class="panel-heading">
+                    <h3 class="m-t-0 m-b-5 font_sz_view">View Product Images</h3>
+                    
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered dataTable" id="table-2">
+                            <thead>
+                                <tr>
+                                    <th>S.no</th>                                    
+                                    <th>Product Image</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $getProductImages = getAllDataWhere('product_bind_images','product_id',$pid); $i=1; ?>
+                                <?php while ($row = $getProductImages->fetch_assoc()) { ?>
+                                <tr>
+                                    <td><?php echo $i; ?></td>
+                                    <td><img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$row['image']; ?>"  id="output" height="60" width="60"/></td>
+                                    <td><span><a href=""><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a></span></td>
+                                </tr>
+                                <?php $i++; } ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -103,5 +128,21 @@
     <script src="js/application.min.js"></script>
     <script src="js/dashboard-3.min.js"></script>
     <script src="js/tables-datatables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+        var max_fields_limit      = 10; //set limit for maximum input fields
+        var x = 1; //initialize counter for text box
+        $('.add_more_button').click(function(e){ //click event on add more fields button having class add_more_button
+            e.preventDefault();
+            if(x < max_fields_limit){ //check conditions
+                x++; //counter increment
+                $('.input_fields_container').append('<div><div class="row"><div class="form-group"><label class="col-sm-3 col-md-4 control-label" for="form-control-22">Product Image</label><div class="col-sm-6 col-md-2"><label class="btn btn-default file-upload-btn">Choose file...<input id="form-control-22" class="file-upload-input" type="file" name="product_images[]" required></label></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="remove_field btn btn-warning"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div></div>'); //add input field
+            }
+        });  
+        $('.input_fields_container').on("click",".remove_field", function(e){ //user click on remove text links
+            e.preventDefault(); $(this).parent('div').remove(); x--;
+        })
+    });
+    </script>
   </body>
 </html>
