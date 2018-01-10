@@ -10,7 +10,7 @@
             $priority = $_POST['priority'];
             $lkp_status_id = $_POST['lkp_status_id'];
         
-                $sql = "INSERT INTO grocery_sub_categories (`grocery_category_id`,`sub_category_name`,`brands_id`,`priority`,`lkp_status_id`) VALUES ('$grocery_category_id','$sub_category_name','$brands_id','$brands_id','$lkp_status_id')"; 
+                 $sql = "INSERT INTO grocery_sub_categories (`grocery_category_id`,`sub_category_name`,`brands_id`,`priority`,`lkp_status_id`) VALUES ('$grocery_category_id','$sub_category_name','$brands_id','$brands_id','$lkp_status_id')"; 
                     if($conn->query($sql) === TRUE){
                        echo "<script type='text/javascript'>window.location='manage_sub_categories.php?msg=success'</script>";
                     } else {
