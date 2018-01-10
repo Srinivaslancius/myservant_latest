@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="js/forms-plugins.min.js"></script>
     <!-- in edit_brand_logos_script -->
-    <script src="js/dashboard-3.min.js"></script>
-    <script src="js/tables-datatables.min.js"></script>
+    
 
     
 
