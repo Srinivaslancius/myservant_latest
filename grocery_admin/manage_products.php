@@ -170,8 +170,7 @@
                         <table class="table table-striped table-bordered dataTable" id="table-2">
                             <thead>
                                 <tr>
-                                    <th>S.no</th>
-                                    <th>Product Name</th>
+                                    <th>S.no</th>                                    
                                     <th>Category</th>
                                     <th>Sub Category</th>
                                     <th>Update Price</th>
@@ -184,8 +183,7 @@
                                 <?php $getProdDet = getAllDataWithActiveRecent('grocery_products'); $i=1; ?>
                                 <?php while ($row = $getProdDet->fetch_assoc()) { ?>
                                 <tr>
-                                    <td><?php echo $i; ?></td>
-                                    <td><?php echo $row['product_name']; ?></td>
+                                    <td><?php echo $i; ?></td>                                    
                                     <?php $catNAme = getIndividualDetails('grocery_category','id',$row['grocery_category_id']); ?>
                                     <td><?php echo $catNAme['category_name']; ?></td>
                                     <?php $subcatNAme = getIndividualDetails('grocery_sub_category','id',$row['grocery_sub_category_id']); ?>
