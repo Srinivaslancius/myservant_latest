@@ -109,7 +109,7 @@ if (!isset($_POST['submit']))  {
 				<ul>
 					<li><a href="index.php">Home</a>
 					</li>
-					<li>FEEDBACK FORM</li>
+					<li>Feedback Form</li>
 				</ul>
 			</div>
 		</div>

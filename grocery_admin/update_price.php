@@ -33,7 +33,8 @@
         if (!isset($_POST['submit']))  {
           echo "fail";
         } else  { 
-            //echo "<pre>"; print_r($_FILES); die;
+            echo "<pre>"; print_r($_POST); die;
+
             $product_images = $_FILES['product_images']['name'];
             foreach($product_images as $key=>$value){
                 if(!empty($value)) {
@@ -41,7 +42,7 @@
                     $file_tmp = $_FILES["product_images"]["tmp_name"][$key];
                     $file_destination = 'uploads/product_images/' . $product_images1;
                     move_uploaded_file($file_tmp, $file_destination);    
-                    $sql = "INSERT INTO product_bind_images ( `product_id`,`image`) VALUES ('$pid','$product_images1')";
+                    $sql = "INSERT INTO product_bind_weight_prices ( `product_id`,`lkp_city_id`, `weight_type`, `mrp_price`, `selling_price`) VALUES ('$pid','$product_images1')";
                     $result = $conn->query($sql);
                 }
             }
@@ -61,57 +62,75 @@
                 <div class="panel-body">
                     <div class="row">
                         
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" method="post" autocomplete="off">
+
                             <div class="form-group">
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Select City</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <select id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }">
+                                    <select id="form-control-1" name="lkp_city_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
                                         <option value="">-- Select City --</option>
-                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                        <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
+                                        <?php while($row = $getCities->fetch_assoc()) {  ?>
+                                            <option value="<?php echo $row['id']; ?>" ><?php echo $row['city_name']; ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Quantity</label>
-                                <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Quantity">
+
+                            <div class="clear_fix"></div>
+
+                            <div class="input_fields_container" >
+                                <div style="border:1px solid;">
+                                    <div class="form-group">
+                                        <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Offer</label>
+                                        <div class="btn-group col-sm-6 col-md-4" >
+                                             <label class="btn btn-outline-primary">
+                                                <input type="radio" name="buttonRadios[]" required onclick="check_offer(1)" value='1' > Yes
+                                            </label>
+                                            <label class="btn btn-outline-primary">
+                                                <input type="radio" name="buttonRadios[]" required onclick="check_offer(0)" value='0' > No &nbsp;
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group offer_price" style="display:none">
+                                        <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Percentage</label>
+                                        <div class="col-sm-6 col-md-4">
+                                            <input type="text" class="form-control" name="offer_percentage[]" id="form-control-3" placeholder="Offer Percentage (%)" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight (Ex: 100 Gms etc..)</label>
+                                        <div class="col-sm-6 col-md-4">
+                                            <input type="text" class="form-control" name="weight_type[]" id="form-control-3" placeholder="Weights (Ex: 100 Gms etc..)" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="form-control-3" class="col-sm-3 col-md-4 control-label">MRP</label>
+                                        <div class="col-sm-6 col-md-4">
+                                            <input type="text" class="form-control valid_mobile_num" name="mrp_price[]" id="form-control-3" placeholder="Enter MRP" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Selling Price</label>
+                                        <div class="col-sm-6 col-md-4">
+                                            <input type="text" class="form-control valid_mobile_num" name="selling_price[]" id="form-control-3" placeholder="Enter Selling Price" required readonly>
+                                        </div>
+                                        <div class="col-sm-6 col-md-2">
+                                            <span><button type="button" class="btn btn-success add_more_button"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i></button></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Offer</label>
-                                <div class="btn-group col-sm-6 col-md-4" data-toggle="buttons">
-                                     <label class="btn btn-outline-primary active">
-                                        <input type="radio" name="buttonRadios" id="buttonRadios1" autocomplete="off" checked="checked"> Yes
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="buttonRadios" id="buttonRadios2" autocomplete="off"> No &nbsp;
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight Types</label>
-                                <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Weight Types">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">MRP</label>
-                                <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter MRP">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Selling Price</label>
-                                <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Selling Price">
-                                </div>
-                            </div>
-                            
+
+                            <br />
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
+
                         </form>
                     </div>
                 </div>
@@ -161,10 +180,37 @@
           2017 © Cosmos
         </div>
 
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
+    <?php include_once 'footer.php'; ?>
     <script src="js/dashboard-3.min.js"></script>
     <script src="js/tables-datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+        var max_fields_limit      = 10; //set limit for maximum input fields
+        var x = 1; //initialize counter for text box
+        $('.add_more_button').click(function(e){ //click event on add more fields button having class add_more_button                   
+            e.preventDefault();
+            if(x < max_fields_limit){ //check conditions
+                x++; //counter increment
+                $('.input_fields_container').append('<div style="border:1px solid;"><div class="row"><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Offer</label><div class="btn-group col-sm-6 col-md-4"><label class="btn btn-outline-primary"><input type="radio" name="buttonRadios[]" value="1" onclick="check_offer(1)" id="buttonRadios1" autocomplete="off" required>Yes</label> <label class="btn btn-outline-primary"><input type="radio" onclick="check_offer(0)" value="0" required name="buttonRadios[]" id="buttonRadios2" autocomplete="off"> No &nbsp;</label></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight (Ex: 100 Gms etc..)</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control" id="form-control-3" placeholder="Weight Types" name="weight_type[]" required></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">MRP</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Enter MRP" name="mrp_price[]" required></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Selling Price</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Enter Selling Price" name="selling_price[]" required readonly></div><a href="#" class="remove_field btn btn-warning"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div></div>'); //add input field
+            }
+        });  
+        $('.input_fields_container').on("click",".remove_field", function(e){ //user click on remove text links
+            e.preventDefault(); $(this).parent('div').remove(); x--;
+        })
+    });
+    </script>
+
+    <script type="text/javascript">
+    function check_offer(getIncValue) {
+
+        if(getIncValue == 1 ){            
+            $('.offer_price').css("display", "block");
+        } else {
+            $('.offer_price').css("display", "none");           
+        }      
+    }
+    </script>
+
   </body>
 </html>
