@@ -84,17 +84,18 @@
                       <h3 class="nomargin_top">My Dashbaord</h3>
                     </div>
                       <div class="panel-body">
-                            <a href="grocery_orders1.php">
+					  <a href="../Services/service_orders.php">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="one">
                                         
-                                        <h3>Grocery Orders</h3>
+                                        <h3>Services Orders</h3>
                                         <p>
                                             Count
                                         </p>
                                     </div>
                                 </div>
                             </a>
+                            
                             <a href="food_orders1.php"> 
                                 <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="two">
@@ -106,27 +107,27 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="../Services/service_orders.php">
+                            <a href="grocery_orders1.php">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="three">
                                         
-                                        <h3>Services Orders</h3>
+                                        <h3>Grocery Orders</h3>
                                         <p>
                                             Count
                                         </p>
                                     </div>
                                 </div>
                             </a>
-                            <a href="update_profile.php">
+							 <a href="#">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="four">
                                         
-                                        <h3>Update Profile</h3>
+                                        <h3>My Wishlist</h3>
                                        
                                     </div>
                                 </div>
                             </a>
-                            <a href="my_address.php">
+							<a href="my_address.php">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="five">
                                         
@@ -135,7 +136,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="wallet.php">
+							 <a href="wallet.php">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="six">
                                         
@@ -144,24 +145,36 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="#">
+                            <a href="update_profile.php">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="box_home" id="seven">
+                                        
+                                        <h3>Update Profile</h3>
+                                       
+                                    </div>
+                                </div>
+                            </a>
+                            
+                           
+                            <a href="#">
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="box_home" id="eight">
                                         
                                         <h3>Reward Points</h3>
                                        
                                     </div>
                                 </div>
                             </a>
-                            <a href="#">
+							 <a href="#">
                                 <div class="col-md-4 col-sm-4">
-                                    <div class="box_home" id="eight">
+                                    <div class="box_home" id="nine">
                                         
-                                        <h3>My Wishlist</h3>
+                                        <h3>Change Password</h3>
                                        
                                     </div>
                                 </div>
                             </a>
+                           
                       </div>
                   </div>
                   
