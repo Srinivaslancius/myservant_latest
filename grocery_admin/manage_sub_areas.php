@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="form-control-1">Select Pincode</label>
-                                    <select id="lkp_pincode_id" name="lkp_pincode_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }"" onChange="getAreas(this.value);" required>
+                                    <select id="lkp_pincode_id" name="lkp_pincode_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" onChange="getAreas(this.value);" required>
                                         <option value="">-- Select Pincode --</option>
                                     </select>
                                 </div>
@@ -161,7 +161,7 @@
                                     <td><?php $getCities = getAllData('lkp_cities'); while($getCitiesData = $getCities->fetch_assoc()) { if($row['lkp_city_id'] == $getCitiesData['id']) { echo $getCitiesData['city_name']; } } ?></td>
                                      <td>Yes</td>
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='lkp_sub_areas'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='lkp_sub_areas'>In Active</span>" ;} ?></td>
-                                    <td><span><a href="edit_lkp_sub_areas.php?pincode_id=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a>  &nbsp;<a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "lkp_sub_areas" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a></span></td>
+                                    <td><span><a href="edit_lkp_sub_areas.php?sub_area_id=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a>  &nbsp;<!-- <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "lkp_sub_areas" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></span></td>
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>
