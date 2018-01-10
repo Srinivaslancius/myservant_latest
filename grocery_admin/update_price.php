@@ -33,16 +33,15 @@
         if (!isset($_POST['submit']))  {
           echo "fail";
         } else  { 
-            echo "<pre>"; print_r($_POST); die;
-
-            $product_images = $_FILES['product_images']['name'];
-            foreach($product_images as $key=>$value){
+            //echo "<pre>"; print_r($_POST); die;
+            $lkp_city_id = $_POST['lkp_city_id'];
+            $weight_type = $_POST['weight_type'];
+            $mrp_price = $_POST['mrp_price'];
+            $selling_price = $_REQUEST['selling_price'];
+            foreach($selling_price as $key=>$value){
                 if(!empty($value)) {
-                    $product_images1 = uniqid().$_FILES['product_images']['name'][$key];
-                    $file_tmp = $_FILES["product_images"]["tmp_name"][$key];
-                    $file_destination = 'uploads/product_images/' . $product_images1;
                     move_uploaded_file($file_tmp, $file_destination);    
-                    $sql = "INSERT INTO product_bind_weight_prices ( `product_id`,`lkp_city_id`, `weight_type`, `mrp_price`, `selling_price`) VALUES ('$product_id','$lkp_city_id', '$weight_type', '$mrp_price', '$selling_price')";
+                    $sql = "INSERT INTO product_bind_weight_prices ( `product_id`,`lkp_city_id`, `weight_type`, `mrp_price`, `selling_price`) VALUES ('$pid','$lkp_city_id', '$weight_type', '$mrp_price', '$selling_price')";
                     $result = $conn->query($sql);
                 }
             }
@@ -81,7 +80,7 @@
 
                             <div class="input_fields_container" >
                                 <div style="border:1px solid;">
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Offer</label>
                                         <div class="btn-group col-sm-6 col-md-4" >
                                              <label class="btn btn-outline-primary">
@@ -91,14 +90,14 @@
                                                 <input type="radio" name="buttonRadios[]" required onclick="check_offer(0)" value='0' > No &nbsp;
                                             </label>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <div class="form-group offer_price" style="display:none">
+                                    <!-- <div class="form-group offer_price" style="display:none">
                                         <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Percentage</label>
                                         <div class="col-sm-6 col-md-4">
                                             <input type="text" class="form-control" name="offer_percentage[]" id="form-control-3" placeholder="Offer Percentage (%)" required>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="form-group">
                                         <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight (Ex: 100 Gms etc..)</label>
@@ -109,13 +108,13 @@
                                     <div class="form-group">
                                         <label for="form-control-3" class="col-sm-3 col-md-4 control-label">MRP</label>
                                         <div class="col-sm-6 col-md-4">
-                                            <input type="text" class="form-control valid_mobile_num" name="mrp_price[]" id="form-control-3" placeholder="Enter MRP" required>
+                                            <input type="text" class="form-control valid_mobile_num" name="mrp_price[]" id="form-control-3" placeholder="Enter MRP" onkeyup="getPrice(this.value);" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Selling Price</label>
                                         <div class="col-sm-6 col-md-4">
-                                            <input type="text" class="form-control valid_mobile_num" name="selling_price[]" id="form-control-3" placeholder="Enter Selling Price" required readonly>
+                                            <input type="text" class="form-control valid_mobile_num" name="selling_price[]" id="form-control-3" placeholder="Enter Selling Price" required>
                                         </div>
                                         <div class="col-sm-6 col-md-2">
                                             <span><button type="button" class="btn btn-success add_more_button"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i></button></span>
@@ -192,7 +191,7 @@
             e.preventDefault();
             if(x < max_fields_limit){ //check conditions
                 x++; //counter increment
-                $('.input_fields_container').append('<div><div class="row"><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Offer</label><div class="btn-group col-sm-6 col-md-4"><label class="btn btn-outline-primary"><input type="radio" name="buttonRadios[]" value="1" onclick="check_offer()" id="buttonRadios1" autocomplete="off" required>Yes</label> <label class="btn btn-outline-primary"><input type="radio" onclick="check_offer()" value="0" required name="buttonRadios[]" id="buttonRadios2" autocomplete="off"> No &nbsp;</label></div></div><div class="form-group offer_price" style="display:none"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Percentage</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control" name="offer_percentage[]" id="offer_percentage_" placeholder="Offer Percentage (%)" required></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight (Ex: 100 Gms etc..)</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control" id="form-control-3" placeholder="Weight Types" name="weight_type[]" required></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">MRP</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Enter MRP" name="mrp_price[]" required></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Selling Price</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Enter Selling Price" name="selling_price[]" required readonly></div><a href="#" class="remove_field btn btn-warning"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div></div>'); //add input field
+                $('.input_fields_container').append('<div><div class="row"><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight (Ex: 100 Gms etc..)</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control" id="form-control-3" placeholder="Weight Types" name="weight_type[]" required></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">MRP</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Enter MRP" name="mrp_price[]" required></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Selling Price</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Enter Selling Price" name="selling_price[]" required></div><a href="#" class="remove_field btn btn-warning"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div></div>'); //add input field
             }
         });  
         $('.input_fields_container').on("click",".remove_field", function(e){ //user click on remove text links
@@ -209,6 +208,11 @@
         } else {
             $('.offer_price').css("display", "none");           
         }      
+    }
+    </script>
+    <script type="text/javascript">
+    function getPrice(Price) {
+        $('#selling_price').val(Price);    
     }
     </script>
 
