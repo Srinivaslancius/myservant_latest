@@ -9,7 +9,7 @@ $getSiteSettingsData = $getSiteSettings->fetch_assoc();
 ?>
 <nav class="navbar navbar-default">
         <div class="navbar-header">
-          <a class="navbar-brand" href="http://localhost/myservant_latest/grocery_admin/">
+          <a class="navbar-brand" href="">
             <img src="<?php echo $base_url . 'uploads/logo/'.$getSiteSettingsData['logo'] ?>" alt="<?php echo $getSiteSettingsData['admin_title'];?>" height="45">
             <!-- <span><?php echo $getSiteSettingsData['admin_title'];?></span> -->
           </a>

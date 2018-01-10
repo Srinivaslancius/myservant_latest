@@ -251,10 +251,10 @@ if(isset($_POST['submit'])) {
                  <?php  while($getAllCategoriesData = $getCategoriesData->fetch_assoc()) { ?> 
 				<div class="col-md-2 col-sm-4 wow zoomIn" data-wow-delay="0.1s">
 					<a href="sub_categories.php?key=<?php echo encryptPassword($getAllCategoriesData['id']); ?>">
-					<div class="tour_container prdct" style="height:220px">
+					<div class="tour_container prdct" style="height:180px">
 						<div class="ribbon_3 popular"><!-- <span>Popular</span> --></div>
 						<div class="img_container padd_sp" style="padding:10px 0px 10px">
-                           <center><img src="<?php echo $base_url . 'uploads/services_category_images/'.$getAllCategoriesData['category_image'] ?>" class="img-responsive img_wdth" alt="<?php echo $getAllCategoriesData['category_name']; ?>"></center>
+                           <center><img src="<?php echo $base_url . 'uploads/services_category_images/'.$getAllCategoriesData['category_image'] ?>" class="img-responsive" alt="<?php echo $getAllCategoriesData['category_name']; ?>"></center>
 						</div>
 						<div class="tour_title">
 							<h3><?php echo $getAllCategoriesData['category_name']; ?></h3>
