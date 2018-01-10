@@ -28,6 +28,31 @@
       <div class="site-right-sidebar">
         <?php include_once './right_slide_toggle.php';?>
       </div>
+      <?php $pid = $_GET['pid']; ?>
+      <?php
+        if (!isset($_POST['submit']))  {
+          echo "fail";
+        } else  { 
+            //echo "<pre>"; print_r($_FILES); die;
+            $product_images = $_FILES['product_images']['name'];
+            foreach($product_images as $key=>$value){
+                if(!empty($value)) {
+                    $product_images1 = uniqid().$_FILES['product_images']['name'][$key];
+                    $file_tmp = $_FILES["product_images"]["tmp_name"][$key];
+                    $file_destination = 'uploads/product_images/' . $product_images1;
+                    move_uploaded_file($file_tmp, $file_destination);    
+                    $sql = "INSERT INTO product_bind_images ( `product_id`,`image`) VALUES ('$pid','$product_images1')";
+                    $result = $conn->query($sql);
+                }
+            }
+           
+            if( $result == 1){
+                echo "<script type='text/javascript'>window.location='manage_products.php?msg=success'</script>";
+            } else {
+                echo "<script type='text/javascript'>window.location='manage_products.php?msg=fail'</script>";
+            }
+        }
+        ?>
         <div class="site-content">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -41,7 +66,7 @@
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Select City</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }">
-                                        <option value="">-- Select Category --</option>
+                                        <option value="">-- Select City --</option>
                                         <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     </select>
                                 </div>
@@ -63,16 +88,10 @@
                                     </label>
                                 </div>
                             </div>
-                             <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight</label>
-                                <div class="col-sm-6 col-md-2">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Weignt">
-                                </div>
-                                <div class="col-sm-6 col-md-2">
-                                    <select id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }">
-                                        <option value="">-- Select Weight Type --</option>
-                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                    </select>
+                            <div class="form-group">
+                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight Types</label>
+                                <div class="col-sm-6 col-md-4">
+                                    <input type="text" class="form-control" id="form-control-3" placeholder="Weight Types">
                                 </div>
                             </div>
                             <div class="form-group">

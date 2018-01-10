@@ -170,8 +170,7 @@
                         <table class="table table-striped table-bordered dataTable" id="table-2">
                             <thead>
                                 <tr>
-                                    <th>S.no</th>
-                                    <th>Product Name</th>
+                                    <th>S.no</th>                                    
                                     <th>Category</th>
                                     <th>Sub Category</th>
                                     <th>Update Price</th>
@@ -184,14 +183,13 @@
                                 <?php $getProdDet = getAllDataWithActiveRecent('grocery_products'); $i=1; ?>
                                 <?php while ($row = $getProdDet->fetch_assoc()) { ?>
                                 <tr>
-                                    <td><?php echo $i; ?></td>
-                                    <td><?php echo $row['product_name']; ?></td>
+                                    <td><?php echo $i; ?></td>                                    
                                     <?php $catNAme = getIndividualDetails('grocery_category','id',$row['grocery_category_id']); ?>
                                     <td><?php echo $catNAme['category_name']; ?></td>
                                     <?php $subcatNAme = getIndividualDetails('grocery_sub_category','id',$row['grocery_sub_category_id']); ?>
                                     <td><?php echo $subcatNAme['sub_category_name']; ?></td>
 
-                                    <td><a href="update_price.php">Update Price</a></td>
+                                    <td><a href="update_price.php?pid=<?php echo $row['id']; ?>">Update Price</a></td>
                                     <td><a href="product_images.php?pid=<?php echo $row['id']; ?>">Upload Images</a></td>
 
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_products'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_products'>In Active</span>" ;} ?></td>
