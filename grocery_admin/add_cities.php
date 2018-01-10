@@ -72,7 +72,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label" for="form-control-9">Select District</label>
-                                <div class="col-sm-6 col-md-4" required>
+                                <div class="col-sm-6 col-md-4">
                                     <select name="lkp_district_id" id="lkp_district_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
                                         <option value="">-- Select District --</option>
                                     </select>
@@ -129,7 +129,7 @@
                                     <td><?php $getDistricts = getAllData('lkp_districts'); while($getDistrictsData = $getDistricts->fetch_assoc()) { if($row['lkp_district_id'] == $getDistrictsData['id']) { echo $getDistrictsData['district_name']; } } ?></td>
                                     <td><?php $getStates = getAllData('lkp_states'); while($getStatesData = $getStates->fetch_assoc()) { if($row['lkp_state_id'] == $getStatesData['id']) { echo $getStatesData['state_name']; } } ?></td>
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='lkp_cities'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='lkp_cities'>In Active</span>" ;} ?></td>
-                                    <td><a href="edit_lkp_cities.php?cityid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp;<a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "lkp_cities" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a></td>
+                                    <td><a href="edit_lkp_cities.php?cityid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp;<!-- <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "lkp_cities" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></td>
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>
