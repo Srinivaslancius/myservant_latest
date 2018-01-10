@@ -35,7 +35,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$base_url = "http://localhost/phani/grocery_new_admin/grocery_admin/";
+$base_url = "http://localhost/myservant_latest/grocery_admin/";
 //$base_url = "http://palle2patnam.com/lancius/myservant/";
  
 ?>

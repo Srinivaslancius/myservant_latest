@@ -2,7 +2,7 @@
 error_reporting(1);
 ob_start();
 include_once('admin_includes/config.php');
-include_once('admin_includes/common_functions.php');
+include_once('../admin_includes/common_functions.php');
 ?>
 <nav class="navbar navbar-default">
         <div class="navbar-header">

@@ -32,13 +32,19 @@
         if (!isset($_POST['submit']))  {
           echo "fail";
         } else  { 
-          $language_name = $_POST['language_name'];
-          $sql = "INSERT INTO grocery_languages (`language_name`) VALUES ('$language_name')";
-          if($conn->query($sql) === TRUE){
-             echo "<script type='text/javascript'>window.location='manage_languages.php?msg=success'</script>";
-          } else {
-             echo "<script type='text/javascript'>window.location='manage_languages.php?msg=fail'</script>";
-          }
+          $language_name = $_REQUEST['language_name'];
+            foreach($language_name as $key=>$value){
+                if(!empty($value)) {
+                  $language_name = $_REQUEST['language_name'][$key];    
+                  $sql = "INSERT INTO grocery_languages (`language_name`) VALUES ('$language_name')";
+                  $result = $conn->query($sql);
+                }
+            }
+            if( $result == 1){
+                echo "<script type='text/javascript'>window.location='manage_languages.php?msg=success'</script>";
+            } else {
+                echo "<script type='text/javascript'>window.location='manage_languages.php?msg=fail'</script>";
+            }
         }
         ?>
         <div class="site-content">
@@ -50,16 +56,19 @@
                     <div class="row">
                         
                         <form class="form-horizontal" method="post" autocomplete="off">
+                            <div class="clear_fix"></div>
+                            <div class="input_fields_container">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label" for="form-control-9">Language</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" name="language_name" class="form-control" id="form-control-3" placeholder="Enter Language Name" required>
+                                    <input type="text" name="language_name[]" class="form-control" id="form-control-3" placeholder="Enter Language Name" required>
                                 </div>
                                 <div class="col-sm-3 col-md-3">
-                                    <span><button type="button" class="btn btn-success"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i></button></span>
-                                    <span><button type="button" class="btn btn-warning"> <i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></button></span>
+                                    <span><button type="button" class="btn btn-success add_more_button"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i></button></span>
                                 </div>
                             </div>
+                            </div>
+                            <div class="clear_fix"></div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
                                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
@@ -94,7 +103,7 @@
                                     <!-- <td>ST1234</td> -->
                                     <td><?php echo $row['language_name']; ?></td>
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_languages'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_languages'>In Active</span>" ;} ?></td>
-                                    <td> <a href="edit_grocery_languages.php?stateid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp; <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "grocery_languages" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a></td>
+                                    <td> <a href="edit_grocery_languages.php?language_id=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp; <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "grocery_languages" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a></td>
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>
@@ -106,5 +115,21 @@
        <?php include_once 'footer.php'; ?>
     <script src="js/dashboard-3.min.js"></script>
     <script src="js/tables-datatables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+        var max_fields_limit      = 10; //set limit for maximum input fields
+        var x = 1; //initialize counter for text box
+        $('.add_more_button').click(function(e){ //click event on add more fields button having class add_more_button
+            e.preventDefault();
+            if(x < max_fields_limit){ //check conditions
+                x++; //counter increment
+                $('.input_fields_container').append('<div class="row"><label class="col-sm-3 control-label" for="form-control-9">Language</label><div class="col-sm-6 col-md-4"><input type="text" name="language_name[]" class="form-control" id="form-control-3" placeholder="Enter Language Name" required></div><a href="#" class="remove_field btn btn-warning"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div>'); //add input field
+            }
+        });  
+        $('.input_fields_container').on("click",".remove_field", function(e){ //user click on remove text links
+            e.preventDefault(); $(this).parent('div').remove(); x--;
+        })
+    });
+    </script>
   </body>
 </html>
