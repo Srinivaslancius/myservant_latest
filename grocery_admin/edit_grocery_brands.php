@@ -49,20 +49,20 @@
                 if(move_uploaded_file($_FILES["web_logo"]["tmp_name"], $target_file)) {
                    // move_uploaded_file($_FILES["web_logo"]["tmp_name"], $target_file);
                     $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name', web_logo = '$web_logo' WHERE id = '$brand_id' ";
-                    $conn->query($sql);
+                    //$conn->query($sql);
                 } elseif(move_uploaded_file($_FILES["app_logo"]["tmp_name"], $app_logo_file)) {
                     //move_uploaded_file($_FILES["app_logo"]["tmp_name"], $app_logo_file);
                     $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name', app_logo = '$app_logo' WHERE id = '$brand_id' ";
-                    $conn->query($sql);
+                    //$conn->query($sql);
                 } 
 
             } else{
                $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name' WHERE id = '$brand_id' ";
-               $conn->query($sql);
+               //$conn->query($sql);
             }          
             //echo $sql; die;
 
-            //$conn->query($sql);
+            $conn->query($sql);
             //if($conn->query($sql) === TRUE){
                 echo "<script type='text/javascript'>window.location='manage_brands.php?msg=success'</script>";
             //} else {
