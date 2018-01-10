@@ -28,35 +28,35 @@
       <div class="site-right-sidebar">
         <?php include_once './right_slide_toggle.php';?>
       </div>
-      <?php $language_id = $_GET['language_id']; ?>
+      <?php $stateid = $_GET['stateid']; ?>
       <?php
         if (!isset($_POST['submit']))  {
           echo "fail";
         } else  { 
             //echo "<pre>"; print_r($_POST); die;     
-            $language_name = $_POST['language_name'];
-            $sql = "UPDATE `grocery_languages` SET language_name = '$language_name' WHERE id = '$language_id' ";     
+            $state_name = $_POST['state_name'];
+            $sql = "UPDATE `lkp_states` SET state_name = '$state_name' WHERE id = '$stateid' ";     
             $result = $conn->query($sql);
             if( $result == 1){
-                echo "<script type='text/javascript'>window.location='manage_languages.php?msg=success'</script>";
+                echo "<script type='text/javascript'>window.location='add_state.php?msg=success'</script>";
             } else {
-                echo "<script type='text/javascript'>window.location='manage_languages.php?msg=fail'</script>";
+                echo "<script type='text/javascript'>window.location='add_state.php?msg=fail'</script>";
             }
         }
         ?>
         <div class="site-content">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="m-y-0 font_sz_view">Languages</h3>
+                    <h3 class="m-y-0 font_sz_view">State</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <?php $getLanguages = getIndividualDetails('grocery_languages','id',$language_id); ?>
+                        <?php $getLanguages = getIndividualDetails('lkp_states','id',$stateid); ?>
                         <form class="form-horizontal" method="POST" autocomplete="off" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Language</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Language" name="language_name" required value="<?php echo $getLanguages['language_name']; ?>">
+                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Language" name="state_name" required value="<?php echo $getLanguages['state_name']; ?>">
                                 </div>
                             </div>
                              
