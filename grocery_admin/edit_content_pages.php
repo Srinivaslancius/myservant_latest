@@ -79,7 +79,7 @@
                             </div>
                             <div class="form-group">
                             <?php if($contentData['image']!='') { ?>
-                                <img src="<?php echo $base_url . 'uploads/grocery_content_banners/'.$contentData['image']; ?>"  id="output" height="100" width="100"/>
+                                <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_content_banners/'.$contentData['image']; ?>"  id="output" height="100" width="100"/>
                             <?php } ?>
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Banner Image</label>
                                 <div class="col-sm-6 col-md-4">
