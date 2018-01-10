@@ -55,8 +55,7 @@
     $footer_text = $_POST['footer_text'];
 
     if($_FILES["logo"]["name"]!='' && $_FILES["fav_icon_image"]["name"]!='' ) {
-
-           
+            
          /*logo*/                                 
         $logo = $_FILES["logo"]["name"];
         $target_dir = "uploads/logo/";
@@ -67,7 +66,6 @@
         $target_dir1 = "uploads/fav_icon_image/";
         $target_file1 = $target_dir1 . basename($_FILES["fav_icon_image"]["name"]);
         $imageFileType1 = pathinfo($target_file1,PATHINFO_EXTENSION);
-
         // Allow certain file formats
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
         && $imageFileType != "gif" && $imageFileType1 != "jpg" && $imageFileType1 != "png" && $imageFileType1 != "jpeg"
@@ -80,7 +78,6 @@
         //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
         if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
           move_uploaded_file($_FILES["fav_icon_image"]["tmp_name"], $target_file1);
-
             $sql = "UPDATE `grocery_site_settings` SET admin_title = '$admin_title', meta_title= '$meta_title', meta_description = '$meta_description', meta_key_words='$meta_key_words', from_email = '$from_email', contact_email ='$contact_email', forgot_password_email = '$forgot_password_email', mobile = '$mobile',minimum_time_to_delivery = '$minimum_time_to_delivery',address='$address', google_analytics_code ='$google_analytics_code',contact_number='$contact_number', orders_email='$orders_email', logo = '$logo', fav_icon_image='$fav_icon_image', footer_text='$footer_text',customer_care_number = '$customer_care_number',service_tax = '$service_tax' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script type='text/javascript'>window.location='basic_settings.php?msg=success'</script>";
@@ -289,5 +286,7 @@
             
         </div>
         <?php include_once 'footer.php'; ?>
+        <script src="js/dashboard-3.min.js"></script>
+    <script src="js/tables-datatables.min.js"></script>
   </body>
 </html>
