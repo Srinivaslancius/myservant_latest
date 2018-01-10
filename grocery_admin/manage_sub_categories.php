@@ -125,10 +125,42 @@
                                     <!-- <td>Subcat21234</td> -->
                                     <td><?php echo $row['sub_category_name']; ?></td>
                                     <td><?php $getCategories = getAllData('grocery_category'); while($getCategoriesData = $getCategories->fetch_assoc()) { if($row['grocery_category_id'] == $getCategoriesData['id']) { echo $getCategoriesData['category_name']; } } ?></td>
-                                    <td><a href="#" data-toggle="modal" data-target="#animatedModal1">View Brands Applicable</a></td>
+                                    <td><a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>">View Brands Applicable</a></td>
+                                    <!-- Modal Popup for brands applicable -->
+                                    <?php 
+                                    $getBrandId = explode(',',$row['brands']);
+                                    $getBrands = getAllDataWithStatus('grocery_brands','0');?>
+                                    <div class="col-lg-2 col-sm-4 col-xs-6 m-y-5">
+                                        <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content animated flipInX">
+                                                    <div class="modal-header bg-info">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">
+                                                                <i class="zmdi zmdi-close"></i>
+                                                            </span>
+                                                        </button>
+                                                        <h4 class="modal-title">View Brands</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <?php while($getBrandsData = $getBrands->fetch_assoc()) {  ?>
+                                                                <div class="col-md-2 marg1"><span class="label label-default m-w-60 font_sz_view"><?php if($getBrandsData['id'] == in_array($getBrandsData['id'], $getBrandId)) { echo $getBrandsData['brand_name']; } ?></span></div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" data-dismiss="modal" class="btn btn-info">Continue</button>
+                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Popup -->
                                     <td><?php echo $row['priority']; ?></td>
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_sub_category'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_sub_category'>In Active</span>" ;} ?></td>
-                                    <td> <a href="edit_grocery_sub_category.php?stateid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp; <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "grocery_sub_category" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a></td>
+                                    <td> <a href="edit_grocery_sub_category.php?sub_category_id=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp;<!--  <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "grocery_sub_category" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></td>
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>
@@ -138,33 +170,6 @@
             </div>
         </div>
         <?php include_once 'footer.php'; ?>
-        <div class="col-lg-2 col-sm-4 col-xs-6 m-y-5">
-            <div id="animatedModal1" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content animated flipInX">
-                        <div class="modal-header bg-info">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">
-                                    <i class="zmdi zmdi-close"></i>
-                                </span>
-                            </button>
-                            <h4 class="modal-title">Modal title</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <?php for($k=0; $k<24; $k++) {?>
-                                    <div class="col-md-2 marg1"><span class="label label-default m-w-60 font_sz_view">Papa Johns</span></div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" data-dismiss="modal" class="btn btn-info">Continue</button>
-                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     <script src="js/dashboard-3.min.js"></script>
      <script src="js/forms-plugins.min.js"></script>
     <script src="js/tables-datatables.min.js"></script>
