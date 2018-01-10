@@ -90,7 +90,7 @@
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Web Logo</label>
                                 <div class="col-sm-6 col-md-4">
                                     <?php if($getBrands['web_logo']!='') { ?>
-                                        <img src="<?php echo $base_url . 'uploads/grocery_brands_web_logo/'.$getBrands['web_logo']; ?>" id="output" height="100" width="100"/>
+                                        <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brands_web_logo/'.$getBrands['web_logo']; ?>" id="output" height="100" width="100"/>
                                     <?php } ?>
                                     <label class="btn btn-default file-upload-btn">Choose file...
                                         <input id="form-control-22" class="file-upload-input" type="file" name="web_logo" accept="image/*" onchange="loadFile(event)">
@@ -101,7 +101,7 @@
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">App Logo</label>
                                 <div class="col-sm-6 col-md-4">
                                     <?php if($getBrands['app_logo']!='') { ?>
-                                        <img src="<?php echo $base_url . 'uploads/grocery_brands_app_logo/'.$getBrands['app_logo']; ?>"  id="output1" height="100" width="100"/>
+                                        <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brands_app_logo/'.$getBrands['app_logo']; ?>"  id="output1" height="100" width="100"/>
                                     <?php } ?>
                                     <label class="btn btn-default file-upload-btn">Choose file...
                                         <input id="form-control-22" class="file-upload-input" type="file" name="app_logo" accept="image/*" onchange="loadFile1(event)">
