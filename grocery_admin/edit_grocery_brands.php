@@ -36,7 +36,9 @@
             //echo "<pre>"; print_r($_FILES); die;
 
             $brand_name = $_POST['brand_name'];
-            if($_FILES["web_logo"]["name"]!='' || $_FILES["app_logo"]["name"]!='') {
+            if($_FILES["web_logo"]["tmp_name"]!='' || $_FILES["app_logo"]["tmp_name"]!='') {
+                echo "<pre>"; print_r($_FILES); die;
+                echo "srinu"; die;
                 $web_logo = uniqid().$_FILES["web_logo"]["name"];
                 $target_dir = "uploads/grocery_brands_web_logo/";
                 $target_file = $target_dir . basename($web_logo);
@@ -46,21 +48,16 @@
                 $app_logo_dir = "uploads/grocery_brands_app_logo/";
                 $app_logo_file = $app_logo_dir . basename($app_logo);
                 $getImgUnlink = getImageUnlink('app_logo','grocery_brands_app_logo','id',$brand_id,$app_logo_dir);
-                if($_FILES["web_logo"]["name"] !='') {
-                    move_uploaded_file($_FILES["web_logo"]["tmp_name"], $target_file);
+
+                if(move_uploaded_file($_FILES["web_logo"]["tmp_name"], $target_file)) {                    
                     $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name', web_logo = '$web_logo' WHERE id = '$brand_id' ";
-                } elseif($_FILES["app_logo"]["name"] !='') {
-                    move_uploaded_file($_FILES["app_logo"]["tmp_name"], $app_logo_file);
+                } elseif(move_uploaded_file($_FILES["app_logo"]["tmp_name"], $app_logo_file)) {                    
                     $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name', app_logo = '$app_logo' WHERE id = '$brand_id' ";
-                } elseif($_FILES["web_logo"]["name"] !='' && $_FILES["app_logo"]["name"] !='') {
-                    move_uploaded_file($_FILES["web_logo"]["tmp_name"], $target_file);
-                    move_uploaded_file($_FILES["app_logo"]["tmp_name"], $app_logo_file);
-                    $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name', web_logo = '$web_logo', app_logo = '$app_logo' WHERE id = '$brand_id' ";
-                }
+                } 
             } else{
                $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name' WHERE id = '$brand_id' ";
             }          
-            //echo $sql; die;
+            echo "srinu". $sql; die;
 
             $result = $conn->query($sql);
             if( $result == 1){
