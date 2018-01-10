@@ -28,54 +28,51 @@
       <div class="site-right-sidebar">
         <?php include_once './right_slide_toggle.php';?>
       </div>
-      <?php
+      <?php  
         if (!isset($_POST['submit']))  {
+          //If fail
           echo "fail";
-        } else  { 
-          $state_name = $_REQUEST['state_name'];
-            foreach($state_name as $key=>$value){
-                if(!empty($value)) {
-                  $state_name = $_REQUEST['state_name'][$key];    
-                  $sql = "INSERT INTO lkp_states (`state_name`) VALUES ('$state_name')";
-                  $result = $conn->query($sql);
-                }
+        }else  {
+          //If success
+          $tag_name = $_POST['tag_name'];
+          foreach($tag_name as $key=>$value){
+            if(!empty($value)) {
+              $tag_name = $_REQUEST['tag_name'][$key];    
+              $sql = "INSERT INTO grocery_tags (`tag_name`) VALUES ('$tag_name')";
+              $result = $conn->query($sql);
             }
-            if( $result == 1){
-                echo "<script type='text/javascript'>window.location='add_state.php?msg=success'</script>";
-            } else {
-                echo "<script type='text/javascript'>window.location='add_state.php?msg=fail'</script>";
-            }
+          }
+          if( $result == 1){
+            echo "<script type='text/javascript'>window.location='grocery_tags.php?msg=success'</script>";
+          } else {
+            echo "<script type='text/javascript'>window.location='grocery_tags.php?msg=fail'</script>";
+          }
         }
         ?>
         <div class="site-content">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="m-y-0 font_sz_view">Add States</h3>
+                    <h3 class="m-y-0 font_sz_view">Add Tags</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         
-                        <form class="form-horizontal" method="post" autocomplete="off">
-                            <div class="clear_fix"></div>
+                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" autocomplete="off">
                             <div class="input_fields_container">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="form-control-9">State</label>
+                                <label class="col-sm-3 control-label" for="form-control-9">Tag</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" name="state_name[]" class="form-control" id="user_input" placeholder="Enter State Name" required>
-                                    <span id="input_status" style="color: red;"></span>
-                                    <input type="hidden" id="table_name" value="lkp_states">
-                                    <input type="hidden" id="column_name" value="state_name">
+                                    <input type="text" name="tag_name[]" class="form-control" id="form-control-3" placeholder="Enter Tag" required>
                                 </div>
                                 <div class="col-sm-3 col-md-3">
                                     <span><button type="button" class="btn btn-success add_more_button"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i></button></span>
-                                    <!-- <span><button type="button" class="btn btn-warning"> <i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></button></span> -->
                                 </div>
                             </div>
                             </div>
                             <div class="clear_fix"></div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
-                                    <button type="submit" value="submit" name="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -84,7 +81,7 @@
             </div>
             <div class="panel panel-default panel-table m-b-0">
                 <div class="panel-heading">
-                    <h3 class="m-t-0 m-b-5 font_sz_view">View States</h3>
+                    <h3 class="m-t-0 m-b-5 font_sz_view">View Tags</h3>
                     
                 </div>
                 <div class="panel-body">
@@ -93,21 +90,21 @@
                             <thead>
                                 <tr>
                                     <th>S.no</th>
-                                    <!-- <th>State Id</th> -->
-                                    <th>State Name</th>
+                                    <!-- <th>Brand Id</th> -->
+                                    <th>Tag Name</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $getStates = getAllDataWithActiveRecent('lkp_states'); $i=1; ?>
-                                <?php while ($row = $getStates->fetch_assoc()) { ?>
+                                <?php $getTags = getAllDataWithActiveRecent('grocery_tags'); $i=1; ?>
+                                <?php while ($row = $getTags->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?php echo $i; ?></td>
-                                    <!-- <td>ST1234</td> -->
-                                    <td><?php echo $row['state_name']; ?></td>
-                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='lkp_states'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='lkp_states'>In Active</span>" ;} ?></td>
-                                    <td> <a href="edit_lkp_states.php?stateid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp; <!-- <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "lkp_states" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></td>
+                                    <!-- <td>Brnd345</td> -->
+                                    <td><?php echo $row['tag_name']; ?></td>
+                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_tags'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_tags'>In Active</span>" ;} ?></td>
+                                    <td> <a href="edit_grocery_tags.php?tag_id=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp; <!-- <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "grocery_brands" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></td>
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>
@@ -127,7 +124,7 @@
             e.preventDefault();
             if(x < max_fields_limit){ //check conditions
                 x++; //counter increment
-                $('.input_fields_container').append('<div><div class="row"><label class="col-sm-3 control-label" for="form-control-9">State</label><div class="col-sm-6 col-md-4"><input type="text" name="state_name[]" class="form-control" id="user_input" placeholder="Enter State Name" required></div><a href="#" class="remove_field btn btn-warning"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div>'); //add input field
+                $('.input_fields_container').append('<div><div class="row"><label class="col-sm-3 control-label" for="form-control-9">Tag</label><div class="col-sm-6 col-md-4"><input type="text" name="tag_name[]" class="form-control" id="user_input" placeholder="Enter Tag" required></div><a href="#" class="remove_field btn btn-warning"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div>'); //add input field
             }
         });  
         $('.input_fields_container').on("click",".remove_field", function(e){ //user click on remove text links

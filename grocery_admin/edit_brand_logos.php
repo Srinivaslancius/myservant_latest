@@ -41,6 +41,7 @@
                 $brand_logo = uniqid().$_FILES["brand_logo"]["name"];
                 $target_dir = "uploads/grocery_brand_logos/";
                 $target_file = $target_dir . basename($brand_logo);
+                $getImgUnlink = getImageUnlink('brand_logo','grocery_brand_logos','id',$id,$target_dir);
                 move_uploaded_file($_FILES["brand_logo"]["tmp_name"], $target_file);
                 $sql = "UPDATE `grocery_brand_logos` SET brand_logo = '$brand_logo', link = '$link', lkp_status_id = '$lkp_status_id' WHERE id = '$cid' ";
                 
@@ -73,7 +74,7 @@
                             </div>
                             <div class="form-group">
                             <?php if($getBrandLogos['brand_logo']!='') { ?>
-                                <img src="<?php echo $base_url . 'uploads/grocery_brand_logos/'.$getBrandLogos['brand_logo']; ?>"  id="output" height="100" width="100"/>
+                                <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brand_logos/'.$getBrandLogos['brand_logo']; ?>"  id="output" height="100" width="100"/>
                             <?php } ?>
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Brand Logo</label>
                                 <div class="col-sm-6 col-md-4">
@@ -106,14 +107,9 @@
             </div>
             
         </div>
-        <div class="site-footer">
-          2017 © Cosmos
-        </div>
-
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
-    <script src="js/dashboard-3.min.js"></script>
+        <?php include_once 'footer.php'; ?>
+        
+        <script src="js/dashboard-3.min.js"></script>
     <script src="js/tables-datatables.min.js"></script>
   </body>
 </html>

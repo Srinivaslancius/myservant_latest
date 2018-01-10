@@ -38,10 +38,9 @@
             $grocery_category_id = $_REQUEST['grocery_category_id'];
             $grocery_sub_category_id = $_REQUEST['grocery_sub_category_id'];
             $product_description = $_REQUEST['product_description'];
-            $tags = $_REQUEST['tags'];
-            $lkp_status_id = $_REQUEST['lkp_status_id'];
+            $tags = $_REQUEST['tags'];            
 
-            $sql = "INSERT INTO grocery_products (`product_name`, `grocery_category_id`, `grocery_sub_category_id`, `product_description`, `tags`, `lkp_status_id`) VALUES ('$product_name', '$grocery_category_id', '$grocery_sub_category_id', '$product_description',  '$tags', '$lkp_status_id')";
+            $sql = "INSERT INTO grocery_products (`grocery_category_id`, `grocery_sub_category_id`, `product_description`) VALUES ('$grocery_category_id', '$grocery_sub_category_id', '$product_description')";
             $result = $conn->query($sql);
             $last_id = $conn->insert_id;
 
@@ -49,7 +48,22 @@
             foreach($brands as $key=>$value){
                 $brandsType = $_REQUEST['brands'][$key];          
                 $sql = "INSERT INTO product_bind_brands ( `product_id`,`brand_id`) VALUES ('$last_id','$brandsType')";
-                $result = $conn->query($sql);
+                $conn->query($sql);
+            }
+
+            $language_id = $_REQUEST['language_id'];
+            foreach($language_id as $key=>$value){
+                $product_name = $_REQUEST['product_name'][$key]; 
+                $product_lang_ids = $_REQUEST['language_id'][$key];         
+                $sql = "INSERT INTO product_name_bind_languages ( `product_id`,`product_name`, `product_languages_id`) VALUES ('$last_id','$product_name', '$product_lang_ids')";
+                $conn->query($sql);
+            }
+
+            $tags = $_REQUEST['tags'];
+            foreach($tags as $key=>$value){
+                $tagName = $_REQUEST['tags'][$key];                   
+                $sql = "INSERT INTO product_bind_tags ( `product_id`,`tag_id`) VALUES ('$last_id','$tagName')";
+                $conn->query($sql);
             }
            
             if( $result == 1){
@@ -68,13 +82,21 @@
                 <div class="panel-body">
                     <div class="row">
                         
-                        <form class="form-horizontal" method="POST" autocomplete="off">
-                            <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Product Name</label>
-                                <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Title" name="product_name" required>
+                        <form class="form-horizontal" method="POST" autocomplete="off">                            
+
+                            <?php 
+                            $getLanguages = getAllDataWithStatus('grocery_languages','0');
+                            ?>
+                            <?php while($getLang = $getLanguages->fetch_assoc()) { ?>
+                                <div class="form-group">
+                                    <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Product Name (<?php echo $getLang['language_name']; ?>)</label>
+                                        <div class="col-sm-4 col-md-4">
+                                            <input type="text" class="form-control" id="form-control-3" placeholder="Enter Title" name="product_name[]" required>
+                                            <input type="hidden" class="form-control" id="form-control-3" placeholder="Language" name="language_id[]" value="<?php echo $getLang['id']; ?>">
+                                        </div>                                        
                                 </div>
-                            </div>
+                            <?php } ?>
+
                             <div class="form-group">
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Select Category</label>
                                 <div class="col-sm-6 col-md-4">
@@ -120,21 +142,14 @@
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Tags</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" name="tags" placeholder="Enter Keywords" required="required">
-                                </div>
-                            </div>
-                            <?php $getStatus = getAllData('lkp_status');?>
-                            <div class="form-group">
-                                <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Status</label>
-                                <div class="col-sm-6 col-md-4">
-                                    <select id="lkp_status_id" name="lkp_status_id" class="form-control" required>
-                                        <option value="">-- Select Status --</option>
-                                         <?php while($row = $getStatus->fetch_assoc()) {  ?>
-                                              <option value="<?php echo $row['id']; ?>"><?php echo $row['status']; ?></option>
-                                          <?php } ?>
+                                    <select id="form-control-2" name="tags[]" class="form-control" data-plugin="select2" multiple="multiple" required="required">
+                                        <?php $getTags = getAllDataWithStatus('grocery_brands','0');
+                                        while($row = $getTags->fetch_assoc()) {  ?>
+                                            <option value="<?php echo $row['id']; ?>" ><?php echo $row['brand_name']; ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
-                            </div>
+                            </div>                            
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
                                     <button type="submit" value="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -155,8 +170,7 @@
                         <table class="table table-striped table-bordered dataTable" id="table-2">
                             <thead>
                                 <tr>
-                                    <th>S.no</th>
-                                    <th>Product Name</th>
+                                    <th>S.no</th>                                    
                                     <th>Category</th>
                                     <th>Sub Category</th>
                                     <th>Update Price</th>
@@ -169,14 +183,13 @@
                                 <?php $getProdDet = getAllDataWithActiveRecent('grocery_products'); $i=1; ?>
                                 <?php while ($row = $getProdDet->fetch_assoc()) { ?>
                                 <tr>
-                                    <td><?php echo $i; ?></td>
-                                    <td><?php echo $row['product_name']; ?></td>
+                                    <td><?php echo $i; ?></td>                                    
                                     <?php $catNAme = getIndividualDetails('grocery_category','id',$row['grocery_category_id']); ?>
                                     <td><?php echo $catNAme['category_name']; ?></td>
                                     <?php $subcatNAme = getIndividualDetails('grocery_sub_category','id',$row['grocery_sub_category_id']); ?>
                                     <td><?php echo $subcatNAme['sub_category_name']; ?></td>
 
-                                    <td><a href="update_price.php">Update Price</a></td>
+                                    <td><a href="update_price.php?pid=<?php echo $row['id']; ?>">Update Price</a></td>
                                     <td><a href="product_images.php?pid=<?php echo $row['id']; ?>">Upload Images</a></td>
 
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_products'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_products'>In Active</span>" ;} ?></td>

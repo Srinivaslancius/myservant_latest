@@ -138,17 +138,10 @@
             </div>
             
         </div>
-        <div class="site-footer">
-          2017 © Cosmos
-        </div>
-
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
+    <?php include_once 'footer.php'; ?>
     <script src="js/dashboard-3.min.js"></script>
+    <script src="js/forms-plugins.min.js"></script>
     <script src="js/tables-datatables.min.js"></script>
-
-    <script type="text/javascript" src="js/check_number_validations.js"></script>
 
   </body>
 </html>

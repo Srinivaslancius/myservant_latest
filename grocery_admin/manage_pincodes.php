@@ -140,7 +140,7 @@
                                     <td><?php $getDistricts = getAllData('lkp_districts'); while($getDistrictsData = $getDistricts->fetch_assoc()) { if($row['lkp_district_id'] == $getDistrictsData['id']) { echo $getDistrictsData['district_name']; } } ?></td>
                                     <td><?php $getStates = getAllData('lkp_states'); while($getStatesData = $getStates->fetch_assoc()) { if($row['lkp_state_id'] == $getStatesData['id']) { echo $getStatesData['state_name']; } } ?></td>
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='lkp_pincodes'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='lkp_pincodes'>In Active</span>" ;} ?></td>
-                                    <td><span><a href="edit_lkp_pincodes.php?pincode_id=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a>  &nbsp;<a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "lkp_pincodes" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a></span></td>
+                                    <td><span><a href="edit_lkp_pincodes.php?pincode_id=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a>  &nbsp;<!-- <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "lkp_pincodes" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></span></td>
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>
@@ -151,7 +151,7 @@
         </div>
         <?php include_once 'footer.php'; ?>
     <script src="js/dashboard-3.min.js"></script>
-     <script src="js/forms-plugins.min.js"></script>
+    <script src="js/forms-plugins.min.js"></script>
     <script src="js/tables-datatables.min.js"></script>
     <script>
         $(document).ready(function() {

@@ -28,35 +28,35 @@
       <div class="site-right-sidebar">
         <?php include_once './right_slide_toggle.php';?>
       </div>
-      <?php $stateid = $_GET['stateid']; ?>
+      <?php $tag_id = $_GET['tag_id']; ?>
       <?php
         if (!isset($_POST['submit']))  {
           echo "fail";
         } else  { 
             //echo "<pre>"; print_r($_POST); die;     
-            $state_name = $_POST['state_name'];
-            $sql = "UPDATE `lkp_states` SET state_name = '$state_name' WHERE id = '$stateid' ";     
+            $tag_name = $_POST['tag_name'];
+            $sql = "UPDATE `grocery_tags` SET tag_name = '$tag_name' WHERE id = '$tag_id' ";     
             $result = $conn->query($sql);
             if( $result == 1){
-                echo "<script type='text/javascript'>window.location='add_state.php?msg=success'</script>";
+                echo "<script type='text/javascript'>window.location='grocery_tags.php?msg=success'</script>";
             } else {
-                echo "<script type='text/javascript'>window.location='add_state.php?msg=fail'</script>";
+                echo "<script type='text/javascript'>window.location='grocery_tags.php?msg=fail'</script>";
             }
         }
         ?>
         <div class="site-content">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="m-y-0 font_sz_view">Edit States</h3>
+                    <h3 class="m-y-0 font_sz_view">Edit Tags</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <?php $getStates = getIndividualDetails('lkp_states','id',$stateid); ?>
+                        <?php $getTags = getIndividualDetails('grocery_tags','id',$tag_id); ?>
                         <form class="form-horizontal" method="POST" autocomplete="off" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">State</label>
+                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Tag</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Language" name="state_name" required value="<?php echo $getStates['state_name']; ?>">
+                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Tag" name="tag_name" required value="<?php echo $getTags['tag_name']; ?>">
                                 </div>
                             </div>
                              
@@ -71,7 +71,6 @@
             </div>
         </div><?php include_once 'footer.php'; ?>
     <script src="js/dashboard-3.min.js"></script>
-    <script src="js/forms-plugins.min.js"></script>
     <script src="js/tables-datatables.min.js"></script>
   </body>
 </html>
