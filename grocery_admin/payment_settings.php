@@ -66,18 +66,24 @@
                         <form class="form-horizontal" method="post" enctype="multipart/form-data">
                             <?php 
                               $checked = "checked";
-                          ?>
+                            ?>
+
+                            <?php if(isset($_POST['RadioGroup1']) && $_POST['RadioGroup1']=='value2') { echo ' checked="checked"'; } ?>
+
                           <?php $getAllPaymentsSettings = getAllDataWhere('grocery_payments_settings','id','1'); 
                                 $getPaymentsSettings = $getAllPaymentsSettings->fetch_assoc(); ?>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Delivery</label>
-                                <div class="col-sm-6 col-md-4 btn-group" data-toggle="buttons">
-                                     <label class="btn btn-outline-primary active">
-                                        <input type="radio" name="delivery" id="delivery"  value="1" <?php if($getPaymentsSettings == 1) echo $checked; ?>
-                                        > Yes
+                                <div class="col-sm-6 col-md-4 btn-group">
+                                    <label class="btn btn-outline-primary active">
+                                       <input type="radio" name="delivery" id="delivery"  value="1" <?php if($getPaymentsSettings['delivery'] == 1) echo 'checked="checked"'; ?>
+                                        > Yes 
                                     </label>
+                                    
+
+                                    
                                     <label class="btn btn-outline-primary">
-                                        <input type="radio" name="delivery" id="delivery" autocomplete="off" value="2" <?php if($getPaymentsSettings == 2)  echo $checked; ?> > No &nbsp;
+                                        <input type="radio" name="delivery" id="delivery" autocomplete="off" value="2" <?php if($getPaymentsSettings['delivery'] == 2)  echo 'checked="checked"'; ?> > No &nbsp;
                                     </label>
                                 </div>
                             </div>
@@ -95,63 +101,63 @@
                             </div>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Coupons</label>
-                                <div class="btn-group col-sm-6 col-md-4" data-toggle="buttons">
+                                <div class="btn-group col-sm-6 col-md-4">
                                      <label class="btn btn-outline-primary active">
-                                        <input type="radio" name="coupons" id="buttonRadios1" autocomplete="off"  value="1" <?php if($getPaymentsSettings == 1) echo $checked; ?> > Yes
+                                        <input type="radio" name="coupons" id="buttonRadios1" autocomplete="off"  value="1" <?php if($getPaymentsSettings['coupons'] == 1) echo $checked; ?> > Yes
                                     </label>
                                     <label class="btn btn-outline-primary">
-                                        <input type="radio" name="coupons" id="buttonRadios2" autocomplete="off" value="2" <?php if($getPaymentsSettings == 2) echo $checked; ?> > No &nbsp;
+                                        <input type="radio" name="coupons" id="buttonRadios2" autocomplete="off" value="2" <?php if($getPaymentsSettings['coupons'] == 2) echo $checked; ?> > No &nbsp;
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Cash On Delivery</label>
-                                <div class="col-sm-6 col-md-4 btn-group" data-toggle="buttons">
+                                <div class="col-sm-6 col-md-4 btn-group">
                                      <label class="btn btn-outline-primary active">
-                                        <input type="radio" name="cash_on_delivery" id="buttonRadios1" autocomplete="off"  value="1" <?php if($getPaymentsSettings == 1) echo $checked; ?>> Yes
+                                        <input type="radio" name="cash_on_delivery" id="buttonRadios1" autocomplete="off"  value="1" <?php if($getPaymentsSettings['cash_on_delivery'] == 1) echo $checked; ?>> Yes
                                     </label>
                                     <label class="btn btn-outline-primary">
-                                        <input type="radio" name="cash_on_delivery" id="buttonRadios2" autocomplete="off" value="2" <?php if($getPaymentsSettings == 2) echo $checked; ?>> No &nbsp;
+                                        <input type="radio" name="cash_on_delivery" id="buttonRadios2" autocomplete="off" value="2" <?php if($getPaymentsSettings['cash_on_delivery'] == 2) echo $checked; ?>> No &nbsp;
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Pay U Payment</label>
-                                <div class="col-sm-6 col-md-4 btn-group" data-toggle="buttons">
+                                <div class="col-sm-6 col-md-4 btn-group">
                                      <label class="btn btn-outline-primary active">
-                                        <input type="radio" name="pay_u_payments" id="buttonRadios1" autocomplete="off"  value="1" <?php if($getPaymentsSettings == 1) echo $checked; ?>> Yes
+                                        <input type="radio" name="pay_u_payments" id="buttonRadios1" autocomplete="off"  value="1" <?php if($getPaymentsSettings['pay_u_payments'] == 1) echo $checked; ?>> Yes
                                     </label>
                                     <label class="btn btn-outline-primary">
-                                        <input type="radio" name="pay_u_payments" id="buttonRadios2" autocomplete="off" value="2" <?php if($getPaymentsSettings == 2) echo $checked; ?>> No &nbsp;
+                                        <input type="radio" name="pay_u_payments" id="buttonRadios2" autocomplete="off" value="2" <?php if($getPaymentsSettings['pay_u_payments'] == 2) echo $checked; ?>> No &nbsp;
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">HDFC Payment</label>
-                                <div class="col-sm-6 col-md-4 btn-group" data-toggle="buttons">
+                                <div class="col-sm-6 col-md-4 btn-group">
                                      <label class="btn btn-outline-primary active">
-                                        <input type="radio" name="hdfc_payments" id="buttonRadios1" autocomplete="off"  value="1" <?php if($getPaymentsSettings == 1) echo $checked; ?>> Yes
+                                        <input type="radio" name="hdfc_payments" id="buttonRadios1" autocomplete="off"  value="1" <?php if($getPaymentsSettings['hdfc_payments'] == 1) echo $checked; ?>> Yes
                                     </label>
                                     <label class="btn btn-outline-primary">
-                                        <input type="radio" name="hdfc_payments" id="buttonRadios2" autocomplete="off" value="2" <?php if($getPaymentsSettings == 2) echo $checked; ?>> No &nbsp;
+                                        <input type="radio" name="hdfc_payments" id="buttonRadios2" autocomplete="off" value="2" <?php if($getPaymentsSettings['hdfc_payments'] == 2) echo $checked; ?>> No &nbsp;
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Paytm Payment</label>
-                                <div class="col-sm-6 col-md-4 btn-group" data-toggle="buttons">
+                                <div class="col-sm-6 col-md-4 btn-group">
                                      <label class="btn btn-outline-primary active">
-                                        <input type="radio" name="paytm_payments" id="buttonRadios1" autocomplete="off" value="1" <?php if($getPaymentsSettings == 1) echo $checked; ?>> Yes
+                                        <input type="radio" name="paytm_payments" id="buttonRadios1" autocomplete="off" value="1" <?php if($getPaymentsSettings['paytm_payments'] == 1) echo $checked; ?>> Yes
                                     </label>
                                     <label class="btn btn-outline-primary">
-                                        <input type="radio" name="paytm_payments" id="buttonRadios2" autocomplete="off" value="2" <?php if($getPaymentsSettings == 2) echo $checked; ?>> No &nbsp;
+                                        <input type="radio" name="paytm_payments" id="buttonRadios2" autocomplete="off" value="2" <?php if($getPaymentsSettings['paytm_payments'] == 2) echo $checked; ?>> No &nbsp;
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Order Cancellation Time</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" name="order_cancellation_time" class="form-control" id="form-control-3" placeholder="Enter Tax Percentage" required value="<?php echo $getPaymentsSettings['order_cancellation_time'];?>">
+                                    <input type="text" name="order_cancellation_time" class="form-control" id="form-control-3" placeholder="Enter Tax Order Cancellation Time" required value="<?php echo $getPaymentsSettings['order_cancellation_time'];?>">
                                 </div>
                             </div>
                             <div class="form-group">
