@@ -268,7 +268,7 @@ if($_SESSION['user_login_session_id'] == '') {
 		<div class="row">
 			<div class="col-md-3 col-sm-3">
             
-				<div class="box_style_2 hidden-xs info">
+				<div class="box_style_2 hidden-xs info" style="padding-bottom:30px">
 					<h4 class="nomargin_top">Delivery time <i class="icon_clock_alt pull-right"></i></h4>
 					<?php $getDeliveryTime = getIndividualDetails('food_vendors','id',$restaurant_id1); ?>
 					<p>
@@ -280,6 +280,7 @@ if($_SESSION['user_login_session_id'] == '') {
 					<p>
 						<?php echo $getCheckoutDetails['description']; ?>
 					</p>
+					
 				</div><!-- End box_style_1 -->
                 
 				<div class="box_style_2 hidden-xs" id="help">
@@ -416,11 +417,11 @@ if($_SESSION['user_login_session_id'] == '') {
 					</table>
 					<hr>
 					<div class="row" id="options_2">
-						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 							<label class="radiob"><input type="radio" value="2" checked name="dev_type" class="check_dev_type" id="del_check" data-pri-key="<?php echo $cartTotal;?>">Delivery
 							<span class="checkmark"></span></label>
 						</div>
-						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 							<label class="radiob"><input type="radio" value="1" name="dev_type" class="check_dev_type" id="take_away_check" data-pri-key="<?php echo $cartTotal; ?>">Take Away<span class="checkmark"></span></label>
 						</div>
 					</div><!-- Edn options 2 -->					
@@ -504,13 +505,13 @@ if($_SESSION['user_login_session_id'] == '') {
 					
 						<?php $getOnlineDeatils = getIndividualDetails('payment_gateway_options','id',2); 
 							if($getOnlineDeatils['enable_status'] == 0) { ?>
-						<div class="col-lg-8 col-md-12 col-sm-12 col-xs-6">
+						<div class="col-lg-8 col-md-6 col-sm-6 col-xs-6">
 							<label class="radiob"><input type="radio" value="2" checked name="pay_mn" id="online_check">Online Payment<span class="checkmark"></span></label>
 						</div>
 						<?php } ?>
 						<?php $getOnlineDeatils = getIndividualDetails('payment_gateway_options','id',1); 
 							if($getOnlineDeatils['enable_status'] == 0) { ?>
-						<div class="col-lg-4 col-md-12 col-sm-12 col-xs-6">
+						<div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
 							<label class="radiob"><input type="radio" value="1" name="pay_mn"id="cod_check">COD<span class="checkmark"></span></label>
 						</div>
 						<?php } ?>
