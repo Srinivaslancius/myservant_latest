@@ -157,7 +157,7 @@
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Order Cancellation Time</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" name="order_cancellation_time" class="form-control" id="form-control-3" placeholder="Enter Tax Percentage" required value="<?php echo $getPaymentsSettings['order_cancellation_time'];?>">
+                                    <input type="text" name="order_cancellation_time" class="form-control" id="form-control-3" placeholder="Enter Tax Order Cancellation Time" required value="<?php echo $getPaymentsSettings['order_cancellation_time'];?>">
                                 </div>
                             </div>
                             <div class="form-group">
