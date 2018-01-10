@@ -41,6 +41,7 @@
                 $brand_logo = uniqid().$_FILES["brand_logo"]["name"];
                 $target_dir = "uploads/grocery_brand_logos/";
                 $target_file = $target_dir . basename($brand_logo);
+                $getImgUnlink = getImageUnlink('brand_logo','grocery_brand_logos','id',$id,$target_dir);
                 move_uploaded_file($_FILES["brand_logo"]["tmp_name"], $target_file);
                 $sql = "UPDATE `grocery_brand_logos` SET brand_logo = '$brand_logo', link = '$link', lkp_status_id = '$lkp_status_id' WHERE id = '$cid' ";
                 
