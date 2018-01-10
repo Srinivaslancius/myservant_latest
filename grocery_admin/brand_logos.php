@@ -121,7 +121,7 @@
                                 <tr>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $row['link']; ?></td>
-                                    <td><img src="<?php echo $base_url . 'uploads/grocery_brand_logos/'.$row['brand_logo']; ?>"  id="output" height="60" width="60"/></td>
+                                    <td><img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brand_logos/'.$row['brand_logo']; ?>"  id="output" height="60" width="60"/></td>
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_brand_logos'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_brand_logos'>In Active</span>" ;} ?></td>
                                     <td> <a href="edit_brand_logos.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a></td>
                                 </tr>
@@ -133,14 +133,6 @@
             </div>
             
         </div>
-        <div class="site-footer">
-          2017 © Cosmos
-        </div>
-
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
-    <script src="js/dashboard-3.min.js"></script>
-    <script src="js/tables-datatables.min.js"></script>
+        <?php include_once 'footer.php'; ?>
   </body>
 </html>

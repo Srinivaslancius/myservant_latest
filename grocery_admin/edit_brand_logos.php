@@ -74,7 +74,7 @@
                             </div>
                             <div class="form-group">
                             <?php if($getBrandLogos['brand_logo']!='') { ?>
-                                <img src="<?php echo $base_url . 'uploads/grocery_brand_logos/'.$getBrandLogos['brand_logo']; ?>"  id="output" height="100" width="100"/>
+                                <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brand_logos/'.$getBrandLogos['brand_logo']; ?>"  id="output" height="100" width="100"/>
                             <?php } ?>
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Brand Logo</label>
                                 <div class="col-sm-6 col-md-4">
@@ -107,14 +107,6 @@
             </div>
             
         </div>
-        <div class="site-footer">
-          2017 © Cosmos
-        </div>
-
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
-    <script src="js/dashboard-3.min.js"></script>
-    <script src="js/tables-datatables.min.js"></script>
+        <?php include_once 'footer.php'; ?>
   </body>
 </html>

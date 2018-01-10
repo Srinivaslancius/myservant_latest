@@ -28,6 +28,31 @@
       <div class="site-right-sidebar">
         <?php include_once './right_slide_toggle.php';?>
       </div>
+      <?php $pid = $_GET['pid']; ?>
+      <?php
+        if (!isset($_POST['submit']))  {
+          echo "fail";
+        } else  { 
+            //echo "<pre>"; print_r($_FILES); die;
+            $product_images = $_FILES['product_images']['name'];
+            foreach($product_images as $key=>$value){
+                if(!empty($value)) {
+                    $product_images1 = uniqid().$_FILES['product_images']['name'][$key];
+                    $file_tmp = $_FILES["product_images"]["tmp_name"][$key];
+                    $file_destination = 'uploads/product_images/' . $product_images1;
+                    move_uploaded_file($file_tmp, $file_destination);    
+                    $sql = "INSERT INTO product_bind_images ( `product_id`,`image`) VALUES ('$pid','$product_images1')";
+                    $result = $conn->query($sql);
+                }
+            }
+           
+            if( $result == 1){
+                echo "<script type='text/javascript'>window.location='manage_products.php?msg=success'</script>";
+            } else {
+                echo "<script type='text/javascript'>window.location='manage_products.php?msg=fail'</script>";
+            }
+        }
+        ?>
         <div class="site-content">
             <div class="panel panel-default">
                 <div class="panel-heading">
