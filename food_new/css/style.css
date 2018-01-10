@@ -3543,7 +3543,7 @@ footer ul {
 	font-size: 11px;
 }
 #country-list {
-    width: 60% !important;
+    width: 169px !important;
 }
 .carousel-inner.pad_lft {
     padding-left:40px !important;
@@ -3575,7 +3575,7 @@ footer ul {
 	padding-left:10px;
 }
 #country-list{
-	width:390px;
+	width:380px !important;
 }
 .strip_list{
 	min-height:250px;
@@ -3597,7 +3597,7 @@ footer ul {
 }
 
 #country-list {
-    width: 205px !important;
+    width: 350px !important;
 }
 .carousel-inner.pad_lft {
     padding-left: 50px !important;
@@ -3622,6 +3622,9 @@ footer ul {
 		padding-right:50px !important;
 		padding-left:30px !important;
 	}
+	#country-list {
+    width: 452px !important;
+}
 }
 @media screen and (max-width: 732px) and (min-width: 412px) {
 	.btn-info {
@@ -3635,6 +3638,9 @@ footer ul {
 .carousel-inner.pad_lft {
     padding-left: 60px !important;
 }
+.twof{
+		width:250px!important;
+	}
 }
 @media screen and (max-width: 960px) and (min-width: 600px) {
 	.btn.btn-danger.c_pad {
@@ -3666,4 +3672,20 @@ footer {
 		width:50px !important;
 		height:50px !important;
 	}
+	.twof{
+		width:240px!important;
+	}
+}
+@media screen and (max-width: 640px) and (min-width: 384px) {
+	.twof{
+		width:240px!important;
+	}
+	#country-list {
+    width: 169px !important;
+}
+}
+@media screen and (max-width: 667px) and (min-width: 375px) {
+	#country-list {
+    width: 169px !important;
+}
 }

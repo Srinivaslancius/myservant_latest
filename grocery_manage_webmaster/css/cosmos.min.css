@@ -24556,3 +24556,12 @@ a.bg-dribbble:hover {
     border-bottom: 1px solid #ccc;
     margin-top: 3px;
 }
+.addmrbrdr
+{
+
+    border: solid 1px #333;
+   
+    margin-bottom: 15px;
+    padding: 10px;
+
+}

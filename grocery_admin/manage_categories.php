@@ -40,13 +40,13 @@
           $fileToUpload2 = $_FILES["fileToUpload2"]["name"];
           $priority = $_POST['priority'];
           if($fileToUpload!='' && $fileToUpload1!='' && $fileToUpload2!='') {
-            $target_dir = "grocery_category_web_image/";
+            $target_dir = "uploads/grocery_category_web_image/";
             $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
             $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-            $target_dir1 = "grocery_category_app_image/";
+            $target_dir1 = "uploads/grocery_category_app_image/";
             $target_file1 = $target_dir1 . basename($_FILES["fileToUpload1"]["name"]);
             $imageFileType = pathinfo($target_file1,PATHINFO_EXTENSION);
-            $target_dir2 = "grocery_category_icon/";
+            $target_dir2 = "uploads/grocery_category_icon/";
             $target_file2 = $target_dir2 . basename($_FILES["fileToUpload2"]["name"]);
             $imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -149,9 +149,9 @@
                                     <td><?php echo $i; ?></td>
                                     <!-- <td>Brnd345</td> -->
                                     <td><?php echo $row['category_name']; ?></td>
-                                    <td><img src="<?php echo $base_url . 'grocery_category_web_image/'.$row['category_web_image'] ?>" width="100" height="100"></td>
-                                    <td><img src="<?php echo $base_url . 'grocery_category_app_image/'.$row['category_app_image'] ?>" width="100" height="100"></td>
-                                     <td><img src="<?php echo $base_url . 'grocery_category_icon/'.$row['category_icon'] ?>" width="100" height="100"></td>
+                                    <td><img src="<?php echo $base_url . 'uploads/grocery_category_web_image/'.$row['category_web_image'] ?>" width="100" height="100"></td>
+                                    <td><img src="<?php echo $base_url . 'uploads/grocery_category_app_image/'.$row['category_app_image'] ?>" width="100" height="100"></td>
+                                     <td><img src="<?php echo $base_url . 'uploads/grocery_category_icon/'.$row['category_icon'] ?>" width="100" height="100"></td>
                                       <td><?php echo $row['priority']; ?></td>
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_category'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_category'>In Active</span>" ;} ?></td>
                                     <td> <a href="edit_grocery_category.php?stateid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp; <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "grocery_category" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a></td>
