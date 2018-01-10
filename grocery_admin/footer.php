@@ -12,7 +12,7 @@
       } );
     </script>
     <!-- This Script For number and price validations -->
-    <script type="text/javascript" src="../js/check_number_validations.js"></script>
+    <script type="text/javascript" src="js/check_number_validations.js"></script>
     <script>
       function isNumberKey(evt){
         var charCode = (evt.which) ? evt.which : event.keyCode
@@ -166,4 +166,4 @@
       cursor: pointer !important;
     }
   </style>
-</html>
+</html> 
