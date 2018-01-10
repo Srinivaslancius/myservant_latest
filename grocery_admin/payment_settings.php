@@ -147,7 +147,7 @@
                                         <input type="radio" name="paytm_payments" id="buttonRadios1" autocomplete="off" value="1" <?php if($getPaymentsSettings['paytm_payments'] == 1) echo $checked; ?> hidden> Yes
                                     </label>
                                     <label class="btn btn-outline-primary <?php if($getPaymentsSettings['paytm_payments'] == 2) {  ?> active <?php } ?>">
-                                        <input type="radio" name="paytm_payments" id="buttonRadios2" autocomplete="off" value="2" <?php if($getPaymentsSettings['paytm_payments'] == 2) echo $checked; ?> hidden> No &nbsp;
+                                        <input type="radio" name="paytm_payments" id="buttonRadios2" autocomplete="off" value="2" <?php if($getPaymentsSettings['paytm_payments'] == 2) echo $checked; ?> hidden> No &nbsp; 
                                     </label>
                                 </div>
                             </div>
