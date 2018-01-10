@@ -42,7 +42,7 @@
                     $file_tmp = $_FILES["product_images"]["tmp_name"][$key];
                     $file_destination = 'uploads/product_images/' . $product_images1;
                     move_uploaded_file($file_tmp, $file_destination);    
-                    $sql = "INSERT INTO product_bind_weight_prices ( `product_id`,`lkp_city_id`, `weight_type`, `mrp_price`, `selling_price`) VALUES ('$pid','$product_images1')";
+                    $sql = "INSERT INTO product_bind_weight_prices ( `product_id`,`lkp_city_id`, `weight_type`, `mrp_price`, `selling_price`) VALUES ('$product_id','$lkp_city_id', '$weight_type', '$mrp_price', '$selling_price')";
                     $result = $conn->query($sql);
                 }
             }
