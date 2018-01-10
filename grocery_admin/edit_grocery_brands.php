@@ -70,6 +70,7 @@
             }
         }
         ?>
+        
         <div class="site-content">
             <div class="panel panel-default">
                 <div class="panel-heading">
