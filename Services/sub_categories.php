@@ -103,7 +103,7 @@
         while($getAllSubCategoriesData = $getSubCategoriesData->fetch_assoc()) { ?>           
         <div class="col-md-2 col-sm-4 wow zoomIn" data-wow-delay="0.1s">
           <a href="list.php?key2=<?php echo encryptPassword($getAllSubCategoriesData['id']); ?>">
-          <div class="tour_container" style="min-height:220px">
+          <div class="tour_container" style="min-height:180px">
 
             <div class="ribbon_3 popular"><!-- <span>Popular</span> --> 
             </div>
