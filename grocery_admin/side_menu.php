@@ -66,6 +66,13 @@
                 <span class="menu-text">Brand Logos</span>
               </a>
             </li>
+            <li><a href="grocery_banners.php">
+                <span class="menu-icon">
+                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                </span>
+                <span class="menu-text">Banners</span>
+              </a>
+            </li>
             <li><a href="grocery_tags.php">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-dot-circle-alt"></i>
