@@ -148,5 +148,8 @@
         
 
     <?php include_once 'footer.php'; ?>
+    <script src="js/dashboard-3.min.js"></script>
+    <script src="js/forms-plugins.min.js"></script>
+    <script src="js/tables-datatables.min.js"></script>    
   </body>
 </html>

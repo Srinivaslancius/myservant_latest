@@ -66,7 +66,7 @@
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Select City</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }">
-                                        <option value="">-- Select Category --</option>
+                                        <option value="">-- Select City --</option>
                                         <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     </select>
                                 </div>
@@ -88,16 +88,10 @@
                                     </label>
                                 </div>
                             </div>
-                             <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight</label>
-                                <div class="col-sm-6 col-md-2">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Weignt">
-                                </div>
-                                <div class="col-sm-6 col-md-2">
-                                    <select id="form-control-1" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }">
-                                        <option value="">-- Select Weight Type --</option>
-                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                    </select>
+                            <div class="form-group">
+                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight Types</label>
+                                <div class="col-sm-6 col-md-4">
+                                    <input type="text" class="form-control" id="form-control-3" placeholder="Weight Types">
                                 </div>
                             </div>
                             <div class="form-group">
