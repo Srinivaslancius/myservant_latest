@@ -219,19 +219,25 @@
                   
                   <div class="form-group">
                     <label for="form-control-3" class="control-label">Choose your City</label>
-                    <select name="lkp_city_id" id="lkp_city_id" class="custom-select" data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a City', allowClear: true }">
+                    <select name="lkp_city_id" id="lkp_city_id" class="custom-select" data-error="This field is required." required data-plugin="select2" onChange="getPincodes(this.value);" data-options="{ placeholder: 'Select a City', allowClear: true }">
                       <option value="">Select City</option>
                    </select>
                     <div class="help-block with-errors"></div>
                   </div>
+
                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Location</label>
-                    <input type="text" name="location" class="form-control" id="form-control-2" placeholder="Location Name" data-error="Please enter Location" required>
+                    <label for="form-control-3" class="control-label">Choose your Pincode</label>
+                    <select name="pincode" id="lkp_pincode_id" class="custom-select" data-error="This field is required." required data-plugin="select2" onChange="getLocations(this.value);" data-options="{ placeholder: 'Select a pincode', allowClear: true }">
+                      <option value="">Select Pincode</option>
+                   </select>
                     <div class="help-block with-errors"></div>
                   </div>
+
                   <div class="form-group">
-                    <label for="form-control-2" class="control-label">Pincode</label>
-                    <input type="text" name="pincode" class="form-control" id="form-control-2" placeholder="Pincode" data-error="Please enter Pincode." required maxlength="6"  onkeypress="return isNumberKey(event)">
+                    <label for="form-control-3" class="control-label">Choose your Location</label>
+                    <select name="location" id="lkp_location_id" class="custom-select" data-error="This field is required." required data-plugin="select2" data-options="{ placeholder: 'Select a location', allowClear: true }">
+                      <option value="">Select Location</option>
+                   </select>
                     <div class="help-block with-errors"></div>
                   </div>
                    <div class="form-group">

@@ -73,8 +73,12 @@ h3,h5{
 	  <?php include_once './header.php';?>
         </header>
     <!-- End Header =============================================== -->
-<?php $getAllAboutData = getAllDataWhere('food_content_pages','id',6);
-          $getAboutData = $getAllAboutData->fetch_assoc();
+<?php 
+if($_SESSION['user_login_session_id'] == '') {
+  header ("Location: logout.php");
+}
+$getAllAboutData = getAllDataWhere('food_content_pages','id',6);
+$getAboutData = $getAllAboutData->fetch_assoc();
 ?>
 <!-- SubHeader =============================================== -->
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
@@ -100,82 +104,123 @@ h3,h5{
 	<div class="row">
     
     <div class="col-md-3 col-sm-3" id="sidebar">
-    <div class="theiaStickySidebar">
+      <div class="theiaStickySidebar">
         <div class="box_style_1" id="faq_box">
-				  <?php include_once 'dashboard_strip.php';?>
-		</div><!-- End box_style_1 -->
-        </div><!-- End theiaStickySidebar -->
-     </div><!-- End col-md-3 -->
+  				<?php include_once 'dashboard_strip.php';?>
+  		  </div><!-- End box_style_1 -->
+      </div><!-- End theiaStickySidebar -->
+    </div><!-- End col-md-3 -->
         
-        <div class="col-md-9 col-sm-9">      	 
-         <div class="panel-group">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h3 class="nomargin_top">Services Orders</h3>
-                    </div>
-                      <div class="panel-body">
-                     <div class="table-responsive">	
-								 
+    <div class="col-md-9 col-sm-9">      	 
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="nomargin_top">Food Orders</h3>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">	
         			<table class="table" style="border:1px solid #ddd;width:100%">
+                <?php $order_id=$_GET['order_id'];
+                $orderData = getIndividualDetails('food_orders','order_id',$order_id);
+                $getRestaurants = getIndividualDetails('food_vendors','id',$orderData['restaurant_id']);
+                $getpaymentTypes = getIndividualDetails('lkp_payment_types','id',$orderData['payment_method']);
+                $orderStatus = getIndividualDetails('lkp_food_order_status','id',$orderData['lkp_order_status_id']);
+                $paymentStatus = getIndividualDetails('lkp_payment_status','id',$orderData['lkp_payment_status_id']);
+                $getSiteSettingsData = getIndividualDetails('food_site_settings','id',1);
+                $service_tax = $orderData['sub_total']*$getSiteSettingsData['service_tax']/100;
+                $getAddOnsPrice = "SELECT * FROM food_order_ingredients WHERE order_id = '$order_id'";
+                $getAddontotal = $conn->query($getAddOnsPrice);
+                $getAddontotalCount = $getAddontotal->num_rows;
+                $getAdstotal = 0;
+                while($getAdTotal = $getAddontotal->fetch_assoc()) {
+                    $getAdstotal += $getAdTotal['item_ingredient_price'];
+                }
+                if($orderData['delivery_charges'] == '0') {
+                  $order_type = "Take Away";
+                } else {
+                  $order_type = "Delivery";
+                }
+                ?>
             		<tbody>
-		  <tr>
-			<td colspan="2" style="padding-left:20px">
-			<h3>Order Information</h3>
-			<p>Restaurant Name: Sweet Magic</p>
-			<p>Payment Method:Cash On Delivery</p>
-			<p>Order Type:Take Away</p>
-			<p>Order Status: InProgress</p>
-			<p>Payment Status: InProgress</p></td>
-			<td colspan="2"></td>
-			<td colspan="2">
-			<h3>Shipping Address</h3>
-			<p>srinu</p>
-			<p>srinivas@lanciussolutions.com</p>
-			<p>7894561235</p>
-			<p>test</p>
-			<p>345345</td>
-		  </tr>
-		  <tr>
-			<td><h5>ITEM NAME</h5></td>
-			<td><h5>CUSINE TYPE</h5></td>
-			<td><h5>ITEM WEIGHT</h5></td>
-			<td><h5>QUANTITY</h5></td>
-			<td><h5>PRICE</h5></td>
-			<td><h5>TOTAL</h5></td>
-		  </tr>
-		   <tr>
-			<td><p>Biryani</p></td>
-			<td><p>MAIN COURSES1</p></td>
-			<td><p>Medium</p></td>
-			<td><p>3</p></td>
-			<td><p>80</p></td>
-			<td><p>240</p></td>
-		  </tr>
-		   <tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><p>Subtotal:</p>
-			<p>Tax:</p>
-			<p style="color:#fe6003;">Grand Total:</p></td>
-			<td><p style="color:#fe6003;">Rs. 240</p>
-			<p style="color:#fe6003;">Rs. 24(10 %)</p>
-			
-				<p style="color:#fe6003;">Rs. 264</p>
-		  </tr>
-		</tbody>
-					
-        	</table>    
-				
+            		  <tr>
+            			<td colspan="2" style="padding-left:20px">
+            			<h3>Order Information</h3>
+            			<p>Restaurant Name: <?php echo $getRestaurants['restaurant_name']; ?>c</p>
+            			<p>Payment Method: <?php echo $getpaymentTypes['status']; ?></p>
+            			<p>Order Type: <?php echo $order_type; ?></p>
+            			<p>Order Status: <?php echo $orderStatus['order_status']; ?></p>
+            			<p>Payment Status: <?php echo $paymentStatus['payment_status']; ?></p></td>
+            			<td colspan="2"></td>
+            			<td colspan="2">
+            			<h3>Shipping Address</h3>
+            			<p><?php echo $orderData['first_name']; ?></p>
+            			<p><?php echo $orderData['email']; ?></p>
+            			<p><?php echo $orderData['mobile']; ?></p>
+            			<p><?php echo $orderData['address']; ?></p>
+            			<p><?php echo $orderData['postal_code']; ?></td>
+            		  </tr>
+            		  <tr>
+                  <td><h5>ITEM</h5></td>
+            			<td><h5>ITEM NAME</h5></td>
+            			<td><h5>CATEGORY NAME</h5></td>
+            			<td><h5>ITEM WEIGHT</h5></td>
+            			<td><h5>QUANTITY</h5></td>
+            			<td><h5>PRICE</h5></td>
+            		  </tr>
+                  <?php $getOrders1 = "SELECT * FROM food_orders WHERE order_id='$order_id'";
+                  $getOrdersData3 = $conn->query($getOrders1);
+                  while($getOrdersData2 = $getOrdersData3->fetch_assoc()) { 
+                  $getCategories = getIndividualDetails('food_category','id',$getOrdersData2['category_id']);
+                  $getProducts = getIndividualDetails('food_products','id',$getOrdersData2['product_id']);
+                  $getItemWeights = getIndividualDetails('food_product_weights','id',$getOrdersData2['item_weight_type_id']);
+                  ?>
+            		  <tr>
+                  <td><p><img src="<?php echo $base_url . 'uploads/food_product_images/'.$getProducts['product_image']; ?>" alt="<?php echo $getProducts['product_name']; ?>" style="width:50px;height:50px"></p></td>
+            			<td><p><?php echo $getProducts['product_name'] ?></p></td>
+            			<td><p><?php echo  $getCategories['category_name']?></p></td>
+            			<td><p><?php echo $getItemWeights['weight_type'] ?></p></td>
+            			<td><p><?php echo $getOrdersData2['item_quantity'] ?></p></td>
+            			<td><p><?php echo $getOrdersData2['item_price'] ?></p></td>
+            		  </tr>
+                  <?php  } ?>
+            		  <tr>
+            			<td></td>
+            			<td></td>
+            			<td></td>
+            			<td></td>
+            			<td><p>Subtotal:</p>
+            			<p>Tax:</p>
+                  <?php if($orderData['delivery_charges'] != '0') { ?>
+                  <p>Delivery Charges:</p>
+                  <?php } ?>
+                  <?php if($getAddontotalCount > 0) { ?>
+                  <p>Ingredients Price:</p>
+                  <?php } ?>
+                  <?php if($orderData['coupen_code'] != '') { ?>
+                  <p>Discount:</p>
+                  <?php } ?>
+            			<p style="color:#fe6003;">Grand Total:</p>
+                  </td>
+            			<td style="color:#f26226"><p>Rs. <?php echo $orderData['sub_total']?></p>
+                  <p>Rs. <?php echo $service_tax.'('.$getSiteSettingsData['service_tax'].'%)' ?></p>
+                  <?php if($orderData['delivery_charges'] != '0') { ?>
+                  <p>Rs. <?php echo $orderData['delivery_charges']?></p>
+                  <?php } ?>
+                  <?php if($getAddontotalCount > 0) { ?>
+                  <p>Rs. <?php echo $getAdstotal?></p>
+                  <?php } ?>
+                  <?php if($orderData['coupen_code'] != '') { ?>
+                  <p>Rs. <?php echo $orderData['discout_money']?>(<span style="color:green">Coupon Applied.</span>)</p>
+                  <?php } ?>
+                  <p>Rs. <?php echo $orderData['order_total']?></p></td>
+            		  </tr>
+            		</tbody>
+        	    </table>  
         	  </div>
-                      </div>
-                  </div>
-                  
-                </div><!-- End panel-group -->
-                
-            
-        </div><!-- End col-md-9 -->
+          </div>
+        </div>   
+      </div><!-- End panel-group -->
+    </div><!-- End col-md-9 -->
     </div><!-- End row -->
 </div><!-- End container -->
 </div>

@@ -114,7 +114,12 @@
                     </div>
                       <div class="panel-body">
                      <div class="table-responsive">	
-				<?php for($i=0; $i<4; $i++) {?>					 
+				    <?php $uid=$_SESSION['user_login_session_id'];
+                    $getOrders = "SELECT * from grocery_orders WHERE user_id = '$uid' GROUP BY order_id ORDER BY id"; 
+                    $getOrders1 = $conn->query($getOrders);
+                    if($getOrders1->num_rows > 0) { 
+                    while($orderData = $getOrders1->fetch_assoc()) { 
+                    ?>				 
         			<table class="table" style="border:1px solid #ddd;width:100%">
 					
             		<thead>
@@ -142,7 +147,9 @@
             		</tbody>
 					
         	     </table>
-				 <?php } ?>
+				 <?php } } else { ?>
+                    <h3 style="text-align:center;color:#fe6003;">No Orders Found</h3>
+                 <?php } ?>
         	  </div>
                       </div>
                   </div>

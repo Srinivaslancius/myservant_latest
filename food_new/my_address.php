@@ -73,6 +73,25 @@
 <?php $getAllAboutData = getAllDataWhere('food_content_pages','id',6);
           $getAboutData = $getAllAboutData->fetch_assoc();
 ?>
+<?php 
+  if(isset($_POST["submit"]) && $_POST["submit"]!="") {
+      $user_id =$_SESSION["user_login_session_id"];
+      $name = $_POST['name'];
+      $email = $_POST['email'];
+      $mobile = $_POST['mobile'];
+      $city = $_POST['city'];
+      $pincode = $_POST['pincode'];
+      $last_name = $_POST['last_name'];
+      $address = $_POST['address'];
+      $created_at = date("ymdhis");
+      $sql1 = "INSERT INTO add_user_address (`user_id`,`name`,`email`,`mobile`,`last_name`,`city`,`pincode`,`address`,`created_at`) VALUES ('$user_id','$name','$email','$mobile','$last_name','$city','$pincode','$address','$created_at')";
+      if($conn->query($sql1) === TRUE){             
+         echo "<script type='text/javascript'>window.location='my_address.php?succ=log-success'</script>";
+      } else {               
+         header('Location: my_address.php?err=log-fail');
+      } 
+  }
+?>
 <!-- SubHeader =============================================== -->
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
@@ -105,7 +124,17 @@
      </div><!-- End col-md-3 -->
         
         <div class="col-md-9 col-sm-9">
-        
+        <?php if(isset($_GET['succ']) && $_GET['succ'] == 'log-success' ) {  ?>                
+            <div class="alert alert-success" style="top:10px; display:block" id="set_valid_msg">
+              <strong>Success!</strong> Your Data Updated Successfully.
+            </div>               
+       <?php }?>
+
+        <?php if(isset($_GET['err']) && $_GET['err'] == 'log-fail' ) {  ?>            
+          <div class="alert alert-danger" style="top:10px; display:block" id="set_valid_msg">
+            <strong>Failed!</strong> Data Updation Failed.
+          </div>     
+        <?php } ?>
        	 
          <div class="panel-group">
                   <div class="panel panel-default">
@@ -113,92 +142,118 @@
                       <h3 class="nomargin_top">My Addresses</h3>
                     </div>
 					<!---start-->
-                      <div class="panel-body one">
-					  <div class="row">
-					  <div class="col-sm-3">
-					  </div>
-					  <div class="col-sm-6">
-						<center><img src="img/myaddress.png">
-						<h4>No Addresses found in your account!</h4>
-						<p>Add a delivery address.</p>
-						<button class="button1">ADD ADDRESS</button></center>
+					<?php
+					$user_id = $_SESSION["user_login_session_id"];
+          $getAddress = getAllDataWhereWithActive('add_user_address','user_id',$user_id);
+					if($getAddress->num_rows) { ?>
+					<div class="panel-body address">
+						<?php while($getAddressDetails = $getAddress->fetch_assoc()) { ?>
+	                    <div class="strip_list wow fadeIn" data-wow-delay="0.1s" style="min-height:180px">                  
+	                        <div class="col-md-9 col-sm-9">
+	                            <h3 style="color:#fe6003">Address </h3>
+	                                <div class="type">
+	                                  <p><?php echo $getAddressDetails['name']; ?></p>
+                										<p><?php echo $getAddressDetails['mobile']; ?></p>
+                										<p><?php echo $getAddressDetails['address']; ?></p>	
+	                                </div>
+	                        </div>
+	                        <input type="hidden" name="id" value="<?php echo $getAddressDetails['id']; ?>">
+	                        <div class="col-md-3 col-sm-3">
+	                            <div class="">								
+	                                <div>
+	                                	<?php if($getAddressDetails['address_status'] == 0) { ?>
+                  										<a href="../Services/make_as_default.php?default_id=<?php echo $getAddressDetails['id']; ?>"><button style="background-color: #fba775" class="button1">Make As Default</button></a>
+                                      <?php } else { ?> 
+                                      <a href="../Services/make_as_default.php?default_id=<?php echo $getAddressDetails['id']; ?>"><button class="button1">Make As Default</button></a>
+                                      <?php } ?>
+	                                </div> 							
+	                          </div> 
+	                        </div>
+						</div><!-- End strip_list-->
+						<?php } ?>
+                        <div class="go_to">								
+                            <div>
+								<center><button class="button1 one">ADD ADDRESS</button></center>
+                            </div> 							
+                       </div> 
+                    </div>
+                    <?php } else { ?>
+                    <div class="panel-body address">
+						<div class="row">
+						  	<div class="col-sm-3"></div>
+						  	<div class="col-sm-6">
+								<center><img src="img/myaddress.png">
+								<h4>No Addresses found in your account!</h4>
+								<p>Add a delivery address.</p>
+								<button class="button1 one">ADD ADDRESS</button></center>
+							</div>
+							<div class="col-sm-3"></div>
 						</div>
-						<div class="col-sm-3">
-					  </div>
-					</div>
-                      </div>
+                    </div>
 					  <!---end-->
+					  <?php } ?>
 					  <!---start-->
                       <div class="panel-body two">
 					      <form method="post">
                   <div class="col-md-12">				 
 				  <div class="col-md-9">
 				  <div class="row">
-				  <div class="col-sm-6">
-					<div class="form-group">
-						<label for="first-name">Name</label>
-						<input type="text" class="form-control"  name="user_full_name" placeholder="Name" required>
-					</div>
-					</div>
-					 <div class="col-sm-6">
-					<div class="form-group">
-						<label for="mobile">Mobile</label>
-						<input type="text" class="form-control valid_mobile_num" name="user_mobile" placeholder="Mobile"required>
-					<span id="input_status1" style="color: red;"></span>
-					</div>
-					</div>
-					 <div class="col-sm-6">
-					<div class="form-group">
-						<label for="pincode">Pincode</label>
-						<input type="text" class="form-control"  name="user_full_name" placeholder="pincode" required>
-					</div>
-					</div>
-					 <div class="col-sm-6">
+				  	<?php $uid = $_SESSION["user_login_session_id"];
+       	  			$userData = getIndividualDetails('users','id',$uid);
+       	  			?>
+				  	<div class="col-sm-6">
 						<div class="form-group">
-						<label for="locality">Locality</label>
-						<input type="text" class="form-control"  name="user_full_name" placeholder="locality" required>
-					</div>
-					</div>
-					 <div class="col-sm-12">
-					<div class="form-group">
-						 <label for="address">Address</label>
-							<textarea class="form-control" rows="5" id="comment"></textarea>
-					</div>
+							<label for="first-name">Name*</label>
+							<input type="text" class="form-control"  name="name" placeholder="Name" value="<?php echo $userData['user_full_name']; ?>" required>
+						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-						<label for="City/District/Town">City/District/Town</label>
-						<input type="text" class="form-control"  name="user_full_name" placeholder="locality" required>
-					</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-						<label for="sel1">Select State</label>
-					  <select class="form-control" id="sel1">
-						<option>Select State</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-					  </select></label>
-					</div>
+							<label for="mobile">Last Name*</label>
+							<input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
+						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-						<label for="Landmark">Landmark</label>
-						<input type="text" class="form-control"  name="user_full_name" placeholder="Landmark" required>
+							<label for="mobile">Email*</label>
+							<input type="text" class="form-control" readonly name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Mobile" value="<?php echo $userData['user_email']; ?>" required>
+						</div>
 					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="mobile">Mobile*</label>
+							<input type="text" class="form-control valid_mobile_num" name="mobile" value="<?php echo $userData['user_mobile']; ?>"  placeholder="Mobile" maxlength="10" pattern="[0-9]{10}" required>
+						</div>
 					</div>
-					 <div class="col-sm-6">
-					<div class="form-group">
-						<label for="mobile">Alternate Mobile</label>
-						<input type="text" class="form-control valid_mobile_num" name="user_mobile" placeholder="Alternate Mobile"required>
-					<span id="input_status1" style="color: red;"></span>
+					<?php $getCitiesData = getAllDataWhere('lkp_cities','lkp_status_id',0); ?>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="locality">City*</label>
+							<select name="city" id="lkp_city_id" class="form-control" required>
+								<option value="">Select City</option>
+								<?php while($getCities = $getCitiesData->fetch_assoc()) { ?>
+								<option value="<?php echo $getCities['id'];?>"><?php echo $getCities['city_name'];?></option>
+								<?php } ?>
+							</select>
+						</div>
 					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="pincode">Pincode*</label>
+							<input type="text" class="form-control valid_mobile_num" maxlength="6" name="pincode" placeholder="pincode" required>
+						</div>
 					</div>
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="address">Address*</label>
+							<textarea class="form-control" name="address" rows="5" id="comment" required></textarea>
+						</div>
 					</div>
 					
+				  </div>
+					
 					<div class="form-group">
-						<button class="button1" type="submit" name="save" style="width:100px;font-size:18px">Save</button> 					
+						<button class="button1" type="submit" name="submit" value="submit" style="width:100px;font-size:18px">Save</button> 
 					</div>						
                   </div>
 				  <div class="col-md-3">
@@ -236,6 +291,8 @@
     
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-2.2.4.min.js"></script>
+<!-- This Script For validations -->
+<script type="text/javascript" src="js/check_number_validations.js"></script>
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
 <script src="assets/validate.js"></script>
@@ -246,6 +303,11 @@
     jQuery('#sidebar').theiaStickySidebar({
       additionalMarginTop: 80
     });
+    $(document).ready(function () {
+      setTimeout(function () {
+        $('#set_valid_msg').hide();
+      }, 2000);
+    });
 </script>
 
 <script>
@@ -253,6 +315,7 @@ $(document).ready(function(){
 	 $(".two").hide();
     $(".one").click(function(){
         $(".one").hide();
+        $(".address").hide();
 		$(".two").show();
     });
 });

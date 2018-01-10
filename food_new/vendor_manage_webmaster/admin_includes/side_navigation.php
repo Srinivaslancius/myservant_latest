@@ -15,6 +15,15 @@
                 </span>
                 <span class="menu-text">Dashboard</span>
               </a>
+            </li>
+
+            <li  class="<?php if($page_name == 'vendor_details.php') { echo "active"; } ?>">
+              <a href="vendor_details.php" aria-haspopup="true">
+                <span class="menu-icon">
+                   <i class="zmdi zmdi-account zmdi-hc-fw"></i>
+                </span>
+                <span class="menu-text">Vendor Details</span>
+              </a>
             </li>    
             
             <li class="with-sub">

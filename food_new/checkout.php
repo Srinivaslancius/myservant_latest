@@ -157,11 +157,7 @@
     filter: alpha(opacity=20);
     opacity: .2;
 }
-@media only screen and (max-width: 480px) {
-	.alert-dismissable .close1{
-	right: 5px;	
-	}	
-}
+
 </style>
     <!-- End Header =============================================== -->
 <?php
@@ -249,35 +245,49 @@ if($_SESSION['user_login_session_id'] == '') {
 				header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=2");				
 			} elseif ($payment_group == 2) {
 				//online 
-				header("Location: hdfc_form.php");
+				header("Location: PayUMoney_form.php?odi=".$order_id."&pay_stau=2");
 			} else {
 				header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=1");
 			}			
 		}
     ?>
+    <?php 
+	if($_SESSION['CART_TEMP_RANDOM'] == "") {
+        $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
+    }
+    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
+    $user_session_id = $_SESSION['user_login_session_id'];
+	$getRest = "SELECT * FROM food_cart WHERE (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') AND item_quantity!='0' ";
+	$getRest1 = $conn->query($getRest);
+   	$getRest2 = $getRest1->fetch_assoc();
+    $restaurant_id1 = $getRest2['restaurant_id'];
+	?>
 
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
 		<div class="row">
 			<div class="col-md-3 col-sm-3">
             
-				<div class="box_style_2 hidden-xs info">
+				<div class="box_style_2 hidden-xs info" style="padding-bottom:30px">
 					<h4 class="nomargin_top">Delivery time <i class="icon_clock_alt pull-right"></i></h4>
+					<?php $getDeliveryTime = getIndividualDetails('food_vendors','id',$restaurant_id1); ?>
 					<p>
-						Lorem ipsum dolor sit amet, in pri partem essent. Qui debitis meliore ex, tollit debitis conclusionemque te eos.
+						Minimum Delivery Time: <?php echo $getDeliveryTime['min_delivery_time']; ?>
 					</p>
 					<hr>
-					<h4>Secure payment <i class="icon_creditcard pull-right"></i></h4>
+					<?php $getCheckoutDetails = getIndividualDetails('food_content_pages','id',16); ?>
+					<h4><?php echo $getCheckoutDetails['title']; ?><i class="icon_creditcard pull-right"></i></h4>
 					<p>
-						Lorem ipsum dolor sit amet, in pri partem essent. Qui debitis meliore ex, tollit debitis conclusionemque te eos.
+						<?php echo $getCheckoutDetails['description']; ?>
 					</p>
+					
 				</div><!-- End box_style_1 -->
                 
 				<div class="box_style_2 hidden-xs" id="help">
 					<i class="icon_lifesaver"></i>
 					<h4>Need <span>Help?</span></h4>
-					<a href="tel://004542344599" class="phone">+45 423 445 99</a>
-					<small>Monday to Friday 9.00am - 7.30pm</small>
+					<a href="tel://<?php echo $getFoodSiteSettingsData['mobile'];?>" class="phone"><?php echo $getFoodSiteSettingsData['mobile'];?></a>
+					<!-- <small>Monday to Friday 9.00am - 7.30pm</small> -->
 				</div>
                 
 			</div><!-- End col-md-3 -->
@@ -407,11 +417,11 @@ if($_SESSION['user_login_session_id'] == '') {
 					</table>
 					<hr>
 					<div class="row" id="options_2">
-						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 							<label class="radiob"><input type="radio" value="2" checked name="dev_type" class="check_dev_type" id="del_check" data-pri-key="<?php echo $cartTotal;?>">Delivery
 							<span class="checkmark"></span></label>
 						</div>
-						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 							<label class="radiob"><input type="radio" value="1" name="dev_type" class="check_dev_type" id="take_away_check" data-pri-key="<?php echo $cartTotal; ?>">Take Away<span class="checkmark"></span></label>
 						</div>
 					</div><!-- Edn options 2 -->					
@@ -455,7 +465,7 @@ if($_SESSION['user_login_session_id'] == '') {
 					<tr>
 						<td class="total">
 							<?php $order_total = $cartTotal+$service_tax+$DeliveryCharges+$getAdstotal; ?>
-							 TOTAL <span class="pull-right cart_total2" id="apply_price_aft_del">Rs. <?php echo $order_total; ?></span>
+							 TOTAL <span class="pull-right cart_total2" id="apply_price_aft_del">Rs. <?php echo round($order_total); ?></span>
 							  
 						</td>
 					</tr>
@@ -464,7 +474,7 @@ if($_SESSION['user_login_session_id'] == '') {
 
 					<input type="hidden" name="delivery_charge" value="<?php echo $DeliveryCharges;?>" id="delivery_charge">
 					<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>" id="sub_total">
-					<input type="hidden" name="order_total" value="<?php echo $order_total; ?>" id="order_total">
+					<input type="hidden" name="order_total" value="<?php echo round($order_total); ?>" id="order_total">
 					<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>" id="service_tax">
 					<input type="hidden" name="getAdstotal" value="<?php echo $getAdstotal; ?>" id="getAdstotal">
 					<input type="hidden" name="discount_money" value="0" id="discount_money">
@@ -495,13 +505,13 @@ if($_SESSION['user_login_session_id'] == '') {
 					
 						<?php $getOnlineDeatils = getIndividualDetails('payment_gateway_options','id',2); 
 							if($getOnlineDeatils['enable_status'] == 0) { ?>
-						<div class="col-lg-8 col-md-12 col-sm-12 col-xs-6">
+						<div class="col-lg-8 col-md-6 col-sm-6 col-xs-6">
 							<label class="radiob"><input type="radio" value="2" checked name="pay_mn" id="online_check">Online Payment<span class="checkmark"></span></label>
 						</div>
 						<?php } ?>
 						<?php $getOnlineDeatils = getIndividualDetails('payment_gateway_options','id',1); 
 							if($getOnlineDeatils['enable_status'] == 0) { ?>
-						<div class="col-lg-4 col-md-12 col-sm-12 col-xs-6">
+						<div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
 							<label class="radiob"><input type="radio" value="1" name="pay_mn"id="cod_check">COD<span class="checkmark"></span></label>
 						</div>
 						<?php } ?>
@@ -553,8 +563,8 @@ $('.check_dev_type').click(function(){
 	var getAdonsTotal = parseFloat($('#getAdstotal').val());
 	if(getcheckRadio == 1) {
 		$('#hide_del_fee').hide();		
-		$('#order_total').val(getSubTotal+getServiceTax+getAdonsTotal);
-		$('#apply_price_aft_del').html(getSubTotal+getServiceTax+getAdonsTotal);
+		$('#order_total').val(Math.round(getSubTotal+getServiceTax+getAdonsTotal));
+		$('#apply_price_aft_del').html(Math.round(getSubTotal+getServiceTax+getAdonsTotal));
 		$('#coupon_code').removeAttr("readonly");
 		$('.form-control-clear').siblings('input[type="text"]').val('').trigger('propertychange').focus();
 		$(".apply_coupon").show();
@@ -562,8 +572,8 @@ $('.check_dev_type').click(function(){
 		$('#discount_money,#coupon_code,#coupon_code_type').val('');
 	} else {
 		$('#hide_del_fee').show();
-		$('#order_total').val(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal);
-		$('#apply_price_aft_del').html(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal);
+		$('#order_total').val(Math.round(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal));
+		$('#apply_price_aft_del').html(Math.round(getSubTotal + getOrderDelCharge+getServiceTax+getAdonsTotal));
 		$('#coupon_code').removeAttr("readonly");
 		$('.form-control-clear').siblings('input[type="text"]').val('').trigger('propertychange').focus();
 		$(".apply_coupon").show();
@@ -639,5 +649,8 @@ $('#discount_price').hide();
 	    });
 	}
 </script>
+
+
+<?php include "search_js_script.php"; ?>
 </body>
 </html>

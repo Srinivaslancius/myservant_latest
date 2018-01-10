@@ -1,4 +1,4 @@
-
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <!--[if IE 8]><html class="ie ie8"> <![endif]-->
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
@@ -100,6 +100,66 @@ background-color: #fe6003;
 				</ul>
 			</div>
 		</div>
+
+		<?php 
+		if(isset($_POST["submit"]) && $_POST["submit"]!="") {
+
+				$first_name = $_POST["first_name"];
+				$last_name = $_POST["last_name"];
+				$email = $_POST["email"];
+				$mobile = $_POST["mobile"];
+				$state = $_POST["state"];
+				$district = $_POST["district"];
+				$city = $_POST["city"];
+				$postal_code=$_POST["postal_code"];
+				$location = $_POST["location"];
+				$address = $_POST["address"];
+				$order_note = $_POST["order_note"];
+				$sub_total = $_POST["sub_total"];
+				$order_total = $_POST["order_total"];
+				$coupon_code = $_POST["coupon_code"];
+				$coupon_code_type = $_POST["coupon_code_type"];
+				$discount_money = $_POST["discount_money"];
+				$payment_group = $_POST["payment_group"];
+				$order_date = date("Y-m-d h:i:s");
+				$string1 = str_shuffle('abcdefghijklmnopqrstuvwxyz');
+				$random1 = substr($string1,0,3);
+				$string2 = str_shuffle('1234567890');
+				$random2 = substr($string2,0,3);
+				$contstr = "MYSER-SERVICES";
+				$order_id = $contstr.$random1.$random2;
+				$service_tax = $_POST["service_tax"];
+				$servicesCount = count($_POST["service_id"]);
+				//Saving user id and coupon id
+				$user_id = $_SESSION['user_login_session_id'];
+				$payment_status = 2; //In progress
+				
+				for($i=0;$i<$servicesCount;$i++) {
+					//Generate sub randon id
+					$string1 = str_shuffle('abcdefghijklmnopqrstuvwxyz');
+					$random1 = substr($string1,0,3);
+					$string2 = str_shuffle('1234567890');
+					$random2 = substr($string2,0,3);
+					$date = date("ymdhis");
+					$contstr = "MYSER-SERVICES";
+					$sub_order_id = $contstr.$random1.$random2.$date;
+					$orders = "INSERT INTO services_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `state`, `district`, `city`, `postal_code`, `location`, `address`, `order_note`, `category_id`, `sub_category_id`,  `group_id`, `service_id`, `service_price_type_id`,`service_price`,`order_price`,`service_quantity`, `service_selected_date`, `service_selected_time`, `sub_total`, `order_total`, `coupon_code`, `coupon_code_type`, `discount_money`, `payment_method`,`lkp_payment_status_id`,`service_tax`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','$first_name','$last_name','$email','$mobile','$state','$district','$city','$postal_code','$location','$address','$order_note','" . $_POST["category_id"][$i] . "','" . $_POST["sub_cat_id"][$i] . "','" . $_POST["group_id"][$i] . "','" . $_POST["service_id"][$i] . "','" . $_POST["service_price_type_id"][$i] . "','" . $_POST["service_price"][$i] . "','" . $_POST["service_price"][$i] . "','" . $_POST["service_quantity"][$i] . "','" . $_POST["service_selected_date"][$i] . "','" . $_POST["service_selected_time"][$i] . "','$sub_total','$order_total',UPPER('$coupon_code'),'$coupon_code_type','$discount_money','$payment_group','$payment_status','$service_tax', '$order_id','$sub_order_id','$order_date')";
+					$servicesOrders = $conn->query($orders);
+				}
+
+				if($payment_group == 1) {
+				//cod 
+					header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=2");				
+				} elseif ($payment_group == 2) {
+					//online 
+					header("Location: PayUMoney_form.php?odi=".$order_id."&pay_stau=2");
+				} else {
+					header("Location: ordersuccess.php?odi=".$order_id."&pay_stau=1");
+				}
+
+		}
+	?>
+
 		<div class="container margin_60">
 		<div class="feature">
 			<div class="checkout-page">
@@ -112,7 +172,7 @@ background-color: #fe6003;
 				$getUserAdress1 = $conn->query($getUserAdress);
 				$getUserAdressDetails = $getUserAdress1->fetch_assoc();
 				?>
-				<form method="post" action="save_order.php" name="form">
+				<form method="post" name="form">
 				<div class="row">
 					<div class="col-md-7"  style="padding-right:20px">
 
@@ -135,7 +195,7 @@ background-color: #fe6003;
 									<div class="form-group col-md-6">
 										<label>Email Address <sup>*</sup>
 										</label>
-										<input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email_contact" value="<?php echo $getUser['user_email']; ?>" placeholder="" class="form-control" required>
+										<input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email_contact" value="<?php echo $getUser['user_email']; ?>" placeholder="" class="form-control" required readonly>
 									</div>
 									<div class="form-group col-md-6">
 										<label>Phone <sup>*</sup>
@@ -308,18 +368,13 @@ background-color: #fe6003;
                                                                     <td colspan="2" class="text-right">Rs. <?php echo $cartTotal; ?></td>
                                                                 </tr>
                                                                 <?php if($getCount->num_rows == 0) { 
-									$service_tax += ($getSiteSettingsData['service_tax']/100)*$cartTotal;
-								?>
+																	$service_tax += ($getSiteSettingsData['service_tax']/100)*$cartTotal;
+																?>
                                                                 <tr>
                                                                     <td>GST (<?php echo $getSiteSettingsData['service_tax'] ; ?>%)</td>
                                                                     <td colspan="2" class="text-right">Rs. <?php echo $service_tax ; ?></td>
                                                                 </tr>
-                                                                <?php } else { ?>
-                                                                <tr>
-                                                                    <td>GST</td>
-                                                                    <td colspan="2" class="text-right">Rs. 0</td>
-                                                                </tr>
-                                                                <?php } ?>
+                                                                <?php }  ?>
                                                                 <input type="hidden" name="service_tax" id="service_tax" value="<?php echo $service_tax ; ?>">
                                                                 <tr>
 

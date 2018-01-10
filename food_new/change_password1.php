@@ -82,16 +82,35 @@
         </div><!-- End sub_content -->
 	</div><!-- End subheader -->
 </section><!-- End section -->
-    <div id="position">
-        <div class="container">
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="#0">Change Password</a></li>
-            </ul>
-            
-        </div>
-    </div><!-- Position -->
+<div id="position">
+    <div class="container">
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="#0">Change Password</a></li>
+        </ul>
+        
+    </div>
+</div><!-- Position -->
 
+<?php 
+  if($_SESSION['user_login_session_id'] == '') {
+      header ("Location: logout.php");
+  }
+  if(isset($_POST["submit"]) && $_POST["submit"]!="") {
+      $uid = $_SESSION["user_login_session_id"];
+      $getUserPwd = getIndividualDetails('users','id',$uid);
+
+      if($_POST['currentPassword'] == decryptPassword($getUserPwd['user_password'])){
+          $encNewPass = encryptPassword($_POST["confirmPassword"]);
+          $sql1 = "UPDATE users SET user_password = '$encNewPass' WHERE  id = '$uid'";
+          if($conn->query($sql1) === TRUE){             
+              echo "<script type='text/javascript'>window.location='change_password1.php?succ=log-success'</script>";
+          }               
+      } else {               
+         header('Location: change_password1.php?err=log-fail');
+      }
+  }
+?>
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
 	<div class="row">
@@ -105,7 +124,17 @@
      </div><!-- End col-md-3 -->
         
         <div class="col-md-9 col-sm-9">
-        
+        <?php if(isset($_GET['succ']) && $_GET['succ'] == 'log-success' ) {  ?>                
+            <div class="alert alert-success" style="top:10px; display:block" id="set_valid_msg">
+              <strong>Success!</strong> Your Password Changed Successfully.
+            </div>               
+       <?php }?>
+
+        <?php if(isset($_GET['err']) && $_GET['err'] == 'log-fail' ) {  ?>            
+          <div class="alert alert-danger" style="top:10px; display:block" id="set_valid_msg">
+            <strong>Failed!</strong> Current Password Is Not Correct.
+          </div>     
+        <?php }?>
        	 
          <div class="panel-group">
                   <div class="panel panel-default">
@@ -116,23 +145,22 @@
                  <form method="post">
                   <div class="col-md-12 col-sm-12">				 
 				   <div class="col-md-6 col-sm-6">				  
-					<div class="form-group">
-						 <label for="cur-password">Current password</label>
-						<input type="password" class="form-control" id="cur-password"  name="currentPassword" placeholder="*******" autocomplete="off">                                           
-					</div>					
-					 <div class="form-group">
-					 <label for="new-password">New password</label>
-						<input type="password" minlength="8" class="form-control" minlength="8" name="newPassword" id="user_password" placeholder="*********" autocomplete="off">                                           
-					</div>					
-					<div class="form-group">
-					<label for="new-repassword">Repeat password</label>
-						 <input type="password" minlength="8" class="form-control" minlength="8" name="confirmPassword" id="confirm_password" placeholder="********" autocomplete="off" onChange="checkPasswordMatch();">
-                                            
-					</div>					
-					 <div class="form-group">
-            <div id="divCheckPasswordMatch" style="color:red"></div>
-						 <button type="submit" value="Submit" name="submit" class="button1">Update</button>					
-					</div>					
+    					<div class="form-group">
+    						<label for="cur-password">Current password</label>
+    						<input type="password" class="form-control" id="cur-password"  name="currentPassword" placeholder="*******" autocomplete="off">                                           
+    					</div>					
+    					 <div class="form-group">
+    					 <label for="new-password">New password</label>
+    						<input type="password" minlength="8" class="form-control" minlength="8" name="newPassword" id="user_password" placeholder="*********" autocomplete="off">                                           
+    					</div>					
+    					<div class="form-group">
+    					<label for="new-repassword">Repeat password</label>
+    						<input type="password" minlength="8" class="form-control" minlength="8" name="confirmPassword" id="confirm_password" placeholder="********" autocomplete="off" onChange="checkPasswordMatch();">
+                <div id="divCheckPasswordMatch" style="color:red"></div>                              
+    					</div>					
+    					 <div class="form-group">
+    						 <button type="submit" value="Submit" name="submit" class="button1">Update</button>					
+    					</div>					
                   </div>
 				   <div class="col-md-6 col-sm-6">
 				   </div>
@@ -179,7 +207,24 @@
       additionalMarginTop: 80
     });
 </script>
-
+<script type="text/javascript">
+  function checkPasswordMatch() {
+      var password = $("#user_password").val();
+      var confirmPassword = $("#confirm_password").val();
+      if (confirmPassword != password) {
+          $("#divCheckPasswordMatch").html("Passwords do not match!");
+          $("#user_password").val("");
+          $("#confirm_password").val("");
+      } else {
+          $("#divCheckPasswordMatch").html("");
+      }
+  }
+  $(document).ready(function () {
+      setTimeout(function () {
+        $('#set_valid_msg').hide();
+      }, 2000);
+    });
+</script>
 
 </body>
 

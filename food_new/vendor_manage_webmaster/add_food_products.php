@@ -137,7 +137,7 @@ if (!isset($_POST['submit']))  {
                   <div class="row">
                     <div class="form-group col-md-5">  
                         <label for="form-control-3" class="control-label">Choose Ingredient Type</label>
-                        <select id="form-control-3" name="ingredient_name_id[]" class="custom-select" data-error="This field is required." required>
+                        <select id="form-control-3" name="ingredient_name_id[]" class="custom-select" >
                           <option value="">Select Ingredient Type</option>
                           <?php while($row = $getIngredients->fetch_assoc()) {  ?>
                             <option value="<?php echo $row['id']; ?>"><?php echo $row['ingredient_name']; ?></option>
@@ -147,7 +147,7 @@ if (!isset($_POST['submit']))  {
                     </div>
                     <div class="form-group col-md-5">
                         <label for="form-control-2" class="control-label">Ingredient Price</label>
-                        <input type="text" class="form-control" id="price" name="ingredient_price[]" placeholder="Ingredient Price" data-error="Please enter Ingredient Price." required onkeypress="return isNumberKey(event)">
+                        <input type="text" class="form-control" id="price" name="ingredient_price[]" placeholder="Ingredient Price" onkeypress="return isNumberKey(event)">
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group col-md-2">
@@ -170,7 +170,7 @@ if (!isset($_POST['submit']))  {
 
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Short Description</label>
-                    <textarea name="specifications" class="form-control" maxlength="30" placeholder="Description" data-error="This field is required." required></textarea>
+                    <textarea name="specifications" class="form-control" placeholder="Description" data-error="This field is required." required></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
                   
@@ -257,8 +257,8 @@ function addInput1(divName1) {
     var newDiv = document.createElement('div');
     newDiv.className = 'new_appen_class';
     var selectHTML = "";    
-    selectHTML="<div class='input-field form-group col-md-6'><select required name='ingredient_name_id[]' id='form-control-3' class='custom-select' style='display:block !important'><option value=''>Select Ingredient Type</option>";
-    var newTextBox = "<div class='form-group col-md-4'><input type='text' onkeypress='return isNumberKey(event)' onclick='addInput1('dynamicInput1');' required name='ingredient_price[]' class='form-control' id='form-control-2' placeholder='Ingrediet Price'></div>";
+    selectHTML="<div class='input-field form-group col-md-6'><select name='ingredient_name_id[]' id='form-control-3' class='custom-select' style='display:block !important'><option value=''>Select Ingredient Type</option>";
+    var newTextBox = "<div class='form-group col-md-4'><input type='text' onkeypress='return isNumberKey(event)' onclick='addInput1('dynamicInput1');' name='ingredient_price[]' class='form-control' id='form-control-2' placeholder='Ingrediet Price'></div>";
     removeBox="<div class='input-field  form-group col-md-2'><a class='remove_button' ><img src='remove-icon.png'/></a></div><div class='clearfix'></div>";
     for(i = 0; i < choices.length; i = i + 1) {
         selectHTML += "<option value='" + choices[i] + "'>" + choices_names1[i] + "</option>";

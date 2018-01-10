@@ -93,6 +93,10 @@
 				$getAvailableLocationsData = "SELECT * FROM availability_of_locations WHERE lkp_status_id = 0 AND lkp_city_id = '".$_SESSION['lkp_city_id']."' ORDER BY id DESC";
 				$getAvailableLocations = $conn->query($getAvailableLocationsData); $getAvailableLocations1 =$getAvailableLocations->fetch_assoc();
 				$service_id = $getAvailableLocations1['service_id'];
+			} else{
+				$getAvailableLocationsData = "SELECT * FROM availability_of_locations WHERE lkp_status_id = 0 AND lkp_city_id = 1 ORDER BY id DESC";
+				$getAvailableLocations = $conn->query($getAvailableLocationsData); $getAvailableLocations1 =$getAvailableLocations->fetch_assoc();
+				$service_id = $getAvailableLocations1['service_id'];
 			}
 			$getCategories = "SELECT * from services_category WHERE id IN ($service_id) AND id IN (SELECT services_category_id FROM services_sub_category WHERE lkp_status_id = 0) AND lkp_status_id = '0' ORDER BY category_position DESC";
 			$getCategoriesData = $conn->query($getCategories);

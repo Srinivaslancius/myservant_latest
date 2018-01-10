@@ -105,13 +105,6 @@ td{
 }
 
 @media only screen and (max-width: 480px) {
-	.alert-dismissable .close1{
-	right: 45px;	
-	}
-	.table.cart-list td{
-		padding-left: 55%;
-	}
-	
 	.rw_wdth h5{
 		margin-left:0px !important;
 	
@@ -192,7 +185,7 @@ td{
 							<th>ADDON</th>
 							<th>QUANTITY</th>
 							<th>TOTAL</th>
-							<th>REMOVE</th>
+							<th class="visible-xs">REMOVE</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -365,7 +358,7 @@ td{
 							<td>Delivery Charges <span class="pull-right">Rs. <?php echo $deliveryCharges; ?></span> </td>
 						</tr>
 						<tr>
-							<td style="color:#fe6003">TOTAL <span class="pull-right total_price">Rs. <?php echo $cartTotal+$service_tax+$getAdstotal+$deliveryCharges; ?></span></td>
+							<td style="color:#fe6003">TOTAL <span class="pull-right total_price">Rs. <?php echo round($cartTotal+$service_tax+$getAdstotal+$deliveryCharges); ?></span></td>
 						</tr>
 						</tbody>
 						</table>
@@ -564,6 +557,6 @@ function remove_cart_item1(cartId) {
 
 </script>
 
-
+<?php include "search_js_script.php"; ?>
 </body>
 </html>

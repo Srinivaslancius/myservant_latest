@@ -1,5 +1,7 @@
 <?php include_once 'admin_includes/main_header.php'; ?>
-<?php $getVendorsData = getAllDataWithActiveRecent('food_vendors');$i=1; ?>
+<?php 
+$getVendors = "SELECT * FROM food_vendors ORDER BY id DESC ";
+$getVendorsData = $conn->query($getVendors);$i=1; ?>
      <div class="site-content">
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
@@ -29,7 +31,12 @@
                     <td><?php echo $row['vendor_email'];?></td>
                     <td><?php echo $row['vendor_mobile'];?></td>
                     <td><?php echo $row['created_at'];?></td>
-                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='food_vendors'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='food_vendors'>In Active</span>" ;} ?></td>
+                    <?php if ($row['vendor_charges_approved']==1 || ($row['delivery_charges'] == '' && $row['admin_comission'] == '')) { ?>
+                    <td>--</td>
+                    <?php } else { ?>
+                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='food_vendors'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='food_vendors'>In Active</span>" ;} ?>
+                      <?php } ?>
+                    </td>
                     <td>
                       <?php if ($row['vendor_charges_approved']==1 || ($row['delivery_charges'] == '' && $row['admin_comission'] == '')) { ?>
                       <p data-toggle="modal" data-target="#<?php echo $row['id']; ?>_1" class="open_cursor">Pending</p>
