@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 		if ($getOrders1->num_rows > 0) {
 				$response["lists"] = array();				
-				while($orderData = $getOrders1->fetch_assoc()) {					
+				while($orderData = $getOrders1->fetch_assoc()) {				
 					//Chedck the condioton for emptty or not		
 					$lists = array();					
 			    	$lists["orderIncId"]   = $orderData["id"];			    	
@@ -24,7 +24,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			    	$lists["orderTotalPrice"] = $orderData["order_total"];
 			    	$lists["address"] = $orderData["address"];
 			    	$lists["orderId"] = $orderData["order_id"];
-			    	
+			    	$order_id = $orderData["order_id"];
+			    	$cntOrd = "SELECT * FROM services_orders WHERE user_id ='$uid' AND order_id='$order_id' ";
+			    	$res = $conn->query($cntOrd);
+			    	$lists["orderItemsCount"] = $res->num_rows;
 			    	array_push($response["lists"], $lists);		
 				}
 				
