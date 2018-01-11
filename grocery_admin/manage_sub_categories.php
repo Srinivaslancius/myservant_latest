@@ -32,11 +32,19 @@
         if (!isset($_POST['submit']))  {
           echo "fail";
         } else  { 
+          //echo "<pre>"; print_r($_POST); die;
           $grocery_category_id = $_POST['grocery_category_id'];
           $sub_category_name = $_POST['sub_category_name'];
           $priority = $_POST['priority'];
           $brands = implode(',',$_POST['brands']);
-          $sql = "INSERT INTO grocery_sub_category (`grocery_category_id`,`sub_category_name`,`priority`,`brands`) VALUES ('$grocery_category_id','$sub_category_name','$priority','$brands')";
+
+          if($_POST['make_it_popular'] == 1) {
+            $checkboxVal = 1;
+          } else {
+            $checkboxVal = 0;
+          }
+
+          $sql = "INSERT INTO grocery_sub_category (`grocery_category_id`,`sub_category_name`,`priority`,`brands`,`make_it_popular`) VALUES ('$grocery_category_id','$sub_category_name','$priority','$brands','$checkboxVal')";
           if($conn->query($sql) === TRUE){
              echo "<script type='text/javascript'>window.location='manage_sub_categories.php?msg=success'</script>";
           } else {
@@ -87,6 +95,12 @@
                                             <?php } ?>
                                         </select>
                                     </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Make It Popular</label>
+                                <div class="col-sm-3 col-md-4">
+                                    <input type="checkbox" name="make_it_popular" class="form-control" id="form-control-3" value="1">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
