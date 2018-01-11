@@ -24,6 +24,13 @@
 			</div><!-- /.header-bottom -->
 		</section><!-- /#header -->
 
+		<?php 
+		$product_id = $_GET['product_id']; 
+		$getProducts = "SELECT * from grocery_products WHERE id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
+		$getProducts1 = $conn->query($getProducts);
+		$productDetails = $getProducts1->fetch_assoc();
+		$getProductName = getIndividualDetails('product_name_bind_languages','product_id',$product_id);
+		?>
 		<section class="flat-breadcrumb">
 			<div class="container-fluid">
 				<div class="row">
@@ -34,7 +41,7 @@
 								<span><img src="images/icons/arrow-right.png" alt=""></span>
 							</li>
 							<li class="trail-item">
-								<a href="#" title="">Single Product</a>
+								<a href="#" title=""><?php echo $getProductName['product_name']; ?></a>
 								
 							</li>
 							
@@ -44,26 +51,19 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
 
+		<?php $getProductImages = getAllDataWhere('product_bind_images','product_id',$product_id); ?>
 		<section class="flat-product-detail">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="flexslider">
 							<ul class="slides">
-							    <li data-thumb="images/product/other/1.png">
-							      <img src="images/product/other/1.png" alt="image slider" />
+								<?php while($productImage = $getProductImages->fetch_assoc()) { ?>
+							    <li data-thumb="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$productImage['image'] ?>">
+							      <img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$productImage['image'] ?>" alt="image slider" />
 							      <span>NEW</span>
 							    </li>
-							    <li data-thumb="images/product/other/1.png">
-							       <img src="images/product/other/1.png" alt="image slider" />
-							    </li>
-							    <li data-thumb="images/product/other/1.png">
-							       <img src="images/product/other/1.png" alt="image slider" />
-							      <span>NEW</span>
-							    </li>
-							    <li data-thumb="images/product/other/1.png">
-							       <img src="images/product/other/1.png" alt="image slider" />
-							    </li>
+							    <?php } ?>
 							   
 							</ul><!-- /.slides -->
 						</div><!-- /.flexslider -->
@@ -71,13 +71,13 @@
 					<div class="col-md-6">
 						<div class="product-detail">
 							<div class="header-detail">
-								<h4 class="name">Instant Bru</h4>
+								<h4 class="name"><?php echo $getProductName['product_name']; ?></h4>
 								
 								<div class="reviewed">
 									
-									<div class="status-product">
+									<!-- <div class="status-product">
 										Availablity <span>In stock</span>
-									</div>
+									</div> -->
 								</div><!-- /.reviewed -->
 							</div><!-- /.header-detail -->
 							<div class="content-detail">
@@ -90,7 +90,7 @@
 									</div>
 								</div>
 								<div class="info-text">
-									BRU Coffee, a part of Hindustan Lever has constantly endeavoured to bring varied types of authentic coffee with premium tastes to Indian consumers
+									<?php echo $productDetails['product_description']; ?>
 								</div>
 								<div class="product-id">
 									SKU: <span class="id">FW511948218</span>

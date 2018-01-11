@@ -113,15 +113,12 @@
 										<div class="col-lg-4 col-sm-6">
 											<div class="product-box">
 												<div class="imagebox">
-														<a href="single_product.php" title="">
+														<a href="single_product.php?product_id=<?php echo $getProductDetails['id'];?>" title="">
 															<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImages['image'] ?>" alt="" style="width:264px; height:210px">
 														</a>
 													<div class="box-content">
-														<!--<div class="cat-name">
-															<a href="#" title="">Monthly Saving Pack 4</a>
-														</div>-->
 														<div class="product-name">
-															<a href="single_product.php" title=""><?php echo $getProductNames['product_name']; ?></a>
+															<a href="single_product.php?product_id=<?php echo $getProductDetails['id'];?>" title=""><?php echo $getProductNames['product_name']; ?></a>
 														</div>
 														<div class="product_name">
 														<?php 
@@ -156,13 +153,13 @@
 										<div class="product-box style3">
 											<div class="imagebox style1 v3">
 												<div class="box-image">
-													<a href="single_product.php" title="">
+													<a href="single_product.php?product_id=<?php echo $getProductsTotalDetails2['id'];?>" title="">
 														<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImages1['image'] ?>" alt="" style="width:264px; height:210px">
 													</a>
 												</div><!-- /.box-image -->
 												<div class="box-content">
 													<div class="product-name">
-														<a href="single_product.php" title=""><?php echo $getProductNames1['product_name']; ?></a>
+														<a href="single_product.php?product_id=<?php echo $getProductsTotalDetails2['id'];?>" title=""><?php echo $getProductNames1['product_name']; ?></a>
 													</div>
 													<!-- <div class="status">
 														Availablity: In stock
