@@ -8,7 +8,7 @@
             <li class="with-sub">
               <a href="#" aria-haspopup="true">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-view-list zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Master Data</span>
               </a>
@@ -35,7 +35,7 @@
             <li class="with-sub">
               <a href="#" aria-haspopup="true">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-settings zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Settings</span>
               </a>
@@ -47,84 +47,83 @@
                 <li class="<?php if($page_name == 'reward_settings.php') { echo "active"; } ?>"><a href="reward_settings.php">Reward Settings</a></li>
               </ul>
             </li>
-            
-            <li><a href="content_page.php">
+
+            <li class="<?php if($page_name == 'social_networks_links.php') { echo "active"; } ?>">
+              <a href="social_networks_links.php" aria-haspopup="true">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-settings zmdi-hc-fw"></i>
+                </span>
+                <span class="menu-text">Social Network Links</span>
+              </a>
+            </li>
+
+            <li class="<?php if($page_name == 'content_page.php' || $page_name == 'edit_content_pages.php') { echo "active"; } ?>"><a href="content_page.php">
+                <span class="menu-icon">
+                  <i class="zmdi zmdi-info zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Content Pages</span>
               </a>
             </li>
-            <li><a href="advertisements.php">
+
+    
+            <li ><a href="#">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
-                </span>
-                <span class="menu-text">Advertisements</span>
-              </a>
-            </li>
-            <li><a href="#">
-                <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-blogger zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Blog</span>
               </a>
             </li>
-            <li><a href="brand_logos.php">
+            <li class="<?php if($page_name == 'brand_logos.php' || $page_name == 'edit_brand_logos.php') { echo "active"; } ?>"><a href="brand_logos.php">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-gradient zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Brand Logos</span>
               </a>
             </li>
-            <li><a href="grocery_banners.php">
+            <li class="<?php if($page_name == 'grocery_banners.php') { echo "active"; } ?>"><a href="grocery_banners.php">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-info zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Banners</span>
               </a>
             </li>
-            <li><a href="grocery_tags.php">
+  
+            <li class="<?php if($page_name == 'grocery_tags.php') { echo "active"; } ?>"><a href="grocery_tags.php">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-link zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Tags</span>
               </a>
             </li>
-            <li><a href="testimonials.php">
+            <li class="<?php if($page_name == 'testimonials.php' || $page_name == 'edit_testimonials.php') { echo "active"; } ?>"><a href="testimonials.php">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-accounts-add zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Testimonials</span>
               </a>
             </li>
-            <li><a href="faq.php">
+            <li class="<?php if($page_name == 'faq.php' || $page_name == 'edit_faq.php') { echo "active"; } ?>"><a href="faq.php">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-pin-help zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">FAQ'S</span>
               </a>
             </li>
-            <li><a href="manage_products.php">
+            <li class="<?php if($page_name == 'manage_products.php') { echo "active"; } ?>"><a href="manage_products.php">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-labels zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Products</span>
               </a>
             </li>
             <li><a href="">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-local-mall zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Orders</span>
               </a>
             </li>
-            <li><a href="package_creation.php">
-                <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
-                </span>
-                <span class="menu-text">Packages</span>
-              </a>
-            </li>
+           
             <li><a href="#">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-dot-circle-alt"></i>
@@ -135,7 +134,7 @@
             <li class="with-sub">
               <a href="#" aria-haspopup="true">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-assignment-account zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Manage Users</span>
               </a>
@@ -152,25 +151,33 @@
             
             <li><a href="#">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-balance-wallet zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Wallet</span>
               </a>
             </li>
             <li><a href="#">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-accounts-outline zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Refer A Friend</span>
               </a>
             </li>
             <li><a href="#">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-dot-circle-alt"></i>
+                  <i class="zmdi zmdi-notifications zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Reward Points</span>
               </a>
             </li>
+             <li class="<?php if($page_name == 'package_creation.php') { echo "active"; } ?>"><a href="package_creation.php">
+                <span class="menu-icon">
+                  <i class="zmdi zmdi-case zmdi-hc-fw"></i>
+                </span>
+                <span class="menu-text">Packages</span>
+              </a>
+            </li>
+
             <li><a href="#">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-dot-circle-alt"></i>
