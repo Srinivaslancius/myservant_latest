@@ -79,7 +79,8 @@
                             <div class="clear_fix"></div>
 
                             <div class="input_fields_container" >
-                                <div style="border:1px solid;">
+							
+                                <div style="border:1px solid #ddd;padding-top:20px;">
                                     <div class="form-group">
                                         <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Offer</label>
                                         <div class="btn-group col-sm-6 col-md-4" >
@@ -116,10 +117,13 @@
                                         <div class="col-sm-6 col-md-4">
                                             <input type="text" class="form-control valid_mobile_num" name="selling_price[]" id="form-control-3" placeholder="Enter Selling Price" required>
                                         </div>
-                                        <div class="col-sm-6 col-md-2">
-                                            <span><button type="button" class="btn btn-success add_more_button"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i></button></span>
-                                        </div>
+                                       
                                     </div>
+                                </div>
+								 <div class="col-sm-8 col-md-8">
+								 </div>
+								 <div class="col-sm-4 col-md-4"style="margin-top:10px">
+                                            <span><button type="button" class="btn btn-success add_more_button"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw" ></i></button></span>
                                 </div>
                             </div>
 
@@ -191,7 +195,7 @@
             e.preventDefault();
             if(x < max_fields_limit){ //check conditions
                 x++; //counter increment
-                $('.input_fields_container').append('<div><div class="row" style="border:1px solid;"><div class="form-group"><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Offer</label><div class="btn-group col-sm-6 col-md-4" ><label class="btn btn-outline-primary"><input type="radio" name="buttonRadios[]" required onclick="check_offer1(1,'+x+')" value="1" > Yes</label<label class="btn btn-outline-primary"><input type="radio" name="buttonRadios[]" required onclick="check_offer1(0,'+x+')" value="0" >No</label></div></div><div class="form-group" id="offer_price_'+x+'" style="display:none"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Percentage</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control" name="offer_percentage[]" id="form-control-3" placeholder="Offer Percentage (%)" required></div></div><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight (Ex: 100 Gms etc..)</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control" id="form-control-3" placeholder="Weight Types" name="weight_type[]" required></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">MRP</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Enter MRP" name="mrp_price[]" required></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Selling Price</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Enter Selling Price" name="selling_price[]" required></div></div><a href="#" style="" class="remove_field btn btn-warning"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div>'); //add input field
+                $('.input_fields_container').append('<div><div class="row" style="border:1px solid #ddd;margin-top:60px;padding-top:20px;margin-left:0px;margin-right:0px;"><div class="form-group"><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Offer</label><div class="btn-group col-sm-6 col-md-4" ><label class="btn btn-outline-primary"><input type="radio" name="buttonRadios[]" required onclick="check_offer1(1,'+x+')" value="1" > Yes</label<label class="btn btn-outline-primary"><input type="radio" name="buttonRadios[]" required onclick="check_offer1(0,'+x+')" value="0" >No</label></div></div><div class="form-group" id="offer_price_'+x+'" style="display:none"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Percentage</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control" name="offer_percentage[]" id="form-control-3" placeholder="Offer Percentage (%)" required></div></div><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight (Ex: 100 Gms etc..)</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control" id="form-control-3" placeholder="Weight Types" name="weight_type[]" required></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">MRP</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Enter MRP" name="mrp_price[]" required></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Selling Price</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Enter Selling Price" name="selling_price[]" required></div></div><a href="#" style="" class="remove_field btn btn-warning"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div>'); //add input field
             }
         });  
         $('.input_fields_container').on("click",".remove_field", function(e){ //user click on remove text links

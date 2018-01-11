@@ -115,8 +115,41 @@ element.style {
 }
 
 .box_home#one {
-    background: url(../img/icon_home_1.svg) center 40px no-repeat #fff;
+    background: url(../images/dashboard/services.png) center 40px no-repeat #fff
 }
+.box_home#two {
+    background: url(../images/dashboard/food.png) center 40px no-repeat #fff
+}
+.box_home#three {
+    background: url(../images/dashboard/grocery.png) center 40px no-repeat #fff;
+}
+.box_home#four {
+    background: url(../images/dashboard/wishlist.png) center 40px no-repeat #fff
+}
+.box_home#five {
+    background: url(../images/dashboard/my-address.png) center 40px no-repeat #fff
+}
+.box_home#six {
+    background: url(../images/dashboard/wallet.png) center 40px no-repeat #fff
+}
+.box_home#seven {
+    background: url(../images/dashboard/profile.png) center 40px no-repeat #fff
+}
+
+.box_home#eight {
+    background: url(../images/dashboard/rewards.png) center 40px no-repeat #fff
+}
+
+.box_home#nine {
+    background: url(../images/dashboard/change-passsword.png) center 40px no-repeat #fff
+}
+
+.box_home h3 {
+	margin-top:35px;
+    margin-bottom: 3px;
+	font-size:20px;
+}
+
 
 .box_home {
     background: #fff;
@@ -131,9 +164,7 @@ element.style {
     color: #666;
     min-height: 235px;
 }
-.box_home h3{
-	font-size:20px;
-}
+
 .box_home p{
 	text-align:center;
 }
