@@ -65,6 +65,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		
 		for($i=0;$i<$serviceCount;$i++) {
 			//Generate sub randon id
+
+			$serviceDate=date_create($service_selected_date[$i]);
+			$getServiceDate=date_format($serviceDate,"Y-m-d");			
+			$serviceTime = date('H:i:s', strtotime($service_selected_time[$i]));
+
 			$string1 = str_shuffle('abcdefghijklmnopqrstuvwxyz');
 			$random1 = substr($string1,0,3);
 			$string2 = str_shuffle('1234567890');
@@ -72,7 +77,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			$date = date("ymdhis");
 			$contstr = "MYSER-SERVICES";
 			$sub_order_id = $contstr.$random1.$random2.$date;
-			$orders = "INSERT INTO services_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `state`, `district`, `city`, `postal_code`, `location`, `address`, `order_note`, `category_id`, `sub_category_id`,  `group_id`, `service_id`, `service_price_type_id`,`service_price`,`order_price`,`service_quantity`, `service_selected_date`, `service_selected_time`, `sub_total`, `order_total`,  `payment_method`,`lkp_payment_status_id`,`service_tax`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','$first_name','$last_name','$email','$mobile','$state','$district','$city','$postal_code','$location','$address','$order_note','" . $category_id[$i] . "','" . $sub_cat_id[$i] . "','" . $group_id[$i] . "','" . $service_id[$i] . "','" . $service_price_type_id[$i] . "','" . $service_price[$i] . "','" . $service_price[$i] . "','" . $service_quantity[$i] . "','" . $service_selected_date[$i] . "','" . $service_selected_time[$i] . "','$sub_total','$order_total','$payment_group','$payment_status','$service_tax', '$order_id','$sub_order_id','$order_date')";		
+			$orders = "INSERT INTO services_orders (`user_id`,`first_name`, `last_name`, `email`, `mobile`, `state`, `district`, `city`, `postal_code`, `location`, `address`, `order_note`, `category_id`, `sub_category_id`,  `group_id`, `service_id`, `service_price_type_id`,`service_price`,`order_price`,`service_quantity`, `service_selected_date`, `service_selected_time`, `sub_total`, `order_total`,  `payment_method`,`lkp_payment_status_id`,`service_tax`, `order_id`,`order_sub_id`, `created_at`) VALUES ('$user_id','$first_name','$last_name','$email','$mobile','$state','$district','$city','$postal_code','$location','$address','$order_note','" . $category_id[$i] . "','" . $sub_cat_id[$i] . "','" . $group_id[$i] . "','" . $service_id[$i] . "','" . $service_price_type_id[$i] . "','" . $service_price[$i] . "','" . $service_price[$i] . "','" . $service_quantity[$i] . "','" . $getServiceDate . "','" . $serviceTime . "','$sub_total','$order_total','$payment_group','$payment_status','$service_tax', '$order_id','$sub_order_id','$order_date')";		
 
 			if ($conn->query($orders) === TRUE) {
 	            // check the conditions for query success or not

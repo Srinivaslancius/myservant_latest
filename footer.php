@@ -75,7 +75,7 @@
 									<a href="faq.php" title="">FAQ</a>
 								</li>
 								<li>
-									<a href="#" title="">Contact Us</a>
+									<a href="contact.php" title="">Contact Us</a>
 								</li>
 								
 							</ul><!-- /.cat-list-ft -->
@@ -103,17 +103,17 @@
 									</a>
 								</li>
 								<li>
-									<a href="#" title="">
+									<a href="delivery_areas.php" title="">
 										Delivery Areas
 									</a>
 								</li>
 								<li>
-									<a href="terms&conditions.php" title="">
+									<a href="terms_conditions.php" title="">
 										Privacy Policy/Terms & Conditions
 									</a>
 								</li>
 								<li>
-									<a href="#" title="">
+									<a href="return_policy.php" title="">
 										Return Policy
 									</a>
 								</li>
