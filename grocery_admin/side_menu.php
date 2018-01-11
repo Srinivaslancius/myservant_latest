@@ -107,7 +107,7 @@
                 <span class="menu-text">Products</span>
               </a>
             </li>
-            <li><a href="">
+            <li><a href="view_orders.php">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-local-mall zmdi-hc-fw"></i>
                 </span>
@@ -131,11 +131,11 @@
               </a>
               <ul class="sidebar-submenu">
                 <li class="menu-subtitle">Manage Users</li>
-                <li><a href="#">Customers</a></li>
-                <li><a href="#">Employees</a></li>
-                <li><a href="#">Delivery Boys</a></li>
-                <li><a href="#">Admin Users</a></li>
-                <li><a href="#">City Wise Admins</a></li>
+                <li class="<?php if($page_name == 'users.php') { echo "active"; } ?>"><a href="users.php">Customers</a></li>
+                <li class="<?php if($page_name == 'employees.php' || $page_name == 'edit_employees.php') { echo "active"; } ?>"><a href="employees.php">Employees</a></li>
+                <li class="<?php if($page_name == 'delivery_boys.php' || $page_name == 'edit_deliveryboys.php') { echo "active"; } ?>"><a href="delivery_boys.php">Delivery Boys</a></li>
+                <li class="<?php if($page_name == 'admin_users.php' || $page_name == 'edit_admin_users.php') { echo "active"; } ?>"><a href="admin_users.php">Admin Users</a></li>
+                <li class="<?php if($page_name == 'city_wise_admin_users.php' || $page_name == 'edit_city_wise_admin_users.php') { echo "active"; } ?>"><a href="city_wise_admin_users.php">City Wise Admins</a></li>
                 
               </ul>
             </li>
