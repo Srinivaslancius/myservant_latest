@@ -14,20 +14,20 @@
               </a>
               <ul class="sidebar-submenu">
                 <li class="menu-subtitle">Dashboards</li>
-                <li class="<?php if($page_name == 'add_state.php') { echo "active"; } ?>"><a href="add_state.php">Manage States</a></li> 
-                <li class="<?php if($page_name == 'add_districts.php') { echo "active"; } ?>"><a href="add_districts.php">Manage Districts</a></li> 
+                <li class="<?php if($page_name == 'add_state.php' || $page_name == 'edit_lkp_states.php') { echo "active"; } ?>"><a href="add_state.php">Manage States</a></li> 
+                <li class="<?php if($page_name == 'add_districts.php' || $page_name == 'edit_lkp_districts.php') { echo "active"; } ?>"><a href="add_districts.php">Manage Districts</a></li> 
 
-                <li class="<?php if($page_name == 'add_cities.php') { echo "active"; } ?>"><a href="add_cities.php">Manage Cities</a></li>
-                <li class="<?php if($page_name == 'manage_pincodes.php') { echo "active"; } ?>"><a href="manage_pincodes.php">Manage Pin Codes</a></li>
+                <li class="<?php if($page_name == 'add_cities.php' || $page_name =='edit_lkp_cities.php') { echo "active"; } ?>"><a href="add_cities.php">Manage Cities</a></li>
+                <li class="<?php if($page_name == 'manage_pincodes.php' || $page_name =='edit_lkp_pincodes.php') { echo "active"; } ?>"><a href="manage_pincodes.php">Manage Pin Codes</a></li>
   
-                <li class="<?php if($page_name == 'manage_areas.php') { echo "active"; } ?>"><a href="manage_areas.php">Manage Areas</a></li>
+                <li class="<?php if($page_name == 'manage_areas.php' || $page_name == 'edit_lkp_areas.php') { echo "active"; } ?>"><a href="manage_areas.php">Manage Areas</a></li>
 
-                <li class="<?php if($page_name == 'manage_sub_areas.php') { echo "active"; } ?>"><a href="manage_sub_areas.php">Manage Sub Areas</a></li>
+                <li class="<?php if($page_name == 'manage_sub_areas.php' || $page_name == 'edit_lkp_sub_areas.php') { echo "active"; } ?>"><a href="manage_sub_areas.php">Manage Sub Areas</a></li>
                 
-                <li class="<?php if($page_name == 'manage_languages.php') { echo "active"; } ?>"><a href="manage_languages.php">Manage Languages</a></li>
-                <li class="<?php if($page_name == 'manage_brands.php') { echo "active"; } ?>"><a href="manage_brands.php">Manage Brands</a></li>
-                <li class="<?php if($page_name == 'manage_categories.php') { echo "active"; } ?>"><a href="manage_categories.php">Manage Categories</a></li>
-                <li class="<?php if($page_name == 'manage_sub_categories.php') { echo "active"; } ?>"><a href="manage_sub_categories.php">Manage Sub Categories</a></li>
+                <li class="<?php if($page_name == 'manage_languages.php' || $page_name == 'edit_grocery_languages.php') { echo "active"; } ?>"><a href="manage_languages.php">Manage Languages</a></li>
+                <li class="<?php if($page_name == 'manage_brands.php' || $page_name == 'edit_grocery_brands.php') { echo "active"; } ?>"><a href="manage_brands.php">Manage Brands</a></li>
+                <li class="<?php if($page_name == 'manage_categories.php' || $page_name == 'edit_grocery_category.php') { echo "active"; } ?>"><a href="manage_categories.php">Manage Categories</a></li>
+                <li class="<?php if($page_name == 'manage_sub_categories.php' || $page_name == 'edit_grocery_sub_category.php') { echo "active"; } ?>"><a href="manage_sub_categories.php">Manage Sub Categories</a></li>
                 <li class="<?php if($page_name == '') { echo "active"; } ?>"><a href="">Manage Time Slots</a></li>
                 <!-- <li><a href="">Manage Time Slots</a></li> -->
               </ul>
@@ -71,7 +71,7 @@
                 <span class="menu-text">Brand Logos</span>
               </a>
             </li>
-            <li class="<?php if($page_name == 'grocery_banners.php') { echo "active"; } ?>"><a href="grocery_banners.php">
+            <li class="<?php if($page_name == 'grocery_banners.php' || $page_name == 'edit_grocery_banners.php') { echo "active"; } ?>"><a href="grocery_banners.php">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-info zmdi-hc-fw"></i>
                 </span>
@@ -79,7 +79,7 @@
               </a>
             </li>
   
-            <li class="<?php if($page_name == 'grocery_tags.php') { echo "active"; } ?>"><a href="grocery_tags.php">
+            <li class="<?php if($page_name == 'grocery_tags.php' || $page_name == 'edit_grocery_tags.php') { echo "active"; } ?>"><a href="grocery_tags.php">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-link zmdi-hc-fw"></i>
                 </span>
@@ -100,14 +100,14 @@
                 <span class="menu-text">FAQ'S</span>
               </a>
             </li>
-            <li class="<?php if($page_name == 'manage_products.php') { echo "active"; } ?>"><a href="manage_products.php">
+            <li class="<?php if($page_name == 'manage_products.php' || $page_name == 'product_images.php' || $page_name == 'update_price.php') { echo "active"; } ?>"><a href="manage_products.php">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-labels zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Products</span>
               </a>
             </li>
-            <li><a href="view_orders.php">
+            <li class="<?php if($page_name == 'view_orders.php') { echo "active"; } ?>"><a href="view_orders.php">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-local-mall zmdi-hc-fw"></i>
                 </span>
@@ -139,6 +139,7 @@
                 
               </ul>
             </li>
+            
             
             <li><a href="#">
                 <span class="menu-icon">
