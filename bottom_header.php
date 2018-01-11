@@ -4,12 +4,12 @@
 						<div class="col-md-3 col-2">
 							<div id="mega-menu">
 								<div class="btn-mega"><span></span>ALL CATEGORIES</div>
-								<?php $getCategories1 = "SELECT * FROM grocery_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_category_id FROM grocery_sub_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0))";
+								<?php $getCategories1 = "SELECT * FROM grocery_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_category_id FROM grocery_sub_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1))) ORDER BY id DESC";
 								$getCategories = $conn->query($getCategories1); ?>
 								<ul class="menu">
 									<?php while($getCategoriesData = $getCategories->fetch_assoc()) { ?>
 									<li>
-										<a href="#" title="" class="dropdown">
+										<a href="results.php?cat_id=<?php echo $getCategoriesData['id']; ?>" title="" class="dropdown">
 											<span class="menu-img">
 												<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_category_web_image/'.$getCategoriesData['category_web_image'] ?>" alt="">
 											</span>
@@ -18,63 +18,32 @@
 											</span>
 										</a>
 										<div class="drop-menu">
+											<?php $getSubCategories = "SELECT * FROM grocery_sub_category WHERE lkp_status_id = 0 AND grocery_category_id ='".$getCategoriesData['id']."' AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)) ORDER BY id DESC LIMIT 0,6";
+											$getSubCategories1 = $conn->query($getSubCategories);
+											while($getSubCategoriesData = $getSubCategories1->fetch_assoc()) { 
+												?>
 											<div class="one-third">
-												<?php $getSubCategories = "SELECT * FROM grocery_sub_category WHERE lkp_status_id = 0 AND grocery_category_id ='".$getCategoriesData['id']."' AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0)";
-													$getSubCategories1 = $conn->query($getSubCategories); ?>
+												<div class="cat-title">
+													<a href="results.php?sub_cat_id=<?php echo $getSubCategoriesData['id']; ?>"><?php echo $getSubCategoriesData['sub_category_name']; ?></a>
+												</div>
 												<ul>
-													<?php while($getSubCategoriesData = $getSubCategories1->fetch_assoc()) { ?>
+													<?php
+													$getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND grocery_sub_category_id = '".$getSubCategoriesData['id']."' ORDER BY id DESC LIMIT 0,3";
+													$getProducts1 = $conn->query($getProducts);
+													while($getProductsData = $getProducts1->fetch_assoc()) { 
+													$getProductNames = getIndividualDetails('product_name_bind_languages','product_id',$getProductsData['id']);
+													?>
 													<li>
-														<a href="sprouts.php" title=""><?php echo $getSubCategoriesData['sub_category_name']; ?></a>
+														<a href="product_details.php?product_id=<?php echo $getProductsData['id']; ?>" title=""><?php echo substr($getProductNames['product_name'], 0,35); ?></a>
 													</li>
 													<?php } ?>
+													
 												</ul>
+												<div class="show">
+													<a href="results.php?sub_cat_id=<?php echo $getSubCategoriesData['id']; ?>" title="">Shop All</a>
+												</div>
 											</div>
-											<!-- <div class="one-third">
-												<ul class="banner">
-													<li>
-														<div class="banner-text">
-															<div class="banner-title">
-																Strawberries
-															</div>
-															<div class="more-link">
-																<a href="#" title="">Shop Now <img src="images/icons/right-2.png" alt=""></a>
-															</div>
-														</div>
-														<div class="banner-img">
-															<img src="images/product/other/sta.jpg" alt="" style="width:58px;height:62px">
-														</div>
-														<div class="clearfix"></div>
-													</li>
-													<li>
-														<div class="banner-text">
-															<div class="banner-title">
-																Strawberries
-															</div>
-															<div class="more-link">
-																<a href="#" title="">Shop Now <img src="images/icons/right-2.png" alt=""></a>
-															</div>
-														</div>
-														<div class="banner-img">
-															<img src="images/product/other/sta.jpg" alt="" style="width:58px;height:62px">
-														</div>
-														<div class="clearfix"></div>
-													</li>
-													<li>
-														<div class="banner-text">
-															<div class="banner-title">
-																Strawberries
-															</div>
-															<div class="more-link">
-																<a href="#" title="">Shop Now <img src="images/icons/right-2.png" alt=""></a>
-															</div>
-														</div>
-														<div class="banner-img">
-															<img src="images/product/other/sta.jpg" alt="" style="width:58px;height:62px">
-														</div>
-														<div class="clearfix"></div>
-													</li>
-												</ul>	
-											</div> -->
+											<?php } ?>
 										</div>
 									</li>
 									<?php } ?>

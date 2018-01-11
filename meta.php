@@ -1,5 +1,6 @@
 <?php
 include "grocery_admin/admin_includes/config.php";
+include "admin_includes/common_functions.php";
 
 ?>
 <!DOCTYPE html>
