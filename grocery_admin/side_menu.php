@@ -48,15 +48,6 @@
               </ul>
             </li>
 
-            <li class="<?php if($page_name == 'social_networks_links.php') { echo "active"; } ?>">
-              <a href="social_networks_links.php" aria-haspopup="true">
-                <span class="menu-icon">
-                  <i class="zmdi zmdi-settings zmdi-hc-fw"></i>
-                </span>
-                <span class="menu-text">Social Network Links</span>
-              </a>
-            </li>
-
             <li class="<?php if($page_name == 'content_page.php' || $page_name == 'edit_content_pages.php') { echo "active"; } ?>"><a href="content_page.php">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-info zmdi-hc-fw"></i>
@@ -65,13 +56,7 @@
               </a>
             </li>
 
-            <li class="<?php if($page_name == 'advertisements.php' ) { echo "active"; } ?>"><a href="advertisements.php">
-                <span class="menu-icon">
-                  <i class="zmdi zmdi-filter-tilt-shift zmdi-hc-fw"></i>
-                </span>
-                <span class="menu-text">Advertisements</span>
-              </a>
-            </li>
+    
             <li ><a href="#">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-blogger zmdi-hc-fw"></i>
@@ -88,11 +73,12 @@
             </li>
             <li class="<?php if($page_name == 'grocery_banners.php') { echo "active"; } ?>"><a href="grocery_banners.php">
                 <span class="menu-icon">
-                  <i class="zmdi zmdi-image zmdi-hc-fw"></i>
+                  <i class="zmdi zmdi-info zmdi-hc-fw"></i>
                 </span>
                 <span class="menu-text">Banners</span>
               </a>
             </li>
+  
             <li class="<?php if($page_name == 'grocery_tags.php') { echo "active"; } ?>"><a href="grocery_tags.php">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-link zmdi-hc-fw"></i>
@@ -182,7 +168,7 @@
                 <span class="menu-text">Packages</span>
               </a>
             </li>
-            
+
             <li><a href="#">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-dot-circle-alt"></i>

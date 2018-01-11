@@ -49,36 +49,36 @@
                 $category_icon_dir = "uploads/grocery_category_icon/";
                 $category_icon_file = $category_icon_dir . basename($category_icon);
                 
-                if($_FILES["category_web_image"]["name"]!='' || $_FILES["category_app_image"]["name"]!='' || $_FILES["category_icon"]["name"]!='') {
+                if($_FILES["category_web_image"]["name"]!='' && $_FILES["category_app_image"]["name"]!='' && $_FILES["category_icon"]["name"]!='') {
                     move_uploaded_file($_FILES["category_web_image"]["tmp_name"], $target_file);
                     move_uploaded_file($_FILES["category_app_image"]["tmp_name"], $category_app_image_file);
                     move_uploaded_file($_FILES["category_icon"]["tmp_name"], $category_icon_file);
-                    $sql = "UPDATE `grocery_brands` SET category_name = '$category_name', category_web_image = '$category_web_image', category_app_image = '$category_app_image', category_icon = '$category_icon' WHERE id = '$category_id' ";
+                    $sql = "UPDATE `grocery_category` SET category_name = '$category_name', category_web_image = '$category_web_image', category_app_image = '$category_app_image', category_icon = '$category_icon' WHERE id = '$category_id' ";
                 } elseif($_FILES["category_web_image"]["name"]!='' && $_FILES["category_app_image"]["name"]!='') {
                     move_uploaded_file($_FILES["category_web_image"]["tmp_name"], $target_file);
                     move_uploaded_file($_FILES["category_app_image"]["tmp_name"], $category_app_image_file);
-                    $sql = "UPDATE `grocery_brands` SET category_name = '$category_name', category_web_image = '$category_web_image', category_app_image = '$category_app_image' WHERE id = '$category_id' ";
+                    $sql = "UPDATE `grocery_category` SET category_name = '$category_name', category_web_image = '$category_web_image', category_app_image = '$category_app_image' WHERE id = '$category_id' ";
                 } elseif($_FILES["category_app_image"]["name"]!='' && $_FILES["category_icon"]["name"]!='') {
                     move_uploaded_file($_FILES["category_app_image"]["tmp_name"], $category_app_image_file);
                     move_uploaded_file($_FILES["category_icon"]["tmp_name"], $category_icon_file);
-                    $sql = "UPDATE `grocery_brands` SET category_name = '$category_name', category_app_image = '$category_app_image', category_icon = '$category_icon' WHERE id = '$category_id' ";
+                    $sql = "UPDATE `grocery_category` SET category_name = '$category_name', category_app_image = '$category_app_image', category_icon = '$category_icon' WHERE id = '$category_id' ";
                 } elseif($_FILES["category_web_image"]["name"]!='' && $_FILES["category_icon"]["name"]!='') {
                     move_uploaded_file($_FILES["category_web_image"]["tmp_name"], $target_file);
                     move_uploaded_file($_FILES["category_icon"]["tmp_name"], $category_icon_file);
-                    $sql = "UPDATE `grocery_brands` SET category_name = '$category_name', category_web_image = '$category_web_image', category_icon = '$category_icon' WHERE id = '$category_id' ";
+                    $sql = "UPDATE `grocery_category` SET category_name = '$category_name', category_web_image = '$category_web_image', category_icon = '$category_icon' WHERE id = '$category_id' ";
                 } elseif($_FILES["category_web_image"]["name"]!='') {
-                    move_uploaded_file($_FILES["category_web_image"]["tmp_name"], $category_web_image_file);
-                    $sql = "UPDATE `grocery_brands` SET category_name = '$category_name', category_web_image = '$category_web_image' WHERE id = '$category_id' ";
+                    move_uploaded_file($_FILES["category_web_image"]["tmp_name"], $target_file);
+                    $sql = "UPDATE `grocery_category` SET category_name = '$category_name', category_web_image = '$category_web_image' WHERE id = '$category_id' ";
                 } elseif($_FILES["category_app_image"]["name"]!='') {
                     move_uploaded_file($_FILES["category_app_image"]["tmp_name"], $category_app_image_file);
-                    $sql = "UPDATE `grocery_brands` SET category_name = '$category_name', category_app_image = '$category_app_image' WHERE id = '$category_id' ";
+                    $sql = "UPDATE `grocery_category` SET category_name = '$category_name', category_app_image = '$category_app_image' WHERE id = '$category_id' ";
                 } elseif($_FILES["category_icon"]["name"]!='') {
                     move_uploaded_file($_FILES["category_icon"]["tmp_name"], $category_icon_file);
-                    $sql = "UPDATE `grocery_brands` SET category_name = '$category_name', category_icon = '$category_icon' WHERE id = '$category_id' ";
+                    $sql = "UPDATE `grocery_category` SET category_name = '$category_name', category_icon = '$category_icon' WHERE id = '$category_id' ";
                 } 
 
             } else{
-               $sql = "UPDATE `grocery_brands` SET category_name = '$category_name' WHERE id = '$category_id' ";
+               $sql = "UPDATE `grocery_category` SET category_name = '$category_name' WHERE id = '$category_id' ";
                //$conn->query($sql);
             }          
             //echo $sql; die;
@@ -134,10 +134,10 @@
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Icon</label>
                                 <div class="col-sm-6 col-md-4">
                                     <?php if($getCategories['category_icon']!='') { ?>
-                                        <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_category_icon/'.$getCategories['category_icon']; ?>"  id="output1" height="100" width="100"/>
+                                        <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_category_icon/'.$getCategories['category_icon']; ?>"  id="output2" height="100" width="100"/>
                                     <?php } ?>
                                     <label class="btn btn-default file-upload-btn">Choose file...
-                                        <input id="form-control-22" class="file-upload-input" type="file" name="category_icon" accept="image/*" onchange="loadFile1(event)">
+                                        <input id="form-control-22" class="file-upload-input" type="file" name="category_icon" accept="image/*" onchange="loadFile2(event)">
                                     </label>
                                 </div>
                             </div>                         
