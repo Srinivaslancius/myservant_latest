@@ -21,19 +21,35 @@
 			<?php include_once 'bottom_header.php';?>
 			</div><!-- /.header-bottom -->
 		</section><!-- /#header -->
+		<?php 
+		if($product_id = $_GET['cat_id']) {
+			$getProducts = getIndividualDetails('grocery_category','id',$product_id);
+			$getName = $getProducts['category_name'];
+			$getProducts = "SELECT * from grocery_products WHERE grocery_category_id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
+			$getProducts1 = $conn->query($getProducts);
+			$getProductsTotalDetails = "SELECT * from grocery_products WHERE grocery_category_id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
+			$getProductsTotalDetails1 = $conn->query($getProductsTotalDetails);
+		} elseif($product_id = $_GET['sub_cat_id']) {
+			$getProducts = getIndividualDetails('grocery_sub_category','id',$product_id);
+			$getName = $getProducts['sub_category_name'];
+			$getProducts = "SELECT * from grocery_products WHERE grocery_sub_category_id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
+			$getProducts1 = $conn->query($getProducts);
+			$getProductsTotalDetails = "SELECT * from grocery_products WHERE grocery_sub_category_id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
+			$getProductsTotalDetails1 = $conn->query($getProductsTotalDetails);
+		}
+		?>
 		<section class="flat-breadcrumb">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="breadcrumbs">
 							<li class="trail-item">
-								<a href="#" title="">Home</a>
+								<a href="index.php" title="">Home</a>
 								<span><img src="images/icons/arrow-right.png" alt=""></span>
 							</li>
 							<li class="trail-item">
-								<a href="#" title="">Sprouts</a>								
+								<a href="#" title=""><?php echo $getName; ?></a>
 							</li>
-							
 						</ul><!-- /.breacrumbs -->
 					</div><!-- /.col-md-12 -->
 				</div><!-- /.row -->
@@ -44,122 +60,15 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-3 col-md-4"><br>
-						<div class="sidebar ">
-							<div class="widget widget-categories">
-								<div class="widget-title">
-									<h3>HOT DEALS<span></span></h3>
-								</div>
-								<div class="widget widget-banner">
-								<div class="banner-box">
-									<div class="inner-box">
-									<div class="box-image owl-carousel-1">
-										<a href="#" title="">
-											<img src="images/product/other/swt.jpg" alt="">
-										</a>
-										<a href="#" title="">
-										<img src="images/product/other/swt.jpg" alt="">
-										</a>
-									</div>
-									</div>
-								</div>
-							</div><!-- /.widget widget-banner -->
-							</div><br>
-							
-							<div class="widget widget-products">
-								<div class="widget-title">
-									<h3>SPECIAL OFFER<span></span></h3>
-								</div>
-								<ul class="product-list widget-content">
-									<li>
-										<div class="img-product">
-											<a href="#" title="">
-												<img src="images/product/other/spm.jpg" alt="" style="width:100px;height:100px">
-											</a>
-										</div>
-										<div class="info-product">
-											<div class="name">
-												<a href="#" title="">Mixed sprouts</a>
-											</div>
-											<div class="queue">
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-											</div>
-											<div class="price">
-												<span class="sale"> ₹30.00</span>
-											</div>
-										</div>
-									</li>	
-									<li>
-										<div class="img-product">
-											<a href="#" title="">
-												<img src="images/product/other/swt.jpg" alt="" style="width:100px;height:100px">
-											</a>
-										</div>
-										<div class="info-product">
-											<div class="name">
-												<a href="#" title="">Sweet corn</a>
-											</div>
-											<div class="queue">
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-											</div>
-											<div class="price">
-												<span class="sale"> ₹30.00</span>
-											</div>
-										</div>
-									</li>	
-									<li>
-										<div class="img-product">
-											<a href="#" title="">
-												<img src="images/product/other/sp.jpg" alt="" style="width:100px;height:100px">
-											</a>
-										</div>
-										<div class="info-product">
-											<div class="name">
-												<a href="#" title="">sprouts</a>
-											</div>
-											<div class="queue">
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<i class="fa fa-star" aria-hidden="true"></i>
-											</div>
-											<div class="price">
-												<span class="sale"> ₹30.00</span>
-											</div>
-										</div>
-									</li>	
-								</ul>
-							</div><br>
-							<div class="widget widget-banner">
-								<div class="banner-box">
-									<div class="inner-box">
-									<div class="box-image owl-carousel-1">
-										<a href="#" title="">
-											<img src="images/product/other/10.png" alt="">
-										</a>
-										<a href="#" title="">
-											<img src="images/product/other/10.png" alt="">
-										</a>
-									</div>
-									</div>
-								</div>
-							</div><!-- /.widget widget-banner -->
-						</div><!-- /.sidebar -->
+						<?php include_once 'filters.php'; ?>
+						<!-- /.sidebar -->
 					</div><!-- /.col-lg-3 col-md-4 -->
 					<div class="col-lg-9 col-md-8">
 						<div class="main-shop">
 							
 							<div class="wrap-imagebox">
 								<div class="flat-row-title">
-									<h3>Sprouts</h3>
+									<h3><?php echo $getName; ?></h3>
 									<span>
 										Showing 1–15 of 20 results
 									</span>
@@ -196,34 +105,31 @@
 								</div>
 								<div class="tab-product">
 									<div class="row sort-box">
-									<?php for($i=0; $i<12; $i++) {?>
+									<?php 
+									while($getProductDetails = $getProducts1->fetch_assoc()) { 
+										$getProductImages = getIndividualDetails('product_bind_images','product_id',$getProductDetails['id']);
+										$getProductNames = getIndividualDetails('product_name_bind_languages','product_id',$getProductDetails['id']);
+									?>	
 										<div class="col-lg-4 col-sm-6">
 											<div class="product-box">
 												<div class="imagebox">
-												
-														<a href="single_product.php" title="">
-															<img src="images/product/other/sp.jpg" alt="" style="width:264px; height:210px">
+														<a href="single_product.php?product_id=<?php echo $getProductDetails['id'];?>" title="">
+															<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImages['image'] ?>" alt="" style="width:264px; height:210px">
 														</a>
-														
 													<div class="box-content">
-														<!--<div class="cat-name">
-															<a href="#" title="">Monthly Saving Pack 4</a>
-														</div>-->
 														<div class="product-name">
-															<a href="single_product.php" title="">Sprouts - Gram green</a>
+															<a href="single_product.php?product_id=<?php echo $getProductDetails['id'];?>" title=""><?php echo $getProductNames['product_name']; ?></a>
 														</div>
 														<div class="product_name">
+														<?php 
+														 $getProductPrices = getAllDataWhereWithActive('product_bind_weight_prices','product_id',$getProductDetails['id']);
+														?> 
 														<select class="s-w form-control" id="na1q_qty0" onchange="get_price(this.value,'na10');">
-                                                            <option value="6180">20 gms - Rs.30.00 </option>
+															<?php while($getPrices = $getProductPrices->fetch_assoc()) { ?>
+                                                            <option value="6180"><?php echo $getPrices['weight_type']; ?> - Rs.<?php echo $getPrices['selling_price']; ?> </option>
+                                                            <?php } ?>
                                                           </select>
 														</div>
-															<!--<select class="form-control" id="sel1" style="height:40px; font-size:13px; width:100px">
-															<option>combo pack-Rs.2999.00</option>
-														  </select>-->
-													<!--	<div class="price">
-															<span class="sale">$2,009.00</span>
-															
-														</div>-->
 													</div><!-- /.box-content -->
 													<div class="box-bottom">
 														<div class="btn-add-cart">
@@ -239,33 +145,40 @@
 										<?php } ?>
 									</div>
 									<div class="sort-box">
-									<?php for($i=0; $i<5; $i++) {?>
+									<?php 
+									while($getProductsTotalDetails2 = $getProductsTotalDetails1->fetch_assoc()) { 
+										$getProductImages1 = getIndividualDetails('product_bind_images','product_id',$getProductsTotalDetails2['id']);
+										$getProductNames1 = getIndividualDetails('product_name_bind_languages','product_id',$getProductsTotalDetails2['id']);
+									?>
 										<div class="product-box style3">
 											<div class="imagebox style1 v3">
 												<div class="box-image">
-													<a href="single_product.php" title="">
-														<img src="images/product/other/sp.jpg" alt="" style="width:264px; height:210px">
+													<a href="single_product.php?product_id=<?php echo $getProductsTotalDetails2['id'];?>" title="">
+														<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImages1['image'] ?>" alt="" style="width:264px; height:210px">
 													</a>
 												</div><!-- /.box-image -->
 												<div class="box-content">
 													<div class="product-name">
-														<a href="single_product.php" title="">Sprouts - Gram green</a>
+														<a href="single_product.php?product_id=<?php echo $getProductsTotalDetails2['id'];?>" title=""><?php echo $getProductNames1['product_name']; ?></a>
 													</div>
-													<div class="status">
+													<!-- <div class="status">
 														Availablity: In stock
-													</div>
+													</div> -->
 													<div class="info">
 														<p style="text-align:justify">
-															Brussels sprouts can provide you with some special cholesterol-lowering benefits 
-															if you will use a steaming method when cooking them.Brussels sprouts may have unique
-															health benefits in the area of DNA protection.
+															<?php echo $getProductNames1['product_description']; ?>
 														</p>
 													</div>
 												</div><!-- /.box-content -->
 												<div class="box-price">
 													<div class="product_name">
+														<?php 
+														 $getProductPrices1 = getAllDataWhereWithActive('product_bind_weight_prices','product_id',$getProductsTotalDetails2['id']);
+														?> 
 														<select class="s-w form-control" id="na1q_qty0" onchange="get_price(this.value,'na10');">
-                                                            <option value="6180">20 gms - Rs.30.00</option>
+                                                            <?php while($getPrices1 = $getProductPrices1->fetch_assoc()) { ?>
+                                                            <option value="6180"><?php echo $getPrices1['weight_type']; ?> - Rs.<?php echo $getPrices1['selling_price']; ?> </option>
+                                                            <?php } ?>
                                                           </select>
 														</div>
 													<div class="btn-add-cart">
