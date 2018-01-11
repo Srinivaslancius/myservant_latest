@@ -48,8 +48,6 @@
               </ul>
             </li>
 
-            
-
             <li class="<?php if($page_name == 'content_page.php' || $page_name == 'edit_content_pages.php') { echo "active"; } ?>"><a href="content_page.php">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-info zmdi-hc-fw"></i>

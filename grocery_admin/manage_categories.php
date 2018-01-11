@@ -40,19 +40,22 @@
           $fileToUpload2 = $_FILES["fileToUpload2"]["name"];
           $priority = $_POST['priority'];
           if($fileToUpload!='' && $fileToUpload1!='' && $fileToUpload2!='') {
+            $web_image = uniqid().$_FILES["fileToUpload"]["name"];
             $target_dir = "uploads/grocery_category_web_image/";
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-            $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+            $target_file = $target_dir . basename($web_image);
+
+            $app_image = uniqid().$_FILES["fileToUpload1"]["name"];
             $target_dir1 = "uploads/grocery_category_app_image/";
-            $target_file1 = $target_dir1 . basename($_FILES["fileToUpload1"]["name"]);
-            $imageFileType = pathinfo($target_file1,PATHINFO_EXTENSION);
+            $target_file1 = $target_dir1 . basename($app_image);
+
+            $icon = uniqid().$_FILES["fileToUpload2"]["name"];
             $target_dir2 = "uploads/grocery_category_icon/";
-            $target_file2 = $target_dir2 . basename($_FILES["fileToUpload2"]["name"]);
-            $imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
+            $target_file2 = $target_dir2 . basename($icon);
+
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1);
                 move_uploaded_file($_FILES["fileToUpload2"]["tmp_name"], $target_file2);
-                $sql = "INSERT INTO grocery_category (`category_name`,`category_web_image`,`category_app_image`,`category_icon`,`priority`) VALUES ('$category_name','$fileToUpload', '$fileToUpload1', '$fileToUpload2', '$priority')"; 
+                $sql = "INSERT INTO grocery_category (`category_name`,`category_web_image`,`category_app_image`,`category_icon`,`priority`) VALUES ('$category_name','$web_image', '$app_image', '$icon', '$priority')";
                 if($conn->query($sql) === TRUE){
                    echo "<script type='text/javascript'>window.location='manage_categories.php?msg=success'</script>";
                 } else {
