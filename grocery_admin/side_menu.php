@@ -57,7 +57,7 @@
             </li>
 
     
-            <li ><a href="#">
+            <li class="<?php if($page_name == 'grocery_blog.php' || $page_name == 'edit_grocery_blog.php') { echo "active"; } ?>"><a href="grocery_blog.php">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-blogger zmdi-hc-fw"></i>
                 </span>
