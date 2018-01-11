@@ -40,20 +40,23 @@
                 $web_logo = uniqid().$_FILES["web_logo"]["name"];
                 $target_dir = "uploads/grocery_brands_web_logo/";
                 $target_file = $target_dir . basename($web_logo);
-                //$getImgUnlink = getImageUnlink('web_logo','grocery_brands_web_logo','id',$brand_id,$target_dir);
 
                 $app_logo = uniqid().$_FILES["app_logo"]["name"];
                 $app_logo_dir = "uploads/grocery_brands_app_logo/";
                 $app_logo_file = $app_logo_dir . basename($app_logo);
-                //$getImgUnlink = getImageUnlink('app_logo','grocery_brands_app_logo','id',$brand_id,$app_logo_dir);
-                if(move_uploaded_file($_FILES["web_logo"]["tmp_name"], $target_file)) {
-                   // move_uploaded_file($_FILES["web_logo"]["tmp_name"], $target_file);
+                
+                if(move_uploaded_file($_FILES["web_logo"]["tmp_name"], $target_file) && move_uploaded_file($_FILES["app_logo"]["tmp_name"], $app_logo_file)) { 
+                    //$getImgUnlink = getImageUnlink('web_logo','grocery_brands','id',$brand_id,$target_dir);
+                    //$getImgUnlink = getImageUnlink('app_logo','grocery_brands','id',$brand_id,$app_logo_dir);
+                    $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name', web_logo = '$web_logo', app_logo = '$app_logo' WHERE id = '$brand_id' ";
+                } elseif($_FILES["web_logo"]["name"]!='') {
+                    //$getImgUnlink = getImageUnlink('web_logo','grocery_brands','id',$brand_id,$target_dir);
+                    move_uploaded_file($_FILES["web_logo"]["tmp_name"], $target_file);
                     $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name', web_logo = '$web_logo' WHERE id = '$brand_id' ";
-                    //$conn->query($sql);
-                } elseif(move_uploaded_file($_FILES["app_logo"]["tmp_name"], $app_logo_file)) {
-                    //move_uploaded_file($_FILES["app_logo"]["tmp_name"], $app_logo_file);
+                } elseif($_FILES["app_logo"]["name"]!='') {
+                    //$getImgUnlink = getImageUnlink('app_logo','grocery_brands','id',$brand_id,$app_logo_dir);
+                    move_uploaded_file($_FILES["app_logo"]["tmp_name"], $app_logo_file);
                     $sql = "UPDATE `grocery_brands` SET brand_name = '$brand_name', app_logo = '$app_logo' WHERE id = '$brand_id' ";
-                    //$conn->query($sql);
                 } 
 
             } else{

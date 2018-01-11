@@ -38,15 +38,15 @@
           $fileToUpload = $_FILES["fileToUpload"]["name"];
           $fileToUpload1 = $_FILES["fileToUpload1"]["name"];
           if($fileToUpload!='' && $fileToUpload1!='') {
+            $web_logo = uniqid().$_FILES["fileToUpload"]["name"];
             $target_dir = "uploads/grocery_brands_web_logo/";
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-            $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+            $target_file = $target_dir . basename($web_logo);
+            $app_logo = uniqid().$_FILES["fileToUpload1"]["name"];
             $target_dir1 = "uploads/grocery_brands_app_logo/";
-            $target_file1 = $target_dir1 . basename($_FILES["fileToUpload1"]["name"]);
-            $imageFileType = pathinfo($target_file1,PATHINFO_EXTENSION);
+            $target_file1 = $target_dir1 . basename($app_logo);
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1);
-                $sql = "INSERT INTO grocery_brands (`brand_name`,`web_logo`,`app_logo`) VALUES ('$brand_name','$fileToUpload', '$fileToUpload1')"; 
+                $sql = "INSERT INTO grocery_brands (`brand_name`,`web_logo`,`app_logo`) VALUES ('$brand_name','$web_logo', '$app_logo')"; 
                 if($conn->query($sql) === TRUE){
                    echo "<script type='text/javascript'>window.location='manage_brands.php?msg=success'</script>";
                 } else {

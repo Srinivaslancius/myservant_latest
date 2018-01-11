@@ -40,19 +40,22 @@
           $fileToUpload2 = $_FILES["fileToUpload2"]["name"];
           $priority = $_POST['priority'];
           if($fileToUpload!='' && $fileToUpload1!='' && $fileToUpload2!='') {
+            $web_image = uniqid().$_FILES["fileToUpload"]["name"];
             $target_dir = "uploads/grocery_category_web_image/";
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-            $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+            $target_file = $target_dir . basename($web_image);
+
+            $app_image = uniqid().$_FILES["fileToUpload1"]["name"];
             $target_dir1 = "uploads/grocery_category_app_image/";
-            $target_file1 = $target_dir1 . basename($_FILES["fileToUpload1"]["name"]);
-            $imageFileType = pathinfo($target_file1,PATHINFO_EXTENSION);
+            $target_file1 = $target_dir1 . basename($app_image);
+
+            $icon = uniqid().$_FILES["fileToUpload2"]["name"];
             $target_dir2 = "uploads/grocery_category_icon/";
-            $target_file2 = $target_dir2 . basename($_FILES["fileToUpload2"]["name"]);
-            $imageFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
+            $target_file2 = $target_dir2 . basename($icon);
+
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file1);
                 move_uploaded_file($_FILES["fileToUpload2"]["tmp_name"], $target_file2);
-                $sql = "INSERT INTO grocery_category (`category_name`,`category_web_image`,`category_app_image`,`category_icon`,`priority`) VALUES ('$category_name','$fileToUpload', '$fileToUpload1', '$fileToUpload2', '$priority')"; 
+                $sql = "INSERT INTO grocery_category (`category_name`,`category_web_image`,`category_app_image`,`category_icon`,`priority`) VALUES ('$category_name','$web_image', '$app_image', '$icon', '$priority')";
                 if($conn->query($sql) === TRUE){
                    echo "<script type='text/javascript'>window.location='manage_categories.php?msg=success'</script>";
                 } else {
@@ -154,7 +157,7 @@
                                      <td><img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_category_icon/'.$row['category_icon'] ?>" width="100" height="100"></td>
                                       <td><?php echo $row['priority']; ?></td>
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_category'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_category'>In Active</span>" ;} ?></td>
-                                    <td> <a href="edit_grocery_category.php?stateid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp; <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "grocery_category" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a></td>
+                                    <td> <a href="edit_grocery_category.php?category_id=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp; <!-- <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "grocery_category" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></td>
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>
