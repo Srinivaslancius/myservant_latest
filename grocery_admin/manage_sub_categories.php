@@ -35,7 +35,7 @@
           //echo "<pre>"; print_r($_POST); die;
           $grocery_category_id = $_POST['grocery_category_id'];
           $sub_category_name = $_POST['sub_category_name'];
-          $priority = $_POST['priority'];
+          $priority = 1;
           $brands = implode(',',$_POST['brands']);
 
           if($_POST['make_it_popular'] == 1) {
@@ -79,12 +79,12 @@
                                     <input type="text" name="sub_category_name" class="form-control" id="form-control-3" placeholder="Enter Sub Category Name" required>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Priority</label>
                                 <div class="col-sm-6 col-md-4">
                                     <input type="text" name="priority" class="form-control" id="form-control-3" placeholder="Enter Priority" required>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label for="form-control-1" class="col-sm-3 col-md-4 control-label">Brands Applicable</label>
                                     <div class="col-sm-6 col-md-4">
@@ -97,9 +97,9 @@
                                     </div>
                             </div>
                             <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Make It Popular</label>
+                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label"></label>
                                 <div class="col-sm-3 col-md-4">
-                                    <input type="checkbox" name="make_it_popular" class="form-control" id="form-control-3" value="1">
+                                    <input type="checkbox" name="make_it_popular"  id="form-control-3" value="1"> &nbsp; &nbsp;Make It Popular
                                 </div>
                             </div>
                             <div class="form-group">
@@ -126,7 +126,7 @@
                                     <th>Sub Category Name</th>
                                     <th>Category Name</th>
                                     <th>Brands Applicable</th>
-                                    <th>Priority</th>
+                                    <!-- <th>Priority</th> -->
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -172,7 +172,7 @@
                                         </div>
                                     </div>
                                     <!-- End Popup -->
-                                    <td><?php echo $row['priority']; ?></td>
+                                    <!-- <td><?php echo $row['priority']; ?></td>-->
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_sub_category'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_sub_category'>In Active</span>" ;} ?></td>
                                     <td> <a href="edit_grocery_sub_category.php?sub_category_id=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp;<!--  <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "grocery_sub_category" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></td>
                                 </tr>

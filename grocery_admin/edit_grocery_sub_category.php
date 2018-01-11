@@ -35,10 +35,17 @@
         } else  { 
             //echo "<pre>"; print_r($_POST); die;
             $sub_category_name = $_POST['sub_category_name'];
-            $priority = $_POST['priority'];
+            $priority = 1;
             $grocery_category_id = $_POST['grocery_category_id'];
             $brands = implode(',',$_POST['brands']);
-            $sql = "UPDATE `grocery_sub_category` SET sub_category_name = '$sub_category_name',priority = '$priority',grocery_category_id = '$grocery_category_id',brands = '$brands' WHERE id = '$sub_category_id' ";     
+
+            if($_POST['make_it_popular'] == 1) {
+                $checkboxVal = 1;
+          } else {
+            $checkboxVal = 0;
+          }
+
+            $sql = "UPDATE `grocery_sub_category` SET sub_category_name = '$sub_category_name',priority = '$priority',grocery_category_id = '$grocery_category_id',brands = '$brands', make_it_popular='$checkboxVal' WHERE id = '$sub_category_id' ";     
             $result = $conn->query($sql);
             if( $result == 1){
                 echo "<script type='text/javascript'>window.location='manage_sub_categories.php?msg=success'</script>";
@@ -74,12 +81,12 @@
                                     <input type="text" class="form-control" id="form-control-3" placeholder="Enter Sub Category Name" name="sub_category_name" required value="<?php echo $getSubCategories['sub_category_name']; ?>">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label class="col-sm-3 control-label" for="form-control-9">Priority</label>
                                 <div class="col-sm-6 col-md-4">
                                     <input type="text" class="form-control" id="form-control-3" placeholder="Enter Priority" name="priority" required value="<?php echo $getSubCategories['priority']; ?>">
                                 </div>
-                            </div>
+                            </div> -->
                             <?php 
                             $getBrandId = explode(',',$getSubCategories['brands']);
                             $getBrands = getAllDataWithStatus('grocery_brands','0');?>
@@ -91,6 +98,12 @@
                                           <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == in_array($row['id'], $getBrandId)) { echo "selected=selected"; }?> ><?php echo $row['brand_name']; ?></option>
                                       <?php } ?>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group">                                
+                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label"></label>
+                                <div class="col-sm-3 col-md-4">
+                                    <input type="checkbox" name="make_it_popular" <?php if($getSubCategories['make_it_popular'] == 1) { echo "checked=checked"; } ?> id="form-control-3" value="1"> &nbsp; &nbsp;Make It Popular
                                 </div>
                             </div>
                             <div class="form-group">
