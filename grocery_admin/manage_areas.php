@@ -40,7 +40,7 @@
             foreach($area_name as $key=>$value){
                 if(!empty($value)) {
                   $area_name = $_REQUEST['area_name'][$key];    
-                  $sql = "INSERT INTO lkp_areas (`lkp_state_id`,`lkp_district_id`,`lkp_city_id`,`lkp_pincode_id`,`area_name`) VALUES ('$lkp_state_id','$lkp_district_id','$lkp_city_id','$lkp_pincode_id','$area_name')";
+                  $sql = "INSERT INTO grocery_lkp_areas (`lkp_state_id`,`lkp_district_id`,`lkp_city_id`,`lkp_pincode_id`,`area_name`) VALUES ('$lkp_state_id','$lkp_district_id','$lkp_city_id','$lkp_pincode_id','$area_name')";
                   $result = $conn->query($sql);
                 }
             }
@@ -65,7 +65,7 @@
                                 <div class="col-sm-6 col-md-4">
                                     <select id="form-control-1" name="lkp_state_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" onChange="getDistricts(this.value);" required>
                                         <option value="">-- Select State --</option>
-                                        <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
+                                        <?php $getStates = getAllDataWithStatus('grocery_lkp_states','0');?>
                                         <?php while($row = $getStates->fetch_assoc()) {  ?>
                                             <option value="<?php echo $row['id']; ?>" ><?php echo $row['state_name']; ?></option>
                                         <?php } ?>
@@ -91,7 +91,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label" for="form-control-9">Select Pin Code</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <select id="lkp_pincode_id" name="lkp_pincode_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }"" required>
+                                    <select id="lkp_pincode_id" name="lkp_pincode_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
                                         <option value="">-- Select Pin Code --</option>
                                     </select>
                                 </div>
@@ -138,15 +138,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $getAreas = getAllDataWithActiveRecent('lkp_areas'); $i=1;
+                                <?php $getAreas = getAllDataWithActiveRecent('grocery_lkp_areas'); $i=1;
                                 while ($row = $getAreas->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?php echo $i;?></td>
                                     <!-- <td>Area1234</td> -->
                                     <td><?php echo $row['area_name'] ?></td>
-                                    <td><?php $getPincodes = getAllData('lkp_pincodes'); while($getPincodesData = $getPincodes->fetch_assoc()) { if($row['lkp_pincode_id'] == $getPincodesData['id']) { echo $getPincodesData['pincode']; } } ?></td>
-                                    <td><?php $getCities = getAllData('lkp_cities'); while($getCitiesData = $getCities->fetch_assoc()) { if($row['lkp_city_id'] == $getCitiesData['id']) { echo $getCitiesData['city_name']; } } ?></td>
-                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='lkp_areas'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='lkp_areas'>In Active</span>" ;} ?></td>
+                                    <td><?php $getPincodes = getAllData('grocery_lkp_pincodes'); while($getPincodesData = $getPincodes->fetch_assoc()) { if($row['lkp_pincode_id'] == $getPincodesData['id']) { echo $getPincodesData['pincode']; } } ?></td>
+                                    <td><?php $getCities = getAllData('grocery_lkp_cities'); while($getCitiesData = $getCities->fetch_assoc()) { if($row['lkp_city_id'] == $getCitiesData['id']) { echo $getCitiesData['city_name']; } } ?></td>
+                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_lkp_areas'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_lkp_areas'>In Active</span>" ;} ?></td>
                                     <td><span><a href="edit_lkp_areas.php?area_id=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a>  &nbsp;<!-- <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "lkp_areas" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></span></td>
                                 </tr>
                                 <?php $i++; } ?>

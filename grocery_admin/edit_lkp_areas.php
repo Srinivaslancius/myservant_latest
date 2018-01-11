@@ -39,7 +39,7 @@
             $lkp_city_id = $_POST['lkp_city_id'];
             $lkp_pincode_id = $_POST['lkp_pincode_id'];
             $area_name = $_POST['area_name'];
-            $sql = "UPDATE `lkp_areas` SET lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',lkp_pincode_id = '$lkp_pincode_id',area_name = '$area_name' WHERE id = '$area_id' ";     
+            $sql = "UPDATE `grocery_lkp_areas` SET lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',lkp_pincode_id = '$lkp_pincode_id',area_name = '$area_name' WHERE id = '$area_id' ";     
             $result = $conn->query($sql);
             if( $result == 1){
                 echo "<script type='text/javascript'>window.location='manage_areas.php?msg=success'</script>";
@@ -55,10 +55,10 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <?php $getAreas = getIndividualDetails('lkp_areas','id',$area_id); ?>
+                        <?php $getAreas = getIndividualDetails('grocery_lkp_areas','id',$area_id); ?>
                         <form class="form-horizontal" method="POST" autocomplete="off" enctype="multipart/form-data">
                             <div class="form-group">
-                                <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
+                                <?php $getStates = getAllDataWithStatus('grocery_lkp_states','0');?>
                                 <label class="col-sm-3 control-label" for="form-control-9">Select State</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select id="form-control-1" name="lkp_state_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required onChange="getDistricts(this.value);">
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <?php $getDistrictsData = getAllDataWithStatus('lkp_districts','0');?>
+                                <?php $getDistrictsData = getAllDataWithStatus('grocery_lkp_districts','0');?>
                                 <label class="col-sm-3 control-label" for="form-control-9">Select District</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select name="lkp_district_id" id="lkp_district_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required onChange="getCities(this.value);">
@@ -82,7 +82,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
+                                <?php $getCities = getAllDataWithStatus('grocery_lkp_cities','0');?>
                                 <label class="col-sm-3 control-label" for="form-control-9">Select City</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select name="lkp_city_id" id="lkp_city_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required onChange="getPincodes(this.value);">
@@ -94,7 +94,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <?php $getPincodes = getAllDataWithStatus('lkp_pincodes','0');?>
+                                <?php $getPincodes = getAllDataWithStatus('grocery_lkp_pincodes','0');?>
                                 <label class="col-sm-3 control-label" for="form-control-9">Select Pincode</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select name="lkp_pincode_id" id="lkp_pincode_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>

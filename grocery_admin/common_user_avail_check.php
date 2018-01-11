@@ -1,5 +1,5 @@
 <?php
-	include_once('admin_includes/config.php');
+	include_once('../admin_includes/config.php');
 	include_once('../../admin_includes/common_functions.php');
 	if(isset($_POST['userInput'])) {
 		$userInput=$_POST['userInput'];

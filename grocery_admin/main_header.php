@@ -1,7 +1,7 @@
 <?php 
 error_reporting(1);
 ob_start();
-include_once('admin_includes/config.php');
+include_once('../admin_includes/config.php');
 include_once('../admin_includes/common_functions.php');
 ?>
 <?php $getSiteSettings = getAllDataWhere('grocery_site_settings','id',1); 
