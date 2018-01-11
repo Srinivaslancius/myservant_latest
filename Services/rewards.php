@@ -124,29 +124,19 @@
                       <h3 class="nomargin_top">Reward points</h3>
                     </div>
                     <div class="panel-body">
-					<!--<div class="row" style="margin-bottom:15px">
-					<div class="col-sm-4">
-					 <button type="button" class="btn btn-primary btn-lg">Rewards <span class="badge">7</span></button>
-					 </div>
-					 <div class="col-sm-4">
-					 <button type="button" class="btn btn-success btn-lg">Rewards X <span class="badge">3</span></button>
-                     </div>	
-                     <div class="col-sm-4">					 
-					<button type="button" class="btn btn-danger btn-lg">Amount <span class="badge">21</span></button>
-					</div>
-                    </div>-->
+					
 					<div class="row" style="padding:10px 60px 50px 60px">
 					<div class="col-sm-4">
 					<h4 style="margin-left:10px">Rewards</h4>
-						<a href="" class="notif"><span class="badge">2</span></a>
+						<a href="" class="notif"><span class="badge1">2</span></a>
 						</div>
 						<div class="col-sm-4">
 					<h4>For Rewards</h4>
-						<a href="" class="notif1"><span class="badge">22</span></a>
+						<a href="" class="notif1"><span class="badge1">22</span></a>
 						</div>
 						<div class="col-sm-4">
 					<h4 style="margin-left:20px">Total</h4>
-						<a href="" class="notif2"><span class="badge">44</span></a>
+						<a href="" class="notif2"><span class="badge1">44</span></a>
 						</div>
                      </div>
 
