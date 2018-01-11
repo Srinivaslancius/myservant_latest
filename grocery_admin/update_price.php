@@ -66,7 +66,7 @@
                         
                         <form class="form-horizontal" method="post" autocomplete="off">
 
-                            <div class="form-group">
+                            <div class="form-group" style="margin-right:50px;margin-left:50px">
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Select City</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select id="form-control-1" name="lkp_city_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
@@ -83,7 +83,7 @@
 
                             <div class="input_fields_container" >
 							
-                                <div style="border:1px solid #ddd;padding-top:20px;">
+                                <div style="border:1px solid #ddd;padding-top:20px;margin-left:60px;margin-right:60px">
                                     <div class="form-group">
                                         <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Offer</label>
                                         <!-- <div class="btn-group col-sm-6 col-md-4" >
@@ -221,7 +221,7 @@
             if(x < max_fields_limit){ //check conditions
                 x++; //counter increment
 
-                $('.input_fields_container').append('<div><div class="row" style="border:1px solid #ddd;margin-top:60px;padding-top:20px;margin-left:0px;margin-right:0px;"><input type="hidden" id="setRaioVal_'+x+'"><div class="form-group"><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Offer</label><div class="btn-group col-sm-6 col-md-4" ><select class="form-control" onChange="check_offer1(this.value,'+x+')" name="select_opt[]"><option value="">Select</option><option value="1">Yes</option><option value="0">No</option></select></div></div></div><div class="form-group" id="offer_price_'+x+'" style="display:none"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Percentage</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control" name="offer_percentage[]" id="offer_per_'+x+'" placeholder="Offer Percentage (%)" ></div></div><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight (Ex: 100 Gms etc..)</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control" id="form-control-3" placeholder="Weight Types" name="weight_type[]" required></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">MRP</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Enter MRP" name="mrp_price[]" required onkeyup="getPrice1(this.value,'+x+');"></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Selling Price</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="selling_price_'+x+'" placeholder="Enter Selling Price" name="selling_price[]" required readonly></div></div><a href="#" style="" class="remove_field btn btn-warning"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div>'); //add input field
+                $('.input_fields_container').append('<div><div class="row" style="border:1px solid #ddd;margin:60px 60px 0px 60px;padding-top:20px;padding-bottom:10px"><input type="hidden" id="setRaioVal_'+x+'"><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Offer</label><div class="btn-group col-sm-6 col-md-4" ><select class="form-control" onChange="check_offer1(this.value,'+x+')" name="select_opt[]"><option value="">Select</option><option value="1">Yes</option><option value="0">No</option></select></div></div><div class="form-group" id="offer_price_'+x+'" style="display:none"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Percentage</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control" name="offer_percentage[]" id="offer_per_'+x+'" placeholder="Offer Percentage (%)" ></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Weight (Ex: 100 Gms etc..)</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control" id="form-control-3" placeholder="Weight Types" name="weight_type[]" required></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">MRP</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Enter MRP" name="mrp_price[]" required onkeyup="getPrice1(this.value,'+x+');"></div></div><div class="form-group"><label for="form-control-3" class="col-sm-3 col-md-4 control-label">Selling Price</label><div class="col-sm-6 col-md-4"><input type="text" class="form-control valid_mobile_num" id="selling_price_'+x+'" placeholder="Enter Selling Price" name="selling_price[]" required readonly></div></div><a href="#" style="margin-right:27%;" class="remove_field btn btn-warning pull-right"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div>'); //add input field
 
             }
         });  
