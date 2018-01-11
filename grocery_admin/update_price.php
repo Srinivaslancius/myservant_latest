@@ -188,7 +188,7 @@
                                             $offerPer= $getProdInfo['offer_percentage'] . ' %';
                                         }
                                     ?>
-                                    <td><?php echo $getCityName['offer_type']; ?></td>
+                                    <td><?php echo $getCityName['city_name']; ?></td>
                                     <td><?php echo $checkOffer; ?></td>
                                     <td><?php echo $offerPer; ?></td>
                                     <td><?php echo $getProdInfo['weight_type']; ?></td>
