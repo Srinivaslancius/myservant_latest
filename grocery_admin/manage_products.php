@@ -38,32 +38,39 @@
             $grocery_category_id = $_REQUEST['grocery_category_id'];
             $grocery_sub_category_id = $_REQUEST['grocery_sub_category_id'];
             $product_description = $_REQUEST['product_description'];
-            $tags = $_REQUEST['tags'];            
+            $tags = $_REQUEST['tags'];      
+            $created_at = date("Y-m-d h:i:s");      
 
-            $sql = "INSERT INTO grocery_products (`grocery_category_id`, `grocery_sub_category_id`, `product_description`) VALUES ('$grocery_category_id', '$grocery_sub_category_id', '$product_description')";
+            $sql = "INSERT INTO grocery_products (`grocery_category_id`, `grocery_sub_category_id`, `product_description`, `created_at` ) VALUES ('$grocery_category_id', '$grocery_sub_category_id', '$product_description', '$created_at')";
             $result = $conn->query($sql);
             $last_id = $conn->insert_id;
 
             $brands = $_REQUEST['brands'];
             foreach($brands as $key=>$value){
-                $brandsType = $_REQUEST['brands'][$key];          
-                $sql = "INSERT INTO product_bind_brands ( `product_id`,`brand_id`) VALUES ('$last_id','$brandsType')";
-                $conn->query($sql);
+                if(!empty($value)) {
+                    $brandsType = $_REQUEST['brands'][$key];          
+                    $sql = "INSERT INTO product_bind_brands ( `product_id`,`brand_id`) VALUES ('$last_id','$brandsType')";
+                    $conn->query($sql);
+                }
             }
 
             $language_id = $_REQUEST['language_id'];
             foreach($language_id as $key=>$value){
-                $product_name = $_REQUEST['product_name'][$key]; 
-                $product_lang_ids = $_REQUEST['language_id'][$key];         
-                $sql = "INSERT INTO product_name_bind_languages ( `product_id`,`product_name`, `product_languages_id`) VALUES ('$last_id','$product_name', '$product_lang_ids')";
-                $conn->query($sql);
+                if(!empty($value)) {
+                    $product_name = $_REQUEST['product_name'][$key]; 
+                    $product_lang_ids = $_REQUEST['language_id'][$key];         
+                    $sql = "INSERT INTO product_name_bind_languages ( `product_id`,`product_name`, `product_languages_id`) VALUES ('$last_id','$product_name', '$product_lang_ids')";
+                    $conn->query($sql);
+                }
             }
 
             $tags = $_REQUEST['tags'];
             foreach($tags as $key=>$value){
-                $tagName = $_REQUEST['tags'][$key];                   
-                $sql = "INSERT INTO product_bind_tags ( `product_id`,`tag_id`) VALUES ('$last_id','$tagName')";
-                $conn->query($sql);
+                if(!empty($value)) {
+                    $tagName = $_REQUEST['tags'][$key];                   
+                    $sql = "INSERT INTO product_bind_tags ( `product_id`,`tag_id`) VALUES ('$last_id','$tagName')";
+                    $conn->query($sql);
+                }
             }
            
             if( $result == 1){
@@ -131,7 +138,7 @@
                             <div class="form-group">
                                 <label for="form-control-1" class="col-sm-3 col-md-4 control-label">Brands Applicable</label>
                                     <div class="col-sm-6 col-md-4">
-                                        <select id="form-control-2" name="brands[]" class="form-control" data-plugin="select2" multiple="multiple" required="required">
+                                        <select id="form-control-2" name="brands[]" class="form-control" data-plugin="select2" multiple="multiple" >
                                             <?php $getBrands = getAllDataWithStatus('grocery_brands','0');
                                             while($row = $getBrands->fetch_assoc()) {  ?>
                                                 <option value="<?php echo $row['id']; ?>" ><?php echo $row['brand_name']; ?></option>
@@ -142,10 +149,10 @@
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Tags</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <select id="form-control-2" name="tags[]" class="form-control" data-plugin="select2" multiple="multiple" required="required">
-                                        <?php $getTags = getAllDataWithStatus('grocery_brands','0');
+                                    <select id="form-control-2" name="tags[]" class="form-control" data-plugin="select2" multiple="multiple" >
+                                        <?php $getTags = getAllDataWithStatus('grocery_tags','0');
                                         while($row = $getTags->fetch_assoc()) {  ?>
-                                            <option value="<?php echo $row['id']; ?>" ><?php echo $row['brand_name']; ?></option>
+                                            <option value="<?php echo $row['id']; ?>" ><?php echo $row['tag_name']; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -170,7 +177,8 @@
                         <table class="table table-striped table-bordered dataTable" id="table-2">
                             <thead>
                                 <tr>
-                                    <th>S.no</th>                                    
+                                    <th>S.no</th>    
+                                    <th>Product Name</th>                                
                                     <th>Category</th>
                                     <th>Sub Category</th>
                                     <th>Update Price</th>
@@ -183,7 +191,14 @@
                                 <?php $getProdDet = getAllDataWithActiveRecent('grocery_products'); $i=1; ?>
                                 <?php while ($row = $getProdDet->fetch_assoc()) { ?>
                                 <tr>
-                                    <td><?php echo $i; ?></td>                                    
+                                    <td><?php echo $i; ?></td>   
+                                    <?php 
+                                    $pid = $row['id'];
+                                    $getProName = "SELECT * FROM product_name_bind_languages WHERE product_id='$pid' "; 
+                                    $getPn = $conn->query($getProName);
+                                    $getProName_new = $getPn->fetch_assoc();
+                                    ?>
+                                    <td><?php echo $getProName_new['product_name']; ?></td>                                 
                                     <?php $catNAme = getIndividualDetails('grocery_category','id',$row['grocery_category_id']); ?>
                                     <td><?php echo $catNAme['category_name']; ?></td>
                                     <?php $subcatNAme = getIndividualDetails('grocery_sub_category','id',$row['grocery_sub_category_id']); ?>

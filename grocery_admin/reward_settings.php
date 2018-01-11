@@ -76,25 +76,25 @@
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Transcation Amount</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Transcation Amount" name="transaction_amount" value="<?php echo $getRewardPointsdata['transaction_amount'];?>">
+                                    <input type="text" class="form-control valid_price_dec" id="form-control-3" placeholder="Enter Transcation Amount" name="transaction_amount" value="<?php echo $getRewardPointsdata['transaction_amount'];?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Reward Points</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Reward Points" name="reward_points" required value="<?php echo $getRewardPointsdata['reward_points'];?>">
+                                    <input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Enter Reward Points" name="reward_points" required value="<?php echo $getRewardPointsdata['reward_points'];?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">For Reward Points</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" name="for_reward_points" id="form-control-3" placeholder="Enter For Reward Points" required value="<?php echo $getRewardPointsdata['for_reward_points'];?>">
+                                    <input type="text" class="form-control valid_mobile_num" name="for_reward_points" id="form-control-3" placeholder="Enter For Reward Points" required value="<?php echo $getRewardPointsdata['for_reward_points'];?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Amount Credits</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" name="amount_credits" id="form-control-3" placeholder="Enter Amount Credits" required value="<?php echo $getRewardPointsdata['amount_credits'];?>">
+                                    <input type="text" class="form-control valid_price_dec" name="amount_credits" id="form-control-3" placeholder="Enter Amount Credits" required value="<?php echo $getRewardPointsdata['amount_credits'];?>">
                                 </div>
                             </div>                            
                             <div class="form-group">
