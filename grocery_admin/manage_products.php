@@ -49,7 +49,7 @@
             foreach($brands as $key=>$value){
                 if(!empty($value)) {
                     $brandsType = $_REQUEST['brands'][$key];          
-                    $sql = "INSERT INTO product_bind_brands ( `product_id`,`brand_id`) VALUES ('$last_id','$brandsType')";
+                    $sql = "INSERT INTO grocery_product_bind_brands ( `product_id`,`brand_id`) VALUES ('$last_id','$brandsType')";
                     $conn->query($sql);
                 }
             }
@@ -59,7 +59,7 @@
                 if(!empty($value)) {
                     $product_name = $_REQUEST['product_name'][$key]; 
                     $product_lang_ids = $_REQUEST['language_id'][$key];         
-                    $sql = "INSERT INTO product_name_bind_languages ( `product_id`,`product_name`, `product_languages_id`) VALUES ('$last_id','$product_name', '$product_lang_ids')";
+                    $sql = "INSERT INTO grocery_product_name_bind_languages ( `product_id`,`product_name`, `product_languages_id`) VALUES ('$last_id','$product_name', '$product_lang_ids')";
                     $conn->query($sql);
                 }
             }
@@ -68,7 +68,7 @@
             foreach($tags as $key=>$value){
                 if(!empty($value)) {
                     $tagName = $_REQUEST['tags'][$key];                   
-                    $sql = "INSERT INTO product_bind_tags ( `product_id`,`tag_id`) VALUES ('$last_id','$tagName')";
+                    $sql = "INSERT INTO grocery_product_bind_tags ( `product_id`,`tag_id`) VALUES ('$last_id','$tagName')";
                     $conn->query($sql);
                 }
             }
@@ -194,7 +194,7 @@
                                     <td><?php echo $i; ?></td>   
                                     <?php 
                                     $pid = $row['id'];
-                                    $getProName = "SELECT * FROM product_name_bind_languages WHERE product_id='$pid' "; 
+                                    $getProName = "SELECT * FROM grocery_product_name_bind_languages WHERE product_id='$pid' "; 
                                     $getPn = $conn->query($getProName);
                                     $getProName_new = $getPn->fetch_assoc();
                                     ?>
