@@ -65,7 +65,7 @@
                                 <div class="col-md-4 col-sm-4">
                                     <a href="#"><div class="box_home" id="one">
                                         
-                                        <h3>Grocery Orders</h3>
+                                        <h3>Services Orders</h3>
                                         <p>
                                             Count
                                         </p>
@@ -87,7 +87,7 @@
                                 <div class="col-sm-4">
                                      <a href="#"><div class="box_home" id="three">
                                         
-                                        <h3>Services Orders</h3>
+                                        <h3>Grocery Orders</h3>
                                         <p>
                                             Count
                                         </p>
@@ -99,7 +99,7 @@
                                 <div class="col-sm-4">
                                       <a href="#"><div class="box_home" id="four">
                                         
-                                        <h3>My Profile</h3>
+                                        <h3>Wishlist Grocery</h3>
                                        
                                     </div>  </a>
                                 </div>
@@ -126,7 +126,7 @@
                                 <div class="col-sm-4">
                                      <a href="#"><div class="box_home" id="seven">
                                         
-                                        <h3>Reward Points</h3>
+                                        <h3>Update Profile</h3>
                                        
                                     </div> </a>
                                 </div>
@@ -135,7 +135,14 @@
                                 <div class="col-sm-4">
                                       <a href="#"><div class="box_home" id="eight">
                                         
-                                        <h3>My Wishlist</h3>
+                                        <h3>Reward Points</h3>
+                                       
+                                    </div></a>
+                                </div>
+								 <div class="col-sm-4">
+                                      <a href="#"><div class="box_home" id="nine">
+                                        
+                                        <h3>Change password</h3>
                                        
                                     </div></a>
                                 </div>
