@@ -62,60 +62,7 @@
 .table>thead>tr>th,.table>thead>tr>td{
 	width:20%;
 }
-.notif {
-  position: relative;
-  display: block;
-  height: 100px;
-  width: 100px;
-  background: url('img/dashboard/rewards1.png');
-  background-size: contain;
-  text-decoration: none;
-  border-radius:100%;
-}
-.notif1 {
-  position: relative;
-  display: block;
- height: 100px;
-  width: 100px;
-  background: url('img/dashboard/mul.png');
-  background-size: contain;
-  text-decoration: none;
-  border-radius:100%;
-}
-.notif2 {
-  position: relative;
-  display: block;
-  height: 100px;
-  width: 100px;
-  background: url('img/dashboard/total.png');
-  background-size: contain;
-  text-decoration: none;
-  border-radius:100%;
-}
 
-.num {
-  position: absolute;
-  right: 0px;
-  top:0px;
-  color: black;
- font-size:50px;
-}
-
-.badge {
-    display: inline-block;
-    min-width: 10px;
-    padding: 13px 17px;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    background-color: #fe6003;
-    border-radius: 20px;
-    margin-left: 70px;
-}
 </style>
 
 </head>
@@ -195,11 +142,11 @@
 						</div>
 						<div class="col-sm-4">
 					<h4>For Rewards</h4>
-						<a href="" class="notif1"><span class="badge">2</span></a>
+						<a href="" class="notif1"><span class="badge">22</span></a>
 						</div>
 						<div class="col-sm-4">
 					<h4 style="margin-left:20px">Total</h4>
-						<a href="" class="notif2"><span class="badge">4</span></a>
+						<a href="" class="notif2"><span class="badge">44</span></a>
 						</div>
                      </div>
 
