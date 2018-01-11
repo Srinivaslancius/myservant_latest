@@ -188,9 +188,9 @@
 					<button type="button" class="btn btn-danger btn-lg">Amount <span class="badge">21</span></button>
 					</div>
                     </div>-->
-					<div class="row" style="padding:10px 55px 50px 100px">
+					<div class="row" style="padding:10px 60px 50px 60px">
 					<div class="col-sm-4">
-					<h4 style="margin-left:">Rewards</h4>
+					<h4 style="margin-left:10px">Rewards</h4>
 						<a href="" class="notif"><span class="badge">2</span></a>
 						</div>
 						<div class="col-sm-4">
@@ -198,7 +198,7 @@
 						<a href="" class="notif1"><span class="badge">2</span></a>
 						</div>
 						<div class="col-sm-4">
-					<h4>Total</h4>
+					<h4 style="margin-left:20px">Total</h4>
 						<a href="" class="notif2"><span class="badge">4</span></a>
 						</div>
                      </div>

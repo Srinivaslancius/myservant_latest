@@ -8,16 +8,16 @@ $lists = array();
 $response = array();
 if($_SERVER['REQUEST_METHOD']=='POST'){
 
-	if(isset($_REQUEST['userId']) && !empty($_REQUEST['userId']) && !empty($_REQUEST['id']) )  {
+	if(isset($_REQUEST['userId']) && !empty($_REQUEST['userId']) && !empty($_REQUEST['orderId']))  {
 
 		$uid = $_REQUEST['userId'];
-		$id = $_REQUEST['id'];
-		$getOrders = "SELECT * from services_orders WHERE user_id = '$uid' AND id='$id' ORDER BY id DESC"; 
+		$order_id = $_REQUEST['order_id'];
+		$getOrders = "SELECT * from services_orders WHERE user_id = '$uid' AND order_id ='$order_id' ORDER BY id DESC"; 
         $getOrders1 = $conn->query($getOrders);
 
 		if ($getOrders1->num_rows > 0) {
 				$response["lists"] = array();				
-				while($orderData = $getOrders1->fetch_assoc()) {					
+				while($orderData = $getOrders1->fetch_assoc()) {		
 					//Chedck the condioton for emptty or not		
 					$lists = array();		
 					$lists["id"] = $orderData["id"];				
@@ -32,8 +32,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			    	$orderPaymentStatus = getIndividualDetails('lkp_payment_status','id',$row['lkp_payment_status_id']);
 			    	$lists["payment_status"] = $orderPaymentStatus['payment_status'];
 
-			    	array_push($response["lists"], $lists);	
-			    	
 			    	array_push($response["lists"], $lists);		
 				}
 				
