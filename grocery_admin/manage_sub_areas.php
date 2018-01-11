@@ -102,7 +102,7 @@
                                     <label for="form-control-1">Sub Area Name</label>
                                     <input type="text" name="sub_area_name[]" class="form-control" id="form-control-1" placeholder="Enter Sub Area Name" required>
                                  </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-5">
                                     <label for="form-control-1">Delivery</label>
                                     <div class="btn-group" data-toggle="buttons">
                                          <label class="btn btn-outline-primary active">
@@ -113,7 +113,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-3 padd0">
+                                <div class="form-group col-md-2 padd0">
                                     <label for="form-control-1">&nbsp;</label>
                                     <div>
                                         <span><button type="button" class="btn btn-success add_more_button"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i></button></span>
@@ -182,7 +182,7 @@
             e.preventDefault();
             if(x < max_fields_limit){ //check conditions
                 x++; //counter increment
-                $('.input_fields_container').append('<div class="row"><div class="form-group col-md-5 padd0"><label for="form-control-1">Sub Area Name</label><input type="text" name="sub_area_name[]" class="form-control" id="form-control-1" placeholder="Enter Sub Area Name" required></div><div class="form-group col-md-4"><label for="form-control-1">Delivery</label><div class="btn-group" data-toggle="buttons"><label class="btn btn-outline-primary active"><input type="radio" name="buttonRadios" id="buttonRadios1" autocomplete="off" checked="checked"> Yes</label><label class="btn btn-outline-primary"><input type="radio" name="buttonRadios" id="buttonRadios2" autocomplete="off"> No &nbsp;</label></div></div><label for="form-control-1">&nbsp;</label><a href="#" class="remove_field btn btn-warning"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div>'); //add input field
+                $('.input_fields_container').append('<div><div class="form-group col-md-5 padd0"><label for="form-control-1">Sub Area Name</label><input type="text" name="sub_area_name[]" class="form-control" id="form-control-1" placeholder="Enter Sub Area Name" required></div><div class="form-group col-md-5"><label for="form-control-1">Delivery</label><div class="btn-group" data-toggle="buttons"><label class="btn btn-outline-primary active"><input type="radio" name="buttonRadios" id="buttonRadios1" autocomplete="off" checked="checked"> Yes</label><label class="btn btn-outline-primary"><input type="radio" name="buttonRadios" id="buttonRadios2" autocomplete="off"> No &nbsp;</label></div></div><label for="form-control-1">&nbsp;</label><a href="#" class="remove_field btn btn-warning" style="margin-top:21px;margin-bottom:20px;margin-left:0px"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div>'); //add input field
             }
         });  
         $('.input_fields_container').on("click",".remove_field", function(e){ //user click on remove text links
