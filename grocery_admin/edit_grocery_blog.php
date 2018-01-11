@@ -104,6 +104,7 @@
                                     </label>
                                 </div>
                             </div>
+                            
                             <?php $getStatus = getAllData('lkp_status');?>
                             <div class="form-group">
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Status</label>
