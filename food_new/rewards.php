@@ -48,6 +48,10 @@
 	background-color:#fe6003;
  padding: 5px 12px;
 } 
+h3,h4{
+	color:#fe6003;
+}
+
 </style>
 </head>
 <body>
@@ -116,15 +120,15 @@
 					  <div class="row" style="padding:10px 60px 50px 60px">
 					<div class="col-sm-4">
 					<h4 style="margin-left:10px">Rewards</h4>
-						<a href="" class="notif"><span class="badge">2</span></a>
+						<a href="" class="notif"><span class="badge1">2</span></a>
 						</div>
 						<div class="col-sm-4">
 					<h4>For Rewards</h4>
-						<a href="" class="notif1"><span class="badge">22</span></a>
+						<a href="" class="notif1"><span class="badge1">22</span></a>
 						</div>
 						<div class="col-sm-4">
 					<h4 style="margin-left:20px">Total</h4>
-						<a href="" class="notif2"><span class="badge">44</span></a>
+						<a href="" class="notif2"><span class="badge1">44</span></a>
 						</div>
                      </div>
                 <div class="table-responsive">						
