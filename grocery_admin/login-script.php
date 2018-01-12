@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST") {
 		//latest activity
 		$_SESSION['last_action'] = time();
 	    if(isset($_SESSION["grocery_admin_user_name"])) {
-		    echo "<script type='text/javascript'>window.location='users.php'</script>";
+		    echo "<script type='text/javascript'>window.location='dashboard.php'</script>";
 		}
 	} else {
 	    //echo "<script language=javascript>alert('Entered Username or Password is incorrect!')</script>";

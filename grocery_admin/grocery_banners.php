@@ -158,7 +158,7 @@
                                         <option value="">-- Select Product --</option>
                                         <?php $getProducts = getAllDataWithStatus('grocery_products','0');?>
                                         <?php while($row = $getProducts->fetch_assoc()) { 
-                                            $getProductNames = getIndividualDetails('product_name_bind_languages','product_id',$row['id']); ?>
+                                            $getProductNames = getIndividualDetails('grocery_product_name_bind_languages','product_id',$row['id']); ?>
                                             <option value="<?php echo $row['id']; ?>" ><?php echo $getProductNames['product_name']; ?></option>
                                         <?php } ?>
                                     </select>
