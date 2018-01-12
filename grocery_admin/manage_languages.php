@@ -67,6 +67,7 @@
                                     <input type="hidden" id="table_name" value="grocery_languages">
                                     <input type="hidden" id="column_name" value="language_name">
                                 </div>
+                                
                                 <div class="col-sm-3 col-md-3">
                                     <span><button type="button" class="btn btn-success add_more_button"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i></button></span>
                                 </div>

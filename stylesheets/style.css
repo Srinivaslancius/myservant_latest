@@ -1531,7 +1531,7 @@ ul.flat-unstyled li > ul > li > a {
 	border-right:1px solid #fec579;
 	line-height:1;
 	position:relative;
-	z-index:8;
+	z-index: -9999;
 	word-spacing: 2px;
 }
 
