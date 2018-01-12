@@ -34,7 +34,7 @@
 													$getProductNames = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getProductsData['id']);
 													?>
 													<li>
-														<a href="product_details.php?product_id=<?php echo $getProductsData['id']; ?>" title=""><?php echo substr($getProductNames['product_name'], 0,35); ?></a>
+														<a href="single_product.php?product_id=<?php echo $getProductsData['id']; ?>" title=""><?php echo substr($getProductNames['product_name'], 0,35); ?></a>
 													</li>
 													<?php } ?>
 													
