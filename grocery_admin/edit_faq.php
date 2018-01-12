@@ -75,7 +75,11 @@
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Priority</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control valid_mobile_num" id="form-control-3" placeholder="Priority" name="priority" required="required" value="<?php echo $getTestmonials['priority']; ?>">
+                                    <input type="text" class="form-control valid_mobile_num" id="user_input" placeholder="Priority" name="priority" required="required" value="<?php echo $getTestmonials['priority']; ?>"  onkeyup="checkUserAvailTest()">
+                                    <span id="input_status" style="color: red;"></span>
+                                    <div class="help-block with-errors"></div>
+                                    <input type="hidden" id="table_name" value="grocery_faqs">
+                                    <input type="hidden" id="column_name" value="priority">
                                 </div>
                             </div>
                             <?php $getStatus = getAllData('lkp_status');?>

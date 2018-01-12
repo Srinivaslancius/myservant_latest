@@ -56,7 +56,11 @@
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Language</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Language" name="language_name" required value="<?php echo $getLanguages['language_name']; ?>">
+                                    <input type="text" class="form-control" id="user_input" placeholder="Enter Language" name="language_name" required value="<?php echo $getLanguages['language_name']; ?>" onkeyup="checkUserAvailTest()">
+                                    <span id="input_status" style="color: red;"></span>
+                                    <div class="help-block with-errors"></div>
+                                    <input type="hidden" id="table_name" value="grocery_languages">
+                                    <input type="hidden" id="column_name" value="language_name">
                                 </div>
                             </div>
                              
