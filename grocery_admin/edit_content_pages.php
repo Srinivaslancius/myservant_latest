@@ -78,13 +78,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                            <?php if($contentData['image']!='') { ?>
-                                <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_content_banners/'.$contentData['image']; ?>"  id="output" height="100" width="100"/>
-                            <?php } ?>
+                            
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Banner Image</label>
                                 <div class="col-sm-6 col-md-4">
+                                    <?php if($contentData['image']!='') { ?>
+                                <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_content_banners/'.$contentData['image']; ?>"  id="output" height="100" width="100"/>
+                            <?php } ?>
                                     <label class="btn btn-default file-upload-btn">Choose file...
-                                        <input id="form-control-22" class="file-upload-input" type="file" name="banner" accept="image/*" >
+                                        <input id="form-control-22" class="file-upload-input" type="file" name="banner" accept="image/*" onchange="loadFile(event)">
                                     </label>
                                 </div>
                             </div>
