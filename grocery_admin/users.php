@@ -31,7 +31,9 @@
 
         <div class="site-content">
             
-
+<?php 
+       $getUsers = "SELECT * FROM users WHERE lkp_admin_service_type_id = 3 ORDER BY lkp_status_id, id DESC";
+       $getUsersData = $conn->query($getUsers); $i=1; ?>
             <div class="panel panel-default panel-table m-b-0">
                 <div class="panel-heading">
                     <h3 class="m-t-0 m-b-5 font_sz_view">Customers</h3>
@@ -47,18 +49,17 @@
                                     <th>Email</th>
                                     <th>Mobile</th>
                                     <th>Created Date</th>
-                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $getAllCustomers = getAllDataWithActiveRecent('customers'); $i=1; ?>
-                                <?php while ($row = $getAllCustomers->fetch_assoc()) { ?>
+                                
+                                    <?php while ($row = $getUsersData->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?php echo $i; ?></td>
-                                    <!-- <td>ST1234</td> -->
-                                    <td><?php echo $row['customer_name']; ?></td>
-                                    <td><?php echo $row['customer_email']; ?></td>
-                                    <td><?php echo $row['customer_mobile']; ?></td>
+                                    
+                                    <td><?php echo $row['user_full_name']; ?></td>
+                                    <td><?php echo $row['user_email']; ?></td>
+                                    <td><?php echo $row['user_mobile']; ?></td>
                                     <td><?php echo $row['created_at']; ?></td>
                                     
                                 </tr>
