@@ -120,15 +120,12 @@
             </div>
             
         </div>
-        <div class="site-footer">
-          2017 © Cosmos
-        </div>
-
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
+        
+    <?php include_once 'footer.php'; ?>
     <script src="js/dashboard-3.min.js"></script>
     <script src="js/tables-datatables.min.js"></script>
+
+
     <script>
         $(document).ready(function() {
         var max_fields_limit      = 10; //set limit for maximum input fields

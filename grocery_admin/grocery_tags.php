@@ -62,7 +62,11 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label" for="form-control-9">Tag</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" name="tag_name[]" class="form-control" id="form-control-3" placeholder="Enter Tag" required>
+                                    <input type="text" name="tag_name[]" class="form-control" id="user_input" placeholder="Enter Tag" required onkeyup="checkUserAvailTest()">
+                                    <span id="input_status" style="color: red;"></span>
+                                    <div class="help-block with-errors"></div>
+                                    <input type="hidden" id="table_name" value="grocery_tags">
+                                    <input type="hidden" id="column_name" value="tag_name">
                                 </div>
                                 <div class="col-sm-3 col-md-3">
                                     <span><button type="button" class="btn btn-success add_more_button"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i></button></span>

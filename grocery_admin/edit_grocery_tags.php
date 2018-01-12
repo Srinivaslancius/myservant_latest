@@ -56,7 +56,11 @@
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Tag</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Tag" name="tag_name" required value="<?php echo $getTags['tag_name']; ?>">
+                                    <input type="text" class="form-control" id="user_input" placeholder="Enter Tag" name="tag_name" required value="<?php echo $getTags['tag_name']; ?>" onkeyup="checkUserAvailTest()">
+                                    <span id="input_status" style="color: red;"></span>
+                                    <div class="help-block with-errors"></div>
+                                    <input type="hidden" id="table_name" value="grocery_tags">
+                                    <input type="hidden" id="column_name" value="tag_name">
                                 </div>
                             </div>
                              
