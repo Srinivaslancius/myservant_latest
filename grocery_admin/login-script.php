@@ -1,6 +1,6 @@
 <?php
 error_reporting(0);
-include_once('admin_includes/config.php');
+include_once('../admin_includes/config.php');
 include_once('../admin_includes/common_functions.php');
 //session_start();
 
@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST") {
 	//Set Password encrypt and decrypt	
 	$pwd=$_POST["admin_password"];	
 	$admin_password = encryptPassword($pwd);
-	$sql = "SELECT * FROM admin_users WHERE admin_email = '$admin_email' AND admin_password = '$admin_password' AND lkp_status_id = 0";
+	$sql = "SELECT * FROM admin_users WHERE admin_email = '$admin_email' AND admin_password = '$admin_password' AND lkp_status_id = 0 AND lkp_admin_user_type_id = 1 AND lkp_admin_service_type_id = 3";
 	$result = $conn->query($sql);
 	$row = $result->fetch_assoc();
 

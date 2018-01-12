@@ -3,6 +3,12 @@ error_reporting(1);
 ob_start();
 include_once('../admin_includes/config.php');
 include_once('../admin_includes/common_functions.php');
+
+if(!isset($_SESSION['grocery_admin_user_id'])) {
+  header("Location: logout.php");
+  exit;
+}
+
 ?>
 <?php $getSiteSettings = getAllDataWhere('grocery_site_settings','id',1); 
 $getSiteSettingsData = $getSiteSettings->fetch_assoc();
