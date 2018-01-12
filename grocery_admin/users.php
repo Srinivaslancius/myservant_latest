@@ -56,7 +56,7 @@
                                     <?php while ($row = $getUsersData->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?php echo $i; ?></td>
-                                    <!-- <td>ST1234</td> -->
+                                    
                                     <td><?php echo $row['user_full_name']; ?></td>
                                     <td><?php echo $row['user_email']; ?></td>
                                     <td><?php echo $row['user_mobile']; ?></td>
