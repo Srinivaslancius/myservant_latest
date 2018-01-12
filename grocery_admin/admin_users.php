@@ -37,11 +37,12 @@
             //echo "<pre>"; print_r($_POST); die;
             $admin_name = $_REQUEST['admin_name'];
             $admin_email = $_REQUEST['admin_email'];
-            $admin_mobile = $_REQUEST['admin_mobile'];
             $admin_password = encryptPassword($_REQUEST['admin_password']);
+            $lkp_admin_service_type_id = $_POST['lkp_admin_service_type_id'];
+            $lkp_admin_user_type_id = $_POST['lkp_admin_user_type_id'];
             $lkp_status_id = $_REQUEST['lkp_status_id'];
 
-            $sql = "INSERT INTO admin_users (`admin_name`,`admin_email`,`admin_mobile`,`admin_password`, `lkp_status_id`) VALUES ('$admin_name', '$admin_email', '$admin_mobile','$admin_password','$lkp_status_id')";
+        $sql = "INSERT INTO admin_users (`admin_name`,`admin_email`,`admin_password`, `lkp_admin_service_type_id`, `lkp_admin_user_type_id`,`lkp_status_id`) VALUES ('$admin_name', '$admin_email','$admin_password','$lkp_admin_service_type_id','$lkp_admin_user_type_id','$lkp_status_id')"; 
            
             
             $result = $conn->query($sql);
@@ -75,16 +76,37 @@
                                     <input type="email"  name="admin_email" class="form-control" id="form-control-3" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" placeholder="Enter Email"  required="required">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Mobile</label>
-                                <div class="col-sm-6 col-md-4">
-                                    <input type="text" name="admin_mobile" class="form-control" id="form-control-3" placeholder="Enter Mobile"  required="required" onkeypress="return isNumberKey(event)" maxlength="10" pattern="[0-9]{10}">
-                                </div>
-                            </div>
+
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Password</label>
                                 <div class="col-sm-6 col-md-4">
                                     <input type="password" name="admin_password" class="form-control" id="form-control-3" placeholder="Enter Password"  minlength="8" required="required">
+                                </div>
+                            </div>
+                            <?php $getAdminSetviceTypes = getAllDataWhereWithActive('lkp_admin_service_types','id',3);?>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Choose Admin Service Types</label>
+                                <div class="col-sm-6 col-md-4">
+                                    <select id="form-control-1" name="lkp_admin_service_type_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
+                                        <option value="">-- Select Admin Service Types --</option>
+
+                                        <?php while($row1 = $getAdminSetviceTypes->fetch_assoc()) {  ?>
+                                            <option value="<?php echo $row1['id']; ?>" ><?php echo $row1['admin_service_type']; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <?php $getAdminUserTypes = getAllDataWithStatus('lkp_admin_user_types','0');?>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Choose Admin User Types</label>
+                                <div class="col-sm-6 col-md-4">
+                                    <select id="form-control-1" name="lkp_admin_user_type_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
+                                        <option value="">-- Select Admin User Types --</option>
+
+                                        <?php while($row2 = $getAdminUserTypes->fetch_assoc()) {  ?>
+                                            <option value="<?php echo $row2['id']; ?>" ><?php echo $row2['admin_type']; ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
                             <?php $getStatus = getAllData('lkp_status');?>
