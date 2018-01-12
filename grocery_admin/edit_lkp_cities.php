@@ -37,7 +37,7 @@
             $lkp_state_id = $_POST['lkp_state_id'];
             $lkp_district_id = $_POST['lkp_district_id'];  
             $city_name = $_POST['city_name'];
-            $sql = "UPDATE `lkp_cities` SET lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',city_name = '$city_name' WHERE id = '$cityid' ";     
+            $sql = "UPDATE `grocery_lkp_cities` SET lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',city_name = '$city_name' WHERE id = '$cityid' ";     
             $result = $conn->query($sql);
             if( $result == 1){
                 echo "<script type='text/javascript'>window.location='add_cities.php?msg=success'</script>";
@@ -53,10 +53,10 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <?php $getCitiesData = getIndividualDetails('lkp_cities','id',$cityid); ?>
+                        <?php $getCitiesData = getIndividualDetails('grocery_lkp_cities','id',$cityid); ?>
                         <form class="form-horizontal" method="POST" autocomplete="off" enctype="multipart/form-data">
                             <div class="form-group">
-                                <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
+                                <?php $getStates = getAllDataWithStatus('grocery_lkp_states','0');?>
                                 <label class="col-sm-3 control-label" for="form-control-9">Select State</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select id="form-control-1" name="lkp_state_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required onChange="getDistricts(this.value);" required>
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <?php $getDistrictsData = getAllDataWithStatus('lkp_districts','0');?>
+                                <?php $getDistrictsData = getAllDataWithStatus('grocery_lkp_districts','0');?>
                                 <label class="col-sm-3 control-label" for="form-control-9">Select District</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select name="lkp_district_id" id="lkp_district_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>

@@ -67,7 +67,7 @@
                         <?php $getGrcTest = getIndividualDetails('city_wise_admin_users','id',$cid); ?>
                         <form class="form-horizontal" method="POST" autocomplete="off" enctype="multipart/form-data">
                             <div class="form-group">
-                                <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
+                                <?php $getStates = getAllDataWithStatus('grocery_lkp_states','0');?>
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-3">Select State</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select id="form-control-1" name="lkp_state_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required onChange="getDistricts(this.value);">
@@ -79,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <?php $getDistrictsData = getAllDataWithStatus('lkp_districts','0');?>
+                                <?php $getDistrictsData = getAllDataWithStatus('grocery_lkp_districts','0');?>
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-3">Select District</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select name="lkp_district_id" id="lkp_district_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required onChange="getCities(this.value);">
@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
+                                <?php $getCities = getAllDataWithStatus('grocery_lkp_cities','0');?>
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-3">Select City</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select name="lkp_city_id" id="lkp_city_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>

@@ -38,7 +38,7 @@
             $lkp_district_id = $_POST['lkp_district_id'];  
             $lkp_city_id = $_POST['lkp_city_id'];
             $pincode = $_POST['pincode'];
-            $sql = "UPDATE `lkp_pincodes` SET lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',pincode = '$pincode' WHERE id = '$pincode_id' ";     
+            $sql = "UPDATE `grocery_lkp_pincodes` SET lkp_state_id = '$lkp_state_id',lkp_district_id = '$lkp_district_id',lkp_city_id = '$lkp_city_id',pincode = '$pincode' WHERE id = '$pincode_id' ";     
             $result = $conn->query($sql);
             if( $result == 1){
                 echo "<script type='text/javascript'>window.location='manage_pincodes.php?msg=success'</script>";
@@ -54,10 +54,10 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <?php $getPincodes = getIndividualDetails('lkp_pincodes','id',$pincode_id); ?>
+                        <?php $getPincodes = getIndividualDetails('grocery_lkp_pincodes','id',$pincode_id); ?>
                         <form class="form-horizontal" method="POST" autocomplete="off" enctype="multipart/form-data">
                             <div class="form-group">
-                                <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
+                                <?php $getStates = getAllDataWithStatus('grocery_lkp_states','0');?>
                                 <label class="col-sm-3 control-label" for="form-control-9">Select State</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select id="form-control-1" name="lkp_state_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required onChange="getDistricts(this.value);">
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <?php $getDistrictsData = getAllDataWithStatus('lkp_districts','0');?>
+                                <?php $getDistrictsData = getAllDataWithStatus('grocery_lkp_districts','0');?>
                                 <label class="col-sm-3 control-label" for="form-control-9">Select District</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select name="lkp_district_id" id="lkp_district_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required onChange="getCities(this.value);">
@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
+                                <?php $getCities = getAllDataWithStatus('grocery_lkp_cities','0');?>
                                 <label class="col-sm-3 control-label" for="form-control-9">Select City</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select name="lkp_city_id" id="lkp_city_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>

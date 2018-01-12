@@ -42,7 +42,7 @@
                     $file_tmp = $_FILES["product_images"]["tmp_name"][$key];
                     $file_destination = 'uploads/product_images/' . $product_images1;
                     move_uploaded_file($file_tmp, $file_destination);    
-                    $sql = "INSERT INTO product_bind_images ( `product_id`,`image`) VALUES ('$pid','$product_images1')";
+                    $sql = "INSERT INTO grocery_product_bind_images ( `product_id`,`image`) VALUES ('$pid','$product_images1')";
                     $result = $conn->query($sql);
                 }
             }
@@ -104,7 +104,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $getProductImages = getAllDataWhere('product_bind_images','product_id',$pid); $i=1; ?>
+                                <?php $getProductImages = getAllDataWhere('grocery_product_bind_images','product_id',$pid); $i=1; ?>
                                 <?php while ($row = $getProductImages->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?php echo $i; ?></td>

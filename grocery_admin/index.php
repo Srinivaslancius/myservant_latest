@@ -26,6 +26,7 @@
       </div>
     </div>
 
+
     <!-- display error message -->
       <?php if(isset($_GET['error']) && $_GET['error']=='fail') { ?>
       <div class="col-sm-4 col-sm-offset-4" id="set_valid_msg">

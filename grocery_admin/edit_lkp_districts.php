@@ -36,7 +36,7 @@
             //echo "<pre>"; print_r($_POST); die;
             $lkp_state_id = $_POST['lkp_state_id'];
             $district_name = $_POST['district_name'];
-            $sql = "UPDATE `lkp_districts` SET lkp_state_id = '$lkp_state_id',district_name = '$district_name' WHERE id = '$districtid' ";     
+            $sql = "UPDATE `grocery_lkp_districts` SET lkp_state_id = '$lkp_state_id',district_name = '$district_name' WHERE id = '$districtid' ";     
             $result = $conn->query($sql);
             if( $result == 1){
                 echo "<script type='text/javascript'>window.location='add_districts.php?msg=success'</script>";
@@ -52,10 +52,10 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <?php $getDistricts = getIndividualDetails('lkp_districts','id',$districtid); ?>
+                        <?php $getDistricts = getIndividualDetails('grocery_lkp_districts','id',$districtid); ?>
                         <form class="form-horizontal" method="POST" autocomplete="off" enctype="multipart/form-data">
                             <div class="form-group">
-                                <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
+                                <?php $getStates = getAllDataWithStatus('grocery_lkp_states','0');?>
                                 <label class="col-sm-3 control-label" for="form-control-9">Select State</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select id="form-control-1" name="lkp_state_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required required>

@@ -35,7 +35,7 @@
         } else  { 
             //echo "<pre>"; print_r($_POST); die;     
             $state_name = $_POST['state_name'];
-            $sql = "UPDATE `lkp_states` SET state_name = '$state_name' WHERE id = '$stateid' ";     
+            $sql = "UPDATE `grocery_lkp_states` SET state_name = '$state_name' WHERE id = '$stateid' ";     
             $result = $conn->query($sql);
             if( $result == 1){
                 echo "<script type='text/javascript'>window.location='add_state.php?msg=success'</script>";
@@ -51,7 +51,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <?php $getStates = getIndividualDetails('lkp_states','id',$stateid); ?>
+                        <?php $getStates = getIndividualDetails('grocery_lkp_states','id',$stateid); ?>
                         <form class="form-horizontal" method="POST" autocomplete="off" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">State</label>

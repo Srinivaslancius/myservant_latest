@@ -36,7 +36,7 @@
             foreach($state_name as $key=>$value){
                 if(!empty($value)) {
                   $state_name = $_REQUEST['state_name'][$key];    
-                  $sql = "INSERT INTO lkp_states (`state_name`) VALUES ('$state_name')";
+                  $sql = "INSERT INTO grocery_lkp_states (`state_name`) VALUES ('$state_name')";
                   $result = $conn->query($sql);
                 }
             }
@@ -63,7 +63,7 @@
                                 <div class="col-sm-6 col-md-4">
                                     <input type="text" name="state_name[]" class="form-control" id="user_input" placeholder="Enter State Name" required>
                                     <span id="input_status" style="color: red;"></span>
-                                    <input type="hidden" id="table_name" value="lkp_states">
+                                    <input type="hidden" id="table_name" value="grocery_lkp_states">
                                     <input type="hidden" id="column_name" value="state_name">
                                 </div>
                                 <div class="col-sm-3 col-md-3">
@@ -100,14 +100,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $getStates = getAllDataWithActiveRecent('lkp_states'); $i=1; ?>
+                                <?php $getStates = getAllDataWithActiveRecent('grocery_lkp_states'); $i=1; ?>
                                 <?php while ($row = $getStates->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?php echo $i; ?></td>
                                     <!-- <td>ST1234</td> -->
                                     <td><?php echo $row['state_name']; ?></td>
-                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='lkp_states'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='lkp_states'>In Active</span>" ;} ?></td>
-                                    <td> <a href="edit_lkp_states.php?stateid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp; <!-- <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "lkp_states" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></td>
+                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_lkp_states'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_lkp_states'>In Active</span>" ;} ?></td>
+                                    <td> <a href="edit_lkp_states.php?stateid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> &nbsp; <!-- <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "grocery_lkp_states" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></td>
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>
@@ -127,7 +127,7 @@
             e.preventDefault();
             if(x < max_fields_limit){ //check conditions
                 x++; //counter increment
-                $('.input_fields_container').append('<div><div class="row"><label class="col-sm-3 control-label" for="form-control-9">State</label><div class="col-sm-6 col-md-4"><input type="text" name="state_name[]" class="form-control" id="user_input" placeholder="Enter State Name" required></div><a href="#" class="remove_field btn btn-warning"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div>'); //add input field
+                $('.input_fields_container').append('<div><div class="form-group"><label class="col-sm-3 control-label" for="form-control-9">State</label><div class="col-sm-6 col-md-4"><input type="text" name="state_name[]" class="form-control" id="user_input" placeholder="Enter State Name" required></div><a href="#" class="remove_field btn btn-warning"style="margin-left:15px"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div>'); //add input field
             }
         });  
         $('.input_fields_container').on("click",".remove_field", function(e){ //user click on remove text links

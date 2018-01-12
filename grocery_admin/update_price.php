@@ -48,7 +48,7 @@
                         $offer_percentage = $_REQUEST['offer_percentage'][$key];
                     }
                     //echo "<pre>"; print_r($buttonRadios); die;
-                    $sql = "INSERT INTO product_bind_weight_prices ( `product_id`,`lkp_city_id`, `weight_type`, `mrp_price`, `selling_price` , `offer_type`, `offer_percentage` ) VALUES ('$pid','$lkp_city_id', '$weight_type', '$mrp_price', '$selling_price', '$offer_type', '$offer_percentage')";
+                    $sql = "INSERT INTO grocery_product_bind_weight_prices ( `product_id`,`lkp_city_id`, `weight_type`, `mrp_price`, `selling_price` , `offer_type`, `offer_percentage` ) VALUES ('$pid','$lkp_city_id', '$weight_type', '$mrp_price', '$selling_price', '$offer_type', '$offer_percentage')";
                     $result = $conn->query($sql);
                 }
             }
@@ -71,7 +71,7 @@
                                 <div class="col-sm-6 col-md-4">
                                     <select id="form-control-1" name="lkp_city_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
                                         <option value="">-- Select City --</option>
-                                        <?php $getCities = getAllDataWithStatus('lkp_cities','0');?>
+                                        <?php $getCities = getAllDataWithStatus('grocery_lkp_cities','0');?>
                                         <?php while($row = $getCities->fetch_assoc()) {  ?>
                                             <option value="<?php echo $row['id']; ?>" ><?php echo $row['city_name']; ?></option>
                                         <?php } ?>
@@ -151,7 +151,7 @@
 
             <?php 
                 $i=1; 
-                $getProPriceInfo = "SELECT * FROM product_bind_weight_prices WHERE product_id='$pid' " ; 
+                $getProPriceInfo = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id='$pid' " ; 
                 $getProIn = $conn->query($getProPriceInfo);
             ?>
             <div class="panel panel-default panel-table m-b-0">
@@ -178,7 +178,7 @@
                                 <?php while($getProdInfo = $getProIn->fetch_assoc() ) {?>
                                 <tr>
                                     <td><?php echo $i; ?></td>
-                                    <?php $getCityName= getIndividualDetails('lkp_cities','id',$getProdInfo['lkp_city_id']); ?>
+                                    <?php $getCityName= getIndividualDetails('grocery_lkp_cities','id',$getProdInfo['lkp_city_id']); ?>
                                     <?php 
                                         if($getProdInfo['offer_type'] == 0) {
                                             $checkOffer = "No";
@@ -188,13 +188,13 @@
                                             $offerPer= $getProdInfo['offer_percentage'] . ' %';
                                         }
                                     ?>
-                                    <td><?php echo $getCityName['offer_type']; ?></td>
+                                    <td><?php echo $getCityName['city_name']; ?></td>
                                     <td><?php echo $checkOffer; ?></td>
                                     <td><?php echo $offerPer; ?></td>
                                     <td><?php echo $getProdInfo['weight_type']; ?></td>
                                     <td><?php echo $getProdInfo['mrp_price']; ?></td>
                                     <td><?php echo $getProdInfo['selling_price']; ?></td>
-                                    <td><?php if ($getProdInfo['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$getProdInfo['id']." data-status=".$getProdInfo['lkp_status_id']." data-tbname='product_bind_weight_prices'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$getProdInfo['lkp_status_id']." data-incId=".$getProdInfo['id']." data-tbname='product_bind_weight_prices'>In Active</span>" ;} ?></td>
+                                    <td><?php if ($getProdInfo['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$getProdInfo['id']." data-status=".$getProdInfo['lkp_status_id']." data-tbname='grocery_product_bind_weight_prices'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$getProdInfo['lkp_status_id']." data-incId=".$getProdInfo['id']." data-tbname='grocery_product_bind_weight_prices'>In Active</span>" ;} ?></td>
                                     <td><span><a href="#"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td>
                                 </tr>
                                 <?php $i++; } ?>

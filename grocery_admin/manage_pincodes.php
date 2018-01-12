@@ -39,7 +39,7 @@
             foreach($pincode as $key=>$value){
                 if(!empty($value)) {
                   $pincode = $_REQUEST['pincode'][$key];    
-                  $sql = "INSERT INTO lkp_pincodes (`lkp_state_id`,`lkp_district_id`,`lkp_city_id`,`pincode`) VALUES ('$lkp_state_id','$lkp_district_id','$lkp_city_id','$pincode')";
+                  $sql = "INSERT INTO grocery_lkp_pincodes (`lkp_state_id`,`lkp_district_id`,`lkp_city_id`,`pincode`) VALUES ('$lkp_state_id','$lkp_district_id','$lkp_city_id','$pincode')";
                   $result = $conn->query($sql);
                 }
             }
@@ -64,7 +64,7 @@
                                 <div class="col-sm-6 col-md-4">
                                     <select id="form-control-1" name="lkp_state_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" onChange="getDistricts(this.value);" required>
                                         <option value="">-- Select State --</option>
-                                        <?php $getStates = getAllDataWithStatus('lkp_states','0');?>
+                                        <?php $getStates = getAllDataWithStatus('grocery_lkp_states','0');?>
                                         <?php while($row = $getStates->fetch_assoc()) {  ?>
                                             <option value="<?php echo $row['id']; ?>" ><?php echo $row['state_name']; ?></option>
                                         <?php } ?>
@@ -130,17 +130,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $getPincodes = getAllDataWithActiveRecent('lkp_pincodes'); $i=1;
+                                <?php $getPincodes = getAllDataWithActiveRecent('grocery_lkp_pincodes'); $i=1;
                                 while ($row = $getPincodes->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?php echo $i;?></td>
                                     <!-- <td>PNCD546</td> -->
                                     <td><?php echo $row['pincode']; ?></td>
-                                    <td><?php $getCities = getAllData('lkp_cities'); while($getCitiesData = $getCities->fetch_assoc()) { if($row['lkp_city_id'] == $getCitiesData['id']) { echo $getCitiesData['city_name']; } } ?></td>
-                                    <td><?php $getDistricts = getAllData('lkp_districts'); while($getDistrictsData = $getDistricts->fetch_assoc()) { if($row['lkp_district_id'] == $getDistrictsData['id']) { echo $getDistrictsData['district_name']; } } ?></td>
-                                    <td><?php $getStates = getAllData('lkp_states'); while($getStatesData = $getStates->fetch_assoc()) { if($row['lkp_state_id'] == $getStatesData['id']) { echo $getStatesData['state_name']; } } ?></td>
-                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='lkp_pincodes'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='lkp_pincodes'>In Active</span>" ;} ?></td>
-                                    <td><span><a href="edit_lkp_pincodes.php?pincode_id=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a>  &nbsp;<!-- <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "lkp_pincodes" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></span></td>
+                                    <td><?php $getCities = getAllData('grocery_lkp_cities'); while($getCitiesData = $getCities->fetch_assoc()) { if($row['lkp_city_id'] == $getCitiesData['id']) { echo $getCitiesData['city_name']; } } ?></td>
+                                    <td><?php $getDistricts = getAllData('grocery_lkp_districts'); while($getDistrictsData = $getDistricts->fetch_assoc()) { if($row['lkp_district_id'] == $getDistrictsData['id']) { echo $getDistrictsData['district_name']; } } ?></td>
+                                    <td><?php $getStates = getAllData('grocery_lkp_states'); while($getStatesData = $getStates->fetch_assoc()) { if($row['lkp_state_id'] == $getStatesData['id']) { echo $getStatesData['state_name']; } } ?></td>
+                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_lkp_pincodes'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_lkp_pincodes'>In Active</span>" ;} ?></td>
+                                    <td><span><a href="edit_lkp_pincodes.php?pincode_id=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a>  &nbsp;<!-- <a href="delete.php?id=<?php echo $row['id']; ?>&table=<?php echo "grocery_lkp_pincodes" ?>"><i class="zmdi zmdi-delete zmdi-hc-fw" onclick="return confirm('Are you sure you want to delete?')"></i></a> --></span></td>
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>
@@ -161,7 +161,7 @@
             e.preventDefault();
             if(x < max_fields_limit){ //check conditions
                 x++; //counter increment
-                $('.input_fields_container').append('<div><div class="row"><label class="col-sm-3 control-label" for="form-control-9">Pincode</label><div class="col-sm-6 col-md-4"><input type="text" name="pincode[]" class="form-control" id="user_input" placeholder="Enter Pincode Name" required></div><a href="#" class="remove_field btn btn-warning"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div>'); //add input field
+                $('.input_fields_container').append('<div><div class="form-group"><label class="col-sm-3 control-label" for="form-control-9">Pincode</label><div class="col-sm-6 col-md-4"><input type="text" name="pincode[]" class="form-control" id="user_input" placeholder="Enter Pincode Name" required></div><a href="#" class="remove_field btn btn-warning"style="margin-left:15px"><i class="zmdi zmdi-minus-circle zmdi-hc-fw"></i></a></div></div>'); //add input field
             }
         });  
         $('.input_fields_container').on("click",".remove_field", function(e){ //user click on remove text links
