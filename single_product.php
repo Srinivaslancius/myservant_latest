@@ -26,10 +26,10 @@
 
 		<?php 
 		$product_id = $_GET['product_id']; 
-		$getProducts = "SELECT * from grocery_products WHERE id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
+		$getProducts = "SELECT * from grocery_products WHERE id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
 		$getProducts1 = $conn->query($getProducts);
 		$productDetails = $getProducts1->fetch_assoc();
-		$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$product_id);
+		$getProductName = getIndividualDetails('product_name_bind_languages','product_id',$product_id);
 		?>
 		<section class="flat-breadcrumb">
 			<div class="container-fluid">
@@ -51,12 +51,7 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
 
-		<?php $getProductImages = getAllDataWhere('grocery_product_bind_images','product_id',$product_id); ?>
-		<input type="hidden" name="product_price" value="<?php echo $cat_id; ?>">
-		<input type="hidden" name="product_name" value="<?php echo $getProductName['product_name']; ?>">
-		<input type="hidden" name="product_weight_type" value="<?php echo $cat_id; ?>">
-		<input type="hidden" name="city_id" value="<?php echo 1; ?>">
-		<input type="hidden" name="product_quantity" value="<?php echo $cat_id; ?>">
+		<?php $getProductImages = getAllDataWhere('product_bind_images','product_id',$product_id); ?>
 		<section class="flat-product-detail">
 			<div class="container">
 				<div class="row">
@@ -76,8 +71,13 @@
 					<div class="col-md-6">
 						<div class="product-detail">
 							<div class="header-detail">
-								<h4 class="name"><?php echo $getProductName['product_name']; ?></h4>
-								
+								<h4 class="name"><?php echo $getProductName['product_name']; ?></h4><br>
+								 <div class="product_name" style="width:300px">
+														<select class="s-w form-control" id="na1q_qty0" onchange="get_price(this.value,'na10');">
+                                                            <option value="6180">20 gms - Rs: 30.00 </option>
+															  <option value="6180">Somthing</option>
+                                                          </select>
+														</div>
 								<div class="reviewed">
 									
 									<!-- <div class="status-product">
@@ -86,12 +86,10 @@
 								</div><!-- /.reviewed -->
 							</div><!-- /.header-detail -->
 							<div class="content-detail">
-								<div class="price">
-									<div class="regular">
-										₹200.00
-									</div>
+								<div class="price">									
 									<div class="sale">
 										₹150.00
+										<span style="text-decoration:line-through;font-size:16px;color:#838383;">(₹200.00)</span>
 									</div>
 								</div>
 								<div class="info-text">
@@ -106,54 +104,20 @@
 									
 									<div class="quanlity">
 										<span class="btn-down"></span>
-										<input type="number" name="number" value="" min="1" max="100" placeholder="Quanlity">
+										<input type="text" name="number" value="" min="1" max="100" placeholder="Quantity">
 										<span class="btn-up"></span>
 									</div>
 								</div><!-- /.quanlity-box -->
 								<div class="box-cart style2">
 									<div class="btn-add-cart">
-										<a class="check_cart" data-cat-id=<?php echo $productDetails['grocery_category_id']; ?> data-sub-cat-id=<?php echo $productDetails['grocery_sub_category_id']; ?> data-product-id=<?php echo $product_id; ?> title=""><img src="images/icons/add-cart.png" alt="">Add to Cart</a>
+										<a href="#" title=""><img src="images/icons/add-cart.png" alt="">Add to Cart</a>
 									</div>
 									<div class="compare-wishlist">
-										<a href="compare.html" class="compare" title=""><img src="images/icons/compare.png" alt="">Compare</a>
+										
 										<a href="compare.html" class="wishlist" title=""><img src="images/icons/wishlist.png" alt="">Wishlist</a>
 									</div>
 								</div><!-- /.box-cart -->
-								<div class="social-single">
-									<span>SHARE</span>
-									<ul class="social-list style2">
-										<li>
-											<a href="#" title="">
-												<i class="fa fa-facebook" aria-hidden="true"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#" title="">
-												<i class="fa fa-twitter" aria-hidden="true"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#" title="">
-												<i class="fa fa-instagram" aria-hidden="true"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#" title="">
-												<i class="fa fa-pinterest" aria-hidden="true"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#" title="">
-												<i class="fa fa-dribbble" aria-hidden="true"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#" title="">
-												<i class="fa fa-google" aria-hidden="true"></i>
-											</a>
-										</li>
-									</ul><!-- /.social-list -->
-								</div><!-- /.social-single -->
+								
 							</div><!-- /.footer-detail -->
 						</div><!-- /.product-detail -->
 					</div><!-- /.col-md-6 -->
