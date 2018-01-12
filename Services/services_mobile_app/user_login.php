@@ -21,6 +21,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		    	$response["userId"] = $getLoggedInDetails['id'];
 		    	$response["userName"] = $getLoggedInDetails['user_full_name'];
 		    	$response["userEmail"] = $getLoggedInDetails['user_email'];
+		    	$response["userMobile"] = $getLoggedInDetails['user_mobile'];
 		    	$response["success"] = 0;
 				$response["message"] = "Success!.";
 			} else {

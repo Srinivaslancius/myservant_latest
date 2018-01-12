@@ -119,74 +119,28 @@
 										</div>
 									</div><!-- /.fields-content -->
 								</div><!-- /.billing-fields -->
-								<div class="shipping-address-fields">
-									<div class="fields-title">
-										<h3>Shipping Address</h3>
-										<span></span>
-										<div class="clearfix"></div>
-									</div><!-- /.fields-title -->
-									<div class="fields-content">
-										<div class="checkbox">
-											<input type="checkbox" id="create-account-2" name="create-account-2" checked>
-											<label for="create-account-2">Ship to a different address ?</label>
-										</div>
-										<div class="field-row">
-											<p class="field-one-half">
-												<label for="first-name-2">First Name *</label>
-												<input type="text" id="first-name-2" name="first-name-2" placeholder="Ali">
-											</p>
-											<p class="field-one-half">
-												<label for="last-name-2">Last Name *</label>
-												<input type="text" id="last-name-2" name="last-name-2" placeholder="Tufan">
-											</p>
-											<div class="clearfix"></div>
-										</div>
-										<div class="field-row">
-											<label for="company-name-2">Company Name</label>
-											<input type="text" id="company-name-2" name="company-name-2">
-										</div>
-										<div class="field-row">
-											<label>Country *</label>
-											<select name="country-2">
-												<option value="">Australia</option>
-												<option value="">USA State</option>
-												<option value="">Spanish</option>
-												<option value="">Viet Nam</option>
-											</select>
-										</div>
-										<div class="field-row">
-											<label for="address-3">Address *</label>
-											<input type="text" id="address-3" name="address-3" placeholder="Street address">
-											<input type="text" id="address-4" name="address2" placeholder="Apartment, suite, unit etc. (optional)">
-										</div>
-										<div class="field-row">
-											<label for="town-city-2">Town / City *</label>
-											<input type="text" id="town-city-2" name="town-city-2">
-										</div>
-										<div class="field-row">
-											<p class="field-one-half">
-												<label for="state-country-2">State / County *</label>
-												<input type="text" id="state-country-2" name="state-country-2">
-											</p>
-											<p class="field-one-half">
-												<label for="post-code-2">Postcode / ZIP *</label>
-												<input type="text" id="post-code-2" name="post-code-2">
-											</p>
-											<div class="clearfix"></div>
-										</div>
-										<div class="field-row">
-											<label for="notes">Order Notes</label>
-											<textarea id="notes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-										</div>
-									</div><!-- /.fields-content -->
-								</div><!-- /.shipping-address-fields -->
+							
 							</form><!-- /.checkout -->
 						</div><!-- /.box-checkout -->
 					</div><!-- /.col-md-7 -->
+					<?php
+					    if($_SESSION['CART_TEMP_RANDOM'] == "") {
+					        $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
+					    }
+					    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
+					    if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
+					        $user_session_id = $_SESSION['user_login_session_id'];
+					        $cartItems1 = "SELECT * FROM grocery_cart WHERE (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') AND product_quantity!='0'";
+					        $cartItems = $conn->query($cartItems1);
+					    } else {
+					      $cartItems1 = "SELECT * FROM grocery_cart WHERE  product_quantity!='0' AND session_cart_id='$session_cart_id' ";
+					      $cartItems = $conn->query($cartItems1);
+					    } 
+					?>
 					<div class="col-md-5">
-						<div class="cart-totals style2">
+						<div class="cart-totals style2">						
 							<h3>Your Order</h3>
-							<form action="#" method="get" accept-charset="utf-8">
+							<form action="order_save.php" method="post" accept-charset="utf-8">
 								<table class="product">
 									<thead>
 										<tr>
@@ -195,69 +149,49 @@
 										</tr>
 									</thead>
 									<tbody>
+										<?php $cartTotal = 0;
+											while ($getCartItems = $cartItems->fetch_assoc()) { 
+											$getProductImage = getIndividualDetails('grocery_product_bind_images','product_id',$getCartItems['product_id']);
+											$cartTotal += $getCartItems['product_price']*$getCartItems['product_quantity'];
+
+											$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
+										?>
 										<tr>
-											<td>Instant Bru</td>
-											<td>₹99.00</td>
-										</tr>
-										<tr>
-											<td>Instant Bru</td>
-											<td>₹100.00</td>
-										</tr>
+											<td><?php echo $getProductName['product_name']; ?></td>
+											<input type="hidden" name="product_name" value="<?php echo $getProductName['product_name']; ?>">
+											<input type="hidden" name="product_price" value="<?php echo $getCartItems['product_price']; ?>">
+											<input type="hidden" name="order_price" value="<?php echo $cartTotal; ?>">
+											
+
+											<td>Rs . <?php echo $getCartItems['product_price']; ?></td>
+										</tr>	
+										<?php } ?>									
 									</tbody>
 								</table><!-- /.product -->
+								
 								<table>
-									<tbody>
+									<tbody>										
+										
 										<tr>
 											<td>Total</td>
-											<td class="subtotal">₹199.00</td>
-										</tr>
-										<tr>
-											<td>Shipping</td>
-											<td class="btn-radio">
-												<div class="radio-info">
-													<input type="radio" checked id="flat-rate" name="radio-flat-rate">
-													<label for="flat-rate">Flat Rate: <span>₹3.00</span></label>
-												</div>
-												<div class="radio-info">
-													<input type="radio" id="free-shipping" name="radio-flat-rate">
-													<label for="free-shipping">Free Shipping</label>
-												</div>
-												<div class="btn-shipping">
-													<a href="#" title="">Calculate Shipping</a>
-												</div>
-											</td><!-- /.btn-radio -->
-										</tr>
-										<tr>
-											<td>Total</td>
-											<td class="price-total">₹199.00</td>
+											<td class="price-total">Rs . <?php echo $cartTotal; ?></td>
 										</tr>
 									</tbody>
 								</table>
 								<div class="btn-radio style2">
-									<div class="radio-info">
-										<input type="radio" id="flat-payment" checked name="radio-cash-2">
-										<label for="flat-payment">Check Payments</label>
-										<p>Please send a check to Store Name, Store Street, Store <br />Town, Store State / County, Store Postcode.</p>
-									</div>
-									<div class="radio-info">
-										<input type="radio" id="bank-transfer" name="radio-cash-2">
-										<label for="bank-transfer">Direct Bank Transfer</label>
-									</div>
-									<div class="radio-info">
-										<input type="radio" id="cash-delivery" name="radio-cash-2">
-										<label for="cash-delivery">Cash on Delivery</label>
-									</div>
-									<div class="radio-info">
-										<input type="radio" id="paypal" name="radio-cash-2">
-										<label for="paypal">Paypal</label>
-									</div>
+									
+								<div class="radio-info">
+									<input type="radio" id="cash-delivery" name="radio-cash-2">
+									<label for="cash-delivery">Cash on Delivery</label>
+								</div>
+									
 								</div><!-- /.btn-radio style2 -->
 								<div class="checkbox">
 									<input type="checkbox" id="checked-order" name="checked-order" checked>
 									<label for="checked-order">I’ve read and accept the terms & conditions *</label>
 								</div><!-- /.checkbox -->
-								<div class="btn-order">
-									<a href="#" class="order" title="">Place Order</a>
+								<div class="btn-order">									
+									<input type="submit" name="submit" value="Place Order">
 								</div><!-- /.btn-order -->
 							</form>
 						</div><!-- /.cart-totals style2 -->
