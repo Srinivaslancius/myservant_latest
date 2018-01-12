@@ -41,6 +41,20 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
 
+		<?php
+		    if($_SESSION['CART_TEMP_RANDOM'] == "") {
+		        $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
+		    }
+		    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
+		    if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
+		        $user_session_id = $_SESSION['user_login_session_id'];
+		        $cartItems1 = "SELECT * FROM grocery_cart WHERE (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') AND product_quantity!='0'";
+		        $cartItems = $conn->query($cartItems1);
+		    } else {
+		      $cartItems1 = "SELECT * FROM grocery_cart WHERE  product_quantity!='0' AND session_cart_id='$session_cart_id' ";
+		      $cartItems = $conn->query($cartItems1);
+		    } 
+		?>
 		<section class="flat-shop-cart">
 			<div class="container">
 				<div class="row">
@@ -59,17 +73,21 @@
 									</tr>
 								</thead>
 								<tbody>
-								<?php for($i=0; $i<2; $i++) {?>
+								<?php $cartTotal = 0;
+								while ($getCartItems = $cartItems->fetch_assoc()) { 
+								$getProductImage = getIndividualDetails('grocery_product_bind_images','product_id',$getCartItems['product_id']);
+								$cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity'];
+								?>
 									<tr>
 										<td>
 											<div class="img-product">
-												<img src="images/product/other/1.png" alt="">
+												<img src="<?php echo $base_url . 'uploads/grocery_product_images/'.$getProductImage['image']; ?>" alt="<?php echo $getCartItems['product_name']; ?>">
 											</div>
 											<div class="name-product">
-												Instant Bru 
+												<?php echo $getCartItems['product_name']; ?>
 											</div>
 											<div class="price">
-												 ₹1,250.00
+												 ₹<?php echo $getCartItems['product_price']; ?>
 											</div>
 											<div class="clearfix"></div>
 										</td>
@@ -82,7 +100,7 @@
 										</td>
 										<td>
 											<div class="total">
-												 ₹6,250.00
+												 ₹<?php echo $cartTotal; ?>
 											</div>
 										</td>
 										<td>
