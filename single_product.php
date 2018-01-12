@@ -26,10 +26,10 @@
 
 		<?php 
 		$product_id = $_GET['product_id']; 
-		$getProducts = "SELECT * from grocery_products WHERE id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
+		$getProducts = "SELECT * from grocery_products WHERE id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
 		$getProducts1 = $conn->query($getProducts);
 		$productDetails = $getProducts1->fetch_assoc();
-		$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$product_id);
+		$getProductName = getIndividualDetails('product_name_bind_languages','product_id',$product_id);
 		?>
 		<section class="flat-breadcrumb">
 			<div class="container-fluid">
@@ -51,12 +51,7 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
 
-		<?php $getProductImages = getAllDataWhere('grocery_product_bind_images','product_id',$product_id); ?>
-		<input type="hidden" name="product_price" value="<?php echo $cat_id; ?>">
-		<input type="hidden" name="product_name" value="<?php echo $getProductName['product_name']; ?>">
-		<input type="hidden" name="product_weight_type" value="<?php echo $cat_id; ?>">
-		<input type="hidden" name="city_id" value="<?php echo 1; ?>">
-		<input type="hidden" name="product_quantity" value="<?php echo $cat_id; ?>">
+		<?php $getProductImages = getAllDataWhere('product_bind_images','product_id',$product_id); ?>
 		<section class="flat-product-detail">
 			<div class="container">
 				<div class="row">
@@ -112,7 +107,7 @@
 								</div><!-- /.quanlity-box -->
 								<div class="box-cart style2">
 									<div class="btn-add-cart">
-										<a class="check_cart" data-cat-id=<?php echo $productDetails['grocery_category_id']; ?> data-sub-cat-id=<?php echo $productDetails['grocery_sub_category_id']; ?> data-product-id=<?php echo $product_id; ?> title=""><img src="images/icons/add-cart.png" alt="">Add to Cart</a>
+										<a href="#" title=""><img src="images/icons/add-cart.png" alt="">Add to Cart</a>
 									</div>
 									<div class="compare-wishlist">
 										<a href="compare.html" class="compare" title=""><img src="images/icons/compare.png" alt="">Compare</a>
