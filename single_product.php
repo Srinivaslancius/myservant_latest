@@ -26,10 +26,10 @@
 
 		<?php 
 		$product_id = $_GET['product_id']; 
-		$getProducts = "SELECT * from grocery_products WHERE id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
+		$getProducts = "SELECT * from grocery_products WHERE id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
 		$getProducts1 = $conn->query($getProducts);
 		$productDetails = $getProducts1->fetch_assoc();
-		$getProductName = getIndividualDetails('product_name_bind_languages','product_id',$product_id);
+		$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$product_id);
 		?>
 		<section class="flat-breadcrumb">
 			<div class="container-fluid">
@@ -51,7 +51,7 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
 
-		<?php $getProductImages = getAllDataWhere('product_bind_images','product_id',$product_id); ?>
+		<?php $getProductImages = getAllDataWhere('grocery_product_bind_images','product_id',$product_id); ?>
 		<section class="flat-product-detail">
 			<div class="container">
 				<div class="row">

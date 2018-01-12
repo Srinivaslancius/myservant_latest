@@ -20,7 +20,7 @@
 										</select>
 										<span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
 										<div class="all-categories">
-											<?php $getCategories1 = "SELECT * FROM grocery_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_category_id FROM grocery_sub_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1))) ORDER BY id DESC";
+											<?php $getCategories1 = "SELECT * FROM grocery_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_category_id FROM grocery_sub_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1))) ORDER BY id DESC";
 											$getCategories = $conn->query($getCategories1);
 											while($getCategoriesData = $getCategories->fetch_assoc()) { ?>
 											<div class="cat-list-search">
@@ -28,7 +28,7 @@
 													<?php echo $getCategoriesData['category_name']; ?>
 												</div>
 												<ul>
-													<?php $getSubCategories = "SELECT * FROM grocery_sub_category WHERE lkp_status_id = 0 AND grocery_category_id ='".$getCategoriesData['id']."' AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)) ORDER BY id DESC";
+													<?php $getSubCategories = "SELECT * FROM grocery_sub_category WHERE lkp_status_id = 0 AND grocery_category_id ='".$getCategoriesData['id']."' AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)) ORDER BY id DESC";
 													$getSubCategories1 = $conn->query($getSubCategories);
 													while($getSubCategoriesData = $getSubCategories1->fetch_assoc()) { ?>
 													<li><?php echo $getSubCategoriesData['sub_category_name']; ?></li>

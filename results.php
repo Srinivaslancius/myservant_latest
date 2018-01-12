@@ -25,16 +25,16 @@
 		if($product_id = $_GET['cat_id']) {
 			$getProducts = getIndividualDetails('grocery_category','id',$product_id);
 			$getName = $getProducts['category_name'];
-			$getProducts = "SELECT * from grocery_products WHERE grocery_category_id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
+			$getProducts = "SELECT * from grocery_products WHERE grocery_category_id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
 			$getProducts1 = $conn->query($getProducts);
-			$getProductsTotalDetails = "SELECT * from grocery_products WHERE grocery_category_id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
+			$getProductsTotalDetails = "SELECT * from grocery_products WHERE grocery_category_id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
 			$getProductsTotalDetails1 = $conn->query($getProductsTotalDetails);
 		} elseif($product_id = $_GET['sub_cat_id']) {
 			$getProducts = getIndividualDetails('grocery_sub_category','id',$product_id);
 			$getName = $getProducts['sub_category_name'];
-			$getProducts = "SELECT * from grocery_products WHERE grocery_sub_category_id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
+			$getProducts = "SELECT * from grocery_products WHERE grocery_sub_category_id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
 			$getProducts1 = $conn->query($getProducts);
-			$getProductsTotalDetails = "SELECT * from grocery_products WHERE grocery_sub_category_id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
+			$getProductsTotalDetails = "SELECT * from grocery_products WHERE grocery_sub_category_id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
 			$getProductsTotalDetails1 = $conn->query($getProductsTotalDetails);
 		}
 		?>
@@ -107,8 +107,8 @@
 									<div class="row sort-box">
 									<?php 
 									while($getProductDetails = $getProducts1->fetch_assoc()) { 
-										$getProductImages = getIndividualDetails('product_bind_images','product_id',$getProductDetails['id']);
-										$getProductNames = getIndividualDetails('product_name_bind_languages','product_id',$getProductDetails['id']);
+										$getProductImages = getIndividualDetails('grocery_product_bind_images','product_id',$getProductDetails['id']);
+										$getProductNames = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getProductDetails['id']);
 									?>	
 										<div class="col-lg-4 col-sm-6">
 											<div class="product-box">
@@ -122,7 +122,7 @@
 														</div>
 														<div class="product_name">
 														<?php 
-														 $getProductPrices = getAllDataWhereWithActive('product_bind_weight_prices','product_id',$getProductDetails['id']);
+														 $getProductPrices = getAllDataWhereWithActive('grocery_product_bind_weight_prices','product_id',$getProductDetails['id']);
 														?> 
 														<select class="s-w form-control" id="na1q_qty0" onchange="get_price(this.value,'na10');">
 															<?php while($getPrices = $getProductPrices->fetch_assoc()) { ?>
@@ -147,8 +147,8 @@
 									<div class="sort-box">
 									<?php 
 									while($getProductsTotalDetails2 = $getProductsTotalDetails1->fetch_assoc()) { 
-										$getProductImages1 = getIndividualDetails('product_bind_images','product_id',$getProductsTotalDetails2['id']);
-										$getProductNames1 = getIndividualDetails('product_name_bind_languages','product_id',$getProductsTotalDetails2['id']);
+										$getProductImages1 = getIndividualDetails('grocery_product_bind_images','product_id',$getProductsTotalDetails2['id']);
+										$getProductNames1 = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getProductsTotalDetails2['id']);
 									?>
 										<div class="product-box style3">
 											<div class="imagebox style1 v3">
@@ -173,7 +173,7 @@
 												<div class="box-price">
 													<div class="product_name">
 														<?php 
-														 $getProductPrices1 = getAllDataWhereWithActive('product_bind_weight_prices','product_id',$getProductsTotalDetails2['id']);
+														 $getProductPrices1 = getAllDataWhereWithActive('grocery_product_bind_weight_prices','product_id',$getProductsTotalDetails2['id']);
 														?> 
 														<select class="s-w form-control" id="na1q_qty0" onchange="get_price(this.value,'na10');">
                                                             <?php while($getPrices1 = $getProductPrices1->fetch_assoc()) { ?>
