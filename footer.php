@@ -158,3 +158,4 @@
 					</div><!-- /.col-lg-4 col-md-6 -->
 				</div>
 			</div><!-- /.container -->
+			<?php include "search_js_script.php"; ?>

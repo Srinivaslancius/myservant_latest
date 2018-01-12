@@ -246,7 +246,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Logo</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <img src="<?php echo $base_url . 'uploads/logo/'.$getGrocerySiteSettings['logo'] ?>" accept="image/*" height="100" width="100" id="output"/>
+                                    <img src="<?php echo $base_url . 'grocery_admin/uploads/logo/'.$getGrocerySiteSettings['logo'] ?>" accept="image/*" height="100" width="100" id="output"/>
                                     <label class="btn btn-default file-upload-btn">Choose file...
                                         <input id="form-control-22" name="logo" class="file-upload-input" type="file"  multiple="multiple"  onchange="loadFile(event)" accept="image/*">
                                     </label>
@@ -255,7 +255,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Favicon</label>
                                <div class="col-sm-6 col-md-4">
-                                    <img src="<?php echo $base_url . 'uploads/fav_icon_image/'.$getGrocerySiteSettings['fav_icon_image'] ?>" accept="image/*" height="100" width="100" id="output1"/>
+                                    <img src="<?php echo $base_url . 'grocery_admin/uploads/fav_icon_image/'.$getGrocerySiteSettings['fav_icon_image'] ?>" accept="image/*" height="100" width="100" id="output1"/>
                                     <label class="btn btn-default file-upload-btn">Choose file...
                                         <input id="form-control-22" name="fav_icon_image" class="file-upload-input" type="file" onchange="loadFile1(event)"  multiple="multiple" >
                                     </label>

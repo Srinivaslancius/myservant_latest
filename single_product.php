@@ -71,8 +71,13 @@
 					<div class="col-md-6">
 						<div class="product-detail">
 							<div class="header-detail">
-								<h4 class="name"><?php echo $getProductName['product_name']; ?></h4>
-								
+								<h4 class="name"><?php echo $getProductName['product_name']; ?></h4><br>
+								 <div class="product_name" style="width:300px">
+														<select class="s-w form-control" id="na1q_qty0" onchange="get_price(this.value,'na10');">
+                                                            <option value="6180">20 gms - Rs: 30.00 </option>
+															  <option value="6180">Somthing</option>
+                                                          </select>
+														</div>
 								<div class="reviewed">
 									
 									<!-- <div class="status-product">
@@ -81,12 +86,10 @@
 								</div><!-- /.reviewed -->
 							</div><!-- /.header-detail -->
 							<div class="content-detail">
-								<div class="price">
-									<div class="regular">
-										₹200.00
-									</div>
+								<div class="price">									
 									<div class="sale">
 										₹150.00
+										<span style="text-decoration:line-through;font-size:16px;color:#838383;">(₹200.00)</span>
 									</div>
 								</div>
 								<div class="info-text">
@@ -101,7 +104,7 @@
 									
 									<div class="quanlity">
 										<span class="btn-down"></span>
-										<input type="number" name="number" value="" min="1" max="100" placeholder="Quanlity">
+										<input type="text" name="number" value="" min="1" max="100" placeholder="Quantity">
 										<span class="btn-up"></span>
 									</div>
 								</div><!-- /.quanlity-box -->
@@ -110,45 +113,11 @@
 										<a href="#" title=""><img src="images/icons/add-cart.png" alt="">Add to Cart</a>
 									</div>
 									<div class="compare-wishlist">
-										<a href="compare.html" class="compare" title=""><img src="images/icons/compare.png" alt="">Compare</a>
+										
 										<a href="compare.html" class="wishlist" title=""><img src="images/icons/wishlist.png" alt="">Wishlist</a>
 									</div>
 								</div><!-- /.box-cart -->
-								<div class="social-single">
-									<span>SHARE</span>
-									<ul class="social-list style2">
-										<li>
-											<a href="#" title="">
-												<i class="fa fa-facebook" aria-hidden="true"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#" title="">
-												<i class="fa fa-twitter" aria-hidden="true"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#" title="">
-												<i class="fa fa-instagram" aria-hidden="true"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#" title="">
-												<i class="fa fa-pinterest" aria-hidden="true"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#" title="">
-												<i class="fa fa-dribbble" aria-hidden="true"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#" title="">
-												<i class="fa fa-google" aria-hidden="true"></i>
-											</a>
-										</li>
-									</ul><!-- /.social-list -->
-								</div><!-- /.social-single -->
+								
 							</div><!-- /.footer-detail -->
 						</div><!-- /.product-detail -->
 					</div><!-- /.col-md-6 -->

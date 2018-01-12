@@ -530,7 +530,7 @@
 
 .imagebox .box-bottom .btn-add-cart a {
 	display:inline-block;
-	background-color: #FE6003;
+	background-color: #f92400;
 	color:#fff;
 	font-size:14px;
 	height:45px;
@@ -5946,7 +5946,7 @@ table.product thead tr th:last-child {
 
 .form-login .title h3,
 .form-register .title h3 {
-	color: #FE6003;
+	color: #2d2d2d;
 }
 
 .form-login .form-box,
@@ -6003,7 +6003,7 @@ table.product thead tr th:last-child {
 	color:#fff;
 	font-size:16px;
 	font-weight:600;
-	background-color: #FE6003;
+	background-color: #484848;
 	height:50px;
 	line-height:50px;
 	border-radius:25px;
@@ -6064,7 +6064,7 @@ table.product thead tr th:last-child {
 	line-height:50px;
 	padding:0 64px;
 	color:#fff;
-	background-color: #FE6003;
+	background-color: #f92400;
 	border-radius:25px;
 	font-size:16px;
 	font-weight:600;
@@ -6545,17 +6545,17 @@ table.product thead tr th:last-child {
 	font-family:'BloggerSans';
 	color:#2d2d2d;
 	padding: 12px 33px 13px;
-	border: 2px solid #FE6003;
-	border-radius: 0px;
+	border: 2px solid #e5e5e5;
+	border-radius: 50px;
 	letter-spacing:-0.03px;
 	cursor:pointer;
 	position:relative;
 }
 
 .accordion-toggle .toggle-title.active {
-	background-color: #FE6003;
+	background-color: #f5f5f5;
 	border-color:#f5f5f5;
-	color: white;
+	/* color: white; */
 }
 
 .accordion-toggle .toggle-title.active:before {
