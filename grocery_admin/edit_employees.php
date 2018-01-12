@@ -82,7 +82,11 @@
                             <div class="form-group">
                                 <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Email</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="email"  name="employee_email" class="form-control" id="form-control-3" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" placeholder="Enter Email"  required="required" value="<?php echo $getGrcTest['employee_email'];?>">
+                                    <input type="email"  name="employee_email" class="form-control" id="user_input" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" placeholder="Enter Email"  required="required" value="<?php echo $getGrcTest['employee_email'];?>" onkeyup="checkUserAvailTest()">
+                                    <span id="input_status" style="color: red;"></span>
+                                    <div class="help-block with-errors"></div>
+                                    <input type="hidden" id="table_name" value="grocery_employess">
+                                    <input type="hidden" id="column_name" value="employee_email"> 
                                 </div>
                             </div>
                             <div class="form-group">
