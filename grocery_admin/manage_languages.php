@@ -61,7 +61,11 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label" for="form-control-9">Language</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" name="language_name[]" class="form-control" id="form-control-3" placeholder="Enter Language Name" required>
+                                    <input type="text" name="language_name[]" class="form-control" id="user_input" placeholder="Enter Language Name" required onkeyup="checkUserAvailTest()">
+                                    <span id="input_status" style="color: red;"></span>
+                                    <div class="help-block with-errors"></div>
+                                    <input type="hidden" id="table_name" value="grocery_languages">
+                                    <input type="hidden" id="column_name" value="language_name">
                                 </div>
                                 <div class="col-sm-3 col-md-3">
                                     <span><button type="button" class="btn btn-success add_more_button"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i></button></span>
