@@ -52,14 +52,11 @@
 		</section><!-- /.flat-breadcrumb -->
 
 		<?php $getProductImages = getAllDataWhere('grocery_product_bind_images','product_id',$product_id); ?>
-		<input type="text" name="category_id" value="<?php echo $cat_id; ?>">
-		<input type="text" name="sub_category_id" value="<?php echo $cat_id; ?>">
-		<input type="text" name="product_id" value="<?php echo $product_id; ?>">
-		<input type="text" name="product_price" value="<?php echo $cat_id; ?>">
-		<input type="text" name="product_name" value="<?php echo $getProductName['product_name']; ?>">
-		<input type="text" name="product_weight_type" value="<?php echo $cat_id; ?>">
-		<input type="text" name="city_id" value="<?php echo $cat_id; ?>">
-		<input type="text" name="product_quantity" value="<?php echo $cat_id; ?>">
+		<input type="hidden" name="product_price" value="<?php echo $cat_id; ?>">
+		<input type="hidden" name="product_name" value="<?php echo $getProductName['product_name']; ?>">
+		<input type="hidden" name="product_weight_type" value="<?php echo $cat_id; ?>">
+		<input type="hidden" name="city_id" value="<?php echo 1; ?>">
+		<input type="hidden" name="product_quantity" value="<?php echo $cat_id; ?>">
 		<section class="flat-product-detail">
 			<div class="container">
 				<div class="row">
@@ -115,7 +112,7 @@
 								</div><!-- /.quanlity-box -->
 								<div class="box-cart style2">
 									<div class="btn-add-cart">
-										<a href="#" title=""><img src="images/icons/add-cart.png" alt="">Add to Cart</a>
+										<a class="check_cart" data-cat-id=<?php echo $productDetails['grocery_category_id']; ?> data-sub-cat-id=<?php echo $productDetails['grocery_sub_category_id']; ?> data-product-id=<?php echo $product_id; ?> title=""><img src="images/icons/add-cart.png" alt="">Add to Cart</a>
 									</div>
 									<div class="compare-wishlist">
 										<a href="compare.html" class="compare" title=""><img src="images/icons/compare.png" alt="">Compare</a>
