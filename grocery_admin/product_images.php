@@ -101,6 +101,7 @@
                                     <th>S.no</th>                                    
                                     <th>Product Image</th>
                                     <!-- <th>Actions</th> -->
+                                    
                                 </tr>
                             </thead>
                             <tbody>
