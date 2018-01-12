@@ -1280,7 +1280,7 @@ ul.flat-unstyled li > ul > li > a {
 	height:65px;
 	padding-left:87px;
 	line-height:65px;
-	background-color: #FE6003;
+	background-color: #484848;
 	border-top-left-radius:9px;
 	border-top-right-radius:9px;
 	position:relative;
@@ -2701,7 +2701,7 @@ footer.style4 .widget-newsletter {
 }
 
 .widget-ft .widget-title h3 {
-	color: #FE6003;
+	color: #2d2d2d;
 	font-weight:500;
 	margin-top:8px;
 	margin-bottom:24px;
@@ -3471,3 +3471,4 @@ ol.comment-list li.comment .comment-text .comment-content p {
     margin-left: 70px;
 	height:auto;
 }
+
