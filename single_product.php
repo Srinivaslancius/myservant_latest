@@ -52,6 +52,14 @@
 		</section><!-- /.flat-breadcrumb -->
 
 		<?php $getProductImages = getAllDataWhere('grocery_product_bind_images','product_id',$product_id); ?>
+		<input type="text" name="category_id" value="<?php echo $cat_id; ?>">
+		<input type="text" name="sub_category_id" value="<?php echo $cat_id; ?>">
+		<input type="text" name="product_id" value="<?php echo $product_id; ?>">
+		<input type="text" name="product_price" value="<?php echo $cat_id; ?>">
+		<input type="text" name="product_name" value="<?php echo $getProductName['product_name']; ?>">
+		<input type="text" name="product_weight_type" value="<?php echo $cat_id; ?>">
+		<input type="text" name="city_id" value="<?php echo $cat_id; ?>">
+		<input type="text" name="product_quantity" value="<?php echo $cat_id; ?>">
 		<section class="flat-product-detail">
 			<div class="container">
 				<div class="row">
