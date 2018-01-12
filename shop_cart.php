@@ -58,7 +58,7 @@
 		<section class="flat-shop-cart">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-8">
+					<div class="col-lg-12">
 						<div class="flat-row-title style1">
 							<h3>Shopping Cart</h3>
 						</div>
@@ -76,31 +76,31 @@
 								<?php $cartTotal = 0;
 								while ($getCartItems = $cartItems->fetch_assoc()) { 
 								$getProductImage = getIndividualDetails('grocery_product_bind_images','product_id',$getCartItems['product_id']);
-								$cartTotal += $getCartItems['item_price']*$getCartItems['item_quantity'];
+								$cartTotal += $getCartItems['product_price']*$getCartItems['product_quantity'];
+
+								$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
 								?>
 									<tr>
 										<td>
 											<div class="img-product">
-												<img src="<?php echo $base_url . 'uploads/grocery_product_images/'.$getProductImage['image']; ?>" alt="<?php echo $getCartItems['product_name']; ?>">
+												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image']; ?>" alt="<?php echo $getCartItems['product_name']; ?>">
 											</div>
 											<div class="name-product">
-												<?php echo $getCartItems['product_name']; ?>
+												<?php echo $getProductName['product_name']; ?>
 											</div>
 											<div class="price">
-												 ₹<?php echo $getCartItems['product_price']; ?>
+												 Rs . <?php echo $getCartItems['product_price']; ?>
 											</div>
 											<div class="clearfix"></div>
 										</td>
 										<td>
 											<div class="quanlity">
-											<form action="" method="post">
-											<input type="number" id="number" min="0" value="1" placeholder="Quanlity"/>
-											</form>
+												<?php echo $getCartItems['product_quantity']; ?>
 											</div>
 										</td>
 										<td>
 											<div class="total">
-												 ₹<?php echo $cartTotal; ?>
+												 Rs . <?php echo $cartTotal; ?>
 											</div>
 										</td>
 										<td>
@@ -112,55 +112,22 @@
 									<?php } ?>
 								</tbody>
 							</table>
-							<div class="form-coupon">
+							<div class="box-cart style2">
+								<div class="btn-add-cart pull-right">
+									<a href="shop_checkout.php" style="cursor:pointer">Proceed To Checkout</a>
+								</div>								
+							</div>
+							<!-- <div class="form-coupon">
 								<form action="#" method="get" accept-charset="utf-8">
 									<div class="coupon-input">
 										<input type="text" name="coupon code" placeholder="Coupon Code">
 										<button type="submit">Apply Coupon</button>
 									</div>
 								</form>
-							</div><!-- /.form-coupon -->
+							</div>--><!-- /.form-coupon -->
 						</div><!-- /.table-cart -->
 					</div><!-- /.col-lg-8 -->
-					<div class="col-lg-4">
-						<div class="cart-totals">
-							<h3>Cart Totals</h3>
-							<form action="#" method="get" accept-charset="utf-8">
-								<table>
-									<tbody>
-										<tr>
-											<td>Subtotal</td>
-											<td class="subtotal"> ₹2,589.00</td>
-										</tr>
-										<tr>
-											<td>Shipping</td>
-											<td class="btn-radio">
-												<div class="radio-info">
-													<input type="radio" id="flat-rate" checked name="radio-flat-rate">
-													<label for="flat-rate">Flat Rate: <span> ₹3.00</span></label>
-												</div>
-												<div class="radio-info">
-													<input type="radio" id="free-shipping" name="radio-flat-rate">
-													<label for="free-shipping">Free Shipping</label>
-												</div>
-												<div class="btn-shipping">
-													<a href="#" title="">Calculate Shipping</a>
-												</div>
-											</td><!-- /.btn-radio -->
-										</tr>
-										<tr>
-											<td>Total</td>
-											<td class="price-total"> ₹1,591.00</td>
-										</tr>
-									</tbody>
-								</table>
-								<div class="btn-cart-totals">
-									<a href="#" class="update" title="">Update Cart</a>
-									<a href="#" class="checkout" title="">Proceed to Checkout</a>
-								</div><!-- /.btn-cart-totals -->
-							</form><!-- /form -->
-						</div><!-- /.cart-totals -->
-					</div><!-- /.col-lg-4 -->
+					
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-shop-cart -->

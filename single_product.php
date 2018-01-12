@@ -26,7 +26,7 @@
 
 		<?php 
 		$product_id = $_GET['product_id']; 
-		$getProducts = "SELECT * from grocery_products WHERE id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
+		$getProducts = "SELECT * from grocery_products WHERE id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)";
 		$getProducts1 = $conn->query($getProducts);
 		$productDetails = $getProducts1->fetch_assoc();
 		$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$product_id);
@@ -59,8 +59,8 @@
 						<div class="flexslider">
 							<ul class="slides">
 								<?php while($productImage = $getProductImages->fetch_assoc()) { ?>
-							    <li data-thumb="<?php echo $base_url . 'uploads/grocery_product_images/'.$productImage['image'] ?>">
-							      <img src="<?php echo $base_url . 'uploads/grocery_product_images/'.$productImage['image'] ?>" alt="image slider" />
+							    <li data-thumb="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$productImage['image'] ?>">
+							      <img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$productImage['image'] ?>" alt="image slider" />
 							      <span>NEW</span>
 							    </li>
 							    <?php } ?>
@@ -73,11 +73,16 @@
 							<div class="header-detail">
 								<h4 class="name"><?php echo $getProductName['product_name']; ?></h4><br>
 								 <div class="product_name" style="width:300px">
-														<select class="s-w form-control" id="na1q_qty0" onchange="get_price(this.value,'na10');">
-                                                            <option value="6180">20 gms - Rs: 30.00 </option>
-															  <option value="6180">Somthing</option>
-                                                          </select>
-														</div>
+								 <?php 
+								 	$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='$product_id' AND lkp_status_id = 0 AND lkp_city_id ='1' ";
+								 	$allGetPrices = $conn->query($getPrices);
+								 ?>
+									<select class="s-w form-control" id="na1q_qty0" onchange="get_price(this.value,'na10');">
+									<?php while($getPrc = $allGetPrices->fetch_assoc() ) { ?>
+                                      <option value="<?php echo $getPrc['id']; ?>"><?php echo $getPrc['weight_type'] .' - '. 'Rs : ' . $getPrc['selling_price']; ?></option>
+                                    <?php } ?>								  
+                                    </select>
+								</div>
 								<div class="reviewed">
 									
 									<!-- <div class="status-product">
@@ -85,32 +90,45 @@
 									</div> -->
 								</div><!-- /.reviewed -->
 							</div><!-- /.header-detail -->
+
+							<input type="hidden" id="pro_id" value="<?php echo $product_id; ?>">
+							<input type="hidden" id="cat_id" value="<?php echo $productDetails['grocery_category_id']; ?>">
+							<input type="hidden" id="sub_cat_id" value="<?php echo $productDetails['grocery_sub_category_id']; ?>">
+							<input type="hidden" id="pro_name" value="<?php echo $getProductName['product_name']; ?>">
+							
+							<?php 
+							 	$getPrices1 = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='$product_id' AND lkp_status_id = 0 AND lkp_city_id ='1' ";
+							 	$allGetPrices1 = $conn->query($getPrices1);
+							?>
 							<div class="content-detail">
-								<div class="price">									
+								<div class="price">		
+								<?php while($getPrc1 = $allGetPrices1->fetch_assoc() ) { ?>							
 									<div class="sale">
-										₹150.00
-										<span style="text-decoration:line-through;font-size:16px;color:#838383;">(₹200.00)</span>
+										<?php echo 'Rs : ' . $getPrc1['selling_price']; ?>
+										<input type="hidden" id="pro_price" value="<?php echo $getPrc1['selling_price']; ?>">
+										<input type="hidden" id="pro_weight_type_id" value="<?php echo $getPrc1['id']; ?>">
+										<?php if($getPrc1['offer_type'] == 1) { ?>
+											<span style="text-decoration:line-through;font-size:16px;color:#838383;">(<?php echo 'Rs : ' . $getPrc1['mrp_price']; ?>)</span>
+										<?php } ?>
 									</div>
+								<?php } ?>
 								</div>
 								<div class="info-text">
 									<?php echo $productDetails['product_description']; ?>
-								</div>
-								<div class="product-id">
-									SKU: <span class="id">FW511948218</span>
-								</div>
+								</div>								
 							</div><!-- /.content-detail -->
 							<div class="footer-detail">
-								<div class="quanlity-box">
+								<!-- <div class="quanlity-box">
 									
 									<div class="quanlity">
 										<span class="btn-down"></span>
 										<input type="text" name="number" value="" min="1" max="100" placeholder="Quantity">
 										<span class="btn-up"></span>
 									</div>
-								</div><!-- /.quanlity-box -->
+								</div><!-- /.quanlity-box --> 
 								<div class="box-cart style2">
 									<div class="btn-add-cart">
-										<a href="#" title=""><img src="images/icons/add-cart.png" alt="">Add to Cart</a>
+										<a style="cursor:pointer" onClick="show_cart()"><img src="images/icons/add-cart.png" alt="">Add to Cart</a>
 									</div>
 									<div class="compare-wishlist">
 										
@@ -192,6 +210,31 @@
 		<script type="text/javascript" src="javascript/jquery.countdown.js"></script>
 
 		<script type="text/javascript" src="javascript/main.js"></script>
+
+		<script type="text/javascript">
+
+		function show_cart() {
+
+			var productId = $('#pro_id').val();
+			var catId = $('#cat_id').val();
+			var subCatId = $('#sub_cat_id').val();
+			var productName = $('#pro_name').val();
+			var productPrice = $('#pro_price').val();
+			var productWeightType = $('#pro_weight_type_id').val();
+
+   			$.ajax({
+		      type:'post',
+		      url:'save_cart.php',
+		      data:{		        
+		        productId:productId,catId:catId,subCatId:subCatId,productName:productName,productPrice:productPrice,productWeightType:productWeightType,
+		      },
+		      success:function(response) {
+		      	window.location.href = "shop_cart.php";
+		      }
+		    }); 
+
+		}
+	</script>
 
 	</body>	
 </html>
