@@ -100,7 +100,7 @@
                                 <tr>
                                     <th>S.no</th>                                    
                                     <th>Product Image</th>
-                                    <th>Actions</th>
+                                    <!-- <th>Actions</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -109,7 +109,7 @@
                                 <tr>
                                     <td><?php echo $i; ?></td>
                                     <td><img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$row['image']; ?>"  id="output" height="60" width="60"/></td>
-                                    <td><span><a href=""><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a></span></td>
+                                    <!-- <td><span><a href=""><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a></span></td> -->
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>

@@ -65,7 +65,7 @@
                                 <label class="col-sm-3 col-md-4 control-label" for="form-control-9">Select Category</label>
                                 <div class="col-sm-6 col-md-4">
                                     <select id="form-control-1" name="grocery_category_id" class="form-control" data-plugin="select2" data-options="{ theme: bootstrap }" required>
-                                        <option value="">-- Select State --</option>
+                                        <option value="">-- Select Category --</option>
                                         <?php $getCategories = getAllDataWithStatus('grocery_category','0');?>
                                         <?php while($row = $getCategories->fetch_assoc()) {  ?>
                                             <option value="<?php echo $row['id']; ?>" ><?php echo $row['category_name']; ?></option>
