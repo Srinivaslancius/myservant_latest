@@ -131,7 +131,7 @@
 									</div>
 									<div class="quanlity">
 										<!--<span class="btn-down"></span>-->
-										<input type="number" name="number" value="1" min="1" max="100" placeholder="Quantity" style="margin-bottom:-15px">
+										<input type="number" name="product_quantity" value="1" min="1" max="20" placeholder="Quantity" id="product_quantity" style="margin-bottom:-15px">
 										<!--<span class="btn-up"></span>-->
 									</div>
 								</div><!-- /.quanlity-box -->
@@ -507,12 +507,13 @@
 				var productName = $('#pro_name').val();
 				var productPrice = $('#pro_price').val();
 				var productWeightType = $('#pro_weight_type_id').val();
+				var product_quantity = $('#product_quantity').val();
 
 	   			$.ajax({
 			      type:'post',
 			      url:'save_cart.php',
 			      data:{		        
-			        productId:productId,catId:catId,subCatId:subCatId,productName:productName,productPrice:productPrice,productWeightType:productWeightType,
+			        productId:productId,catId:catId,subCatId:subCatId,productName:productName,productPrice:productPrice,productWeightType:productWeightType,product_quantity:product_quantity,
 			      },
 			      success:function(response) {
 			      	window.location.href = "shop_cart.php";
