@@ -3471,4 +3471,91 @@ ol.comment-list li.comment .comment-text .comment-content p {
     margin-left: 70px;
 	height:auto;
 }
+  .cities {
+    width: 290px;
+    height: auto;
+    box-sizing: borderbox;
+    background: #fff;
+    /* background: #e4e4e4; */
+    position: absolute;
+    top: 35px;
+    right: 70px;
+    z-index: 9999;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.6);
+    display: none;
+}
+#tf-menu.navbar-default .navbar-nav > li > a {
+    text-transform: uppercase;
+    color: #FFF;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
 
+#select-city {
+    position: relative;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #777;
+}
+.city-triangle {
+    width: 0;
+    margin-right: auto;
+    margin-left: auto;
+    border: 8px solid transparent;
+    border-bottom-color: #fff;
+    position: absolute;
+    left: 48%;
+    top: -15px;
+}
+#city-area {
+    width: 85%;
+    margin: 14px auto;
+    display: block;
+    outline: medium none;
+    background: transparent none repeat scroll 0% 0%;
+    border: medium none;
+    border: 1px solid #aaa;
+    padding: 15px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+
+input {
+    line-height: normal;
+}
+
+
+.city-srch-btn {
+    position: absolute;
+    top: 15px;
+    right: 22px;
+    background: transparent;
+    border: none;
+    color: #333;
+}
+
+
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+i, cite, em, var, address, dfn {
+    font-style: italic;
+}
+.city-names {
+    margin: 0px 10px;
+}
+.city-names > h3 {
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;   
+    color: #333;
+    text-align: left;
+	margin-bottom:10px;
+}
