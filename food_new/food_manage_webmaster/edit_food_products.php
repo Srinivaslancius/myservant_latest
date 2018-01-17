@@ -128,7 +128,7 @@ if (!isset($_POST['submit']))  {
                     <label class="btn btn-default file-upload-btn">
                         Choose file...
                         <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload" id="fileToUpload"  onchange="loadFile(event)"  multiple="multiple" >
-                      </label>
+                      </label> (Width : 60 px ; height : 60 px)
                  </div>
                   <?php $id = $_GET['pid'];
                     $getQry = "SELECT * FROM food_product_weight_prices where product_id = '$id'";

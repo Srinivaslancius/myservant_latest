@@ -64,7 +64,7 @@ if (!isset($_POST['submit'])) {
                     <label class="btn btn-default file-upload-btn">
                         Choose file...
                         <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload" id="fileToUpload"  onchange="loadFile(event)"  multiple="multiple" >
-                      </label>
+                      </label> (width : 200px ; height : 150px)
                   </div>
                   <?php $getStatus = getAllData('lkp_status');?>
                   <div class="form-group">
