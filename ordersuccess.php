@@ -16,8 +16,8 @@ if(isset($_SESSION['order_last_session_id']) && $_SESSION['order_last_session_id
     }
     $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
 	
-	// $delCart ="DELETE FROM grocery_cart WHERE user_id = '$user_id' OR session_cart_id='$session_cart_id' ";
-	// $conn->query($delCart);
+	$delCart ="DELETE FROM grocery_cart WHERE user_id = '$user_id' OR session_cart_id='$session_cart_id' ";
+	$conn->query($delCart);
 
 	header("Location: thankyou.php?odi=".$order_id."");
 }
