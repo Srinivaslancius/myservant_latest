@@ -126,7 +126,7 @@ if (!isset($_POST['submit'])) {
                     <label class="btn btn-default file-upload-btn">
                         Choose file...
                         <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload1" id="fileToUpload1"  onchange="loadFile1(event)"  multiple="multiple" >
-                      </label> (width : 1800px ; height : 400px)
+                      </label> (width : 550px ; height : 200px) 
                   </div>
                   <?php $getBannerTypes = getAllDataWithStatus('lkp_banner_types','0');?>
                   <div class="form-group">
