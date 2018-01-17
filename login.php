@@ -72,17 +72,23 @@
 	?>
 
 	<?php if(isset($_GET['err']) && $_GET['err'] == 'log-success' ) {  ?>
-			<div class="col-sm-4"></div>
-       	  	<div class="col-sm-4 alert alert-success" style="display:block">
+	<div class="row">
+			<div class="col-sm-3"></div>
+       	  	<div class="col-sm-6 alert alert-success" style="display:block">
 		      <strong>Success!</strong> Your Registration Successfully Completed.
 		    </div>
+			<div class="col-sm-3"></div>
+			</div>
 		<?php }?>
 
 	    <?php if(isset($_GET['err']) && $_GET['err'] == 'log-fail' ) {  ?>
-	    <div class="col-sm-4"></div>
-	    <div class="col-sm-4 alert alert-danger" style="display:block">
+		<div class="row">
+	    <div class="col-sm-3"></div>
+	    <div class="col-sm-6 alert alert-danger" style="display:block">
 	      <strong>Failed!</strong> Your Login Failed.
 	    </div>
+		 <div class="col-sm-3"></div>
+		 </div>
 	    <?php }?>
 
 		<section class="flat-account background">
