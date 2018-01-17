@@ -40,6 +40,50 @@
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
+		<?php 
+		error_reporting(0);
+		
+		$cart_id = decryptPassword($_GET['cart_id']);
+		if(isset($_POST['login']))  { 
+		    //Login here
+
+		    $user_email = $_POST['user_email'];
+		    $user_password = encryptPassword($_POST['login_password']);
+		    $getLoginData = userLogin($user_email,$user_password);
+		    //Set variable for session
+		    if($getLoggedInDetails = $getLoginData->fetch_assoc()) {
+		    	$last_login_visit = date("Y-m-d h:i:s");
+		    	$login_count = $getLoggedInDetails['login_count']+1;
+		    	$sql = "UPDATE `users` SET login_count='$login_count', last_login_visit='$last_login_visit' WHERE user_email = '$user_email' OR user_mobile = '$user_email' ";
+		    	$row = $conn->query($sql);
+		        $_SESSION['user_login_session_id'] =  $getLoggedInDetails['id'];
+		        $_SESSION['user_login_session_name'] = $getLoggedInDetails['user_full_name'];
+		        $_SESSION['user_login_session_email'] = $getLoggedInDetails['user_email'];
+		        $_SESSION['timestamp'] = time();
+		        $updateCart = "UPDATE `grocery_cart` SET user_id='".$_SESSION['user_login_session_id']."' WHERE session_cart_id = '".$_SESSION['CART_TEMP_RANDOM']."'";
+				$updateCart1 = $conn->query($updateCart);
+		        if($cart_id == 1) {
+		        	header('Location: contact.php');
+		        } elseif($_GET['err']!='') { header('Location: index.php'); exit; } else { header('Location: index.php'); exit; }
+		    } else {
+		    	header('Location: login.php?err=log-fail');
+		    }
+		}
+	?>
+
+	<?php if(isset($_GET['err']) && $_GET['err'] == 'log-success' ) {  ?>
+			<div class="col-sm-4"></div>
+       	  	<div class="col-sm-4 alert alert-success" style="display:block">
+		      <strong>Success!</strong> Your Registration Successfully Completed.
+		    </div>
+		<?php }?>
+
+	    <?php if(isset($_GET['err']) && $_GET['err'] == 'log-fail' ) {  ?>
+	    <div class="col-sm-4"></div>
+	    <div class="col-sm-4 alert alert-danger" style="display:block">
+	      <strong>Failed!</strong> Your Login Failed.
+	    </div>
+	    <?php }?>
 
 		<section class="flat-account background">
 			<div class="container">

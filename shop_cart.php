@@ -63,7 +63,7 @@
 						<div class="flat-row-title style1">
 							<h3>Shopping Cart</h3>
 						</div>
-						<div class="table-cart">
+						<div class="table-cart cart">
 							<table>
 								<thead>
 									<tr>
@@ -96,11 +96,10 @@
 										</td>
 										<td>
 											<div class="quanlity">
-											<span class="btn-down"></span>
-										<input type="text" name="number" value="1" min="0" placeholder="Quantity">
-										<span class="btn-up"></span>
-												<!--<a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onclick="add_cart_item1(<?php echo $getCartItems['id']; ?>)"></i></a> <strong id="ind_quan_<?php echo $getCartItems['id']; ?>"><?php echo $getCartItems['product_quantity']; ?></strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item1(<?php echo $getCartItems['id']; ?>)"></i></a>-->
-											</div>
+                                				<span class="btn-down" onclick="remove_cart_item1(<?php echo $getCartItems['id']; ?>)"></span>
+                                				<input type="text" readonly name="number" id="number" value="<?php echo $getCartItems['product_quantity']; ?>" min="0" placeholder="Quantity">
+                                				<span class="btn-up" onclick="add_cart_item1(<?php echo $getCartItems['id']; ?>)"></span>
+                                    		</div>
 										</td>
 										<td>
 											<div class="total">
@@ -246,6 +245,43 @@ number.onkeydown = function(e) {
     }
 }
 		</script>
+<script type="text/javascript">
+
+function add_cart_item1(cartId) {
+  
+ $.ajax({
+  type:'post',
+  url:'cart_page_inc.php',
+  data:{
+     cart_id:cartId,       
+  },
+  success:function(data) {
+    //alert(data);
+    $('.cart').html(data);
+  }
+ });
+
+}
+
+function remove_cart_item1(cartId) {
+
+ $.ajax({
+  type:'post',
+  url:'cart_page_dec.php',
+  data:{
+     cart_id:cartId,       
+  },
+  success:function(data) { 
+    //alert(data);
+    $('.cart').html(data);
+    $('#cart_cnt').html($('#get_cart_cnt').val());
+  }
+
+ });
+
+}
+
+</script>
 		
 
 </body>	

@@ -119,10 +119,10 @@
 											</p>
 											<div class="clearfix"></div>
 										</div>
-										<div class="checkbox">
+										<!-- <div class="checkbox">
 											<input type="checkbox" id="create-account" name="create-account" checked>
 											<label for="create-account">Create an account?</label>
-										</div>
+										</div> -->
 									</div><!-- /.fields-content -->
 								</div><!-- /.billing-fields -->
 							
@@ -175,7 +175,7 @@
 											<input type="hidden" name="order_total" value="<?php echo $cartTotal; ?>">
 											
 
-											<td>Rs . <?php echo $getCartItems['product_price']; ?></td>
+											<td>Rs . <?php echo $getCartItems['product_price'] ?> * <?php echo $getCartItems['product_quantity']; ?></td>
 										</tr>	
 										<?php } ?>									
 									</tbody>
@@ -194,11 +194,11 @@
 									
 								<div class="radio-info">
 									<input type="radio" id="cash-delivery" name="pay_mn" value="1" required>
-									<label for="cash-delivery">Cash on Delivery</label>
+									<label for="cash-delivery">COD</label>
 								</div>
 								<div class="radio-info">
-									<input type="radio" id="cash-delivery" name="pay_mn" value="2" required>
-									<label for="cash-delivery">Online payment</label>
+									<input type="radio" id="online_payment" name="pay_mn" value="2" required>
+									<label for="online_payment">Online payment</label>
 								</div>
 									
 								</div><!-- /.btn-radio style2 -->

@@ -51,6 +51,7 @@
 										</div> -->
 									</a>
 									<div class="dropdown-box">
+										<?php if($cart_count > 0) { ?>
 										<ul>
 											<?php $cartTotal = 0;
 											while ($getCartItems = $cartItems->fetch_assoc()) { 
@@ -89,6 +90,9 @@
 											<a href="shop_checkout.php" class="check-out" title="">Checkout</a>
 											<?php } ?>
 										</div>
+										<?php } else { ?>
+											<p style="text-align:center; color:#f26226">There are no items found in the cart</p>
+										<?php } ?>
 									</div>
 								</div><!-- /.inner-box -->
 							</div><!-- /.box-cart -->
