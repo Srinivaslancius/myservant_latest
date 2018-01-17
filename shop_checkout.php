@@ -42,9 +42,9 @@
 		</section><!-- /.flat-breadcrumb -->
 
 		<?php
-		// if($_SESSION['user_login_session_id'] == '') {
-		//     header ("Location: logout.php");
-		// } 
+		if($_SESSION['user_login_session_id'] == '') {
+		    header ("Location: logout.php");
+		} 
 		?>
 		<?php 
 		$id = $_SESSION['user_login_session_id'];
