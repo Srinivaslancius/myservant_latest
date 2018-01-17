@@ -1,5 +1,6 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-4">
@@ -10,7 +11,45 @@
 								<li>
 									<a href="trackorder.php" title="">Track Your Order</a>
 								</li>
-								 <li><span class="icon-location" data-toggle="popover" data-placement="bottom" data-content="TOP SEARCHED: <br> Vijayawada, Hyderabad, Karimnagar, Chennai, Warangal, Pune, Bangalore" style="cursor:pointer">Vijayawada <i class="fa fa-angle-down" aria-hidden="true"></i></span></li>
+								<li><a href="javascript:avoid();" class="page-scroll" id="select-city">
+               Vijayawada <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+				<!--Select City Popup
+			  =====================-->
+			  <div class="cities" id ="panel">
+			  <div class="city-triangle"></div>
+			  <div class="city-header"></div>
+				<input type="text" name="city-area" id="city-area" placeholder="Search Your City">
+				<button type="button" class="city-srch-btn"><i class="fa fa-search"></i></button>
+
+				  <div class="city-names">
+                  
+                  
+					<h3>Main Cities</h3>
+            
+                       <span id="cityloading"></span>
+                    <div id="citiesRead">
+                       					<ul class="cityrow1">
+                    					  <li><a href="javascript:avoid();" rel="83" class="citylink">Bangalore</a></li>
+					 					  <li><a href="javascript:avoid();" rel="980" class="citylink">Chennai</a></li>
+					 					  <li><a href="javascript:avoid();" rel="1730" class="citylink">Delhi</a></li>
+					 					  <li><a href="javascript:avoid();" rel="143" class="citylink">Hyderabad</a></li>
+					 					  <li><a href="javascript:avoid();" rel="911" class="citylink">Jaipur</a></li>
+					 					  <li><a href="javascript:avoid();" rel="166" class="citylink">Kolkata</a></li>
+					 					  <li><a href="javascript:avoid();" rel="97" class="citylink">Mumbai</a></li>
+					 					  <li><a href="javascript:avoid();" rel="47" class="citylink">Patna</a></li>
+					 					  <li><a href="javascript:avoid();" rel="34" class="citylink">Vijayawada</a></li>
+					 					  <li><a href="javascript:avoid();" rel="33" class="citylink">Visakhapatnam</a></li>
+					 					</ul>
+					                                    
+                                    
+                              </div>                     
+				  </div>
+				  <div class="underline"></div>
+				<button type="submit" class="submit pull-right" style="margin:10px;background-color:#FE6003">Login</button>
+
+			  </div>
+				</li>
+								 <!--<li><span class="icon-location" data-toggle="popover" data-placement="bottom" data-content="TOP SEARCHED: <br> Vijayawada, Hyderabad, Karimnagar, Chennai, Warangal, Pune, Bangalore" style="cursor:pointer">Vijayawada <i class="fa fa-angle-down" aria-hidden="true"></i></span></li>-->
 								
 								
 							</ul><!-- /.flat-support -->
@@ -72,7 +111,14 @@
 						</div><!-- /.col-md-4 -->
 					</div><!-- /.row -->
 				</div><!-- /.container -->
-				<script type="text/javascript">
+				<script> 
+$(document).ready(function(){
+    $("#select-city").click(function(){
+        $("#panel").slideToggle("slow");
+    });
+});
+</script>
+				<!--<script type="text/javascript">
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover({
         html: true,
@@ -84,4 +130,4 @@ $(document).ready(function(){
         $(this).parents(".popover").popover('hide');
     });
 });
-</script>
+</script>-->
