@@ -78,7 +78,12 @@
 									<a href="#" title="">My Account<i class="fa fa-angle-down" aria-hidden="true"></i></a>
 									<ul class="unstyled">
 										<li>
-											<a href="login.php" title="">Login</a>
+											<?php if($_SESSION['user_login_session_id'] =='') { ?>
+												<a href="login.php" title="">Login / Register</a>
+											<?php } else { ?>
+												<a href="" title=""><?php echo $_SESSION['user_login_session_name']; ?></a> <a href="logout.php">Logout</a>
+											 <?php } ?>
+											
 										</li>
 										
 										<li>
