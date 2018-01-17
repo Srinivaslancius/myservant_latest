@@ -96,7 +96,10 @@
 										</td>
 										<td>
 											<div class="quanlity">
-												<a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onclick="add_cart_item1(<?php echo $getCartItems['id']; ?>)"></i></a> <strong id="ind_quan_<?php echo $getCartItems['id']; ?>"><?php echo $getCartItems['product_quantity']; ?></strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item1(<?php echo $getCartItems['id']; ?>)"></i></a>
+											<span class="btn-down"></span>
+										<input type="text" name="number" value="1" min="0" placeholder="Quantity">
+										<span class="btn-up"></span>
+												<!--<a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onclick="add_cart_item1(<?php echo $getCartItems['id']; ?>)"></i></a> <strong id="ind_quan_<?php echo $getCartItems['id']; ?>"><?php echo $getCartItems['product_quantity']; ?></strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item1(<?php echo $getCartItems['id']; ?>)"></i></a>-->
 											</div>
 										</td>
 										<td>
@@ -114,9 +117,15 @@
 								</tbody>
 							</table>
 							<div class="box-cart style2">
-								<div class="btn-add-cart pull-right">
+								<?php if(!isset($_SESSION['user_login_session_id'])) { ?>
+							  	<div class="btn-add-cart pull-right">
+									<a href="login.php?cart_id=<?php echo encryptPassword(1);?>" style="cursor:pointer">Proceed To Checkout</a>
+								</div>
+	            				<?php } else { ?>
+					              <div class="btn-add-cart pull-right">
 									<a href="shop_checkout.php" style="cursor:pointer">Proceed To Checkout</a>
-								</div>								
+								 </div>
+					            <?php } ?>					
 							</div>
 							<!-- <div class="form-coupon">
 								<form action="#" method="get" accept-charset="utf-8">
