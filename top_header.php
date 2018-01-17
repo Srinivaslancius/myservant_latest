@@ -76,7 +76,7 @@
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover({
         html: true,
-        template: '<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-body"><div class="form-group"><input type="text" class="form-control1" id="email" placeholder="ENTER YOUR CITY" required></div></div><div class="popover-content"></div><div class="popover-footer"><a href="index.php" class="btn btn-info btn-sm">Submit</a></div></div>'
+        template: '<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-body"><div class="form-group"><input type="text" class="form-control1" placeholder="ENTER YOUR CITY" required></div></div><div class="popover-content"></div><div class="popover-footer"><a href="index.php" class="btn btn-info btn-sm">Submit</a></div></div>'
     });
     
     // Custom jQuery to hide popover on click of the close button
