@@ -109,7 +109,7 @@
 									<div class="sale">
 										<input type="hidden" id="pro_price" value="<?php echo $getPrc1['selling_price']; ?>">
 										<input type="hidden" id="pro_weight_type_id" value="<?php echo $getPrc1['id']; ?>">
-										<?php echo 'Rs.' . $getPrc1['selling_price'] . '.00'; ?><span style="text-decoration:line-through;font-size:16px;color:#838383;">(<?php echo 'Rs.' . $getPrc1['mrp_price']; ?>)</span>
+										<?php echo 'Rs.' . $getPrc1['selling_price'] . '.00'; ?> <span style="text-decoration:line-through;font-size:16px;color:#838383;">(<?php echo 'Rs.' . $getPrc1['mrp_price']; ?>)</span>
 									</div>
 								</div>
 								<div class="info-text">
@@ -130,9 +130,9 @@
 	                                    </select>
 									</div>
 									<div class="quanlity">
-										<span class="btn-down"></span>
-										<input type="number" name="number" value="" min="1" max="100" placeholder="Quanlity">
-										<span class="btn-up"></span>
+										<!--<span class="btn-down"></span>-->
+										<input type="number" name="number" value="1" min="1" max="100" placeholder="Quantity" style="margin-bottom:-15px">
+										<!--<span class="btn-up"></span>-->
 									</div>
 								</div><!-- /.quanlity-box -->
 								<div class="box-cart style2">
