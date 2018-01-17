@@ -55,6 +55,7 @@
 		      $cartItems = $conn->query($cartItems1);
 		    } 
 		?>
+		<?php if($cartItems->num_rows > 0) { ?>
 		<section class="flat-shop-cart">
 			<div class="container">
 				<div class="row">
@@ -131,6 +132,10 @@
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-shop-cart -->
+		<?php } else { ?>
+			<p style="text-align:center; color:#f26226">There are no items found in the cart</p>
+    		<center><a href="index.php" style="color:#f26226">Click here for items</a></center>
+		<?php } ?>
 
 		<section class="flat-row flat-iconbox style3">
 			<div class="container">

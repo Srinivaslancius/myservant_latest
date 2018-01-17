@@ -36,6 +36,8 @@ if(!empty($_POST['user_mobile']) && !empty($_POST['mobile_otp']))  {
         $updateCart = "UPDATE `grocery_cart` SET user_id='".$_SESSION['user_login_session_id']."' WHERE session_cart_id = '".$_SESSION['CART_TEMP_RANDOM']."'";
 		$updateCart1 = $conn->query($updateCart);
 
+
+
         $dataem = $getLoggedInDetails["user_email"];
 
         $user_password = decryptPassword($getLoggedInDetails["user_password"]);
