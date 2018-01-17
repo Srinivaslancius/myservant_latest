@@ -76,7 +76,7 @@
 								<?php $cartTotal = 0;
 								while ($getCartItems = $cartItems->fetch_assoc()) { 
 								$getProductImage = getIndividualDetails('grocery_product_bind_images','product_id',$getCartItems['product_id']);
-								$cartTotal += $getCartItems['product_price']*$getCartItems['product_quantity'];
+								$cartTotal = $getCartItems['product_price']*$getCartItems['product_quantity'];
 
 								$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
 								?>
@@ -95,7 +95,7 @@
 										</td>
 										<td>
 											<div class="quanlity">
-												<?php echo $getCartItems['product_quantity']; ?>
+												<a href="#0" class="remove_item"><i class="icon_plus_alt inc_cart_quan" onclick="add_cart_item1(<?php echo $getCartItems['id']; ?>)"></i></a> <strong id="ind_quan_<?php echo $getCartItems['id']; ?>"><?php echo $getCartItems['product_quantity']; ?></strong> <a href="#0" class="remove_item"><i class="icon_minus_alt" onclick="remove_cart_item1(<?php echo $getCartItems['id']; ?>)"></i></a>
 											</div>
 										</td>
 										<td>

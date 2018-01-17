@@ -26,54 +26,61 @@
 						<div class="col-md-3">
 							<div class="box-cart">
 							
+							<?php
+							    if($_SESSION['CART_TEMP_RANDOM'] == "") {
+							        $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
+							    }
+							    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
+							    if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
+							        $user_session_id = $_SESSION['user_login_session_id'];
+							        $cartItems1 = "SELECT * FROM grocery_cart WHERE (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') AND product_quantity!='0'";
+							        $cartItems = $conn->query($cartItems1);
+							    } else {
+							      $cartItems1 = "SELECT * FROM grocery_cart WHERE  product_quantity!='0' AND session_cart_id='$session_cart_id' ";
+							      $cartItems = $conn->query($cartItems1);
+							    } 
+							    $cartCount = $cartItems->num_rows;
+							?>
 								<div class="inner-box">
 									<a href="#" title="">
 										<div class="icon-cart">
 											<img src="images/icons/cart.png" alt="">
-											<span>4</span>
+											<span><?php echo $cartCount; ?></span>
 										</div>
-										<div class="price">
+										<!-- <div class="price">
 											₹0.00
-										</div>
+										</div> -->
 									</a>
 									<div class="dropdown-box">
 										<ul>
+											<?php $cartTotal = 0;
+											while ($getCartItems = $cartItems->fetch_assoc()) { 
+											$getProductImage = getIndividualDetails('grocery_product_bind_images','product_id',$getCartItems['product_id']);
+											$cartTotal += $getCartItems['product_price']*$getCartItems['product_quantity'];
+
+											$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
+											?>
 											<li>
 												<div class="img-product">
-													<img src="images/product/other/my.jpg" alt="">
+													<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image']; ?>" alt="">
 												</div>
 												<div class="info-product">
 													<div class="name">
-														Combo Offer
+														<?php echo $getProductName['product_name']; ?>
 													</div>
 													<div class="price">
-														<span>1 x</span>
-														<span>₹250.00</span>
+														<span><?php echo $getCartItems['product_quantity']; ?> x</span>
+														<span>Rs . <?php echo $getCartItems['product_price']; ?></span>
 													</div>
 												</div>
 												<div class="clearfix"></div>
 												<span class="delete">x</span>
 											</li>
-											<li>
-												<div class="img-product">
-													<img src="images/product/other/my.jpg" alt="">
-												</div>
-												<div class="info-product">
-													<div class="name">
-														Combo Offer
-													</div>
-													<div class="price">
-														<span>1 x</span>
-														<span>₹250.00</span>
-													</div>
-												</div>
-												<div class="clearfix"></div>
-												<span class="delete">x</span>
-											</li>
+											<?php } ?>
 										</ul>
 										<div class="total">
 											<span>Subtotal:</span>
-											<span class="price">₹1,999.00</span>
+											<span class="price">Rs . <?php echo $cartTotal; ?></span>
 										</div>
 										<div class="btn-cart">
 											<a href="shop_cart.php" class="view-cart" title="">View Cart</a>
