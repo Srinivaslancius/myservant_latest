@@ -85,7 +85,7 @@
 									</div><!-- /.one-half order-id -->
 									<div class="form-box">
 										<label for="OTP" style="margin-right:415px">OTP:</label>
-										<input type="tel" placeholder="Enter OTP" maxlength="4" pattern="[0-9]{10}"  required>
+										<input type="tel" id="mobile_otp" name="mobile_otp" placeholder="Enter OTP" maxlength="4"   required>
 									</div>
 									
 									<div class="btn-track">
@@ -202,9 +202,7 @@ $('#verify_otp').on('click', function () {
   if(user_mobile!='' && mobile_otp!='') {
 
       $.ajax({
-
         type:"post",
-
         url:"check_otp.php",
         data:$("form").serialize(),
         success:function(result){           
@@ -215,9 +213,10 @@ $('#verify_otp').on('click', function () {
           } else {
             //Success
             alert("OTP verified");
-            
-                window.location.href = 'contact.php';
-             
+            if (checkout_key == '') {
+                window.location.href = 'index.php';
+            } else {
+                window.location.href = 'checkout.php';
             }
           }
         }
