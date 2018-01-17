@@ -187,7 +187,7 @@
                     <label class="btn btn-default file-upload-btn">
                       Choose file...
                         <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload" id="fileToUpload"  onchange="loadFile(event)"  multiple="multiple" required data-error="Please Select Image." >
-                      </label> (Width : 508 px ; height : 320 px)
+                      </label> (Width : 98 px ; height : 62 px)
                   </div>
                   <div class="form-group">
                     <label for="form-control-4" class="control-label">Banner</label>

@@ -51,7 +51,12 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
 
-		<?php $getProductImages = getAllDataWhere('grocery_product_bind_images','product_id',$product_id); ?>
+		<?php $getProductImages = getAllDataWhere('grocery_product_bind_images','product_id',$product_id);
+		$getCategoryName = getIndividualDetails('grocery_category','id',$productDetails['grocery_category_id']); ?>
+		<input type="hidden" id="pro_id" value="<?php echo $product_id; ?>">
+		<input type="hidden" id="cat_id" value="<?php echo $productDetails['grocery_category_id']; ?>">
+		<input type="hidden" id="sub_cat_id" value="<?php echo $productDetails['grocery_sub_category_id']; ?>">
+		<input type="hidden" id="pro_name" value="<?php echo $getProductName['product_name']; ?>">
 		<section class="flat-product-detail">
 			<div class="container">
 				<div class="row">
@@ -71,77 +76,358 @@
 					<div class="col-md-6">
 						<div class="product-detail">
 							<div class="header-detail">
-								<h4 class="name"><?php echo $getProductName['product_name']; ?></h4><br>
-								 <div class="product_name" style="width:300px">
-								 <?php 
-								 	$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='$product_id' AND lkp_status_id = 0 AND lkp_city_id ='1' ";
-								 	$allGetPrices = $conn->query($getPrices);
-								 ?>
-									<select class="s-w form-control" id="na1q_qty0" onchange="get_price(this.value,'na10');">
-									<?php while($getPrc = $allGetPrices->fetch_assoc() ) { ?>
-                                      <option value="<?php echo $getPrc['id']; ?>"><?php echo $getPrc['weight_type'] .' - '. 'Rs : ' . $getPrc['selling_price']; ?></option>
-                                    <?php } ?>								  
-                                    </select>
+								<h4 class="name"><?php echo $getProductName['product_name']; ?></h4>
+								<div class="category">
+									<?php echo $getCategoryName['category_name']; ?>
 								</div>
 								<div class="reviewed">
-									
-									<!-- <div class="status-product">
+									<div class="review">
+										<div class="queue">
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
+										</div>
+										<div class="text">
+											<span>3 Reviews</span>
+											<span class="add-review">Add Your Review</span>
+										</div>
+									</div><!-- /.review -->
+									<div class="status-product">
 										Availablity <span>In stock</span>
-									</div> -->
+									</div>
 								</div><!-- /.reviewed -->
 							</div><!-- /.header-detail -->
-
-							<input type="hidden" id="pro_id" value="<?php echo $product_id; ?>">
-							<input type="hidden" id="cat_id" value="<?php echo $productDetails['grocery_category_id']; ?>">
-							<input type="hidden" id="sub_cat_id" value="<?php echo $productDetails['grocery_sub_category_id']; ?>">
-							<input type="hidden" id="pro_name" value="<?php echo $getProductName['product_name']; ?>">
-							
 							<?php 
-							 	$getPrices1 = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='$product_id' AND lkp_status_id = 0 AND lkp_city_id ='1' ";
-							 	$allGetPrices1 = $conn->query($getPrices1);
-							?>
+							 	$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='$product_id' AND lkp_status_id = 0 AND lkp_city_id ='1' ";
+							 	$allGetPrices = $conn->query($getPrices);
+							 	$getPrc1 = $allGetPrices->fetch_assoc();
+							 ?>
 							<div class="content-detail">
-								<div class="price">		
-								<?php while($getPrc1 = $allGetPrices1->fetch_assoc() ) { ?>							
+								<div class="price">
 									<div class="sale">
-										<?php echo 'Rs : ' . $getPrc1['selling_price']; ?>
 										<input type="hidden" id="pro_price" value="<?php echo $getPrc1['selling_price']; ?>">
 										<input type="hidden" id="pro_weight_type_id" value="<?php echo $getPrc1['id']; ?>">
-										<?php if($getPrc1['offer_type'] == 1) { ?>
-											<span style="text-decoration:line-through;font-size:16px;color:#838383;">(<?php echo 'Rs : ' . $getPrc1['mrp_price']; ?>)</span>
-										<?php } ?>
+										<?php echo 'Rs.' . $getPrc1['selling_price'] . '.00'; ?><span style="text-decoration:line-through;font-size:16px;color:#838383;">(<?php echo 'Rs.' . $getPrc1['mrp_price']; ?>)</span>
 									</div>
-								<?php } ?>
 								</div>
 								<div class="info-text">
 									<?php echo $productDetails['product_description']; ?>
-								</div>								
+								</div>
 							</div><!-- /.content-detail -->
 							<div class="footer-detail">
-								<!-- <div class="quanlity-box">
-									
+								<div class="quanlity-box">
+									<div class="colors">
+										<?php 
+									 	$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='$product_id' AND lkp_status_id = 0 AND lkp_city_id ='1' ";
+									 	$allGetPrices = $conn->query($getPrices);
+									 	?>
+										<select onchange="get_price(this.value,'na10');">
+										<?php while($getPrc = $allGetPrices->fetch_assoc() ) { ?>
+	                                      <option value="<?php echo $getPrc['id']; ?>"><?php echo $getPrc['weight_type'] .' - '. 'Rs : ' . $getPrc['selling_price']; ?></option>
+	                                    <?php } ?>								  
+	                                    </select>
+									</div>
 									<div class="quanlity">
 										<span class="btn-down"></span>
-										<input type="text" name="number" value="" min="1" max="100" placeholder="Quantity">
+										<input type="number" name="number" value="" min="1" max="100" placeholder="Quanlity">
 										<span class="btn-up"></span>
 									</div>
-								</div><!-- /.quanlity-box --> 
+								</div><!-- /.quanlity-box -->
 								<div class="box-cart style2">
 									<div class="btn-add-cart">
 										<a style="cursor:pointer" onClick="show_cart()"><img src="images/icons/add-cart.png" alt="">Add to Cart</a>
 									</div>
 									<div class="compare-wishlist">
-										
 										<a href="compare.html" class="wishlist" title=""><img src="images/icons/wishlist.png" alt="">Wishlist</a>
 									</div>
 								</div><!-- /.box-cart -->
-								
+								<div class="social-single">
+									<span>SHARE</span>
+									<ul class="social-list style2">
+										<li>
+											<a href="#" title="">
+												<i class="fa fa-facebook" aria-hidden="true"></i>
+											</a>
+										</li>
+										<li>
+											<a href="#" title="">
+												<i class="fa fa-twitter" aria-hidden="true"></i>
+											</a>
+										</li>
+										<li>
+											<a href="#" title="">
+												<i class="fa fa-instagram" aria-hidden="true"></i>
+											</a>
+										</li>
+										<li>
+											<a href="#" title="">
+												<i class="fa fa-pinterest" aria-hidden="true"></i>
+											</a>
+										</li>
+										<li>
+											<a href="#" title="">
+												<i class="fa fa-dribbble" aria-hidden="true"></i>
+											</a>
+										</li>
+										<li>
+											<a href="#" title="">
+												<i class="fa fa-google" aria-hidden="true"></i>
+											</a>
+										</li>
+									</ul><!-- /.social-list -->
+								</div><!-- /.social-single -->
 							</div><!-- /.footer-detail -->
 						</div><!-- /.product-detail -->
+
 					</div><!-- /.col-md-6 -->
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-product-detail -->
+
+		<section class="flat-product-content">
+			<ul class="product-detail-bar">
+				<li class="active">Description</li>
+				
+				<li>Reviews</li>
+			</ul><!-- /.product-detail-bar -->
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="description-text">
+							<div class="box-text">
+								<h4>Nuqqam Et Massa</h4>
+								<p>Sed sodales sed orci molestie tristique. Nunc dictum, erat id molestie vestibulum, ex leo vestibulum justo, luctus tempor erat sem quis diam. Lorem ipsum dolor sit amet.</p>
+							</div>
+							<div class="box-text wireless">
+								<h4>Wireless</h4>
+								<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece <br />of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+							</div>
+							<div class="box-text design">
+								<h4>Fresh Design</h4>
+								<p>It is a long established fact that a reader will be distracted by the readable content of <br />a page when looking at its layout. The point of using Lorem Ipsum is that it has a <br />more-or-less normal distribution of letters, as opposed to using</p>
+							</div>
+							<div class="box-text sound">
+								<h4>Fabolous Sound</h4>
+								<p>There are many variations of passages of Lorem Ipsum available, but the <br />majority have suffered alteration in some form, by injected humour, or <br />randomised words which don't look even slightly believable.</p>
+							</div>
+						</div><!-- /.description-text -->
+					</div><!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="description-image">
+							<div class="box-image">
+								<img src="images/product/single/01.png" alt="">
+							</div>
+							<div class="box-text">
+								<h4>Nuqqam Et Massa</h4>
+								<p>Sed sodales sed orci molestie tristique. Nunc dictum, erat id molestie vestibulum, ex leo vestibulum justo, luctus tempor erat sem quis diam. Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div><!-- /.description-image -->
+					</div><!-- /.col-md-6 -->
+					<div class="col-md-12">
+						<div class="different-color">
+							<div class="title">
+								Different Colors
+							</div>
+							<p>
+								Sed sodales sed orci<br />molestie
+							</p>
+						</div><!-- /.different-color -->
+					</div><!-- /.col-md-12 -->
+					<div class="col-md-6">
+						<div class="box-left">
+							<div class="img-line">
+								<img src="images/product/single/line-1.png" alt="">
+							</div>
+							<div class="img-product">
+								<img src="images/product/single/06.png" alt="">
+							</div>
+						</div><!-- /.box-left -->
+					</div><!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="box-right">
+							<div class="img-line">
+								<img src="images/product/single/line-2.png" alt="">
+								<img src="images/product/single/04.png" alt="">
+							</div>
+							<div class="img-product">
+								
+							</div>
+							<div class="box-text">
+								<h4>Nuqqam Et Massa</h4>
+								<p>Sed sodales sed orci molestie tristique. Nunc dictum, erat id molestie vestibulum, ex leo vestibulum justo, luctus tempor erat sem quis diam. Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div><!-- /.box-right -->
+					</div><!-- /.col-md-6 -->
+				</div><!-- /.row -->
+				
+				<div class="row">
+					<div class="col-md-6">
+						<div class="rating">
+							<div class="title">
+								Based on 3 reviews
+							</div>
+							<div class="score">
+								<div class="average-score">
+									<p class="numb">4.3</p>
+									<p class="text">Average score</p>
+								</div>
+								<div class="queue">
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+								</div>
+							</div><!-- /.score -->
+							<ul class="queue-box">
+								<li class="five-star">
+									<span>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</span>
+									<span class="numb-star">3</span>
+								</li><!-- /.five-star -->
+								<li class="four-star">
+									<span>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</span>
+									<span class="numb-star">4</span>
+								</li><!-- /.four-star -->
+								<li class="three-star">
+									<span>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</span>
+									<span class="numb-star">3</span>
+								</li><!-- /.three-star -->
+								<li class="two-star">
+									<span>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</span>
+									<span class="numb-star">2</span>
+								</li><!-- /.two-star -->
+								<li class="one-star">
+									<span>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</span>
+									<span class="numb-star">0</span>
+								</li><!-- /.one-star -->
+							</ul><!-- /.queue-box -->
+						</div><!-- /.rating -->
+					</div><!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="form-review">
+							<div class="title">
+								Add a review 
+							</div>
+							<div class="your-rating queue">
+								<span>Your Rating</span>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+							</div>
+							<form action="#" method="get" accept-charset="utf-8">
+								<div class="review-form-name">
+									<input type="text" name="name-author" value="" placeholder="Name">
+								</div>
+								<div class="review-form-email">
+									<input type="text" name="email-author" value="" placeholder="Email">
+								</div>
+								<div class="review-form-comment">
+									<textarea name="review-text" placeholder="Your Name"></textarea>
+								</div>
+								<div class="btn-submit">
+									<button type="submit">Add Review</button>
+								</div>
+							</form>
+						</div><!-- /.form-review -->
+					</div><!-- /.col-md-6 -->
+					<div class="col-md-12">
+						<ul class="review-list">
+							<li>
+								<div class="review-metadata">
+									<div class="name">
+										Ali Tufan : <span>April 3, 2016</span>
+									</div>
+									<div class="queue">
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</div>
+								</div><!-- /.review-metadata -->
+								<div class="review-content">
+									<p>
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+									</p> 
+								</div><!-- /.review-content -->
+							</li>
+							<li>
+								<div class="review-metadata">
+									<div class="name">
+										Peter Tufan : <span>April 3, 2016</span>
+									</div>
+									<div class="queue">
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</div>
+								</div><!-- /.review-metadata -->
+								<div class="review-content">
+									<p>
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+									</p> 
+								</div><!-- /.review-content -->
+							</li>
+							<li>
+								<div class="review-metadata">
+									<div class="name">
+										Jon Tufan : <span>April 3, 2016</span>
+									</div>
+									<div class="queue">
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</div>
+								</div><!-- /.review-metadata -->
+								<div class="review-content">
+									<p>
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+									</p> 
+								</div><!-- /.review-content -->
+							</li>
+						</ul><!-- /.review-list -->
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.flat-product-content -->
 		
 		<section class="flat-imagebox style4">
 			<div class="container">
@@ -213,28 +499,43 @@
 
 		<script type="text/javascript">
 
-		function show_cart() {
+			function show_cart() {
 
-			var productId = $('#pro_id').val();
-			var catId = $('#cat_id').val();
-			var subCatId = $('#sub_cat_id').val();
-			var productName = $('#pro_name').val();
-			var productPrice = $('#pro_price').val();
-			var productWeightType = $('#pro_weight_type_id').val();
+				var productId = $('#pro_id').val();
+				var catId = $('#cat_id').val();
+				var subCatId = $('#sub_cat_id').val();
+				var productName = $('#pro_name').val();
+				var productPrice = $('#pro_price').val();
+				var productWeightType = $('#pro_weight_type_id').val();
 
-   			$.ajax({
-		      type:'post',
-		      url:'save_cart.php',
-		      data:{		        
-		        productId:productId,catId:catId,subCatId:subCatId,productName:productName,productPrice:productPrice,productWeightType:productWeightType,
-		      },
-		      success:function(response) {
-		      	window.location.href = "shop_cart.php";
-		      }
-		    }); 
+	   			$.ajax({
+			      type:'post',
+			      url:'save_cart.php',
+			      data:{		        
+			        productId:productId,catId:catId,subCatId:subCatId,productName:productName,productPrice:productPrice,productWeightType:productWeightType,
+			      },
+			      success:function(response) {
+			      	window.location.href = "shop_cart.php";
+			      }
+			    }); 
 
-		}
-	</script>
+			}
+		</script>
+		<script type="text/javascript">
+			function get_price(product_id) {
+				$.ajax({
+				  type:'post',
+				  url:'get_price.php',
+				  data:{
+				     product_id:product_id,       
+				  },
+				  success:function(data) {
+				    //alert(data);
+				    $('.price').html(data);
+				  }
+				});
+			}
+		</script>
 
 	</body>	
 </html>
