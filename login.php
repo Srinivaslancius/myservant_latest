@@ -49,21 +49,21 @@
 							<div class="title">
 								<h3>Login</h3>
 							</div>
-							<form action="#" method="get" id="form-login" accept-charset="utf-8">
+							<form  method="POST" id="form-login" accept-charset="utf-8">
 								<div class="form-box">
 									<label for="name-login">Username or email address * </label>
-									<input type="text" id="name-login" name="name-login" placeholder="Ali">
+									<input type="text" id="user_email" name="user_email" placeholder="Email" required>
 								</div><!-- /.form-box -->
 								<div class="form-box">
 									<label for="password-login">Password * </label>
-									<input type="text" id="password-login" name="password-login" placeholder="******">
+									<input type="password" id="login_password" name="login_password" placeholder="Password" required>
 								</div><!-- /.form-box -->
 								<div class="form-box checkbox">
 									<input type="checkbox" id="remember" checked name="remember">
 									<label for="remember">Remember me</label>
 								</div><!-- /.form-box -->
 								<div class="form-box">
-									<button type="submit" class="login">Login</button>
+									<button type="submit" name="login" class="login">SIGN IN</button>
 									<a href="#" title="">Lost your password?</a>
 								</div><!-- /.form-box -->
 							</form><!-- /#form-login -->
@@ -74,17 +74,33 @@
 							<div class="title">
 								<h3>Register</h3>
 							</div>
-							<form action="#" method="get" id="form-register" accept-charset="utf-8">
+							<form method="post" action="mobile_otp.php" id="form-register" accept-charset="utf-8">
 								<div class="form-box">
+									<label for="password-register">Name</label>
+									<input type="text" name="user_name"  id="user_name" placeholder="Name" required>
+								</div>
+								<!-- <div class="form-box">
+									<label for="password-register">Mobile</label>
+									<input type="tel" name="user_mobile" id="user_mobile"  placeholder="Mobile Number" maxlength="10" pattern="[0-9]{10}" onkeyup="checkMobile();" required>
+									<span id="input_status1" style="color: red;"></span>
+								</div> --> 								
+								<!-- <div class="form-box">
 									<label for="name-register">Email address * </label>
-									<input type="text" id="name-register" name="name-register">
-								</div><!-- /.form-box -->
+									<input type="text" name="user_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  id="user_email" placeholder="Email" onkeyup="checkEmail();" required>
+									<span id="input_status" style="color: red;"></span>
+								</div> -->
 								<div class="form-box">
 									<label for="password-register">Password</label>
-									<input type="text" id="password-register" name="password-register">
-								</div><!-- /.form-box -->
+									<input type="password" name="user_password" minlength="8" id="user_password" placeholder="Password" required>
+								</div> 
 								<div class="form-box">
-									<button type="submit" class="register">Register</button>
+									<label for="password-register">Confirm Password</label>
+									<input type="password" name="confirm_password" minlength="8"  id="confirm_password" placeholder="Confirm password" onChange="checkPasswordMatch();" required>
+									<div id="divCheckPasswordMatch" style="color:red"></div>
+	                    			<div id="pass-info" class="clearfix"></div>
+								</div>
+								<div class="form-box">
+									<button type="submit" name="register" class="register">Register</button>
 								</div><!-- /.form-box -->
 							</form><!-- /#form-register -->
 						</div><!-- /.form-register -->
@@ -180,6 +196,61 @@
 		<script type="text/javascript" src="javascript/jquery.countdown.js"></script>
 
 		<script type="text/javascript" src="javascript/main.js"></script>
+
+		<script type="text/javascript">
+	    
+	    function checkPasswordMatch() {
+		    var password = $("#user_password").val();
+		    var confirmPassword = $("#confirm_password").val();
+		    if (confirmPassword != password) {
+		        $("#divCheckPasswordMatch").html("Passwords do not match!");
+		        $("#confirm_password").val("");
+		    } else {
+		        $("#divCheckPasswordMatch").html("");
+		    }
+		}
+	    function checkMobile() {
+	        var user_mobile = document.getElementById("user_mobile").value;
+	        if (user_mobile){
+	          $.ajax({
+	          type: "POST",
+	          url: "user_avail_check.php",
+	          data: {
+	            user_mobile:user_mobile,
+	          },
+	          success: function (result) {
+	            if (result > 0){
+	            	$("#input_status1").html("<span style='color:red;'>Mobile Already Exist</span>");
+	        		$('#user_mobile').val('');
+	            } else {
+	              $('#input_status1').html("");
+	            }       
+	            }
+	           });          
+	        }
+	    }
+	    function checkEmail() {
+
+	        var user_email = document.getElementById("user_email").value;
+	        if (user_email){
+	          $.ajax({
+	          type: "POST",
+	          url: "user_avail_check.php",
+	          data: {
+	            user_email:user_email,
+	          },
+	          success: function (result) {
+	            if (result > 0){
+	            	$("#input_status").html("<span style='color:red;'>Email Already Exist</span>");
+	        		$('#user_email').val('');
+	            } else {
+	              $('#input_status').html("");
+	            }     
+	            }
+	           });          
+	        }
+	    }
+    </script>
 
 </body>	
 </html>

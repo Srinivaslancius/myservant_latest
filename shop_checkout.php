@@ -41,15 +41,21 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
 
+		<!-- <?php
+		if($_SESSION['user_login_session_id'] == '') {
+		    //header ("Location: logout.php");
+		} 
+		?> -->
+		<?php 
+		$id = $_SESSION['user_login_session_id'];
+		$getUserData = getAllDataWhere('users','id',$id);
+		$getUser = $getUserData->fetch_assoc();?>
+
 		<section class="flat-checkout">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-7">
 						<div class="box-checkout">
-							<h3 class="title">Checkout</h3>
-							<div class="checkout-login">
-								Returning customer? <a href="login.php" title="">Click here to login</a>
-							</div>
 							<form action="#" method="get" class="checkout" accept-charset="utf-8">
 								<div class="billing-fields">
 									<div class="fields-title">
@@ -61,11 +67,11 @@
 										<div class="field-row">
 											<p class="field-one-half">
 												<label for="first-name">First Name *</label>
-												<input type="text" id="first-name" name="first-name" placeholder="Ali">
+												<input type="text" id="first-name" name="first_name" placeholder="First name" required value="<?php echo $getUser['user_full_name']; ?>">
 											</p>
 											<p class="field-one-half">
 												<label for="last-name">Last Name *</label>
-												<input type="text" id="last-name" name="last-name" placeholder="Tufan">
+												<input type="text" id="last-name" name="last_name" placeholder="Last name" required>
 											</p>
 											<div class="clearfix"></div>
 										</div>
@@ -76,11 +82,11 @@
 										<div class="field-row">
 											<p class="field-one-half">
 												<label for="email-address">Email Address *</label>
-												<input type="email" id="email-address" name="email-address">
+												<input type="email" id="email-address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="email" class="form-control" value="<?php echo $getUser['user_email']; ?>" placeholder="Your email" required>
 											</p>
 											<p class="field-one-half">
 												<label for="phone">Phone *</label>
-												<input type="text" id="phone" name="phone">
+												<input type="text" id="phone" name="mobile" maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" value="<?php echo $getUser['user_mobile']; ?>" class="form-control valid_mobile_num" placeholder="Telephone/mobile" required>
 											</p>
 											<div class="clearfix"></div>
 										</div>
@@ -96,20 +102,20 @@
 										<div class="field-row">
 											<label for="address">Address *</label>
 											<input type="text" id="address" name="address" placeholder="Street address">
-											<input type="text" id="address-2" name="address" placeholder="Apartment, suite, unit etc. (optional)">
+											<!-- <input type="text" id="address-2" name="address" placeholder="Apartment, suite, unit etc. (optional)"> -->
 										</div>
 										<div class="field-row">
 											<label for="town-city">Town / City *</label>
-											<input type="text" id="town-city" name="town-city">
+											<input type="text" id="town-city" name="city">
 										</div>
 										<div class="field-row">
-											<p class="field-one-half">
+											<!-- <p class="field-one-half">
 												<label for="state-country">State / County *</label>
 												<input type="text" id="state-country" name="state-country">
-											</p>
+											</p> -->
 											<p class="field-one-half">
 												<label for="post-code">Postcode / ZIP *</label>
-												<input type="text" id="post-code" name="post-code">
+												<input type="text" id="post-code" name="postal_code">
 											</p>
 											<div class="clearfix"></div>
 										</div>
@@ -156,11 +162,17 @@
 
 											$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
 										?>
+										<input type="hidden" name='category_id' type='text' value='<?php echo $getCartItems['category_id'];?>'>
+										<input type="hidden" name='sub_cat_id' type='text' value='<?php echo $getCartItems['sub_category_id'];?>'>
+										<input type="hidden" name='product_id' type='text' value='<?php echo $getCartItems['product_id'];?>'>
+										<input type="hidden" name='product_weight' type='text' value='<?php echo $getCartItems['product_weight_type'];?>'>
+										<input type="hidden" name='product_quantity' type='text' value='<?php echo $getCartItems['product_quantity'];?>'>
 										<tr>
 											<td><?php echo $getProductName['product_name']; ?></td>
 											<input type="hidden" name="product_name" value="<?php echo $getProductName['product_name']; ?>">
 											<input type="hidden" name="product_price" value="<?php echo $getCartItems['product_price']; ?>">
-											<input type="hidden" name="order_price" value="<?php echo $cartTotal; ?>">
+											<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>">
+											<input type="hidden" name="order_total" value="<?php echo $cartTotal; ?>">
 											
 
 											<td>Rs . <?php echo $getCartItems['product_price']; ?></td>
@@ -181,8 +193,12 @@
 								<div class="btn-radio style2">
 									
 								<div class="radio-info">
-									<input type="radio" id="cash-delivery" name="radio-cash-2">
+									<input type="radio" id="cash-delivery" name="pay_mn" value="1" required>
 									<label for="cash-delivery">Cash on Delivery</label>
+								</div>
+								<div class="radio-info">
+									<input type="radio" id="cash-delivery" name="pay_mn" value="2" required>
+									<label for="cash-delivery">Online payment</label>
 								</div>
 									
 								</div><!-- /.btn-radio style2 -->
