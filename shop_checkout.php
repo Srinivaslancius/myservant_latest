@@ -76,10 +76,6 @@
 											<div class="clearfix"></div>
 										</div>
 										<div class="field-row">
-											<label for="company-name">Company Name</label>
-											<input type="text" id="company-name" name="company-name">
-										</div>
-										<div class="field-row">
 											<p class="field-one-half">
 												<label for="email-address">Email Address *</label>
 												<input type="email" id="email-address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="email" class="form-control" value="<?php echo $getUser['user_email']; ?>" placeholder="Your email" required>
@@ -91,33 +87,52 @@
 											<div class="clearfix"></div>
 										</div>
 										<div class="field-row">
-											<label>Country *</label>
-											<select name="country">
-												<option value="">Australia</option>
-												<option value="">USA State</option>
-												<option value="">Spanish</option>
-												<option value="">Viet Nam</option>
-											</select>
+											<p class="field-one-half">
+												<label>State *</label>
+												<?php $getStates = getAllDataWithStatus('grocery_lkp_states','0'); ?>
+												<select name="lkp_state_id" id="lkp_state_id" onChange="getDistricts(this.value);" required>
+													<option value="">Select State</option>
+													<?php while($getStatesData = $getStates->fetch_assoc()) { ?>
+													<option value="<?php echo $getStatesData['id'];?>"><?php echo $getStatesData['state_name'];?></option>
+													<?php } ?>
+												</select>
+											</p>
+											<p class="field-one-half">
+												<label>District *</label>
+												<select name="lkp_district_id" id="lkp_district_id" placeholder="District" onChange="getCities(this.value);" required>
+													<option value="">Select District</option>
+												</select>
+											</p>
+											<div class="clearfix"></div>
+										</div>
+										<div class="field-row">
+											<p class="field-one-half">
+												<label>City *</label>
+												<select name="lkp_city_id" id="lkp_city_id" placeholder="City" onChange="getPincodes(this.value);" required>
+													<option value="">Select City</option>
+												</select>
+											</p>
+											<p class="field-one-half">
+												<label>Pincode *</label>
+												<select name="lkp_pincode_id" id="lkp_pincode_id" onChange="getAreas(this.value);" placeholder="Zip / Postal Code" required>
+													<option value="">Select Pincode</option>
+												</select>
+											</p>
+											<div class="clearfix"></div>
+										</div>
+										<div class="field-row">
+											<p class="field-one-half">
+												<label>Location *</label>
+												<select name="lkp_area_id" id="lkp_area_id" placeholder="Location" required>
+											<option value="">Select Location</option>
+												</select>
+											</p>
+											<div class="clearfix"></div>
 										</div>
 										<div class="field-row">
 											<label for="address">Address *</label>
 											<input type="text" id="address" name="address" placeholder="Street address">
 											<!-- <input type="text" id="address-2" name="address" placeholder="Apartment, suite, unit etc. (optional)"> -->
-										</div>
-										<div class="field-row">
-											<label for="town-city">Town / City *</label>
-											<input type="text" id="town-city" name="city">
-										</div>
-										<div class="field-row">
-											<!-- <p class="field-one-half">
-												<label for="state-country">State / County *</label>
-												<input type="text" id="state-country" name="state-country">
-											</p> -->
-											<p class="field-one-half">
-												<label for="post-code">Postcode / ZIP *</label>
-												<input type="text" id="post-code" name="postal_code">
-											</p>
-											<div class="clearfix"></div>
 										</div>
 										<!-- <div class="checkbox">
 											<input type="checkbox" id="create-account" name="create-account" checked>
@@ -302,6 +317,48 @@
 		<script type="text/javascript" src="javascript/jquery.countdown.js"></script>
 
 		<script type="text/javascript" src="javascript/main.js"></script>
+		<script type="text/javascript">
+		    function getDistricts(val) { 
+		        $.ajax({
+		        type: "POST",
+		        url: "grocery_admin/get_districts.php",
+		        data:'lkp_state_id='+val,
+		        success: function(data){
+		            $("#lkp_district_id").html(data);
+		        }
+		        });
+		    }
+		    function getCities(val) { 
+		        $.ajax({
+		        type: "POST",
+		        url: "grocery_admin/get_cities.php",
+		        data:'lkp_district_id='+val,
+		        success: function(data){
+		            $("#lkp_city_id").html(data);
+		        }
+		        });
+		    }
+		    function getPincodes(val) { 
+		        $.ajax({
+		        type: "POST",
+		        url: "grocery_admin/get_pincodes.php",
+		        data:'lkp_city_id='+val,
+		        success: function(data){
+		            $("#lkp_pincode_id").html(data);
+		        }
+		        });
+		    }
+		    function getAreas(val) { 
+		        $.ajax({
+		        type: "POST",
+		        url: "grocery_admin/get_locations.php",
+		        data:'lkp_pincode_id='+val,
+		        success: function(data){
+		            $("#lkp_area_id").html(data);
+		        }
+		        });
+		    }
+		    </script>
 
 </body>	
 </html>

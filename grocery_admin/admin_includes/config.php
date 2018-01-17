@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+error_reporting(1);
 ob_start();
 date_default_timezone_set("Asia/Kolkata");
 if(!isset($_SESSION)) 
@@ -17,15 +17,15 @@ if(!isset($_SESSION))
 
 $setcon = 1;
 if($setcon == 2) {
-    $servername = "localhost";
+    $servername = "148.66.136.4";
     $username = "myservant";
     $password = "lancius12#";
-    $dbname = "myservant";
+    $dbname = "myservant_grocery";
 } else {
     $servername = "localhost";  
     $username = "root";
     $password = "";
-    $dbname = "myservant_grocery";
+    $dbname = "myservant_latest";
 }  
 
 // Create connection
@@ -34,8 +34,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-
-//$base_url = "http://palle2patnam.com/lancius/myservant/";
-$base_url = "http://localhost/myservant_latest/";
+$base_url = "http://palle2patnam.com/lancius/myservant/";
+//$base_url = "http://localhost/myservant_latest/";
  
 ?>
