@@ -72,17 +72,23 @@
 	?>
 
 	<?php if(isset($_GET['err']) && $_GET['err'] == 'log-success' ) {  ?>
-			<div class="col-sm-4"></div>
-       	  	<div class="col-sm-4 alert alert-success" style="display:block">
+	<div class="row">
+			<div class="col-sm-3"></div>
+       	  	<div class="col-sm-6 alert alert-success" style="display:block">
 		      <strong>Success!</strong> Your Registration Successfully Completed.
 		    </div>
+			<div class="col-sm-3"></div>
+			</div>
 		<?php }?>
 
 	    <?php if(isset($_GET['err']) && $_GET['err'] == 'log-fail' ) {  ?>
-	    <div class="col-sm-4"></div>
-	    <div class="col-sm-4 alert alert-danger" style="display:block">
+		<div class="row">
+	    <div class="col-sm-3"></div>
+	    <div class="col-sm-6 alert alert-danger" style="display:block">
 	      <strong>Failed!</strong> Your Login Failed.
 	    </div>
+		 <div class="col-sm-3"></div>
+		 </div>
 	    <?php }?>
 
 		<section class="flat-account background">
@@ -123,16 +129,16 @@
 									<label for="password-register">Name</label>
 									<input type="text" name="user_name"  id="user_name" placeholder="Name" required>
 								</div>
-								<div class="form-box">
+								<!-- <div class="form-box">
 									<label for="password-register">Mobile</label>
 									<input type="tel" name="user_mobile" id="user_mobile"  placeholder="Mobile Number" maxlength="10" pattern="[0-9]{10}" onkeyup="checkMobile();" required>
 									<span id="input_status1" style="color: red;"></span>
-								</div>							
-								<div class="form-box">
+								</div> --> 								
+								<!-- <div class="form-box">
 									<label for="name-register">Email address * </label>
 									<input type="text" name="user_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  id="user_email" placeholder="Email" onkeyup="checkEmail();" required>
 									<span id="input_status" style="color: red;"></span>
-								</div>
+								</div> -->
 								<div class="form-box">
 									<label for="password-register">Password</label>
 									<input type="password" name="user_password" minlength="8" id="user_password" placeholder="Password" required>
