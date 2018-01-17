@@ -41,11 +41,11 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
 
-		<!-- <?php
+		<?php
 		if($_SESSION['user_login_session_id'] == '') {
-		    //header ("Location: logout.php");
+		    header ("Location: logout.php");
 		} 
-		?> -->
+		?>
 		<?php 
 		$id = $_SESSION['user_login_session_id'];
 		$getUserData = getAllDataWhere('users','id',$id);

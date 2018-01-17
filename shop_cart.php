@@ -114,9 +114,15 @@
 								</tbody>
 							</table>
 							<div class="box-cart style2">
-								<div class="btn-add-cart pull-right">
+								<?php if(!isset($_SESSION['user_login_session_id'])) { ?>
+							  	<div class="btn-add-cart pull-right">
+									<a href="login.php?cart_id=<?php echo encryptPassword(1);?>" style="cursor:pointer">Proceed To Checkout</a>
+								</div>
+	            				<?php } else { ?>
+					              <div class="btn-add-cart pull-right">
 									<a href="shop_checkout.php" style="cursor:pointer">Proceed To Checkout</a>
-								</div>								
+								 </div>
+					            <?php } ?>					
 							</div>
 							<!-- <div class="form-coupon">
 								<form action="#" method="get" accept-charset="utf-8">
