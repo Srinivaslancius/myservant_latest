@@ -33,7 +33,7 @@ if($getCountSel->num_rows > 0) {
 	$saveItems = "UPDATE grocery_cart SET product_quantity='$product_quantity' WHERE product_id='$product_id' AND session_cart_id='$session_cart_id'"; 	
 
 } else {
-	$product_quantity = 1;
+	$product_quantity = $_POST['product_quantity'];
 	$saveItems = "INSERT INTO `grocery_cart`(`user_id`, `session_cart_id`, `category_id`, `sub_category_id`, `product_id`, `product_name`, `product_price`, `product_weight_type`,`product_quantity`, `lkp_city_id`, `created_at`,`device_id`) VALUES ('$user_id','$session_cart_id','$category_id','$sub_category_id','$product_id','$product_name','$product_price','$product_weight_type','$product_quantity','$city_id','$created_at','$device_id')"; 	
 }
 $saveCart = $conn->query($saveItems);
