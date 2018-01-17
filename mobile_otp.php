@@ -40,7 +40,24 @@
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
+		<?php 
+    if (isset($_POST['register']))  {
 
+        $user_mobile = $_POST['user_mobile'];
+        //$mobile_otp = rand(1000, 9999); //Your message to send, Add URL encoding here.
+        $mobile_otp = "1234";
+        $selOTP = getAllDataWhere('user_mobile_otp','user_mobile',$user_mobile);    
+        $getNoRows = $selOTP->num_rows; 
+
+        if($getNoRows > 0) {
+            $mobOtpSave = "UPDATE user_mobile_otp SET mobile_otp = '$mobile_otp' WHERE user_mobile = '$user_mobile' ";
+            $saveOTP = $conn->query($mobOtpSave);
+        } else {
+            $mobOtpSave = "INSERT INTO `user_mobile_otp`(`user_mobile`, `mobile_otp`) VALUES ('$user_mobile', '$mobile_otp') ";
+            $saveOTP = $conn->query($mobOtpSave);
+        }       
+    }
+    ?>
 		<section class="flat-tracking background">
 			<div class="container">
 				<div class="row">
@@ -57,17 +74,22 @@
 								</p>-->
 							</div><!-- /.title -->
 							<div class="tracking-content">
-								<form action="#" method="get" accept-charset="utf-8">
+								<form method="post" id="opt_valid_mobile" name="opt_valid_mobile" accept-charset="utf-8">
+									<input type="hidden" name="user_name" value="<?php echo $_POST['user_name']; ?>">
+				                    <input type="hidden" name="user_mobile_cust" value="<?php echo $_POST['user_mobile']; ?>" id="user_mobile_cust">
+				                    <input type="hidden" name="user_email" value="<?php echo $_POST['user_email']; ?>">
+				                    <input type="hidden" name="user_password" value="<?php echo encryptPassword($_POST['user_password']); ?>"><input type="hidden" name="checkout_key" value="<?php echo $_POST['checkout_key']; ?>" id="checkout_key">
 									<div class="form-box" style="margin-bottom:20px">
 										<label for="Mobile" style="margin-right:380px">Mobile No:</label>
-										<input type="text" placeholder="Enter Your Mobile No.">
+										<input type="text" id="user_mobile" name="user_mobile" readonly placeholder="Enter Your Mobile No." value="<?php echo $_POST['user_mobile']; ?>" >
 									</div><!-- /.one-half order-id -->
 									<div class="form-box">
 										<label for="OTP" style="margin-right:415px">OTP:</label>
-										<input type="text" placeholder="Enter OTP">
-									</div><!-- /.one-half billing -->
+										<input type="tel" placeholder="Enter OTP" maxlength="4" pattern="[0-9]{10}"  required>
+									</div>
+									
 									<div class="btn-track">
-										<button type="submit">Submit</button>
+										<button type="submit" id="verify_otp">Submit</button>
 									</div><!-- /.container -->
 								</form><!-- /.form -->
 							</div><!-- /.tracking-content -->
@@ -169,6 +191,47 @@
 		<script type="text/javascript" src="javascript/jquery.countdown.js"></script>
 
 		<script type="text/javascript" src="javascript/main.js"></script>
+
+		<script type="text/javascript">
+
+$('#verify_otp').on('click', function () {
+
+  var user_mobile = $('#user_mobile').val();
+  var mobile_otp = $('#mobile_otp').val();
+  var checkout_key = $('#checkout_key').val();
+  if(user_mobile!='' && mobile_otp!='') {
+
+      $.ajax({
+
+        type:"post",
+
+        url:"check_otp.php",
+        data:$("form").serialize(),
+        success:function(result){           
+          if(result == 0) {
+            $("#return_msg").css("display", "block");       
+            $("#return_msg").html("<span style='color:red;'>Please enter valid OTP!</span>");
+            $('#mobile_otp').val('');
+          } else {
+            //Success
+            alert("OTP verified");
+            
+                window.location.href = 'contact.php';
+             
+            }
+          }
+        }
+      });
+
+  } else {
+    alert("Please enter OTP!");
+    $("#return_msg").css("display", "none");
+    return false;
+  }
+  
+});
+
+</script>
 
 </body>	
 </html>
