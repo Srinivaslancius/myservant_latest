@@ -47,15 +47,14 @@
 		if(isset($_POST['login']))  { 
 		    //Login here
 
-		    $user_email = $_POST['login_email'];
-		    echo $user_email; die;
+		    $user_email = $_POST['user_email'];
 		    $user_password = encryptPassword($_POST['login_password']);
 		    $getLoginData = userLogin($user_email,$user_password);
 		    //Set variable for session
 		    if($getLoggedInDetails = $getLoginData->fetch_assoc()) {
 		    	$last_login_visit = date("Y-m-d h:i:s");
 		    	$login_count = $getLoggedInDetails['login_count']+1;
-		    	echo $sql = "UPDATE `users` SET login_count='$login_count', last_login_visit='$last_login_visit' WHERE user_email = '$user_email' OR user_mobile = '$user_email' "; die;
+		    	$sql = "UPDATE `users` SET login_count='$login_count', last_login_visit='$last_login_visit' WHERE user_email = '$user_email' OR user_mobile = '$user_email' ";
 		    	$row = $conn->query($sql);
 		        $_SESSION['user_login_session_id'] =  $getLoggedInDetails['id'];
 		        $_SESSION['user_login_session_name'] = $getLoggedInDetails['user_full_name'];
