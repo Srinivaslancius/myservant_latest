@@ -31,7 +31,7 @@
 								<span><img src="images/icons/arrow-right.png" alt=""></span>
 							</li>
 							<li class="trail-item">
-								<a href="#" title="">Verify OTP</a>
+								<a href="#" title="">Forgot Password</a>
 								
 							</li>
 							
@@ -70,25 +70,15 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="title">
-								<h3>Verify OTP</h3>
+								<h3>Forgot Password</h3>
 								<!--<p class="subscibe">
 									Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <br />Excepteur sint occaecat cupidatat non proident.
 								</p>-->
 							</div><!-- /.title -->
 							<div class="tracking-content">
 								<form method="post" id="opt_valid_mobile" name="opt_valid_mobile" accept-charset="utf-8">
-									<input type="hidden" name="user_name" value="<?php echo $_POST['user_name']; ?>">
-				                    <input type="hidden" name="user_mobile_cust" value="<?php echo $_POST['user_mobile']; ?>" id="user_mobile_cust">
-				                    <input type="hidden" name="user_email" value="<?php echo $_POST['user_email']; ?>">
-				                    <input type="hidden" name="user_password" value="<?php echo encryptPassword($_POST['user_password']); ?>"><input type="hidden" name="checkout_key" value="<?php echo $_POST['checkout_key']; ?>" id="checkout_key">
-									<div class="form-box" style="margin-bottom:20px">
-										<label for="Mobile" style="margin-right:300px">Mobile No:</label>
-										<input type="text" id="user_mobile" name="user_mobile" readonly placeholder="Enter Your Mobile No." value="<?php echo $_POST['user_mobile']; ?>" >
-									</div><!-- /.one-half order-id -->
-									<div class="form-box">
-										<label for="OTP" style="margin-right:415px">OTP:</label>
-										<input type="tel" id="mobile_otp" name="mobile_otp" placeholder="Enter OTP" maxlength="4"   required>
-									</div>
+									<label for="name-contact" style="margin-right:300px">Email:</label>
+										<input type="text" id="name-contact" name="name-contact" placeholder="Email">
 									
 									<div class="btn-track">
 										<button type="submit" id="verify_otp">Submit</button>
