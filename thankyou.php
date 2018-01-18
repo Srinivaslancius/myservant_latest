@@ -16,10 +16,10 @@
 		</section><!-- /#header -->
 
 		<?php
-		// header( "refresh:10;url=index.php" );
-		// if($_SESSION['user_login_session_id'] == '') {
-		//     header ("Location: logout.php");
-		// } 
+		header( "refresh:10;url=index.php" );
+		if($_SESSION['user_login_session_id'] == '') {
+		    header ("Location: logout.php");
+		} 
 		?>
 		<?php 
 		$user_session_id = $_SESSION['user_login_session_id'];
