@@ -28,48 +28,44 @@
       <div class="site-right-sidebar">
         <?php include_once './right_slide_toggle.php';?>
       </div>
-
       <?php
         if (!isset($_POST['submit']))  {
           echo "fail";
         } else  { 
 
-            //echo "<pre>"; print_r($_POST); die;
-            $title = $_REQUEST['title'];            
-            $description = $_REQUEST['description'];
-            if($_FILES["banner"]["name"]!='') {
-                $banner = uniqid().$_FILES["banner"]["name"];
-                $target_dir = "uploads/grocery_content_banners/";
-                $target_file = $target_dir . basename($banner);
-                move_uploaded_file($_FILES["banner"]["tmp_name"], $target_file);
-            } else {
-                $banner = '';
+            //echo "<pre>"; print_r($_POST); die;     
+            $link = $_REQUEST['link'];
+            $name = $_REQUEST['name'];
+            $lkp_status_id = $_REQUEST['lkp_status_id'];
+            if($_FILES["image"]["name"]!='') {
+                $image = uniqid().$_FILES["image"]["name"];
+                $target_dir = "uploads/grocery_offer_module_image/";
+                $target_file = $target_dir . basename($image);
+                move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+                $sql = "INSERT INTO grocery_offer_module (`name`,`image`, `link`, `lkp_status_id`) VALUES ('$name', '$image', '$link', '$lkp_status_id')";
+                $result = $conn->query($sql);
             }
-
-            $sql = "INSERT INTO grocery_content_pages (`title`, `image`, `description`) VALUES ('$title', '$banner', '$description')";
-            $result = $conn->query($sql);
            
             if( $result == 1){
-                echo "<script type='text/javascript'>window.location='content_page.php?msg=success'</script>";
+                echo "<script type='text/javascript'>window.location='grocery_offer_module.php?msg=success'</script>";
             } else {
-                echo "<script type='text/javascript'>window.location='content_page.php?msg=fail'</script>";
+                echo "<script type='text/javascript'>window.location='grocery_offer_module.php?msg=fail'</script>";
             }
         }
         ?>
-
         <div class="site-content">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="m-y-0 font_sz_view">Content Page</h3>
+                    <h3 class="m-y-0 font_sz_view">Brand Logo</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         
                         <form class="form-horizontal" method="POST" autocomplete="off" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Title</label>
+                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Name</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Title" name="title" required="required">
+                                    <input type="text" class="form-control" id="form-control-3" placeholder="Enter Name" name="name" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -77,16 +73,17 @@
                                 <div class="col-sm-6 col-md-4">
                                     <img id="output" height="100" width="100"/>
                                     <label class="btn btn-default file-upload-btn">Choose file...
-                                        <input id="form-control-22" class="file-upload-input" type="file" name="banner" accept="image/*" onchange="loadFile(event)" required>
+                                        <input id="form-control-22" class="file-upload-input" type="file" name="image" accept="image/*"  onchange="loadFile(event)" required>
                                     </label>
                                 </div>
                             </div>
-                             <div class="form-group">
-                                <label class="col-sm-3  col-md-4 control-label" for="form-control-8">Content</label>
+                            <div class="form-group">
+                                <label for="form-control-3" class="col-sm-3 col-md-4 control-label">Link</label>
                                 <div class="col-sm-6 col-md-4">
-                                    <textarea id="form-control-8" class="form-control" rows="3" name="description" required="required"></textarea>
+                                    <input type="url" class="form-control" id="form-control-3" placeholder="Enter Link" name="link" required>
                                 </div>
                             </div>
+                             
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
                                     <button type="submit" value="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -97,9 +94,9 @@
                 </div>
             </div>
 
-            <div class="panel panel-default panel-table m-b-0">
+             <div class="panel panel-default panel-table m-b-0">
                 <div class="panel-heading">
-                    <h3 class="m-t-0 m-b-5 font_sz_view">View Content Pages</h3>
+                    <h3 class="m-t-0 m-b-5 font_sz_view">View Brand Logo</h3>
                     
                 </div>
                 <div class="panel-body">
@@ -108,19 +105,23 @@
                             <thead>
                                 <tr>
                                     <th>S.no</th>
-                                    <th>Title</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Link</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $getContentData = getAllDataWithActiveRecent('grocery_content_pages'); $i=1; ?>
-                                <?php while ($row = $getContentData->fetch_assoc()) { ?>
+                                <?php $getOffers = getAllDataWithActiveRecent('grocery_offer_module'); $i=1; ?>
+                                <?php while ($row = $getOffers->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?php echo $i; ?></td>
-                                    <!-- <td>ST1234</td> -->
-                                    <td><?php echo $row['title']; ?></td>
-                                    <td> <a href="edit_content_pages.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a></td>
-                                    <!-- <td><span><a href="#"><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a></span> <span><a href="#"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td> -->
+                                    <td><?php echo $row['name']; ?></td>
+                                    <td><img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_offer_module_image/'.$row['image']; ?>"  id="output" height="60" width="60"/></td>
+                                    <td><?php echo $row['link']; ?></td>
+                                    <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_offer_module'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_offer_module'>In Active</span>" ;} ?></td>
+                                    <td> <a href="edit_grocery_offer_module.php?offer_id=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a></td>
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>
@@ -130,9 +131,9 @@
             </div>
             
         </div>
-    <?php include_once 'footer.php'; ?>
-    <script src="js/dashboard-3.min.js"></script>
-    <script src="js/forms-plugins.min.js"></script>
-    <script src="js/tables-datatables.min.js"></script>
+        <?php include_once 'footer.php'; ?>
+        <script src="js/dashboard-3.min.js"></script>
+        <script src="js/forms-plugins.min.js"></script>
+        <script src="js/tables-datatables.min.js"></script>
   </body>
 </html>

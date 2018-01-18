@@ -31,7 +31,15 @@
         	$getCities1 = getIndividualDetails('grocery_lkp_cities','city_name',$_SESSION['city_name']);
             $lkp_city_id = $getCities1['id'];
         }
-		$product_id = $_GET['product_id']; 
+        if(isset($_POST['searchKey'])) {
+	        $searchParms = $_POST['searchKey'];
+	        $getSearchData = "SELECT * from grocery_product_name_bind_languages WHERE product_name LIKE '%$searchParms%' ";
+			$getSearchData1 = $conn->query($getSearchData);
+			$getSearchDetails = $getSearchData1->fetch_assoc(); 
+			$product_id =  $getSearchDetails['product_id'];        
+	    } else {
+			$product_id = $_GET['product_id']; 
+		}
 		$getProducts = "SELECT * from grocery_products WHERE id = $product_id AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = '$lkp_city_id')";
 		$getProducts1 = $conn->query($getProducts);
 		$productDetails = $getProducts1->fetch_assoc();
