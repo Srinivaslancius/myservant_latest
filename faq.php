@@ -51,78 +51,24 @@
 							<div class="title">
 								<h3>Fequently Asked Questions</h3>
 							</div>
+							<?php $getHelpCentersData = getAllDataWhere('grocery_faqs','lkp_status_id',0); 
+                  		while($getHelpCenters = $getHelpCentersData->fetch_assoc()) { ?>
 							<div class="accordion-toggle">
 								<div class="toggle-title">
-									How do i register?
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $getHelpCenters['id'];?>"><?php echo $getHelpCenters['question'];?><i class="indicator pull-right  <?php if($getHelpCenters['id']==1) { echo "icon-minus"; } else { echo "icon-plus";  } ?>"></i></a>
 								</div>
-								<div class="toggle-content">
+								<div class="toggle-content  collapse  <?php if($getHelpCenters['id']==1) { echo "in"; } ?>" id="collapse<?php echo $getHelpCenters['id'];?>">
 									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in accumsan dui. In hac habitasse platea dictumst. Donec sit amet auctor leo. Sed venenatis posuere risus quis dictum. Vivamus ullamcorper orci vitae eros tincidunt, a aliquet lacus dapibus. Sed consectetur, est vel tincidunt imperdiet, justo est dignissim lorem, nec tincidunt lacus lacus ac risus. Cras pretium enim nec vestibulum aliquam. Vestibulum ante ipsum primis in
-										faucibus orci luctus et ultrices posuere cubilia Curae;
+										<?php echo $getHelpCenters['answer'];?>
 									</p>
 								</div>
-							</div><!-- /.accordion-toggle -->
-							<div class="accordion-toggle">
-								<div class="toggle-title">
-									Who should i to contact if i have any queries?
-								</div>
-								<div class="toggle-content">
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in accumsan dui. Donec imperdiet, nisl non pharetra convallis, nunc sapien laoreet massa, ac elementum
-										arcu neque vitae enim. Praesent convallis leo est, scelerisque tincidunt magna ultricies eu. Ut placerat est a eros faucibus feugiat. Nullam a urna sit amet sem porttitor malesuada a 
-										quis nibh. In hac habitasse platea dictumst. Donec sit amet auctor leo. Sed venenatis posuere risus quis dictum. Vivamus ullamcorper orci vitae eros tincidunt, a aliquet lacus dapibus.
-									</p>
-								</div>
-							</div><!-- /.accordion-toggle -->
-							<div class="accordion-toggle">
-								<div class="toggle-title active">
-									How to i track my order?
-								</div>
-								<div class="toggle-content">
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in accumsan dui. Donec imperdiet, nisl non pharetra convallis, nunc sapien laoreet massa, ac elementum
-										arcu neque vitae enim. Praesent convallis leo est, scelerisque tincidunt magna ultricies eu. Ut placerat est a eros faucibus feugiat. Nullam a urna sit amet sem porttitor malesuada a 
-										quis nibh. In hac habitasse platea dictumst. Donec sit amet auctor leo. Sed venenatis posuere risus quis dictum. Vivamus ullamcorper orci vitae eros tincidunt, a aliquet lacus dapibus. 
-										Sed consectetur, est vel tincidunt imperdiet, justo est dignissim lorem, nec tincidunt lacus lacus ac risus. Cras pretium enim nec vestibulum aliquam. Vestibulum ante ipsum primis in
-										faucibus orci luctus et ultrices posuere cubilia Curae;
-									</p>
-								</div>
-							</div><!-- /.accordion-toggle -->
-							<div class="accordion-toggle">
-								<div class="toggle-title">
-									How can i change or cancel my order?
-								</div>
-								<div class="toggle-content">
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in accumsan dui. In hac habitasse platea dictumst. Donec sit amet auctor leo. Sed venenatis posuere risus quis dictum. Vivamus ullamcorper orci vitae eros tincidunt, a aliquet lacus dapibus. Sed consectetur, est vel tincidunt imperdiet, justo est dignissim lorem, nec tincidunt lacus lacus ac risus. Cras pretium enim nec vestibulum aliquam. Vestibulum ante ipsum primis in
-										faucibus orci luctus et ultrices posuere cubilia Curae;
-									</p>
-								</div>
-							</div><!-- /.accordion-toggle -->
-							<div class="accordion-toggle">
-								<div class="toggle-title">
-									How can I get a new returns note?
-								</div>
-								<div class="toggle-content">
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in accumsan dui. Donec imperdiet, nisl non pharetra convallis, nunc sapien laoreet massa, ac elementum
-										arcu neque vitae enim. Praesent convallis leo est, scelerisque tincidunt magna ultricies eu. Ut placerat est a eros faucibus feugiat. Nullam a urna sit amet sem porttitor malesuada a 
-										quis nibh. In hac habitasse platea dictumst. Donec sit amet auctor leo. Sed venenatis posuere risus quis dictum. Vivamus ullamcorper orci vitae eros tincidunt, a aliquet lacus dapibus.
-									</p>
-								</div>
-							</div><!-- /.accordion-toggle -->
-							<div class="accordion-toggle">
-								<div class="toggle-title">
-									What should I do if my order hasn't been delivered yet?
-								</div>
-								<div class="toggle-content">
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet, nisl non pharetra convallis, nunc sapien laoreet massa, ac elementum
-										arcu neque vitae enim. Praesent convallis leo est, scelerisque tincidunt magna ultricies eu. Ut placerat est a eros faucibus feugiat. Nullam a urna sit amet sem porttitor malesuada a 
-										quis nibh. In hac habitasse platea dictumst. Donec sit amet auctor leo. Vivamus ullamcorper orci vitae eros tincidunt, a aliquet lacus dapibus.
-									</p>
-								</div>
-							</div><!-- /.accordion-toggle -->
+							</div>
+							<?php } ?><!-- /.accordion-toggle -->
+							<!-- /.accordion-toggle -->
+							<!-- /.accordion-toggle -->
+							<!-- /.accordion-toggle -->
+							<!-- /.accordion-toggle -->
+							<!-- /.accordion-toggle -->
 						</div><!-- /.accordion -->
 					</div><!-- /.col-md-12 -->
 				</div><!-- /.row -->
