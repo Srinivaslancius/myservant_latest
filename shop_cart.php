@@ -141,8 +141,10 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-shop-cart -->
 		<?php } else { ?>
-			<p style="text-align:center; color:#f26226">There are no items found in the cart</p>
-    		<center><a href="index.php" style="color:#f26226">Click here for items</a></center>
+		<center><img src="images/cart.png"></center>
+			<p style="text-align:center;font-size:20px;margin-top:10px">Your shopping cart is currently empty</p>			
+			<p style="text-align:center;margin:15px">please click on the 'Continue Shopping' button below for items</p>
+    		<center><a href="index.php"><button type="submit" class="contact" style="background-color:#FE6003">Continue Shopping</button></a></center>
 		<?php } ?>
 
 		<section class="flat-row flat-iconbox style3">
