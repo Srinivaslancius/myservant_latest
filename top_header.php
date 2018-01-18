@@ -1,4 +1,14 @@
-
+<?php
+if(isset($_POST['submit'])) {
+	$getCities1 = getIndividualDetails('grocery_lkp_cities','city_name',$_POST['city_area']);
+	$_SESSION['city'] = $getCities1['id'];
+	$_SESSION['city_name'] = $_POST['city_area'];
+} 
+if($_SESSION['city'] == '') {
+	$_SESSION['city'] = 1;
+	$_SESSION['city_name'] = 'Vijayawada';
+}
+?>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<div class="container-fluid">
@@ -12,46 +22,36 @@
 									<a href="trackorder.php" title="">Track Your Order</a>
 								</li>
 								<li><a href="javascript:avoid();" class="page-scroll" id="select-city">
-               Vijayawada <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-				<!--Select City Popup
-			  =====================-->
-			  <div class="cities" id ="panel">
-			  <div class="city-triangle"></div>
-			  <div class="city-header"></div>
-				<input type="text" name="city-area" id="city-area" placeholder="Search Your City">
-				<button type="button" class="city-srch-btn"><i class="fa fa-search"></i></button>
+               					<?php echo $_SESSION['city_name']; ?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+								<!--Select City Popup
+								=====================-->
+								<form method="post">
+									<div class="cities" id ="panel">
+									  	<div class="city-triangle"></div>
+									  	<div class="city-header"></div>
+										<input type="text" name="city_area" id="city-area" placeholder="Search Your City">
+										<button type="button" class="city-srch-btn"><i class="fa fa-search"></i></button>
 
-				  <div class="city-names">
-                  
-                  
-					<h3>Main Cities</h3>
-            
-                       <span id="cityloading"></span>
-                    <div id="citiesRead">
-                       					<ul class="cityrow1">
-                    					  <li><a href="javascript:avoid();" rel="83" class="citylink">Bangalore</a></li>
-					 					  <li><a href="javascript:avoid();" rel="980" class="citylink">Chennai</a></li>
-					 					  <li><a href="javascript:avoid();" rel="1730" class="citylink">Delhi</a></li>
-					 					  <li><a href="javascript:avoid();" rel="143" class="citylink">Hyderabad</a></li>
-					 					  <li><a href="javascript:avoid();" rel="911" class="citylink">Jaipur</a></li>
-					 					  <li><a href="javascript:avoid();" rel="166" class="citylink">Kolkata</a></li>
-					 					  <li><a href="javascript:avoid();" rel="97" class="citylink">Mumbai</a></li>
-					 					  <li><a href="javascript:avoid();" rel="47" class="citylink">Patna</a></li>
-					 					  <li><a href="javascript:avoid();" rel="34" class="citylink">Vijayawada</a></li>
-					 					  <li><a href="javascript:avoid();" rel="33" class="citylink">Visakhapatnam</a></li>
-					 					</ul>
-					                                    
-                                    
-                              </div>                     
-				  </div>
-				  <div class="underline"></div>
-				<button type="submit" class="submit pull-right" style="margin:10px;background-color:#FE6003">Login</button>
-
-			  </div>
-				</li>
+										  <div class="city-names">
+											<h3>Main Cities</h3>
+						                   	<span id="cityloading"></span>
+						            		<div id="citiesRead">
+						       					<ul class="cityrow1">
+						       						<?php 
+						       						$getCity = "SELECT * FROM grocery_lkp_cities WHERE lkp_status_id = 0 AND id IN (SELECT lkp_city_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0)";
+						       						$getCities = $conn->query($getCity);
+						       						while($getCitiesNames = $getCities->fetch_assoc()) { ?>
+							    					  <li><a href="javascript:avoid();" rel="83" class="citylink"><?php echo $getCitiesNames['city_name']; ?></a></li>
+							    					  <?php } ?>
+							 					</ul>
+						                    </div>                     
+										</div>
+										<div class="underline"></div>
+										<button type="submit" name="submit" class="submit pull-right" style="margin:10px;background-color:#FE6003">Submit</button>
+									</div>
+								</form>
+								</li>
 								 <!--<li><span class="icon-location" data-toggle="popover" data-placement="bottom" data-content="TOP SEARCHED: <br> Vijayawada, Hyderabad, Karimnagar, Chennai, Warangal, Pune, Bangalore" style="cursor:pointer">Vijayawada <i class="fa fa-angle-down" aria-hidden="true"></i></span></li>-->
-								
-								
 							</ul><!-- /.flat-support -->
 						</div><!-- /.col-md-4 -->
 						<div class="col-md-4">

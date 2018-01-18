@@ -71,7 +71,7 @@ echo '<table>
 					</div>
 				</td>
 				<td>
-					<a href="#" title="">
+					<a href="#" title="" onclick="deleteCartItem('.$getCartItems['id'].');">
 						<img src="images/icons/delete.png" alt="">
 					</a>
 				</td>
