@@ -1,4 +1,13 @@
-
+<?php 
+    $currentFile = $_SERVER["PHP_SELF"];
+    $parts = Explode('/', $currentFile);
+    $page_name = $parts[count($parts) - 1];
+?>
+<style type="text/css">
+.check_page {
+    color:#C71585 !important;
+}
+</style>
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-3 col-2">
@@ -67,34 +76,20 @@
 							<div class="nav-wrap">
 								<div id="mainnav" class="mainnav">
 									<ul class="menu">
-										<li class="column-1">
-											<a href="index.php" title="">Home</a>
+										<li class="active">
+											
+										<a href="index.php" <?php if($page_name == 'index.php') {  ?> class="check_page" <?php } ?>>Home</a>
+										</li><!-- /.column-1 -->
+										<li class="active"><a href="about.php" <?php if($page_name == 'about.php') {  ?> class="check_page" <?php } ?>>About</a></li>
+										<li class="active"><a href="products.php" <?php if($page_name == 'products.php') {  ?> class="check_page" <?php } ?>>Products</a></li>
+
+										<li class="active"><a href="newarraivals.php" <?php if($page_name == 'newarraivals.php') {  ?> class="check_page" <?php } ?>>New Arrivals</a></li>
+										<li class="active"><a href="offerzone.php" <?php if($page_name == 'offerzone.php') {  ?> class="check_page" <?php } ?>>Offer Zone</a></li>
+			
 										
-										</li><!-- /.column-1 -->
-										<li class="column-1">
-											<a href="about.php" title="">About</a>
-											
-										</li><!-- /.has-mega-menu -->
-										<li class="column-1">
-											<a href="products.php" title="">Products</a>
-											
-										</li><!-- /.has-mega-menu -->
-										<li class="column-1">
-											<a href="newarraivals.php" title="">New Arrivals</a>
-											
-										</li>
-										<li class="column-1">
-											<a href="offerzone.php" title="">Offer Zone</a>
-											
-										</li>
-										<li class="column-1">
-											<a href="faq.php" title="">faq's</a>
-											
-										</li><!-- /.column-1 -->
-										<li class="column-1">
-											<a href="contact.php" title="">Contact</a>
-											
-										</li><!-- /.column-1 -->
+										<li class="active"><a href="faq.php" <?php if($page_name == 'faq.php') {  ?> class="check_page" <?php } ?>>faq's</a></li>
+									
+										<li class="active"><a href="contact.php" <?php if($page_name == 'contact.php') {  ?> class="check_page" <?php } ?>>Contact</a></li>
 									</ul><!-- /.menu -->
 								</div><!-- /.mainnav -->
 							</div><!-- /.nav-wrap -->

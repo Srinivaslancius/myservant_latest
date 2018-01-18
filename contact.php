@@ -1,5 +1,6 @@
 <?php include_once 'meta.php';?>
-
+<?php $getSiteSettings1 = getAllDataWhere('grocery_site_settings','id','1'); 
+$getSiteSettingsData1 = $getSiteSettings1->fetch_assoc(); ?>
 <body class="header_sticky">
 	<div class="boxed">
 
@@ -42,7 +43,7 @@
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
-
+        
 		<section class="flat-map">
             <div class="container">
             	<div class="row">
@@ -50,8 +51,9 @@
             			<div id="flat-map" class="pdmap">
 				           	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.580289180194!2d80.64353381474554!3d16.496776588618033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35fabb6eff70cd%3A0xbc7d945d41d79aa6!2sCMR+ENTERPRISES+PVT.LTD!5e0!3m2!1sen!2sin!4v1511846045669" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 				            <div class="gm-map">                
-				                <div class="map"></div>                        
+				                <div class="map" id="map"></div>                        
 				            </div>
+
             			</div><!-- /#flat-map -->
             		</div><!-- /.col-md-12 -->
             	</div><!-- /.row -->
@@ -73,7 +75,7 @@
         					</div><!-- /.box-header -->
         					<div class="box-content">
         						<p>
-        							#40-15/2-19, Brundavan Colony, Vijayawda,Andhra Pradesh, India - 520010.
+        							<?php echo $getSiteSettingsData1['address']; ?>
         						</p>
         					</div><!-- /.box-content -->
         				</div><!-- /.iconbox style2 -->
@@ -90,7 +92,7 @@
         					</div><!-- /.box-header -->
         					<div class="box-content">
         						<p>
-        							+918897725019
+        							<?php echo $getSiteSettingsData1['contact_number']; ?>
         						</p>
         						
         					</div><!-- /.box-content -->
@@ -108,7 +110,7 @@
         					</div><!-- /.box-header -->
         					<div class="box-content">
         						<p>
-        							orders@myservant.com
+        							<?php echo $getSiteSettingsData1['contact_email']; ?>
         						</p>
         					</div><!-- /.box-content -->
         				</div><!-- /.iconbox style2 -->
@@ -126,32 +128,32 @@
         					<div class="box-content">
         						<ul class="social-list style2">
 									<li>
-										<a href="#" title="">
+										<a href="<?php echo $getSiteSettingsData1['fb_link'] ?>" target="_blank" title="">
 											<i class="fa fa-facebook" aria-hidden="true"></i>
 										</a>
 									</li>
 									<li>
-										<a href="#" title="">
+										<a href="<?php echo $getSiteSettingsData1['twitter_link'] ?>" target="_blank">
 											<i class="fa fa-twitter" aria-hidden="true"></i>
 										</a>
 									</li>
 									<li>
-										<a href="#" title="">
+										<a href="<?php echo $getSiteSettingsData1['inst_link'] ?>" target="_blank">
 											<i class="fa fa-instagram" aria-hidden="true"></i>
 										</a>
 									</li>
 									<li>
-										<a href="#" title="">
-											<i class="fa fa-pinterest" aria-hidden="true"></i>
+										<a href="<?php echo $getSiteSettingsData1['linkden_link'] ?>" target="_blank">
+											<i class="fa fa-linkedin" aria-hidden="true"></i>
 										</a>
 									</li>
 									<li>
-										<a href="#" title="">
-											<i class="fa fa-dribbble" aria-hidden="true"></i>
+										<a href="<?php echo $getSiteSettingsData1['you_tube_link'] ?>" target="_blank" >
+											<i class="fa fa-youtube" aria-hidden="true"></i>
 										</a>
 									</li>
 									<li>
-										<a href="#" title="">
+										<a href="<?php echo $getSiteSettingsData1['gplus_link'] ?>" target="_blank">
 											<i class="fa fa-google" aria-hidden="true"></i>
 										</a>
 									</li>
@@ -166,8 +168,7 @@
 
 if(!empty($_POST['name_contact']) && !empty($_POST['last_name_contact']) && !empty($_POST['email_contact']) && !empty($_POST['phone_contact']))  {
 
-$getSiteSettings1 = getAllDataWhere('grocery_site_settings','id','1'); 
-$getSiteSettingsData1 = $getSiteSettings1->fetch_assoc();
+
     $name_contact = $_POST['name_contact'];
     $last_name_contact = $_POST['last_name_contact'];
     $email_contact = $_POST['email_contact'];

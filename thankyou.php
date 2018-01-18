@@ -1,23 +1,4 @@
-<style>
-th{
-	text-align:center;
-	font-size:14px !important;
-}
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-    border-bottom: 1px solid #ddd;
 
-}
-.table>thead>tr>th {
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-	 border-bottom: 1px solid #ddd !important;
-  
-}
-</style>
 <?php include_once 'meta.php';?>
 	<body class="header_sticky">
 	<div class="boxed">
@@ -55,9 +36,9 @@ th{
 		<section class="flat-error">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-2">
+					<div class="col-md-2 col-sm-2">
 					</div><!-- /.col-md-2 -->
-					<div class="col-md-8">
+					<div class="col-md-8 col-sm-8">
 						<div class="wrap-error center">
 							<div class="header-error" style="margin-bottom:30px">
 								
@@ -67,9 +48,9 @@ th{
 							<table class="table" style="border: 1px solid #ddd;width:70%;margin-left:15%">
 							<thead>
 							  <tr style="background-color:#e5e5e5">
-								<th>PRODUCT</th>
-								<th>QUANTITY</th>
-								<th>PRICE</th>
+								<th style="text-align:center">PRODUCT</th>
+								<th style="text-align:center">QUANTITY</th>
+								<th style="text-align:center">PRICE</th>
 							  </tr>
 							</thead>
 							<tbody>
@@ -97,7 +78,7 @@ th{
 						  </table>
 							
 					</div><!-- /.col-md-8 -->
-					<div class="col-md-2">
+					<div class="col-md-2 col-sm-2">
 					</div><!-- /.col-md-2 -->
 				</div><!-- /.row -->
 			</div><!-- /.container -->

@@ -1,3 +1,5 @@
+<?php $getSiteSettings1 = getAllDataWhere('grocery_site_settings','id','1'); 
+$getSiteSettingsData1 = $getSiteSettings1->fetch_assoc(); ?>
 <div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-3 col-md-6">
@@ -13,42 +15,42 @@
 								</div>
 								<div class="info">
 									<p class="questions">Got Questions ? Call us 24/7!</p>
-									<p class="phone">Call Us: +918897725019</p>
+									<p class="phone">Call Us: <?php echo $getSiteSettingsData1['contact_number']; ?></p>
 									<p class="address">
-										#40-15/2-19, Brundavan Colony, Vijayawda,Andhra Pradesh, India - 520010.
+										<?php echo $getSiteSettingsData1['address']; ?>
 									</p>
 								</div>
 							</div><!-- /.widget-content -->
 							<ul class="social-list">
 								<li>
-									<a href="#" title="">
-										<i class="fa fa-facebook" aria-hidden="true"></i>
-									</a>
+									<a href="<?php echo $getSiteSettingsData1['fb_link'] ?>" target="_blank" title="">
+											<i class="fa fa-facebook" aria-hidden="true"></i>
+										</a>
 								</li>
 								<li>
-									<a href="#" title="">
-										<i class="fa fa-twitter" aria-hidden="true"></i>
-									</a>
+									<a href="<?php echo $getSiteSettingsData1['twitter_link'] ?>" target="_blank">
+											<i class="fa fa-twitter" aria-hidden="true"></i>
+										</a>
 								</li>
 								<li>
-									<a href="#" title="">
-										<i class="fa fa-instagram" aria-hidden="true"></i>
-									</a>
+									<a href="<?php echo $getSiteSettingsData1['inst_link'] ?>" target="_blank">
+											<i class="fa fa-instagram" aria-hidden="true"></i>
+										</a>
 								</li>
 								<li>
-									<a href="#" title="">
-										<i class="fa fa-pinterest" aria-hidden="true"></i>
-									</a>
+									<a href="<?php echo $getSiteSettingsData1['linkden_link'] ?>" target="_blank">
+											<i class="fa fa-linkedin" aria-hidden="true"></i>
+										</a>
 								</li>
 								<li>
-									<a href="#" title="">
-										<i class="fa fa-dribbble" aria-hidden="true"></i>
-									</a>
+									<a href="<?php echo $getSiteSettingsData1['you_tube_link'] ?>" target="_blank" >
+											<i class="fa fa-youtube" aria-hidden="true"></i>
+										</a>
 								</li>
 								<li>
-									<a href="#" title="">
-										<i class="fa fa-google" aria-hidden="true"></i>
-									</a>
+									<a href="<?php echo $getSiteSettingsData1['gplus_link'] ?>" target="_blank">
+											<i class="fa fa-google" aria-hidden="true"></i>
+										</a>
 								</li>
 							</ul><!-- /.social-list -->
 						</div><!-- /.widget-about -->
@@ -132,7 +134,7 @@
 							</div>
 							<ul class="app-list">
 								<li class="app-store">
-									<a href="#" title="">
+									<a href="<?php echo $getSiteSettingsData1['apple_app_link'] ?>" target="_blank" title="">
 										<div class="img">
 											<img src="images/icons/app-store.png" alt="">
 										</div>
@@ -143,7 +145,7 @@
 									</a>
 								</li><br><br>
 								<li class="google-play">
-									<a href="#" title="">
+									<a href="<?php echo $getSiteSettingsData1['android_app_link'] ?>" target="_blank" title="">
 										<div class="img">
 											<img src="images/icons/google-play.png" alt="">
 										</div>
