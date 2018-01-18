@@ -52,11 +52,11 @@
 		$getUser = $getUserData->fetch_assoc();?>
 
 		<section class="flat-checkout">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-7">
-						<div class="box-checkout">
-							<form action="#" method="get" class="checkout" accept-charset="utf-8">
+			<form action="order_save.php" method="post" accept-charset="utf-8">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-7">
+							<div class="box-checkout">
 								<div class="billing-fields">
 									<div class="fields-title">
 										<h3>Billing details</h3>
@@ -140,95 +140,92 @@
 										</div> -->
 									</div><!-- /.fields-content -->
 								</div><!-- /.billing-fields -->
-							
-							</form><!-- /.checkout -->
-						</div><!-- /.box-checkout -->
-					</div><!-- /.col-md-7 -->
-					<?php
-					    if($_SESSION['CART_TEMP_RANDOM'] == "") {
-					        $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
-					    }
-					    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
-					    if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
-					        $user_session_id = $_SESSION['user_login_session_id'];
-					        $cartItems1 = "SELECT * FROM grocery_cart WHERE (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') AND product_quantity!='0'";
-					        $cartItems = $conn->query($cartItems1);
-					    } else {
-					      $cartItems1 = "SELECT * FROM grocery_cart WHERE  product_quantity!='0' AND session_cart_id='$session_cart_id' ";
-					      $cartItems = $conn->query($cartItems1);
-					    } 
-					?>
-					<div class="col-md-5">
-						<div class="cart-totals style2">						
-							<h3>Your Order</h3>
-							<form action="order_save.php" method="post" accept-charset="utf-8">
-								<table class="product">
-									<thead>
-										<tr>
-											<th>Product</th>
-											<th>Total</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php $cartTotal = 0;
-											while ($getCartItems = $cartItems->fetch_assoc()) { 
-											$getProductImage = getIndividualDetails('grocery_product_bind_images','product_id',$getCartItems['product_id']);
-											$cartTotal += $getCartItems['product_price']*$getCartItems['product_quantity'];
+							</div><!-- /.box-checkout -->
+						</div><!-- /.col-md-7 -->
+						<?php
+						    if($_SESSION['CART_TEMP_RANDOM'] == "") {
+						        $_SESSION['CART_TEMP_RANDOM'] = rand(10, 10).sha1(crypt(time())).time();
+						    }
+						    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
+						    if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id']!='') {
+						        $user_session_id = $_SESSION['user_login_session_id'];
+						        $cartItems1 = "SELECT * FROM grocery_cart WHERE (user_id = '$user_session_id' OR session_cart_id='$session_cart_id') AND product_quantity!='0'";
+						        $cartItems = $conn->query($cartItems1);
+						    } else {
+						      $cartItems1 = "SELECT * FROM grocery_cart WHERE  product_quantity!='0' AND session_cart_id='$session_cart_id' ";
+						      $cartItems = $conn->query($cartItems1);
+						    } 
+						?>
+						<div class="col-md-5">
+							<div class="cart-totals style2">						
+								<h3>Your Order</h3>
+									<table class="product">
+										<thead>
+											<tr>
+												<th>Product</th>
+												<th>Total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php $cartTotal = 0;
+												while ($getCartItems = $cartItems->fetch_assoc()) { 
+												$getProductImage = getIndividualDetails('grocery_product_bind_images','product_id',$getCartItems['product_id']);
+												$cartTotal += $getCartItems['product_price']*$getCartItems['product_quantity'];
 
-											$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
-										?>
-										<input type="hidden" name='category_id' type='text' value='<?php echo $getCartItems['category_id'];?>'>
-										<input type="hidden" name='sub_cat_id' type='text' value='<?php echo $getCartItems['sub_category_id'];?>'>
-										<input type="hidden" name='product_id' type='text' value='<?php echo $getCartItems['product_id'];?>'>
-										<input type="hidden" name='product_weight' type='text' value='<?php echo $getCartItems['product_weight_type'];?>'>
-										<input type="hidden" name='product_quantity' type='text' value='<?php echo $getCartItems['product_quantity'];?>'>
-										<tr>
-											<td><?php echo $getProductName['product_name']; ?></td>
-											<input type="hidden" name="product_name" value="<?php echo $getProductName['product_name']; ?>">
-											<input type="hidden" name="product_price" value="<?php echo $getCartItems['product_price']; ?>">
-											<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>">
-											<input type="hidden" name="order_total" value="<?php echo $cartTotal; ?>">
+												$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
+											?>
+											<input type="hidden" name='category_id[]' type='text' value='<?php echo $getCartItems['category_id'];?>'>
+											<input type="hidden" name='sub_cat_id[]' type='text' value='<?php echo $getCartItems['sub_category_id'];?>'>
+											<input type="hidden" name='product_id[]' type='text' value='<?php echo $getCartItems['product_id'];?>'>
+											<input type="hidden" name='product_weight[]' type='text' value='<?php echo $getCartItems['product_weight_type'];?>'>
+											<input type="hidden" name='product_quantity[]' type='text' value='<?php echo $getCartItems['product_quantity'];?>'>
+											<tr>
+												<td><?php echo $getProductName['product_name']; ?></td>
+												<input type="hidden" name="product_name" value="<?php echo $getProductName['product_name']; ?>">
+												<input type="hidden" name="product_price[]" value="<?php echo $getCartItems['product_price']; ?>">
+												<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>">
+												<input type="hidden" name="order_total" value="<?php echo $cartTotal; ?>">
+												
+
+												<td>Rs . <?php echo $getCartItems['product_price'] ?> * <?php echo $getCartItems['product_quantity']; ?></td>
+											</tr>	
+											<?php } ?>									
+										</tbody>
+									</table><!-- /.product -->
+									
+									<table>
+										<tbody>										
 											
-
-											<td>Rs . <?php echo $getCartItems['product_price'] ?> * <?php echo $getCartItems['product_quantity']; ?></td>
-										</tr>	
-										<?php } ?>									
-									</tbody>
-								</table><!-- /.product -->
-								
-								<table>
-									<tbody>										
+											<tr>
+												<td>Total</td>
+												<td class="price-total">Rs . <?php echo $cartTotal; ?></td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="btn-radio style2">
 										
-										<tr>
-											<td>Total</td>
-											<td class="price-total">Rs . <?php echo $cartTotal; ?></td>
-										</tr>
-									</tbody>
-								</table>
-								<div class="btn-radio style2">
-									
-								<div class="radio-info">
-									<input type="radio" id="cash-delivery" name="pay_mn" value="1" required>
-									<label for="cash-delivery">COD</label>
-								</div>
-								<div class="radio-info">
-									<input type="radio" id="online_payment" name="pay_mn" value="2" required>
-									<label for="online_payment">Online payment</label>
-								</div>
-									
-								</div><!-- /.btn-radio style2 -->
-								<div class="checkbox">
-									<input type="checkbox" id="checked-order" name="checked-order" checked>
-									<label for="checked-order">I’ve read and accept the terms & conditions *</label>
-								</div><!-- /.checkbox -->
-								<div class="btn-order">									
-									<input type="submit" name="submit" value="Place Order">
-								</div><!-- /.btn-order -->
-							</form>
-						</div><!-- /.cart-totals style2 -->
-					</div><!-- /.col-md-5 -->
-				</div><!-- /.row -->
-			</div><!-- /.container -->
+									<div class="radio-info">
+										<input type="radio" id="cash-delivery" name="pay_mn" value="1" required>
+										<label for="cash-delivery">COD</label>
+									</div>
+									<div class="radio-info">
+										<input type="radio" id="online_payment" name="pay_mn" value="2" required>
+										<label for="online_payment">Online payment</label>
+									</div>
+										
+									</div><!-- /.btn-radio style2 -->
+									<div class="checkbox">
+										<input type="checkbox" id="checked-order" name="checked-order" checked>
+										<label for="checked-order">I’ve read and accept the terms & conditions *</label>
+									</div><!-- /.checkbox -->
+									<div class="btn-order">									
+										<input type="submit" name="submit" value="Place Order">
+									</div><!-- /.btn-order -->
+							</div><!-- /.cart-totals style2 -->
+						</div><!-- /.col-md-5 -->
+					</div><!-- /.row -->
+				</div><!-- /.container -->
+			</form>
 		</section><!-- /.flat-checkout -->
 
 		<section class="flat-row flat-iconbox style5">
