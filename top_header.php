@@ -1,7 +1,7 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<div class="container-fluid">
+	<div class="container">
 					<div class="row">
 						<div class="col-md-4">
 							<ul class="flat-support">
@@ -57,7 +57,7 @@
 						<div class="col-md-4">
 							<ul class="flat-infomation">
 								<li class="phone">
-									Call Us: <a href="#" title="">+918897725019</a>
+									Call Us : <a href="#" title=""> +918897725019</a>
 								</li>
 							</ul><!-- /.flat-infomation -->
 						</div><!-- /.col-md-4 -->

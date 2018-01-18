@@ -1,7 +1,7 @@
 
-				<div class="container-fluid">
+				<div class="container">
 					<div class="row">
-						<div class="col-md-3 col-2">
+						<div class="col-md-3 col-sm-2">
 							<div id="mega-menu">
 								<div class="btn-mega"><span></span>ALL CATEGORIES</div>
 								<?php $getCategories1 = "SELECT * FROM grocery_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_category_id FROM grocery_sub_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1))) ORDER BY id DESC";
@@ -50,7 +50,7 @@
 								</ul>
 							</div>
 						</div><!-- /.col-md-3 -->
-						<div class="col-md-9 col-10">
+						<div class="col-md-9 col-sm-10">
 							<div class="nav-wrap">
 								<div id="mainnav" class="mainnav">
 									<ul class="menu">

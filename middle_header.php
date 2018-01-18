@@ -1,7 +1,7 @@
 
-				<div class="container-fluid">
+				<div class="container">
 					<div class="row">
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<div id="logo" class="logo">
 								<a href="index.php" title="">
 									<img src="images/logos/logo1.png" alt="">
@@ -23,7 +23,7 @@
 								</form><!-- /.form-search -->
 							</div><!-- /.top-search -->
 						</div><!-- /.col-md-6 -->
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<div class="box-cart">
 							<?php
 							    if($_SESSION['CART_TEMP_RANDOM'] == "") {
@@ -91,7 +91,7 @@
 											<?php } ?>
 										</div>
 										<?php } else { ?>
-											<p style="text-align:center; color:#f26226">There are no items found in the cart</p>
+											<p style="text-align:center; color:#f26226">No items in cart</p>
 										<?php } ?>
 									</div>
 								</div><!-- /.inner-box -->
