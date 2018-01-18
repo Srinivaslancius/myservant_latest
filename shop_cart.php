@@ -107,7 +107,7 @@
 											</div>
 										</td>
 										<td>
-											<a href="#" title="">
+											<a href="#" title="" onclick="deleteCartItem(<?php echo $getCartItems['id']; ?>);">
 												<img src="images/icons/delete.png" alt="">
 											</a>
 										</td>
@@ -281,6 +281,29 @@ function remove_cart_item1(cartId) {
 
  });
 
+}
+
+function deleteCartItem(cartId) {
+  //Display Add On's
+  var x = confirm("Are you sure you want to delete?");
+    if(x) {
+        $.ajax({
+          type:'post',
+          url:'delete_cart_tem.php',
+          data:{
+             cartId : cartId,                                
+          },
+          success:function(response) {            
+             if(response == 1) {
+                alert("Item Deleted!");
+                location.reload();
+             } else {
+               alert("Item Delete Failed!");
+               return false;
+             }
+            }
+        });
+      }
 }
 
 </script>

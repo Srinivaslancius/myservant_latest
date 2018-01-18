@@ -93,6 +93,13 @@
                 <span class="menu-text">Testimonials</span>
               </a>
             </li>
+            <li class="<?php if($page_name == 'grocery_offer_module.php' || $page_name == 'edit_grocery_offer_module.php') { echo "active"; } ?>"><a href="grocery_offer_module.php">
+                <span class="menu-icon">
+                  <i class="zmdi zmdi-label"></i>
+                </span>
+                <span class="menu-text">Offers</span>
+              </a>
+            </li>
             <li class="<?php if($page_name == 'faq.php' || $page_name == 'edit_faq.php') { echo "active"; } ?>"><a href="faq.php">
                 <span class="menu-icon">
                   <i class="zmdi zmdi-pin-help zmdi-hc-fw"></i>

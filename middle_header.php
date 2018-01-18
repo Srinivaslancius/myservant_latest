@@ -10,10 +10,10 @@
 						</div><!-- /.col-md-3 -->
 						<div class="col-md-7">
 							<div class="top-search">
-								<form action="#" method="get" class="form-search" accept-charset="utf-8">
+								<form action="single_product.php" method="post" class="form-search" accept-charset="utf-8"  autocomplete="off">
 									
 									<div class="box-search">
-										<input type="text" name="search" placeholder="Search what you looking for ?" id="search-box">
+										<input type="text" name="searchKey" placeholder="Search Your Products..." id="search-box">
 										<div id="suggesstion-box"></div>
 										<span class="btn-search">
 											<button type="submit" class="waves-effect"><img src="images/icons/search.png" alt=""></button>
@@ -74,7 +74,7 @@
 													</div>
 												</div>
 												<div class="clearfix"></div>
-												<span class="delete">x</span>
+												<span class="delete"onclick="deleteCartItem(<?php echo $getCartItems['id']; ?>);"><img src="images/icons/delete.png" alt=""></span>
 											</li>
 											<?php } ?>
 										</ul>
@@ -99,3 +99,28 @@
 						</div><!-- /.col-md-3 -->
 					</div><!-- /.row -->
 				</div><!-- /.container -->
+
+<script type="text/javascript">
+	function deleteCartItem(cartId) {
+  //Display Add On's
+  var x = confirm("Are you sure you want to delete?");
+    if(x) {
+        $.ajax({
+          type:'post',
+          url:'delete_cart_tem.php',
+          data:{
+             cartId : cartId,                                
+          },
+          success:function(response) {            
+             if(response == 1) {
+                alert("Item Deleted!");
+                location.reload();
+             } else {
+               alert("Item Delete Failed!");
+               return false;
+             }
+            }
+        });
+      }
+}
+</script>
