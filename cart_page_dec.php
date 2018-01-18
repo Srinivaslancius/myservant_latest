@@ -10,6 +10,11 @@ $getCartQuantity = getIndividualDetails('grocery_cart','id',$cartId);
 $itemPrevQuan = $getCartQuantity['product_quantity'];
 
 $itemPrevQuantity = $itemPrevQuan-1;
+
+if($itemPrevQuantity == 0){
+    $sql3 = "DELETE FROM grocery_cart WHERE id ='$cartId' ";
+    $conn->query($sql3);
+}
     
 $updateItems = "UPDATE grocery_cart SET product_quantity = '$itemPrevQuantity' WHERE id = '$cartId' ";
 $upCart = $conn->query($updateItems);
