@@ -34,7 +34,23 @@ th{
 			</div><!-- /.header-bottom -->
 		</section><!-- /#header -->
 
-		
+		<?php
+		// header( "refresh:10;url=index.php" );
+		// if($_SESSION['user_login_session_id'] == '') {
+		//     header ("Location: logout.php");
+		// } 
+		?>
+		<?php 
+		$user_session_id = $_SESSION['user_login_session_id'];
+		$order_session_id = $_SESSION['order_last_session_id'];
+		$placedOrders = "SELECT * FROM grocery_orders WHERE user_id = '$user_session_id' AND order_id='$order_session_id' ";
+		$placeOrder = $conn->query($placedOrders);
+		?> 
+
+		<?php
+		$orderData =getAllDataWhere('grocery_orders','order_id',$order_session_id);
+		$getAddOrder = $orderData->fetch_array();
+		?>
 
 		<section class="flat-error">
 			<div class="container">
@@ -57,25 +73,25 @@ th{
 							  </tr>
 							</thead>
 							<tbody>
+							<?php while ($getPlaceOrders = $placeOrder->fetch_assoc()) { 
+								$cartTotal += $getPlaceOrders['item_quantity']*$getPlaceOrders['item_price'];
+								$getProductDetails= getIndividualDetails('grocery_product_name_bind_languages','product_id',$getPlaceOrders['product_id']);
+							?>
 							  <tr>
-								<td>somthing</td>
-								<td>somthing</td>
-								<td>somthing</td>
+								<td><?php echo $getProductDetails['product_name']; ?></td>
+								<td><?php echo $getPlaceOrders['item_quantity']; ?></td>
+								<td>Rs : <?php echo $getPlaceOrders['item_price']; ?></td>
 							  </tr>
-							  <tr>
-								<td>somthing</td>
-								<td>somthing</td>
-								<td>somthing</td>
-							  </tr>
+							<?php } ?>
 							  <tr>
 								<td style="font-size:14px;color:#fe6003">Sub Total</td>
 								<td></td>
-								<td style="font-size:14px;color:#fe6003">Rs : 2000/-</td>
+								<td style="font-size:14px;color:#fe6003">Rs : <?php echo $cartTotal; ?>/-</td>
 							  </tr>
 							  <tr style="background-color:black">
 								<td style="font-size:14px;color:#fff">Total</td>
 								<td></td>
-								<td style="font-size:14px;color:#fff">Rs : 2000/-</td>
+								<td style="font-size:14px;color:#fff">Rs : <?php echo $cartTotal; ?>/-</td>
 							  </tr>
 							</tbody>
 						  </table>
