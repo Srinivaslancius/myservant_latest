@@ -136,7 +136,7 @@
 								</div>  								
 								<div class="form-box">
 									<label for="name-register">Email address * </label>
-									<input type="text" name="user_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  id="user_email" placeholder="Email" onkeyup="checkEmail();" required>
+									<input type="email" name="user_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  id="user_email" placeholder="Email" onkeyup="checkEmail();" required>
 									<span id="input_status" style="color: red;"></span>
 								</div>
 								<div class="form-box">
@@ -259,27 +259,7 @@
 		        $("#divCheckPasswordMatch").html("");
 		    }
 		}
-	    function checkMobile() {
-	        var user_mobile = document.getElementById("user_mobile").value;
-	        if (user_mobile){
-	          $.ajax({
-	          type: "POST",
-	          url: "user_avail_check.php",
-	          data: {
-	            user_mobile:user_mobile,
-	          },
-	          success: function (result) {
-	            if (result > 0){
-	            	$("#input_status1").html("<span style='color:red;'>Mobile Already Exist</span>");
-	        		$('#user_mobile').val('');
-	            } else {
-	              $('#input_status1').html("");
-	            }       
-	            }
-	           });          
-	        }
-	    }
-	    function checkEmail() {
+		function checkEmail() {
 
 	        var user_email = document.getElementById("user_email").value;
 	        if (user_email){
@@ -290,6 +270,7 @@
 	            user_email:user_email,
 	          },
 	          success: function (result) {
+	          	alert('hai');
 	            if (result > 0){
 	            	$("#input_status").html("<span style='color:red;'>Email Already Exist</span>");
 	        		$('#user_email').val('');
@@ -300,6 +281,28 @@
 	           });          
 	        }
 	    }
+	    function checkMobile() {
+	        var user_mobile = document.getElementById("user_mobile").value;
+	        if (user_mobile){
+	          $.ajax({
+	          type: "POST",
+	          url: "user_avail_check.php",
+	          data: {
+	            user_mobile:user_mobile,
+	          },
+	          success: function (result) {
+
+	            if (result > 0){
+	            	$("#input_status1").html("<span style='color:red;'>Mobile Already Exist</span>");
+	        		$('#user_mobile').val('');
+	            } else {
+	              $('#input_status1').html("");
+	            }       
+	            }
+	           });          
+	        }
+	    }
+
     </script>
 
 </body>	

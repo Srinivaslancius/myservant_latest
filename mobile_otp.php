@@ -211,12 +211,13 @@ $('#verify_otp').on('click', function () {
         data:$("form").serialize(),
         success:function(result){           
           if(result == 0) {
+         
             $("#return_msg").css("display", "block");       
             $("#return_msg").html("<span style='color:red;'>Please enter valid OTP!</span>");
             $('#mobile_otp').val('');
           } else {
             //Success
-            alert("OTP verified");
+            alert("Your Registration Successfully Completed");
             if (checkout_key == '') {
                 window.location.href = 'index.php';
             } else {

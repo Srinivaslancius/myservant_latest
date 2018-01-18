@@ -11,7 +11,7 @@
     	
 		$user_email=$_POST['user_email']; 
 	  	$sql1 = "SELECT * FROM `users` WHERE `user_email` = '$user_email' ";
-        $result1 = $conn->query($sql1);
+        $result1 = $conn->query($sql1); 
         echo  $result1->num_rows;
     }
 ?> 
