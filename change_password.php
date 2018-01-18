@@ -97,7 +97,17 @@
     }
 ?>
         <div class="col-sm-9">       	 
-         
+         <?php if(isset($_GET['succ']) && $_GET['succ'] == 'log-success' ) {  ?>                
+            <div class="alert alert-success" style="top:10px; display:block" id="set_valid_msg">
+              <strong>Success!</strong> Your Password Changed Successfully.
+            </div>               
+       <?php }?>
+
+        <?php if(isset($_GET['err']) && $_GET['err'] == 'log-fail' ) {  ?>            
+          <div class="alert alert-danger" style="top:10px; display:block" id="set_valid_msg">
+            <strong>Failed!</strong> Current Password Is Not Correct.
+          </div>     
+        <?php }?>
          <div class="panel-group">
                   <div class="panel panel-default">
                     <div class="panel-heading">

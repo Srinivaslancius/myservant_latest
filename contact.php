@@ -224,18 +224,18 @@ if(mail($to, $subject, $message, $headers)) {
         						</p>-->
         					</div><!-- /.form-contact-header -->
         					<div class="form-contact-content">
-        						<form action="#" method="get" id="form-contact" accept-charset="utf-8">
+        						<form method="post" action="" id="form-contact" accept-charset="utf-8">
 									<div class="form-box one-half name-contact">
 										<label for="name-contact">First name*</label>
-										<input type="text" id="name-contact" name= "name_contact" placeholder="First name">
+										<input type="text" id="name-contact" name= "name_contact" placeholder="First name" required>
 									</div>
 									<div class="form-box one-half password-contact">
 										<label for="password-contact">Last name*</label>
-										<input type="text" id="password-contact" name="last_name_contact" placeholder="Last name">
+										<input type="text" id="password-contact" name="last_name_contact" placeholder="Last name" required>
 									</div>
 									<div class="form-box one-half name-contact">
 										<label for="name-contact">Email*</label>
-										<input type="text" id="email_contact" name="email_contact" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Email">
+										<input type="text" id="email_contact" name="email_contact" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Email" required>
 									</div>
 									<div class="form-box one-half name-contact">
 										<label for="name-contact">Mobile*</label>
