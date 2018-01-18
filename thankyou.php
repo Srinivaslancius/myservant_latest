@@ -1,12 +1,27 @@
+<style>
+th{
+	text-align:center;
+	font-size:14px !important;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-bottom: 1px solid #ddd;
 
+}
+.table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+	 border-bottom: 1px solid #ddd !important;
+  
+}
+</style>
 <?php include_once 'meta.php';?>
 	<body class="header_sticky">
 	<div class="boxed">
-
 		<div class="overlay"></div>
-
-	
-
 		<section id="header" class="header">
 			<div class="header-top">
 			<?php include_once 'top_header.php';?>
@@ -28,11 +43,42 @@
 					</div><!-- /.col-md-2 -->
 					<div class="col-md-8">
 						<div class="wrap-error center">
-							<div class="header-error">
+							<div class="header-error" style="margin-bottom:30px">
 								
 								<h1>Thank You for placing the order with my servant</h1>
 								<p>We will send you the order details with delivery dates shortly!</p>
 							</div><!-- /.header-error -->
+							<table class="table" style="border: 1px solid #ddd;width:70%;margin-left:15%">
+							<thead>
+							  <tr style="background-color:#e5e5e5">
+								<th>PRODUCT</th>
+								<th>QUANTITY</th>
+								<th>PRICE</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<td>somthing</td>
+								<td>somthing</td>
+								<td>somthing</td>
+							  </tr>
+							  <tr>
+								<td>somthing</td>
+								<td>somthing</td>
+								<td>somthing</td>
+							  </tr>
+							  <tr>
+								<td style="font-size:14px;color:#fe6003">Sub Total</td>
+								<td></td>
+								<td style="font-size:14px;color:#fe6003">Rs : 2000/-</td>
+							  </tr>
+							  <tr style="background-color:black">
+								<td style="font-size:14px;color:#fff">Total</td>
+								<td></td>
+								<td style="font-size:14px;color:#fff">Rs : 2000/-</td>
+							  </tr>
+							</tbody>
+						  </table>
 							
 					</div><!-- /.col-md-8 -->
 					<div class="col-md-2">
