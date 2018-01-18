@@ -128,18 +128,30 @@
 														</div>
 														<div class="product_name">
 														<?php 
-														 $getProductPrices = getAllDataWhereWithActive('grocery_product_bind_weight_prices','product_id',$getProductDetails['id']);
+														$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductDetails['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+							 							$getProductPrices = $conn->query($getPrices);
 														?> 
 														<select class="s-w form-control" id="na1q_qty0" onchange="get_price(this.value,'na10');">
-															<?php while($getPrices = $getProductPrices->fetch_assoc()) { ?>
-                                                            <option value="6180"><?php echo $getPrices['weight_type']; ?> - Rs.<?php echo $getPrices['selling_price']; ?> </option>
+															<?php while($getPricesDetails = $getProductPrices->fetch_assoc()) { ?>
+                                                            <option value="6180"><?php echo $getPricesDetails['weight_type']; ?> - Rs.<?php echo $getPricesDetails['selling_price']; ?> </option>
                                                             <?php } ?>
                                                           </select>
 														</div>
 													</div><!-- /.box-content -->
+
+													<?php $getPrices1 = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductDetails['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+							 							$getProductPrices1 = $conn->query($getPrices1);
+							 							$getPricesDetails1 = $getProductPrices1->fetch_assoc();
+							 						?>
+
+													<input type="hidden" id="cat_id_<?php echo $getProductDetails['id']; ?>" value="<?php echo $getProductDetails['grocery_category_id']; ?>">
+													<input type="hidden" id="sub_cat_id_<?php echo $getProductDetails['id']; ?>" value="<?php echo $getProductDetails['grocery_sub_category_id']; ?>">
+													<input type="hidden" id="pro_name_<?php echo $getProductDetails['id']; ?>" value="<?php echo $getProductNames['product_name']; ?>">
+													<input type="hidden" id="pro_price_<?php echo $getProductDetails['id']; ?>" value="<?php echo $getPricesDetails1['selling_price']; ?>">
+													<input type="hidden" id="pro_weight_type_id_<?php echo $getProductDetails['id']; ?>" value="<?php echo $getPricesDetails1['id']; ?>">
 													<div class="box-bottom">
 														<div class="btn-add-cart">
-															<a href="#" title="">
+															<a href="#" title="" onClick="show_cart(<?php echo $getProductDetails['id']; ?>)">
 																<img src="images/icons/add-cart.png" alt="">Add to Cart
 															</a>
 														</div>
@@ -235,6 +247,28 @@
 		<script type="text/javascript" src="javascript/jquery.countdown.js"></script>
 
 		<script type="text/javascript" src="javascript/main.js"></script>
+		<script type="text/javascript">
+
+			function show_cart(ProductId) {
+				var catId = $('#cat_id_'+ProductId).val();
+				var subCatId = $('#sub_cat_id_'+ProductId).val();
+				var productName = $('#pro_name_'+ProductId).val();
+				var productPrice = $('#pro_price_'+ProductId).val();
+				var productWeightType = $('#pro_weight_type_id_'+ProductId).val();
+				var product_quantity = 1;
+
+	   			$.ajax({
+			      type:'post',
+			      url:'save_cart.php',
+			      data:{		        
+			        productId:ProductId,catId:catId,subCatId:subCatId,product_name:productName,productPrice:productPrice,productWeightType:productWeightType,product_quantity:product_quantity,
+			      },
+			      success:function(response) {
+			      	window.location.href = "shop_cart.php";
+			      }
+			    });
+			}
+		</script>
 
 </body>	
 </html>
