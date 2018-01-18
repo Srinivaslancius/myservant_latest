@@ -74,17 +74,22 @@
 									</div>
 									</ul>
 								</li>-->
+								<?php if($_SESSION['user_login_session_id'] =='') { ?>
 								<li class="account">
 									<a href="#" title="">My Account<i class="fa fa-angle-down" aria-hidden="true"></i></a>
 									<ul class="unstyled">
 										<li>
-											<?php if($_SESSION['user_login_session_id'] =='') { ?>
-												<a href="login.php" title="">Login / Register</a>
-											<?php } else { ?>
-												<a href="" title=""><?php echo $_SESSION['user_login_session_name']; ?></a> 
-												<a href="logout.php">Logout</a>
-											 <?php } ?>
-											
+											<a href="login.php" title="">Login / Register</a>	
+										</li>
+									</ul><!-- /.unstyled -->
+								</li>
+								<?php } else { ?>
+								<li class="account">
+									<a href="#" title=""><?php echo $_SESSION['user_login_session_name']; ?><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+									
+									<ul class="unstyled">
+										<li>
+										<a href="logout.php">Logout</a>
 										</li>
 										
 										<li>
@@ -98,6 +103,7 @@
 										</li>
 									</ul><!-- /.unstyled -->
 								</li>
+								<?php } ?>
 								<li>
 									<?php $language_name = "SELECT * FROM grocery_languages WHERE lkp_status_id = 0";
 									$language_name1 = $conn->query($language_name);

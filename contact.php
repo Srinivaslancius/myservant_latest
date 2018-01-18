@@ -162,7 +162,54 @@
         		</div><!-- /.row -->
         	</div><!-- /.container -->
         </section><!-- /.flat-iconbox style4 -->
+<?php
 
+if(!empty($_POST['name_contact']) && !empty($_POST['last_name_contact']) && !empty($_POST['email_contact']) && !empty($_POST['phone_contact']))  {
+
+$getSiteSettings1 = getAllDataWhere('grocery_site_settings','id','1'); 
+$getSiteSettingsData1 = $getSiteSettings1->fetch_assoc();
+    $name_contact = $_POST['name_contact'];
+    $last_name_contact = $_POST['last_name_contact'];
+    $email_contact = $_POST['email_contact'];
+    $phone_contact = $_POST['phone_contact'];
+    $message_contact = $_POST['message_contact'];
+
+$dataem = $getSiteSettingsData1["contact_email"];
+//$to = "srinivas@lanciussolutions.com";
+$to = $dataem;
+$subject = "Myservent - Contact Us ";
+$message = '';      
+$message .= '<body>
+    <div class="container" style=" width:50%;border: 5px solid #fe6003;margin:0 auto">
+    <header style="padding:0.8em;color: white;background-color: #fe6003;clear: left;text-align: center;">
+     <center><img src='.$base_url . "uploads/logo/".$getSiteSettingsData1["logo"].' class="logo-responsive"></center>
+    </header>
+    <article style=" border-left: 1px solid gray;overflow: hidden;text-align:justify; word-spacing:0.1px;line-height:25px;padding:15px">
+        <h1 style="color:#fe6003">User Feedback Information.</h1>
+        <h4>First Name: </h4><p>'.$name_contact.'</p>
+        <h4>Last Name: </h4><p>'.$last_name_contact.'</p>
+        <h4>Email: </h4><p>'.$email_contact.'</p>
+        <h4>Mobile: </h4><p>'.$phone_contact.'</p>
+        
+        <h4>Message: </h4><p>'.$message_contact.'</p>
+    </article>
+    <footer style="padding: 1em;color: white;background-color: #fe6003;clear: left;text-align: center;">'.$getFoodSiteSettingsData['footer_text'].'</footer>
+    </div>
+
+    </body>';
+
+//$sendMail = sendEmail($to,$subject,$message,$email_contact);
+$name = "My Servant";
+$from = $email_contact;
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";  
+$headers .= 'From: '.$name.'<'.$from.'>'. "\r\n";
+if(mail($to, $subject, $message, $headers)) {
+    echo  "<script>alert('Thank You For Your feedback');window.location.href('contact.php');</script>";
+}
+
+}
+?>
         <section class="flat-contact">
         	<div class="container">
         		<div class="row">
@@ -180,23 +227,23 @@
         						<form action="#" method="get" id="form-contact" accept-charset="utf-8">
 									<div class="form-box one-half name-contact">
 										<label for="name-contact">First name*</label>
-										<input type="text" id="name-contact" name="name-contact" placeholder="First name">
+										<input type="text" id="name-contact" name= "name_contact" placeholder="First name">
 									</div>
 									<div class="form-box one-half password-contact">
 										<label for="password-contact">Last name*</label>
-										<input type="text" id="password-contact" name="password-contact" placeholder="Last name">
+										<input type="text" id="password-contact" name="last_name_contact" placeholder="Last name">
 									</div>
 									<div class="form-box one-half name-contact">
 										<label for="name-contact">Email*</label>
-										<input type="text" id="name-contact" name="name-contact" placeholder="Email">
+										<input type="text" id="email_contact" name="email_contact" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Email">
 									</div>
 									<div class="form-box one-half name-contact">
 										<label for="name-contact">Mobile*</label>
-										<input type="text" id="name-contact" name="name-contact" placeholder="Mobile number">
+										<input type="text" maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" name="phone_contact" placeholder="Mobile Number" required>
 									</div>
 									<div class="form-box">
 										<label for="comment-contact">Comment</label>
-										<textarea id="comment-contact"></textarea>
+										<textarea name="message_contact" rows="4" id="comment"></textarea>
 									</div>
 									<div class="form-box">
 										<button type="submit" class="contact">Send</button>

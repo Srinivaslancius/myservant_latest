@@ -41,23 +41,58 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
 		<?php 
-    if (isset($_POST['register']))  {
+	error_reporting(0);
+	if(isset($_POST['submit']))  { 
+	
+		$getSiteSettings1 = getAllDataWhere('grocery_site_settings','id','1'); 
+		$getSiteSettingsData1 = $getSiteSettings1->fetch_assoc();
+	    //Login here
+	    $user_email = $_POST['login_email'];
+	   
+	    $getUserForgotData = forgotPassword($user_email);
+	    //Set variable for session
+	    if($getUserForgotPassword = $getUserForgotData->fetch_assoc()) {
 
-        $user_mobile = $_POST['user_mobile'];
-        //$mobile_otp = rand(1000, 9999); //Your message to send, Add URL encoding here.
-        $mobile_otp = "1234";
-        $selOTP = getAllDataWhere('user_mobile_otp','user_mobile',$user_mobile);    
-        $getNoRows = $selOTP->num_rows; 
+	    	//$pwd = decryptPassword($getUserForgotPassword['user_password']);
+	    	$userId = encryptPassword($getUserForgotPassword['id']);
+            $to = $user_email;
+            $subject =  "User Forgot Password";
+            $message = '';
+            $message .= '<body>
+			<div class="container" style=" width:50%;border: 5px solid #fe6003;margin:0 auto">
+			<header style="padding:0.8em;color: white;background-color: #fe6003;clear: left;text-align: center;">
+			 <center><img src='.$base_url . "uploads/logo/".$getSiteSettingsData1["logo"].' class="logo-responsive"></center>
+			</header>
+			<article style=" border-left: 1px solid gray;overflow: hidden;text-align:justify; word-spacing:0.1px;line-height:25px;padding:15px">
+			  <h1 style="color:#fe6003">Your Password</h1>
+			  <p>Dear <span style="color:#fe6003;">'.$getUserForgotPassword["user_full_name"].'</span>.</p>
+			  <p>Want to change your password? Please click on the link given below to reset the password of your Myservant Account </p>
+			  <p><a href="'.$base_url . "reset_password.php?token=".$userId.'" target="_blank"> Click here</a></p>
 
-        if($getNoRows > 0) {
-            $mobOtpSave = "UPDATE user_mobile_otp SET mobile_otp = '$mobile_otp' WHERE user_mobile = '$user_mobile' ";
-            $saveOTP = $conn->query($mobOtpSave);
-        } else {
-            $mobOtpSave = "INSERT INTO `user_mobile_otp`(`user_mobile`, `mobile_otp`) VALUES ('$user_mobile', '$mobile_otp') ";
-            $saveOTP = $conn->query($mobOtpSave);
-        }       
-    }
-    ?>
+			  <p>If you are not able to click on the above link, please copy and paste the entire URL into your browsers address bar and press Enter.</p>
+			  <strong>'.$base_url . "reset_password.php?token=".$userId.'</strong>
+				<p>We hope you enjoy your stay at myservant.com, if you have any problems, questions, opinions, praise, comments, suggestions, please free to contact us at any time.</p>
+				<p>Warm Regards,<br>The Myservant Team </p>
+			</article>
+			<footer style="padding: 1em;color: white;background-color: #fe6003;clear: left;text-align: center;">'.$getSiteSettingsData1['footer_text'].'</footer>
+			</div>
+
+			</body>';
+			
+			//echo $message; die;
+			$name = "My Servant";
+			$from = $getSiteSettingsData1["from_email"];
+			$headers = "MIME-Version: 1.0" . "\r\n";
+			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";  
+			$headers .= 'From: '.$name.'<'.$from.'>'. "\r\n";
+            mail($to, $subject, $message, $headers);
+
+		        echo  "<script>alert('Password Sent To Your Email,Please Check.');window.location='login.php';</script>";
+		    } else {
+	    	echo "<script>alert('Your Entered Email Not Found');</script>";
+	    }
+	}
+?>
 		<section class="flat-tracking background">
 			<div class="container">
 				<div class="row">
@@ -76,12 +111,12 @@
 								</p>-->
 							</div><!-- /.title -->
 							<div class="tracking-content">
-								<form method="post" id="opt_valid_mobile" name="opt_valid_mobile" accept-charset="utf-8">
+								<form method="post"  accept-charset="utf-8">
 									<label for="name-contact" style="margin-right:300px">Email:</label>
-										<input type="text" id="name-contact" name="name-contact" placeholder="Email">
+										<input type="text" id="login_email" name="login_email" placeholder="Email">
 									
 									<div class="btn-track">
-										<button type="submit" id="verify_otp">Submit</button>
+										<button type="submit" name="submit">Submit</button>
 									</div><!-- /.container -->
 								</form><!-- /.form -->
 							</div><!-- /.tracking-content -->
