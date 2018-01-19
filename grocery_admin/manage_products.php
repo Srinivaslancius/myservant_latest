@@ -166,7 +166,7 @@
                     </div>
                 </div>
             </div>
-
+            <div class="clear_fix"></div>
             <div class="panel panel-default panel-table m-b-0">
                 <div class="panel-heading">
                     <h3 class="m-t-0 m-b-5 font_sz_view">View Products</h3>
@@ -208,7 +208,44 @@
                                     <td><a href="product_images.php?pid=<?php echo $row['id']; ?>">Upload Images</a></td>
 
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_products'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_products'>In Active</span>" ;} ?></td>
-                                    <td> <a href="edit_testimonials.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a></td>
+                                    <td> <a href="edit_testimonials.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> <a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>">Hot Deals</a></td>
+
+                                    <!-- Modal Popup for brands applicable -->                                   
+                                    <div class="col-lg-2 col-sm-4 col-xs-6 m-y-5">
+                                        <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 150px;">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content animated flipInX">
+                                                    <div class="modal-header bg-info">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">
+                                                                <i class="zmdi zmdi-close"></i>
+                                                            </span>
+                                                        </button>
+                                                        <h4 class="modal-title">Hot Deals</h4>
+                                                    </div>
+                                                    <form method="post" action="update_deal_date.php">
+                                                        <input type="hidden" name="pid" value="<?php echo $row['id']; ?>">
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <p id="basicExample">
+                                                                    <input type="text" class="date start" name="deal_start_date"/>
+                                                                    <input type="text" class="time start" name="deal_start_time"/> To
+                                                                    <input type="text" class="time end" name="deal_end_time" />
+                                                                    <input type="text" class="date end" name="deal_end_date" />
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer"> 
+                                                            <button type="submit" name="submit" value="submit" class="btn btn-default" style="background-color:#f28b00;color:white">Submit</button>
+                                                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Popup -->
+
                                 </tr>
                                 <?php $i++; } ?>
                             </tbody>
@@ -223,6 +260,30 @@
     <?php include_once 'footer.php'; ?>
     <script src="js/dashboard-3.min.js"></script>
     <script src="js/tables-datatables.min.js"></script>
+
+
+    <!-- date time pociker -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://jonthornton.github.io/jquery-timepicker/jquery.timepicker.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.standalone.css" />
+
+
+    <script>
+        $('#basicExample .time').timepicker({
+            'showDuration': true,
+            'timeFormat': 'g:ia'
+        });
+
+        $('#basicExample .date').datepicker({
+            'format': 'm/d/yyyy',
+            'autoclose': true
+        });
+
+        var basicExampleEl = document.getElementById('basicExample');
+        var datepair = new Datepair(basicExampleEl);
+    </script>
 
 
   </body>
