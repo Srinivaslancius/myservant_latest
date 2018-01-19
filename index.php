@@ -128,16 +128,35 @@
  	
  		<div class="divider20"></div>
 
+ 		<?php 
+		if($_SESSION['city_name'] == '') {
+            $lkp_city_id = 1;
+        } else {
+            $getCities1 = getIndividualDetails('grocery_lkp_cities','city_name',$_SESSION['city_name']);
+			$lkp_city_id = $getCities1['id'];
+        }
+		$getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND deal_start_date != '0000-00-00' AND deal_end_date != '0000-00-00' AND deal_start_time != '00:00:00' AND deal_end_time != '00:00:00' AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)";
+		$productDetails = $conn->query($getProducts); 
+		if($productDetails->num_rows > 0) {
+		?>
 		<section class="flat-imagebox">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="owl-carousel-2 style2">
+								<?php while($productDetails1 = $productDetails->fetch_assoc()) { 
+									$getProductNames = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productDetails1['id']);
+								$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$productDetails1['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+							 	$allGetPrices = $conn->query($getPrices);
+							 	$getPrc1 = $allGetPrices->fetch_assoc();
+							 	$deal_start_date = $productDetails1['deal_start_date'];
+							 	$deal_end_date = $productDetails1['deal_end_date'];
+								?>
 								<div class="box-counter style1">
 									<div class="counter">
 										<span class="special">Special Offer</span>
 										<div class="counter-content">
-											<p>There are many variations of passages of Lorem Ipsum available, but the majorited have suffered alteration.</p>
+											<p><?php echo $getProductNames['product_name']; ?></p>
 											<div class="count-down style2">
 												<div class="square">
 													<div class="numb">
@@ -184,24 +203,19 @@
 											</div><!-- /.box-image -->
 											<div class="box-content">
 												<div class="product-name">
-													<a href="#" title="">27-inch iMac with Retina 5K display</a>
+													<a href="#" title=""><?php echo $getProductNames['product_name']; ?></a>
 												</div>
 												<ul class="product-info">
-													<li>3.3GHz quad-core Intel Core i5 processor</li>
-													<li>Turbo Boost up to 3.9GHz</li>
-													<li>8GB (two 4GB) memory, configurable up to 32GB</li>
-													<li>2TB Fusion Drive1</li>
-													<li>AMD Radeon R9 M395 with 2GB video memory</li>
-													<li>Retina 5K 5120-by-2880 P3 display</li>
+													<li><?php echo $productDetails1['product_description']; ?></li>
 												</ul>
 												<div class="price">
-													<span class="sale">$2,299.00</span>
-													<span class="regular">$2,999.00</span>
+													<span class="sale"><?php echo 'Rs.' . $getPrc1['selling_price'] . '.00'; ?></span>
+													<span class="regular"><?php echo 'Rs.' . $getPrc1['mrp_price']; ?></span>
 												</div>
 											</div><!-- /.box-content -->
 											<div class="box-bottom">
 												<div class="btn-add-cart">
-													<a href="#" title="">
+													<a href="#" title="" onClick="show_cart()">
 														<img src="images/icons/add-cart.png" alt="">Add to Cart
 													</a>
 												</div>
@@ -218,96 +232,13 @@
 									</div><!-- /.product-item -->
 									<div class="clearfix"></div>
 								</div><!-- /.box-counter -->
-								<div class="box-counter style1">
-									<div class="counter">
-										<span class="special">Special Offer</span>
-										<div class="counter-content">
-											<p>There are many variations of passages of Lorem Ipsum available, but the majorited have suffered alteration.</p>
-											<div class="count-down style2">
-												<div class="square">
-													<div class="numb">
-														14
-													</div>
-													<div class="text">
-														DAYS
-													</div>
-												</div>
-												<div class="square">
-													<div class="numb">
-														09
-													</div>
-													<div class="text">
-														HOURS
-													</div>
-												</div>
-												<div class="square">
-													<div class="numb">
-														48
-													</div>
-													<div class="text">
-														MINS
-													</div>
-												</div>
-												<div class="square">
-													<div class="numb">
-														23
-													</div>
-													<div class="text">
-														SECS
-													</div>
-												</div>
-											</div><!-- /.count-down -->
-										</div><!-- /.counter-content -->
-									</div><!-- /.counter -->
-									<div class="product-item">
-										<div class="imagebox style3 v1">
-											<div class="box-image save">
-												<a href="#" title="">
-													<img src="images/product/other/l06.jpg" alt="">
-												</a>
-												<span>Save $105.00</span>
-											</div><!-- /.box-image -->
-											<div class="box-content">
-												<div class="product-name">
-													<a href="#" title="">27-inch iMac with Retina 5K display</a>
-												</div>
-												<ul class="product-info">
-													<li>3.3GHz quad-core Intel Core i5 processor</li>
-													<li>Turbo Boost up to 3.9GHz</li>
-													<li>8GB (two 4GB) memory, configurable up to 32GB</li>
-													<li>2TB Fusion Drive1</li>
-													<li>AMD Radeon R9 M395 with 2GB video memory</li>
-													<li>Retina 5K 5120-by-2880 P3 display</li>
-												</ul>
-												<div class="price">
-													<span class="sale">$5,599.00</span>
-													<span class="regular">$2,999.00</span>
-												</div>
-											</div><!-- /.box-content -->
-											<div class="box-bottom">
-												<div class="btn-add-cart">
-													<a href="#" title="">
-														<img src="images/icons/add-cart.png" alt="">Add to Cart
-													</a>
-												</div>
-												<div class="compare-wishlist">
-													<a href="#" class="compare" title="">
-														<img src="images/icons/compare.png" alt="">Compare
-													</a>
-													<a href="#" class="wishlist" title="">
-														<img src="images/icons/wishlist.png" alt="">Wishlist
-													</a>
-												</div>
-											</div><!-- /.box-bottom -->
-										</div><!-- /.imagbox style3 -->
-									</div><!-- /.product-item -->
-									<div class="clearfix"></div>
-								</div><!-- /.box-counter -->
+								<?php } ?>
 							</div><!-- /.owl-carousel-2 -->
 						</div><!-- /.col-md-12 -->
 					</div><!-- /.row -->
 				</div><!-- /.container -->
-			</section><!-- /.flat-imagebox -->       
+			</section><!-- /.flat-imagebox -->  
+			<?php } ?>     
 		
 
 
