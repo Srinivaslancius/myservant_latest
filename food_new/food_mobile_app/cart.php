@@ -26,7 +26,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 			$getCartData = getAllDataWhere('food_cart','user_id',$user_id); 
 			$response["cartCount"] = $getCartData->num_rows;
-			$response["cartId"] = $conn->insert_id;
+			//$response["cartId"] = $conn->insert_id;
+			$response["itemWeightTypeId"] = $_REQUEST['itemWeightTypeId'];
+			$response["itemId"] = $_REQUEST['itemId'];
 		    $response["success"] = 0;
 		    $response["message"] = "Success";
 		} else {
