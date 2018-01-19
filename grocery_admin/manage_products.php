@@ -185,6 +185,7 @@
                                     <th>Upload Images</th>
                                     <th>Status</th>
                                     <th>Action</th>
+                                    <th>Hot Deals</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -208,9 +209,15 @@
                                     <td><a href="product_images.php?pid=<?php echo $row['id']; ?>">Upload Images</a></td>
 
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_products'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_products'>In Active</span>" ;} ?></td>
-                                    <td> <a href="edit_testimonials.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> <a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>">Hot Deals</a></td>
+                                    <td> <a href="edit_testimonials.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a></td>
 
-                                    <!-- Modal Popup for brands applicable -->                                   
+                                    <?php if($row['deal_start_date']!='0000-00-00' && $row['deal_start_time']!='00:00:00' && $row['deal_end_date']!='0000-00-00' && $row['deal_end_time']!='00:00:00') { ?>
+                                    <td><a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>"><i class="zmdi zmdi-assignment-check zmdi-hc-fw"></i></a></td>
+                                    <?php } else { ?>
+                                    <td><a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>"><i class="zmdi zmdi-close zmdi-hc-fw"></i></a></td>
+                                        <?php }?>
+                                    <!-- Modal Popup for brands applicable -->       
+                                                                
                                     <div class="col-lg-2 col-sm-4 col-xs-6 m-y-5">
                                         <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 150px;">
                                             <div class="modal-dialog modal-lg">
