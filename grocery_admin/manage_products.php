@@ -217,7 +217,7 @@
                                     <td><a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>"><i class="zmdi zmdi-close zmdi-hc-fw"></i></a></td>
                                         <?php }?>
                                     <!-- Modal Popup for brands applicable -->       
-                                                                
+
                                     <div class="col-lg-2 col-sm-4 col-xs-6 m-y-5">
                                         <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 150px;">
                                             <div class="modal-dialog modal-lg">
@@ -260,12 +260,13 @@
                                         $deal_end_time = '';
                                     }
                                     ?>
+                                    
                                                             <div class="row">
                                                                 <p id="basicExample">
-                                                                    <input type="text" class="date start" name="deal_start_date" value="<?php echo $deal_start_date; ?>" placeholder="Deal Start Date" required/>
-                                                                    <input type="text" class="time start" name="deal_start_time" value="<?php echo $deal_start_time; ?>" placeholder="Deal Start Time" required/> To
-                                                                    <input type="text" class="time end" name="deal_end_time" value="<?php echo $deal_end_time; ?>" placeholder="Deal End Time" required/>
-                                                                    <input type="text" class="date end" name="deal_end_date" value="<?php echo $deal_end_date; ?>" placeholder="Deal End Date" required/>
+                                                                    <input type="text" class="date start" name="deal_start_date" value="<?php echo $deal_start_date; ?>" placeholder="Deal Start Date"/>
+                                                                    <input type="text" class="time start" name="deal_start_time" value="<?php echo $deal_start_time; ?>" placeholder="Deal Start Time"/> To
+                                                                    <input type="text" class="time end" name="deal_end_time" value="<?php echo $deal_end_time; ?>" placeholder="Deal End Time"/>
+                                                                    <input type="text" class="date end" name="deal_end_date" value="<?php echo $deal_end_date; ?>" placeholder="Deal End Date"/>
                                                                 </p>
                                                             </div>
                                                         </div>
