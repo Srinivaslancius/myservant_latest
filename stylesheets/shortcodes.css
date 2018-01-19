@@ -1448,7 +1448,7 @@
 	padding:28px 29px;
 	border:1px solid #e5e5e5;
 	border-radius:8px;
-	margin-bottom:-2px;
+	/* margin-bottom:-2px; */
 }
 
 .box-counter.style1 .counter {
@@ -2125,10 +2125,10 @@ ul.flat-infomation.style1 li img {
 }
 
 .slider .slider-item .item-image {
-	padding-top:57px;
-	padding-right:75px;
+	/* padding-top:57px; */
+	/* padding-right:75px; */
 	position:relative;
-	float:right;
+	/* float:right; */
 }
 
 .slider .slider-item:before {
@@ -2538,7 +2538,7 @@ ul.flat-infomation.style1 li img {
 
 .slider-item {
 	background-color:#fff;
-	height:481px;
+	/* height:481px; */
 }
 
 /* Slider Item Style2 */
