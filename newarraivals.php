@@ -442,7 +442,7 @@
 														$getPrices2 = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductsData1['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
 							 							$getProductPrices2 = $conn->query($getPrices2);
 														?>
-														<select class="s-w form-control" id="na1q_qty0" onchange="get_price(this.value,'na10');">
+														<select class="s-w form-control" id="na1q_qty0" onchange="get_price1(this.value,'na10');">
                                                             <?php while($getPricesDetails2 = $getProductPrices2->fetch_assoc()) { ?>
                                                             <option value="6180"><?php echo $getPricesDetails2['weight_type']; ?> - Rs.<?php echo $getPricesDetails2['selling_price']; ?> </option>
                                                             <?php } ?>
@@ -593,6 +593,23 @@
 		      }
 		      });
 		    }
+		</script>
+		<script type="text/javascript">
+			function get_price(product_id) {
+				alert();
+				$.ajax({
+				  type:'post',
+				  url:'get_price.php',
+				  data:{
+				     product_id:product_id,       
+				  },
+				  success:function(data) {
+				    //alert(data);
+				    $('#pro_price_').val($('#pro_price').val());
+				    $('#pro_weight_type_id_').val($('#pro_weight_type_id').val());
+				  }
+				});
+			}
 		</script>
 
 </body>	
