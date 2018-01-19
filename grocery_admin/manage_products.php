@@ -237,7 +237,7 @@
                                     } else {
                                         $deal_start_date = '';
                                     }
-                                    
+
                                     if($row['deal_start_time']!='00:00:00') {
                                         $deal_start_time = date('H:i:s A', strtotime($row['deal_start_time']));
                                     } else {
@@ -258,10 +258,10 @@
                                     ?>
                                                             <div class="row">
                                                                 <p id="basicExample">
-                                                                    <input type="text" class="date start" name="deal_start_date" value="<?php echo $deal_start_date; ?>" required/>
-                                                                    <input type="text" class="time start" name="deal_start_time" value="<?php echo $deal_start_time; ?>"  required/> To
-                                                                    <input type="text" class="time end" name="deal_end_time" value="<?php echo $deal_end_time; ?>" required/>
-                                                                    <input type="text" class="date end" name="deal_end_date" value="<?php echo $deal_end_date; ?>"  required/>
+                                                                    <input type="text" class="date start" name="deal_start_date" value="<?php echo $deal_start_date; ?>" placeholder="Deal Start Date" required/>
+                                                                    <input type="text" class="time start" name="deal_start_time" value="<?php echo $deal_start_time; ?>" placeholder="Deal Start Time" required/> To
+                                                                    <input type="text" class="time end" name="deal_end_time" value="<?php echo $deal_end_time; ?>" placeholder="Deal End Time" required/>
+                                                                    <input type="text" class="date end" name="deal_end_date" value="<?php echo $deal_end_date; ?>" placeholder="Deal End Date" required/>
                                                                 </p>
                                                             </div>
                                                         </div>
