@@ -100,7 +100,7 @@
             		  <tr>
             			<td style="width:10%"><img src="images/dashboard/wallet.png" style="width:50px;height:50px"></td>
             			<td><b>Rs : 5/-</b><br>Your Wallet Balance</td>
-            			<td colspan="2"><input type="text" name="amnt" id="amnt" placeholder="Enter amount to be added in your wallet" required></td>
+            			<td colspan="2"><input type="text" name="amnt" id="amnt" class="valid_mobile_num" placeholder="Enter amount to be added in your wallet" required></td>
 						
 						<td><button class="button1" type="submit" name="submit" >Add Money to Wallet</button></td>
             		  </tr>
