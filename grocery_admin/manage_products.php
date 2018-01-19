@@ -227,10 +227,7 @@
                                                     <form method="post" action="update_deal_date.php">
                                                         <input type="hidden" name="pid" value="<?php echo $row['id']; ?>">
                                                         <div class="modal-body">
-                                                <!-- <?php $getProductsDates= "SELECT * FROM grocery_products ";
-                                                        $getProductsDatesDetails = $conn->query($getProductsDates);
-                                                        $getProductsDatesDetails1 = $getProductsDatesDetails->fetch_assoc();
-                                                ?> -->
+                                                
                                     <?php
                                     if($row['deal_start_date']!='0000-00-00') {
                                         $deal_start_date = date('m/d/Y', strtotime($row['deal_start_date']));
