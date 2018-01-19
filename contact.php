@@ -43,23 +43,41 @@ $getSiteSettingsData1 = $getSiteSettings1->fetch_assoc(); ?>
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
-        
-		<section class="flat-map">
-            <div class="container">
-            	<div class="row">
-            		<div class="col-md-12">
-            			<div id="flat-map" class="pdmap">
-				           	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.580289180194!2d80.64353381474554!3d16.496776588618033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35fabb6eff70cd%3A0xbc7d945d41d79aa6!2sCMR+ENTERPRISES+PVT.LTD!5e0!3m2!1sen!2sin!4v1511846045669" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-				            <div class="gm-map">                
-				                <div class="map" id="map"></div>                        
-				            </div>
-
-            			</div><!-- /#flat-map -->
-            		</div><!-- /.col-md-12 -->
-            	</div><!-- /.row -->
-            </div><!-- /.container -->
+        <script src="https://maps.google.com/maps/api/js?key=AIzaSyA_wD4yy0lpl0j2e7f-gCVhbZadHycfk7U" type="text/javascript"></script>
+		<section class="flat-map" id="map" style="height:400px;width:100%">
+            <!-- /.container -->
         </section><!-- /#flat-map -->
+        <script type="text/javascript">
+                            var locations = [
+                              ['Lancius it solutions', 17.445913, 78.381229],
+                              ['Maxcure Hospital', 17.446740, 78.380109],
+                              ['Cyber Towers ', 17.450415, 78.381095],
+                            ];
 
+                            var map = new google.maps.Map(document.getElementById('map'), {
+                              zoom: 14,
+                              center: new google.maps.LatLng(17.448293, 78.391485),
+                              mapTypeId: google.maps.MapTypeId.ROADMAP
+                            });
+
+                            var infowindow = new google.maps.InfoWindow();
+
+                            var marker, i;
+
+                            for (i = 0; i < locations.length; i++) {  
+                              marker = new google.maps.Marker({
+                                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                                map: map
+                              });
+
+                              google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                                return function() {
+                                  infowindow.setContent(locations[i][0]);
+                                  infowindow.open(map, marker);
+                                }
+                              })(marker, i));
+                            }
+                          </script>
         <section class="flat-iconbox style4">
         	<div class="container">
         		<div class="row">
@@ -281,7 +299,6 @@ if(mail($to, $subject, $message, $headers)) {
 		<script type="text/javascript" src="javascript/smoothscroll.js"></script>
 		<script type="text/javascript" src="javascript/jquery-ui.js"></script>
 		<script type="text/javascript" src="javascript/jquery.mCustomScrollbar.js"></script>
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
 	   	<script type="text/javascript" src="javascript/gmap3.min.js"></script>
 	   	<script type="text/javascript" src="javascript/waves.min.js"></script>
 		<script type="text/javascript" src="javascript/jquery.countdown.js"></script>

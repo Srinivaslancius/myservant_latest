@@ -98,7 +98,7 @@
 							<?php $getBrandlogosData = getAllDataWithStatus('grocery_brand_logos','0'); ?>
 							<?php while($getBrandlogos = $getBrandlogosData->fetch_assoc()) { ?>
 							<li >
-								<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brand_logos/'.$getBrandlogos['brand_logo'] ?>">
+								<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brand_logos/'.$getBrandlogos['brand_logo'] ?>" width="200px" height="150px">
 							</li>
 							<?php } ?>
 						</ul><!-- /.owl-carousel-5 
