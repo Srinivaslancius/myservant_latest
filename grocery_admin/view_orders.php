@@ -30,7 +30,12 @@
         <?php include_once './right_slide_toggle.php';?>
       </div>
       <div class="site-content">
-        
+        <?php 
+
+    $groceryOrders = "SELECT * FROM grocery_orders GROUP BY order_id ORDER BY id DESC"; 
+    $groceryOrdersData = $conn->query($groceryOrders);
+    $i=1;
+?>
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
             <h3 class="m-t-0 m-b-5 font_sz_view">View Orders</h3>
@@ -46,40 +51,42 @@
                     <th>Customer</th>
                     <th>Email</th>
                     <th>Mobile Number</th>
-                    <th>Date</th>
+                    <th>Order Date</th>
                     <th>Delivery Date</th>
-                    <th>Time Slot</th>
                     <th>Payment Option</th>
                     <th>Payment Status</th>
                     <th>Order Status</th>
                     <th>Delivery Boy</th>
-                    <th>Action</th>
+                    <!-- <th>Action</th> -->
                   </tr>
                 </thead>
                 <tbody>
+                  <?php while ($row = $groceryOrdersData->fetch_assoc()) { ?> 
                     <tr>
                         <td>1</td>
-                        <td><a href="#" data-toggle="modal" data-target="#successModal2">GRDR12345</a></td>
-                        <td>Mallikarjun</td>
-                        <td>Mallikarjun.he@myservant.com</td>
-                        <td>999 999 9999</td>
-                        <td>25 - 12 - 2017</td>
-                        <td>03 - 01 - 2018</td>
-                        <td>10 AM - 12 PM</td>
-                        <td>COD</td>
-                        <td><a href="#">Order Status</a> </td>
-                        <td><a href="#">Payment Status</a> </td>
-                        <td><a href="#">Delivery Boy Details</a> </td>
-                        <td><span><a href="#"><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a></span> <span><a href="#"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td>
-                    </tr>
-                  
-                </tbody>
-                
-              </table>
-            </div>
-          </div>
-        </div>
-        <div id="successModal2" class="modal fade" tabindex="-1" role="dialog">
+                        <td><a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>"><?php echo $row['order_id'];?></td></a></td>
+                        <td><?php echo $row['first_name'];?></td>
+                        <td><?php echo $row['email'];?></td>
+                        <td><?php echo $row['mobile'];?></td>
+                        <td><?php echo $row['created_at'];?></td>
+                        <td><?php echo $row['delivery_date'];?></td>
+                        <td><?php $getGroceryPaymentsTypes = getAllData('lkp_payment_types');
+                         while($getPaymentsTypes = $getGroceryPaymentsTypes->fetch_assoc()) { if($row['payment_method'] == $getPaymentsTypes['id']) { echo $getPaymentsTypes['status']; } } ?></td>
+                        <td><?php $getGroceryPaymentsStatus = getAllData('lkp_payment_status');
+                         while($getPaymentsStatus = $getGroceryPaymentsStatus->fetch_assoc()) { if($row['lkp_payment_status_id'] == $getPaymentsStatus['id']) { echo $getPaymentsStatus['payment_status']; } } ?></td>
+
+                         <td><?php $getGroceryOrderStatus = getAllData('lkp_order_status');
+                         while($getOrderStatus = $getGroceryOrderStatus->fetch_assoc()) { if($row['lkp_order_status_id'] == $getOrderStatus['id']) { echo $getOrderStatus['order_status']; } } ?></td>
+
+
+                        <?php if($row['assign_delivery_id'] == '0' || $row['assign_delivery_id'] == '') { ?>
+                        <td><a href="assign_to.php?order_id=<?php echo $row['order_id']; ?>">Assign To</a></td>
+                        <?php } else { 
+                          $getDeliveryBoysNames = getAllDataWhere('grocery_delivery_boys','id',$row['assign_delivery_id']); $getDeliveryBoysNamesData = $getDeliveryBoysNames->fetch_assoc(); ?>
+                          <td><a href="assign_to.php?order_id=<?php echo $row['order_id']; ?>"><?php if($getDeliveryBoysNamesData['id'] == $row['assign_delivery_id']) { echo $getDeliveryBoysNamesData['deliveryboy_name']; } ?>(Assigned)</a></td>
+                          <?php }?>
+                        <!-- <td><span><a href="invoice.php?order_id=<?php echo $row['order_id']; ?>" target="_blank"><i class="zmdi zmdi-eye zmdi-hc-fw"></i></a></span> <span><a href="#"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td> -->
+                        <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog">
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                       <div class="modal-header bg-success">
@@ -88,25 +95,27 @@
                             <i class="zmdi zmdi-close"></i>
                           </span>
                         </button>
-                          <h4 class="modal-title">Order Details (Order Id: GRDR1234)<span><a href="#"><i class="zmdi zmdi-print zmdi-hc-fw" style="color: #fff;"></i></a></span></h4>
+                          <h4 class="modal-title">Order Details (Order Id: <?php echo $row['order_id'];?>)<span><a href="#"><i class="zmdi zmdi-print zmdi-hc-fw" style="color: #fff;"></i></a></span></h4>
                       </div>
                       <div class="modal-body">
                           
                         <div class="col-md-12 fr1">
                            <div class="col-md-6">
                                <h3 class="m-t-0 m-b-5 font_sz_view">User Details</h3>
-                               <p>Name : P.Phanendra Kumar</p>
-                               <p>Email : phanendrakumar@lanciussolutions.com</p>
-                               <p>Mobile Number: 9959742195</p>
-                               <p>Order Date: 25 - 12 - 2017</p>
+                               <p>Name : <?php echo $row['first_name'];?></p>
+                               <p>Email : <?php echo $row['email'];?></p>
+                               <p>Mobile Number: <?php echo $row['mobile'];?></p>
+                               <p>Order Date: <?php echo $row['created_at'];?></p>
                            </div>
                            <div class="col-md-6">
                                <h3 class="m-t-0 m-b-5 font_sz_view">Delivery Details</h3>
-                               <p>Delivery Date: 02 - 01 - 2018</p>
-                               <p>Time Slot: 10AM - 12AM</p>
-                               <p>Mode of Payment : Online</p>
-                               <p>Payment Status : Completed</p>
-                               <p>Order Status : Delivered</p>
+                               <p>Delivery Date: <?php echo $row['delivery_date'];?></p>
+                               <p>Mode of Payment : <?php $getGroceryPaymentsTypes = getAllData('lkp_payment_types');
+                         while($getPaymentsTypes = $getGroceryPaymentsTypes->fetch_assoc()) { if($row['payment_method'] == $getPaymentsTypes['id']) { echo $getPaymentsTypes['status']; } } ?></p>
+                               <p>Payment Status : <?php $getGroceryOrderStatus = getAllData('lkp_order_status');
+                         while($getOrderStatus = $getGroceryOrderStatus->fetch_assoc()) { if($row['lkp_order_status_id'] == $getOrderStatus['id']) { echo $getOrderStatus['order_status']; } } ?></p>
+                               <p>Order Status : <?php $getGroceryOrderStatus = getAllData('lkp_order_status');
+                         while($getOrderStatus = $getGroceryOrderStatus->fetch_assoc()) { if($row['lkp_order_status_id'] == $getOrderStatus['id']) { echo $getOrderStatus['order_status']; } } ?></p>
                                
                            </div>
                             <div class="col-md-12">
@@ -155,6 +164,15 @@
                     </div>
                   </div>
                 </div>
+                    </tr>
+                  <?php  $i++; } ?>
+                </tbody>
+                
+              </table>
+            </div>
+          </div>
+        </div>
+        
               </div>
       </div>
       <div class="site-footer">
