@@ -38,7 +38,7 @@
             //If success            
           $assign_delivery_id = $_POST['assign_delivery_id'];
           
-          $sql = "UPDATE `grocery_orders` SET assign_delivery_id = '$assign_delivery_id',lkp_order_status_id = 3 WHERE order_id = '$order_id' ";
+          $sql = "UPDATE `grocery_orders` SET assign_delivery_id = '$assign_delivery_id' WHERE order_id = '$order_id' ";
           if($conn->query($sql) === TRUE){
              echo "<script type='text/javascript'>window.location='view_orders.php?order_id=$order_id&msg=success'</script>";
           } else {

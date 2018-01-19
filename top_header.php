@@ -1,11 +1,9 @@
 <?php
 if(isset($_POST['submit'])) {
 	$getCities1 = getIndividualDetails('grocery_lkp_cities','city_name',$_POST['city_area']);
-	$_SESSION['city'] = $getCities1['id'];
 	$_SESSION['city_name'] = $_POST['city_area'];
 } 
-if($_SESSION['city'] == '') {
-	$_SESSION['city'] = 1;
+if($_SESSION['city_name'] == '') {
 	$_SESSION['city_name'] = 'Vijayawada';
 }
 ?>
@@ -87,19 +85,19 @@ if($_SESSION['city'] == '') {
 								<li class="account">
 									<a href="#" title=""><?php echo $_SESSION['user_login_session_name']; ?><i class="fa fa-angle-down" aria-hidden="true"></i></a>
 									
-									<ul class="unstyled">
-										<li>
-										<a href="logout.php">Logout</a>
-										</li>
+									<ul class="unstyled">										
 										
 										<li>
 											<a href="shop_cart.php" title="">My Cart</a>
 										</li>
 										<li>
-											<a href="myaccount.php" title="">My Account</a>
+											<a href="my_account.php" title="">My Account</a>
 										</li>
 										<li>
 											<a href="shop_checkout.php" title="">Checkout</a>
+										</li>
+										<li>
+											<a href="logout.php">Logout</a>
 										</li>
 									</ul><!-- /.unstyled -->
 								</li>
