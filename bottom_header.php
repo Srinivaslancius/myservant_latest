@@ -91,7 +91,7 @@
 										<li class="active"><a href="offerzone.php" <?php if($page_name == 'offerzone.php') {  ?> class="check_page" <?php } ?>>Offer Zone</a></li>
 			
 										
-										<li class="active"><a href="faq.php" <?php if($page_name == 'faq.php') {  ?> class="check_page" <?php } ?>>faq's</a></li>
+										<li class="active"><a href="faq.php" <?php if($page_name == 'faq.php') {  ?> class="check_page" <?php } ?>>Faq's</a></li>
 									
 										<li class="active"><a href="contact.php" <?php if($page_name == 'contact.php') {  ?> class="check_page" <?php } ?>>Contact</a></li>
 									</ul><!-- /.menu -->
