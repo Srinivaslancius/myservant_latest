@@ -1,4 +1,4 @@
-
+<?php ob_start(); ?>
 <?php include_once 'meta.php';?>
 	<body class="header_sticky">
 	<div class="boxed">
