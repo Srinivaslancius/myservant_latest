@@ -341,7 +341,7 @@
 									$getProductImages = getIndividualDetails('grocery_product_bind_images','product_id',$getProductsData['id']);
 									?>
 									<input type="hidden" id="row_no" value="10">
-										<div class="col-lg-3 col-md-3 col-sm-6" >
+										<div class="col-lg-4 col-md-4 col-sm-6" >
 											<div class="product-box">
 												<div class="imagebox">
 												

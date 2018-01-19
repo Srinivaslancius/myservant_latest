@@ -26,7 +26,7 @@ echo'<input type="hidden" id="cat_id_'.$getProductsData['id'].'" value="'.$getPr
     <input type="hidden" id="pro_name_'.$getProductsData['id'].'" value="'.$getProductNames['product_name'].'">
     <input type="hidden" id="pro_price_'.$getProductsData['id'].'" value="'.$getPricesDetails1['selling_price'].'">
     <input type="hidden" id="pro_weight_type_id_'.$getProductsData['id'].'" value="'.$getPricesDetails1['id'].'">';
- echo '<div class="col-lg-3 col-md-3 col-sm-6" >
+ echo '<div class="col-lg-4 col-md-4 col-sm-6" >
         <div class="product-box">
             <div class="imagebox">
                     <a href="single_product.php?product_id='.$getProductsData['id'].'" title="">

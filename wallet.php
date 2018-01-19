@@ -4,11 +4,11 @@
     background-color: #fe6003;
     border-color: #fe6003;
     color: white;
-    padding: 2px 19px;
+    padding: 2px 11px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 13px;
+    font-size: 12px;
     margin: 4px 2px;
     cursor: pointer;
 }
@@ -17,6 +17,7 @@
 	background-color:#fe6003;
  padding: 5px 12px;
 } 
+
 	</style>
 
 	
@@ -85,46 +86,53 @@
                       <div class="panel-body">
                      <div class="table-responsive">				 
         			<table class="table" style="border:1px solid #ddd;width:100%">
-					<h4>My Subscriptions</h4><br>
             		<thead>
             		  <tr>
-            			<th>SUBSCRIPTION</th>
-            			<th>STATUS</th>
-            			<th>NEXT PAYMENT</th>
-            			<th>TOTAL</th>
+            			<th></th>
+            			<th></th>
+            			<th></th>
+            			<th></th>
 						<th></th>
             		  </tr>
             		</thead>
+            		<form method="post" action="">
             		<tbody>
             		  <tr>
-            			<td>68</td>
-            			<td>Active</td>
-            			<td>september 6,2015 via<br>visacard missing in 4242</td>
-						<td>₹99.9/month</td>
-						<td><a href="order_details1.php"><button class="button1">View</button></a></td>
+            			<td style="width:10%"><img src="images/dashboard/wallet.png" style="width:50px;height:50px"></td>
+            			<td><b>Rs : 5/-</b><br>Your Wallet Balance</td>
+            			<td colspan="2"><input type="text" name="amnt" id="amnt" placeholder="Enter amount to be added in your wallet" required></td>
+						
+						<td><a href="order_details1.php"><button class="button1">Add Money to Wallet</button></a></td>
             		  </tr>
             		  
             		</tbody>
+            		</form>
 					
         	     </table>
 				 <table class="table" style="border:1px solid #ddd;width:100%">
-					<h4>Recent Orders</h4><br>
             		<thead>
             		  <tr>
-            			<th>ORDER</th>
-            			<th>DATE</th>
+            			<th>MERCHANT NAME</th>
+            			<th>WITHDRAWAL</th>
+            			<th>DEPOSIT</th>
             			<th>STATUS</th>
-            			<th>TOTAL</th>
-						<th></th>
+						<th>COMMENT</th>
             		  </tr>
             		</thead>
             		<tbody>
-            		  <tr>
-            			<td>#67</td>
-            			<td>August 6,2015</td>
-            			<td>Processing</td>
-						<td>₹99.9 for item</td>
-						<td><a href="order_details1.php"><button class="button1">View</button></a></td>
+            		  <tr style="border-bottom:1px solid #ddd">
+            			<td><b>Cashback Received</b><br>paytm for Order #CASH-676607643 Paytm Cash Txn ID 17376641204 2018-01-09 09:39:13 PM</td>
+            			<td></td>
+            			<td>Rs : 5/-</td>
+						<td>SUCCESS</td>
+						<td>Order #4419408824 of Reacharge of Airtel Mobile 730214...(Promocode:GETS)</td>
+            		  </tr>
+					  <tr>
+            			<td><b>Cashback Received</b><br>paytm for Order #CASH-676607643 Paytm Cash Txn ID 17376641204 2018-01-09 09:39:13 PM</td>
+            			<td></td>
+            			<td>Rs : 5/-</td>
+						<td>SUCCESS</td>
+						<td>Order #4419408824 of Reacharge of Airtel Mobile 730214...(Promocode:GETS)</td>
             		  </tr>
             		  
             		</tbody>
