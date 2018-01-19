@@ -23,7 +23,7 @@
 			</div><!-- /.header-bottom -->
 		</section><!-- /#header -->
 
-
+<?php $getAboutUsData = getIndividualDetails('grocery_content_pages','id',1) ?>
 		<section class="flat-breadcrumb">
 			<div class="container">
 				<div class="row">
@@ -34,14 +34,14 @@
 								<span><img src="images/icons/arrow-right.png" alt=""></span>
 							</li>
 							<li class="trail-item">
-								<a href="about.php" title="">About</a>
+								<a href="about.php" title=""><?php echo $getAboutUsData['title'];?></a>
 								
 						</ul><!-- /.breacrumbs -->
 					</div><!-- /.col-md-12 -->
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
-		<?php $getAboutUsData = getIndividualDetails('grocery_content_pages','id',2) ?>
+		
 		<section class="flat-about">
 			<div class="container">
 				
@@ -98,7 +98,7 @@
 							<?php $getBrandlogosData = getAllDataWithStatus('grocery_brand_logos','0'); ?>
 							<?php while($getBrandlogos = $getBrandlogosData->fetch_assoc()) { ?>
 							<li >
-								<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brand_logos/'.$getBrandlogos['brand_logo'] ?>">
+								<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brand_logos/'.$getBrandlogos['brand_logo'] ?>" width="200px" height="150px">
 							</li>
 							<?php } ?>
 						</ul><!-- /.owl-carousel-5 
