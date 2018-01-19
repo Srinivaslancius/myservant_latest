@@ -1,4 +1,19 @@
 <?php include_once 'meta.php';?>
+<style>
+
+#div1{
+width:90%;
+height:auto;
+display:none;
+background: rgba(0,0,0,0.8);
+border:1px solid #DCDCDC;
+border-radius:30px;
+padding:20px;
+z-index:999;
+position:absolute;
+}
+
+</style>
 <body class="header_sticky">
 	<div class="boxed">
 
@@ -167,6 +182,7 @@
 							</div><!-- /.widget widget-banner -->
 						</div><!-- /.sidebar -->
 					</div><!-- /.col-lg-3 col-md-4 -->
+					
 					<div class="col-lg-9 col-md-8">
 						<div class="main-shop">
 							<div class="slider owl-carousel-16">
@@ -233,11 +249,18 @@
 									</div>
 									<div class="clearfix"></div>
 								</div>
+								
 								<div class="tab-product">
 									<div class="row sort-box">
 									<?php for($i=0; $i<12; $i++) {?>
 										<div class="col-lg-4 col-sm-6">
 											<div class="product-box">
+											<div id="div1">
+								
+					<p style="color:white"><img src="images/icons/add-cart.png" alt="" style="margin-right:10px"> ITEM ADDED TO YOUR CART</p>
+					<p style="color:white">Product Name : Instant Brue</p>
+					
+					</div>
 												<div class="imagebox">
 												
 														<a href="single_product.php" title="">
@@ -264,6 +287,7 @@
 															
 														</div>-->
 													</div><!-- /.box-content -->
+													
 													<div class="box-bottom">
 														<div class="btn-add-cart">
 															<a href="#" title="">
@@ -272,8 +296,11 @@
 														</div>
 														
 													</div><!-- /.box-bottom -->
+													
+													
 												</div><!-- /.imagebox -->
 											</div>
+											
 										</div><!-- /.col-lg-4 col-sm-6 -->
 										<?php } ?>
 									</div>
@@ -361,7 +388,9 @@
 							</div><!-- /.blog-pagination -->
 						</div><!-- /.main-shop -->
 					</div><!-- /.col-lg-9 col-md-8 -->
+					
 				</div><!-- /.row -->
+				
 			</div><!-- /.container -->
 		</main><!-- /#shop -->
 		<footer>
@@ -375,6 +404,7 @@
 	</div><!-- /.boxed -->
 
 		<!-- Javascript -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/tether.min.js"></script>
 		<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
@@ -392,6 +422,13 @@
 		<script type="text/javascript" src="javascript/jquery.countdown.js"></script>
 
 		<script type="text/javascript" src="javascript/main.js"></script>
-
+<script>
+$(document).ready(function(){
+    $(".btn-add-cart").click(function(){
+        $("#div1").fadeIn(1000);
+       
+    });
+});
+</script>
 </body>	
 </html>
