@@ -215,7 +215,7 @@
                                         <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 150px;">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content animated flipInX">
-                                                    <div class="modal-header bg-info">
+                                                    <div class="modal-header bg-info" style="background-color:#FE6003">
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">
                                                                 <i class="zmdi zmdi-close"></i>
@@ -228,15 +228,15 @@
                                                         <div class="modal-body">
                                                             <div class="row">
                                                                 <p id="basicExample">
-                                                                    <input type="text" class="date start" name="deal_start_date" required/>
-                                                                    <input type="text" class="time start" name="deal_start_time" required/> To
-                                                                    <input type="text" class="time end" name="deal_end_time" required/>
-                                                                    <input type="text" class="date end" name="deal_end_date" required/>
+                                                                    <input type="text" class="date start" name="deal_start_date" placeholder=" start date"required/>
+                                                                    <input type="text" class="time start" name="deal_start_time" placeholder=" start time" required/> To 
+                                                                    <input type="text" class="time end" name="deal_end_time" placeholder=" end time" required/>
+                                                                    <input type="text" class="date end" name="deal_end_date"placeholder=" end date" required/>
                                                                 </p>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer"> 
-                                                            <button type="submit" name="submit" value="submit" class="btn btn-default" style="background-color:#f28b00;color:white">Submit</button>
+                                                            <button type="submit" name="submit" value="submit" class="btn btn-default" style="background-color:#FE6003;color:white">Submit</button>
                                                             <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                         </div>
                                                     </form>
