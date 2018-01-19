@@ -426,7 +426,7 @@
 														</p>
 													</div>
 												</div><!-- /.box-content -->
-												<?php $productPrice = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductsData['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+												<?php $productPrice = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductsData1['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
 						 							$productPrice1 = $conn->query($productPrice);
 						 							$productPrice2 = $productPrice1->fetch_assoc();
 						 						?>
