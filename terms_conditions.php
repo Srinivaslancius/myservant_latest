@@ -24,7 +24,7 @@
 		<section class="flat-breadcrumb">
 			<div class="container">
 				<div class="row">
-					<?php $getTerms_ConditionsData = getIndividualDetails('grocery_content_pages','id',4) ?>
+					<?php $getTerms_ConditionsData = getIndividualDetails('grocery_content_pages','id',3) ?>
 					<div class="col-md-12">
 						<ul class="breadcrumbs">
 							<li class="trail-item">

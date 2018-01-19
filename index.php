@@ -311,7 +311,14 @@
 		
 
 
+<?php $getFreeShippingData = getIndividualDetails('grocery_content_pages','id',4);
 
+$getOnlineOrderData = getIndividualDetails('grocery_content_pages','id',5);
+
+$getPaymentsData = getIndividualDetails('grocery_content_pages','id',6);
+
+$getReturnPolicydataData = getIndividualDetails('grocery_content_pages','id',7);
+?>
 		<section class="flat-iconbox">
 			<div class="container-fluid">
 				<div class="row">
@@ -319,14 +326,14 @@
 						<div class="iconbox">
 							<div class="box-header">
 								<div class="image">
-									<img src="images/icons/car.png" alt="">
+									<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_content_banners/'.$getFreeShippingData['image'] ?>" alt="">
 								</div>
 								<div class="box-title">
-									<h3>Free Shipping</h3>
+									<h3><?php echo $getFreeShippingData['title']; ?></h3>
 								</div>
 							</div><!-- /.box-header -->
 							<div class="box-content">
-								<p>Free Shipping On Order Over ₹500</p>
+								<p><?php echo $getFreeShippingData['description']; ?></p>
 							</div><!-- /.box-content -->
 						</div><!-- /.iconbox -->
 					</div><!-- /.col-md-3 col-sm-6 -->
@@ -334,14 +341,14 @@
 						<div class="iconbox">
 							<div class="box-header">
 								<div class="image">
-									<img src="images/icons/order.png" alt="">
+									<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_content_banners/'.$getOnlineOrderData['image'] ?>" alt="">
 								</div>
 								<div class="box-title">
-									<h3>Order Online Service</h3>
+									<h3><?php echo $getOnlineOrderData['title']; ?></h3>
 								</div>
 							</div><!-- /.box-header -->
 							<div class="box-content">
-								<p>Free return products in 30 days</p>
+								<p><?php echo $getOnlineOrderData['description']; ?></p>
 							</div><!-- /.box-content -->
 						</div><!-- /.iconbox -->
 					</div><!-- /.col-md-3 col-sm-6 -->
@@ -349,14 +356,14 @@
 						<div class="iconbox">
 							<div class="box-header">
 								<div class="image">
-									<img src="images/icons/payment.png" alt="">
+									<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_content_banners/'.$getPaymentsData['image'] ?>" alt="">
 								</div>
 								<div class="box-title">
-									<h3>Payment</h3>
+									<h3><?php echo $getPaymentsData['title']; ?></h3>
 								</div>
 							</div><!-- /.box-header -->
 							<div class="box-content">
-								<p>Secure System</p>
+								<p><?php echo $getPaymentsData['description']; ?></p>
 							</div><!-- /.box-content -->
 						</div><!-- /.iconbox -->
 					</div><!-- /.col-md-3 col-sm-6 -->
@@ -364,14 +371,14 @@
 						<div class="iconbox">
 							<div class="box-header">
 								<div class="image">
-									<img src="images/icons/return.png" alt="">
+									<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_content_banners/'.$getReturnPolicydataData['image'] ?>" alt="">
 								</div>
 								<div class="box-title">
-									<h3>Return 30 Days</h3>
+									<h3><?php echo $getReturnPolicydataData['title']; ?></h3>
 								</div>
 							</div><!-- /.box-header -->
 							<div class="box-content">
-								<p>Free return products in 30 days</p>
+								<p><?php echo $getReturnPolicydataData['description']; ?></p>
 							</div><!-- /.box-content -->
 						</div><!-- /.iconbox -->
 					</div><!-- /.col-md-3 col-sm-6 -->
