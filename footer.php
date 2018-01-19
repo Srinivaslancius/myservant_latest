@@ -102,11 +102,11 @@ $getSiteSettingsData1 = $getSiteSettings1->fetch_assoc(); ?>
 										Track Order
 									</a>
 								</li>
-								<li>
+								<!-- <li>
 									<a href="faq.php" title="">
 										Help Center
 									</a>
-								</li>
+								</li> -->
 								<li>
 									<a href="delivery_areas.php" title="">
 										Delivery Areas
