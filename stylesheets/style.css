@@ -210,7 +210,7 @@ img {
 }
 
 b, strong {
-	font-weight:900;
+	font-weight:700;
 }
 
 uttonb,
@@ -429,6 +429,7 @@ h3 {
 	font-size:20px;
 	font-weight:500;
 	color:#2d2d2d;
+	margin-bottom: 5px;
 }
 
 h4 {
@@ -1081,7 +1082,7 @@ ul.flat-unstyled li > ul > li > a {
 	border-radius:8px;
 	top:150px;
 	width:332px;
-	right:0;
+	right: -50px;
 	opacity:0;
 	visibility:hidden;
 	z-index:99;
@@ -3479,7 +3480,7 @@ ol.comment-list li.comment .comment-text .comment-content p {
     /* background: #e4e4e4; */
     position: absolute;
     top: 35px;
-    right: 0px;
+    right: 20px;
     z-index: 9999;
     box-shadow: 0px 0px 4px rgba(0,0,0,0.6);
     -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.6);
@@ -3559,3 +3560,73 @@ i, cite, em, var, address, dfn {
     text-align: left;
 	margin-bottom:10px;
 }
+@media screen and (max-width: 480px) and (min-width: 320px){
+	.city-triangle{
+		left:78%;
+	}
+	.box-cart .inner-box .dropdown-box {
+    right: -55px !important;
+  
+    padding: 25px 15px;
+}
+.term-conditions .text-wrap h3 {
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+/*.widget-categories-ft, .box-left .img-product, .form-review.style2 {
+    padding-left: 20px !important;
+}
+.widget-ft {
+    margin-bottom: 20px;
+    padding-left: 20px;
+}*/
+}
+@media screen and (max-width: 960px) and (min-width: 600px){
+	.city-triangle{
+		left:65% !important;
+	}
+	.box-cart .inner-box .dropdown-box{
+		right:0px !important;
+	}
+}
+@media screen and (max-width: 732px) and (min-width: 408px){
+	.city-triangle{
+		left:62% !important;
+	}
+	.box-cart .inner-box .dropdown-box {
+    right: -90px !important;
+	}
+	}
+	@media screen and (max-width: 640px) and (min-width: 360px){
+		.box-cart .inner-box .dropdown-box {
+    right: -110px !important;
+   
+}
+	}
+	@media screen and (max-width: 568px) and (min-width: 320px){
+		.box-cart .inner-box .dropdown-box {
+    right: -130px !important;
+   
+}
+	}
+	@media screen and (max-width: 1024px) and (min-width: 768px){
+		.cities {
+			right:-30px;
+		}
+		.box-cart .inner-box .dropdown-box {
+			right:-10px;
+		}
+		ul.app-list li {
+    height: 75px;
+		width: 225px;
+		}
+		#mega-menu > ul.menu > li .drop-menu {
+			padding: 27px 7px 27px 10px !important;
+		}
+		#mainnav {
+		padding-left: 0px !important;
+		}
+		.slider .slider-item.style9 .item-text .header-item h2 {
+    margin-top: 0px !important;
+}
+	}

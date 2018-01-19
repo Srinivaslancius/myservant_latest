@@ -1,6 +1,9 @@
+
+<div class="container">
+
 <?php $getSiteSettings1 = getAllDataWhere('grocery_site_settings','id','1'); 
 $getSiteSettingsData1 = $getSiteSettings1->fetch_assoc(); ?>
-<div class="container-fluid">
+
 				<div class="row">
 					<div class="col-lg-3 col-md-6">
 						<div class="widget-ft widget-about">
@@ -140,7 +143,7 @@ $getSiteSettingsData1 = $getSiteSettings1->fetch_assoc(); ?>
 										</div>
 										<div class="text">
 											<h4>App Store</h4>
-											<p>Available now on the</p>
+											<p>Now available on</p>
 										</div>
 									</a>
 								</li><br><br>

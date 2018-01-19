@@ -6616,7 +6616,7 @@ table.product thead tr th:last-child {
 
 .term-conditions .text-wrap p {
 	color:#919191;
-	padding-right:100px;
+	/*! padding-right:100px; */
 	text-align:  justify;
 	margin-bottom: 15px;
 	/* margin-top: 0px; */

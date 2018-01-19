@@ -1,6 +1,9 @@
+
+<div class="container">
+
 <?php $getSiteSettings1 = getAllDataWhere('grocery_site_settings','id','1'); 
 $getSiteSettingsData1 = $getSiteSettings1->fetch_assoc(); ?>
-<div class="container-fluid">
+
 				<div class="row">
 					<div class="col-md-12">
 						<p class="copyright"> <?php echo $getSiteSettingsData1['footer_text']; ?></p>

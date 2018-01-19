@@ -56,7 +56,7 @@
 								<h3>What is Myservant.com</h3>
 							</div>
 							<div class="content">
-								<p>
+								<p style="text-align:justify">
 									Myservant.com (A Unit of CMR Enterprises Pvt Ltd) is one of the largest online food and grocery store in Vijayawada. With over 3500 products and we deal with over 250 brands in our catalogue. The Main Vision of Myservant.com is to convert complex to simpler form. Myservant offers best online food and grocery shopping experience in and around Vijayawada. My Servant offers the best price, the best quality with on time delivery.
 								</p>
 								
@@ -65,11 +65,11 @@
 						</div><!-- /.text-about -->
 					</div><!-- /.col-md-6 -->
 				</div><!-- /.row -->
-				<div class="title">
+				<div class="title" style="margin-top:15px">
 								<h3>Why Myservant is here?</h3>
 							</div>
 							<div class="content">
-								<p>
+								<p style="text-align:justify">
 									Myservant is an online grocery store coupled with house maintenance services which serves all your home needs in just a click. Whether it might be a metro city or an urban it doesn’t matter, we are here to save your precious time and reduce the stress on shopping household items and give life changing experience in handling household products. Myservant is an online grocery store designed just for everyone from infant to old age. We provide services at your door step with respect to your comfortable time. Select a time slot for delivery/ service and your order will be delivered right to your doorstep, anywhere in Vijayawada. You can also pay online using your debit/credit cards, wallet payments and cash on delivery.
 								</p>
 								
@@ -78,7 +78,7 @@
 								<h3>MyServant.com Services</h3>
 							</div>
 							<div class="content">
-								<p>
+								<p style="text-align:justify">
 									We give you wide range of grocery products from branded to non-branded including Groceries, Staples, Food items, Fruits and Vegetables, cosmetics, Beauty products, baby products, personal care and many more.
 
 								</p>
@@ -88,79 +88,14 @@
 								<h3>Book a Service</h3>
 							</div>
 							<div class="content">
-								<p>
+								<p style="text-align:justify">
 									We offer different services which offers great convenience. We offer services such as Home Appliances Repairs & services, Car & bike repair Services, Online 24 X 7 emergency electrical services, Laundry Services, Plumbing Services, Air Conditioning services. You get served by the best and authorized technicians..
 								</p>
 								
 							</div><!-- /.content -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-about -->
-	<!---	<section class="main-blog">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
-						<article class="main-post style4">
-							<div class="featured-post">
-								<a href="#" title="">
-									<img src="images/about/02.jpg" alt="">
-								</a>
-							</div>
-							<div class="divider37"></div>
-							<div class="content-post">
-								<h3 class="title-post">
-									<a href="#" title="">There are many</a>
-								</h3>
-								<div class="entry-post">
-									<p>
-										This is a Rebel that surrendered to us. Although he denies it, I believe there may be more of them, and I request permission to conduct a further search of the area. He was
-									</p>
-								</div>
-							</div>
-						</article>
-					</div>
-					<div class="col-md-4">
-						<article class="main-post style4">
-							<div class="featured-post">
-								<a href="#" title="">
-									<img src="images/about/03.jpg" alt="">
-								</a>
-							</div>
-							<div class="divider37"></div>
-							<div class="content-post">
-								<h3 class="title-post">
-									<a href="#" title="">Many desktop publishing </a>
-								</h3>
-								<div class="entry-post">
-									<p>
-										This is a Rebel that surrendered to us. Although he denies it, I believe there may be more of them, and I request permission to conduct a further search of the area. He was
-									</p>
-								</div>
-							</div>
-						</article>
-					</div>
-					<div class="col-md-4">
-						<article class="main-post style4">
-							<div class="featured-post">
-								<a href="#" title="">
-									<img src="images/about/04.jpg" alt="">
-								</a>
-							</div>
-							<div class="divider37"></div>
-							<div class="content-post">
-								<h3 class="title-post">
-									<a href="#" title="">Lorem Ipsum is simply</a>
-								</h3>
-								<div class="entry-post">
-									<p>
-										This is a Rebel that surrendered to us. Although he denies it, I believe there may be more of them, and I request permission to conduct a further search of the area. He was
-									</p>
-								</div>
-							</div>
-						</article>
-					</div>
-				</div>
-			</div>
-		</section>--->
+	
 		<section class="flat-team">
 			<div class="container">
 				<div class="row">

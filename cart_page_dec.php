@@ -33,7 +33,7 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
 }
 
 $cartTotal = 0;
-
+if($cartItems->num_rows > 0) {
 echo '<table>
 		<thead>
 			<tr>
@@ -76,7 +76,7 @@ echo '<table>
 					</div>
 				</td>
 				<td>
-					<a href="#" title="">
+					<a href="#" title="" onclick="deleteCartItem('.$getCartItems['id'].');">
 						<img src="images/icons/delete.png" alt="">
 					</a>
 				</td>
@@ -90,4 +90,10 @@ echo '<table>
 		</div>								
 	</div>
 </div>';
+} else { 
+	echo'<center><img src="images/cart.png"></center>
+	<p style="text-align:center;font-size:20px;margin-top:10px">Your shopping cart is currently empty</p>			
+	<p style="text-align:center;margin:15px">please click on the Continue Shopping button below for items</p>
+    <center><a href="index.php"><button type="submit" class="contact" style="background-color:#FE6003">Continue Shopping</button></a></center>';
+} 
 }

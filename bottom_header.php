@@ -1,3 +1,7 @@
+
+
+				<div class="container">
+
 <?php 
     $currentFile = $_SERVER["PHP_SELF"];
     $parts = Explode('/', $currentFile);
@@ -8,13 +12,21 @@
     color:#C71585 !important;
 }
 </style>
-				<div class="container-fluid">
+
 					<div class="row">
-						<div class="col-md-3 col-2">
+						<div class="col-md-3 col-sm-2">
 							<div id="mega-menu">
 								<div class="btn-mega"><span></span>ALL CATEGORIES</div>
-								<?php $getCategories1 = "SELECT * FROM grocery_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_category_id FROM grocery_sub_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1))) ORDER BY id DESC";
-								$getCategories = $conn->query($getCategories1); ?>
+								<?php 
+								if($_SESSION['city_name'] == '') {
+                                    $lkp_city_id = 1;
+                                } else {
+                                    $getCities1 = getIndividualDetails('grocery_lkp_cities','city_name',$_SESSION['city_name']);
+            						$lkp_city_id = $getCities1['id'];
+                                }
+								$getCategories1 = "SELECT * FROM grocery_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_category_id FROM grocery_sub_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id))) ORDER BY id DESC";
+								$getCategories = $conn->query($getCategories1);
+								if($getCategories->num_rows > 0) { ?>
 								<ul class="menu">
 									<?php while($getCategoriesData = $getCategories->fetch_assoc()) { ?>
 									<li>
@@ -27,7 +39,7 @@
 											</span>
 										</a>
 										<div class="drop-menu">
-											<?php $getSubCategories = "SELECT * FROM grocery_sub_category WHERE lkp_status_id = 0 AND grocery_category_id ='".$getCategoriesData['id']."' AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)) ORDER BY id DESC LIMIT 0,6";
+											<?php $getSubCategories = "SELECT * FROM grocery_sub_category WHERE lkp_status_id = 0 AND grocery_category_id ='".$getCategoriesData['id']."' AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)) ORDER BY id DESC LIMIT 0,6";
 											$getSubCategories1 = $conn->query($getSubCategories);
 											while($getSubCategoriesData = $getSubCategories1->fetch_assoc()) { 
 												?>
@@ -37,7 +49,7 @@
 												</div>
 												<ul>
 													<?php
-													$getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND grocery_sub_category_id = '".$getSubCategoriesData['id']."' ORDER BY id DESC LIMIT 0,3";
+													$getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND grocery_sub_category_id = '".$getSubCategoriesData['id']."' AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)  ORDER BY id DESC LIMIT 0,3";
 													$getProducts1 = $conn->query($getProducts);
 													while($getProductsData = $getProducts1->fetch_assoc()) { 
 													$getProductNames = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getProductsData['id']);
@@ -57,9 +69,14 @@
 									</li>
 									<?php } ?>
 								</ul>
+								<?php } else { ?>
+								<ul class="menu">
+									<li>No Items Found</li>
+								</ul>
+								<?php } ?>
 							</div>
 						</div><!-- /.col-md-3 -->
-						<div class="col-md-9 col-10">
+						<div class="col-md-9 col-sm-10">
 							<div class="nav-wrap">
 								<div id="mainnav" class="mainnav">
 									<ul class="menu">
