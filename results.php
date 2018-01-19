@@ -168,6 +168,16 @@
 										$getProductImages1 = getIndividualDetails('grocery_product_bind_images','product_id',$getProductsTotalDetails2['id']);
 										$getProductNames1 = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getProductsTotalDetails2['id']);
 									?>
+									<?php $productPrice = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductsTotalDetails2['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+			 							$productPrice1 = $conn->query($productPrice);
+			 							$productPrice2 = $productPrice1->fetch_assoc();
+			 						?>
+
+									<input type="hidden" id="cat_id1_<?php echo $getProductsTotalDetails2['id']; ?>" value="<?php echo $getProductsTotalDetails2['grocery_category_id']; ?>">
+									<input type="hidden" id="sub_cat_id1_<?php echo $getProductsTotalDetails2['id']; ?>" value="<?php echo $getProductsTotalDetails2['grocery_sub_category_id']; ?>">
+									<input type="hidden" id="pro_name1_<?php echo $getProductsTotalDetails2['id']; ?>" value="<?php echo $getProductNames['product_name']; ?>">
+									<input type="hidden" id="pro_price1_<?php echo $getProductsTotalDetails2['id']; ?>" value="<?php echo $productPrice2['selling_price']; ?>">
+									<input type="hidden" id="pro_weight_type_id1_<?php echo $getProductsTotalDetails2['id']; ?>" value="<?php echo $productPrice2['id']; ?>">
 										<div class="product-box style3">
 											<div class="imagebox style1 v3">
 												<div class="box-image">
@@ -200,7 +210,7 @@
                                                           </select>
 														</div>
 													<div class="btn-add-cart">
-														<a href="#" title="">
+														<a href="#" title="" onClick="show_cart(<?php echo $getProductsTotalDetails2['id']; ?>)">
 															<img src="images/icons/add-cart.png" alt="">Add to Cart
 														</a>
 													</div>
@@ -262,6 +272,25 @@
 			      url:'save_cart.php',
 			      data:{		        
 			        productId:ProductId,catId:catId,subCatId:subCatId,product_name:productName,productPrice:productPrice,productWeightType:productWeightType,product_quantity:product_quantity,
+			      },
+			      success:function(response) {
+			      	window.location.href = "shop_cart.php";
+			      }
+			    });
+			}
+			function show_cart1(productId) {
+				var catId = $('#cat_id1_'+productId).val();
+				var subCatId = $('#sub_cat_id1_'+productId).val();
+				var productName = $('#pro_name1_'+productId).val();
+				var productPrice = $('#pro_price1_'+productId).val();
+				var productWeightType = $('#pro_weight_type_id1_'+productId).val();
+				var product_quantity = 1;
+
+	   			$.ajax({
+			      type:'post',
+			      url:'save_cart.php',
+			      data:{		        
+			        productId:productId,catId:catId,subCatId:subCatId,product_name:productName,productPrice:productPrice,productWeightType:productWeightType,product_quantity:product_quantity,
 			      },
 			      success:function(response) {
 			      	window.location.href = "shop_cart.php";
