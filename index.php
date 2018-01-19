@@ -71,9 +71,9 @@
 						<?php while($getBannersData1 = $getBannersData->fetch_assoc()) { ?>
 							<div class="slider-item style2">
 								<div class="item-image">
-									<div class="sale-off">
+									<!--<div class="sale-off">
 										60 % <span>sale</span>
-									</div>
+									</div>-->
 									<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_banner_web_image/'.$getBannersData1['web_image'] ?>" alt="">
 								</div>
 								<div class="clearfix"></div>
