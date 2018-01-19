@@ -164,3 +164,5 @@ $getSiteSettingsData1 = $getSiteSettings1->fetch_assoc(); ?>
 				</div>
 			</div><!-- /.container -->
 			<?php include "search_js_script.php"; ?>
+			<!-- This Script For validations -->
+			<script type="text/javascript" src="javascript/check_number_validations.js"></script>

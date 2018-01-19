@@ -261,7 +261,7 @@ if(mail($to, $subject, $message, $headers)) {
 									</div>
 									<div class="form-box one-half name-contact">
 										<label for="name-contact">Mobile*</label>
-										<input type="text" maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" name="phone_contact" placeholder="Mobile Number" required>
+										<input type="text" maxlength="10" pattern="[0-9]{10}" name="phone_contact" placeholder="Mobile Number" required class="valid_mobile_num">
 									</div>
 									<div class="form-box">
 										<label for="comment-contact">Comment</label>
