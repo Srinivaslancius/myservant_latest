@@ -44,24 +44,34 @@
 		<section class="flat-row flat-imagebox">
 			<div class="container">				
 				<div class="row">
-				<?php for($i=0; $i<6; $i++) {?>
+				<?php 
+				if($_SESSION['city_name'] == '') {
+                    $lkp_city_id = 1;
+                } else {
+                    $getCities1 = getIndividualDetails('grocery_lkp_cities','city_name',$_SESSION['city_name']);
+					$lkp_city_id = $getCities1['id'];
+                }
+				$getCategories1 = "SELECT * FROM grocery_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_category_id FROM grocery_sub_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id))) ORDER BY id DESC";
+				$getCategories = $conn->query($getCategories1);
+				while($getCategoriesDeatils = $getCategories->fetch_assoc()) { ?>
 					<div class="col-md-6 col-lg-4">
 						<div class="imagebox style1 v1" style="border:2px solid #FE6003; margin-bottom:5px">
 							<div class="box-image">
 								<a href="#" title="">
-									<img src="images/product/other/fruit.jpg" alt="">
+									<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_category_web_image/'.$getCategoriesDeatils['category_web_image'] ?>" alt="">
 								</a>
 							</div><!-- /.box-image -->
 							<div class="box-content">
 								<div class="cat-name">
-									<a href="#" title="" style="color:#FE6003">Fruits & Vegitables</a>
+									<a href="results.php?cat_id=<?php echo $getCategoriesDeatils['id']; ?>" title="" style="color:#FE6003"><?php echo $getCategoriesDeatils['category_name']; ?></a>
 								</div>
 								<ul class="cat-list">
-									<li><a href="sprouts.php" title="">Sprouts</a></li>
-									<li><a href="sprouts.php" title="">Fresh Fruits</a></li>
-									<li><a href="sprouts.php" title="">Fresh Herbs & Seasonings</a></li>
-									<li><a href="sprouts.php" title="">Fresh Vegetables</a></li>
-									
+									<?php $getSubCategories = "SELECT * FROM grocery_sub_category WHERE lkp_status_id = 0 AND grocery_category_id ='".$getCategoriesDeatils['id']."' AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)) ORDER BY id DESC LIMIT 0,4";
+									$getSubCategories1 = $conn->query($getSubCategories);
+									while($getSubCategoriesData = $getSubCategories1->fetch_assoc()) { 
+										?>
+									<li><a href="results.php?sub_cat_id=<?php echo $getSubCategoriesData['id']; ?>" title=""><?php echo $getSubCategoriesData['sub_category_name']; ?></a></li>
+									<?php } ?>
 								</ul>
 								<!--<div class="btn-more">
 									<a href="#" title="">See all</a>

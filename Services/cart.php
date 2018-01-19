@@ -301,8 +301,10 @@
 		</div>
 		</form>
 		<?php }  else { ?> <br />
-			<p style="text-align:center; color:#f26226">No Services In Your Cart</p>
-        	<center><a href="services.php" style="color:#f26226">Click here for SERVICES</a></center><br /><br />
+		<center><img src="img/cart.png"></center>
+			<p style="text-align:center;font-size:20px">Your shopping cart is currently empty</p>
+			<p style="text-align:center">Please click on the 'Continue Shopping' button below for items</p>
+        	<center><a href="services.php" style="color:#f26226"><input type="submit" value="Continue Shopping" class="btn_1" ></a></center><br /><br />
 		<?php } ?>
 		<!--End container -->
 	</main>

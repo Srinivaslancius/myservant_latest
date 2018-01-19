@@ -819,7 +819,7 @@
 /* Imagebox Style1 V3 */
 .imagebox.style1.v3 {
 	min-height:270px;
-	padding:28px 30px 20px 30px;
+	/* padding:28px 30px 20px 30px; */
 }
 
 .imagebox.style1.v3 .box-content {

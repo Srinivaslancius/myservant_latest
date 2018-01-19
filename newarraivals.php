@@ -341,13 +341,25 @@
 								</div>
 								<div class="tab-product">
 									<div class="row sort-box">
-									<?php for($i=0; $i<12; $i++) {?>
+									<?php 
+									if($_SESSION['city_name'] == '') {
+	                                    $lkp_city_id = 1;
+	                                } else {
+	                                    $getCities1 = getIndividualDetails('grocery_lkp_cities','city_name',$_SESSION['city_name']);
+	            						$lkp_city_id = $getCities1['id'];
+	                                }
+									$getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)  ORDER BY id DESC LIMIT 0,15";
+										$getProducts1 = $conn->query($getProducts);
+									while($getProductsData = $getProducts1->fetch_assoc()) {
+									$getProductNames = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getProductsData['id']);
+									$getProductImages = getIndividualDetails('grocery_product_bind_images','product_id',$getProductsData['id']);
+									?>
 										<div class="col-lg-3 col-md-3 col-sm-6">
 											<div class="product-box">
 												<div class="imagebox">
 												
-														<a href="single_product.php" title="">
-															<img src="images/product/other/mys.jpg" alt="" style="width:264px; height:210px">
+														<a href="single_product.php?product_id=<?php echo $getProductsData['id'];?>" title="">
+															<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImages['image'] ?>" alt="" style="width:264px; height:210px">
 														</a>
 														
 													<div class="box-content">
@@ -355,11 +367,17 @@
 															<a href="#" title="">Monthly Saving Pack 4</a>
 														</div>-->
 														<div class="product-name">
-															<a href="single_product.php" title="">Monthly Saving Pack 4</a>
+															<a href="single_product.php?product_id=<?php echo $getProductsData['id'];?>" title=""><?php echo $getProductNames['product_name']; ?></a>
 														</div>
 														<div class="product_name">
+														<?php 
+														$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductsData['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+							 							$getProductPrices = $conn->query($getPrices);
+														?>
 														<select class="s-w form-control" id="na1q_qty0" onchange="get_price(this.value,'na10');">
-                                                            <option value="6180">Combo Pack - Rs.2999.00 </option>
+                                                            <?php while($getPricesDetails = $getProductPrices->fetch_assoc()) { ?>
+                                                            <option value="6180"><?php echo $getPricesDetails['weight_type']; ?> - Rs.<?php echo $getPricesDetails['selling_price']; ?> </option>
+                                                            <?php } ?>
                                                           </select>
 														</div>
 															<!--<select class="form-control" id="sel1" style="height:40px; font-size:13px; width:100px">
@@ -370,9 +388,20 @@
 															
 														</div>-->
 													</div><!-- /.box-content -->
+
+													<?php $getPrices1 = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductsData['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+							 							$getProductPrices1 = $conn->query($getPrices1);
+							 							$getPricesDetails1 = $getProductPrices1->fetch_assoc();
+							 						?>
+
+													<input type="hidden" id="cat_id_<?php echo $getProductsData['id']; ?>" value="<?php echo $getProductsData['grocery_category_id']; ?>">
+													<input type="hidden" id="sub_cat_id_<?php echo $getProductsData['id']; ?>" value="<?php echo $getProductsData['grocery_sub_category_id']; ?>">
+													<input type="hidden" id="pro_name_<?php echo $getProductsData['id']; ?>" value="<?php echo $getProductNames['product_name']; ?>">
+													<input type="hidden" id="pro_price_<?php echo $getProductsData['id']; ?>" value="<?php echo $getPricesDetails1['selling_price']; ?>">
+													<input type="hidden" id="pro_weight_type_id_<?php echo $getProductsData['id']; ?>" value="<?php echo $getPricesDetails1['id']; ?>">
 													<div class="box-bottom">
 														<div class="btn-add-cart">
-															<a href="#" title="">
+															<a href="#" title="" onClick="show_cart(<?php echo $getProductsData['id']; ?>)">
 																<img src="images/icons/add-cart.png" alt="">Add to Cart
 															</a>
 														</div>
@@ -498,6 +527,28 @@
 		<script type="text/javascript" src="javascript/jquery.countdown.js"></script>
 
 		<script type="text/javascript" src="javascript/main.js"></script>
+		<script type="text/javascript">
+
+			function show_cart(ProductId) {
+				var catId = $('#cat_id_'+ProductId).val();
+				var subCatId = $('#sub_cat_id_'+ProductId).val();
+				var productName = $('#pro_name_'+ProductId).val();
+				var productPrice = $('#pro_price_'+ProductId).val();
+				var productWeightType = $('#pro_weight_type_id_'+ProductId).val();
+				var product_quantity = 1;
+
+	   			$.ajax({
+			      type:'post',
+			      url:'save_cart.php',
+			      data:{		        
+			        productId:ProductId,catId:catId,subCatId:subCatId,product_name:productName,productPrice:productPrice,productWeightType:productWeightType,product_quantity:product_quantity,
+			      },
+			      success:function(response) {
+			      	window.location.href = "shop_cart.php";
+			      }
+			    });
+			}
+		</script>
 
 </body>	
 </html>
