@@ -27,7 +27,7 @@
 					<div class="col-md-12">
 						<ul class="breadcrumbs">
 							<li class="trail-item">
-								<a href="#" title="">Home</a>
+								<a href="index.php" title="">Home</a>
 								<span><img src="images/icons/arrow-right.png" alt=""></span>
 							</li>
 							<li class="trail-item">
@@ -276,30 +276,16 @@
 					<div class="col-lg-9 col-md-8">
 						<div class="main-shop">
 							<div class="slider owl-carousel-16">
+								<?php $getBanners = "SELECT * FROM grocery_banners WHERE lkp_status_id = 0";
+								$getBannersData = $conn->query($getBanners); ?>
+								<?php while($getBannersData1 = $getBannersData->fetch_assoc()) { ?>
 								<div class="slider-item style9">
-									<div class="item-text">
-										<div class="header-item">
-											<p>You can build the banner for other category</p>
-											<h2 class="name" style="font-size:60px">Mansoon Offer</h2>
-										</div>
-									</div>
 									<div class="item-image">
-										<img src="images/product/other/my.jpg" alt="" style="width:201px; height:212px">
+										<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_banner_web_image/'.$getBannersData1['web_image'] ?>" alt="">
 									</div>
 									<div class="clearfix"></div>
 								</div><!-- /.slider-item style9 -->
-								<div class="slider-item style9">
-									<div class="item-text">
-										<div class="header-item">
-											<p>You can build the banner for other category</p>
-											<h2 class="name" style="font-size:60px">Mansoon Offer</h2>
-										</div>
-									</div>
-									<div class="item-image">
-										<img src="images/product/other/my.jpg" alt="" style="width:201px; height:212px">
-									</div>
-									<div class="clearfix"></div>
-								</div><!-- /.slider-item style9 -->
+								<?php } ?>
 								
 							</div><!-- /.slider -->
 							<div class="wrap-imagebox">
@@ -413,34 +399,42 @@
 										<?php } ?>
 									</div>
 									<div class="sort-box">
-									<?php for($i=0; $i<5; $i++) {?>
+									<?php 
+									$getProducts1 = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)  ORDER BY id DESC LIMIT 0,15";
+										$getProducts11 = $conn->query($getProducts1);
+									while($getProductsData1 = $getProducts11->fetch_assoc()) {
+									$getProductNames1 = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getProductsData1['id']);
+									$getProductImages1 = getIndividualDetails('grocery_product_bind_images','product_id',$getProductsData1['id']); ?>
 										<div class="product-box style3">
 											<div class="imagebox style1 v3">
 												<div class="box-image">
-													<a href="single_product.php" title="">
-														<img src="images/product/other/my.jpg" alt="" style="width:264px; height:210px">
+													<a href="single_product.php?product_id=<?php echo $getProductsData1['id'];?>" title="">
+														<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImages1['image'] ?>" alt="" style="width:264px; height:210px">
 													</a>
 												</div><!-- /.box-image -->
 												<div class="box-content">
 													<div class="product-name">
-														<a href="single_product.php" title="">Monthly Saving Pack 4</a>
+														<a href="single_product.php?product_id=<?php echo $getProductsData1['id'];?>" title=""><?php echo $getProductNames1['product_name']; ?></a>
 													</div>
 													<div class="status">
 														Availablity: In stock
 													</div>
 													<div class="info">
 														<p>
-															Toor Dal - 2 kg, Urad Dal White - 500gm, Chana Dal - 500gm, Urad Gota Whole - 2kg,
-															Bombay Rava - 500gm, Red Wheat - 500gm, Wheet Flour - 1kg, Chilli Powder - 250gm,
-															Turmeric Powder -100gm, Jeera -100gm, Mustard Seeds - 250gm.
-
+															<?php echo $getProductNames1['product_description']; ?>
 														</p>
 													</div>
 												</div><!-- /.box-content -->
 												<div class="box-price">
 													<div class="product_name">
+														<?php 
+														$getPrices2 = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductsData1['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+							 							$getProductPrices2 = $conn->query($getPrices2);
+														?>
 														<select class="s-w form-control" id="na1q_qty0" onchange="get_price(this.value,'na10');">
-                                                            <option value="6180">Combo Pack - Rs.2999.00 </option>
+                                                            <?php while($getPricesDetails2 = $getProductPrices2->fetch_assoc()) { ?>
+                                                            <option value="6180"><?php echo $getPricesDetails2['weight_type']; ?> - Rs.<?php echo $getPricesDetails2['selling_price']; ?> </option>
+                                                            <?php } ?>
                                                           </select>
 														</div>
 													<div class="btn-add-cart">
