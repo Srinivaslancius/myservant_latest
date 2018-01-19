@@ -185,6 +185,7 @@
                                     <th>Upload Images</th>
                                     <th>Status</th>
                                     <th>Action</th>
+                                    <th>Hot Deals</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -208,14 +209,20 @@
                                     <td><a href="product_images.php?pid=<?php echo $row['id']; ?>">Upload Images</a></td>
 
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_products'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_products'>In Active</span>" ;} ?></td>
-                                    <td> <a href="edit_testimonials.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a> <a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>">Hot Deals</a></td>
+                                    <td> <a href="edit_testimonials.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a></td>
 
-                                    <!-- Modal Popup for brands applicable -->                                   
+                                    <?php if($row['deal_start_date']!='0000-00-00' && $row['deal_start_time']!='00:00:00' && $row['deal_end_date']!='0000-00-00' && $row['deal_end_time']!='00:00:00') { ?>
+                                    <td><a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>"><i class="zmdi zmdi-assignment-check zmdi-hc-fw"></i></a></td>
+                                    <?php } else { ?>
+                                    <td><a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>"><i class="zmdi zmdi-close zmdi-hc-fw"></i></a></td>
+                                        <?php }?>
+                                    <!-- Modal Popup for brands applicable -->       
+                                                                
                                     <div class="col-lg-2 col-sm-4 col-xs-6 m-y-5">
                                         <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 150px;">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content animated flipInX">
-                                                    <div class="modal-header bg-info">
+                                                    <div class="modal-header bg-info" style="background-color:#FE6003">
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">
                                                                 <i class="zmdi zmdi-close"></i>
@@ -223,20 +230,76 @@
                                                         </button>
                                                         <h4 class="modal-title">Hot Deals</h4>
                                                     </div>
+
                                                     <form method="post" action="update_deal_date.php">
                                                         <input type="hidden" name="pid" value="<?php echo $row['id']; ?>">
-                                                        <div class="modal-body">
-                                                            <div class="row">
+                                                        <div class="modal-body" style="padding-right:80px;padding-left:80px">
+                                                
+                                    <?php
+                                    if($row['deal_start_date']!='0000-00-00') {
+                                        $deal_start_date = date('m/d/Y', strtotime($row['deal_start_date']));
+                                    } else {
+                                        $deal_start_date = '';
+                                    }
+
+                                    if($row['deal_start_time']!='00:00:00') {
+                                        $deal_start_time = date('H:i:s A', strtotime($row['deal_start_time']));
+                                    } else {
+                                        $deal_start_time = '';
+                                    }
+
+                                    if($row['deal_end_date']!='0000-00-00') {
+                                        $deal_end_date = date('m/d/Y', strtotime($row['deal_end_date']));
+                                    } else {
+                                        $deal_end_date = '';
+                                    }
+
+                                    if($row['deal_end_time']!='00:00:00') {
+                                        $deal_end_time = date('H:i:s A', strtotime($row['deal_end_time']));
+                                    } else {
+                                        $deal_end_time = '';
+                                    }
+                                    ?>
+                                                           
                                                                 <p id="basicExample">
-                                                                    <input type="text" class="date start" name="deal_start_date" required/>
-                                                                    <input type="text" class="time start" name="deal_start_time" required/> To
-                                                                    <input type="text" class="time end" name="deal_end_time" required/>
-                                                                    <input type="text" class="date end" name="deal_end_date" required/>
+																<div class="row">
+																<div class="col-sm-6">
+																<div class="row">
+																<div class="col-sm-6">
+																<label for="start date">Start Date:</label>
+																<input type="text" class="date start" name="deal_start_date" value="<?php echo $deal_start_date; ?>" placeholder=" start date" required/>
+																</div>
+																<div class="col-sm-6">
+																<label for="start date">Start Time:</label>
+																<input type="text" class="time start" name="deal_start_time" value="<?php echo $deal_start_time; ?>" placeholder=" start time" required/>
+																</div>
+																</div>
+																</div>
+																<div class="col-sm-6">
+																<div class="row">
+																<div class="col-sm-6">
+																<label for="start date">End Time:</label>
+																<input type="text" class="time end" name="deal_end_time" value="<?php echo $deal_end_time; ?>" placeholder=" end time" required/>
+																</div>
+																<div class="col-sm-6">
+																<label for="start date">End Date:</label>
+																<input type="text" class="date end" name="deal_end_date" value="<?php echo $deal_end_date; ?>" placeholder=" end date" required/>
+																</div>
+																</div>
+																</div>
+																</div>
+                                                                   
+																	<!--<label for="start date">Start Date:</label>
+                                                                    <input type="text" class="date start" name="deal_start_date" value="<?php echo $deal_start_date; ?>" placeholder=" start date" required/>
+                                                                    <input type="text" class="time start" name="deal_start_time" value="<?php echo $deal_start_time; ?>" placeholder=" start time" required/> To
+                                                                    <input type="text" class="time end" name="deal_end_time" value="<?php echo $deal_end_time; ?>" placeholder=" end time" required/>
+                                                                    <input type="text" class="date end" name="deal_end_date" value="<?php echo $deal_end_date; ?>" placeholder=" end date" required/>-->
+
                                                                 </p>
-                                                            </div>
+                                                            
                                                         </div>
                                                         <div class="modal-footer"> 
-                                                            <button type="submit" name="submit" value="submit" class="btn btn-default" style="background-color:#f28b00;color:white">Submit</button>
+                                                            <button type="submit" name="submit" value="submit" class="btn btn-default" style="background-color:#FE6003;color:white">Submit</button>
                                                             <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                         </div>
                                                     </form>

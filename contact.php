@@ -44,8 +44,11 @@ $getSiteSettingsData1 = $getSiteSettings1->fetch_assoc(); ?>
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
         <script src="https://maps.google.com/maps/api/js?key=AIzaSyA_wD4yy0lpl0j2e7f-gCVhbZadHycfk7U" type="text/javascript"></script>
-		<section class="flat-map" id="map" style="height:400px;width:100%">
-            <!-- /.container -->
+		<section class="flat-map">
+		<div class="container">
+		
+		<div id="map" style="height:400px;width:100%"></div>
+          </div>
         </section><!-- /#flat-map -->
         <script type="text/javascript">
                             var locations = [
@@ -258,7 +261,7 @@ if(mail($to, $subject, $message, $headers)) {
 									</div>
 									<div class="form-box one-half name-contact">
 										<label for="name-contact">Mobile*</label>
-										<input type="text" maxlength="10" pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" name="phone_contact" placeholder="Mobile Number" required>
+										<input type="text" maxlength="10" pattern="[0-9]{10}" name="phone_contact" placeholder="Mobile Number" required class="valid_mobile_num">
 									</div>
 									<div class="form-box">
 										<label for="comment-contact">Comment</label>

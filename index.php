@@ -1,4 +1,5 @@
 <?php include_once 'meta.php';?>
+
 <body class="header_sticky">
 	<div class="boxed style2">
 
@@ -124,8 +125,7 @@
 				</div><!-- /.container -->
 			</section><!-- /.flat-banner-box -->
 <!-- /.flat-banner-box -->
- 		
-
+ 	
  		<div class="divider20"></div>
 
  		<?php 
