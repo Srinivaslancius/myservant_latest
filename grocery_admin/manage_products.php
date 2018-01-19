@@ -228,10 +228,10 @@
                                                         <div class="modal-body">
                                                             <div class="row">
                                                                 <p id="basicExample">
-                                                                    <input type="text" class="date start" name="deal_start_date"/>
-                                                                    <input type="text" class="time start" name="deal_start_time"/> To
-                                                                    <input type="text" class="time end" name="deal_end_time" />
-                                                                    <input type="text" class="date end" name="deal_end_date" />
+                                                                    <input type="text" class="date start" name="deal_start_date" required/>
+                                                                    <input type="text" class="time start" name="deal_start_time" required/> To
+                                                                    <input type="text" class="time end" name="deal_end_time" required/>
+                                                                    <input type="text" class="date end" name="deal_end_date" required/>
                                                                 </p>
                                                             </div>
                                                         </div>
