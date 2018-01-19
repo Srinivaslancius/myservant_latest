@@ -63,7 +63,7 @@
                 <tbody>
                   <?php while ($row = $groceryOrdersData->fetch_assoc()) { ?> 
                     <tr>
-                        <td>1</td>
+                        <td><?php echo $i; ?></td>
                         <td><a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>"><?php echo $row['order_id'];?></td></a></td>
                         <td><?php echo $row['first_name'];?></td>
                         <td><?php echo $row['email'];?></td>
@@ -120,44 +120,53 @@
                            </div>
                             <div class="col-md-12">
                                 <p><strong>Address:</strong></p>
-                               <p>H.NO: 21 - 69, Girinagar, Opp: IDPL Colony, Near: Balanagar, Hyderabad: 500037</p>
+                               <p><?php echo $row['address'];  ?></p>
                             </div>
                         </div>
                         <div class="col-md-12 fr1 mt5">
                             <h3 class="m-t-0 m-b-5 font_sz_view">Delivery Boy Details</h3>
-                            <p class="col-md-6">Name: P.Phanendra Kumar</p>
+                            <p class="col-md-6">Name: <?php echo $getDeliveryBoysNamesData['deliveryboy_name'];  ?></p>
                             <p class="col-md-6 pull-right text-right">Mobile Number: 9959742195</p>
                         </div>
                           <div class="col-md-12 fr1 mt5">
                               <h3 class="m-t-0 m-b-5 font_sz_view">Ordered Items</h3>
                           </div>
+                          
+                          <?php $getProducts = getIndividualDetails('grocery_product_name_bind_languages','product_id',$row['product_id']); ?>
+                          <?php $getProducts1 = getIndividualDetails('grocery_product_bind_images','product_id',$row['product_id']); ?>
                           <div class="col-md-12 fr1 padd0">
-                              <?php for($i=0; $i<5; $i++) {?>
+                              
                               <div class="col-md-12 mt5 brdrbtm padd0">
                                   <div class="col-md-2 mb5">
-                                      <img src="" width="100px" height="100px">
+                                      <img src="<?php echo $base_url . 'uploads/product_images/'.$row['image'] ?>" width="100px" height="100px">
                                   </div>
                                   <div class="col-md-6">
-                                      <p><b>Item Name: </b> Toor Dal</p>
-                                      <p><b>Quantity: </b> 12</p>
-                                      <p><b>Price Per Kg: </b> Rs. 100</p>
+                                      <p><b>Item Name: </b> <?php echo $getProducts['product_name'] ?></p>
+                                      <p><b>Quantity: </b> <?php echo $row['item_quantity'];  ?></p>
+                                      <!-- <p><b>Price Per Kg: </b> Rs. 100</p> -->
                                   </div>
                                   <div class="col-md-4">
-                                      <p>Sub Total: Rs. 1200</p>
+                                      <p>Sub Total: Rs. <?php echo $row['item_price'];  ?></p>
                                   </div>
                               </div>
-                              <?php } ?>
+                             
                               
                           </div>
                       </div>
+                      <?php $getSiteSettingsData = getIndividualDetails('grocery_site_settings','id',1); 
+                            $service_tax = $row['sub_total']*$getSiteSettingsData['service_tax']/100;
+                      ?>
+
                       <div class="modal-footer">
                           <div class="col-md-12">
                               <div class="col-md-6"></div>
                               <div class="col-md-6">
-                                  <p><b>Item Total: </b> Rs. 6000.00</p>
-                                  <p><b>GST: </b> Rs. 900.00</p>
-                                  <p><b>Delivery Charges: </b> Rs. 100.00</p>
-                                   <h3 class="m-t-0 m-b-5 font_sz_view">Total Amount: Rs. 7000.00</h3>
+                                  <p><b>Item Total: </b> Rs. <?php echo $row['sub_total'];  ?></p>
+                                  <?php $tax = $service_tax.'('.$getSiteSettingsData['service_tax'].'%)' ?>
+                                  <p><b>GST: </b> Rs. <?php echo $tax ?></p>
+                                  <p><b>Delivery Charges: </b> Rs. <?php echo $row['delivery_charges'];  ?></p>
+                                  <?php $total_price = $row['order_total'] + $row['delivery_charges'] + $tax ?>
+                                   <h3 class="m-t-0 m-b-5 font_sz_view">Total Amount: Rs. <?php echo $total_price;  ?></h3>
                               </div>
                           </div>
                       </div>
