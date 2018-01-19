@@ -91,7 +91,10 @@
 											<?php } ?>
 										</div>
 										<?php } else { ?>
-											<p style="text-align:center; color:#f26226">No items in cart</p>
+										<center><img src="images/cart.png" style="width:120px;height:80px"></center>
+											<p style="text-align:center; color:#f26226">Your shopping cart is currently empty
+
+</p>
 										<?php } ?>
 									</div>
 								</div><!-- /.inner-box -->
