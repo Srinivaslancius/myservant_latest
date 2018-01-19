@@ -132,12 +132,13 @@
                               <h3 class="m-t-0 m-b-5 font_sz_view">Ordered Items</h3>
                           </div>
                           
-                          <?php $getProducts = getIndividualDetails('grocery_product_name_bind_languages','id',$row['id']); ?>
+                          <?php $getProducts = getIndividualDetails('grocery_product_name_bind_languages','product_id',$row['product_id']); ?>
+                          <?php $getProducts1 = getIndividualDetails('grocery_product_bind_images','product_id',$row['product_id']); ?>
                           <div class="col-md-12 fr1 padd0">
                               
                               <div class="col-md-12 mt5 brdrbtm padd0">
                                   <div class="col-md-2 mb5">
-                                      <img src="" width="100px" height="100px">
+                                      <img src="<?php echo $base_url . 'uploads/product_images/'.$row['image'] ?>" width="100px" height="100px">
                                   </div>
                                   <div class="col-md-6">
                                       <p><b>Item Name: </b> <?php echo $getProducts['product_name'] ?></p>
@@ -153,7 +154,7 @@
                           </div>
                       </div>
                       <?php $getSiteSettingsData = getIndividualDetails('grocery_site_settings','id',1); 
-                            $service_tax = $getOrdersData1['sub_total']*$getSiteSettingsData['service_tax']/100;
+                            $service_tax = $row['sub_total']*$getSiteSettingsData['service_tax']/100;
                       ?>
 
                       <div class="modal-footer">
@@ -161,9 +162,11 @@
                               <div class="col-md-6"></div>
                               <div class="col-md-6">
                                   <p><b>Item Total: </b> Rs. <?php echo $row['sub_total'];  ?></p>
-                                  <p><b>GST: </b> Rs. <?php echo $service_tax.'('.$getSiteSettingsData['service_tax'].'%)' ?></p>
+                                  <?php $tax = $service_tax.'('.$getSiteSettingsData['service_tax'].'%)' ?>
+                                  <p><b>GST: </b> Rs. <?php echo $tax ?></p>
                                   <p><b>Delivery Charges: </b> Rs. <?php echo $row['delivery_charges'];  ?></p>
-                                   <h3 class="m-t-0 m-b-5 font_sz_view">Total Amount: Rs. <?php echo $row['order_total'];  ?></h3>
+                                  <?php $total_price = $row['order_total'] + $row['delivery_charges'] + $tax ?>
+                                   <h3 class="m-t-0 m-b-5 font_sz_view">Total Amount: Rs. <?php echo $total_price;  ?></h3>
                               </div>
                           </div>
                       </div>
