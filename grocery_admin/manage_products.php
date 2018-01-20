@@ -217,12 +217,12 @@
                                     <td><a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>"><i class="zmdi zmdi-close zmdi-hc-fw"></i></a></td>
                                         <?php }?>
                                     <!-- Modal Popup for brands applicable -->       
-                                                                
+
                                     <div class="col-lg-2 col-sm-4 col-xs-6 m-y-5">
                                         <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 150px;">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content animated flipInX">
-                                                    <div class="modal-header bg-info">
+                                                    <div class="modal-header bg-info" style="background-color:#FE6003">
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">
                                                                 <i class="zmdi zmdi-close"></i>
@@ -233,7 +233,7 @@
 
                                                     <form method="post" action="update_deal_date.php">
                                                         <input type="hidden" name="pid" value="<?php echo $row['id']; ?>">
-                                                        <div class="modal-body">
+                                                        <div class="modal-body" style="padding-right:80px;padding-left:80px">
                                                 
                                     <?php
                                     if($row['deal_start_date']!='0000-00-00') {
@@ -260,17 +260,17 @@
                                         $deal_end_time = '';
                                     }
                                     ?>
+
+                                    
                                                             <div class="row">
                                                                 <p id="basicExample">
-                                                                    <input type="text" class="date start" name="deal_start_date" value="<?php echo $deal_start_date; ?>" placeholder="Deal Start Date" required/>
-                                                                    <input type="text" class="time start" name="deal_start_time" value="<?php echo $deal_start_time; ?>" placeholder="Deal Start Time" required/> To
-                                                                    <input type="text" class="time end" name="deal_end_time" value="<?php echo $deal_end_time; ?>" placeholder="Deal End Time" required/>
-                                                                    <input type="text" class="date end" name="deal_end_date" value="<?php echo $deal_end_date; ?>" placeholder="Deal End Date" required/>
-                                                                </p>
+                                                                    <input type="text" class="date start" name="deal_start_date" value="<?php echo $deal_start_date; ?>" placeholder="Deal Start Date"/>
+                                                                    <input type="text" class="time start" name="deal_start_time" value="<?php echo $deal_start_time; ?>" placeholder="Deal Start Time"/> To
+                                                                    <input type="text" class="time end" name="deal_end_time" value="<?php echo $deal_end_time; ?>" placeholder="Deal End Time"/>
+                                                                    <input type="text" class="date end" name="deal_end_date" value="<?php echo $deal_end_date; ?>" placeholder="Deal End Date"/>
                                                             </div>
-                                                        </div>
                                                         <div class="modal-footer"> 
-                                                            <button type="submit" name="submit" value="submit" class="btn btn-default" style="background-color:#f28b00;color:white">Submit</button>
+                                                            <button type="submit" name="submit" value="submit" class="btn btn-default" style="background-color:#FE6003;color:white">Submit</button>
                                                             <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                         </div>
                                                     </form>
