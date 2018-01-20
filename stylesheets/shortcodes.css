@@ -530,7 +530,7 @@
 
 .imagebox .box-bottom .btn-add-cart a {
 	display:inline-block;
-	background-color: #f92400;
+	background-color: #FE6003;
 	color:#fff;
 	font-size:14px;
 	height:45px;
@@ -819,7 +819,7 @@
 /* Imagebox Style1 V3 */
 .imagebox.style1.v3 {
 	min-height:270px;
-	/* padding:28px 30px 20px 30px; */
+	padding:28px 30px 20px 30px;
 }
 
 .imagebox.style1.v3 .box-content {
@@ -896,7 +896,7 @@
 /* Flat Imagebox Style2
 -------------------------------------------------------------- */
 .flat-imagebox.style2 {
-	padding:58px 0;
+	padding: 30px 0;
 }
 
 .flat-imagebox.style2.v1 {
@@ -1448,7 +1448,7 @@
 	padding:28px 29px;
 	border:1px solid #e5e5e5;
 	border-radius:8px;
-	/* margin-bottom:-2px; */
+	margin-bottom:-2px;
 }
 
 .box-counter.style1 .counter {
@@ -2125,10 +2125,10 @@ ul.flat-infomation.style1 li img {
 }
 
 .slider .slider-item .item-image {
-	/* padding-top:57px; */
-	/* padding-right:75px; */
+	padding-top:57px;
+	padding-right:75px;
 	position:relative;
-	/* float:right; */
+	float:right;
 }
 
 .slider .slider-item:before {
@@ -2538,7 +2538,7 @@ ul.flat-infomation.style1 li img {
 
 .slider-item {
 	background-color:#fff;
-	/* height:481px; */
+	height:481px;
 }
 
 /* Slider Item Style2 */
@@ -5455,7 +5455,7 @@ input[type="checkbox"]:checked + label:before {
 	position:absolute;
 	z-index:9;
 	top:13px;
-	right: 160px;
+	right:56px;
 	padding:10px 10px;
 	cursor:pointer;
 }
@@ -5926,7 +5926,7 @@ table.product thead tr th:last-child {
 	border-radius:8px;
 	box-shadow:0px 2px 3px 0px rgba(234, 234, 234, 1);
 	padding:44px 50px 50px 50px;
-	/* height:512px; */
+	height:512px;
 }
 
 .form-register {
@@ -5946,7 +5946,7 @@ table.product thead tr th:last-child {
 
 .form-login .title h3,
 .form-register .title h3 {
-	color: #2d2d2d;
+	color: #FE6003;
 }
 
 .form-login .form-box,
@@ -6003,7 +6003,7 @@ table.product thead tr th:last-child {
 	color:#fff;
 	font-size:16px;
 	font-weight:600;
-	background-color: #484848;
+	background-color: #FE6003;
 	height:50px;
 	line-height:50px;
 	border-radius:25px;
@@ -6064,7 +6064,7 @@ table.product thead tr th:last-child {
 	line-height:50px;
 	padding:0 64px;
 	color:#fff;
-	background-color: #f92400;
+	background-color: #FE6003;
 	border-radius:25px;
 	font-size:16px;
 	font-weight:600;
@@ -6545,17 +6545,17 @@ table.product thead tr th:last-child {
 	font-family:'BloggerSans';
 	color:#2d2d2d;
 	padding: 12px 33px 13px;
-	border: 2px solid #e5e5e5;
-	border-radius: 50px;
+	border: 2px solid #FE6003;
+	border-radius: 0px;
 	letter-spacing:-0.03px;
 	cursor:pointer;
 	position:relative;
 }
 
 .accordion-toggle .toggle-title.active {
-	background-color: #f5f5f5;
+	background-color: #FE6003;
 	border-color:#f5f5f5;
-	/* color: white; */
+	color: white;
 }
 
 .accordion-toggle .toggle-title.active:before {
@@ -6616,7 +6616,7 @@ table.product thead tr th:last-child {
 
 .term-conditions .text-wrap p {
 	color:#919191;
-	/*! padding-right:100px; */
+	padding-right:100px;
 	text-align:  justify;
 	margin-bottom: 15px;
 	/* margin-top: 0px; */
@@ -6759,7 +6759,7 @@ table.product thead tr th:last-child {
 #form-contact .form-box button {
 	height:55px;
 	line-height:55px;
-	background-color: #FE6003;
+	background-color:#f92400;
 	color:#fff;
 	font-family:'Open Sans';
 	font-weight:600;
