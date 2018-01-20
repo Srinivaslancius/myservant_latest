@@ -78,6 +78,7 @@
 								while ($getCartItems = $cartItems->fetch_assoc()) { 
 								$getProductImage = getIndividualDetails('grocery_product_bind_images','product_id',$getCartItems['product_id']);
 								$cartTotal = $getCartItems['product_price']*$getCartItems['product_quantity'];
+								$subTotal += $getCartItems['product_price']*$getCartItems['product_quantity'];
 
 								$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
 								?>
@@ -125,10 +126,21 @@
                                     <tbody>
                                         <tr>
                                             <td>Subtotal</td>
-                                            <td class="subtotal">Rs . <?php echo $cartTotal; ?></td>
+                                            <td class="subtotal" id="subtotal">Rs . <?php echo $subTotal; ?></td>
                                         </tr>
                                         <tr>
-                                            <td>Shipping</td>
+                                            <td>GST(<?php echo $getSiteSettingsData1['service_tax']; ?>%)</td>
+                                            <?php $service_tax += ($getSiteSettingsData1['service_tax']/100)*$subTotal; ?>
+                                            <td class="subtotal" id="serviceTax1">Rs . <?php echo $service_tax; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Delivery Charges</td>
+                                            <td class="subtotal">Rs . <?php echo $getSiteSettingsData1['delivery_charges']; ?></td>
+                                        </tr>
+                                        <input type="hidden" name="service_tax" id="service_tax" value="<?php echo $getSiteSettingsData1['service_tax']; ?>">
+                                        <input type="hidden" name="delivery_charges" id="delivery_charges" value="<?php echo $getSiteSettingsData1['delivery_charges']; ?>">
+                                        <!-- <tr>
+                                            <td>GST</td>
                                             <td class="btn-radio">
                                                 <div class="radio-info">
                                                     <input type="radio" id="flat-rate" checked name="radio-flat-rate">
@@ -141,11 +153,11 @@
                                                 <div class="btn-shipping">
                                                     <a href="#" title="">Calculate Shipping</a>
                                                 </div>
-                                            </td><!-- /.btn-radio -->
-                                        </tr>
+                                            </td>
+                                        </tr> -->
                                         <tr>
                                             <td>Total</td>
-                                            <td class="price-total"> â‚¹1,591.00</td>
+                                            <td class="price-total" id="ordertotal">Rs. <?php echo $subTotal+$service_tax+$getSiteSettingsData1['delivery_charges']; ?></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -275,16 +287,20 @@ number.onkeydown = function(e) {
 <script type="text/javascript">
 
 function add_cart_item1(cartId) {
-  
+ var service_tax = $('#service_tax').val();
+ var delivery_charges = $('#delivery_charges').val();
  $.ajax({
   type:'post',
   url:'cart_page_inc.php',
   data:{
-     cart_id:cartId,       
+     cart_id:cartId,service_tax:service_tax,delivery_charges:delivery_charges,      
   },
   success:function(data) {
     //alert(data);
     $('.cart').html(data);
+    $('#subtotal').html($('#subTotal').val());
+    $('#ordertotal').html($('#orderTotal').val());
+    $('#serviceTax1').html($('#serviceTax').val());
   }
  });
 
@@ -301,7 +317,9 @@ function remove_cart_item1(cartId) {
   success:function(data) { 
     //alert(data);
     $('.cart').html(data);
-    $('#cart_cnt').html($('#get_cart_cnt').val());
+    $('#subtotal').html($('#subTotal').val());
+    $('#orderTotal').html($('#orderTotal').val());
+    $('#serviceTax1').html($('#serviceTax').val());
   }
 
  });
