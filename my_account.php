@@ -61,35 +61,38 @@
                     </div>
                       <div class="panel-body">
 					  <div class="row">
-                            
+          <?php $getServiceOrders = getAllDataWhere('services_orders','user_id',$_SESSION['user_login_session_id']);
+          $getServiceOrders1 = $getServiceOrders->num_rows; ?>
                                 <div class="col-md-4 col-sm-4">
-                                    <a href="#"><div class="box_home" id="one">
+                                    <a href="Services/service_orders.php"><div class="box_home" id="one">
                                         
                                         <h3>Services Orders</h3>
                                         <p>
-                                            Count
+                                            <?php echo $getServiceOrders1; ?>
                                         </p>
                                     </div> </a>
                                 </div>
                            
-                           
+        <?php $getFoodOrders = getAllDataWhere('food_orders','user_id',$_SESSION['user_login_session_id']);
+          $getFoodOrders1 = $getFoodOrders->num_rows; ?>
                                 <div class="col-sm-4">
-                                     <a href="#"> <div class="box_home" id="two">
+                                     <a href="food_new/food_orders1.php"> <div class="box_home" id="two">
                                         
                                         <h3>Food Orders</h3>
                                         <p>
-                                            Count
+                                            <?php echo $getFoodOrders1; ?>
                                         </p>
                                     </div> </a>
                                 </div>
                            
-                           
+        <?php $getGroceryOrders = getAllDataWhere('grocery_orders','user_id',$_SESSION['user_login_session_id']);
+          $getGroceryOrders1 = $getGroceryOrders->num_rows; ?>                   
                                 <div class="col-sm-4">
-                                     <a href="#"><div class="box_home" id="three">
+                                     <a href="grocery_orders.php"><div class="box_home" id="three">
                                         
                                         <h3>Grocery Orders</h3>
                                         <p>
-                                            Count
+                                            <?php echo $getGroceryOrders1; ?>
                                         </p>
                                     </div> </a>
                                 </div>
@@ -97,7 +100,7 @@
 							
                           
                                 <div class="col-sm-4">
-                                      <a href="#"><div class="box_home" id="four">
+                                      <a href="grocery_wishlist.php"><div class="box_home" id="four">
                                         
                                         <h3>Wishlist Grocery</h3>
                                        
@@ -106,7 +109,7 @@
                           
                            
                                 <div class="col-sm-4">
-                                     <a href="#"><div class="box_home" id="five">
+                                     <a href="my_address.php"><div class="box_home" id="five">
                                         
                                         <h3>My Addresses</h3>
                                        
@@ -115,7 +118,7 @@
                           
                           
                                 <div class="col-sm-4">
-                                      <a href="#"><div class="box_home" id="six">
+                                      <a href="wallet.php"><div class="box_home" id="six">
                                         
                                         <h3>Wallet</h3>
                                        
@@ -124,7 +127,7 @@
                           
                            
                                 <div class="col-sm-4">
-                                     <a href="#"><div class="box_home" id="seven">
+                                     <a href="update_profile.php"><div class="box_home" id="seven">
                                         
                                         <h3>Update Profile</h3>
                                        
@@ -140,7 +143,7 @@
                                     </div></a>
                                 </div>
 								 <div class="col-sm-4">
-                                      <a href="#"><div class="box_home" id="nine">
+                                      <a href="change_password.php"><div class="box_home" id="nine">
                                         
                                         <h3>Change password</h3>
                                        
