@@ -5,6 +5,7 @@ include "admin_includes/common_functions.php";
 if (isset($_POST['cart_id'])){
 
 $cartId = $_POST['cart_id'];
+$delivery_charges = $_POST['delivery_charges'];
 
 $getCartQuantity = getIndividualDetails('grocery_cart','id',$cartId);
 $itemPrevQuan = $getCartQuantity['product_quantity'];
@@ -47,7 +48,7 @@ echo '<table>
 		while ($getCartItems = $cartItems->fetch_assoc()) { 
 			$getProductImage = getIndividualDetails('grocery_product_bind_images','product_id',$getCartItems['product_id']);
 			$cartTotal = $getCartItems['product_price']*$getCartItems['product_quantity'];
-
+			$subTotal += $getCartItems['product_price']*$getCartItems['product_quantity'];
 			$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
 			$img = $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image'];
 			echo'<tr>
@@ -82,14 +83,15 @@ echo '<table>
 				</td>
 			</tr>';
 		}
+		$service_tax = 0;
+		$service_tax += ($_POST['service_tax']/100)*$subTotal;
+		$orderTotal = $subTotal+$service_tax+$delivery_charges;
 		echo'</tbody>
 	</table>
-	<div class="box-cart style2">
-		<div class="btn-add-cart pull-right">
-			<a href="shop_checkout.php" style="cursor:pointer">Proceed To Checkout</a>
-		</div>								
-	</div>
 </div>';
+echo'<input type="hidden" id="subTotal" value=" Rs . '.$subTotal.'">';
+echo'<input type="hidden" id="orderTotal" value=" Rs . '.$orderTotal.'">';
+echo'<input type="hidden" id="serviceTax" value=" Rs . '.$service_tax.'">';
 } else { 
 	echo'<center><img src="images/cart.png"></center>
 	<p style="text-align:center;font-size:20px;margin-top:10px">Your shopping cart is currently empty</p>			
