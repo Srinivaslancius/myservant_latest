@@ -59,7 +59,7 @@
 		<section class="flat-shop-cart">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-8">
 						<div class="flat-row-title style1">
 							<h3>Shopping Cart</h3>
 						</div>
@@ -115,27 +115,52 @@
 									<?php } ?>
 								</tbody>
 							</table>
-							<div class="box-cart style2">
-								<?php if(!isset($_SESSION['user_login_session_id'])) { ?>
-							  	<div class="btn-add-cart pull-right">
-									<a href="login.php?cart_id=<?php echo encryptPassword(1);?>" style="cursor:pointer">Proceed To Checkout</a>
-								</div>
-	            				<?php } else { ?>
-					              <div class="btn-add-cart pull-right">
-									<a href="shop_checkout.php" style="cursor:pointer">Proceed To Checkout</a>
-								 </div>
-					            <?php } ?>					
-							</div>
-							<!-- <div class="form-coupon">
-								<form action="#" method="get" accept-charset="utf-8">
-									<div class="coupon-input">
-										<input type="text" name="coupon code" placeholder="Coupon Code">
-										<button type="submit">Apply Coupon</button>
-									</div>
-								</form>
-							</div>--><!-- /.form-coupon -->
 						</div><!-- /.table-cart -->
 					</div><!-- /.col-lg-8 -->
+					<div class="col-lg-4">
+                        <div class="cart-totals">
+                            <h3>Cart Totals</h3>
+                            <form action="#" method="get" accept-charset="utf-8">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Subtotal</td>
+                                            <td class="subtotal">Rs . <?php echo $cartTotal; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shipping</td>
+                                            <td class="btn-radio">
+                                                <div class="radio-info">
+                                                    <input type="radio" id="flat-rate" checked name="radio-flat-rate">
+                                                    <label for="flat-rate">Flat Rate: <span> â‚¹3.00</span></label>
+                                                </div>
+                                                <div class="radio-info">
+                                                    <input type="radio" id="free-shipping" name="radio-flat-rate">
+                                                    <label for="free-shipping">Free Shipping</label>
+                                                </div>
+                                                <div class="btn-shipping">
+                                                    <a href="#" title="">Calculate Shipping</a>
+                                                </div>
+                                            </td><!-- /.btn-radio -->
+                                        </tr>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td class="price-total"> â‚¹1,591.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="btn-cart-totals">
+                                    <a href="#" class="update" title="">Clear Cart</a>
+                                    <?php if(!isset($_SESSION['user_login_session_id'])) { ?>
+                                    	<a href="login.php?cart_id=<?php echo encryptPassword(1);?>" class="update" style="background-color:#2d2d2d !important;">Proceed To Checkout</a>
+                                    <?php } else { ?>
+                                    	<a href="shop_checkout.php" class="update" style="background-color:#2d2d2d !important;">Proceed To Checkout</a>
+                                    <?php } ?>
+                                    <a href="index.php" class="checkout" title="">Continue Shopping</a>
+                                </div><!-- /.btn-cart-totals -->
+                            </form><!-- /form -->
+                        </div><!-- /.cart-totals -->
+                    </div>
 					
 				</div><!-- /.row -->
 			</div><!-- /.container -->

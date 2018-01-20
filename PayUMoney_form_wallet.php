@@ -117,11 +117,11 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
         </tr>
         <tr>
           <td>Success URI: </td>
-          <td colspan="3"><input name="surl" value="http://192.168.0.103/myservant_latest/walletsuccess.php?lastTransId=<?php echo $lastTransId; ?>" size="64" /></td>
+          <td colspan="3"><input name="surl" value="http://localhost/myservant_latest/walletsuccess.php?lastTransId=<?php echo $lastTransId; ?>" size="64" /></td>
         </tr>
         <tr>
           <td>Failure URI: </td>
-          <td colspan="3"><input name="furl" value="http://192.168.0.103/myservant_latest/walletfailure.php?lastTransId=<?php echo $lastTransId; ?>" size="64" /></td>
+          <td colspan="3"><input name="furl" value="http://localhost/myservant_latest/walletfailure.php?lastTransId=<?php echo $lastTransId; ?>" size="64" /></td>
         </tr>
 
         <tr>

@@ -102,7 +102,7 @@
 						//echo "<pre>"; print_r($_POST); die;
 
 						$user_id = $_SESSION['user_login_session_id'];
-						$wallet_id = "WALLET123";
+						$wallet_id = $_SESSION['wallet_id'];
 						$credit_amnt = $_POST['amnt'];						
 						$description = "Money Added in Wallet";
 						$updated_date = date('Y-m-d H:i:s', time() + 24 * 60 * 60);
@@ -113,14 +113,17 @@
             				header("Location: PayUMoney_form_wallet.php?key=".$last_id."");
             			}
             		}
-
-
+            		$user_id = $_SESSION['user_login_session_id'];
+					$wallet_id = $_SESSION['wallet_id'];
+            		$getwalletAmount = "SELECT * FROM user_wallet WHERE user_id = '$user_id' AND wallet_id = '$wallet_id'";
+            		$getwalletAmount1 = $conn->query($getwalletAmount);
+            		$getwalletAmountDetails = $getwalletAmount1->fetch_assoc();
             		?>
             		<form method="post" >
             		<tbody>
             		  <tr>
             			<td style="width:10%"><img src="images/dashboard/wallet.png" style="width:50px;height:50px"></td>
-            			<td><b>Rs : 5/-</b><br>Your Wallet Balance</td>
+            			<td><b>Rs : <?php echo $getwalletAmountDetails['amount']; ?>/-</b><br>Your Wallet Balance</td>
             			<td colspan="2"><input type="text" name="amnt" id="amnt" class="valid_mobile_num" placeholder="Enter amount to be added in your wallet" required></td>						
 						<td><button class="button1" type="submit" name="submit" value="submit">Add Money to Wallet</button></td>
             		  </tr>            		  
