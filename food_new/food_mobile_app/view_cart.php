@@ -23,25 +23,12 @@ if (isset($_REQUEST['userId'])  ) {
 		$proName= getIndividualDetails('food_products','id',$row['food_item_id']);
 		$lists["productName"] = $proName['product_name'];		
 
-		$getPriceDetails = getAllDataWhere('food_product_weight_prices','product_id',$row["food_item_id"]);
-    	$getPriceDet = array();
-    	while($getPriceDet = $getPriceDetails->fetch_assoc()) {
-    		$lists["price"] .=  round($getPriceDet['admin_price'] .",");
-    		$lists["priceTypeId"] .=  $getPriceDet['id'] .",";
-	    	$getWeights = getIndividualDetails('food_product_weights','id',$getPriceDet['weight_type_id']);
-	    	$lists["weightTypeId"] .=  $getWeights['id'] .",";
-    		$lists["weightType"] .=  $getWeights['weight_type'] .",";		    		
-    	}
-
-    	$getMoreAddonsDet = getAllDataWhere('food_product_ingredient_prices','product_id',$row["food_item_id"]);
-    	$getMoreAddons = array();
-    	while($getMoreAddons = $getMoreAddonsDet->fetch_assoc()) {
-    		$lists["price"] .=  round($getMoreAddons['admin_price'] .",");
-    		$lists["ingTypeId"] .=  $getMoreAddons['id'] .",";
-	    	$getIng = getIndividualDetails('food_ingredients','id',$getMoreAddons['ingredient_name_id']);
-	    	//$lists["weightTypeId"] .=  $getIng['id'] .",";
-    		$lists["ingredient_name"] .=  $getIng['ingredient_name'] .",";		    		
-    	}
+		$getPriceDetails = getIndividualDetails('food_product_weight_prices','product_id',$row["food_item_id"]);
+		$lists["priceTypeId"] =  $getPriceDetails['id'];
+		$lists["price"] =  round($getPriceDetails['admin_price']);
+		$getWeights = getIndividualDetails('food_product_weights','id',$getPriceDet['weight_type_id']);
+		$lists["weightTypeId"] =  $getWeights['id'];
+    	$lists["weightType"] =  $getWeights['weight_type'];	
 
 		array_push($response["lists"], $lists);
 	}
