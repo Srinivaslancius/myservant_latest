@@ -4,11 +4,11 @@
     background-color: #fe6003;
     border-color: #fe6003;
     color: white;
-    padding: 2px 11px;
+    padding: 2px 19px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 12px;
+    font-size: 13px;
     margin: 4px 2px;
     cursor: pointer;
 }
@@ -17,7 +17,6 @@
 	background-color:#fe6003;
  padding: 5px 12px;
 } 
-
 	</style>
 
 	
@@ -54,7 +53,8 @@
 								<span><img src="images/icons/arrow-right.png" alt=""></span>
 							</li>
 							<li class="trail-item">
-								<a href="#" title="">My Wallet</a>								
+								<a href="terms&conditions.php" title="">My Wallet</a>
+								
 							</li>
 							
 						</ul><!-- /.breacrumbs -->
@@ -85,73 +85,46 @@
                       <div class="panel-body">
                      <div class="table-responsive">				 
         			<table class="table" style="border:1px solid #ddd;width:100%">
+					<h4>My Subscriptions</h4><br>
             		<thead>
             		  <tr>
-            			<th></th>
-            			<th></th>
-            			<th></th>
-            			<th></th>
+            			<th>SUBSCRIPTION</th>
+            			<th>STATUS</th>
+            			<th>NEXT PAYMENT</th>
+            			<th>TOTAL</th>
 						<th></th>
             		  </tr>
             		</thead>
-
-            		<?php 
-
-					if(isset($_POST["submit"]) && $_POST["submit"]!="") {
-
-						//echo "<pre>"; print_r($_POST); die;
-
-						$user_id = $_SESSION['user_login_session_id'];
-						$wallet_id = "WALLET123";
-						$credit_amnt = $_POST['amnt'];						
-						$description = "Money Added in Wallet";
-						$updated_date = date('Y-m-d H:i:s', time() + 24 * 60 * 60);
-
-            			$sqlInwallet = "INSERT INTO `user_wallet_transactions`( `wallet_id`, `user_id`, `credit_amnt`, `description`, `lkp_payment_status_id`, `updated_date`) VALUES ('$wallet_id','$user_id','$credit_amnt','$description','2','$updated_date')";
-            			if($conn->query($sqlInwallet) === TRUE) {
-            				$last_id = $conn->insert_id;
-            				header("Location: PayUMoney_form_wallet.php?key=".$last_id."");
-            			}
-            		}
-
-
-            		?>
-            		<form method="post" >
             		<tbody>
             		  <tr>
-            			<td style="width:10%"><img src="images/dashboard/wallet.png" style="width:50px;height:50px"></td>
-            			<td><b>Rs : 5/-</b><br>Your Wallet Balance</td>
-            			<td colspan="2"><input type="text" name="amnt" id="amnt" class="valid_mobile_num" placeholder="Enter amount to be added in your wallet" required></td>						
-						<td><button class="button1" type="submit" name="submit" value="submit">Add Money to Wallet</button></td>
-            		  </tr>            		  
+            			<td>68</td>
+            			<td>Active</td>
+            			<td>september 6,2015 via<br>visacard missing in 4242</td>
+						<td>₹99.9/month</td>
+						<td><a href="order_details1.php"><button class="button1">View</button></a></td>
+            		  </tr>
+            		  
             		</tbody>
-            		</form>
 					
         	     </table>
 				 <table class="table" style="border:1px solid #ddd;width:100%">
+					<h4>Recent Orders</h4><br>
             		<thead>
             		  <tr>
-            			<th>MERCHANT NAME</th>
-            			<th>WITHDRAWAL</th>
-            			<th>DEPOSIT</th>
+            			<th>ORDER</th>
+            			<th>DATE</th>
             			<th>STATUS</th>
-						<th>COMMENT</th>
+            			<th>TOTAL</th>
+						<th></th>
             		  </tr>
             		</thead>
             		<tbody>
-            		  <tr style="border-bottom:1px solid #ddd">
-            			<td><b>Cashback Received</b><br>paytm for Order #CASH-676607643 Paytm Cash Txn ID 17376641204 2018-01-09 09:39:13 PM</td>
-            			<td></td>
-            			<td>Rs : 5/-</td>
-						<td>SUCCESS</td>
-						<td>Order #4419408824 of Reacharge of Airtel Mobile 730214...(Promocode:GETS)</td>
-            		  </tr>
-					  <tr>
-            			<td><b>Cashback Received</b><br>paytm for Order #CASH-676607643 Paytm Cash Txn ID 17376641204 2018-01-09 09:39:13 PM</td>
-            			<td></td>
-            			<td>Rs : 5/-</td>
-						<td>SUCCESS</td>
-						<td>Order #4419408824 of Reacharge of Airtel Mobile 730214...(Promocode:GETS)</td>
+            		  <tr>
+            			<td>#67</td>
+            			<td>August 6,2015</td>
+            			<td>Processing</td>
+						<td>₹99.9 for item</td>
+						<td><a href="order_details1.php"><button class="button1">View</button></a></td>
             		  </tr>
             		  
             		</tbody>
