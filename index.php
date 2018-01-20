@@ -127,24 +127,7 @@
 <!-- /.flat-banner-box -->
  	
  		<div class="divider20"></div>
- 		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-		<script type="text/javascript" src="javascript/jquery.min.js"></script>
-		<script type="text/javascript" src="javascript/tether.min.js"></script>
-		<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
-		<script type="text/javascript" src="javascript/waypoints.min.js"></script>
-		<!-- <script type="text/javascript" src="javascript/jquery.circlechart.js"></script> -->
-		<script type="text/javascript" src="javascript/easing.js"></script>
-		<script type="text/javascript" src="javascript/jquery.flexslider-min.js"></script>
-		<script type="text/javascript" src="javascript/owl.carousel.js"></script>
-		<script type="text/javascript" src="javascript/smoothscroll.js"></script>
-		<!-- <script type="text/javascript" src="javascript/jquery-ui.js"></script> -->
-		<script type="text/javascript" src="javascript/jquery.mCustomScrollbar.js"></script>
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
-	   	<script type="text/javascript" src="javascript/gmap3.min.js"></script>
-	   	<script type="text/javascript" src="javascript/waves.min.js"></script> 
-		<script type="text/javascript" src="javascript/jquery.countdown.js"></script>
 
-		<script type="text/javascript" src="javascript/main.js"></script>
  		<?php 
 		if($_SESSION['city_name'] == '') {
             $lkp_city_id = 1;
@@ -152,7 +135,7 @@
             $getCities1 = getIndividualDetails('grocery_lkp_cities','city_name',$_SESSION['city_name']);
 			$lkp_city_id = $getCities1['id'];
         }
-		$getProducts = "SELECT * FROM grocery_products_new WHERE lkp_status_id = 0 AND (NOW() BETWEEN deal_start AND deal_end) AND deal_start != '0000-00-00 00:00:00' AND deal_end != '0000-00-00 00:00:00' AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)";
+		$getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND deal_start_date != '0000-00-00' AND deal_end_date != '0000-00-00' AND deal_start_time != '00:00:00' AND deal_end_time != '00:00:00' AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)";
 		$productDetails = $conn->query($getProducts); 
 		if($productDetails->num_rows > 0) {
 		?>
@@ -162,109 +145,23 @@
 						<div class="col-md-12">
 							<div class="owl-carousel-2 style2">
 								<?php while($productDetails1 = $productDetails->fetch_assoc()) { 
-								$getProductNames = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productDetails1['id']);
+									$getProductNames = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productDetails1['id']);
 								$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$productDetails1['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
 							 	$allGetPrices = $conn->query($getPrices);
 							 	$getPrc1 = $allGetPrices->fetch_assoc();
-							 	$count_down_date = date('m/d/Y H:i:s', strtotime($productDetails1['deal_end']));
-
-
-							 	$getProductImages = getIndividualDetails('grocery_product_bind_images','product_id',$productDetails1['id']);
+							 	$deal_start_date = $productDetails1['deal_start_date'];
+							 	$deal_end_date = $productDetails1['deal_end_date'];
 								?>
-								
-
-								
-								
 								<div class="box-counter style1">
 									<div class="counter">
 										<span class="special">Special Offer</span>
 										<div class="counter-content">
 											<p><?php echo $getProductNames['product_name']; ?></p>
-											<input type="hidden" id="date_<?php echo $productDetails1['id']; ?>" value="<?php echo $count_down_date; ?>">
-											<script type="text/javascript">
-								($ => {
-
-  $.fn.timezz = function (options) {
-    var date = $('#date_<?php echo $productDetails1['id']; ?>').val();
-    alert(date);
-    const defaultOptions = {
-      'date' : date,
-      'days' : 'd',
-      'hours' : 'h',
-      'minutes' : 'm',
-      'seconds' : 's',
-      'tagNumber' : 'span',
-      'tagLetter' : 'i',
-      'stop' : false
-    };
-
-    const settings = $.extend(defaultOptions, options);
-
-    return this.each(function () {
-
-      const ths = $(this);
-
-      // create tags
-      const { tagNumber, tagLetter } = settings;
-
-      // time specified in the settings
-      const countDate = new Date(settings.date).getTime();
-
-      // time
-      const ONE_SECOND = 1000; // ms
-      const ONE_MINUTE = ONE_SECOND * 60;
-      const ONE_HOUR = ONE_MINUTE * 60;
-      const ONE_DAY = ONE_HOUR * 24;
-
-      // fixing zero before output
-      const fixNumber = number => number >= 10 ? number : `0${number}`;
-
-      // template for calculate
-      const calculate = math => fixNumber(Math.floor(Math.abs(math)));
-
-      function timer() {
-
-        // current time
-        const now = new Date().getTime();
-        // distance
-        const distance = countDate - now;
-
-        // hard mathematics
-        let days = calculate(distance / ONE_DAY);
-        let hours = calculate(distance % ONE_DAY / ONE_HOUR);
-        let minutes = calculate(distance % ONE_HOUR / ONE_MINUTE);
-        let seconds = calculate(distance % ONE_MINUTE / ONE_SECOND);
-
-        // template for output
-        const output = (unit, unitConfig) => `<${tagNumber}>${unit}<${tagLetter}>${unitConfig}</${tagLetter}></${tagNumber}> `;
-                                             
-        // output
-        ths.html(
-          output(days, settings.days) +
-          output(hours, settings.hours) +
-          output(minutes, settings.minutes) +
-          output(seconds, settings.seconds)
-        )
-      }
-
-      // output before calculate
-      timer()
-
-      // calculate and output with constant updating
-      if (settings.stop == false) setInterval(timer, ONE_SECOND)
-    })
-  }
-})(jQuery);
-</script>
-<script>
-		  $('#timer_<?php echo $productDetails1['id']; ?>').timezz({
-		    'days' : ' days,',
-		    'hours' : ' hours,',
-		    'minutes' : ' minutes,',
-		    'seconds' : ' seconds'
-		  });
-		</script>
-											<div id="timer_<?php echo $productDetails1['id']; ?>">
+											<div id="timer">
+											  <div id="days"></div>
+											  <div id="hours"></div>
+											  <div id="minutes"></div>
+											  <div id="seconds"></div>
 											</div>
 										</div><!-- /.counter-content -->
 									</div><!-- /.counter -->
@@ -272,8 +169,9 @@
 										<div class="imagebox style3 v1">
 											<div class="box-image save">
 												<a href="#" title="">
-													<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImages['image'] ?>" alt="" style="width:321px; height:352px">
-												</a>												
+													<img src="images/product/other/l06.jpg" alt="">
+												</a>
+												<span>Save $20.00</span>
 											</div><!-- /.box-image -->
 											<div class="box-content">
 												<div class="product-name">
@@ -402,9 +300,73 @@ $getReturnPolicydataData = getIndividualDetails('grocery_content_pages','id',7);
 	</div><!-- /.boxed -->
 
 		<!-- Javascript -->
-		
-		
+		<script type="text/javascript" src="javascript/jquery.min.js"></script>
+		<script type="text/javascript" src="javascript/tether.min.js"></script>
+		<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
+		<script type="text/javascript" src="javascript/waypoints.min.js"></script>
+		<!-- <script type="text/javascript" src="javascript/jquery.circlechart.js"></script> -->
+		<script type="text/javascript" src="javascript/easing.js"></script>
+		<script type="text/javascript" src="javascript/jquery.flexslider-min.js"></script>
+		<script type="text/javascript" src="javascript/owl.carousel.js"></script>
+		<script type="text/javascript" src="javascript/smoothscroll.js"></script>
+		<!-- <script type="text/javascript" src="javascript/jquery-ui.js"></script> -->
+		<script type="text/javascript" src="javascript/jquery.mCustomScrollbar.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
+	   	<script type="text/javascript" src="javascript/gmap3.min.js"></script>
+	   	<script type="text/javascript" src="javascript/waves.min.js"></script> 
 
+
+		<script type="text/javascript" src="javascript/main.js"></script>
+
+		<script type="text/javascript">
+	function makeTimer() {
+
+		var endTime = new Date("21 January 2018 10:56:00");			
+		endTime = (Date.parse(endTime) / 1000);
+
+		var now = new Date();
+		now = (Date.parse(now) / 1000);
+
+		var timeLeft = endTime - now;
+
+		var days = Math.floor(timeLeft / 86400); 
+		var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+		var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+		var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+
+		if (hours < "10") { hours = "0" + hours; }
+		if (minutes < "10") { minutes = "0" + minutes; }
+		if (seconds < "10") { seconds = "0" + seconds; }
+
+		$("#days").html(days + "<span>Days</span>");
+		$("#hours").html(hours + "<span>Hours</span>");
+		$("#minutes").html(minutes + "<span>Minutes</span>");
+		$("#seconds").html(seconds + "<span>Seconds</span>");		
+
+	}
+setInterval(function() { makeTimer(); }, 1000);
+</script>
+
+<style type="text/css">
+
+
+#days {
+  font-size: 100px;
+  color: #db4844;
+}
+#hours {
+  font-size: 100px;
+  color: #f07c22;
+}
+#minutes {
+  font-size: 100px;
+  color: #f6da74;
+}
+#seconds {
+  font-size: 50px;
+  color: #abcd58;
+}
+</style>
 
 </body>	
 </html>

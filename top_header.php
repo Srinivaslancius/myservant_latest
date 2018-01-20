@@ -58,7 +58,7 @@ $getSiteSettingsData1 = $getSiteSettings1->fetch_assoc(); ?>
 						<div class="col-md-4">
 							<ul class="flat-infomation">
 								<li class="phone">
-									Call Us : <a href="#" title=""> <?php echo $getSiteSettingsData1['contact_number']; ?></a>
+									Call Us : <a href="Tel:<?php echo $getSiteSettingsData1['contact_number']; ?>" title=""> <?php echo $getSiteSettingsData1['contact_number']; ?></a>
 								</li>
 							</ul><!-- /.flat-infomation -->
 						</div><!-- /.col-md-4 -->
