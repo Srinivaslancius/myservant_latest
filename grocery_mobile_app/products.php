@@ -33,9 +33,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		    	$getPriceDet = array();
 		    	while($getPriceDet = $getPriceDetails->fetch_assoc()) {
 		    		$lists["sellingPrice"] .=  $getPriceDet['selling_price'] .",";
-		    		$lists["priceTypeId"] .=  $getPriceDet['id'] .",";
-			    	$getWeights = getIndividualDetails('food_product_weights','id',$getPriceDet['weight_type_id']);
-		    		$lists["weightType"] .=  $getWeights['weight_type'] .",";		    		
+		    		$lists["priceTypeId"] .=  $getPriceDet['id'] .",";			    	
+		    		$lists["weightType"] .=  $getPriceDet['weight_type'] .",";		    		
 		    	}    			
 		    	array_push($response["lists"], $lists);		
 			}			
