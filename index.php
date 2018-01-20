@@ -135,7 +135,7 @@
             $getCities1 = getIndividualDetails('grocery_lkp_cities','city_name',$_SESSION['city_name']);
 			$lkp_city_id = $getCities1['id'];
         }
-		$getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND deal_start_date != '0000-00-00' AND deal_end_date != '0000-00-00' AND deal_start_time != '00:00:00' AND deal_end_time != '00:00:00' AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)";
+		$getProducts = "SELECT * FROM grocery_products_new WHERE lkp_status_id = 0 AND (NOW() BETWEEN deal_start AND deal_end) AND deal_start != '0000-00-00 00:00:00' AND deal_end != '0000-00-00 00:00:00' AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)";
 		$productDetails = $conn->query($getProducts); 
 		if($productDetails->num_rows > 0) {
 		?>
@@ -145,22 +145,31 @@
 						<div class="col-md-12">
 							<div class="owl-carousel-2 style2">
 								<?php while($productDetails1 = $productDetails->fetch_assoc()) { 
-									$getProductNames = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productDetails1['id']);
+								$getProductNames = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productDetails1['id']);
 								$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$productDetails1['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
 							 	$allGetPrices = $conn->query($getPrices);
 							 	$getPrc1 = $allGetPrices->fetch_assoc();
-							 	$deal_start_date = $productDetails1['deal_start_date'];
-							 	$deal_end_date = $productDetails1['deal_end_date'];
+							 	echo $productDetails1['deal_startdeal_start'];
+
+							 	//Caluculate time difference
+							 	$date1 = new DateTime($productDetails1['deal_start']);
+								$date2 = $date1->diff(new DateTime($productDetails1['deal_end']));
+								$years = $date2->y;
+								$months = $date2->m;
+								$days = $date2->d;
+								$hours = $date2->h;
+								$minutes = $date2->i;
+								$secs = $date2->s;
 								?>
 								<div class="box-counter style1">
 									<div class="counter">
 										<span class="special">Special Offer</span>
 										<div class="counter-content">
 											<p><?php echo $getProductNames['product_name']; ?></p>
-											<div class="count-down style2">
+											<div class="style2">
 												<div class="square">
 													<div class="numb">
-														14
+														<?php echo $days;?>
 													</div>
 													<div class="text">
 														DAYS
@@ -168,7 +177,7 @@
 												</div>
 												<div class="square">
 													<div class="numb">
-														09
+														<?php echo $hours;?>
 													</div>
 													<div class="text">
 														HOURS
@@ -176,7 +185,7 @@
 												</div>
 												<div class="square">
 													<div class="numb">
-														48
+														<?php echo $minutes;?>
 													</div>
 													<div class="text">
 														MINS
@@ -184,7 +193,7 @@
 												</div>
 												<div class="square">
 													<div class="numb">
-														23
+														<?php echo $secs;?>
 													</div>
 													<div class="text">
 														SECS
