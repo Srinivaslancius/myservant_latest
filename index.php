@@ -139,7 +139,7 @@
 <!-- /.flat-banner-box -->
 
  	<section class="flat-imagebox style4">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="flat-row-title">
