@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
 
 html {
     font-family: sans-serif;
@@ -20880,12 +20880,12 @@ textarea {
 }
 
 .switch {
-    display: inline-block;
+    /* display: inline-block; */
     font-weight: 400;
     min-height: 18px;
     min-width: 40px;
     padding-left: 50px;
-    position: relative
+    position: relative;
 }
 
 .switch .s-input {
