@@ -84,47 +84,32 @@
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-slider -->
+		
+         <?php $getOfferModules = "SELECT * FROM grocery_offer_module WHERE lkp_status_id = 0 ORDER BY id DESC LIMIT 4";
+						$getOfferModules1 = $conn->query($getOfferModules); ?>
                 <section class="flat-row flat-banner-box">
 				<div class="container-fluid">
 					<div class="row">
+
 						<div class="wrap-banner">
+							<?php while($getOfferModulesData = $getOfferModules1->fetch_assoc()) { ?>
 							<div class="banner-box style1">
+								
 								<div class="inner-box">
-									<a href="#" title="">
-										<img src="images/banner_boxes/home-06.jpg" alt="banner">
+									<a href="<?php echo $getOfferModulesData['link'] ?>" title="" target="_blank">
+										<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_offer_module_image/'.$getOfferModulesData['image'] ?>" alt="<?php echo $getOfferModulesData['name'] ?>" style="height:179px;width:555px">
 									</a>
 								</div><!-- /.inner-box -->
-								<div class="inner-box">
-									<a href="#" title="">
-										<img src="images/banner_boxes/home-09.jpg" alt="">
-									</a>
-								</div><!-- /.inner-box -->
-								<div class="clearfix"></div>
+								
+								
 							</div><!-- /.box -->
-							<div class="banner-box style1">
-								<div class="inner-box">
-									<a href="#" title="">
-										<img src="images/banner_boxes/home-07.jpg" alt="banner">
-									</a>
-								</div>
-								<div class="inner-box">
-									<a href="#" title="">
-										<img src="images/banner_boxes/home-10.jpg" alt="">
-									</a>
-								</div>
-							</div><!-- /.banner-box -->
-							<div class="banner-box style1 v1">
-								<div class="inner-box">
-									<a href="#" title="">
-										<img src="images/banner_boxes/home-08.jpg" alt="">
-									</a>
-								</div><!-- /.inner-box -->
-							</div><!-- /.banner-box -->
+							<?php } ?>
 						</div><!-- /.col-md-4 -->
 					</div><!-- /.row -->
 				</div><!-- /.container -->
 			</section><!-- /.flat-banner-box -->
 <!-- /.flat-banner-box -->
+
  	
  		<div class="divider20"></div>
 
