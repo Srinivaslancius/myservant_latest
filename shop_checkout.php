@@ -224,8 +224,8 @@
 								<?php if($getWalletAmount['amount'] > 0) { ?>
 								<div class="btn-radio style2">
 									<div class="radio-info">
-										<input type="radio" class="radio-button" id="cash-delivery" name="pay_mn" value="1" checked required>
-										<label for="cash-delivery">Wallet</label>
+										<input type="radio" class="radio-button" id="wallet_id" name="wallet_id" value="1" checked>
+										<label for="wallet_id">Wallet</label>
 									</div>
 								</div>
 								<?php } ?>
@@ -241,9 +241,6 @@
 												while ($getCartItems = $cartItems->fetch_assoc()) { 
 												$getProductImage = getIndividualDetails('grocery_product_bind_images','product_id',$getCartItems['product_id']);
 												$cartTotal += $getCartItems['product_price']*$getCartItems['product_quantity'];
-												$service_tax += ($getSiteSettingsData1['service_tax']/100)*$cartTotal;
-												$orderTotal = round($cartTotal+$service_tax+$getSiteSettingsData1['delivery_charges']-$getWalletAmount['amount']);
-												$orderTotalwithoutWallet = round($cartTotal+$service_tax+$getSiteSettingsData1['delivery_charges']);
 												$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
 											?>
 											<input type="hidden" name='category_id[]' type='text' value='<?php echo $getCartItems['category_id'];?>'>
@@ -255,13 +252,22 @@
 												<td><?php echo $getProductName['product_name']; ?></td>
 												<input type="hidden" name="product_name" value="<?php echo $getProductName['product_name']; ?>">
 												<input type="hidden" name="product_price[]" value="<?php echo $getCartItems['product_price']; ?>">
-												<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>">
-												<input type="hidden" id="order_total" name="order_total" value="<?php echo $orderTotal; ?>">
-												<input type="hidden" id="order_total_without_wallet" value="<?php echo $orderTotalwithoutWallet; ?>">
-												
-
+												<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>">			
 												<td>Rs . <?php echo $getCartItems['product_price'] ?> * <?php echo $getCartItems['product_quantity']; ?></td>
-											</tr>	
+											</tr>
+											<?php } ?>									
+										</tbody>
+									</table><!-- /.product -->
+									
+									<?php 
+									$service_tax += ($getSiteSettingsData1['service_tax']/100)*$cartTotal;
+									$orderTotal = round($cartTotal+$service_tax+$getSiteSettingsData1['delivery_charges']-$getWalletAmount['amount']);
+									$orderTotalwithoutWallet = round($cartTotal+$service_tax+$getSiteSettingsData1['delivery_charges']);
+									?>
+									<input type="hidden" id="order_total" name="order_total" value="<?php echo $orderTotal; ?>">
+									<input type="hidden" id="order_total_without_wallet" value="<?php echo $orderTotalwithoutWallet; ?>">
+									<table>
+										<tbody>	
 											<tr>
 	                                            <td>GST(<?php echo $getSiteSettingsData1['service_tax']; ?>%)</td>
 	                                            <td class="subtotal" id="serviceTax1">Rs . <?php echo $service_tax; ?></td>
@@ -275,12 +281,7 @@
 	                                            <td>Money in Your Wallet</td>
 	                                            <td class="subtotal">Rs . <?php echo $getWalletAmount['amount']; ?></td>
 	                                        </tr>
-											<?php } } ?>									
-										</tbody>
-									</table><!-- /.product -->
-									
-									<table>
-										<tbody>										
+	                                        <?php } ?>									
 											<?php if($getWalletAmount['amount'] > 0) { ?>
 											<tr>
 												<td>Total</td>

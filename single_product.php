@@ -211,69 +211,14 @@
 					<div class="col-md-6">
 						<div class="description-text">
 							<div class="box-text">
-								<h4>Nuqqam Et Massa</h4>
-								<p>Sed sodales sed orci molestie tristique. Nunc dictum, erat id molestie vestibulum, ex leo vestibulum justo, luctus tempor erat sem quis diam. Lorem ipsum dolor sit amet.</p>
-							</div>
-							<div class="box-text wireless">
-								<h4>Wireless</h4>
-								<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece <br />of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-							</div>
-							<div class="box-text design">
-								<h4>Fresh Design</h4>
-								<p>It is a long established fact that a reader will be distracted by the readable content of <br />a page when looking at its layout. The point of using Lorem Ipsum is that it has a <br />more-or-less normal distribution of letters, as opposed to using</p>
-							</div>
-							<div class="box-text sound">
-								<h4>Fabolous Sound</h4>
-								<p>There are many variations of passages of Lorem Ipsum available, but the <br />majority have suffered alteration in some form, by injected humour, or <br />randomised words which don't look even slightly believable.</p>
+							<?php echo substr(strip_tags($productDetails['product_description']), 0,200);?>
 							</div>
 						</div><!-- /.description-text -->
 					</div><!-- /.col-md-6 -->
-					<div class="col-md-6">
-						<div class="description-image">
-							<div class="box-image">
-								<img src="images/product/single/01.png" alt="">
-							</div>
-							<div class="box-text">
-								<h4>Nuqqam Et Massa</h4>
-								<p>Sed sodales sed orci molestie tristique. Nunc dictum, erat id molestie vestibulum, ex leo vestibulum justo, luctus tempor erat sem quis diam. Lorem ipsum dolor sit amet.</p>
-							</div>
-						</div><!-- /.description-image -->
-					</div><!-- /.col-md-6 -->
-					<div class="col-md-12">
-						<div class="different-color">
-							<div class="title">
-								Different Colors
-							</div>
-							<p>
-								Sed sodales sed orci<br />molestie
-							</p>
-						</div><!-- /.different-color -->
-					</div><!-- /.col-md-12 -->
-					<div class="col-md-6">
-						<div class="box-left">
-							<div class="img-line">
-								<img src="images/product/single/line-1.png" alt="">
-							</div>
-							<div class="img-product">
-								<img src="images/product/single/06.png" alt="">
-							</div>
-						</div><!-- /.box-left -->
-					</div><!-- /.col-md-6 -->
-					<div class="col-md-6">
-						<div class="box-right">
-							<div class="img-line">
-								<img src="images/product/single/line-2.png" alt="">
-								<img src="images/product/single/04.png" alt="">
-							</div>
-							<div class="img-product">
-								
-							</div>
-							<div class="box-text">
-								<h4>Nuqqam Et Massa</h4>
-								<p>Sed sodales sed orci molestie tristique. Nunc dictum, erat id molestie vestibulum, ex leo vestibulum justo, luctus tempor erat sem quis diam. Lorem ipsum dolor sit amet.</p>
-							</div>
-						</div><!-- /.box-right -->
-					</div><!-- /.col-md-6 -->
+					
+					
+					
+					
 				</div><!-- /.row -->
 				
 				<div class="row">

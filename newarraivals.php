@@ -71,63 +71,29 @@
 									<?php } ?>									
 								</ul><!-- /.cat-list -->
 							</div><!-- /.widget-categories -->
-							<div class="widget widget-price">
-								<div class="widget-title">
-									<h3>Price<span></span></h3>
-								</div>
-								<div class="widget-content">
-									<p>Price</p>
-									<div class="price search-filter-input">
-                                        <div id="slider-range" class="price-slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" ></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span></div>
-                                        <p class="amount">
-                                          <input type="text" id="amount" disabled="">
-                                        </p>
-                                   </div>
-								</div>
-							</div><!-- /.widget widget-price -->
+							
+
+							<?php								
+				    		$getBrnds = "SELECT * FROM grocery_brands WHERE lkp_status_id = 0 AND id IN (SELECT brand_id FROM grocery_product_bind_brands WHERE product_id IN (SELECT id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id))) ORDER BY id DESC";
+				    		$getAllBrands = $conn->query($getBrnds);
+					    	?>
+
 							<div class="widget widget-brands">
 								<div class="widget-title">
 									<h3>Brands<span></span></h3>
 								</div>
-								<div class="widget-content">
-									<form action="#" method="get" accept-charset="utf-8">
-										<input type="text" name="brands" placeholder="Brands Search">
-									</form>
-									<ul class="box-checkbox scroll">
-										<li class="check-box">
-											<input type="checkbox" id="checkbox1" name="checkbox1">
-											<label for="checkbox1">Apple <span>(4)</span></label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="checkbox2" name="checkbox2">
-											<label for="checkbox2">Samsung <span>(2)</span></label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="checkbox3" name="checkbox3">
-											<label for="checkbox3">HTC <span>(2)</span></label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="checkbox4" name="checkbox4">
-											<label for="checkbox4">LG <span>(2)</span></label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="checkbox5" name="checkbox5">
-											<label for="checkbox5">Dell <span>(1)</span></label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="checkbox6" name="checkbox6">
-											<label for="checkbox6">Sony <span>(3)</span></label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="checkbox7" name="checkbox7">
-											<label for="checkbox7">Bphone <span>(4)</span></label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="checkbox8" name="checkbox8">
-											<label for="checkbox8">Oppo <span>(4)</span></label>
-										</li>
-									</ul>
-								</div>
+								<form id="check_filter_form">
+									<div class="widget-content">									
+										<ul class="box-checkbox scroll">
+											<?php while($getAllBrandsNames = $getAllBrands->fetch_assoc() ) { ?>
+											<li class="check-box">
+												<input type="checkbox" id="checkbox1" name="brands_filt[]" class="brand_filters" value="<?php echo $getAllBrandsNames['id']; ?>">
+												<label for="checkbox1"><?php echo $getAllBrandsNames['brand_name']; ?></label>
+											</li>	
+											<?php } ?>									
+										</ul>
+									</div>
+								</form>
 							</div><!-- /.widget widget-brands -->
 							
 							
@@ -173,15 +139,7 @@
 												<option value="">Sort by popularity</option>
 												<option value="">Sort by popularity</option>
 											</select>
-										</div>
-										<div class="showed">
-											<select name="showed">
-												<option value="">Show 15</option>
-												<option value="">Show 15</option>
-												<option value="">Show 15</option>
-												<option value="">Show 15</option>
-											</select>
-										</div>
+										</div>										
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -498,7 +456,31 @@
 	      $('#all_rows_grid').html(response);		  
 	      }
 		});
-	}	
+	}
+	
+	$(document).on('change','.brand_filters',function(){
+
+	   $.ajax({
+	      type: 'post',
+	      url: 'load_brands_products.php',
+	      data: $("#check_filter_form").serialize(),
+	      success: function (response) {
+	      //alert(response);
+	      $('#all_rows').html(response);		  
+	      }
+		});
+
+		$.ajax({
+	      type: 'post',
+	      url: 'load_brands_products_grid.php',
+	      data: $("#check_filter_form").serialize(),
+	      success: function (response) {
+	      //alert(response);
+	      $('#all_rows_grid').html(response);		  
+	      }
+		});	   
+
+	});
 	</script>
 
 </body>	
