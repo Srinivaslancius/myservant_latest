@@ -40,6 +40,12 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-breadcrumb -->
 
+		<?php
+			$lkp_city_id = 1;
+    		$getFilters = "SELECT * FROM grocery_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_category_id FROM grocery_sub_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id))) ORDER BY id DESC";
+    		$getGroFilters = $conn->query($getFilters);
+    	?>
+
 		<main id="shop">
 			<div class="container-fluid">
 				<div class="row">
@@ -50,118 +56,19 @@
 									<h3>Categories<span></span></h3>
 								</div>
 								<ul class="cat-list style1 widget-content">
+									<?php while($filtCat =  $getGroFilters->fetch_assoc() ) { ?>
 									<li>
-										<span>Accessories<i>(03)</i></span>
+										<span><?php echo $filtCat['category_name']; ?></span>
+										<?php $subCat = "SELECT * FROM grocery_sub_category WHERE lkp_status_id = 0 AND grocery_category_id ='".$filtCat['id']."' AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)) ORDER BY id DESC "; $getSubs = $conn->query($subCat); ?>
 										<ul class="cat-child">
-											<li>
-												<a href="#" title="">TV</a>
-											</li>
-											<li>
-												<a href="#" title="">Monitors</a>
-											</li>
-											<li>
-												<a href="#" title="">Software</a>
-											</li>
+											<?php while($getSubCatName = $getSubs->fetch_assoc() ) { ?>
+												<li>
+													<a href="javascript:void(0)" title="<?php echo $getSubCatName['sub_category_name']; ?>" onClick="loadFilterProducts(<?php echo $getSubCatName['id']; ?>)"><?php echo $getSubCatName['sub_category_name']; ?></a>
+												</li>
+											<?php } ?>
 										</ul>
 									</li>
-									<li>
-										<span>Cameras<i>(19)</i></span>
-										<ul class="cat-child">
-											<li>
-												<a href="#" title="">Go Pro</a>
-											</li>
-											<li>
-												<a href="#" title="">Video</a>
-											</li>
-											<li>
-												<a href="#" title="">Software</a>
-											</li>
-										</ul>
-									</li>
-									<li class="">
-										<span>Computers<i>(56)</i></span>
-										<ul class="cat-child">
-											<li>
-												<a href="#" title="">Desktop</a>
-											</li>
-											<li>
-												<a href="#" title="">Monitors</a>
-											</li>
-											<li>
-												<a href="#" title="">Software</a>
-											</li>
-										</ul>
-									</li>
-									<li>
-										<span>Laptops<i>(03)</i></span>
-										<ul class="cat-child">
-											<li>
-												<a href="#" title="">Desktop</a>
-											</li>
-											<li>
-												<a href="#" title="">Monitors</a>
-											</li>
-											<li>
-												<a href="#" title="">Software</a>
-											</li>
-										</ul>
-									</li>
-									<li>
-										<span>Networking<i>(03)</i></span>
-										<ul class="cat-child">
-											<li>
-												<a href="#" title="">Monitors</a>
-											</li>
-											<li>
-												<a href="#" title="">Software</a>
-											</li>
-										</ul>
-									</li>
-									<li>
-										<span>Old Products<i>(89)</i></span>
-										<ul class="cat-child">
-											<li>
-												<a href="#" title="">Monitors</a>
-											</li>
-											<li>
-												<a href="#" title="">Software</a>
-											</li>
-										</ul>
-									</li>
-									<li>
-										<span>Smartphones<i>(90)</i></span>
-										<ul class="cat-child">
-											<li>
-												<a href="#" title="">Apple</a>
-											</li>
-											<li>
-												<a href="#" title="">HTC</a>
-											</li>
-											<li>
-												<a href="#" title="">Sony</a>
-											</li>
-											<li>
-												<a href="#" title="">Samsung</a>
-											</li>
-											<li>
-												<a href="#" title="">LG</a>
-											</li>
-										</ul>
-									</li>
-									<li>
-										<span>Software<i>(23)</i></span>
-										<ul class="cat-child">
-											<li>
-												<a href="#" title="">Desktop</a>
-											</li>
-											<li>
-												<a href="#" title="">Monitors</a>
-											</li>
-											<li>
-												<a href="#" title="">BKAV</a>
-											</li>
-										</ul>
-									</li>
+									<?php } ?>									
 								</ul><!-- /.cat-list -->
 							</div><!-- /.widget-categories -->
 							<div class="widget widget-price">
@@ -246,9 +153,7 @@
 							<div class="wrap-imagebox">
 								<div class="flat-row-title">
 									<h3>Offer products</h3>
-									<span>
-										Showing 1–15 of 20 results
-									</span>
+									
 									<div class="clearfix"></div>
 								</div>
 								<div class="sort-product">
@@ -566,6 +471,35 @@
 				});
 			}
 		</script>
+
+	<script type="text/javascript">
+	function loadFilterProducts(subCatId) {
+	
+		$.ajax({
+	      type: 'post',
+	      url: 'load_filter_products.php',
+	      data: {
+	       subCatId:subCatId,
+	      },
+	      success: function (response) {
+	      //alert(response);
+	      $('#all_rows').html(response);		  
+	      }
+		});
+
+		$.ajax({
+	      type: 'post',
+	      url: 'load_filter_products_grid.php',
+	      data: {
+	       subCatId:subCatId,
+	      },
+	      success: function (response) {
+	      //alert(response);
+	      $('#all_rows_grid').html(response);		  
+	      }
+		});
+	}	
+	</script>
 
 </body>	
 </html>
