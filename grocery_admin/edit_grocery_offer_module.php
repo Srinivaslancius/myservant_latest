@@ -37,17 +37,17 @@
             //echo "<pre>"; print_r($_POST); die;     
             $name = $_REQUEST['name'];
             $link = $_REQUEST['link'];
-            $lkp_status_id = $_REQUEST['lkp_status_id'];
+            //$lkp_status_id = $_REQUEST['lkp_status_id'];
             if($_FILES["image"]["name"]!='') {
                 $image = uniqid().$_FILES["image"]["name"];
                 $target_dir = "uploads/grocery_offer_module_image/";
                 $target_file = $target_dir . basename($image);
                 $getImgUnlink = getImageUnlink('image','grocery_offer_module','id',$offer_id,$target_dir);
                 move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
-                $sql = "UPDATE `grocery_offer_module` SET name = '$name', image = '$image', link = '$link', lkp_status_id = '$lkp_status_id' WHERE id = '$offer_id' ";
+                $sql = "UPDATE `grocery_offer_module` SET name = '$name', image = '$image', link = '$link' WHERE id = '$offer_id' ";
                 
             } else {
-                $sql = "UPDATE `grocery_offer_module` SET link = '$link', lkp_status_id = '$lkp_status_id' WHERE id = '$offer_id' ";
+                $sql = "UPDATE `grocery_offer_module` SET link = '$link' WHERE id = '$offer_id' ";
             }
             
             $result = $conn->query($sql);
