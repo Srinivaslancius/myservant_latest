@@ -36,7 +36,20 @@ if(!empty($_POST['user_mobile']) && !empty($_POST['mobile_otp']))  {
         $updateCart = "UPDATE `grocery_cart` SET user_id='".$_SESSION['user_login_session_id']."' WHERE session_cart_id = '".$_SESSION['CART_TEMP_RANDOM']."'";
 		$updateCart1 = $conn->query($updateCart);
 
-
+        if($_SESSION['wallet_id'] == "") {
+			$string1 = str_shuffle('abcdefghijklmnopqrstuvwxyz');
+			$random1 = substr($string1,0,3);
+			$string2 = str_shuffle('1234567890');
+			$random2 = substr($string2,0,3);
+			$contstr = "MYSER-WALLET_";
+			$_SESSION['wallet_id'] = $contstr.$random1.$random2;
+		}
+		$wallet_id = $_SESSION['wallet_id'];
+		$user_id = $_SESSION['user_login_session_id'];
+		$created_at = date("Y-m-d h:i:s");
+		$amount = 0;
+		$sqlInwallet = "INSERT INTO `user_wallet`(`wallet_id`, `user_id`, `amount`, `created_at`) VALUES ('$wallet_id','$user_id','$amount','$created_at')";
+		$sqlInwallet1 = $conn->query($sqlInwallet);
 
         $dataem = $getLoggedInDetails["user_email"];
 
