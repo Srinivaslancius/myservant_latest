@@ -16,13 +16,13 @@ if (isset($_REQUEST['userId']) && !empty($_REQUEST['product_id']) && !empty($_RE
 	
 	if($item_quantity != 0 ) {
 
-		$updateq = "UPDATE grocery_cart SET item_quantity = '$item_quantity' WHERE user_id='$user_id' AND food_item_id='$itemId' AND item_weight_type_id='$itemWeightTypeId' ";
+		$updateq = "UPDATE grocery_cart SET product_quantity = '$product_quantity' WHERE user_id='$user_id' AND product_id='$product_id' AND product_weight_type='$product_weight_type' ";
 		if($conn->query($updateq) === TRUE) {
 
-		    $getCartFoodData = getAllDataWhere('food_cart','user_id',$user_id); 
+		    $getCartFoodData = getAllDataWhere('grocery_cart','user_id',$user_id); 
 		    $response["cartCount"] = $getCartFoodData->num_rows;
-		    $response["itemWeightTypeId"] = $_REQUEST['itemWeightTypeId'];
-			$response["itemId"] = $_REQUEST['itemId'];
+		    $response["product_weight_type"] = $_REQUEST['product_weight_type'];
+			$response["product_id"] = $_REQUEST['product_id'];
 		    $response["success"] = 0;
 		    $response["message"] = "Success";
 		} else {

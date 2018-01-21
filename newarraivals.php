@@ -460,7 +460,6 @@
 
 	function loadPopularity(popStatus) {
 
-
 		$.ajax({
 	      type: 'post',
 	      url: 'load_popular_products.php',
@@ -484,7 +483,6 @@
 	      $('#all_rows_grid').html(response);		  
 	      }
 		});
-
 	}
 	
 	$(document).on('change','.brand_filters',function(){
