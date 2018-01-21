@@ -88,7 +88,7 @@
 												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image']; ?>" alt="<?php echo $getCartItems['product_name']; ?>">
 											</div>
 											<div class="name-product">
-												<?php echo wordwrap($getProductName['product_name'],25,"<br>\n"); ?>
+												<?php echo wordwrap($getProductName['product_name'],20,"<br>\n"); ?>
 											</div>
 											<div class="price">
 												 Rs . <?php echo $getCartItems['product_price']; ?>
