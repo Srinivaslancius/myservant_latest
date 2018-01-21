@@ -224,8 +224,8 @@
 								<?php if($getWalletAmount['amount'] > 0) { ?>
 								<div class="btn-radio style2">
 									<div class="radio-info">
-										<input type="radio" class="radio-button" id="cash-delivery" name="wallet_id" value="1" checked required>
-										<label for="cash-delivery">Wallet</label>
+										<input type="radio" class="radio-button" id="wallet_id" name="wallet_id" value="1" checked required>
+										<label for="wallet_id">Wallet</label>
 									</div>
 								</div>
 								<?php } ?>
