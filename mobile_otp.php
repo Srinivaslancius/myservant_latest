@@ -83,15 +83,17 @@
 				                    <input type="hidden" name="user_password" value="<?php echo encryptPassword($_POST['user_password']); ?>"><input type="hidden" name="checkout_key" value="<?php echo $_POST['checkout_key']; ?>" id="checkout_key">
 									<div class="form-box" style="margin-bottom:20px">
 										<label for="Mobile" style="margin-right:300px">Mobile No:</label>
-										<input type="text" id="user_mobile" name="user_mobile" readonly placeholder="Enter Your Mobile No." value="<?php echo $_POST['user_mobile']; ?>" >
+										<input type="text" id="user_mobile" name="user_mobile" readonly placeholder="Enter Your Mobile No." maxlength="10" value="<?php echo $_POST['user_mobile']; ?>" class="valid_mobile_num" >
 									</div><!-- /.one-half order-id -->
 									<div class="form-box">
 										<label for="OTP" style="margin-right:415px">OTP:</label>
-										<input type="tel" id="mobile_otp" name="mobile_otp" placeholder="Enter OTP" maxlength="4"   required>
+										<input type="tel" id="mobile_otp" name="mobile_otp" placeholder="Enter OTP" maxlength="4" class="valid_mobile_num" required>
 									</div>
+									<span id="return_msg" style="display:none"></span><br />
+                                	<div class="clear_fix"></div>
 									
 									<div class="btn-track">
-										<button type="submit" id="verify_otp">Submit</button>
+										<button type="button" value="Verify" id="verify_otp">SUBMIT</button>
 									</div><!-- /.container -->
 								</form><!-- /.form -->
 							</div><!-- /.tracking-content -->
@@ -107,65 +109,7 @@
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-tracking -->
-
-		<section class="flat-row flat-iconbox style1 background">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-3">
-						<div class="iconbox style1 v1">
-							<div class="box-header">
-								<div class="image">
-									<img src="images/icons/car.png" alt="">
-								</div>
-								<div class="box-title">
-									<h3>Free Shipping</h3>
-								</div>
-								<div class="clearfix"></div>
-							</div><!-- /.box-header -->
-						</div><!-- /.iconbox -->
-					</div><!-- /.col-md-3 -->
-					<div class="col-md-3">
-						<div class="iconbox style1 v1">
-							<div class="box-header">
-								<div class="image">
-									<img src="images/icons/order.png" alt="">
-								</div>
-								<div class="box-title">
-									<h3>Order Online Service</h3>
-								</div>
-								<div class="clearfix"></div>
-							</div><!-- /.box-header -->
-						</div><!-- /.iconbox -->
-					</div><!-- /.col-md-3 -->
-					<div class="col-md-3">
-						<div class="iconbox style1 v1">
-							<div class="box-header">
-								<div class="image">
-									<img src="images/icons/payment.png" alt="">
-								</div>
-								<div class="box-title">
-									<h3>Payment</h3>
-								</div>
-								<div class="clearfix"></div>
-							</div><!-- /.box-header -->
-						</div><!-- /.iconbox -->
-					</div><!-- /.col-md-3 -->
-					<div class="col-md-3">
-						<div class="iconbox style1 v1">
-							<div class="box-header">
-								<div class="image">
-									<img src="images/icons/return.png" alt="">
-								</div>
-								<div class="box-title">
-									<h3>Return 30 Days</h3>
-								</div>
-								<div class="clearfix"></div>
-							</div><!-- /.box-header -->
-						</div><!-- /.iconbox -->
-					</div><!-- /.col-md-3 -->
-				</div><!-- /.row -->
-			</div><!-- /.container -->
-		</section><!-- /.flat-iconbox -->
+		
 <footer>
 			<?php include_once 'footer.php';?>
 		</footer><!-- /footer -->

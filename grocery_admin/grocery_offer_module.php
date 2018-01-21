@@ -42,7 +42,7 @@
                 $target_dir = "uploads/grocery_offer_module_image/";
                 $target_file = $target_dir . basename($image);
                 move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
-                $sql = "INSERT INTO grocery_offer_module (`name`,`image`, `link`, `lkp_status_id`) VALUES ('$name', '$image', '$link')";
+                $sql = "INSERT INTO grocery_offer_module (`name`,`image`, `link`) VALUES ('$name', '$image', '$link')";
                 $result = $conn->query($sql);
             }
            
