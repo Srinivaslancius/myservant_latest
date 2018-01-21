@@ -78,6 +78,11 @@
 				</ul>
 			</div>
 		</div>
+		 <div class="container-fluid marg10 search_back">
+            	
+              <?php include_once './news_scroll.php';?> 
+               
+                </div>
 		<!-- Position -->
 		<div class="container margin_60">
 
