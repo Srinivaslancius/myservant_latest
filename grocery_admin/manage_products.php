@@ -185,7 +185,7 @@
                                     <th>Upload Images</th>
                                     <th>Status</th>
                                     <th>Action</th>
-                                    <th>Hot Deals</th>
+                                    <!-- <th>Hot Deals</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -211,11 +211,11 @@
                                     <td><?php if ($row['lkp_status_id']==0) { echo "<span class='label label-outline-success check_active open_cursor' data-incId=".$row['id']." data-status=".$row['lkp_status_id']." data-tbname='grocery_products'>Active</span>" ;} else { echo "<span class='label label-outline-info check_active open_cursor' data-status=".$row['lkp_status_id']." data-incId=".$row['id']." data-tbname='grocery_products'>In Active</span>" ;} ?></td>
                                     <td> <a href="edit_testimonials.php?cid=<?php echo $row['id']; ?>"><i class="zmdi zmdi-edit"></i></a></td>
 
-                                    <?php if($row['deal_start_date']!='0000-00-00 00:00:00' && $row['deal_start_time']!='0000-00-00 00:00:00' && $row['deal_end_date']!='0000-00-00 00:00:00' && $row['deal_end_time']!='0000-00-00 00:00:00') { ?>
+                                    <!-- <?php if($row['deal_start_date']!='0000-00-00 00:00:00' && $row['deal_start_time']!='0000-00-00 00:00:00' && $row['deal_end_date']!='0000-00-00 00:00:00' && $row['deal_end_time']!='0000-00-00 00:00:00') { ?>
                                     <td><a href="edit_deal_dates.php?cid=<?php echo $row['id']; ?>" data-toggle="modal" data-target="#<?php echo $row['id']; ?>"><i class="zmdi zmdi-assignment-check zmdi-hc-fw"></i></a></td>
                                     <?php } else { ?>
                                     <td><a href="edit_deal_dates.php?cid=<?php echo $row['id']; ?>" data-toggle="modal" data-target="#<?php echo $row['id']; ?>"><i class="zmdi zmdi-close zmdi-hc-fw"></i></a></td>
-                                        <?php }?>
+                                        <?php }?> -->
                                    
 
                                 </tr>
