@@ -643,7 +643,7 @@
 	}
 
 	.imagebox.style1.v3 {
-		min-height:380px;padding:15px 20px 20px 20px;
+		min-height:320px;padding:15px 20px 20px 20px;
 	}
 
 	.imagebox.style1.v3 .box-price {
@@ -1477,8 +1477,27 @@
 	.slider .slider-item.style5 .item-image {
 		width:43%;padding-right:30px;
 	}
+.cat-title a {
+    text-decoration: none;
+    color: #fcfafa;}
 
 
+}
+@media only screen and (min-width:412px) and (max-width:732px) {
+.cat-title a {
+    text-decoration: none;
+    color: #fcfafa;
+	}
+	
+}
+@media only screen and (min-width:600px) and (max-width:960px) {
+	.cat-title a {
+    text-decoration: none;
+    color: #fcfafa;}
+.table-cart tr td .quanlity {
+    position: relative;
+    margin-right: 50px;
+}
 }
 
 @media only screen and (min-width:320px) and (max-width:480px) {
@@ -1508,6 +1527,9 @@
     margin-right: 0px;
     padding: 21px 10px 13px 26px;
 }
+.cat-title a {
+    text-decoration: none;
+    color: #fcfafa;}
 }
 
 @media only screen and (max-width:480px) {
@@ -1763,6 +1785,4 @@
 
 }
 
-@media (max-width:320px) {
-	
-}
+
