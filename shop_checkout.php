@@ -73,7 +73,11 @@
 			    $session_cart_id = $_SESSION['CART_TEMP_RANDOM'];
 			    if($_POST['walletid'] == 1) {
 				    $wallet_id = $_SESSION['wallet_id'];
-				    $wallet_amount = $_POST['wallet_amount'];
+				    if($_POST['wallet_amount'] > $_POST['order_total_without_wallet']) {
+				    	$wallet_amount = $_POST["order_total_without_wallet"];
+				    } else {
+				    	$wallet_amount = $_POST['wallet_amount'];
+				    }
 				} else {
 					$wallet_id = '';
 				    $wallet_amount = '';
@@ -271,8 +275,12 @@
 									$orderTotal = round($cartTotal+$service_tax+$getSiteSettingsData1['delivery_charges']-$getWalletAmount['amount']);
 									$orderTotalwithoutWallet = round($cartTotal+$service_tax+$getSiteSettingsData1['delivery_charges']);
 									?>
+									<?php if($getWalletAmount['amount'] > $orderTotalwithoutWallet) { ?>
+									<input type="hidden" id="order_total" name="order_total" value="<?php echo 0; ?>">
+									<?php } else { ?>
 									<input type="hidden" id="order_total" name="order_total" value="<?php echo $orderTotal; ?>">
-									<input type="hidden" id="order_total_without_wallet" value="<?php echo $orderTotalwithoutWallet; ?>">
+									<?php } ?>
+									<input type="hidden" id="order_total_without_wallet" name="order_total_without_wallet" value="<?php echo $orderTotalwithoutWallet; ?>">
 									<input type="hidden" name="service_tax" value="<?php echo $service_tax; ?>" id="service_tax">
 									<input type="hidden" name="delivery_charges" value="<?php echo $getSiteSettingsData1['delivery_charges']; ?>" id="delivery_charges">
 									<table>
@@ -289,13 +297,22 @@
 	                                            <td>Delivery Charges</td>
 	                                            <td class="subtotal">Rs . <?php echo $getSiteSettingsData1['delivery_charges']; ?></td>
 	                                        </tr>
+	                                        <tr>
+												<td>Order Total</td>
+												<td class="subtotal">Rs . <?php echo $orderTotalwithoutWallet; ?></td>
+											</tr>
 	                                        <?php if($getWalletAmount['amount'] > 0) { ?>
 	                                        <tr id="wallet">
 	                                            <td>Money in Your Wallet</td>
 	                                            <td class="subtotal">Rs . <?php echo $getWalletAmount['amount']; ?></td>
 	                                        </tr>
-	                                        <?php } ?>									
-											<?php if($getWalletAmount['amount'] > 0) { ?>
+	                                        <?php } ?>								
+											<?php if($getWalletAmount['amount'] > $orderTotalwithoutWallet) { ?>
+											<tr>
+												<td>Total</td>
+												<td class="price-total">Rs . <?php echo 0; ?></td>
+											</tr>
+											<?php } else if($getWalletAmount['amount'] > 0) { ?>
 											<tr>
 												<td>Total</td>
 												<td class="price-total">Rs . <?php echo $orderTotal; ?></td>
