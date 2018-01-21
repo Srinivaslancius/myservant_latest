@@ -40,7 +40,7 @@
 							    }
 							    $cart_count = $cartItems->num_rows; 
 							?>
-								<div class="inner-box">
+								<div class="inner-box header_cart">
 									<a href="#" title="">
 										<div class="icon-cart">
 											<img src="images/icons/cart.png" alt="">
