@@ -60,19 +60,6 @@
 		        $_SESSION['user_login_session_name'] = $getLoggedInDetails['user_full_name'];
 		        $_SESSION['user_login_session_email'] = $getLoggedInDetails['user_email'];
 		        $_SESSION['timestamp'] = time();
-		        if($_SESSION['wallet_id'] == "") {
-					$string1 = str_shuffle('abcdefghijklmnopqrstuvwxyz');
-					$random1 = substr($string1,0,3);
-					$string2 = str_shuffle('1234567890');
-					$random2 = substr($string2,0,3);
-					$contstr = "MYSER-WALLET_";
-					$_SESSION['wallet_id'] = $contstr.$random1.$random2;
-				}
-				$wallet_id = $_SESSION['wallet_id'];
-				$user_id = $_SESSION['user_login_session_id'];
-				$amount = 0;
-				$sqlInwallet = "INSERT INTO `user_wallet`(`wallet_id`, `user_id`, `amount`, `created_at`) VALUES ('$wallet_id','$user_id','$amount','$last_login_visit')";
-				$sqlInwallet1 = $conn->query($sqlInwallet);
 
 		        $updateCart = "UPDATE `grocery_cart` SET user_id='".$_SESSION['user_login_session_id']."' WHERE session_cart_id = '".$_SESSION['CART_TEMP_RANDOM']."'";
 				$updateCart1 = $conn->query($updateCart);
@@ -113,19 +100,16 @@
 							<div class="title">
 								<h3>Login</h3>
 							</div>
-							<form  method="POST" id="form-login" accept-charset="utf-8">
+							<form  method="POST" id="form-login" accept-charset="utf-8" autocomplete="off">
 								<div class="form-box">
 									<label for="name-login">Username or email address * </label>
-									<input type="text" id="user_email" name="user_email" placeholder="Email" required>
+									<input type="text" id="user_email1" name="user_email" placeholder="Email" required>
 								</div><!-- /.form-box -->
 								<div class="form-box">
 									<label for="password-login">Password * </label>
 									<input type="password" id="login_password" name="login_password" placeholder="Password" required>
 								</div><!-- /.form-box -->
-								<div class="form-box checkbox">
-									<input type="checkbox" id="remember" checked name="remember">
-									<label for="remember">Remember me</label>
-								</div><!-- /.form-box -->
+								
 								<div class="form-box">
 									<button type="submit" name="login" class="login">SIGN IN</button>
 									<a href="forgot_password.php" title="">Lost your password?</a>
@@ -138,14 +122,14 @@
 							<div class="title">
 								<h3>Register</h3>
 							</div>
-							<form method="post" action="mobile_otp.php" id="form-register" accept-charset="utf-8">
+							<form method="post" action="mobile_otp.php" id="form-register" accept-charset="utf-8" autocomplete="off">
 								<div class="form-box">
 									<label for="password-register">Name</label>
 									<input type="text" name="user_name"  id="user_name" placeholder="Name" required>
 								</div>
 								<div class="form-box">
 									<label for="password-register">Mobile</label>
-									<input type="tel" name="user_mobile" id="user_mobile"  placeholder="Mobile Number" maxlength="10" pattern="[0-9]{10}" onkeyup="checkMobile();" required>
+									<input type="tel" name="user_mobile" id="user_mobile"  placeholder="Mobile Number" maxlength="10" pattern="[0-9]{10}" onkeyup="checkMobile();" required class="valid_mobile_num">
 									<span id="input_status1" style="color: red;"></span>
 								</div>  								
 								<div class="form-box">
@@ -283,8 +267,7 @@
 	          data: {
 	            user_email:user_email,
 	          },
-	          success: function (result) {
-	          	alert('hai');
+	          success: function (result) {	          	
 	            if (result > 0){
 	            	$("#input_status").html("<span style='color:red;'>Email Already Exist</span>");
 	        		$('#user_email').val('');

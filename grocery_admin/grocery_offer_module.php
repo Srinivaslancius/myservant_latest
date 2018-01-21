@@ -36,13 +36,13 @@
             //echo "<pre>"; print_r($_POST); die;     
             $link = $_REQUEST['link'];
             $name = $_REQUEST['name'];
-            $lkp_status_id = $_REQUEST['lkp_status_id'];
+            //$lkp_status_id = $_REQUEST['lkp_status_id'];
             if($_FILES["image"]["name"]!='') {
                 $image = uniqid().$_FILES["image"]["name"];
                 $target_dir = "uploads/grocery_offer_module_image/";
                 $target_file = $target_dir . basename($image);
                 move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
-                $sql = "INSERT INTO grocery_offer_module (`name`,`image`, `link`, `lkp_status_id`) VALUES ('$name', '$image', '$link', '$lkp_status_id')";
+                $sql = "INSERT INTO grocery_offer_module (`name`,`image`, `link`) VALUES ('$name', '$image', '$link')";
                 $result = $conn->query($sql);
             }
            

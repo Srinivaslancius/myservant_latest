@@ -118,12 +118,17 @@
             		$getwalletAmount = "SELECT * FROM user_wallet WHERE user_id = '$user_id' AND wallet_id = '$wallet_id'";
             		$getwalletAmount1 = $conn->query($getwalletAmount);
             		$getwalletAmountDetails = $getwalletAmount1->fetch_assoc();
+            		if($getwalletAmountDetails['amount'] == '') {
+            			$amount = 0;
+            		} else {
+            			$amount = $getwalletAmountDetails['amount'];
+            		}
             		?>
             		<form method="post" >
             		<tbody>
             		  <tr>
             			<td style="width:10%"><img src="images/dashboard/wallet.png" style="width:50px;height:50px"></td>
-            			<td><b>Rs : <?php echo $getwalletAmountDetails['amount']; ?>/-</b><br>Your Wallet Balance</td>
+            			<td><b>Rs : <?php echo $amount; ?>/-</b><br>Your Wallet Balance</td>
             			<td colspan="2"><input type="text" name="amnt" id="amnt" class="valid_mobile_num" placeholder="Enter amount to be added in your wallet" required></td>						
 						<td><button class="button1" type="submit" name="submit" value="submit">Add Money to Wallet</button></td>
             		  </tr>            		  

@@ -26,9 +26,6 @@ echo '<a href="#" title="">
 			<img src="images/icons/cart.png" alt="">
 			<span>'.$cart_count.'</span>
 		</div>
-		<!-- <div class="price">
-			₹0.00
-		</div> -->
 	</a>
 	<div class="dropdown-box">';
 		if($cart_count > 0) {
