@@ -218,6 +218,17 @@
 						<div class="col-md-5">
 							<div class="cart-totals style2">						
 								<h3>Your Order</h3>
+								<?php $getWalletAmount = getIndividualDetails('user_wallet','user_id',$_SESSION['user_login_session_id']); 
+								?>
+								<input type="hidden" name="wallet_amount" id="wallet_amount" value="<?php echo $getWalletAmount['amount']; ?>">
+								<?php if($getWalletAmount['amount'] > 0) { ?>
+								<div class="btn-radio style2">
+									<div class="radio-info">
+										<input type="radio" class="radio-button" id="cash-delivery" name="pay_mn" value="1" checked required>
+										<label for="cash-delivery">Wallet</label>
+									</div>
+								</div>
+								<?php } ?>
 									<table class="product">
 										<thead>
 											<tr>
@@ -230,7 +241,9 @@
 												while ($getCartItems = $cartItems->fetch_assoc()) { 
 												$getProductImage = getIndividualDetails('grocery_product_bind_images','product_id',$getCartItems['product_id']);
 												$cartTotal += $getCartItems['product_price']*$getCartItems['product_quantity'];
-
+												$service_tax += ($getSiteSettingsData1['service_tax']/100)*$cartTotal;
+												$orderTotal = round($cartTotal+$service_tax+$getSiteSettingsData1['delivery_charges']-$getWalletAmount['amount']);
+												$orderTotalwithoutWallet = round($cartTotal+$service_tax+$getSiteSettingsData1['delivery_charges']);
 												$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
 											?>
 											<input type="hidden" name='category_id[]' type='text' value='<?php echo $getCartItems['category_id'];?>'>
@@ -243,22 +256,42 @@
 												<input type="hidden" name="product_name" value="<?php echo $getProductName['product_name']; ?>">
 												<input type="hidden" name="product_price[]" value="<?php echo $getCartItems['product_price']; ?>">
 												<input type="hidden" name="sub_total" value="<?php echo $cartTotal; ?>">
-												<input type="hidden" name="order_total" value="<?php echo $cartTotal; ?>">
+												<input type="hidden" id="order_total" name="order_total" value="<?php echo $orderTotal; ?>">
+												<input type="hidden" id="order_total_without_wallet" value="<?php echo $orderTotalwithoutWallet; ?>">
 												
 
 												<td>Rs . <?php echo $getCartItems['product_price'] ?> * <?php echo $getCartItems['product_quantity']; ?></td>
 											</tr>	
-											<?php } ?>									
+											<tr>
+	                                            <td>GST(<?php echo $getSiteSettingsData1['service_tax']; ?>%)</td>
+	                                            <td class="subtotal" id="serviceTax1">Rs . <?php echo $service_tax; ?></td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td>Delivery Charges</td>
+	                                            <td class="subtotal">Rs . <?php echo $getSiteSettingsData1['delivery_charges']; ?></td>
+	                                        </tr>
+	                                        <?php if($getWalletAmount['amount'] > 0) { ?>
+	                                        <tr id="wallet">
+	                                            <td>Money in Your Wallet</td>
+	                                            <td class="subtotal">Rs . <?php echo $getWalletAmount['amount']; ?></td>
+	                                        </tr>
+											<?php } } ?>									
 										</tbody>
 									</table><!-- /.product -->
 									
 									<table>
 										<tbody>										
-											
+											<?php if($getWalletAmount['amount'] > 0) { ?>
 											<tr>
 												<td>Total</td>
-												<td class="price-total">Rs . <?php echo $cartTotal; ?></td>
+												<td class="price-total">Rs . <?php echo $orderTotal; ?></td>
 											</tr>
+											<?php } else { ?>
+											<tr>
+												<td>Total</td>
+												<td class="price-total">Rs . <?php echo $orderTotalwithoutWallet; ?></td>
+											</tr>
+											<?php } ?>
 										</tbody>
 									</table>
 									<div class="btn-radio style2">
@@ -414,6 +447,20 @@
 		        }
 		        });
 		    }
+		    var totalWithoutWallet = $('#order_total_without_wallet').val();
+		    var totalWithWallet = $('#order_total').val();
+		    $('.radio-button').on("click", function(event){
+			    $(this).prop('checked', false);
+			    $('#wallet').hide();
+			    $('.price-total').html("Rs. "+totalWithoutWallet);
+			    $('#order_total').val(totalWithoutWallet);
+			});
+			$('.radio-button').on("change", function(event){
+			    $(this).prop('checked', true);
+			    $('#wallet').show();
+			    $('.price-total').html("Rs. "+totalWithWallet);
+			    $('#order_total').val(totalWithWallet);
+			});
 		    </script>
 
 </body>	

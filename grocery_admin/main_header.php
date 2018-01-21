@@ -299,26 +299,26 @@ $getSiteSettingsData = $getSiteSettings->fetch_assoc();
                   <span class="nav-cell p-r-10">
                     <img class="img-circle" src="img/avatars/1.jpg" alt="" width="32" height="32">
                   </span>
-                  <span class="nav-cell">Jon Snow
+                  <span class="nav-cell"><?php echo $_SESSION['grocery_admin_user_name']; ?>
                     <span class="caret"></span>
                   </span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li>
+                  <!-- <li>
                     <a href="#">
                       <i class="zmdi zmdi-account-o m-r-10"></i> Profile</a>
-                  </li>
-                  <li>
+                  </li> -->
+                  <!-- <li>
                     <a href="#">
                       <i class="zmdi zmdi-settings m-r-10"></i> Settings</a>
-                  </li>
+                  </li>-->
                   <li>
-                    <a href="#">
-                      <i class="zmdi zmdi-help-outline m-r-10"></i> Help</a>
+                    <a href="change_password.php">
+                      <i class="zmdi zmdi-power m-r-10"></i>Change Password</a>
                   </li>
                   <li role="separator" class="divider"></li>
                   <li>
-                    <a href="#">
+                    <a href="logout.php">
                       <i class="zmdi zmdi-power m-r-10"></i> Logout</a>
                   </li>
                 </ul>
