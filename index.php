@@ -150,13 +150,12 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="owl-carousel-3">
-						<?php $getAllBrandLogos=  getAllDataWithStatus('grocery_brand_logos',0); 
-						while($getBrandLogosData = $getAllBrandLogos->fetch_assoc()) { ?>
 						
+						<?php for($i=0; $i<10; $i++) {?>
 							<div class="imagebox style4">
 								<div class="box-image">
-									<a href="<?php echo $getBrandLogosData['link'] ?>" title="">
-										<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brand_logos/'.$getBrandLogosData['brand_logo'] ?>" alt="<?php echo $getBrandLogosData['link'] ?>">
+									<a href="single_product.php" title="">
+										<img src="images/product/other/1.png" alt="">
 									</a>
 								</div><!-- /.box-image -->
 								
