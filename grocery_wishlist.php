@@ -41,7 +41,18 @@
     margin-top: 5px;
     text-align: justify;
 }
-
+.button12 {
+    background-color: #fe6003;
+    border-color: #fe6003;
+    color: white;
+    padding: 2px 9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 	</style>
 
 	
@@ -135,7 +146,7 @@
 								<div class="row">
 								<div class="col-sm-8 col-xs-12">
                                         <div>
-										<a href="#"><button class="button1">Add to Cart</button></a>
+										<a href="#"><button class="button12">Add to Cart</button></a>
                                            
                                       </div> 
 								</div>

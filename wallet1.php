@@ -85,21 +85,21 @@
             			<th></th>
 						<th></th>
             		  </tr>
-            		</thead>
-
-            		<form method="post" >
+            		</thead>           		
             		<tbody>
             		  <tr>
-            			<td style="width:10%"><img src="images/dashboard/wallet.png" style="width:50px;height:50px"></td>
+            			<td><img src="images/dashboard/wallet.png"></td>
             			<td><b>Rs :5/-</b><br>Your Wallet Balance</td>
             			<td colspan="2"><input type="text" name="amnt" placeholder="Enter amount to be added in your wallet" required></td>						
 						<td><button class="button1" type="submit" name="submit" value="submit">Add Money to Wallet</button></td>
             		  </tr>            		  
             		</tbody>
-            		</form>
+            	
 					
         	     </table>
-				  
+				  </div>
+				  </div>
+				   <div class="panel-body">
 		<section class="flat-imagebox style2 background">
 			<div class="container">
 				<div class="row">
@@ -115,7 +115,7 @@
 							<div class="tab-item">
 								<div class="row">
 									<div class="col-md-12">
-										
+										 <div class="table-responsive">	
 											<table class="table" style="border:1px solid #ddd;width:95%;margin-left:20px">
             		<thead>
             		  <tr>
@@ -150,9 +150,10 @@
 									</div><!-- /.col-md-6 -->
 									
 								</div><!-- /.row -->
+								</div>
 											<div class="row">
 									<div class="col-md-12">
-										
+										 <div class="table-responsive">	
 											<table class="table" style="border:1px solid #ddd;width:95%;margin-left:20px">
             		<thead>
             		  <tr>
@@ -192,6 +193,7 @@
 					</div><!-- /.col-md-12 -->
 				</div><!-- /.row -->
 			</div><!-- /.container -->
+			</div>
 		</section><!-- /.flat-imagebox style2 -->
         	  </div>
                       </div>
