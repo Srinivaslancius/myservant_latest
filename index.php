@@ -1,5 +1,33 @@
 <?php include_once 'meta.php';?>
-
+<style>
+.owl-theme .owl-dots .owl-dot span {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    margin: 6px;
+    display: block;
+    position: relative;
+    -webkit-backface-visibility: visible;
+    -webkit-transition: opacity 200ms ease;
+    -moz-transition: opacity 200ms ease;
+    -ms-transition: opacity 200ms ease;
+    -o-transition: opacity 200ms ease;
+}
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    border-color: #ffffff;
+}
+.owl-theme .owl-dots .owl-dot.active span:after, .owl-theme .owl-dots .owl-dot:hover span:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+  background-color: #ffffff;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+</style>
 <body class="header_sticky">
 	<div class="boxed style2">
 
@@ -110,7 +138,35 @@
 			</section><!-- /.flat-banner-box -->
 <!-- /.flat-banner-box -->
 
- 	
+ 	<section class="flat-imagebox style4">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="flat-row-title">
+							<h3>Our Brands</h3>
+						</div>
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="owl-carousel-3">
+						
+						<?php for($i=0; $i<10; $i++) {?>
+							<div class="imagebox style4">
+								<div class="box-image">
+									<a href="single_product.php" title="">
+										<img src="images/product/other/1.png" alt="">
+									</a>
+								</div><!-- /.box-image -->
+								
+							</div><!-- /.imagebox style4 -->
+							<?php } ?>
+							
+						</div><!-- /.owl-carousel-3 -->
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.flat-imagebox style4 -->
  		<div class="divider20"></div>
 
  		<?php 

@@ -1584,9 +1584,9 @@
 
 /* Imagebox Style4 */
 .imagebox.style4 {
-	padding:29px 16px 20px;
+	padding: 29px 16px 40px;
 	text-align:left;
-	border:2px solid #e5e5e5;
+	border: 2px solid #e5e5e5;
 	border-radius:8px;
 	min-height:auto;
 	-webkit-transition:all 0.3s ease-in-out;
@@ -2419,8 +2419,8 @@ ul.flat-infomation.style1 li img {
 }
 
 .slider .slider-item.style9 .item-image {
-	padding-top:28px;
-	padding-right:79px;
+	/* padding-top:28px; */
+	/* padding-right:79px; */
 }
 
 /* Button Shop */
