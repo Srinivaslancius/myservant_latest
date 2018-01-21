@@ -14,7 +14,7 @@
 </style>
 
 					<div class="row">
-						<div class="col-md-3 col-sm-2">
+						<div class="col-md-3 col-2">
 							<div id="mega-menu">
 								<div class="btn-mega"><span></span>ALL CATEGORIES</div>
 								<?php 
@@ -76,7 +76,7 @@
 								<?php } ?>
 							</div>
 						</div><!-- /.col-md-3 -->
-						<div class="col-md-9 col-sm-10">
+						<div class="col-md-9 col-10">
 							<div class="nav-wrap">
 								<div id="mainnav" class="mainnav">
 									<ul class="menu">

@@ -119,11 +119,11 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
         </tr>
         <tr>
           <td>Success URI: </td>
-          <td colspan="3"><input name="surl" value="https://palle2patnam.com/lancius/myservant/ordersuccess.php?odi=<?php echo $odi; ?>&pay_stau=1" size="64" /></td>
+          <td colspan="3"><input name="surl" value="http://localhost/myservant_latest/ordersuccess.php?odi=<?php echo $odi; ?>&pay_stau=1" size="64" /></td>
         </tr>
         <tr>
           <td>Failure URI: </td>
-          <td colspan="3"><input name="furl" value="https://palle2patnam.com/lancius/myservant/orderfailure.php?odi=<?php echo $odi; ?>&pay_stau=3" size="64" /></td>
+          <td colspan="3"><input name="furl" value="http://localhost/myservant_latest/orderfailure.php?odi=<?php echo $odi; ?>&pay_stau=3" size="64" /></td>
         </tr>
 
         <tr>

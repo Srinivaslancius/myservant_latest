@@ -57,6 +57,9 @@
 							<?php while ($getPlaceOrders = $placeOrder->fetch_assoc()) { 
 								$cartTotal += $getPlaceOrders['item_quantity']*$getPlaceOrders['item_price'];
 								$getProductDetails= getIndividualDetails('grocery_product_name_bind_languages','product_id',$getPlaceOrders['product_id']);
+								$delivery_charges = $getPlaceOrders['delivery_charges'];
+								$service_tax = $getPlaceOrders['service_tax'];
+								$order_total = $getPlaceOrders['order_total'];
 							?>
 							  <tr>
 								<td><?php echo $getProductDetails['product_name']; ?></td>
@@ -69,10 +72,20 @@
 								<td></td>
 								<td style="font-size:14px;color:#fe6003">Rs : <?php echo $cartTotal; ?>/-</td>
 							  </tr>
+							  <tr>
+								<td style="font-size:14px;color:#fe6003">GST</td>
+								<td></td>
+								<td style="font-size:14px;color:#fe6003">Rs : <?php echo $service_tax; ?>/-</td>
+							  </tr>
+							  <tr>
+								<td style="font-size:14px;color:#fe6003">Delivery Charges</td>
+								<td></td>
+								<td style="font-size:14px;color:#fe6003">Rs : <?php echo $delivery_charges; ?>/-</td>
+							  </tr>
 							  <tr style="background-color:black">
 								<td style="font-size:14px;color:#fff">Total</td>
 								<td></td>
-								<td style="font-size:14px;color:#fff">Rs : <?php echo $cartTotal; ?>/-</td>
+								<td style="font-size:14px;color:#fff">Rs : <?php echo $order_total; ?>/-</td>
 							  </tr>
 							</tbody>
 						  </table>
