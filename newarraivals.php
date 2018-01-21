@@ -118,7 +118,7 @@
 							</div><!-- /.slider -->
 							<div class="wrap-imagebox">
 								<div class="flat-row-title">
-									<h3>Offer products</h3>
+									<h3>Offer Products</h3>
 									
 									<div class="clearfix"></div>
 								</div>
@@ -133,11 +133,11 @@
 									</ul>
 									<div class="sort">
 										<div class="popularity">
-											<select name="popularity">
+											<select name="popularity" onChange="loadPopularity(this.value)">
 												<option value="">Sort by popularity</option>
-												<option value="">Sort by popularity</option>
-												<option value="">Sort by popularity</option>
-												<option value="">Sort by popularity</option>
+												<option value="recent">Sort by recent</option>
+												<option value="low_high">Price low to high</option>
+												<option value="high_low">Price high to low</option>
 											</select>
 										</div>										
 									</div>
@@ -456,6 +456,35 @@
 	      $('#all_rows_grid').html(response);		  
 	      }
 		});
+	}
+
+	function loadPopularity(popStatus) {
+
+
+		$.ajax({
+	      type: 'post',
+	      url: 'load_popular_products.php',
+	      data: {
+	       popStatus:popStatus,
+	      },
+	      success: function (response) {
+	      //alert(response);
+	      $('#all_rows').html(response);		  
+	      }
+		});
+
+		$.ajax({
+	      type: 'post',
+	      url: 'load_popular_products_grid.php',
+	      data: {
+	       popStatus:popStatus,
+	      },
+	      success: function (response) {
+	      //alert(response);
+	      $('#all_rows_grid').html(response);		  
+	      }
+		});
+
 	}
 	
 	$(document).on('change','.brand_filters',function(){
