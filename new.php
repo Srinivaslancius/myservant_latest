@@ -1,5 +1,65 @@
 <?php include_once 'meta.php';?>
+<style>
+	.thumbnail {
+    padding: 0 0 15px 0;
+      border: 1px solid #ddd;
+    border-radius: 4px;
+	position: relative;
+  width: 100%;
+}
 
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+}
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+ background: rgba(0,0,0,0.8);
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: .5s ease;
+}
+
+.thumbnail:hover .overlay {
+  height: 100%;
+}
+
+.text {
+  color: white;
+  font-size: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  
+}
+.button {
+    background-color: #FE6003;
+	
+    border-radius: 30px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+	</style>
 <body class="header_sticky">
 	<div class="boxed style2">
 
@@ -84,118 +144,80 @@
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-slider -->
-		
-         <?php $getOfferModules = "SELECT * FROM grocery_offer_module WHERE lkp_status_id = 0 ORDER BY id DESC LIMIT 4";
-						$getOfferModules1 = $conn->query($getOfferModules); ?>
-                <section class="flat-row flat-banner-box">
-				<div class="container-fluid">
-					<div class="row">
+                
+		<section class="main-blog">
+			<div class="container text-center bg-grey">
+  <h2>Offers based on your interest</h2><br> 
+  <div class="row text-center">
+    <div class="col-sm-3">
+      <div class="thumbnail">
+     <img src="images/team/01.jpg" alt="" style="width=400px;height:300px" class="image1">
+        <p><strong>Somthing</strong></p>
+        <p>Experies on 31-03-2018</p>
+		 <div class="overlay">
+    <div class="text"><h4 style="margin-bottom:18px">Get Discount upto</h4>
+	<h3 style="color:white;margin-bottom:15px;font-size:20px">₹15,000</h3>
+	<p style="font-size:13px;margin-bottom:15px;">Pay Using ICICI Bank<br>Netbanking, or Cards</p>
+	<a href="new1.php"><button class="button" style="font-size:15px">SEE FULL DETAILS</button></a>
 
-						<div class="wrap-banner">
-							<?php while($getOfferModulesData = $getOfferModules1->fetch_assoc()) { ?>
-							<div class="banner-box style1">
-								
-								<div class="inner-box">
-									<a href="<?php echo $getOfferModulesData['link'] ?>" title="" target="_blank">
-										<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_offer_module_image/'.$getOfferModulesData['image'] ?>" alt="<?php echo $getOfferModulesData['name'] ?>" style="height:179px;width:555px">
-									</a>
-								</div><!-- /.inner-box -->
-								
-								
-							</div><!-- /.box -->
-							<?php } ?>
-						</div><!-- /.col-md-4 -->
-					</div><!-- /.row -->
-				</div><!-- /.container -->
-			</section><!-- /.flat-banner-box -->
-<!-- /.flat-banner-box -->
+	</div>
+														
+  </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
 
- 	
- 		<div class="divider20"></div>
+     <div class="thumbnail">
+     <img src="images/team/01.jpg" alt="" style="width=400px;height:300px" class="image1">
+        <p><strong>Somthing</strong></p>
+        <p>Experies on 31-03-2018</p>
+		 <div class="overlay">
+    <div class="text"><h4 style="margin-bottom:18px">Get Discount upto</h4>
+	<h3 style="color:white;margin-bottom:15px;font-size:20px">₹15,000</h3>
+	<p style="font-size:13px;margin-bottom:15px;">Pay Using ICICI Bank<br>Netbanking, or Cards</p>
+	<a href="new1.php"><button class="button" style="font-size:15px">SEE FULL DETAILS</button></a>
 
- 		<?php 
-		if($_SESSION['city_name'] == '') {
-            $lkp_city_id = 1;
-        } else {
-            $getCities1 = getIndividualDetails('grocery_lkp_cities','city_name',$_SESSION['city_name']);
-			$lkp_city_id = $getCities1['id'];
-        }
-		$getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND deal_start_date != '0000-00-00' AND deal_end_date != '0000-00-00' AND deal_start_time != '00:00:00' AND deal_end_time != '00:00:00' AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)";
-		$productDetails = $conn->query($getProducts); 
-		if($productDetails->num_rows > 0) {
-		?>
-		<section class="flat-imagebox">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="owl-carousel-2 style2">
-								<?php while($productDetails1 = $productDetails->fetch_assoc()) { 
-									$getProductNames = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productDetails1['id']);
-								$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$productDetails1['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
-							 	$allGetPrices = $conn->query($getPrices);
-							 	$getPrc1 = $allGetPrices->fetch_assoc();
-							 	$deal_start_date = $productDetails1['deal_start_date'];
-							 	$deal_end_date = $productDetails1['deal_end_date'];
-								?>
-								<div class="box-counter style1">
-									<div class="counter">
-										<span class="special">Special Offer</span>
-										<div class="counter-content">
-											<p><?php echo $getProductNames['product_name']; ?></p>
-											<div id="timer">
-											  <div id="days"></div>
-											  <div id="hours"></div>
-											  <div id="minutes"></div>
-											  <div id="seconds"></div>
-											</div>
-										</div><!-- /.counter-content -->
-									</div><!-- /.counter -->
-									<div class="product-item">
-										<div class="imagebox style3 v1">
-											<div class="box-image save">
-												<a href="#" title="">
-													<img src="images/product/other/l06.jpg" alt="">
-												</a>
-												<span>Save $20.00</span>
-											</div><!-- /.box-image -->
-											<div class="box-content">
-												<div class="product-name">
-													<a href="#" title=""><?php echo $getProductNames['product_name']; ?></a>
-												</div>
-												<ul class="product-info">
-													<li><?php echo $productDetails1['product_description']; ?></li>
-												</ul>
-												<div class="price">
-													<span class="sale"><?php echo 'Rs.' . $getPrc1['selling_price'] . '.00'; ?></span>
-													<span class="regular"><?php echo 'Rs.' . $getPrc1['mrp_price']; ?></span>
-												</div>
-											</div><!-- /.box-content -->
-											<div class="box-bottom">
-												<div class="btn-add-cart">
-													<a href="#" title="" onClick="show_cart()">
-														<img src="images/icons/add-cart.png" alt="">Add to Cart
-													</a>
-												</div>
-												<div class="compare-wishlist">
-													<a href="#" class="compare" title="">
-														<img src="images/icons/compare.png" alt="">Compare
-													</a>
-													<a href="#" class="wishlist" title="">
-														<img src="images/icons/wishlist.png" alt="">Wishlist
-													</a>
-												</div>
-											</div><!-- /.box-bottom -->
-										</div><!-- /.imagbox style3 -->
-									</div><!-- /.product-item -->
-									<div class="clearfix"></div>
-								</div><!-- /.box-counter -->
-								<?php } ?>
-							</div><!-- /.owl-carousel-2 -->
-						</div><!-- /.col-md-12 -->
-					</div><!-- /.row -->
-				</div><!-- /.container -->
-			</section><!-- /.flat-imagebox -->  
-			<?php } ?>     
+	</div>
+														
+  </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="thumbnail">
+     <img src="images/team/01.jpg" alt="" style="width=400px;height:300px" class="image1">
+        <p><strong>Somthing</strong></p>
+        <p>Experies on 31-03-2018</p>
+		 <div class="overlay">
+    <div class="text"><h4 style="margin-bottom:18px">Get Discount upto</h4>
+	<h3 style="color:white;margin-bottom:15px;font-size:20px">₹15,000</h3>
+	<p style="font-size:13px;margin-bottom:15px;">Pay Using ICICI Bank<br>Netbanking, or Cards</p>
+	<a href="new1.php"><button class="button" style="font-size:15px">SEE FULL DETAILS</button></a>
+
+	</div>
+														
+  </div>
+      </div>
+    </div>
+	<div class="col-sm-3">
+      <div class="thumbnail">
+     <img src="images/team/01.jpg" alt="" style="width=400px;height:300px" class="image1">
+        <p><strong>Somthing</strong></p>
+        <p>Experies on 31-03-2018</p>
+		 <div class="overlay">
+    <div class="text"><h4 style="margin-bottom:18px">Get Discount upto</h4>
+	<h3 style="color:white;margin-bottom:15px;font-size:20px">₹15,000</h3>
+	<p style="font-size:13px;margin-bottom:15px;">Pay Using ICICI Bank<br>Netbanking, or Cards</p>
+	<a href="new1.php"><button class="button" style="font-size:15px">SEE FULL DETAILS</button></a>
+
+	</div>
+														
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+		</section><!-- /.main-blog -->
+   
 		
 
 

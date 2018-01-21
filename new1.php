@@ -1,5 +1,20 @@
 <?php include_once 'meta.php';?>
-
+<style>
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    font-size: 13px;
+}
+.table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom: 0px;
+    background-color: #fe6003;
+	color:white;
+    font-weight: bold;
+}
+	</style>
 <body class="header_sticky">
 	<div class="boxed style2">
 
@@ -84,118 +99,128 @@
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</section><!-- /.flat-slider -->
-		
-         <?php $getOfferModules = "SELECT * FROM grocery_offer_module WHERE lkp_status_id = 0 ORDER BY id DESC LIMIT 4";
-						$getOfferModules1 = $conn->query($getOfferModules); ?>
-                <section class="flat-row flat-banner-box">
-				<div class="container-fluid">
-					<div class="row">
-
-						<div class="wrap-banner">
-							<?php while($getOfferModulesData = $getOfferModules1->fetch_assoc()) { ?>
-							<div class="banner-box style1">
-								
-								<div class="inner-box">
-									<a href="<?php echo $getOfferModulesData['link'] ?>" title="" target="_blank">
-										<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_offer_module_image/'.$getOfferModulesData['image'] ?>" alt="<?php echo $getOfferModulesData['name'] ?>" style="height:179px;width:555px">
-									</a>
-								</div><!-- /.inner-box -->
-								
-								
-							</div><!-- /.box -->
-							<?php } ?>
-						</div><!-- /.col-md-4 -->
-					</div><!-- /.row -->
-				</div><!-- /.container -->
-			</section><!-- /.flat-banner-box -->
-<!-- /.flat-banner-box -->
-
- 	
- 		<div class="divider20"></div>
-
- 		<?php 
-		if($_SESSION['city_name'] == '') {
-            $lkp_city_id = 1;
-        } else {
-            $getCities1 = getIndividualDetails('grocery_lkp_cities','city_name',$_SESSION['city_name']);
-			$lkp_city_id = $getCities1['id'];
-        }
-		$getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND deal_start_date != '0000-00-00' AND deal_end_date != '0000-00-00' AND deal_start_time != '00:00:00' AND deal_end_time != '00:00:00' AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)";
-		$productDetails = $conn->query($getProducts); 
-		if($productDetails->num_rows > 0) {
-		?>
-		<section class="flat-imagebox">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="owl-carousel-2 style2">
-								<?php while($productDetails1 = $productDetails->fetch_assoc()) { 
-									$getProductNames = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productDetails1['id']);
-								$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$productDetails1['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
-							 	$allGetPrices = $conn->query($getPrices);
-							 	$getPrc1 = $allGetPrices->fetch_assoc();
-							 	$deal_start_date = $productDetails1['deal_start_date'];
-							 	$deal_end_date = $productDetails1['deal_end_date'];
-								?>
-								<div class="box-counter style1">
-									<div class="counter">
-										<span class="special">Special Offer</span>
-										<div class="counter-content">
-											<p><?php echo $getProductNames['product_name']; ?></p>
-											<div id="timer">
-											  <div id="days"></div>
-											  <div id="hours"></div>
-											  <div id="minutes"></div>
-											  <div id="seconds"></div>
-											</div>
-										</div><!-- /.counter-content -->
-									</div><!-- /.counter -->
-									<div class="product-item">
-										<div class="imagebox style3 v1">
-											<div class="box-image save">
-												<a href="#" title="">
-													<img src="images/product/other/l06.jpg" alt="">
-												</a>
-												<span>Save $20.00</span>
-											</div><!-- /.box-image -->
-											<div class="box-content">
-												<div class="product-name">
-													<a href="#" title=""><?php echo $getProductNames['product_name']; ?></a>
-												</div>
-												<ul class="product-info">
-													<li><?php echo $productDetails1['product_description']; ?></li>
-												</ul>
-												<div class="price">
-													<span class="sale"><?php echo 'Rs.' . $getPrc1['selling_price'] . '.00'; ?></span>
-													<span class="regular"><?php echo 'Rs.' . $getPrc1['mrp_price']; ?></span>
-												</div>
-											</div><!-- /.box-content -->
-											<div class="box-bottom">
-												<div class="btn-add-cart">
-													<a href="#" title="" onClick="show_cart()">
-														<img src="images/icons/add-cart.png" alt="">Add to Cart
-													</a>
-												</div>
-												<div class="compare-wishlist">
-													<a href="#" class="compare" title="">
-														<img src="images/icons/compare.png" alt="">Compare
-													</a>
-													<a href="#" class="wishlist" title="">
-														<img src="images/icons/wishlist.png" alt="">Wishlist
-													</a>
-												</div>
-											</div><!-- /.box-bottom -->
-										</div><!-- /.imagbox style3 -->
-									</div><!-- /.product-item -->
-									<div class="clearfix"></div>
-								</div><!-- /.box-counter -->
-								<?php } ?>
-							</div><!-- /.owl-carousel-2 -->
-						</div><!-- /.col-md-12 -->
-					</div><!-- /.row -->
-				</div><!-- /.container -->
-			</section><!-- /.flat-imagebox -->  
-			<?php } ?>     
+                
+		<section class="main-blog">
+			<div class="container">
+			<div class="row">
+			<div class="col-sm-2">
+			</div>
+			<div class="col-sm-8">
+			<h2 style="text-align:center">Goomo flights offer - Get discount up to Rs.15,000</h2><br>
+			<center> <button type="submit" class="contact" style="background-color:#f92400" data-toggle="modal" data-target="#myModal1">BOOK NOW</button></center><br>
+			<p>ICICI Bank in association with Goomo brings to you an exclusive offer on domestic and international flight bookings.</p>
+			<p>Get instant discount up to Rs.15,000 on flight bookings.</p>
+			<p><b>Offer Details:</b></p>
+			<p style="font-size:15px;margin:7px 0px"><b>Domestic Flights:</b></p>
+			<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Discount</th>
+        <th>Booking Amount</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Rs.400	</td>
+        <td>Rs.3,000 - Rs.6,999</td>
+       
+      </tr>
+      <tr>
+        <td>Rs.800</td>
+        <td>Rs.7,000 - Rs.9,999	</td>
+      
+      </tr>
+      <tr>
+        <td>Rs.1,000</td>
+        <td>Rs.10,000 - Rs.19,999</td>
+       
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:15px;margin:7px 0px"><b>Domestic Flights:</b></p>
+  	<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Discount</th>
+        <th>Booking Amount</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Rs.400	</td>
+        <td>Rs.3,000 - Rs.6,999</td>
+       
+      </tr>
+      <tr>
+        <td>Rs.800</td>
+        <td>Rs.7,000 - Rs.9,999	</td>
+      
+      </tr>
+      <tr>
+        <td>Rs.1,000</td>
+        <td>Rs.10,000 - Rs.19,999</td>
+       
+      </tr>
+    </tbody>
+  </table>
+  <p><b>Steps to avail the offer:</b></p>
+  <ul>
+  <li>Log on to goomo.com</li>
+   <li>Log on to goomo.com</li>
+    <li>Log on to goomo.com</li>
+	</ul>
+	<p style="font-size:15px">Offer valid till January 31, 2018.</p><br>
+  
+  <button type="submit" class="contact" style="background-color:#f92400" data-toggle="modal" data-target="#myModal">BOOK NOW</button>
+			</div>
+			<div class="col-sm-2">
+			</div>
+			</div>
+       </div>
+	    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+        
+          <center><h4 class="modal-title" style="font-size:23px">Disclaimer</h4></center>
+		   <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>By clicking on the hyper-link, you will be leaving ICICIBank.com and entering website operated by other parties. ICICI Bank does not control or endorse such websites, and bears no responsibility for them.</p>
+        </div>
+        <div class="modal-footer">
+          <center> <button type="submit" class="contact" style="background-color:#f92400">CLICK TO PROCEED</button></center>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+        
+          <center><h4 class="modal-title" style="font-size:23px">Disclaimer</h4></center>
+		   <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>By clicking on the hyper-link, you will be leaving ICICIBank.com and entering website operated by other parties. ICICI Bank does not control or endorse such websites, and bears no responsibility for them.</p>
+        </div>
+        <div class="modal-footer">
+          <center> <button type="submit" class="contact" style="background-color:#f92400">CLICK TO PROCEED</button></center>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+		</section><!-- /.main-blog -->
+   
 		
 
 
