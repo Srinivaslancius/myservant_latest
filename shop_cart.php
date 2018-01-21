@@ -57,13 +57,13 @@
 		?>
 		<?php if($cartItems->num_rows > 0) { ?>
 		<section class="flat-shop-cart">
-			<div class="container">
+			<div class="container cart">
 				<div class="row">
 					<div class="col-lg-8">
 						<div class="flat-row-title style1">
 							<h3>Shopping Cart</h3>
 						</div>
-						<div class="table-cart cart">
+						<div class="table-cart">
 							<table>
 								<thead>
 									<tr>
@@ -88,7 +88,7 @@
 												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image']; ?>" alt="<?php echo $getCartItems['product_name']; ?>">
 											</div>
 											<div class="name-product">
-												<?php echo $getProductName['product_name']; ?>
+												<?php echo wordwrap($getProductName['product_name'],25,"<br>\n"); ?>
 											</div>
 											<div class="price">
 												 Rs . <?php echo $getCartItems['product_price']; ?>
@@ -157,12 +157,12 @@
                                         </tr> -->
                                         <tr>
                                             <td>Total</td>
-                                            <td class="price-total" id="ordertotal">Rs. <?php echo $subTotal+$service_tax+$getSiteSettingsData1['delivery_charges']; ?></td>
+                                            <td class="price-total" id="ordertotal">Rs. <?php echo round($subTotal+$service_tax+$getSiteSettingsData1['delivery_charges']); ?></td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <div class="btn-cart-totals">
-                                    <a href="#" class="update" title="">Clear Cart</a>
+                                    <a href="delete_cart.php" class="update" title="">Clear Cart</a>
                                     <?php if(!isset($_SESSION['user_login_session_id'])) { ?>
                                     	<a href="login.php?cart_id=<?php echo encryptPassword(1);?>" class="update" style="background-color:#2d2d2d !important;">Proceed To Checkout</a>
                                     <?php } else { ?>
@@ -298,28 +298,44 @@ function add_cart_item1(cartId) {
   success:function(data) {
     //alert(data);
     $('.cart').html(data);
-    $('#subtotal').html($('#subTotal').val());
-    $('#ordertotal').html($('#orderTotal').val());
-    $('#serviceTax1').html($('#serviceTax').val());
+  }
+ });
+ $.ajax({
+  type:'post',
+  url:'header_cart_page_inc.php',
+  data:{
+     cart_id:cartId,service_tax:service_tax,delivery_charges:delivery_charges,      
+  },
+  success:function(data) {
+    //alert(data);
+    $('.header_cart').html(data);
   }
  });
 
 }
 
 function remove_cart_item1(cartId) {
-
+ var service_tax = $('#service_tax').val();
+ var delivery_charges = $('#delivery_charges').val();
  $.ajax({
   type:'post',
   url:'cart_page_dec.php',
   data:{
-     cart_id:cartId,       
+     cart_id:cartId,service_tax:service_tax,delivery_charges:delivery_charges,      
   },
-  success:function(data) { 
-    //alert(data);
+  success:function(data) {
     $('.cart').html(data);
-    $('#subtotal').html($('#subTotal').val());
-    $('#orderTotal').html($('#orderTotal').val());
-    $('#serviceTax1').html($('#serviceTax').val());
+  }
+
+ });
+ $.ajax({
+  type:'post',
+  url:'header_cart_page_dec.php',
+  data:{
+     cart_id:cartId,service_tax:service_tax,delivery_charges:delivery_charges,      
+  },
+  success:function(data) {
+    $('.header_cart').html(data);
   }
 
  });
