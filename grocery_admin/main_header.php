@@ -299,26 +299,26 @@ $getSiteSettingsData = $getSiteSettings->fetch_assoc();
                   <span class="nav-cell p-r-10">
                     <img class="img-circle" src="img/avatars/1.jpg" alt="" width="32" height="32">
                   </span>
-                  <span class="nav-cell">Jon Snow
+                  <span class="nav-cell"><?php echo $_SESSION['grocery_admin_user_name']; ?>
                     <span class="caret"></span>
                   </span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li>
+                  <!-- <li>
                     <a href="#">
                       <i class="zmdi zmdi-account-o m-r-10"></i> Profile</a>
-                  </li>
-                  <li>
+                  </li> -->
+                  <!-- <li>
                     <a href="#">
                       <i class="zmdi zmdi-settings m-r-10"></i> Settings</a>
-                  </li>
+                  </li>-->
                   <li>
-                    <a href="#">
-                      <i class="zmdi zmdi-help-outline m-r-10"></i> Help</a>
+                    <a href="change_password.php">
+                      <i class="zmdi zmdi-power m-r-10"></i>Change Password</a>
                   </li>
                   <li role="separator" class="divider"></li>
                   <li>
-                    <a href="#">
+                    <a href="logout.php">
                       <i class="zmdi zmdi-power m-r-10"></i> Logout</a>
                   </li>
                 </ul>
@@ -326,4 +326,43 @@ $getSiteSettingsData = $getSiteSettings->fetch_assoc();
             </ul>
           </div>
         </div>
+        <div class="site-main">
+    <?php include_once 'admin_includes/side_navigation.php'; ?>
+    <?php if(isset($_GET['msg']) && $_GET['msg']=='success') { ?>
+    <div class="col-sm-6 col-md-offset-5" style="margin-left:32.667% !important; margin-top:7px;" id="set_valid_msg">
+      <div class="alert alert-success alert-icon-bg alert-dismissable" role="alert" style="margin-bottom:-7px;">
+        <div class="alert-icon">
+          <i class="zmdi zmdi-check"></i>
+        </div>
+        <div class="alert-message">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">
+              <i class="zmdi zmdi-close"></i>
+            </span>
+          </button>
+          <strong>Well done!</strong> Your data updated successfully  .
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <?php } elseif(isset($_GET['msg']) && $_GET['msg']=='fail') { ?>
+    <div class="col-sm-6 col-md-offset-5" style="margin-left:32.667% !important; margin-top:7px;" id="set_valid_msg">
+      <div class="alert alert-danger alert-icon-bg alert-dismissable" role="alert" style="margin-bottom:-7px;">
+        <div class="alert-icon">
+          <i class="zmdi zmdi-check"></i>
+        </div>
+        <div class="alert-message">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">
+              <i class="zmdi zmdi-close"></i>
+            </span>
+          </button>
+          <strong>Oops!</strong> Your data updation failed.
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  <?php } else {  ?>
+  <div class="clearfix"></div>
+  <?php } ?>
       </nav>
