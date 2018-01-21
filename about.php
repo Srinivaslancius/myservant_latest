@@ -87,7 +87,7 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-testimonial -->
 
-		<section class="flat-row flat-brand style2">
+		<!--<section class="flat-row flat-brand style2">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
@@ -101,11 +101,11 @@
 								<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brand_logos/'.$getBrandlogos['brand_logo'] ?>" width="200px" height="150px">
 							</li>
 							<?php } ?>
-						</ul><!-- /.owl-carousel-5 
-					</div><!-- /.col-md-12 -->
-				</div><!-- /.row -->
-			</div><!-- /.container -->
-		</section><!-- /.flat-brand -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>-->
 
 		<footer>
 			<?php include_once 'footer.php';?>
