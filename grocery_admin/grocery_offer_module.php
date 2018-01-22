@@ -74,7 +74,7 @@
                                     <img id="output" height="100" width="100"/>
                                     <label class="btn btn-default file-upload-btn">Choose file...
                                         <input id="form-control-22" class="file-upload-input" type="file" name="image" accept="image/*"  onchange="loadFile(event)" required>
-                                    </label>
+                                    </label> (width : 555px ; height : 179px)
                                 </div>
                             </div>
                             <div class="form-group">

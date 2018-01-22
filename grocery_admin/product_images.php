@@ -70,7 +70,7 @@
                                     <div class="col-sm-6 col-md-2">
                                         <label class="btn btn-default file-upload-btn">Choose file...
                                             <input id="form-control-22" class="file-upload-input" type="file" name="product_images[]" accept="image/*" required>
-                                        </label>
+                                        </label> (width : 420px ; height : 420px)
                                     </div>
                                     <div class="col-sm-6 col-md-2">
                                         <span><button type="button" class="btn btn-success add_more_button"> <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i></button></span>                                    
