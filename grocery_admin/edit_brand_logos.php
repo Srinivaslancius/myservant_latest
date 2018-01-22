@@ -79,7 +79,7 @@
                                         <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_brand_logos/'.$getBrandLogos['brand_logo']; ?>"  id="output" height="100" width="100"/>
                                     <?php } ?>
                                     <label class="btn btn-default file-upload-btn">Choose file...
-                                        <input id="form-control-22" class="file-upload-input" type="file" name="brand_logo" accept="image/*">
+                                        <input id="form-control-22" class="file-upload-input" type="file" name="brand_logo" accept="image/*" onchange="loadFile(event)">
                                     </label> (width : 150px ; height : 150px)
                                 </div>
                             </div>
