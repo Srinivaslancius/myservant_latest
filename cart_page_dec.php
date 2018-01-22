@@ -56,6 +56,7 @@ echo'<div class="row">
 					$cartTotal = $getCartItems['product_price']*$getCartItems['product_quantity'];
 					$subTotal += $getCartItems['product_price']*$getCartItems['product_quantity'];
 					$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
+					$getProductWeight = getIndividualDetails('grocery_product_bind_weight_prices','id',$getCartItems['product_weight_type']);
 					$img = $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image'];
 					echo'<tr>
 						<td>
@@ -67,21 +68,15 @@ echo'<div class="row">
 							</div>
 							<div class="col-sm-3">
 							<div class="name-product">
-								'.wordwrap($getProductName['product_name'],25,"<br>\n").'
+								'.wordwrap($getProductName['product_name'],20,"<br>\n").'
 							</div>
 							</div>
 							<div class="col-sm-3">
-							<div class="quanlity-box">
-											<div class="colors">
-											<select>
-											<option value="96">500 - Rs : 80</option>
-																				  
-												</select>
-											</div>
-									
-											</div>
-											</div>
-											<div class="col-sm-3">
+								<div class="price">
+									'.$getProductWeight['weight_type'].'
+								</div>
+							</div>
+							<div class="col-sm-3">
 							<div class="price">
 								 Rs . '.$getCartItems['product_price'].'
 							</div>

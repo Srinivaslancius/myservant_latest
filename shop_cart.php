@@ -82,6 +82,7 @@
 								$subTotal += $getCartItems['product_price']*$getCartItems['product_quantity'];
 
 								$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
+								$getProductWeight = getIndividualDetails('grocery_product_bind_weight_prices','id',$getCartItems['product_weight_type']);
 								?>
 									<tr>
 										<td>
@@ -97,7 +98,10 @@
 											</div>
 											</div>
 											<div class="col-sm-3">
-											<div class="quanlity-box">
+												<div class="price">
+													<?php echo $getProductWeight['weight_type']; ?>
+												</div>
+											<!-- <div class="quanlity-box">
 											<div class="colors">
 											<select onchange="get_price(this.value,'na10');">
 											<option value="96">500 - Rs : 80</option>
@@ -105,7 +109,7 @@
 												</select>
 											</div>
 									
-											</div>
+											</div> -->
 											</div>
 											<div class="col-sm-3">
 											<div class="price">

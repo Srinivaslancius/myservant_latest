@@ -11,6 +11,11 @@ $getCartQuantity = getIndividualDetails('grocery_cart','id',$cartId);
 $itemPrevQuan = $getCartQuantity['product_quantity'];
 
 $itemPrevQuantity = $itemPrevQuan+1;
+
+if($itemPrevQuantity == 0){
+    $sql3 = "DELETE FROM grocery_cart WHERE id ='$cartId' ";
+    $conn->query($sql3);
+}
     
 $updateItems = "UPDATE grocery_cart SET product_quantity = '$itemPrevQuantity' WHERE id = '$cartId' ";
 $upCart = $conn->query($updateItems);
@@ -29,8 +34,8 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
 }
 
 $cartTotal = 0;
-
-echo '<div class="row">
+if($cartItems->num_rows > 0) {
+echo'<div class="row">
 	<div class="col-lg-12">
 		<div class="flat-row-title style1">
 			<h3>Shopping Cart</h3>
@@ -51,6 +56,7 @@ echo '<div class="row">
 					$cartTotal = $getCartItems['product_price']*$getCartItems['product_quantity'];
 					$subTotal += $getCartItems['product_price']*$getCartItems['product_quantity'];
 					$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getCartItems['product_id']);
+					$getProductWeight = getIndividualDetails('grocery_product_bind_weight_prices','id',$getCartItems['product_weight_type']);
 					$img = $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image'];
 					echo'<tr>
 						<td>
@@ -60,23 +66,16 @@ echo '<div class="row">
 								<img src="'.$img.'" alt="">
 							</div>
 							</div>
-							
-										<div class="col-sm-3">
+							<div class="col-sm-3">
 							<div class="name-product">
-								'.wordwrap($getProductName['product_name'],25,"<br>\n").'
+								'.wordwrap($getProductName['product_name'],20,"<br>\n").'
 							</div>
 							</div>
 							<div class="col-sm-3">
-							<div class="quanlity-box">
-											<div class="colors">
-											<select>
-											<option value="96">500 - Rs : 80</option>
-																				  
-												</select>
-											</div>
-									
-											</div>
-											</div>
+								<div class="price">
+									'.$getProductWeight['weight_type'].'
+								</div>
+							</div>
 							<div class="col-sm-3">
 							<div class="price">
 								 Rs . '.$getCartItems['product_price'].'
@@ -110,6 +109,7 @@ echo '<div class="row">
 	<div class="col-lg-7">
 	</div>
 	<div class="col-lg-5">
+	
 	    <div class="cart-totals">
 	        <h3>Cart Totals</h3>
 	        <form action="#" method="get" accept-charset="utf-8">
@@ -150,4 +150,11 @@ echo '<div class="row">
 	    </div>
     </div>
 </div>';
+} else { 
+	echo'<center><img src="images/cart.png"></center>
+	<p style="text-align:center;font-size:20px;margin-top:10px">Your shopping cart is currently empty</p>			
+	<p style="text-align:center;margin:15px">please click on the Continue Shopping button below for items</p>
+    <center><a href="index.php"><button type="submit" class="contact" style="background-color:#FE6003">Continue Shopping</button></a></center>';
+}
+echo'<input type="hidden" id="cart_cnt" value="'.$cartCount.'">';
 }
