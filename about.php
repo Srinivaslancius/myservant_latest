@@ -45,7 +45,7 @@
 		<section class="flat-about">
 			<div class="container">
 				
-				<div class="title">
+				<div class="title" style="text-align:justify">
 								
 				<?php echo $getAboutUsData['description'];?>	
 				</div>

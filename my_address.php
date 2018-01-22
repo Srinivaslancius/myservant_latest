@@ -111,7 +111,7 @@
 					 <div class="col-sm-12">
 					<div class="form-group">
 						 <label for="address">Address</label>
-							<textarea class="form-control" rows="5" id="comment"></textarea>
+							<textarea class="form-control" rows="5" id="comment" style="border-radius:30px;height:48px"></textarea>
 					</div>
 					</div>
 					<div class="col-sm-6">
@@ -123,7 +123,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 						<label for="sel1">Select State</label>
-					  <select class="form-control" id="sel1">
+					  <select class="form-control" id="sel1" style="border-radius:30px">
 						<option>Select State</option>
 						<option>2</option>
 						<option>3</option>

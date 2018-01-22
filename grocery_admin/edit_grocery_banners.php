@@ -75,6 +75,7 @@
         }
         ?>
         
+        
         <div class="site-content">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -116,7 +117,7 @@
                                     <?php } ?>
                                     <label class="btn btn-default file-upload-btn">Choose file...
                                         <input class="file-upload-input" type="file" name="web_image" multiple="multiple" accept="image/*" onchange="loadFile(event)">
-                                    </label>
+                                    </label> (width : 1110px ; height : 416px)
                                 </div>
                             </div>
                             <div class="form-group">
@@ -127,7 +128,7 @@
                                     <?php } ?>
                                     <label class="btn btn-default file-upload-btn">Choose file...
                                         <input id="form-control-22" class="file-upload-input" type="file" name="app_image" accept="image/*" onchange="loadFile1(event)">
-                                    </label>
+                                    </label> (width : 550px ; height : 200px)
                                 </div>
                             </div>
                             <div class="form-group">

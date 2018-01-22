@@ -108,7 +108,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Web Logo</label>
+                                <label class="col-sm-3 col-md-4 control-label" for="form-control-22">Web Image</label>
                                 <div class="col-sm-6 col-md-4">
                                     <?php if($getCategories['category_web_image']!='') { ?>
                                         <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_category_web_image/'.$getCategories['category_web_image']; ?>" id="output" height="100" width="100"/>
@@ -119,14 +119,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 col-md-4 control-label" for="form-control-22">App Logo</label>
+                                <label class="col-sm-3 col-md-4 control-label" for="form-control-22">App Image</label>
                                 <div class="col-sm-6 col-md-4">
                                     <?php if($getCategories['category_app_image']!='') { ?>
                                         <img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_category_app_image/'.$getCategories['category_app_image']; ?>"  id="output1" height="100" width="100"/>
                                     <?php } ?>
                                     <label class="btn btn-default file-upload-btn">Choose file...
-                                        <input id="form-control-22" class="file-upload-input" type="file" name="category_app_image" accept="image/*" onchange="loadFile1(event)">
-                                    </label>
+                                        <input id="form-control-22" class="file-upload-input" type="file" name="category_app_image" accept="image/*" onchange="loadFile1(event)"> 
+                                    </label> (Width : 100 px ; height : 100 px)
                                 </div>
                             </div>
 

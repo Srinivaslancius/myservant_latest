@@ -36,7 +36,7 @@ if(isset($_SESSION['user_login_session_id']) && $_SESSION['user_login_session_id
 $cartTotal = 0;
 if($cartItems->num_rows > 0) {
 echo'<div class="row">
-	<div class="col-lg-8">
+	<div class="col-lg-12">
 		<div class="flat-row-title style1">
 			<h3>Shopping Cart</h3>
 		</div>
@@ -47,7 +47,7 @@ echo'<div class="row">
 						<th>Product</th>
 						<th>Quantity</th>
 						<th>Total</th>
-						<th></th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>';
@@ -59,14 +59,32 @@ echo'<div class="row">
 					$img = $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image'];
 					echo'<tr>
 						<td>
+						<div class="row">
+										<div class="col-sm-3">
 							<div class="img-product">
 								<img src="'.$img.'" alt="">
 							</div>
+							</div>
+							<div class="col-sm-3">
 							<div class="name-product">
 								'.wordwrap($getProductName['product_name'],25,"<br>\n").'
 							</div>
+							</div>
+							<div class="col-sm-3">
+							<div class="quanlity-box">
+											<div class="colors">
+											<select>
+											<option value="96">500 - Rs : 80</option>
+																				  
+												</select>
+											</div>
+									
+											</div>
+											</div>
+											<div class="col-sm-3">
 							<div class="price">
 								 Rs . '.$getCartItems['product_price'].'
+							</div>
 							</div>
 							<div class="clearfix"></div>
 						</td>
@@ -93,7 +111,10 @@ echo'<div class="row">
 			</table>
 		</div>
 	</div>
-	<div class="col-lg-4">
+	<div class="col-lg-7">
+	</div>
+	<div class="col-lg-5">
+	
 	    <div class="cart-totals">
 	        <h3>Cart Totals</h3>
 	        <form action="#" method="get" accept-charset="utf-8">

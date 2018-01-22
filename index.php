@@ -629,10 +629,6 @@ $getCategoriesNames1 = $conn->query($getCategoriesNames);
 			</section><!-- /.flat-imagebox -->
 
 			<div class="divider20"></div>
-
-
-<!--Tabbination For Most Popular Products Ends Here-->
-
  	<section class="flat-imagebox style4">
 			<div class="container-fluid">
 				<div class="row">
@@ -883,7 +879,24 @@ $getReturnPolicydataData = getIndividualDetails('grocery_content_pages','id',7);
 	}
 setInterval(function() { makeTimer(); }, 1000);
 </script>
+<script>
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
 
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
 <style type="text/css">
 
 
