@@ -72,7 +72,7 @@
                                 <div class="col-sm-6 col-md-4">
                                     <label class="btn btn-default file-upload-btn">Choose file...
                                         <input id="form-control-22" class="file-upload-input" type="file" name="brand_logo" accept="image/*" required> 
-                                    </label> (width : 168px ; height : 134px)
+                                    </label> (width : 150px ; height : 150px)
                                 </div>
                             </div>
                             <?php $getStatus = getAllData('lkp_status');?>

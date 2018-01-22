@@ -80,7 +80,7 @@
                                     <?php } ?>
                                     <label class="btn btn-default file-upload-btn">Choose file...
                                         <input id="form-control-22" class="file-upload-input" type="file" name="brand_logo" accept="image/*">
-                                    </label>
+                                    </label> (width : 150px ; height : 150px)
                                 </div>
                             </div>
                             <?php $getStatus = getAllData('lkp_status');?>
