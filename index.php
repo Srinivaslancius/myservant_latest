@@ -138,6 +138,501 @@
 			</section><!-- /.flat-banner-box -->
 <!-- /.flat-banner-box -->
 
+<?php 
+if($_SESSION['city_name'] == '') {
+    $lkp_city_id = 1;
+} else {
+    $getCities1 = getIndividualDetails('grocery_lkp_cities','city_name',$_SESSION['city_name']);
+	$lkp_city_id = $getCities1['id'];
+}
+$getTags = "SELECT * FROM grocery_tags WHERE lkp_status_id = 0 AND id IN (SELECT tag_id FROM grocery_product_bind_tags WHERE lkp_status_id = 0 AND product_id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)) ORDER BY id";
+$tagNames = $conn->query($getTags);
+?>
+<!--Tabbination Starts Here for New Arrivals-->
+<section class="flat-imagebox">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="product-tab style3">
+							<ul class="tab-list">
+								<?php while($tagNames1 = $tagNames->fetch_assoc()) { 
+								?>
+								<li class="<?php if($tagNames1['id'] == 1) { echo 'active'; } ?>"><?php echo $tagNames1['tag_name']; ?></li>
+								<?php } ?>
+							</ul>
+						</div><!-- /.product-tab -->
+					</div><!-- /.row -->
+					<div class="box-product">
+						<div class="row">
+							<?php 
+								$getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_tags WHERE lkp_status_id = 0 AND tag_id = 1 AND product_id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)) ORDER BY id DESC LIMIT 0,6";
+							$getProducts1 = $conn->query($getProducts);
+							while($productDetails = $getProducts1->fetch_assoc()) { 
+								$getProductName = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productDetails['id']);
+								$getProductImage = getIndividualDetails('grocery_product_bind_images','product_id',$productDetails['id']);
+								$categoryName = getIndividualDetails('grocery_category','id',$productDetails['grocery_category_id']);
+								$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$productDetails['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+								$allGetPrices = $conn->query($getPrices);
+								$getPrc = $allGetPrices->fetch_assoc();
+							?> 
+							<div class="col-xl-2 col-md-4 col-sm-6">
+								<div class="product-box">
+									<div class="imagebox">
+										<div class="box-image owl-carousel-1">
+											<a href="single_product.php?product_id=<?php echo $productDetails['id']; ?>" title="">
+												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image']; ?>" alt="">
+											</a>
+											<a href="single_product.php?product_id=<?php echo $productDetails['id']; ?>" title="">
+												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image']; ?>" alt="">
+											</a>
+											<a href="single_product.php?product_id=<?php echo $productDetails['id']; ?>" title="">
+												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image']; ?>" alt="">
+											</a>
+										</div><!-- /.box-image -->
+										<div class="box-content">
+											<div class="cat-name">
+												<a href="single_product.php?product_id=<?php echo $productDetails['id']; ?>" title=""><?php echo $categoryName['category_name']; ?></a>
+											</div>
+											<div class="product-name">
+												<a href="single_product.php?product_id=<?php echo $productDetails['id']; ?>" title=""><?php echo $getProductName['product_name']; ?></a>
+											</div>
+											<div class="price">
+												<span class="sale"><?php echo 'Rs : ' . $getPrc['selling_price']; ?></span>
+												<span class="regular"><?php echo 'Rs : ' . $getPrc['mrp_price']; ?></span>
+											</div>
+										</div><!-- /.box-content -->
+										<div class="box-bottom">
+											<div class="btn-add-cart">
+												<a href="#" title="">
+													<img src="images/icons/add-cart.png" alt="">Add to Cart
+												</a>
+											</div>
+											<div class="compare-wishlist">
+												<a href="#" class="compare" title="">
+													<img src="images/icons/compare.png" alt="">Compare
+												</a>
+												<a href="#" class="wishlist" title="">
+													<img src="images/icons/wishlist.png" alt="">Wishlist
+												</a>
+											</div>
+										</div><!-- /.box-bottom -->
+									</div><!-- /.imagebox -->
+								</div>
+							</div><!-- /.col-xl-2 col-md-4 col-sm-6 -->
+							<?php } ?>
+						</div><!-- /.row -->
+						<div class="row">
+							<?php 
+								$getProducts2 = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_tags WHERE lkp_status_id = 0 AND tag_id = 2 AND product_id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)) ORDER BY id DESC LIMIT 0,6";
+							$getProducts3 = $conn->query($getProducts2);
+							while($productDetails1 = $getProducts3->fetch_assoc()) { 
+								$getProductName1 = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productDetails1['id']);
+								$getProductImage1 = getIndividualDetails('grocery_product_bind_images','product_id',$productDetails1['id']);
+								$categoryName1 = getIndividualDetails('grocery_category','id',$productDetails1['grocery_category_id']);
+								$getPrices1 = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$productDetails1['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+								$allGetPrices1 = $conn->query($getPrices1);
+								$getPrc1 = $allGetPrices1->fetch_assoc();
+							?>
+							<div class="col-xl-2 col-md-4 col-sm-6">
+								<div class="product-box">
+									<div class="imagebox">
+										<div class="box-image owl-carousel-1">
+											<a href="single_product.php?product_id=<?php echo $productDetails1['id']; ?>" title="">
+												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage1['image']; ?>" alt="">
+											</a>
+											<a href="single_product.php?product_id=<?php echo $productDetails1['id']; ?>" title="">
+												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage1['image']; ?>" alt="">
+											</a>
+											<a href="single_product.php?product_id=<?php echo $productDetails1['id']; ?>" title="">
+												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage1['image']; ?>" alt="">
+											</a>
+										</div><!-- /.box-image -->
+										<div class="box-content">
+											<div class="cat-name">
+												<a href="single_product.php?product_id=<?php echo $productDetails1['id']; ?>" title=""><?php echo $categoryName1['category_name']; ?></a>
+											</div>
+											<div class="product-name">
+												<a href="single_product.php?product_id=<?php echo $productDetails1['id']; ?>" title=""><?php echo $getProductName1['product_name']; ?></a>
+											</div>
+											<div class="price">
+												<span class="sale"><?php echo 'Rs : ' . $getPrc1['selling_price']; ?></span>
+												<span class="regular"><?php echo 'Rs : ' . $getPrc1['mrp_price']; ?></span>
+											</div>
+										</div><!-- /.box-content -->
+										<div class="box-bottom">
+											<div class="btn-add-cart">
+												<a href="#" title="">
+													<img src="images/icons/add-cart.png" alt="">Add to Cart
+												</a>
+											</div>
+											<div class="compare-wishlist">
+												<a href="#" class="compare" title="">
+													<img src="images/icons/compare.png" alt="">Compare
+												</a>
+												<a href="#" class="wishlist" title="">
+													<img src="images/icons/wishlist.png" alt="">Wishlist
+												</a>
+											</div>
+										</div><!-- /.box-bottom -->
+									</div><!-- /.imagebox -->
+								</div>
+							</div><!-- /.col-xl-2 col-md-4 col-sm-6 -->
+							<?php } ?>
+						</div><!-- /.row -->
+						<div class="row">
+							<?php 
+								$getProducts4 = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_tags WHERE lkp_status_id = 0 AND tag_id = 3 AND product_id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1)) ORDER BY id DESC LIMIT 0,6";
+							$getProducts5 = $conn->query($getProducts4);
+							while($productDetails2 = $getProducts5->fetch_assoc()) { 
+								$getProductName2 = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productDetails2['id']);
+								$getProductImage2 = getIndividualDetails('grocery_product_bind_images','product_id',$productDetails2['id']);
+								$categoryName2 = getIndividualDetails('grocery_category','id',$productDetails2['grocery_category_id']);
+								$getPrices2 = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$productDetails2['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+								$allGetPrices2 = $conn->query($getPrices2);
+								$getPrc2 = $allGetPrices2->fetch_assoc();
+							?>
+							<div class="col-xl-2 col-md-4 col-sm-6">
+								<div class="product-box">
+									<div class="imagebox">
+										<div class="box-image owl-carousel-1">
+											<a href="single_product.php?product_id=<?php echo $productDetails2['id']; ?>" title="">
+												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage2['image']; ?>" alt="">
+											</a>
+											<a href="single_product.php?product_id=<?php echo $productDetails2['id']; ?>" title="">
+												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage2['image']; ?>" alt="">
+											</a>
+											<a href="single_product.php?product_id=<?php echo $productDetails2['id']; ?>" title="">
+												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage2['image']; ?>" alt="">
+											</a>
+										</div><!-- /.box-image -->
+										<div class="box-content">
+											<div class="cat-name">
+												<a href="single_product.php?product_id=<?php echo $productDetails2['id']; ?>" title=""><?php echo $categoryName2['category_name']; ?></a>
+											</div>
+											<div class="product-name">
+												<a href="single_product.php?product_id=<?php echo $productDetails2['id']; ?>" title=""><?php echo $getProductName2['product_name']; ?></a>
+											</div>
+											<div class="price">
+												<span class="sale"><?php echo 'Rs : ' . $getPrc2['selling_price']; ?></span>
+												<span class="regular"><?php echo 'Rs : ' . $getPrc2['mrp_price']; ?></span>
+											</div>
+										</div><!-- /.box-content -->
+										<div class="box-bottom">
+											<div class="btn-add-cart">
+												<a href="#" title="">
+													<img src="images/icons/add-cart.png" alt="">Add to Cart
+												</a>
+											</div>
+											<div class="compare-wishlist">
+												<a href="#" class="compare" title="">
+													<img src="images/icons/compare.png" alt="">Compare
+												</a>
+												<a href="#" class="wishlist" title="">
+													<img src="images/icons/wishlist.png" alt="">Wishlist
+												</a>
+											</div>
+										</div><!-- /.box-bottom -->
+									</div><!-- /.imagebox -->
+								</div>
+							</div><!-- /.col-xl-2 col-md-4 col-sm-6 -->
+							<?php } ?>
+						</div><!-- /.row -->
+					</div><!-- /.box-product -->
+				</div><!-- /.container -->
+			</section><!-- /.flat-imagebox -->
+                   <!--Tabbination for New Arrivals Ends Here-->
+
+<?php 
+$getCategoriesNames = "SELECT * FROM grocery_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_category_id FROM grocery_sub_category WHERE lkp_status_id = 0 AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id))) ORDER BY id LIMIT 0,5";
+$getCategoriesNames1 = $conn->query($getCategoriesNames);
+?>
+<!--Tabbination for Most popular product starts here -->
+<section class="flat-imagebox style6">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="product-wrap style1">
+								<div class="product-tab style1 v2">
+									<ul class="tab-list">
+										<?php while($getCategoriesNamesData = $getCategoriesNames1->fetch_assoc()) { ?>
+										<li class="<?php if($getCategoriesNamesData['id'] == 1) { echo 'active'; } ?>"><?php echo $getCategoriesNamesData['category_name']; ?></li>
+										<?php } ?>
+									</ul><!-- /.tab-list -->
+								</div><!-- /.product-tab style1 -->
+								<div class="tab-item">
+									<div class="row">
+										<?php 
+											$products = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND grocery_category_id = 3 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1) ORDER BY id DESC LIMIT 0,6";
+										$products1 = $conn->query($products);
+										while($productsData = $products1->fetch_assoc()) { 
+											$ProductName1 = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productsData['id']);
+											$ProductImage1 = getIndividualDetails('grocery_product_bind_images','product_id',$productsData['id']);
+											$category1 = getIndividualDetails('grocery_category','id',$productsData['grocery_category_id']);
+											$prices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$productsData['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+											$allprices1 = $conn->query($prices);
+											$Prc1 = $allprices1->fetch_assoc();
+										?>	
+										<div class="box-6">
+											<div class="product-box line style1">
+												<div class="imagebox style2">
+													<div class="box-image">
+														<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title="">
+															<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$ProductImage1['image']; ?>" alt="">
+														</a>
+													</div><!-- /.box-image -->
+													<div class="box-content">
+														<div class="cat-name">
+															<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title=""><?php echo $category1['category_name']; ?></a>
+														</div>
+														<div class="product-name">
+															<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title=""><?php echo $ProductName1['product_name']; ?></a>
+														</div>
+														<div class="price">
+															<span class="sale"><?php echo 'Rs : ' . $Prc1['selling_price']; ?></span>
+															<span class="regular"><?php echo 'Rs : ' . $Prc1['mrp_price']; ?></span>
+														</div>
+													</div><!-- /.box-content -->
+													<div class="box-bottom">
+														<div class="btn-add-cart">
+															<a href="#" title="">
+																<img src="images/icons/add-cart.png" alt="">Add to Cart
+															</a>
+														</div>
+														<div class="compare-wishlist">
+															<a href="#" class="compare" title="">
+																<img src="images/icons/compare.png" alt="">Compare
+															</a>
+															<a href="#" class="wishlist" title="">
+																<img src="images/icons/wishlist.png" alt="">Wishlist
+															</a>
+														</div>
+													</div><!-- /.box-bottom -->
+												</div><!-- /.imagebox style2 -->
+											</div><!-- /.product-box line style1 -->
+										</div><!-- /.box-6 -->
+										<?php } ?>
+									</div><!-- /.row -->
+									<div class="row">
+										<?php 
+											$products = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND grocery_category_id = 6 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1) ORDER BY id DESC LIMIT 0,6";
+										$products1 = $conn->query($products);
+										while($productsData = $products1->fetch_assoc()) { 
+											$ProductName1 = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productsData['id']);
+											$ProductImage1 = getIndividualDetails('grocery_product_bind_images','product_id',$productsData['id']);
+											$category1 = getIndividualDetails('grocery_category','id',$productsData['grocery_category_id']);
+											$prices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$productsData['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+											$allprices1 = $conn->query($prices);
+											$Prc1 = $allprices1->fetch_assoc();
+										?>	
+										<div class="box-6 <?php if($productsData['id'] == 3) { echo 'big'; } ?>">
+											<div class="product-box line style1">
+												<div class="imagebox style2">
+													<div class="box-image">
+														<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title="">
+															<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$ProductImage1['image']; ?>" alt="">
+														</a>
+													</div><!-- /.box-image -->
+													<div class="box-content">
+														<div class="cat-name">
+															<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title=""><?php echo $category1['category_name']; ?></a>
+														</div>
+														<div class="product-name">
+															<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title=""><?php echo $ProductName1['product_name']; ?></a>
+														</div>
+														<div class="price">
+															<span class="sale"><?php echo 'Rs : ' . $Prc1['selling_price']; ?></span>
+															<span class="regular"><?php echo 'Rs : ' . $Prc1['mrp_price']; ?></span>
+														</div>
+													</div><!-- /.box-content -->
+													<div class="box-bottom">
+														<div class="btn-add-cart">
+															<a href="#" title="">
+																<img src="images/icons/add-cart.png" alt="">Add to Cart
+															</a>
+														</div>
+														<div class="compare-wishlist">
+															<a href="#" class="compare" title="">
+																<img src="images/icons/compare.png" alt="">Compare
+															</a>
+															<a href="#" class="wishlist" title="">
+																<img src="images/icons/wishlist.png" alt="">Wishlist
+															</a>
+														</div>
+													</div><!-- /.box-bottom -->
+												</div><!-- /.imagebox style2 -->
+											</div><!-- /.product-box line style1 -->
+										</div><!-- /.box-6 -->
+										<?php } ?>
+									</div><!-- /.row -->
+									<div class="row">
+										<?php 
+											$products = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND grocery_category_id = 8 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1) ORDER BY id DESC LIMIT 0,6";
+										$products1 = $conn->query($products);
+										while($productsData = $products1->fetch_assoc()) { 
+											$ProductName1 = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productsData['id']);
+											$ProductImage1 = getIndividualDetails('grocery_product_bind_images','product_id',$productsData['id']);
+											$category1 = getIndividualDetails('grocery_category','id',$productsData['grocery_category_id']);
+											$prices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$productsData['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+											$allprices1 = $conn->query($prices);
+											$Prc1 = $allprices1->fetch_assoc();
+										?>	
+										<div class="box-6 <?php if($productsData['id'] == 3) { echo 'big'; } ?>">
+											<div class="product-box line style1">
+												<div class="imagebox style2">
+													<div class="box-image">
+														<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title="">
+															<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$ProductImage1['image']; ?>" alt="">
+														</a>
+													</div><!-- /.box-image -->
+													<div class="box-content">
+														<div class="cat-name">
+															<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title=""><?php echo $category1['category_name']; ?></a>
+														</div>
+														<div class="product-name">
+															<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title=""><?php echo $ProductName1['product_name']; ?></a>
+														</div>
+														<div class="price">
+															<span class="sale"><?php echo 'Rs : ' . $Prc1['selling_price']; ?></span>
+															<span class="regular"><?php echo 'Rs : ' . $Prc1['mrp_price']; ?></span>
+														</div>
+													</div><!-- /.box-content -->
+													<div class="box-bottom">
+														<div class="btn-add-cart">
+															<a href="#" title="">
+																<img src="images/icons/add-cart.png" alt="">Add to Cart
+															</a>
+														</div>
+														<div class="compare-wishlist">
+															<a href="#" class="compare" title="">
+																<img src="images/icons/compare.png" alt="">Compare
+															</a>
+															<a href="#" class="wishlist" title="">
+																<img src="images/icons/wishlist.png" alt="">Wishlist
+															</a>
+														</div>
+													</div><!-- /.box-bottom -->
+												</div><!-- /.imagebox style2 -->
+											</div><!-- /.product-box line style1 -->
+										</div><!-- /.box-6 -->
+										<?php } ?>
+									</div><!-- /.row -->
+									<div class="row">
+										<?php 
+											$products = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND grocery_category_id = 9 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1) ORDER BY id DESC LIMIT 0,6";
+										$products1 = $conn->query($products);
+										while($productsData = $products1->fetch_assoc()) { 
+											$ProductName1 = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productsData['id']);
+											$ProductImage1 = getIndividualDetails('grocery_product_bind_images','product_id',$productsData['id']);
+											$category1 = getIndividualDetails('grocery_category','id',$productsData['grocery_category_id']);
+											$prices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$productsData['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+											$allprices1 = $conn->query($prices);
+											$Prc1 = $allprices1->fetch_assoc();
+										?>	
+										<div class="box-6 <?php if($productsData['id'] == 3) { echo 'big'; } ?>">
+											<div class="product-box line style1">
+												<div class="imagebox style2">
+													<div class="box-image">
+														<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title="">
+															<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$ProductImage1['image']; ?>" alt="">
+														</a>
+													</div><!-- /.box-image -->
+													<div class="box-content">
+														<div class="cat-name">
+															<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title=""><?php echo $category1['category_name']; ?></a>
+														</div>
+														<div class="product-name">
+															<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title=""><?php echo $ProductName1['product_name']; ?></a>
+														</div>
+														<div class="price">
+															<span class="sale"><?php echo 'Rs : ' . $Prc1['selling_price']; ?></span>
+															<span class="regular"><?php echo 'Rs : ' . $Prc1['mrp_price']; ?></span>
+														</div>
+													</div><!-- /.box-content -->
+													<div class="box-bottom">
+														<div class="btn-add-cart">
+															<a href="#" title="">
+																<img src="images/icons/add-cart.png" alt="">Add to Cart
+															</a>
+														</div>
+														<div class="compare-wishlist">
+															<a href="#" class="compare" title="">
+																<img src="images/icons/compare.png" alt="">Compare
+															</a>
+															<a href="#" class="wishlist" title="">
+																<img src="images/icons/wishlist.png" alt="">Wishlist
+															</a>
+														</div>
+													</div><!-- /.box-bottom -->
+												</div><!-- /.imagebox style2 -->
+											</div><!-- /.product-box line style1 -->
+										</div><!-- /.box-6 -->
+										<?php } ?>
+									</div><!-- /.row -->
+									<div class="row">
+										<?php 
+											$products = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND grocery_category_id = 10 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1) ORDER BY id DESC LIMIT 0,6";
+										$products1 = $conn->query($products);
+										while($productsData = $products1->fetch_assoc()) { 
+											$ProductName1 = getIndividualDetails('grocery_product_name_bind_languages','product_id',$productsData['id']);
+											$ProductImage1 = getIndividualDetails('grocery_product_bind_images','product_id',$productsData['id']);
+											$category1 = getIndividualDetails('grocery_category','id',$productsData['grocery_category_id']);
+											$prices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$productsData['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+											$allprices1 = $conn->query($prices);
+											$Prc1 = $allprices1->fetch_assoc();
+										?>	
+										<div class="box-6 <?php if($productsData['id'] == 3) { echo 'big'; } ?>">
+											<div class="product-box line style1">
+												<div class="imagebox style2">
+													<div class="box-image">
+														<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title="">
+															<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$ProductImage1['image']; ?>" alt="">
+														</a>
+													</div><!-- /.box-image -->
+													<div class="box-content">
+														<div class="cat-name">
+															<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title=""><?php echo $category1['category_name']; ?></a>
+														</div>
+														<div class="product-name">
+															<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title=""><?php echo $ProductName1['product_name']; ?></a>
+														</div>
+														<div class="price">
+															<span class="sale"><?php echo 'Rs : ' . $Prc1['selling_price']; ?></span>
+															<span class="regular"><?php echo 'Rs : ' . $Prc1['mrp_price']; ?></span>
+														</div>
+													</div><!-- /.box-content -->
+													<div class="box-bottom">
+														<div class="btn-add-cart">
+															<a href="#" title="">
+																<img src="images/icons/add-cart.png" alt="">Add to Cart
+															</a>
+														</div>
+														<div class="compare-wishlist">
+															<a href="#" class="compare" title="">
+																<img src="images/icons/compare.png" alt="">Compare
+															</a>
+															<a href="#" class="wishlist" title="">
+																<img src="images/icons/wishlist.png" alt="">Wishlist
+															</a>
+														</div>
+													</div><!-- /.box-bottom -->
+												</div><!-- /.imagebox style2 -->
+											</div><!-- /.product-box line style1 -->
+										</div><!-- /.box-6 -->
+										<?php } ?>
+									</div><!-- /.row -->
+									
+									
+								</div><!-- /.tab-item -->
+							</div><!-- /.product-wrap -->
+						</div><!-- /.col-md-12 -->
+					</div><!-- /.row -->
+				</div><!-- /.container -->
+			</section><!-- /.flat-imagebox -->
+
+			<div class="divider20"></div>
+
+
+<!--Tabbination For Most Popular Products Ends Here-->
+
  	<section class="flat-imagebox style4">
 			<div class="container-fluid">
 				<div class="row">

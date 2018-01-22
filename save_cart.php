@@ -24,13 +24,13 @@ $created_at = date('Y-m-d H:i:s', time() + 24 * 60 * 60);
 $city_id = 1;
 $device_id = 1;
 
-$selCnt = "SELECT * FROM grocery_cart WHERE product_id='$product_id' AND session_cart_id='$session_cart_id' ";
+$selCnt = "SELECT * FROM grocery_cart WHERE product_id='$product_id' AND product_weight_type = '$product_weight_type' AND session_cart_id='$session_cart_id' ";
 $getCountSel = $conn->query($selCnt);
 $getQun = $getCountSel->fetch_assoc();
 
 if($getCountSel->num_rows > 0) {
 	$product_quantity = $getQun['product_quantity']+1;
-	$saveItems = "UPDATE grocery_cart SET product_quantity='$product_quantity' WHERE product_id='$product_id' AND session_cart_id='$session_cart_id'"; 	
+	$saveItems = "UPDATE grocery_cart SET product_quantity='$product_quantity' WHERE product_id='$product_id' AND product_weight_type = '$product_weight_type' AND session_cart_id='$session_cart_id'"; 	
 
 } else {
 	$product_quantity = $_POST['product_quantity'];

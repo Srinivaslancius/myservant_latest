@@ -65,9 +65,9 @@ echo'<input type="hidden" id="cat_id1_'.$getProductsData1['id'].'" value="'.$get
             </div>
             <div class="box-price">
                 <div class="product_name">
-                    <select class="s-w form-control" id="na1q_qty0" ">';
+                    <select class="s-w form-control" id="get_pr_price1_'.$getProductsData1['id'].'">;';
                         while($getPricesDetails = $getProductPrices->fetch_assoc()) {
-                            echo'<option value="6180">'.$getPricesDetails['weight_type'].' - Rs.'.$getPricesDetails['selling_price'].' </option>';
+                            echo'<option value="'.$getPricesDetails['id'].','.$getPricesDetails['selling_price'].'">'.$getPricesDetails['weight_type'].' - Rs.'.$getPricesDetails['selling_price'].' </option>';
                         }
                       echo'</select>
                     </div>

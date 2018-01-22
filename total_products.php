@@ -38,10 +38,10 @@ echo'<input type="hidden" id="cat_id_'.$getProductsData['id'].'" value="'.$getPr
                         <a href="single_product.php?product_id='.$getProductsData['id'].'" title="">'.$getProductNames['product_name'].'</a>
                     </div>
                     <div class="product_name">
-                    <select class="s-w form-control" id="na1q_qty0">';
-                    while($getPricesDetails = $getProductPrices->fetch_assoc()) {
-                        echo'<option value="6180">'.$getPricesDetails['weight_type'].' - Rs.'.$getPricesDetails['selling_price'].' </option>';
-                    }
+                    <select class="s-w form-control" id="get_pr_price_'.$getProductsData['id'].'">;';
+                        while($getPricesDetails = $getProductPrices->fetch_assoc()) {
+                            echo'<option value="'.$getPricesDetails['id'].','.$getPricesDetails['selling_price'].'">'.$getPricesDetails['weight_type'].' - Rs.'.$getPricesDetails['selling_price'].' </option>';
+                        }
                     echo'</select>
                     </div>
                 </div>

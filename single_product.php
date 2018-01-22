@@ -121,14 +121,12 @@
 							<div class="content-detail">
 								<div class="price">
 									<div class="sale">
-										<input type="hidden" id="pro_price" value="<?php echo $getPrc1['selling_price']; ?>">
-										<input type="hidden" id="pro_weight_type_id" value="<?php echo $getPrc1['id']; ?>">
 										<?php echo 'Rs.' . $getPrc1['selling_price'] . '.00'; ?> <span style="text-decoration:line-through;font-size:16px;color:#838383;">(<?php echo 'Rs.' . $getPrc1['mrp_price']; ?>)</span>
 									</div>
 								</div>
-								<div class="info-text">
+								<!-- <div class="info-text">
 									<?php echo $productDetails['product_description']; ?>
-								</div>
+								</div> -->
 							</div><!-- /.content-detail -->
 							<div class="footer-detail">
 								<div class="quanlity-box">
@@ -137,9 +135,9 @@
 									 	$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='$product_id' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
 									 	$allGetPrices = $conn->query($getPrices);
 									 	?>
-										<select onchange="get_price(this.value,'na10');">
+										<select onchange="get_price(this.value,'na10');" id="get_pr_price_<?php echo $product_id; ?>">
 										<?php while($getPrc = $allGetPrices->fetch_assoc() ) { ?>
-	                                      <option value="<?php echo $getPrc['id']; ?>"><?php echo $getPrc['weight_type'] .' - '. 'Rs : ' . $getPrc['selling_price']; ?></option>
+	                                      <option value="<?php echo $getPrc['id']; ?>,<?php echo $getPrc['selling_price']; ?>"><?php echo $getPrc['weight_type']; ?> - Rs.<?php echo $getPrc['selling_price']; ?> </option>
 	                                    <?php } ?>								  
 	                                    </select>
 									</div>
@@ -151,7 +149,7 @@
 								</div><!-- /.quanlity-box -->
 								<div class="box-cart style2">
 									<div class="btn-add-cart">
-										<a style="cursor:pointer" onClick="show_cart()"><img src="images/icons/add-cart.png" alt="">Add to Cart</a>
+										<a style="cursor:pointer" onClick="show_cart(<?php echo $product_id; ?>)"><img src="images/icons/add-cart.png" alt="">Add to Cart</a>
 									</div>
 									<div class="compare-wishlist">
 										<a href="compare.html" class="wishlist" title=""><img src="images/icons/wishlist.png" alt="">Wishlist</a>
@@ -458,14 +456,16 @@
 
 		<script type="text/javascript">
 
-			function show_cart() {
+			function show_cart(ProductId) {
 
 				var productId = $('#pro_id').val();
 				var catId = $('#cat_id').val();
 				var subCatId = $('#sub_cat_id').val();
 				var productName = $('#pro_name').val();
-				var productPrice = $('#pro_price').val();
-				var productWeightType = $('#pro_weight_type_id').val();
+				var product = $('#get_pr_price_'+ProductId).val();
+				var split = product.split(",");
+				var productWeightType = split[0];
+				var productPrice = split[1];
 				var product_quantity = $('#product_quantity').val();
 
 	   			$.ajax({
