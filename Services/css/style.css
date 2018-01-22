@@ -5331,3 +5331,11 @@ ul#top_tools{
     margin-left: 70px;
 	height:auto;
 }
+marquee span { 
+   margin-right: 0%; 
+	-moz-margin-right: 0%; 
+    }
+    marquee p { 
+    white-space:nowrap;
+    margin-right: 1000px; 
+    } 

@@ -12,8 +12,14 @@ if(isset($_SESSION['order_last_session_id']) && $_SESSION['order_last_session_id
 	$conn->query($updateOrderStatus);
 
 	$getWalletAmount = getIndividualDetails('grocery_orders','order_id',$_SESSION['order_last_session_id']);
+	$getAmount = getIndividualDetails('user_wallet','wallet_id',$_SESSION['wallet_id']);
 	if($getWalletAmount['wallet_amount'] != '') {
-		$updateWalletAmount = "UPDATE user_wallet SET amount = 0 WHERE user_id = '$user_id' ";
+		if($getAmount['amount'] > $getWalletAmount['wallet_amount']) {
+			$amount = $getAmount['amount'] - $getWalletAmount['wallet_amount'];
+		} else {
+			$amount = 0;
+		}
+		$updateWalletAmount = "UPDATE user_wallet SET amount = '$amount' WHERE user_id = '$user_id' ";
 		$conn->query($updateWalletAmount);
 
 		$description = "Money Debited for placing Order";

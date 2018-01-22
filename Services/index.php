@@ -28,14 +28,7 @@
 	<!-- For brands slider -->
 	<script src="../cdn-cgi/scripts/78d64697/cloudflare-static/email-decode.min.js"></script><script src="js/jquery-2.2.4.min.js"></script>
 <style>
-	marquee span { 
-   margin-right: 0%; 
-	-moz-margin-right: 0%; 
-    }
-    marquee p { 
-    white-space:nowrap;
-    margin-right: 1000px; 
-    } 
+	
 	.close1 {   
     font-size: 15px !important;
     font-weight: 700 !important;
@@ -204,23 +197,15 @@ if(isset($_POST['submit'])) {
         <div class="clear"></div>
 	<main>
 		<!-- Slider -->
-		<?php $getAllServiceNewsFeedData = getAllDataWithStatus('services_newsfeed','0');
-	
-		?>
+		
 		<div id="full-slider-wrapper">
                     <?php include_once './slider.php';?>
 		</div>
 		<!-- End layerslider -->
 			
-            <div class="container-fluid marg10 search_back">
+             <div class="container-fluid marg10 search_back">
             	
-                <div class="row">
-                	
-					<marquee scrollamount="10" style="color:white;font-size:15px">
-					<?php while($getServiceNewsFeed = $getAllServiceNewsFeedData->fetch_assoc()) {  ?><span><a href="<?php echo $getServiceNewsFeed['news_feed_url']; ?>" target= "_blank" style="color:white;"><?php echo $getServiceNewsFeed['news_feed_url'];?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php  } ?>
-					</marquee> 
-					 
-                </div>
+              <?php include_once './news_scroll.php';?> 
                
                 </div>
 

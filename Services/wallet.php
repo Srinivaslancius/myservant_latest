@@ -101,6 +101,15 @@
 					</div>
 				<?php }?>
     	</div>
+		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="index.php">Home</a>
+					</li>
+					<li>Wallet</li>
+				</ul>
+			</div>
+		</div>
 		<div class="container margin_60">
 <div class="row">
     
