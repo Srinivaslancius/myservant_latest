@@ -10,7 +10,7 @@
     <!-- BASE CSS -->
     <link href="css/base.css" rel="stylesheet">
 
-		
+		<link href="css/admin.css" rel="stylesheet">
     
     <!-- SPECIFIC CSS -->
     <link href="layerslider/css/layerslider.css" rel="stylesheet">
@@ -29,7 +29,7 @@
     padding: 8px;
     line-height: 1.42857143;
     vertical-align: top;
-   border-top: 1px solid #ddd;
+   border-top: 0px solid #ddd;
 }
 .button1 {
     background-color: #fe6003;
@@ -48,6 +48,9 @@
 	background-color:#fe6003;
  padding: 5px 12px;
 } 
+.table>thead>tr>th,.table>thead>tr>td{
+	width:20%;
+}
 </style>
 </head>
 <body>
@@ -112,55 +115,117 @@
                     <div class="panel-heading">
                       <h3 class="nomargin_top">My Wallet</h3>
                     </div>
-                      <div class="panel-body">
+					 <div class="panel-body">
                      <div class="table-responsive">				 
         			<table class="table" style="border:1px solid #ddd;width:100%">
-					<h4>My Subscriptions</h4>
             		<thead>
             		  <tr>
-            			<th>SUBSCRIPTION</th>
-            			<th>STATUS</th>
-            			<th>NEXT PAYMENT</th>
-            			<th>TOTAL</th>
+            			<th></th>
+            			<th></th>
+            			<th></th>
+            			<th></th>
 						<th></th>
             		  </tr>
-            		</thead>
+            		</thead>           		
             		<tbody>
             		  <tr>
-            			<td>68</td>
-            			<td>Active</td>
-            			<td>september 6,2015 via<br>visacard missing in 4242</td>
-						<td>₹99.9/month</td>
-						<td><a href="order_details1.php"><button class="button1">View</button></a></td>
-            		  </tr>
-            		  
+            			<td><img src="img/dashboard/wallet.png"></td>
+            			<td><b>Rs :5/-</b><br>Your Wallet Balance</td>
+            			<td colspan="2"><input type="text" name="amnt" class="form-control" placeholder="Enter amount to be added in your wallet" required></td>						
+						<td><button class="button1" type="submit" name="submit" value="submit">Add Money to Wallet</button></td>
+            		  </tr>            		  
             		</tbody>
+            	
 					
         	     </table>
-				 <table class="table" style="border:1px solid #ddd;width:100%">
-					<h4>Recent Orders</h4>
-            		<thead>
-            		  <tr>
-            			<th>ORDER</th>
-            			<th>DATE</th>
-            			<th>STATUS</th>
-            			<th>TOTAL</th>
-						<th></th>
-            		  </tr>
-            		</thead>
-            		<tbody>
-            		  <tr>
-            			<td>#67</td>
-            			<td>August 6,2015</td>
-            			<td>Processing</td>
-						<td>₹99.9 for item</td>
-						<td><a href="order_details1.php"><button class="button1">View</button></a></td>
-            		  </tr>
-            		  
-            		</tbody>
+				  </div>
+				  <!--</div>
+                      <div class="panel-body">-->
+                    <div id="tabs" class="tabs">
+			<nav>
+				<ul>
+					<li><a href="#section-1" class="icon-profile"><span>Somthing</span></a>
+					</li>
+					<li><a href="#section-2" class="icon-menut-items"><span>Somthing</span></a>
+					</li>
 					
-        	     </table>
-        	  </div>
+				</ul>
+			</nav>
+			<div class="content">
+
+				<section id="section-1">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="table-responsive">	
+									<table class="table" style="width:100%;border-bottom:0px">
+										<thead>
+										  <tr>
+											<th>MERCHANT NAME</th>
+											<th>WITHDRAWAL</th>
+											<th>DEPOSIT</th>
+											<th>STATUS</th>
+											<th>COMMENT</th>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td><b>Cashback Received</b><br>paytm for Order #CASH-676607643 Paytm Cash Txn ID 17376641204 2018-01-09 09:39:13 PM</td>
+											<td></td>
+											<td>Rs : 5/-</td>
+											<td>SUCCESS</td>
+											<td>Order #4419408824 of Reacharge of Airtel Mobile 730214...(Promocode:GETS)</td>
+										  </tr>
+										 
+										</tbody>
+					
+									</table>
+				 
+										
+								</div><!-- /.col-md-6 -->
+									
+							</div><!-- /.row -->
+						</div>
+                    
+				</section><!-- End section 1 -->
+
+				<section id="section-2">
+					
+                   		<div class="row">
+							<div class="col-md-12">
+								<div class="table-responsive">	
+									<table class="table" style="width:100%;border-bottom:0px">
+										<thead>
+										  <tr>
+											<th>MERCHANT NAME</th>
+											<th>WITHDRAWAL</th>
+											<th>DEPOSIT</th>
+											<th>STATUS</th>
+											<th>COMMENT</th>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td><b>Cashback Received</b><br>paytm for Order #CASH-676607643 Paytm Cash Txn ID 17376641204 2018-01-09 09:39:13 PM</td>
+											<td></td>
+											<td>Rs : 5/-</td>
+											<td>SUCCESS</td>
+											<td>Order #4419408824 of Reacharge of Airtel Mobile 730214...(Promocode:GETS)</td>
+										  </tr>
+										 
+										</tbody>
+					
+									</table>
+				 
+										
+								</div><!-- /.col-md-6 -->
+									
+							</div><!-- /.row -->
+						</div> 
+				</section><!-- End section 2 -->
+
+
+			</div><!-- End content -->
+		</div>
                       </div>
                   </div>
                   
@@ -193,7 +258,10 @@
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
 <script src="assets/validate.js"></script>
-
+<script src="js/tabs.js"></script>
+	<script>
+		new CBPFWTabs(document.getElementById('tabs'));
+	</script>
 <!-- SPECIFIC SCRIPTS -->
 <script src="js/theia-sticky-sidebar.js"></script>
 <script>

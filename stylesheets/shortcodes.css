@@ -5396,7 +5396,7 @@ input[type="checkbox"]:checked + label:before {
 
 .table-cart tr td:nth-child(4) {
 	width:8.667%;
-	text-align:right;
+	/* text-align:right; */
 }
 
 .table-cart tr td .img-product {
@@ -5455,7 +5455,7 @@ input[type="checkbox"]:checked + label:before {
 	position:absolute;
 	z-index:9;
 	top:13px;
-	right: 60px;
+	right: 160px;
 	padding:10px 10px;
 	cursor:pointer;
 }
@@ -5482,7 +5482,7 @@ input[type="checkbox"]:checked + label:before {
 }
 
 .table-cart tr td .quanlity input {
-	width:160px;
+	width: 160px;
 	text-align:center;
 	padding:15px 30px;
 	height:45px;
@@ -5568,12 +5568,12 @@ input[type="checkbox"]:checked + label:before {
 
 .cart-totals table tr td.subtotal {
 	color:#8c8c8c;
-	font-size:19px;
+	font-size: 19px;
 	font-family:'BloggerSans';
 }
 
 .cart-totals table tr td.price-total {
-	font-size:24px;
+	font-size: 23px;
 	font-weight:500;
 	font-family:'BloggerSans';
 	color:#f28b00;
@@ -5639,7 +5639,7 @@ input[type="checkbox"]:checked + label:before {
 .cart-totals form .btn-cart-totals a {
 	display:block;
 	color:#fff;
-	font-size:16px;
+	font-size: 16px;
 	height:50px;
 	line-height:50px;
 	text-align:center;

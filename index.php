@@ -138,6 +138,207 @@
 			</section><!-- /.flat-banner-box -->
 <!-- /.flat-banner-box -->
 
+          <section class="flat-imagebox">
+			<div class="container">
+			 <!--<div class="tab">
+			  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen" style="border-radius:0px">New Arrivals</button>
+			  <button class="tablinks" onclick="openCity(event, 'Paris')" style="border-radius:0px">Featured</button>
+			  <button class="tablinks" onclick="openCity(event, 'Tokyo')" style="border-radius:0px">Top Selling</button>
+			</div>-->
+				<div class="product-tab">
+							<ul class="tab-list">
+							
+								<li class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen" style="border-radius:0px">New Arrivals</li>
+							
+								<li class="tablinks" onclick="openCity(event, 'Paris')" style="border-radius:0px">Featured</li>
+								<li class="tablinks" onclick="openCity(event, 'Tokyo')" style="border-radius:0px">Top Selling</li>
+							</ul>
+						</div>
+				<div id="London" class="tabcontent">
+					<div class="row">
+					<?php for($i=0; $i<4; $i++) {?>
+						<div class="col-lg-3 col-sm-6">
+							<div class="product-box">
+								<div class="imagebox">
+									<span class="item-new">NEW</span>																		
+											<a href="single_product.php" title="">
+												<img src="images/product/other/1.png" alt="">
+											</a>																													
+									<div class="box-content">
+										<div class="cat-name">
+											<a href="single_product.php" title="">Brue Instant</a>
+										</div>
+									
+										<div class="price">
+											<span class="sale"> ₹200.00</span>
+											<span class="regular"> ₹250.00</span>
+										</div>
+									</div>
+									<div class="box-bottom">
+										<div class="btn-add-cart">
+											<a href="#" title="">
+												<img src="images/icons/add-cart.png" alt="">Add to Cart
+											</a>
+										</div>
+										
+									</div>
+								</div>
+							</div>	
+							<div class="product-box">
+								<div class="imagebox">
+									<span class="item-new">NEW</span>																		
+											<a href="single_product.php" title="">
+												<img src="images/product/other/1.png" alt="">
+											</a>																													
+									<div class="box-content">
+										<div class="cat-name">
+											<a href="single_product.php" title="">Brue Instant</a>
+										</div>
+									
+										<div class="price">
+											<span class="sale"> ₹200.00</span>
+											<span class="regular"> ₹250.00</span>
+										</div>
+									</div>
+									<div class="box-bottom">
+										<div class="btn-add-cart">
+											<a href="#" title="">
+												<img src="images/icons/add-cart.png" alt="">Add to Cart
+											</a>
+										</div>
+										
+									</div>
+								</div>
+							</div>	
+						</div>
+						<?php } ?>
+					</div>
+</div>
+
+<div id="Paris" class="tabcontent">
+  	<div class="row">
+					<?php for($i=0; $i<4; $i++) {?>
+						<div class="col-lg-3 col-sm-6">
+							<div class="product-box">
+								<div class="imagebox">
+									<span class="item-new">NEW</span>																		
+											<a href="single_product.php" title="">
+												<img src="images/product/other/03.jpg" alt="">
+											</a>																													
+									<div class="box-content">
+										<div class="cat-name">
+											<a href="single_product.php" title="">Brue Instant</a>
+										</div>
+									
+										<div class="price">
+											<span class="sale"> ₹200.00</span>
+											<span class="regular"> ₹250.00</span>
+										</div>
+									</div>
+									<div class="box-bottom">
+										<div class="btn-add-cart">
+											<a href="#" title="">
+												<img src="images/icons/add-cart.png" alt="">Add to Cart
+											</a>
+										</div>
+										
+									</div>
+								</div>
+							</div>	
+							<div class="product-box">
+								<div class="imagebox">
+									<span class="item-new">NEW</span>																		
+											<a href="single_product.php" title="">
+												<img src="images/product/other/03.jpg" alt="">
+											</a>																													
+									<div class="box-content">
+										<div class="cat-name">
+											<a href="single_product.php" title="">Brue Instant</a>
+										</div>
+									
+										<div class="price">
+											<span class="sale"> ₹200.00</span>
+											<span class="regular"> ₹250.00</span>
+										</div>
+									</div>
+									<div class="box-bottom">
+										<div class="btn-add-cart">
+											<a href="#" title="">
+												<img src="images/icons/add-cart.png" alt="">Add to Cart
+											</a>
+										</div>
+										
+									</div>
+								</div>
+							</div>	
+						</div>
+						<?php } ?>
+					</div>
+				</div>
+
+			<div id="Tokyo" class="tabcontent">
+					<div class="row">
+					<?php for($i=0; $i<4; $i++) {?>
+						<div class="col-lg-3 col-sm-6">
+							<div class="product-box">
+								<div class="imagebox">
+									<span class="item-new">NEW</span>																		
+											<a href="single_product.php" title="">
+												<img src="images/product/other/02.jpg" alt="">
+											</a>																													
+									<div class="box-content">
+										<div class="cat-name">
+											<a href="single_product.php" title="">Brue Instant</a>
+										</div>
+									
+										<div class="price">
+											<span class="sale"> ₹200.00</span>
+											<span class="regular"> ₹250.00</span>
+										</div>
+									</div>
+									<div class="box-bottom">
+										<div class="btn-add-cart">
+											<a href="#" title="">
+												<img src="images/icons/add-cart.png" alt="">Add to Cart
+											</a>
+										</div>
+										
+									</div>
+								</div>
+							</div>	
+							<div class="product-box">
+								<div class="imagebox">
+									<span class="item-new">NEW</span>																		
+											<a href="single_product.php" title="">
+												<img src="images/product/other/02.jpg" alt="">
+											</a>																													
+									<div class="box-content">
+										<div class="cat-name">
+											<a href="single_product.php" title="">Brue Instant</a>
+										</div>
+									
+										<div class="price">
+											<span class="sale"> ₹200.00</span>
+											<span class="regular"> ₹250.00</span>
+										</div>
+									</div>
+									<div class="box-bottom">
+										<div class="btn-add-cart">
+											<a href="#" title="">
+												<img src="images/icons/add-cart.png" alt="">Add to Cart
+											</a>
+										</div>
+										
+									</div>
+								</div>
+							</div>	
+						</div>
+						<?php } ?>
+					</div>
+</div>
+
+			</div>
+			</section>
  	<section class="flat-imagebox style4">
 			<div class="container-fluid">
 				<div class="row">
@@ -388,7 +589,24 @@ $getReturnPolicydataData = getIndividualDetails('grocery_content_pages','id',7);
 	}
 setInterval(function() { makeTimer(); }, 1000);
 </script>
+<script>
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
 
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
 <style type="text/css">
 
 

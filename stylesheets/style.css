@@ -303,7 +303,7 @@ input[type="email"] {
 }
 
 select {
-	border:none;
+	border: 1px solid #ddd;
 }
 
 input[type="search"] {
