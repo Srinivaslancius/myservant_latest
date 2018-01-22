@@ -139,7 +139,7 @@ if (!isset($_POST['submit'])) {
                     <label class="btn btn-default file-upload-btn">
                         Choose file...
                         <input id="form-control-22" class="file-upload-input" type="file" accept="image/*" name="fileToUpload1" id="fileToUpload1"  onchange="loadFile1(event)"  multiple="multiple" >
-                      </label>
+                      </label> (Width : 90 px ; height : 90 px)
                   </div>
                   <div class="form-group">
                     <label for="form-control-2" class="control-label">Sub Category Description</label>
