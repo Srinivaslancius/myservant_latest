@@ -15,17 +15,12 @@ $getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN
 while($getProductsData1 = $getProducts1->fetch_assoc()) {
 $getProductNames1 = getIndividualDetails('grocery_product_name_bind_languages','product_id',$getProductsData1['id']);
 $getProductImages1 = getIndividualDetails('grocery_product_bind_images','product_id',$getProductsData1['id']);
- $getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductsData1['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+ $getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductsData1['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ORDER BY selling_price ";
 $getProductPrices = $conn->query($getPrices);
-$getPrices1 = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductsData1['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
-$getProductPrices1 = $conn->query($getPrices1);
-$getPricesDetails1 = $getProductPrices1->fetch_assoc();
 $img = $base_url . 'grocery_admin/uploads/product_images/'.$getProductImages1['image'];
 echo'<input type="hidden" id="cat_id1_'.$getProductsData1['id'].'" value="'.$getProductsData1['grocery_category_id'].'">
     <input type="hidden" id="sub_cat_id1_'.$getProductsData1['id'].'" value="'.$getProductsData1['grocery_sub_category_id'].'">
-    <input type="hidden" id="pro_name1_'.$getProductsData1['id'].'" value="'.$getProductNames1['product_name'].'">
-    <input type="hidden" id="pro_price1_'.$getProductsData1['id'].'" value="'.$getPricesDetails1['selling_price'].'">
-    <input type="hidden" id="pro_weight_type_id1_'.$getProductsData1['id'].'" value="'.$getPricesDetails1['id'].'">';
+    <input type="hidden" id="pro_name1_'.$getProductsData1['id'].'" value="'.$getProductNames1['product_name'].'">';
  echo '<div class="product-box style3">
         <div class="imagebox style1 v3">
             <div class="box-image">
