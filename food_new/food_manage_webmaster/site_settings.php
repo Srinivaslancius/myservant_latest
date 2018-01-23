@@ -19,6 +19,7 @@
     $open_timings = $_POST['open_timings'];
     $address = $_POST['address'];
     $delivery_charges = $_POST['delivery_charges'];
+    $paytm = $_POST['paytm'];
 
     if($_FILES["logo"]["name"]!='') {
                                           
@@ -35,7 +36,7 @@
         $getImgUnlink = getImageUnlink('logo','food_site_settings','id',$id,$target_dir);
         //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
         if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
-            $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title',from_email = '$from_email',orders_email ='$orders_email', contact_email = '$contact_email', delivery_charges = '$delivery_charges', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax',email='$email', mobile='$mobile', logo = '$logo',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
+            $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title',from_email = '$from_email',orders_email ='$orders_email', contact_email = '$contact_email', delivery_charges = '$delivery_charges', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax',email='$email', mobile='$mobile', logo = '$logo',footer_text='$footer_text', address='$address', paytm='$paytm' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
             } else {
@@ -46,7 +47,7 @@
             echo "Sorry, there was an error uploading your file.";
         }
     }  else {
-        $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title', from_email = '$from_email', orders_email ='$orders_email', contact_email = '$contact_email', delivery_charges = '$delivery_charges', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax', email='$email', mobile='$mobile',footer_text='$footer_text', address='$address' WHERE id = '$id' ";
+        $sql = "UPDATE `food_site_settings` SET admin_title = '$admin_title', from_email = '$from_email', orders_email ='$orders_email', contact_email = '$contact_email', delivery_charges = '$delivery_charges', google_analytics_code ='$google_analytics_code', service_tax = '$service_tax', email='$email', mobile='$mobile',footer_text='$footer_text', address='$address', paytm='$paytm' WHERE id = '$id' ";
         if($conn->query($sql) === TRUE){
            echo "<script type='text/javascript'>window.location='site_settings.php?msg=success'</script>";
         } else {
@@ -133,6 +134,15 @@
                   <div class="form-group">
                     <label for="form-control-4" class="control-label">Address</label>
                     <textarea type="text" name="address" class="form-control" id="form-control-2" placeholder="Address" data-error="This field is required." required><?php echo $getSiteSettingsData['address'];?></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="form-control-3" class="control-label">Paytm</label>
+                    <select id="form-control-3" name="paytm" class="custom-select" data-error="This field is required." required>
+                      <option value="">Paytm</option>
+                      <option <?php if($getSiteSettingsData['paytm'] == 1) { echo "Selected"; } ?> value="1">Yes</option>
+                      <option <?php if($getSiteSettingsData['paytm'] == 2) { echo "Selected"; } ?> value="2">No</option>
+                    </select>
+                    <div class="help-block with-errors"></div>
                   </div>
                   <button type="submit" name="submit" value="Submit" class="btn btn-primary btn-block">Submit</button>
                 </form>
