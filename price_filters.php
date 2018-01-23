@@ -34,19 +34,19 @@ if($_SESSION['city_name'] == '') {
 }
 
 if(isset($_POST['price'])) {
-    $getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = '$lkp_city_id' AND (selling_price BETWEEN '$sendMinPrice' AND '$sendMaxPrice'))  ORDER BY id DESC";
+    $where_condition = "WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = '$lkp_city_id' AND (selling_price BETWEEN '$sendMinPrice' AND '$sendMaxPrice'))  ORDER BY id DESC";
 } elseif(isset($_POST['product_price']) && isset($_POST['category_id'])) {
-    $getProducts = "SELECT * FROM grocery_products WHERE grocery_category_id = '".$_POST['category_id']."' AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = '$lkp_city_id' AND (selling_price BETWEEN '$sendMinPrice' AND '$sendMaxPrice'))  ORDER BY id DESC";
+    $where_condition = "WHERE grocery_category_id = '".$_POST['category_id']."' AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = '$lkp_city_id' AND (selling_price BETWEEN '$sendMinPrice' AND '$sendMaxPrice'))  ORDER BY id DESC";
 } elseif(isset($_POST['product_price']) && isset($_POST['sub_category_id'])) {
-    $getProducts = "SELECT * FROM grocery_products WHERE grocery_sub_category_id = '".$_POST['sub_category_id']."' AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = '$lkp_city_id' AND (selling_price BETWEEN '$sendMinPrice' AND '$sendMaxPrice'))  ORDER BY id DESC";
+    $where_condition = "WHERE grocery_sub_category_id = '".$_POST['sub_category_id']."' AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = '$lkp_city_id' AND (selling_price BETWEEN '$sendMinPrice' AND '$sendMaxPrice'))  ORDER BY id DESC";
 } elseif($_POST['product_price'] == ''  && isset($_POST['category_id'])) {
-    $getProducts = "SELECT * FROM grocery_products WHERE grocery_category_id = '".$_POST['category_id']."' AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = '$lkp_city_id')  ORDER BY id DESC";
+    $where_condition = "WHERE grocery_category_id = '".$_POST['category_id']."' AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = '$lkp_city_id')  ORDER BY id DESC";
 } elseif($_POST['product_price'] == '' && isset($_POST['sub_category_id'])) {
-    $getProducts = "SELECT * FROM grocery_products WHERE grocery_sub_category_id = '".$_POST['sub_category_id']."' AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = '$lkp_city_id')  ORDER BY id DESC";
+    $where_condition = "WHERE grocery_sub_category_id = '".$_POST['sub_category_id']."' AND lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = '$lkp_city_id')  ORDER BY id DESC";
 } else {
-    $getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)  ORDER BY id DESC LIMIT 0,10";
+    $where_condition = "WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)  ORDER BY id DESC LIMIT 0,10";
 }
-//echo $getProducts;
+$getProducts = "SELECT * FROM grocery_products $where_condition";
 $getProducts1 = $conn->query($getProducts);
    
 while($getProductsData = $getProducts1->fetch_assoc()) {
