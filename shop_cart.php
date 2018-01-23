@@ -86,19 +86,16 @@
 								?>
 									<tr>
 										<td>
-										<div class="row">
-										<div class="col-sm-3">
+										
 											<div class="img-product">
 												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image']; ?>" alt="">
 											</div>
-											</div>
-											<div class="col-sm-3">
+											
 											<div class="name-product">
 												<?php echo wordwrap($getProductName['product_name'],20,"<br>\n"); ?>
 											</div>
-											</div>
-											<div class="col-sm-3">
-												<div class="price">
+											
+												<div class="weight">
 													<?php echo $getProductWeight['weight_type']; ?>
 												</div>
 											<!-- <div class="quanlity-box">
@@ -110,13 +107,11 @@
 											</div>
 									
 											</div> -->
-											</div>
-											<div class="col-sm-3">
+											
 											<div class="price">
 												 Rs . <?php echo $getCartItems['product_price']; ?>
 											</div>
-											</div>
-											</div>
+											
 											<div class="clearfix"></div>
 										</td>
 										<td>

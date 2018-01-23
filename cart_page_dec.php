@@ -60,27 +60,23 @@ echo'<div class="row">
 					$img = $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image'];
 					echo'<tr>
 						<td>
-						<div class="row">
-										<div class="col-sm-3">
+						
 							<div class="img-product">
 								<img src="'.$img.'" alt="">
 							</div>
-							</div>
-							<div class="col-sm-3">
+							
 							<div class="name-product">
 								'.wordwrap($getProductName['product_name'],20,"<br>\n").'
 							</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="price">
+							
+								<div class="weight">
 									'.$getProductWeight['weight_type'].'
 								</div>
-							</div>
-							<div class="col-sm-3">
+							
 							<div class="price">
 								 Rs . '.$getCartItems['product_price'].'
 							</div>
-							</div>
+							
 							<div class="clearfix"></div>
 						</td>
 						<td>

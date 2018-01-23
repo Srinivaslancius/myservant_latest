@@ -18090,15 +18090,15 @@ fieldset[disabled] .btn-dribbble:hover {
     line-height: 50px;
     height: 50px;
     padding: 0 15px;
-    position: absolute;
-    right: 0
+    /* position: absolute; */
+    right: 0;
 }
 
 @media (min-width:768px) {
     .site-footer {
         margin-left: 220px;
         -webkit-transition: margin-left .3s;
-        transition: margin-left .3s
+        transition: margin-left .3s;
     }
     .layout-footer-fixed .site-footer {
         position: fixed
