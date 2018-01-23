@@ -31,18 +31,16 @@
       </div>
       <div class="site-content">
         <?php 
-
-    $groceryOrders = "SELECT * FROM grocery_orders WHERE lkp_payment_status_id != 3 AND lkp_order_status_id != 3 GROUP BY order_id ORDER BY id DESC"; 
-    $groceryOrdersData = $conn->query($groceryOrders);
-    $i=1;
-?>
+          $groceryOrders = "SELECT * FROM grocery_orders WHERE lkp_payment_status_id != 3 AND lkp_order_status_id != 3 GROUP BY order_id ORDER BY id DESC"; 
+          $groceryOrdersData = $conn->query($groceryOrders);
+          $i=1;
+        ?>
         <div class="panel panel-default panel-table">
           <div class="panel-heading">
             <h3 class="m-t-0 m-b-5 font_sz_view">View Orders</h3>
           </div>
           <div class="panel-body">
             <div class="table-responsive">
-                
               <table class="table table-striped table-bordered dataTable" id="table-2">
                 <thead>
                   <tr>
@@ -52,40 +50,37 @@
                     <th>Email</th>
                     <th>Mobile Number</th>
                     <th>Order Date</th>
-                    <th>Delivery Date</th>
+                    <!-- <th>Delivery Date</th> -->
                     <th>Payment Option</th>
                     <th>Payment Status</th>
                     <th>Order Status</th>
                     <th>Delivery Boy</th>
-                    <!-- <th>Action</th> -->
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php while ($row = $groceryOrdersData->fetch_assoc()) { ?> 
                     <tr>
                         <td><?php echo $i; ?></td>
-                        <td><a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>"><?php echo $row['order_id'];?></td></a></td>
+                        <td><a href="#" data-toggle="modal" data-target="#<?php echo $row['id']; ?>"><?php echo $row['order_id'];?></a></td>
                         <td><?php echo $row['first_name'];?></td>
                         <td><?php echo $row['email'];?></td>
                         <td><?php echo $row['mobile'];?></td>
                         <td><?php echo $row['created_at'];?></td>
-                        <td><?php echo $row['delivery_date'];?></td>
+                        <!-- <td><?php echo $row['delivery_date'];?></td> -->
                         <td><?php $getGroceryPaymentsTypes = getAllData('lkp_payment_types');
                          while($getPaymentsTypes = $getGroceryPaymentsTypes->fetch_assoc()) { if($row['payment_method'] == $getPaymentsTypes['id']) { echo $getPaymentsTypes['status']; } } ?></td>
                         <td><?php $getGroceryPaymentsStatus = getAllData('lkp_payment_status');
                          while($getPaymentsStatus = $getGroceryPaymentsStatus->fetch_assoc()) { if($row['lkp_payment_status_id'] == $getPaymentsStatus['id']) { echo $getPaymentsStatus['payment_status']; } } ?></td>
-
                          <td><?php $getGroceryOrderStatus = getAllData('lkp_order_status');
                          while($getOrderStatus = $getGroceryOrderStatus->fetch_assoc()) { if($row['lkp_order_status_id'] == $getOrderStatus['id']) { echo $getOrderStatus['order_status']; } } ?></td>
-
-
                         <?php if($row['assign_delivery_id'] == '0' || $row['assign_delivery_id'] == '') { ?>
                         <td><a href="assign_to.php?order_id=<?php echo $row['order_id']; ?>">Assign To</a></td>
                         <?php } else { 
                           $getDeliveryBoysNames = getAllDataWhere('grocery_delivery_boys','id',$row['assign_delivery_id']); $getDeliveryBoysNamesData = $getDeliveryBoysNames->fetch_assoc(); ?>
                           <td><a href="assign_to.php?order_id=<?php echo $row['order_id']; ?>"><?php if($getDeliveryBoysNamesData['id'] == $row['assign_delivery_id']) { echo $getDeliveryBoysNamesData['deliveryboy_name']; } ?>(Assigned)</a></td>
                           <?php }?>
-                        <!-- <td><span><a href="invoice.php?order_id=<?php echo $row['order_id']; ?>" target="_blank"><i class="zmdi zmdi-eye zmdi-hc-fw"></i></a></span> <span><a href="#"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td> -->
+                        <td><span><a href="invoice.php?order_id=<?php echo $row['order_id']; ?>" target="_blank"><i class="zmdi zmdi-eye zmdi-hc-fw"></i></a></span> <span><a href="#"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a></span></td>
                         <div id="<?php echo $row['id']; ?>" class="modal fade" tabindex="-1" role="dialog">
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -98,7 +93,6 @@
                           <h4 class="modal-title">Order Details (Order Id: <?php echo $row['order_id'];?>)<span><a href="#"><i class="zmdi zmdi-print zmdi-hc-fw" style="color: #fff;"></i></a></span></h4>
                       </div>
                       <div class="modal-body">
-                          
                         <div class="col-md-12 fr1">
                            <div class="col-md-6">
                                <h3 class="m-t-0 m-b-5 font_sz_view">User Details</h3>
@@ -111,12 +105,11 @@
                                <h3 class="m-t-0 m-b-5 font_sz_view">Delivery Details</h3>
                                <p>Delivery Date: <?php echo $row['delivery_date'];?></p>
                                <p>Mode of Payment : <?php $getGroceryPaymentsTypes = getAllData('lkp_payment_types');
-                         while($getPaymentsTypes = $getGroceryPaymentsTypes->fetch_assoc()) { if($row['payment_method'] == $getPaymentsTypes['id']) { echo $getPaymentsTypes['status']; } } ?></p>
-                               <p>Payment Status : <?php $getGroceryOrderStatus = getAllData('lkp_order_status');
-                         while($getOrderStatus = $getGroceryOrderStatus->fetch_assoc()) { if($row['lkp_order_status_id'] == $getOrderStatus['id']) { echo $getOrderStatus['order_status']; } } ?></p>
-                               <p>Order Status : <?php $getGroceryOrderStatus = getAllData('lkp_order_status');
-                         while($getOrderStatus = $getGroceryOrderStatus->fetch_assoc()) { if($row['lkp_order_status_id'] == $getOrderStatus['id']) { echo $getOrderStatus['order_status']; } } ?></p>
-                               
+                               while($getPaymentsTypes = $getGroceryPaymentsTypes->fetch_assoc()) { if($row['payment_method'] == $getPaymentsTypes['id']) { echo $getPaymentsTypes['status']; } } ?></p>
+                                     <p>Payment Status : <?php $getGroceryOrderStatus = getAllData('lkp_order_status');
+                               while($getOrderStatus = $getGroceryOrderStatus->fetch_assoc()) { if($row['lkp_order_status_id'] == $getOrderStatus['id']) { echo $getOrderStatus['order_status']; } } ?></p>
+                                     <p>Order Status : <?php $getGroceryOrderStatus = getAllData('lkp_order_status');
+                               while($getOrderStatus = $getGroceryOrderStatus->fetch_assoc()) { if($row['lkp_order_status_id'] == $getOrderStatus['id']) { echo $getOrderStatus['order_status']; } } ?></p>
                            </div>
                             <div class="col-md-12">
                                 <p><strong>Address:</strong></p>
@@ -131,7 +124,6 @@
                           <div class="col-md-12 fr1 mt5">
                               <h3 class="m-t-0 m-b-5 font_sz_view">Ordered Items</h3>
                           </div>
-                          
                           <?php $getProducts = getIndividualDetails('grocery_product_name_bind_languages','product_id',$row['product_id']); ?>
                           <?php $getProducts1 = getIndividualDetails('grocery_product_bind_images','product_id',$row['product_id']); ?>
                           <div class="col-md-12 fr1 padd0">
@@ -149,14 +141,11 @@
                                       <p>Sub Total: Rs. <?php echo $row['item_price'];  ?></p>
                                   </div>
                               </div>
-                             
-                              
                           </div>
                       </div>
                       <?php $getSiteSettingsData = getIndividualDetails('grocery_site_settings','id',1); 
                             $service_tax = $row['sub_total']*$getSiteSettingsData['service_tax']/100;
                       ?>
-
                       <div class="modal-footer">
                           <div class="col-md-12">
                               <div class="col-md-6"></div>
@@ -176,22 +165,15 @@
                     </tr>
                   <?php  $i++; } ?>
                 </tbody>
-                
               </table>
             </div>
           </div>
         </div>
-        
-              </div>
-      </div>
-      <div class="site-footer">
-        2017 © Cosmos
       </div>
     </div>
-    <script src="js/vendor.min.js"></script>
-    <script src="js/cosmos.min.js"></script>
-    <script src="js/application.min.js"></script>
-     <script src="js/dashboard-3.min.js"></script>
+    <?php include_once 'footer.php'; ?>
+    <script src="js/dashboard-3.min.js"></script>
+     <script src="js/forms-plugins.min.js"></script>
     <script src="js/tables-datatables.min.js"></script>
   </body>
 </html>

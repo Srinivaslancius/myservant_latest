@@ -314,7 +314,7 @@
 				var productWeightType = split[0];
 				var productPrice = split[1];
 				var product_quantity = 1;
-				alert(productWeightType);
+				//alert(productWeightType);
 
 	   			$.ajax({
 			      type:'post',
@@ -337,7 +337,7 @@
 				var productWeightType = split[0];
 				var productPrice = split[1];
 				var product_quantity = 1;
-				alert(productPrice);
+				//alert(productPrice);
 	   			$.ajax({
 			      type:'post',
 			      url:'save_cart.php',
