@@ -101,60 +101,71 @@
                                <p>Mobile Number: <?php echo $row['mobile'];?></p>
                                <p>Order Date: <?php echo $row['created_at'];?></p>
                            </div>
-                           <div class="col-md-6">
-                               <h3 class="m-t-0 m-b-5 font_sz_view">Delivery Details</h3>
-                               <p>Delivery Date: <?php echo $row['delivery_date'];?></p>
-                               <p>Mode of Payment : <?php $getGroceryPaymentsTypes = getAllData('lkp_payment_types');
-                               while($getPaymentsTypes = $getGroceryPaymentsTypes->fetch_assoc()) { if($row['payment_method'] == $getPaymentsTypes['id']) { echo $getPaymentsTypes['status']; } } ?></p>
-                                     <p>Payment Status : <?php $getGroceryOrderStatus = getAllData('lkp_order_status');
-                               while($getOrderStatus = $getGroceryOrderStatus->fetch_assoc()) { if($row['lkp_order_status_id'] == $getOrderStatus['id']) { echo $getOrderStatus['order_status']; } } ?></p>
-                                     <p>Order Status : <?php $getGroceryOrderStatus = getAllData('lkp_order_status');
-                               while($getOrderStatus = $getGroceryOrderStatus->fetch_assoc()) { if($row['lkp_order_status_id'] == $getOrderStatus['id']) { echo $getOrderStatus['order_status']; } } ?></p>
-                           </div>
+                            <div class="col-md-6">
+                              <h3 class="m-t-0 m-b-5 font_sz_view">Delivery Details</h3>
+                              <!-- <p>Delivery Date: <?php echo $row['delivery_date'];?></p> -->
+                              <p>Mode of Payment : <?php $getGroceryPaymentsTypes = getAllData('lkp_payment_types');
+                              while($getPaymentsTypes = $getGroceryPaymentsTypes->fetch_assoc()) { if($row['payment_method'] == $getPaymentsTypes['id']) { echo $getPaymentsTypes['status']; } } ?></p>
+                              <p>Payment Status : <?php $getGroceryPaymentsStatus = getAllData('lkp_payment_status');
+                              while($getPaymentsStatus = $getGroceryPaymentsStatus->fetch_assoc()) { if($row['lkp_payment_status_id'] == $getPaymentsStatus['id']) { echo $getPaymentsStatus['payment_status']; } } ?></p>
+                              <p>Order Status : <?php $getGroceryOrderStatus = getAllData('lkp_order_status');
+                              while($getOrderStatus = $getGroceryOrderStatus->fetch_assoc()) { if($row['lkp_order_status_id'] == $getOrderStatus['id']) { echo $getOrderStatus['order_status']; } } ?></p>
+                            </div>
                             <div class="col-md-12">
                                 <p><strong>Address:</strong></p>
                                <p><?php echo $row['address'];  ?></p>
                             </div>
                         </div>
+                        <?php if($row['assign_delivery_id'] == '0' || $row['assign_delivery_id'] == '') { 
+                          $deliveryboy_name = '-';
+                          $deliveryboy_mobile = '-';
+                        } else { 
+                          $deliveryBoyDetails = getIndividualDetails('grocery_delivery_boys','id',$row['assign_delivery_id']);
+                          $deliveryboy_name = $deliveryBoyDetails['deliveryboy_name'];
+                          $deliveryboy_mobile = $deliveryBoyDetails['deliveryboy_mobile'];
+                        } ?>
                         <div class="col-md-12 fr1 mt5">
                             <h3 class="m-t-0 m-b-5 font_sz_view">Delivery Boy Details</h3>
-                            <p class="col-md-6">Name: <?php echo $getDeliveryBoysNamesData['deliveryboy_name'];  ?></p>
-                            <p class="col-md-6 pull-right text-right">Mobile Number: 9959742195</p>
+                            <p class="col-md-6">Name: <?php echo $deliveryboy_name;  ?></p>
+                            <p class="col-md-6 pull-right text-right">Mobile Number: <?php echo $deliveryboy_mobile;  ?></p>
                         </div>
                           <div class="col-md-12 fr1 mt5">
                               <h3 class="m-t-0 m-b-5 font_sz_view">Ordered Items</h3>
                           </div>
-                          <?php $getProducts = getIndividualDetails('grocery_product_name_bind_languages','product_id',$row['product_id']); ?>
-                          <?php $getProducts1 = getIndividualDetails('grocery_product_bind_images','product_id',$row['product_id']); ?>
+                          <?php 
+                          $groceryOrders1 = "SELECT * FROM grocery_orders WHERE lkp_payment_status_id != 3 AND lkp_order_status_id != 3 AND order_id = '".$row['order_id']."'"; 
+                          $groceryOrdersData1 = $conn->query($groceryOrders1);
+                          $i=1; ?>
+                          <?php while($OrderDetails = $groceryOrdersData1->fetch_assoc()) { 
+                          $getProducts = getIndividualDetails('grocery_product_name_bind_languages','product_id',$OrderDetails['product_id']);
+                          $getProducts1 = getIndividualDetails('grocery_product_bind_images','product_id',$OrderDetails['product_id']);
+                          ?>
                           <div class="col-md-12 fr1 padd0">
-                              
                               <div class="col-md-12 mt5 brdrbtm padd0">
                                   <div class="col-md-2 mb5">
-                                      <img src="<?php echo $base_url . 'uploads/product_images/'.$row['image'] ?>" width="100px" height="100px">
+                                      <img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProducts1['image'] ?>" width="100px" height="100px">
                                   </div>
                                   <div class="col-md-6">
                                       <p><b>Item Name: </b> <?php echo $getProducts['product_name'] ?></p>
-                                      <p><b>Quantity: </b> <?php echo $row['item_quantity'];  ?></p>
-                                      <!-- <p><b>Price Per Kg: </b> Rs. 100</p> -->
+                                      <p><b>Quantity: </b> <?php echo $OrderDetails['item_quantity'];  ?></p>
+                                      <p><b>Price: </b> Rs. <?php echo $OrderDetails['item_price'];  ?></p>
                                   </div>
                                   <div class="col-md-4">
-                                      <p>Sub Total: Rs. <?php echo $row['item_price'];  ?></p>
+                                      <p>Sub Total: Rs. <?php echo $OrderDetails['item_quantity']*$OrderDetails['item_price'];  ?></p>
                                   </div>
                               </div>
                           </div>
+                          <?php } ?>
                       </div>
-                      <?php $getSiteSettingsData = getIndividualDetails('grocery_site_settings','id',1); 
-                            $service_tax = $row['sub_total']*$getSiteSettingsData['service_tax']/100;
-                      ?>
+                      <?php $getSiteSettingsData = getIndividualDetails('grocery_site_settings','id',1); ?>
                       <div class="modal-footer">
                           <div class="col-md-12">
                               <div class="col-md-6"></div>
                               <div class="col-md-6">
-                                  <p><b>Item Total: </b> Rs. <?php echo $row['sub_total'];  ?></p>
-                                  <?php $tax = $service_tax.'('.$getSiteSettingsData['service_tax'].'%)' ?>
-                                  <p><b>GST: </b> Rs. <?php echo $tax ?></p>
+                                  <p><b>Sub Total: </b> Rs. <?php echo $row['sub_total'];  ?></p>
+                                  <p><b>GST: </b> Rs. <?php echo $row['service_tax'].'('.$getSiteSettingsData['service_tax'].'%)' ?></p>
                                   <p><b>Delivery Charges: </b> Rs. <?php echo $row['delivery_charges'];  ?></p>
-                                  <?php $total_price = $row['order_total'] + $row['delivery_charges'] + $tax ?>
+                                  <?php $total_price = round($row['sub_total'] + $row['delivery_charges'] + $row['service_tax']); ?>
                                    <h3 class="m-t-0 m-b-5 font_sz_view">Total Amount: Rs. <?php echo $total_price;  ?></h3>
                               </div>
                           </div>
