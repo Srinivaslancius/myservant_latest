@@ -29,7 +29,7 @@
 }
 </style>
 <body class="header_sticky">
-	<div class="boxed style2">
+	<div class="boxed">
 
 		<div class="overlay"></div>
 
@@ -113,74 +113,48 @@
 			</div><!-- /.container -->
 		</section><!-- /.flat-slider -->
 		
-         <?php $getOfferModules = "SELECT * FROM grocery_offer_module WHERE lkp_status_id = 0 ORDER BY id DESC LIMIT 4";
-						$getOfferModules1 = $conn->query($getOfferModules); ?>
-			<section class="flat-row flat-banner-box">
+         <section class="flat-row flat-banner-box">
 			<div class="container">
-			<?php for($i=0; $i<2; $i++) {?>
-				<div class="row" style="margin-bottom:10px">				
-					<div class="col-md-8 col-sm-8">
-					<div class="row">
-					<div class="col-sm-6">
+				<div class="row">
+					<div class="col-md-3">
 						<div class="banner-box">
 							<div class="inner-box">
 								<a href="#" title="">
-									<img src="images/product/1.jpg" alt="" class="img-responsive">
+									<img src="images/banner_boxes/3.jpg" alt="" width="360px" height="200px">
 								</a>
 							</div><!-- /.inner-box -->
 						</div><!-- /.banner-box -->
-						</div>
-						<div class="col-sm-6">
-						<div class="banner-box">
-							<div class="inner-box">
-								<a href="#" title="">
-									<img src="images/product/1.jpg" alt="" class="img-responsive">
-								</a>
-							</div><!-- /.inner-box -->
-						</div><!-- /.banner-box -->
-						</div>
-						</div>
 					</div><!-- /.col-md-4 -->
-					<div class="col-md-4 col-sm-4">
-					
+					<div class="col-md-3">
 						<div class="banner-box">
 							<div class="inner-box">
 								<a href="#" title="">
-									<img src="images/product/1.jpg" alt="" class="img-responsive">
+									<img src="images/banner_boxes/4.jpg" alt="" width="360px" height="200px">
 								</a>
 							</div><!-- /.inner-box -->
 						</div><!-- /.banner-box -->
-						
-						
-						
 					</div><!-- /.col-md-4 -->
-					
-					
+					<div class="col-md-3">
+						<div class="banner-box">
+							<div class="inner-box">
+								<a href="#" title="">
+									<img src="images/banner_boxes/3.jpg" alt="" width="360px" height="200px">
+								</a>
+							</div><!-- /.inner-box -->
+						</div><!-- /.banner-box -->
+					</div><!-- /.col-md-4 -->
+					<div class="col-md-3">
+						<div class="banner-box">
+							<div class="inner-box">
+								<a href="#" title="">
+									<img src="images/banner_boxes/4.jpg" alt="" width="360px" height="200px">
+								</a>
+							</div><!-- /.inner-box -->
+						</div><!-- /.banner-box -->
+					</div><!-- /.col-md-4 -->
 				</div><!-- /.row -->
-				<?php } ?>
 			</div><!-- /.container -->
-		</section>
-                <!--<section class="flat-row flat-banner-box">
-				<div class="container-fluid">
-					<div class="row">
-
-						<div class="wrap-banner">
-							<?php while($getOfferModulesData = $getOfferModules1->fetch_assoc()) { ?>
-							<div class="banner-box style1">
-								
-								<div class="inner-box">
-									<a href="<?php echo $getOfferModulesData['link'] ?>" title="" target="_blank">
-										<img src="<?php echo $base_url . 'grocery_admin/uploads/grocery_offer_module_image/'.$getOfferModulesData['image'] ?>" alt="<?php echo $getOfferModulesData['name'] ?>" style="height:179px;width:555px">
-									</a>
-								</div>
-								
-								
-							</div>
-							<?php } ?>
-						</div>
-					</div>
-				</div>
-			</section>-->
+		</section><!-- /.flat-banner-box -->
 <!-- /.flat-banner-box -->
 
 <?php 
@@ -195,9 +169,9 @@ $tagNames = $conn->query($getTags);
 ?>
 <!--Tabbination Starts Here for New Arrivals-->
 <section class="flat-imagebox">
-				<div class="container-fluid">
+				<div class="container">
 					<div class="row">
-						<div class="product-tab style3">
+						<div class="product-tab">
 							<ul class="tab-list">
 								<?php while($tagNames1 = $tagNames->fetch_assoc()) { 
 								?>
@@ -219,19 +193,20 @@ $tagNames = $conn->query($getTags);
 								$allGetPrices = $conn->query($getPrices);
 								$getPrc = $allGetPrices->fetch_assoc();
 							?> 
-							<div class="col-xl-2 col-md-4 col-sm-6">
+							<div class="col-lg-3 col-md-3 col-sm-6">
 								<div class="product-box">
 									<div class="imagebox">
 										<div class="box-image owl-carousel-1">
 											<a href="single_product.php?product_id=<?php echo $productDetails['id']; ?>" title="">
 												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image']; ?>" alt="">
 											</a>
-											<a href="single_product.php?product_id=<?php echo $productDetails['id']; ?>" title="">
+<a href="single_product.php?product_id=<?php echo $productDetails['id']; ?>" title="">
 												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image']; ?>" alt="">
 											</a>
 											<a href="single_product.php?product_id=<?php echo $productDetails['id']; ?>" title="">
 												<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$getProductImage['image']; ?>" alt="">
 											</a>
+											
 										</div><!-- /.box-image -->
 										<div class="box-content">
 											<div class="cat-name">
@@ -391,12 +366,12 @@ $getCategoriesNames = "SELECT * FROM grocery_category WHERE lkp_status_id = 0 AN
 $getCategoriesNames1 = $conn->query($getCategoriesNames);
 ?>
 <!--Tabbination for Most popular product starts here -->
-<section class="flat-imagebox style6">
-				<div class="container-fluid">
+<section class="flat-imagebox style2 background">
+				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="product-wrap style1">
-								<div class="product-tab style1 v2">
+							<div class="product-wrap">
+								<div class="product-tab style1">
 									<ul class="tab-list">
 										<?php while($getCategoriesNamesData = $getCategoriesNames1->fetch_assoc()) { ?>
 										<li class="<?php if($getCategoriesNamesData['id'] == 1) { echo 'active'; } ?>"><?php echo $getCategoriesNamesData['category_name']; ?></li>
@@ -417,8 +392,8 @@ $getCategoriesNames1 = $conn->query($getCategoriesNames);
 											$Prc1 = $allprices1->fetch_assoc();
 										?>	
 										<div class="box-6">
-											<div class="product-box line style1">
-												<div class="imagebox style2">
+											<div class="product-box">
+												<div class="imagebox style2  v1">
 													<div class="box-image">
 														<a href="single_product.php?product_id=<?php echo $productsData['id']; ?>" title="">
 															<img src="<?php echo $base_url . 'grocery_admin/uploads/product_images/'.$ProductImage1['image']; ?>" alt="">
@@ -672,10 +647,90 @@ $getCategoriesNames1 = $conn->query($getCategoriesNames);
 					</div><!-- /.row -->
 				</div><!-- /.container -->
 			</section><!-- /.flat-imagebox -->
-
+                         <section class="flat-imagebox style3">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="owl-carousel-2">
+						<?php for($i=0; $i<2; $i++) {?>
+							<div class="box-counter">
+								<div class="counter">
+									<span class="special">Super Sale</span>
+									<div class="counter-content">
+										<p>There are many variations of passages of Lorem Ipsum available, but the majorited have suffered alteration.</p>
+										<div class="count-down">
+											<div class="square">
+												<div class="numb">
+													14
+												</div>
+												<div class="text">
+													DAYS
+												</div>
+											</div>
+											<div class="square">
+												<div class="numb">
+													09
+												</div>
+												<div class="text">
+													HOURS
+												</div>
+											</div>
+											<div class="square">
+												<div class="numb">
+													48
+												</div>
+												<div class="text">
+													MINS
+												</div>
+											</div>
+											<div class="square">
+												<div class="numb">
+													23
+												</div>
+												<div class="text">
+													SECS
+												</div>
+											</div>
+										</div><!-- /.count-down -->
+									</div><!-- /.counter-content -->
+								</div><!-- /.counter -->
+								<div class="product-item">
+									<div class="imagebox style3">
+										<div class="box-image save">
+											<a href="single_product.php" title="">
+												<img src="images/product/other/soap.jpg" alt="" style="width:600px;height:352px">
+											</a>
+											<span>Save $85.00</span>
+										</div><!-- /.box-image -->
+										<div class="box-content" style="text-align:center">
+											<div class="product-name">
+												<a href="#" title="">Medimix soaps</a>
+											</div>
+											<div class="price">
+												<span class="sale">$2,299.00</span>
+												<span class="regular">$2,999.00</span>
+											</div>
+										</div>
+										<div class="box-bottom" style="text-align:center">
+											<div class="btn-add-cart">
+												<a href="#" title="">
+													<img src="images/icons/add-cart.png" alt="">Add to Cart
+												</a>
+											</div>
+											
+										</div><!-- /.box-bottom -->
+									</div><!-- /.imagbox style3 -->
+								</div><!-- /.product-item -->
+							</div><!-- /.box-counter -->
+							<?php } ?>
+						</div><!-- /.owl-carousel-2 -->
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.flat-imagebox style3 -->
 			<div class="divider20"></div>
  	<section class="flat-imagebox style4">
-			<div class="container-fluid">
+			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="flat-row-title">
@@ -718,7 +773,7 @@ $getCategoriesNames1 = $conn->query($getCategoriesNames);
 		if($productDetails->num_rows > 0) {
 		?>
 		<section class="flat-imagebox">
-				<div class="container-fluid">
+				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="owl-carousel-2 style2">
@@ -801,7 +856,7 @@ $getPaymentsData = getIndividualDetails('grocery_content_pages','id',6);
 $getReturnPolicydataData = getIndividualDetails('grocery_content_pages','id',7);
 ?>
 		<section class="flat-iconbox">
-			<div class="container-fluid">
+			<div class="container">
 				<div class="row">
 					<div class="col-md-3 col-sm-6">
 						<div class="iconbox">
