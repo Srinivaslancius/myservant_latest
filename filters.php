@@ -7,9 +7,11 @@
 		</div>
 		<?php $SubCategoriesData = "SELECT * FROM grocery_sub_category WHERE lkp_status_id = 0 AND grocery_category_id ='$product_id' AND id IN (SELECT grocery_sub_category_id FROM grocery_products WHERE lkp_status_id = 0 AND id in (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)) ORDER BY id DESC LIMIT 0,6";
 		$SubCategoriesData1 = $conn->query($SubCategoriesData);?>
+		
+		
+		<div class="widget-content">
 		<form id="category_filters">
 		<input type="hidden" name="category_id" value="<?php echo $product_id ?>">
-		<div class="widget-content">
 			<div style="height: 0px"></div>
 			<ul class="box-checkbox scroll">
 				<?php while($SubCategoriesData2 = $SubCategoriesData1->fetch_assoc() ) { ?>
@@ -19,8 +21,9 @@
 				</li>
 				<?php } ?>
 			</ul>
+			</form>
 		</div>
-		</form>
+		
 	</div><!-- /.widget widget-color -->
 	<?php } ?>
 	<?php								
