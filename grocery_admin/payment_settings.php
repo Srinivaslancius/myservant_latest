@@ -169,7 +169,7 @@
             
         </div>
         <div class="site-footer">
-          2017 © Cosmos
+         Design & Developed By Lancius IT Solutions
         </div>
 
     <script src="js/vendor.min.js"></script>
