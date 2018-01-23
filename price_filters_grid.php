@@ -1,10 +1,25 @@
 <?php
 include "admin_includes/config.php";
 include "admin_includes/common_functions.php";
-//echo "<pre>"; print_r($_POST); die;
-if(isset($_POST['popStatus']) ) {
 
-$popStatus = $_POST['popStatus'];
+// note the differences in the array keys for price filetr checking here 
+$array_values = array_values($_POST['price']);
+$indFirstval = array_shift($array_values); 
+$indLastval = array_pop($array_values); 
+$piece1 = explode(" - ", $indFirstval);
+$piece2 = explode(" - ", $indLastval);
+$getMinPriceVal = $piece1[0];
+$getMaxPriceVal = $piece2[1];
+
+if($getMaxPriceVal=='') {
+    $sendMinPrice = $piece1[0];
+    $sendMaxPrice = $piece1[1];
+} else {
+    $sendMinPrice = $piece1[0];
+    $sendMaxPrice = $piece2[1];
+}
+// echo $sendMinPrice .'-'. $sendMaxPrice;
+// die;
 
 if($_SESSION['city_name'] == '') {
     $lkp_city_id = 1;
@@ -13,19 +28,10 @@ if($_SESSION['city_name'] == '') {
     $lkp_city_id = $getCities1['id'];
 }
 
-if($popStatus == 'recent') {
-
-    $getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)  ORDER BY id DESC ";
-} elseif($popStatus == 'low_high') {
-
-    $getProducts = "SELECT grocery_product_bind_weight_prices.*,grocery_products.* FROM grocery_product_bind_weight_prices LEFT JOIN grocery_products ON grocery_products.id = grocery_product_bind_weight_prices.id WHERE grocery_product_bind_weight_prices.lkp_status_id = 0 AND grocery_products.lkp_status_id=0 AND lkp_city_id = '$lkp_city_id' GROUP BY grocery_product_bind_weight_prices.product_id ORDER BY grocery_product_bind_weight_prices.selling_price ASC";
-
-} elseif($popStatus == 'high_low') {
-
-    $getProducts = "SELECT grocery_product_bind_weight_prices.*,grocery_products.* FROM grocery_product_bind_weight_prices LEFT JOIN grocery_products ON grocery_products.id = grocery_product_bind_weight_prices.id WHERE grocery_product_bind_weight_prices.lkp_status_id = 0 AND grocery_products.lkp_status_id=0 AND lkp_city_id = '$lkp_city_id' GROUP BY grocery_product_bind_weight_prices.product_id ORDER BY grocery_product_bind_weight_prices.selling_price DESC";
+if(isset($_POST['price'])) {
+    $getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = '$lkp_city_id' AND (selling_price BETWEEN '$sendMinPrice' AND '$sendMaxPrice'))  ORDER BY id DESC";
 } else {
-
-    $getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id) ORDER BY id DESC ";
+    $getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)  ORDER BY id DESC LIMIT 0,10";
 }
 
 $getProducts1 = $conn->query($getProducts);
@@ -80,5 +86,5 @@ echo'<input type="hidden" id="cat_id1_'.$getProductsData1['id'].'" value="'.$get
         </div><!-- /.imagebox -->
     </div>';
     }
-}
+
 ?>

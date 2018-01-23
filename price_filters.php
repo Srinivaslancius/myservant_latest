@@ -1,7 +1,27 @@
 <?php
 include "admin_includes/config.php";
 include "admin_includes/common_functions.php";
-//echo "<pre>"; print_r($_POST); die;
+//echo "<pre>"; print_r($_POST['price']); 
+
+// note the differences in the array keys for price filetr checking here 
+$array_values = array_values($_POST['price']);
+$indFirstval = array_shift($array_values); 
+$indLastval = array_pop($array_values); 
+$piece1 = explode(" - ", $indFirstval);
+$piece2 = explode(" - ", $indLastval);
+$getMinPriceVal = $piece1[0];
+$getMaxPriceVal = $piece2[1];
+
+if($getMaxPriceVal=='') {
+    $sendMinPrice = $piece1[0];
+    $sendMaxPrice = $piece1[1];
+} else {
+    $sendMinPrice = $piece1[0];
+    $sendMaxPrice = $piece2[1];
+}
+// echo $sendMinPrice .'-'. $sendMaxPrice;
+// die;
+
 if($_SESSION['city_name'] == '') {
     $lkp_city_id = 1;
 } else {
@@ -9,10 +29,8 @@ if($_SESSION['city_name'] == '') {
     $lkp_city_id = $getCities1['id'];
 }
 
-if(isset($_POST['brands_filt']) ) {
-
-    $getProducts = "SELECT grocery_product_bind_brands.brand_id,grocery_product_bind_brands.product_id, grocery_products.id,grocery_products.grocery_category_id,grocery_products.grocery_sub_category_id,grocery_products.product_description,grocery_products.lkp_status_id FROM grocery_product_bind_brands LEFT JOIN grocery_products ON grocery_products.id=grocery_product_bind_brands.product_id AND grocery_product_bind_brands.brand_id IN (".implode(',', $_POST['brands_filt']).") WHERE grocery_products.lkp_status_id = '0' AND grocery_products.id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = 1) ORDER BY id DESC";
-
+if(isset($_POST['price'])) {
+    $getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = '$lkp_city_id' AND (selling_price BETWEEN '$sendMinPrice' AND '$sendMaxPrice'))  ORDER BY id DESC";
 } else {
     $getProducts = "SELECT * FROM grocery_products WHERE lkp_status_id = 0 AND id IN (SELECT product_id FROM grocery_product_bind_weight_prices WHERE lkp_status_id = 0 AND lkp_city_id = $lkp_city_id)  ORDER BY id DESC LIMIT 0,10";
 }

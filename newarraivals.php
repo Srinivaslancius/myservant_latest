@@ -78,7 +78,7 @@
 				    		$getAllBrands = $conn->query($getBrnds);
 					    	?>
 
-							<!--<div class="widget widget-brands">
+							<div class="widget widget-brands">
 								<div class="widget-title">
 									<h3>Brands<span></span></h3>
 								</div>
@@ -94,79 +94,44 @@
 										</ul>
 									</div>
 								</form>
-							</div>-->
-							<div class="widget widget-brands">
-								<div class="widget-title">
-									<h3>Brands<span></span></h3>
-								</div>
-								<div class="widget-content">
-									<!--<form action="#" method="get" accept-charset="utf-8">
-										<input type="text" name="brands" placeholder="Brands Search">
-									</form>-->
-									<ul class="box-checkbox scroll">
-										<li class="check-box">
-											<input type="checkbox" id="checkbox1" name="checkbox1">
-											<label for="checkbox1">Apple <span>(4)</span></label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="checkbox2" name="checkbox2">
-											<label for="checkbox2">Samsung <span>(2)</span></label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="checkbox3" name="checkbox3">
-											<label for="checkbox3">HTC <span>(2)</span></label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="checkbox1" name="checkbox1">
-											<label for="checkbox1">Apple <span>(4)</span></label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="checkbox2" name="checkbox2">
-											<label for="checkbox2">Samsung <span>(2)</span></label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="checkbox3" name="checkbox3">
-											<label for="checkbox3">HTC <span>(2)</span></label>
-										</li>
-										
-									</ul>
-								</div>
-							</div><!-- /.widget widget-brands -->
+							</div>
+							
 							
 							<div class="widget widget-price">
 								<div class="widget-title">
 									<h3>Price<span></span></h3>
 									<div style="height: 2px"></div>
 								</div>
-								<div class="widget-content">									
-									<ul class="box-checkbox scroll">
-										<li class="check-box">
-											<input type="checkbox" id="check1" name="check1">
-											<label for="check1">Price 300 - 500/-</label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="check2" name="check2">
-											<label for="check2">somthing</label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="check3" name="check3">
-											<label for="check3">somthing</label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="check1" name="check1">
-											<label for="check1">somthing</label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="check2" name="check2">
-											<label for="check2">somthing</label>
-										</li>
-										<li class="check-box">
-											<input type="checkbox" id="check3" name="check3">
-											<label for="check3">somthing</label>
-										</li>
-										
-									</ul>
-								</div>
+								<form id="search_form">
+									<div class="widget-content">									
+										<ul class="box-checkbox scroll">
+											<li class="check-box check_price_type">
+												<input type="checkbox" id="check1" name="price[]" value="0 - 500">
+												<label for="check1">0 - 500/-</label>
+											</li>
+											<li class="check-box check_price_type">
+												<input type="checkbox" id="check2" name="price[]" value="500 - 1000">
+												<label for="check2">500 - 1000/-</label>
+											</li>
+											<li class="check-box check_price_type">
+												<input type="checkbox" id="check3" name="price[]" value="1000 - 1500">
+												<label for="check3">1000 - 1500/-</label>
+											</li>
+											<li class="check-box check_price_type">
+												<input type="checkbox" id="check4" name="price[]" value="1500 - 2000">
+												<label for="check4">1500 - 2000/-</label>
+											</li>
+											<li class="check-box check_price_type">
+												<input type="checkbox" id="check5" name="price[]" value="2000 - 2500">
+												<label for="check5">2000 - 2500/-</label>
+											</li>
+											<li class="check-box check_price_type">
+												<input type="checkbox" id="check6" name="price[]" value="2500 - 3000">
+												<label for="check6">2500 - 3000/-</label>
+											</li>
+										</ul>
+									</div>
+								</form>
 							</div><!-- /.widget widget-color -->
 						</div><!-- /.sidebar -->
 					</div><!-- /.col-lg-3 col-md-4 -->
@@ -246,7 +211,7 @@
 														</div>
 														<div class="product_name">
 														<?php 
-														$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductsData['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ";
+														$getPrices = "SELECT * FROM grocery_product_bind_weight_prices WHERE product_id ='".$getProductsData['id']."' AND lkp_status_id = 0 AND lkp_city_id ='$lkp_city_id' ORDER BY selling_price DESC ";
 							 							$getProductPrices = $conn->query($getPrices);
 														?>
 														<select class="s-w form-control" id="get_pr_price_<?php echo $getProductsData['id']; ?>">;
@@ -255,13 +220,6 @@
                                                             <?php } ?>
                                                         </select>
 														</div>
-															<!--<select class="form-control" id="sel1" style="height:40px; font-size:13px; width:100px">
-															<option>combo pack-Rs.2999.00</option>
-														  </select>-->
-													<!--	<div class="price">
-															<span class="sale">$2,009.00</span>
-															
-														</div>-->
 													</div><!-- /.box-content -->
 													<input type="hidden" id="cat_id_<?php echo $getProductsData['id']; ?>" value="<?php echo $getProductsData['grocery_category_id']; ?>">
 													<input type="hidden" id="sub_cat_id_<?php echo $getProductsData['id']; ?>" value="<?php echo $getProductsData['grocery_sub_category_id']; ?>">
@@ -571,6 +529,30 @@
 
 	});
 	</script>
+	<script type="text/javascript">
+		$(document).on('change','.check_price_type',function(){
+		   $.ajax({
+		     type: "POST",
+		     url: 'price_filters.php',
+		     data: $("#search_form").serialize(),
+		     success: function(response)
+		     {                  
+		        //alert(response);
+		        $('#all_rows').html(response);
+		     }               
+		   });
+		  $.ajax({
+		     type: "POST",
+		     url: 'price_filters_grid.php',
+		     data: $("#search_form").serialize(),
+		     success: function(response)
+		     {                  
+		        //alert(response);
+		        $('#all_rows_grid').html(response);
+		     }               
+		   });
+		});
+		</script>
 
 </body>	
 </html>
