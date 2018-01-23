@@ -110,7 +110,7 @@
 									<div class="clearfix"></div>
 								</div>
 								<div class="tab-product">
-									<div class="row sort-box">
+									<div class="row sort-box" id="all_rows">
 									<?php 
 									while($getProductDetails = $getProducts1->fetch_assoc()) { 
 										$getProductImages = getIndividualDetails('grocery_product_bind_images','product_id',$getProductDetails['id']);
@@ -154,7 +154,7 @@
 										</div><!-- /.col-lg-4 col-sm-6 -->
 										<?php } ?>
 									</div>
-									<div class="sort-box">
+									<div class="sort-box" id="all_rows_grid">
 									<?php 
 									while($getProductsTotalDetails2 = $getProductsTotalDetails1->fetch_assoc()) { 
 										$getProductImages1 = getIndividualDetails('grocery_product_bind_images','product_id',$getProductsTotalDetails2['id']);
@@ -291,6 +291,76 @@
 			      }
 			    });
 			}
+		</script>
+		<script type="text/javascript">
+			$(document).on('change','.categories',function(){
+			   $.ajax({
+			      type: 'post',
+			      url: 'category_filters.php',
+			      data: $("#category_filters").serialize(),
+			      success: function (response) {
+			      //alert(response);
+			      $('#all_rows').html(response);		  
+			      }
+				});
+
+				$.ajax({
+			      type: 'post',
+			      url: 'category_filters_grid.php',
+			      data: $("#category_filters").serialize(),
+			      success: function (response) {
+			      //alert(response);
+			      $('#all_rows_grid').html(response);		  
+			      }
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).on('change','.brand_filters',function(){
+			   $.ajax({
+			      type: 'post',
+			      url: 'load_brands_products.php',
+			      data: $("#check_filter_form").serialize(),
+			      success: function (response) {
+			      //alert(response);
+			      $('#all_rows').html(response);		  
+			      }
+				});
+
+				$.ajax({
+			      type: 'post',
+			      url: 'load_brands_products_grid.php',
+			      data: $("#check_filter_form").serialize(),
+			      success: function (response) {
+			      //alert(response);
+			      $('#all_rows_grid').html(response);		  
+			      }
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).on('change','.check_price_type',function(){
+			   $.ajax({
+			     type: "POST",
+			     url: 'price_filters.php',
+			     data: $("#search_form").serialize(),
+			     success: function(response)
+			     {                  
+			        //alert(response);
+			        $('#all_rows').html(response);
+			     }               
+			   });
+			  $.ajax({
+			     type: "POST",
+			     url: 'price_filters_grid.php',
+			     data: $("#search_form").serialize(),
+			     success: function(response)
+			     {                  
+			        //alert(response);
+			        $('#all_rows_grid').html(response);
+			     }               
+			   });
+			});
 		</script>
 
 </body>	
