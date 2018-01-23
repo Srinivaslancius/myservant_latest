@@ -31,13 +31,14 @@
 		<div class="widget-title">
 			<h3>Brands<span></span></h3>
 		</div>
-		<form id="check_filter_form">
+		
+			<div class="widget-content">
+<form id="check_filter_form">
 			<?php if($_GET['cat_id']) { ?>
 				<input type="hidden" name="category_id" value="<?php echo $_GET['cat_id']; ?>">
 			 <?php } elseif($_GET['sub_cat_id']) { ?>
 				<input type="hidden" name="sub_category_id" value="<?php echo $_GET['sub_cat_id']; ?>">
-			<?php } ?>
-			<div class="widget-content">									
+			<?php } ?>			
 				<ul class="box-checkbox scroll">
 					<?php while($getAllBrandsNames = $getAllBrands->fetch_assoc() ) { ?>
 					<li class="check-box">
@@ -46,21 +47,23 @@
 					</li>	
 					<?php } ?>									
 				</ul>
+				</form>
 			</div>
-		</form>
+		
 	</div><!-- /.widget widget-brands -->
 	<div class="widget widget-price">
 		<div class="widget-title">
 			<h3>Price<span></span></h3>
 			<div style="height: 2px"></div>
 		</div>
-		<form id="search_form">
+		
+			<div class="widget-content">
+<form id="search_form">
 			<?php if($_GET['cat_id']) { ?>
 				<input type="hidden" name="category_id" value="<?php echo $_GET['cat_id']; ?>">
 			 <?php } elseif($_GET['sub_cat_id']) { ?>
 				<input type="hidden" name="sub_category_id" value="<?php echo $_GET['sub_cat_id']; ?>">
-			<?php } ?>
-			<div class="widget-content">									
+			<?php } ?>			
 				<ul class="box-checkbox scroll">
 					<li class="check-box check_price_type">
 						<input type="checkbox" id="check1" name="product_price[]" value="0 - 500">
@@ -87,8 +90,9 @@
 						<label for="check6">2500 - 3000/-</label>
 					</li>
 				</ul>
+				</form>
 			</div>
-		</form>
+		
 	</div><!-- /.widget widget-color -->
 
 	

@@ -82,8 +82,9 @@
 								<div class="widget-title">
 									<h3>Brands<span></span></h3>
 								</div>
-								<form id="check_filter_form">
-									<div class="widget-content">									
+								
+									<div class="widget-content">
+									<form id="check_filter_form">									
 										<ul class="box-checkbox scroll">
 											<?php while($getAllBrandsNames = $getAllBrands->fetch_assoc() ) { ?>
 											<li class="check-box">
@@ -92,8 +93,9 @@
 											</li>	
 											<?php } ?>									
 										</ul>
+										</form>
 									</div>
-								</form>
+								
 							</div>
 							
 							
@@ -102,8 +104,9 @@
 									<h3>Price<span></span></h3>
 									<div style="height: 2px"></div>
 								</div>
-								<form id="search_form">
-									<div class="widget-content">									
+								
+									<div class="widget-content">
+									<form id="search_form">									
 										<ul class="box-checkbox scroll">
 											<li class="check-box check_price_type">
 												<input type="checkbox" id="check1" name="price[]" value="0 - 500">
@@ -130,8 +133,9 @@
 												<label for="check6">2500 - 3000/-</label>
 											</li>
 										</ul>
+										</form>
 									</div>
-								</form>
+								
 							</div><!-- /.widget widget-color -->
 						</div><!-- /.sidebar -->
 					</div><!-- /.col-lg-3 col-md-4 -->
