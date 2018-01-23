@@ -78,7 +78,7 @@
 				    		$getAllBrands = $conn->query($getBrnds);
 					    	?>
 
-							<div class="widget widget-brands">
+							<!--<div class="widget widget-brands">
 								<div class="widget-title">
 									<h3>Brands<span></span></h3>
 								</div>
@@ -94,10 +94,80 @@
 										</ul>
 									</div>
 								</form>
+							</div>-->
+							<div class="widget widget-brands">
+								<div class="widget-title">
+									<h3>Brands<span></span></h3>
+								</div>
+								<div class="widget-content">
+									<!--<form action="#" method="get" accept-charset="utf-8">
+										<input type="text" name="brands" placeholder="Brands Search">
+									</form>-->
+									<ul class="box-checkbox scroll">
+										<li class="check-box">
+											<input type="checkbox" id="checkbox1" name="checkbox1">
+											<label for="checkbox1">Apple <span>(4)</span></label>
+										</li>
+										<li class="check-box">
+											<input type="checkbox" id="checkbox2" name="checkbox2">
+											<label for="checkbox2">Samsung <span>(2)</span></label>
+										</li>
+										<li class="check-box">
+											<input type="checkbox" id="checkbox3" name="checkbox3">
+											<label for="checkbox3">HTC <span>(2)</span></label>
+										</li>
+										<li class="check-box">
+											<input type="checkbox" id="checkbox1" name="checkbox1">
+											<label for="checkbox1">Apple <span>(4)</span></label>
+										</li>
+										<li class="check-box">
+											<input type="checkbox" id="checkbox2" name="checkbox2">
+											<label for="checkbox2">Samsung <span>(2)</span></label>
+										</li>
+										<li class="check-box">
+											<input type="checkbox" id="checkbox3" name="checkbox3">
+											<label for="checkbox3">HTC <span>(2)</span></label>
+										</li>
+										
+									</ul>
+								</div>
 							</div><!-- /.widget widget-brands -->
 							
-							
-							
+							<div class="widget widget-price">
+								<div class="widget-title">
+									<h3>Price<span></span></h3>
+									<div style="height: 2px"></div>
+								</div>
+								<div class="widget-content">									
+									<ul class="box-checkbox scroll">
+										<li class="check-box">
+											<input type="checkbox" id="check1" name="check1">
+											<label for="check1">Price 300 - 500/-</label>
+										</li>
+										<li class="check-box">
+											<input type="checkbox" id="check2" name="check2">
+											<label for="check2">somthing</label>
+										</li>
+										<li class="check-box">
+											<input type="checkbox" id="check3" name="check3">
+											<label for="check3">somthing</label>
+										</li>
+										<li class="check-box">
+											<input type="checkbox" id="check1" name="check1">
+											<label for="check1">somthing</label>
+										</li>
+										<li class="check-box">
+											<input type="checkbox" id="check2" name="check2">
+											<label for="check2">somthing</label>
+										</li>
+										<li class="check-box">
+											<input type="checkbox" id="check3" name="check3">
+											<label for="check3">somthing</label>
+										</li>
+										
+									</ul>
+								</div>
+							</div><!-- /.widget widget-color -->
 						</div><!-- /.sidebar -->
 					</div><!-- /.col-lg-3 col-md-4 -->
 <!-- /.col-lg-3 col-md-4 -->
